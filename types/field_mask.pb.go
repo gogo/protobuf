@@ -230,7 +230,7 @@ type FieldMask struct {
 	// The set of field mask paths.
 	Paths                []string `protobuf:"bytes,1,rep,name=paths" json:"paths,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -390,9 +390,7 @@ func (m *FieldMask) MarshalTo(dAtA []byte) (int, error) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -414,9 +412,7 @@ func NewPopulatedFieldMask(r randyFieldMask, easy bool) *FieldMask {
 		this.Paths[i] = string(randStringFieldMask(r))
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedFieldMask(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedFieldMask(r, 2)
 	}
 	return this
 }
@@ -503,9 +499,7 @@ func (m *FieldMask) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

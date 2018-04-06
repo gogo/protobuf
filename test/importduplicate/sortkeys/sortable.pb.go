@@ -35,7 +35,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Object struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -111,9 +111,7 @@ func valueToGoStringSortable(v interface{}, typ string) string {
 func NewPopulatedObject(r randySortable, easy bool) *Object {
 	this := &Object{}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedSortable(r, 1)
-		}
+		this.XXX_unrecognized = randUnrecognizedSortable(r, 1)
 	}
 	return this
 }

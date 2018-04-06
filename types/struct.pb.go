@@ -57,7 +57,7 @@ type Struct struct {
 	// Unordered map of dynamically typed values.
 	Fields               map[string]*Value `protobuf:"bytes,1,rep,name=fields" json:"fields,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
-	XXX_unrecognized     []byte            `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
 }
 
@@ -106,7 +106,7 @@ type Value struct {
 	//	*Value_ListValue
 	Kind                 isValue_Kind `protobuf_oneof:"kind"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
-	XXX_unrecognized     []byte       `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte       `json:"-"`
 	XXX_sizecache        int32        `json:"-"`
 }
 
@@ -354,7 +354,7 @@ type ListValue struct {
 	// Repeated field of dynamically typed values.
 	Values               []*Value `protobuf:"bytes,1,rep,name=values" json:"values,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -794,9 +794,7 @@ func (m *Struct) MarshalTo(dAtA []byte) (int, error) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -824,9 +822,7 @@ func (m *Value) MarshalTo(dAtA []byte) (int, error) {
 		i += nn2
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -922,9 +918,7 @@ func (m *ListValue) MarshalTo(dAtA []byte) (int, error) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -948,9 +942,7 @@ func NewPopulatedStruct(r randyStruct, easy bool) *Struct {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedStruct(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedStruct(r, 2)
 	}
 	return this
 }
@@ -973,9 +965,7 @@ func NewPopulatedValue(r randyStruct, easy bool) *Value {
 		this.Kind = NewPopulatedValue_ListValue(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedStruct(r, 7)
-		}
+		this.XXX_unrecognized = randUnrecognizedStruct(r, 7)
 	}
 	return this
 }
@@ -1023,9 +1013,7 @@ func NewPopulatedListValue(r randyStruct, easy bool) *ListValue {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedStruct(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedStruct(r, 2)
 	}
 	return this
 }
@@ -1119,9 +1107,7 @@ func (m *Struct) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1133,9 +1119,7 @@ func (m *Value) Size() (n int) {
 		n += m.Kind.Size()
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1193,9 +1177,7 @@ func (m *ListValue) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

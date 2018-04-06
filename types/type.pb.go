@@ -175,7 +175,7 @@ type Type struct {
 	// The source syntax.
 	Syntax               Syntax   `protobuf:"varint,6,opt,name=syntax,proto3,enum=google.protobuf.Syntax" json:"syntax,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -265,7 +265,7 @@ type Field struct {
 	// The string value of the default value of this field. Proto2 syntax only.
 	DefaultValue         string   `protobuf:"bytes,11,opt,name=default_value,json=defaultValue,proto3" json:"default_value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -371,7 +371,7 @@ type Enum struct {
 	// The source syntax.
 	Syntax               Syntax   `protobuf:"varint,5,opt,name=syntax,proto3,enum=google.protobuf.Syntax" json:"syntax,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -438,7 +438,7 @@ type EnumValue struct {
 	// Protocol buffer options.
 	Options              []*Option `protobuf:"bytes,3,rep,name=options" json:"options,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
-	XXX_unrecognized     []byte    `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
 	XXX_sizecache        int32     `json:"-"`
 }
 
@@ -496,7 +496,7 @@ type Option struct {
 	// value using the google.protobuf.Int32Value type.
 	Value                *Any     `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -1319,9 +1319,7 @@ func (m *Type) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintType(dAtA, i, uint64(m.Syntax))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1408,9 +1406,7 @@ func (m *Field) MarshalTo(dAtA []byte) (int, error) {
 		i += copy(dAtA[i:], m.DefaultValue)
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1476,9 +1472,7 @@ func (m *Enum) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintType(dAtA, i, uint64(m.Syntax))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1522,9 +1516,7 @@ func (m *EnumValue) MarshalTo(dAtA []byte) (int, error) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1561,9 +1553,7 @@ func (m *Option) MarshalTo(dAtA []byte) (int, error) {
 		i += n3
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1604,9 +1594,7 @@ func NewPopulatedType(r randyType, easy bool) *Type {
 	}
 	this.Syntax = Syntax([]int32{0, 1}[r.Intn(2)])
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedType(r, 7)
-		}
+		this.XXX_unrecognized = randUnrecognizedType(r, 7)
 	}
 	return this
 }
@@ -1636,9 +1624,7 @@ func NewPopulatedField(r randyType, easy bool) *Field {
 	this.JsonName = string(randStringType(r))
 	this.DefaultValue = string(randStringType(r))
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedType(r, 12)
-		}
+		this.XXX_unrecognized = randUnrecognizedType(r, 12)
 	}
 	return this
 }
@@ -1665,9 +1651,7 @@ func NewPopulatedEnum(r randyType, easy bool) *Enum {
 	}
 	this.Syntax = Syntax([]int32{0, 1}[r.Intn(2)])
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedType(r, 6)
-		}
+		this.XXX_unrecognized = randUnrecognizedType(r, 6)
 	}
 	return this
 }
@@ -1687,9 +1671,7 @@ func NewPopulatedEnumValue(r randyType, easy bool) *EnumValue {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedType(r, 4)
-		}
+		this.XXX_unrecognized = randUnrecognizedType(r, 4)
 	}
 	return this
 }
@@ -1701,9 +1683,7 @@ func NewPopulatedOption(r randyType, easy bool) *Option {
 		this.Value = NewPopulatedAny(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedType(r, 3)
-		}
+		this.XXX_unrecognized = randUnrecognizedType(r, 3)
 	}
 	return this
 }
@@ -1813,9 +1793,7 @@ func (m *Type) Size() (n int) {
 		n += 1 + sovType(uint64(m.Syntax))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1861,9 +1839,7 @@ func (m *Field) Size() (n int) {
 		n += 1 + l + sovType(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1895,9 +1871,7 @@ func (m *Enum) Size() (n int) {
 		n += 1 + sovType(uint64(m.Syntax))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1919,9 +1893,7 @@ func (m *EnumValue) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1938,9 +1910,7 @@ func (m *Option) Size() (n int) {
 		n += 1 + l + sovType(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

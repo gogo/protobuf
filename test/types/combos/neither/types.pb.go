@@ -60,7 +60,7 @@ type KnownTypes struct {
 	Str                  *google_protobuf3.StringValue `protobuf:"bytes,10,opt,name=str" json:"str,omitempty"`
 	Bytes                *google_protobuf3.BytesValue  `protobuf:"bytes,11,opt,name=bytes" json:"bytes,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
-	XXX_unrecognized     []byte                        `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte                        `json:"-"`
 	XXX_sizecache        int32                         `json:"-"`
 }
 
@@ -169,7 +169,7 @@ type ProtoTypes struct {
 	Timestamp            google_protobuf2.Timestamp  `protobuf:"bytes,3,opt,name=timestamp" json:"timestamp"`
 	Duration             google_protobuf1.Duration   `protobuf:"bytes,4,opt,name=duration" json:"duration"`
 	XXX_NoUnkeyedLiteral struct{}                    `json:"-"`
-	XXX_unrecognized     []byte                      `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte                      `json:"-"`
 	XXX_sizecache        int32                       `json:"-"`
 }
 
@@ -229,7 +229,7 @@ type StdTypes struct {
 	Timestamp            time.Time      `protobuf:"bytes,3,opt,name=timestamp,stdtime" json:"timestamp"`
 	Duration             time.Duration  `protobuf:"bytes,4,opt,name=duration,stdduration" json:"duration"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
-	XXX_unrecognized     []byte         `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
 }
 
@@ -289,7 +289,7 @@ type RepProtoTypes struct {
 	Timestamps           []google_protobuf2.Timestamp  `protobuf:"bytes,3,rep,name=timestamps" json:"timestamps"`
 	Durations            []google_protobuf1.Duration   `protobuf:"bytes,4,rep,name=durations" json:"durations"`
 	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
-	XXX_unrecognized     []byte                        `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte                        `json:"-"`
 	XXX_sizecache        int32                         `json:"-"`
 }
 
@@ -349,7 +349,7 @@ type RepStdTypes struct {
 	Timestamps           []time.Time      `protobuf:"bytes,3,rep,name=timestamps,stdtime" json:"timestamps"`
 	Durations            []time.Duration  `protobuf:"bytes,4,rep,name=durations,stdduration" json:"durations"`
 	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
-	XXX_unrecognized     []byte           `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
 	XXX_sizecache        int32            `json:"-"`
 }
 
@@ -409,7 +409,7 @@ type MapProtoTypes struct {
 	NullableDuration     map[int32]*google_protobuf1.Duration  `protobuf:"bytes,3,rep,name=nullableDuration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	Duration             map[int32]google_protobuf1.Duration   `protobuf:"bytes,4,rep,name=duration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_NoUnkeyedLiteral struct{}                              `json:"-"`
-	XXX_unrecognized     []byte                                `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte                                `json:"-"`
 	XXX_sizecache        int32                                 `json:"-"`
 }
 
@@ -469,7 +469,7 @@ type MapStdTypes struct {
 	NullableDuration     map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	Duration             map[int32]time.Duration  `protobuf:"bytes,4,rep,name=duration,stdduration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
-	XXX_unrecognized     []byte                   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte                   `json:"-"`
 	XXX_sizecache        int32                    `json:"-"`
 }
 
@@ -529,7 +529,7 @@ type OneofProtoTypes struct {
 	//	*OneofProtoTypes_Duration
 	OneOfProtoTimes      isOneofProtoTypes_OneOfProtoTimes `protobuf_oneof:"OneOfProtoTimes"`
 	XXX_NoUnkeyedLiteral struct{}                          `json:"-"`
-	XXX_unrecognized     []byte                            `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte                            `json:"-"`
 	XXX_sizecache        int32                             `json:"-"`
 }
 
@@ -673,7 +673,7 @@ type OneofStdTypes struct {
 	//	*OneofStdTypes_Duration
 	OneOfStdTimes        isOneofStdTypes_OneOfStdTimes `protobuf_oneof:"OneOfStdTimes"`
 	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
-	XXX_unrecognized     []byte                        `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte                        `json:"-"`
 	XXX_sizecache        int32                         `json:"-"`
 }
 
@@ -2221,9 +2221,7 @@ func NewPopulatedKnownTypes(r randyTypes, easy bool) *KnownTypes {
 		this.Bytes = google_protobuf3.NewPopulatedBytesValue(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTypes(r, 12)
-		}
+		this.XXX_unrecognized = randUnrecognizedTypes(r, 12)
 	}
 	return this
 }
@@ -2241,9 +2239,7 @@ func NewPopulatedProtoTypes(r randyTypes, easy bool) *ProtoTypes {
 	v2 := google_protobuf1.NewPopulatedDuration(r, easy)
 	this.Duration = *v2
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
-		}
+		this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
 	}
 	return this
 }
@@ -2261,9 +2257,7 @@ func NewPopulatedStdTypes(r randyTypes, easy bool) *StdTypes {
 	v4 := types1.NewPopulatedStdDuration(r, easy)
 	this.Duration = *v4
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
-		}
+		this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
 	}
 	return this
 }
@@ -2301,9 +2295,7 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
-		}
+		this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
 	}
 	return this
 }
@@ -2341,9 +2333,7 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
-		}
+		this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
 	}
 	return this
 }
@@ -2379,9 +2369,7 @@ func NewPopulatedMapProtoTypes(r randyTypes, easy bool) *MapProtoTypes {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
-		}
+		this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
 	}
 	return this
 }
@@ -2417,9 +2405,7 @@ func NewPopulatedMapStdTypes(r randyTypes, easy bool) *MapStdTypes {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
-		}
+		this.XXX_unrecognized = randUnrecognizedTypes(r, 5)
 	}
 	return this
 }
@@ -2434,9 +2420,7 @@ func NewPopulatedOneofProtoTypes(r randyTypes, easy bool) *OneofProtoTypes {
 		this.OneOfProtoTimes = NewPopulatedOneofProtoTypes_Duration(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTypes(r, 3)
-		}
+		this.XXX_unrecognized = randUnrecognizedTypes(r, 3)
 	}
 	return this
 }
@@ -2461,9 +2445,7 @@ func NewPopulatedOneofStdTypes(r randyTypes, easy bool) *OneofStdTypes {
 		this.OneOfStdTimes = NewPopulatedOneofStdTypes_Duration(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTypes(r, 3)
-		}
+		this.XXX_unrecognized = randUnrecognizedTypes(r, 3)
 	}
 	return this
 }
@@ -2599,9 +2581,7 @@ func (m *KnownTypes) Size() (n int) {
 		n += 1 + l + sovTypes(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -2622,9 +2602,7 @@ func (m *ProtoTypes) Size() (n int) {
 	l = m.Duration.Size()
 	n += 1 + l + sovTypes(uint64(l))
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -2645,9 +2623,7 @@ func (m *StdTypes) Size() (n int) {
 	l = types1.SizeOfStdDuration(m.Duration)
 	n += 1 + l + sovTypes(uint64(l))
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -2680,9 +2656,7 @@ func (m *RepProtoTypes) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -2715,9 +2689,7 @@ func (m *RepStdTypes) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -2770,9 +2742,7 @@ func (m *MapProtoTypes) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -2825,9 +2795,7 @@ func (m *MapStdTypes) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -2839,9 +2807,7 @@ func (m *OneofProtoTypes) Size() (n int) {
 		n += m.OneOfProtoTimes.Size()
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -2871,9 +2837,7 @@ func (m *OneofStdTypes) Size() (n int) {
 		n += m.OneOfStdTimes.Size()
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

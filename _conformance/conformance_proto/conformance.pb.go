@@ -129,7 +129,7 @@ type ConformanceRequest struct {
 	// Which format should the testee serialize its message to?
 	RequestedOutputFormat WireFormat `protobuf:"varint,3,opt,name=requested_output_format,json=requestedOutputFormat,proto3,enum=conformance.WireFormat" json:"requested_output_format,omitempty"`
 	XXX_NoUnkeyedLiteral  struct{}   `json:"-"`
-	XXX_unrecognized      []byte     `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized      []byte     `json:"-"`
 	XXX_sizecache         int32      `json:"-"`
 }
 
@@ -274,7 +274,7 @@ type ConformanceResponse struct {
 	//	*ConformanceResponse_Skipped
 	Result               isConformanceResponse_Result `protobuf_oneof:"result"`
 	XXX_NoUnkeyedLiteral struct{}                     `json:"-"`
-	XXX_unrecognized     []byte                       `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte                       `json:"-"`
 	XXX_sizecache        int32                        `json:"-"`
 }
 
@@ -636,7 +636,7 @@ type TestAllTypes struct {
 	FieldName17__        int32    `protobuf:"varint,417,opt,name=field_name17__,json=fieldName17,proto3" json:"field_name17__,omitempty"`
 	FieldName18__        int32    `protobuf:"varint,418,opt,name=Field_name18__,json=FieldName18,proto3" json:"Field_name18__,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -1721,7 +1721,7 @@ type TestAllTypes_NestedMessage struct {
 	A                    int32         `protobuf:"varint,1,opt,name=a,proto3" json:"a,omitempty"`
 	Corecursive          *TestAllTypes `protobuf:"bytes,2,opt,name=corecursive" json:"corecursive,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
-	XXX_unrecognized     []byte        `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte        `json:"-"`
 	XXX_sizecache        int32         `json:"-"`
 }
 
@@ -1766,7 +1766,7 @@ func (m *TestAllTypes_NestedMessage) GetCorecursive() *TestAllTypes {
 type ForeignMessage struct {
 	C                    int32    `protobuf:"varint,1,opt,name=c,proto3" json:"c,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 

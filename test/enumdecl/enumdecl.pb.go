@@ -49,7 +49,7 @@ func (MyEnum) EnumDescriptor() ([]byte, []int) { return fileDescriptorEnumdecl, 
 type Message struct {
 	EnumeratedField      MyEnum   `protobuf:"varint,1,opt,name=enumerated_field,json=enumeratedField,proto3,enum=enumdecl.MyEnum" json:"enumerated_field,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -161,9 +161,7 @@ func (m *Message) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintEnumdecl(dAtA, i, uint64(m.EnumeratedField))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -181,9 +179,7 @@ func NewPopulatedMessage(r randyEnumdecl, easy bool) *Message {
 	this := &Message{}
 	this.EnumeratedField = MyEnum([]int32{0, 1}[r.Intn(2)])
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedEnumdecl(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedEnumdecl(r, 2)
 	}
 	return this
 }
@@ -267,9 +263,7 @@ func (m *Message) Size() (n int) {
 		n += 1 + sovEnumdecl(uint64(m.EnumeratedField))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

@@ -28,7 +28,7 @@ type DoubleValue struct {
 	// The double value.
 	Value                float64  `protobuf:"fixed64,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -66,7 +66,7 @@ type FloatValue struct {
 	// The float value.
 	Value                float32  `protobuf:"fixed32,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -104,7 +104,7 @@ type Int64Value struct {
 	// The int64 value.
 	Value                int64    `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -142,7 +142,7 @@ type UInt64Value struct {
 	// The uint64 value.
 	Value                uint64   `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -180,7 +180,7 @@ type Int32Value struct {
 	// The int32 value.
 	Value                int32    `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -218,7 +218,7 @@ type UInt32Value struct {
 	// The uint32 value.
 	Value                uint32   `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -256,7 +256,7 @@ type BoolValue struct {
 	// The bool value.
 	Value                bool     `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -294,7 +294,7 @@ type StringValue struct {
 	// The string value.
 	Value                string   `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -332,7 +332,7 @@ type BytesValue struct {
 	// The bytes value.
 	Value                []byte   `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -1084,9 +1084,7 @@ func (m *DoubleValue) MarshalTo(dAtA []byte) (int, error) {
 		i += 8
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1113,9 +1111,7 @@ func (m *FloatValue) MarshalTo(dAtA []byte) (int, error) {
 		i += 4
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1141,9 +1137,7 @@ func (m *Int64Value) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintWrappers(dAtA, i, uint64(m.Value))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1169,9 +1163,7 @@ func (m *UInt64Value) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintWrappers(dAtA, i, uint64(m.Value))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1197,9 +1189,7 @@ func (m *Int32Value) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintWrappers(dAtA, i, uint64(m.Value))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1225,9 +1215,7 @@ func (m *UInt32Value) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintWrappers(dAtA, i, uint64(m.Value))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1258,9 +1246,7 @@ func (m *BoolValue) MarshalTo(dAtA []byte) (int, error) {
 		i++
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1287,9 +1273,7 @@ func (m *StringValue) MarshalTo(dAtA []byte) (int, error) {
 		i += copy(dAtA[i:], m.Value)
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1316,9 +1300,7 @@ func (m *BytesValue) MarshalTo(dAtA []byte) (int, error) {
 		i += copy(dAtA[i:], m.Value)
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1339,9 +1321,7 @@ func NewPopulatedDoubleValue(r randyWrappers, easy bool) *DoubleValue {
 		this.Value *= -1
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
 	}
 	return this
 }
@@ -1353,9 +1333,7 @@ func NewPopulatedFloatValue(r randyWrappers, easy bool) *FloatValue {
 		this.Value *= -1
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
 	}
 	return this
 }
@@ -1367,9 +1345,7 @@ func NewPopulatedInt64Value(r randyWrappers, easy bool) *Int64Value {
 		this.Value *= -1
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
 	}
 	return this
 }
@@ -1378,9 +1354,7 @@ func NewPopulatedUInt64Value(r randyWrappers, easy bool) *UInt64Value {
 	this := &UInt64Value{}
 	this.Value = uint64(uint64(r.Uint32()))
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
 	}
 	return this
 }
@@ -1392,9 +1366,7 @@ func NewPopulatedInt32Value(r randyWrappers, easy bool) *Int32Value {
 		this.Value *= -1
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
 	}
 	return this
 }
@@ -1403,9 +1375,7 @@ func NewPopulatedUInt32Value(r randyWrappers, easy bool) *UInt32Value {
 	this := &UInt32Value{}
 	this.Value = uint32(r.Uint32())
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
 	}
 	return this
 }
@@ -1414,9 +1384,7 @@ func NewPopulatedBoolValue(r randyWrappers, easy bool) *BoolValue {
 	this := &BoolValue{}
 	this.Value = bool(bool(r.Intn(2) == 0))
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
 	}
 	return this
 }
@@ -1425,9 +1393,7 @@ func NewPopulatedStringValue(r randyWrappers, easy bool) *StringValue {
 	this := &StringValue{}
 	this.Value = string(randStringWrappers(r))
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
 	}
 	return this
 }
@@ -1440,9 +1406,7 @@ func NewPopulatedBytesValue(r randyWrappers, easy bool) *BytesValue {
 		this.Value[i] = byte(r.Intn(256))
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedWrappers(r, 2)
 	}
 	return this
 }
@@ -1526,9 +1490,7 @@ func (m *DoubleValue) Size() (n int) {
 		n += 9
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1540,9 +1502,7 @@ func (m *FloatValue) Size() (n int) {
 		n += 5
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1554,9 +1514,7 @@ func (m *Int64Value) Size() (n int) {
 		n += 1 + sovWrappers(uint64(m.Value))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1568,9 +1526,7 @@ func (m *UInt64Value) Size() (n int) {
 		n += 1 + sovWrappers(uint64(m.Value))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1582,9 +1538,7 @@ func (m *Int32Value) Size() (n int) {
 		n += 1 + sovWrappers(uint64(m.Value))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1596,9 +1550,7 @@ func (m *UInt32Value) Size() (n int) {
 		n += 1 + sovWrappers(uint64(m.Value))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1610,9 +1562,7 @@ func (m *BoolValue) Size() (n int) {
 		n += 2
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1625,9 +1575,7 @@ func (m *StringValue) Size() (n int) {
 		n += 1 + l + sovWrappers(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1640,9 +1588,7 @@ func (m *BytesValue) Size() (n int) {
 		n += 1 + l + sovWrappers(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

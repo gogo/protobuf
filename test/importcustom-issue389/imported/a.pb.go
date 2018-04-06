@@ -35,7 +35,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type A struct {
 	F1                   string   `protobuf:"bytes,1,opt,name=f1,proto3" json:"f1,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -114,9 +114,7 @@ func (m *A) MarshalTo(dAtA []byte) (int, error) {
 		i += copy(dAtA[i:], m.F1)
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -134,9 +132,7 @@ func NewPopulatedA(r randyA, easy bool) *A {
 	this := &A{}
 	this.F1 = string(randStringA(r))
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedA(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedA(r, 2)
 	}
 	return this
 }
@@ -221,9 +217,7 @@ func (m *A) Size() (n int) {
 		n += 1 + l + sovA(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

@@ -44,7 +44,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type Subby struct {
 	Sub                  string   `protobuf:"bytes,1,opt,name=sub,proto3" json:"sub,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -83,7 +83,7 @@ type SampleOneOf struct {
 	//	*SampleOneOf_SubMessage
 	TestOneof            isSampleOneOf_TestOneof `protobuf_oneof:"test_oneof"`
 	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
-	XXX_unrecognized     []byte                  `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte                  `json:"-"`
 	XXX_sizecache        int32                   `json:"-"`
 }
 
@@ -2027,9 +2027,7 @@ func (m *Subby) MarshalTo(dAtA []byte) (int, error) {
 		i += copy(dAtA[i:], m.Sub)
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -2057,9 +2055,7 @@ func (m *SampleOneOf) MarshalTo(dAtA []byte) (int, error) {
 		i += nn1
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -2213,9 +2209,7 @@ func NewPopulatedSubby(r randyOne, easy bool) *Subby {
 	this := &Subby{}
 	this.Sub = string(randStringOne(r))
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedOne(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedOne(r, 2)
 	}
 	return this
 }
@@ -2258,9 +2252,7 @@ func NewPopulatedSampleOneOf(r randyOne, easy bool) *SampleOneOf {
 		this.TestOneof = NewPopulatedSampleOneOf_SubMessage(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedOne(r, 17)
-		}
+		this.XXX_unrecognized = randUnrecognizedOne(r, 17)
 	}
 	return this
 }
@@ -2454,9 +2446,7 @@ func (m *Subby) Size() (n int) {
 		n += 1 + l + sovOne(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -2468,9 +2458,7 @@ func (m *SampleOneOf) Size() (n int) {
 		n += m.TestOneof.Size()
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

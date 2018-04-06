@@ -26,7 +26,7 @@ type SourceContext struct {
 	// protobuf element.  For example: `"google/protobuf/source_context.proto"`.
 	FileName             string   `protobuf:"bytes,1,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -164,9 +164,7 @@ func (m *SourceContext) MarshalTo(dAtA []byte) (int, error) {
 		i += copy(dAtA[i:], m.FileName)
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -184,9 +182,7 @@ func NewPopulatedSourceContext(r randySourceContext, easy bool) *SourceContext {
 	this := &SourceContext{}
 	this.FileName = string(randStringSourceContext(r))
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedSourceContext(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedSourceContext(r, 2)
 	}
 	return this
 }
@@ -271,9 +267,7 @@ func (m *SourceContext) Size() (n int) {
 		n += 1 + l + sovSourceContext(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

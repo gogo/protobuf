@@ -38,7 +38,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type C struct {
 	F2                   *github_com_gogo_protobuf_test_importcustom_issue389_imported.B `protobuf:"bytes,1,opt,name=f2,customtype=github.com/gogo/protobuf/test/importcustom-issue389/imported.B" json:"f2,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                                                        `json:"-"`
-	XXX_unrecognized     []byte                                                          `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte                                                          `json:"-"`
 	XXX_sizecache        int32                                                           `json:"-"`
 }
 
@@ -118,9 +118,7 @@ func (m *C) MarshalTo(dAtA []byte) (int, error) {
 		i += n1
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -140,9 +138,7 @@ func NewPopulatedC(r randyC, easy bool) *C {
 		this.F2 = github_com_gogo_protobuf_test_importcustom_issue389_imported.NewPopulatedB(r)
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedC(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedC(r, 2)
 	}
 	return this
 }
@@ -227,9 +223,7 @@ func (m *C) Size() (n int) {
 		n += 1 + l + sovC(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

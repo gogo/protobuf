@@ -66,7 +66,7 @@ type Api struct {
 	// The source syntax of the service.
 	Syntax               Syntax   `protobuf:"varint,7,opt,name=syntax,proto3,enum=google.protobuf.Syntax" json:"syntax,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -155,7 +155,7 @@ type Method struct {
 	// The source syntax of this method.
 	Syntax               Syntax   `protobuf:"varint,7,opt,name=syntax,proto3,enum=google.protobuf.Syntax" json:"syntax,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -312,7 +312,7 @@ type Mixin struct {
 	// are rooted.
 	Root                 string   `protobuf:"bytes,2,opt,name=root,proto3" json:"root,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -845,9 +845,7 @@ func (m *Api) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintApi(dAtA, i, uint64(m.Syntax))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -923,9 +921,7 @@ func (m *Method) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintApi(dAtA, i, uint64(m.Syntax))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -958,9 +954,7 @@ func (m *Mixin) MarshalTo(dAtA []byte) (int, error) {
 		i += copy(dAtA[i:], m.Root)
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -1004,9 +998,7 @@ func NewPopulatedApi(r randyApi, easy bool) *Api {
 	}
 	this.Syntax = Syntax([]int32{0, 1}[r.Intn(2)])
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedApi(r, 8)
-		}
+		this.XXX_unrecognized = randUnrecognizedApi(r, 8)
 	}
 	return this
 }
@@ -1027,9 +1019,7 @@ func NewPopulatedMethod(r randyApi, easy bool) *Method {
 	}
 	this.Syntax = Syntax([]int32{0, 1}[r.Intn(2)])
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedApi(r, 8)
-		}
+		this.XXX_unrecognized = randUnrecognizedApi(r, 8)
 	}
 	return this
 }
@@ -1039,9 +1029,7 @@ func NewPopulatedMixin(r randyApi, easy bool) *Mixin {
 	this.Name = string(randStringApi(r))
 	this.Root = string(randStringApi(r))
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedApi(r, 3)
-		}
+		this.XXX_unrecognized = randUnrecognizedApi(r, 3)
 	}
 	return this
 }
@@ -1155,9 +1143,7 @@ func (m *Api) Size() (n int) {
 		n += 1 + sovApi(uint64(m.Syntax))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1193,9 +1179,7 @@ func (m *Method) Size() (n int) {
 		n += 1 + sovApi(uint64(m.Syntax))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1212,9 +1196,7 @@ func (m *Mixin) Size() (n int) {
 		n += 1 + l + sovApi(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

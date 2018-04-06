@@ -92,7 +92,7 @@ type Duration struct {
 	// to +999,999,999 inclusive.
 	Nanos                int32    `protobuf:"varint,2,opt,name=nanos,proto3" json:"nanos,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -252,9 +252,7 @@ func (m *Duration) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintDuration(dAtA, i, uint64(m.Nanos))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -278,9 +276,7 @@ func (m *Duration) Size() (n int) {
 		n += 1 + sovDuration(uint64(m.Nanos))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

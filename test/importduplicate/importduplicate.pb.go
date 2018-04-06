@@ -41,7 +41,7 @@ type MapAndSortKeys struct {
 	KeyValue             map[int32]string `protobuf:"bytes,2,rep,name=keyValue" json:"keyValue,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	Value                *proto1.Subject  `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
-	XXX_unrecognized     []byte           `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
 	XXX_sizecache        int32            `json:"-"`
 }
 
@@ -185,9 +185,7 @@ func NewPopulatedMapAndSortKeys(r randyImportduplicate, easy bool) *MapAndSortKe
 		this.Value = proto1.NewPopulatedSubject(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedImportduplicate(r, 4)
-		}
+		this.XXX_unrecognized = randUnrecognizedImportduplicate(r, 4)
 	}
 	return this
 }

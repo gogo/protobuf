@@ -30,7 +30,7 @@ var _ = math.Inf
 // The JSON representation for `Empty` is empty JSON object `{}`.
 type Empty struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -146,9 +146,7 @@ func (m *Empty) MarshalTo(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -165,9 +163,7 @@ func encodeVarintEmpty(dAtA []byte, offset int, v uint64) int {
 func NewPopulatedEmpty(r randyEmpty, easy bool) *Empty {
 	this := &Empty{}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedEmpty(r, 1)
-		}
+		this.XXX_unrecognized = randUnrecognizedEmpty(r, 1)
 	}
 	return this
 }
@@ -248,9 +244,7 @@ func (m *Empty) Size() (n int) {
 	var l int
 	_ = l
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

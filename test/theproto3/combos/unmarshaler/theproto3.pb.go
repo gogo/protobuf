@@ -112,7 +112,7 @@ type Message struct {
 	Proto2Field          *test.NinOptNative         `protobuf:"bytes,11,opt,name=proto2_field,json=proto2Field" json:"proto2_field,omitempty"`
 	Proto2Value          map[int64]*test.NinOptEnum `protobuf:"bytes,13,rep,name=proto2_value,json=proto2Value" json:"proto2_value,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_NoUnkeyedLiteral struct{}                   `json:"-"`
-	XXX_unrecognized     []byte                     `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte                     `json:"-"`
 	XXX_sizecache        int32                      `json:"-"`
 }
 
@@ -137,7 +137,7 @@ var xxx_messageInfo_Message proto.InternalMessageInfo
 type Nested struct {
 	Bunny                string   `protobuf:"bytes,1,opt,name=bunny,proto3" json:"bunny,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -178,7 +178,7 @@ type AllMaps struct {
 	StringToEnumMap      map[string]MapEnum        `protobuf:"bytes,16,rep,name=StringToEnumMap" json:"StringToEnumMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3,enum=theproto3.MapEnum"`
 	StringToMsgMap       map[string]*FloatingPoint `protobuf:"bytes,17,rep,name=StringToMsgMap" json:"StringToMsgMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
-	XXX_unrecognized     []byte                    `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte                    `json:"-"`
 	XXX_sizecache        int32                     `json:"-"`
 }
 
@@ -219,7 +219,7 @@ type AllMapsOrdered struct {
 	StringToEnumMap      map[string]MapEnum        `protobuf:"bytes,16,rep,name=StringToEnumMap" json:"StringToEnumMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3,enum=theproto3.MapEnum"`
 	StringToMsgMap       map[string]*FloatingPoint `protobuf:"bytes,17,rep,name=StringToMsgMap" json:"StringToMsgMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
-	XXX_unrecognized     []byte                    `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte                    `json:"-"`
 	XXX_sizecache        int32                     `json:"-"`
 }
 
@@ -243,7 +243,7 @@ type MessageWithMap struct {
 	MsgMapping           map[int64]*FloatingPoint `protobuf:"bytes,2,rep,name=msg_mapping,json=msgMapping" json:"msg_mapping,omitempty" protobuf_key:"zigzag64,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	ByteMapping          map[bool][]byte          `protobuf:"bytes,3,rep,name=byte_mapping,json=byteMapping" json:"byte_mapping,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
-	XXX_unrecognized     []byte                   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte                   `json:"-"`
 	XXX_sizecache        int32                    `json:"-"`
 }
 
@@ -268,7 +268,7 @@ var xxx_messageInfo_MessageWithMap proto.InternalMessageInfo
 type FloatingPoint struct {
 	F                    float64  `protobuf:"fixed64,1,opt,name=f,proto3" json:"f,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -294,7 +294,7 @@ type Uint128Pair struct {
 	Left                 github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,1,opt,name=left,proto3,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"left"`
 	Right                *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=right,proto3,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"right,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                                      `json:"-"`
-	XXX_unrecognized     []byte                                        `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte                                        `json:"-"`
 	XXX_sizecache        int32                                         `json:"-"`
 }
 
@@ -318,7 +318,7 @@ var xxx_messageInfo_Uint128Pair proto.InternalMessageInfo
 
 type ContainsNestedMap struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -343,7 +343,7 @@ var xxx_messageInfo_ContainsNestedMap proto.InternalMessageInfo
 type ContainsNestedMap_NestedMap struct {
 	NestedMapField       map[string]float64 `protobuf:"bytes,1,rep,name=NestedMapField" json:"NestedMapField,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"fixed64,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
-	XXX_unrecognized     []byte             `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
 	XXX_sizecache        int32              `json:"-"`
 }
 
@@ -370,7 +370,7 @@ var xxx_messageInfo_ContainsNestedMap_NestedMap proto.InternalMessageInfo
 type NotPacked struct {
 	Key                  []uint64 `protobuf:"varint,5,rep,name=key" json:"key,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -3519,9 +3519,7 @@ func NewPopulatedMessage(r randyTheproto3, easy bool) *Message {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 14)
-		}
+		this.XXX_unrecognized = randUnrecognizedTheproto3(r, 14)
 	}
 	return this
 }
@@ -3530,9 +3528,7 @@ func NewPopulatedNested(r randyTheproto3, easy bool) *Nested {
 	this := &Nested{}
 	this.Bunny = string(randStringTheproto3(r))
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedTheproto3(r, 2)
 	}
 	return this
 }
@@ -3701,9 +3697,7 @@ func NewPopulatedAllMaps(r randyTheproto3, easy bool) *AllMaps {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 18)
-		}
+		this.XXX_unrecognized = randUnrecognizedTheproto3(r, 18)
 	}
 	return this
 }
@@ -3872,9 +3866,7 @@ func NewPopulatedAllMapsOrdered(r randyTheproto3, easy bool) *AllMapsOrdered {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 18)
-		}
+		this.XXX_unrecognized = randUnrecognizedTheproto3(r, 18)
 	}
 	return this
 }
@@ -3908,9 +3900,7 @@ func NewPopulatedMessageWithMap(r randyTheproto3, easy bool) *MessageWithMap {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 4)
-		}
+		this.XXX_unrecognized = randUnrecognizedTheproto3(r, 4)
 	}
 	return this
 }
@@ -3922,9 +3912,7 @@ func NewPopulatedFloatingPoint(r randyTheproto3, easy bool) *FloatingPoint {
 		this.F *= -1
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedTheproto3(r, 2)
 	}
 	return this
 }
@@ -3935,9 +3923,7 @@ func NewPopulatedUint128Pair(r randyTheproto3, easy bool) *Uint128Pair {
 	this.Left = *v74
 	this.Right = github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 3)
-		}
+		this.XXX_unrecognized = randUnrecognizedTheproto3(r, 3)
 	}
 	return this
 }
@@ -3945,9 +3931,7 @@ func NewPopulatedUint128Pair(r randyTheproto3, easy bool) *Uint128Pair {
 func NewPopulatedContainsNestedMap(r randyTheproto3, easy bool) *ContainsNestedMap {
 	this := &ContainsNestedMap{}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 1)
-		}
+		this.XXX_unrecognized = randUnrecognizedTheproto3(r, 1)
 	}
 	return this
 }
@@ -3966,9 +3950,7 @@ func NewPopulatedContainsNestedMap_NestedMap(r randyTheproto3, easy bool) *Conta
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedTheproto3(r, 2)
 	}
 	return this
 }
@@ -3981,9 +3963,7 @@ func NewPopulatedNotPacked(r randyTheproto3, easy bool) *NotPacked {
 		this.Key[i] = uint64(uint64(r.Uint32()))
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedTheproto3(r, 6)
-		}
+		this.XXX_unrecognized = randUnrecognizedTheproto3(r, 6)
 	}
 	return this
 }
@@ -4128,9 +4108,7 @@ func (m *Message) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -4143,9 +4121,7 @@ func (m *Nested) Size() (n int) {
 		n += 1 + l + sovTheproto3(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -4299,9 +4275,7 @@ func (m *AllMaps) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -4455,9 +4429,7 @@ func (m *AllMapsOrdered) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -4499,9 +4471,7 @@ func (m *MessageWithMap) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -4513,9 +4483,7 @@ func (m *FloatingPoint) Size() (n int) {
 		n += 9
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -4530,9 +4498,7 @@ func (m *Uint128Pair) Size() (n int) {
 		n += 1 + l + sovTheproto3(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -4541,9 +4507,7 @@ func (m *ContainsNestedMap) Size() (n int) {
 	var l int
 	_ = l
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -4560,9 +4524,7 @@ func (m *ContainsNestedMap_NestedMap) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -4576,9 +4538,7 @@ func (m *NotPacked) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

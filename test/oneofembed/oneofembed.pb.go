@@ -34,7 +34,7 @@ const _ = proto1.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type Foo struct {
 	*Bar                 `protobuf:"bytes,1,opt,name=bar,embedded=bar" json:"bar,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -66,7 +66,7 @@ type Bar struct {
 	//	*Bar_B
 	Pick                 isBar_Pick `protobuf_oneof:"pick"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
-	XXX_unrecognized     []byte     `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
 }
 
@@ -318,9 +318,7 @@ func NewPopulatedFoo(r randyOneofembed, easy bool) *Foo {
 		this.Bar = NewPopulatedBar(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto1.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedOneofembed(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedOneofembed(r, 2)
 	}
 	return this
 }
@@ -335,9 +333,7 @@ func NewPopulatedBar(r randyOneofembed, easy bool) *Bar {
 		this.Pick = NewPopulatedBar_B(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto1.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedOneofembed(r, 13)
-		}
+		this.XXX_unrecognized = randUnrecognizedOneofembed(r, 13)
 	}
 	return this
 }

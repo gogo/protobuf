@@ -180,7 +180,7 @@ type Any struct {
 	// Must be a valid serialized protocol buffer of the above specified type.
 	Value                []byte   `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -339,9 +339,7 @@ func (m *Any) MarshalTo(dAtA []byte) (int, error) {
 		i += copy(dAtA[i:], m.Value)
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -364,9 +362,7 @@ func NewPopulatedAny(r randyAny, easy bool) *Any {
 		this.Value[i] = byte(r.Intn(256))
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedAny(r, 3)
-		}
+		this.XXX_unrecognized = randUnrecognizedAny(r, 3)
 	}
 	return this
 }
@@ -455,9 +451,7 @@ func (m *Any) Size() (n int) {
 		n += 1 + l + sovAny(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

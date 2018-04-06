@@ -71,7 +71,7 @@ type Message struct {
 	EnumeratedField      MyEnum      `protobuf:"varint,1,opt,name=enumerated_field,json=enumeratedField,proto3,enum=enumdeclall.MyEnum" json:"enumerated_field,omitempty"`
 	OtherenumeratedField MyOtherEnum `protobuf:"varint,2,opt,name=otherenumerated_field,json=otherenumeratedField,proto3,enum=enumdeclall.MyOtherEnum" json:"otherenumerated_field,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
-	XXX_unrecognized     []byte      `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
 	XXX_sizecache        int32       `json:"-"`
 }
 
@@ -202,9 +202,7 @@ func (m *Message) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintEnumdeclall(dAtA, i, uint64(m.OtherenumeratedField))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -223,9 +221,7 @@ func NewPopulatedMessage(r randyEnumdeclall, easy bool) *Message {
 	this.EnumeratedField = MyEnum([]int32{0, 1}[r.Intn(2)])
 	this.OtherenumeratedField = MyOtherEnum([]int32{0, 1}[r.Intn(2)])
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedEnumdeclall(r, 3)
-		}
+		this.XXX_unrecognized = randUnrecognizedEnumdeclall(r, 3)
 	}
 	return this
 }
@@ -312,9 +308,7 @@ func (m *Message) Size() (n int) {
 		n += 1 + sovEnumdeclall(uint64(m.OtherenumeratedField))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

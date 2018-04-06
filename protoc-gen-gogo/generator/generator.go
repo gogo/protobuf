@@ -2311,12 +2311,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			}
 		}
 		if gogoproto.HasUnrecognized(g.file.FileDescriptorProto, message.DescriptorProto) {
-			if message.proto3() {
-				// TODO: Remove this when proto3 always preserves unknown fields.
-				g.P("XXX_unrecognized\t[]byte `protobuf_unrecognized:\"proto3\" json:\"-\"`")
-			} else {
-				g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
-			}
+			g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
 		}
 		g.P("XXX_sizecache\tint32 `json:\"-\"`")
 		g.Out()

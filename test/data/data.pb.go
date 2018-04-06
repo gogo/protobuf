@@ -38,7 +38,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type MyMessage struct {
 	MyData               uint32   `protobuf:"varint,1,opt,name=my_data,json=myData,proto3" json:"my_data,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -169,9 +169,7 @@ func (m *MyMessage) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintData(dAtA, i, uint64(m.MyData))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -189,9 +187,7 @@ func NewPopulatedMyMessage(r randyData, easy bool) *MyMessage {
 	this := &MyMessage{}
 	this.MyData = uint32(r.Uint32())
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedData(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedData(r, 2)
 	}
 	return this
 }
@@ -275,9 +271,7 @@ func (m *MyMessage) Size() (n int) {
 		n += 1 + sovData(uint64(m.MyData))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

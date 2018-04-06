@@ -35,7 +35,7 @@ const _ = proto1.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Subject struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -111,9 +111,7 @@ func valueToGoStringProto(v interface{}, typ string) string {
 func NewPopulatedSubject(r randyProto, easy bool) *Subject {
 	this := &Subject{}
 	if !easy && r.Intn(10) != 0 {
-		if proto1.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedProto(r, 1)
-		}
+		this.XXX_unrecognized = randUnrecognizedProto(r, 1)
 	}
 	return this
 }

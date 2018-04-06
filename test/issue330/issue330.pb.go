@@ -35,7 +35,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type Object struct {
 	Type                 TypeIdentifier `protobuf:"varint,1,opt,name=type,proto3,casttype=TypeIdentifier" json:"type,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
-	XXX_unrecognized     []byte         `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
 }
 
@@ -113,9 +113,7 @@ func (m *Object) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintIssue330(dAtA, i, uint64(m.Type))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -133,9 +131,7 @@ func NewPopulatedObject(r randyIssue330, easy bool) *Object {
 	this := &Object{}
 	this.Type = TypeIdentifier(r.Uint32())
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedIssue330(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedIssue330(r, 2)
 	}
 	return this
 }
@@ -219,9 +215,7 @@ func (m *Object) Size() (n int) {
 		n += 1 + sovIssue330(uint64(m.Type))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }

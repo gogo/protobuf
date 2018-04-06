@@ -44,7 +44,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type MapTest struct {
 	StrStr               map[string]string `protobuf:"bytes,1,rep,name=str_str,json=strStr" json:"str_str,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
-	XXX_unrecognized     []byte            `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
 }
 
@@ -66,7 +66,7 @@ var xxx_messageInfo_MapTest proto.InternalMessageInfo
 type FakeMap struct {
 	Entries              []*FakeMapEntry `protobuf:"bytes,1,rep,name=entries" json:"entries,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
 	XXX_sizecache        int32           `json:"-"`
 }
 
@@ -90,7 +90,7 @@ type FakeMapEntry struct {
 	Value                string   `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
 	Other                string   `protobuf:"bytes,3,opt,name=other,proto3" json:"other,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `protobuf_unrecognized:"proto3" json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
@@ -695,9 +695,7 @@ func (m *MapTest) MarshalTo(dAtA []byte) (int, error) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -730,9 +728,7 @@ func (m *FakeMap) MarshalTo(dAtA []byte) (int, error) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -771,9 +767,7 @@ func (m *FakeMapEntry) MarshalTo(dAtA []byte) (int, error) {
 		i += copy(dAtA[i:], m.Other)
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			i += copy(dAtA[i:], m.XXX_unrecognized)
-		}
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -797,9 +791,7 @@ func NewPopulatedMapTest(r randyMap, easy bool) *MapTest {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedMap(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedMap(r, 2)
 	}
 	return this
 }
@@ -814,9 +806,7 @@ func NewPopulatedFakeMap(r randyMap, easy bool) *FakeMap {
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedMap(r, 2)
-		}
+		this.XXX_unrecognized = randUnrecognizedMap(r, 2)
 	}
 	return this
 }
@@ -827,9 +817,7 @@ func NewPopulatedFakeMapEntry(r randyMap, easy bool) *FakeMapEntry {
 	this.Value = string(randStringMap(r))
 	this.Other = string(randStringMap(r))
 	if !easy && r.Intn(10) != 0 {
-		if proto.Proto3UnknownFields {
-			this.XXX_unrecognized = randUnrecognizedMap(r, 4)
-		}
+		this.XXX_unrecognized = randUnrecognizedMap(r, 4)
 	}
 	return this
 }
@@ -918,9 +906,7 @@ func (m *MapTest) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -935,9 +921,7 @@ func (m *FakeMap) Size() (n int) {
 		}
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -958,9 +942,7 @@ func (m *FakeMapEntry) Size() (n int) {
 		n += 1 + l + sovMap(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
-		if proto.Proto3UnknownFields {
-			n += len(m.XXX_unrecognized)
-		}
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
