@@ -1293,7 +1293,7 @@ type FileOptions struct {
 	// top-level extensions defined in the file.
 	JavaMultipleFiles *bool `protobuf:"varint,10,opt,name=java_multiple_files,json=javaMultipleFiles,def=0" json:"java_multiple_files,omitempty"`
 	// This option does nothing.
-	JavaGenerateEqualsAndHash *bool `protobuf:"varint,20,opt,name=java_generate_equals_and_hash,json=javaGenerateEqualsAndHash" json:"java_generate_equals_and_hash,omitempty"`
+	JavaGenerateEqualsAndHash *bool `protobuf:"varint,20,opt,name=java_generate_equals_and_hash,json=javaGenerateEqualsAndHash" json:"java_generate_equals_and_hash,omitempty"` // Deprecated: Do not use.
 	// If set true, then the Java2 code generator will generate code that
 	// throws an exception whenever an attempt is made to assign a non-UTF-8
 	// byte sequence to a string field.
@@ -1417,6 +1417,7 @@ func (m *FileOptions) GetJavaMultipleFiles() bool {
 	return Default_FileOptions_JavaMultipleFiles
 }
 
+// Deprecated: Do not use.
 func (m *FileOptions) GetJavaGenerateEqualsAndHash() bool {
 	if m != nil && m.JavaGenerateEqualsAndHash != nil {
 		return *m.JavaGenerateEqualsAndHash
