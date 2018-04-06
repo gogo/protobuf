@@ -1258,7 +1258,7 @@ func sizeBoolValue(_ pointer, tagsize int) int {
 }
 func sizeBoolValueNoZero(ptr pointer, tagsize int) int {
 	v := *ptr.toBool()
-	if v == false {
+	if !v {
 		return 0
 	}
 	return 1 + tagsize

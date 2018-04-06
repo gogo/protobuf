@@ -886,7 +886,7 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 				return fmt.Errorf("bad ListValue: %v", err)
 			}
 
-			target.Field(0).Set(reflect.ValueOf(make([]*types.Value, len(s), len(s))))
+			target.Field(0).Set(reflect.ValueOf(make([]*types.Value, len(s))))
 			for i, sv := range s {
 				if err := u.unmarshalValue(target.Field(0).Index(i), sv, prop); err != nil {
 					return err

@@ -155,7 +155,7 @@ func (d *Descriptor) TypeName() []string {
 	for parent := d; parent != nil; parent = parent.parent {
 		n++
 	}
-	s := make([]string, n, n)
+	s := make([]string, n)
 	for parent := d; parent != nil; parent = parent.parent {
 		n--
 		s[n] = parent.GetName()
