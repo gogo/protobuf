@@ -1505,6 +1505,14 @@ func TestVarintOverflow(t *testing.T) {
 	}
 }
 
+func TestBytesWithInvalidLengthInGroup(t *testing.T) {
+	// Overflowing a 64-bit length should not be allowed.
+	b := []byte{0xbb, 0x30, 0xb2, 0x30, 0xb0, 0xb2, 0x83, 0xf1, 0xb0, 0xb2, 0xef, 0xbf, 0xbd, 0x01}
+	if err := Unmarshal(b, new(MyMessage)); err == nil {
+		t.Fatalf("Overflowed uint64 length without error")
+	}
+}
+
 func TestUnmarshalFuzz(t *testing.T) {
 	const N = 1000
 	seed := time.Now().UnixNano()
