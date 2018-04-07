@@ -36,10 +36,10 @@ func (m *Subtype) Reset()                    { *m = Subtype{} }
 func (m *Subtype) String() string            { return proto.CompactTextString(m) }
 func (*Subtype) ProtoMessage()               {}
 func (*Subtype) Descriptor() ([]byte, []int) { return fileDescriptorEvents, []int{0} }
-func (m *Subtype) Unmarshal(b []byte) error {
+func (m *Subtype) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Subtype.Unmarshal(m, b)
 }
-func (m *Subtype) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Subtype) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Subtype.Marshal(b, m, deterministic)
 }
 func (dst *Subtype) XXX_Merge(src proto.Message) {

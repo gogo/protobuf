@@ -57,10 +57,10 @@ func (m *DeprecatedRequest) Reset()                    { *m = DeprecatedRequest{
 func (m *DeprecatedRequest) String() string            { return proto.CompactTextString(m) }
 func (*DeprecatedRequest) ProtoMessage()               {}
 func (*DeprecatedRequest) Descriptor() ([]byte, []int) { return fileDescriptorDeprecated, []int{0} }
-func (m *DeprecatedRequest) Unmarshal(b []byte) error {
+func (m *DeprecatedRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeprecatedRequest.Unmarshal(m, b)
 }
-func (m *DeprecatedRequest) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *DeprecatedRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DeprecatedRequest.Marshal(b, m, deterministic)
 }
 func (dst *DeprecatedRequest) XXX_Merge(src proto.Message) {
@@ -88,10 +88,10 @@ func (m *DeprecatedResponse) Reset()                    { *m = DeprecatedRespons
 func (m *DeprecatedResponse) String() string            { return proto.CompactTextString(m) }
 func (*DeprecatedResponse) ProtoMessage()               {}
 func (*DeprecatedResponse) Descriptor() ([]byte, []int) { return fileDescriptorDeprecated, []int{1} }
-func (m *DeprecatedResponse) Unmarshal(b []byte) error {
+func (m *DeprecatedResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeprecatedResponse.Unmarshal(m, b)
 }
-func (m *DeprecatedResponse) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *DeprecatedResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DeprecatedResponse.Marshal(b, m, deterministic)
 }
 func (dst *DeprecatedResponse) XXX_Merge(src proto.Message) {

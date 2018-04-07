@@ -44,6 +44,12 @@ type A struct {
 func (m *A) Reset()                    { *m = A{} }
 func (*A) ProtoMessage()               {}
 func (*A) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{0} }
+func (m *A) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_A.Unmarshal(m, b)
+}
+func (m *A) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_A.Marshal(b, m, deterministic)
+}
 func (dst *A) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_A.Merge(dst, src)
 }
@@ -67,6 +73,12 @@ type B struct {
 func (m *B) Reset()                    { *m = B{} }
 func (*B) ProtoMessage()               {}
 func (*B) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{1} }
+func (m *B) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_B.Unmarshal(m, b)
+}
+func (m *B) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_B.Marshal(b, m, deterministic)
+}
 func (dst *B) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_B.Merge(dst, src)
 }
@@ -89,6 +101,12 @@ type C struct {
 func (m *C) Reset()                    { *m = C{} }
 func (*C) ProtoMessage()               {}
 func (*C) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{2} }
+func (m *C) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_C.Unmarshal(m, b)
+}
+func (m *C) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_C.Marshal(b, m, deterministic)
+}
 func (dst *C) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_C.Merge(dst, src)
 }
@@ -119,6 +137,12 @@ type U struct {
 func (m *U) Reset()                    { *m = U{} }
 func (*U) ProtoMessage()               {}
 func (*U) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{3} }
+func (m *U) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_U.Unmarshal(m, b)
+}
+func (m *U) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_U.Marshal(b, m, deterministic)
+}
 func (dst *U) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_U.Merge(dst, src)
 }
@@ -169,6 +193,12 @@ func (m *E) GetExtensions() *[]byte {
 	}
 	return &m.XXX_extensions
 }
+func (m *E) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_E.Unmarshal(m, b)
+}
+func (m *E) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_E.Marshal(b, m, deterministic)
+}
 func (dst *E) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_E.Merge(dst, src)
 }
@@ -190,6 +220,12 @@ type R struct {
 func (m *R) Reset()                    { *m = R{} }
 func (*R) ProtoMessage()               {}
 func (*R) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{5} }
+func (m *R) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_R.Unmarshal(m, b)
+}
+func (m *R) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_R.Marshal(b, m, deterministic)
+}
 func (dst *R) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_R.Merge(dst, src)
 }
@@ -219,6 +255,12 @@ type CastType struct {
 func (m *CastType) Reset()                    { *m = CastType{} }
 func (*CastType) ProtoMessage()               {}
 func (*CastType) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{6} }
+func (m *CastType) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CastType.Unmarshal(m, b)
+}
+func (m *CastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CastType.Marshal(b, m, deterministic)
+}
 func (dst *CastType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CastType.Merge(dst, src)
 }

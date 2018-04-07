@@ -45,7 +45,10 @@ func (m *NinRepNative) Reset()                    { *m = NinRepNative{} }
 func (m *NinRepNative) String() string            { return proto.CompactTextString(m) }
 func (*NinRepNative) ProtoMessage()               {}
 func (*NinRepNative) Descriptor() ([]byte, []int) { return fileDescriptorPacked, []int{0} }
-func (m *NinRepNative) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinRepNative) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinRepNative.Unmarshal(m, b)
+}
+func (m *NinRepNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepNative.Marshal(b, m, deterministic)
 }
 func (dst *NinRepNative) XXX_Merge(src proto.Message) {
@@ -174,7 +177,10 @@ func (m *NinRepPackedNative) Reset()                    { *m = NinRepPackedNativ
 func (m *NinRepPackedNative) String() string            { return proto.CompactTextString(m) }
 func (*NinRepPackedNative) ProtoMessage()               {}
 func (*NinRepPackedNative) Descriptor() ([]byte, []int) { return fileDescriptorPacked, []int{1} }
-func (m *NinRepPackedNative) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinRepPackedNative) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinRepPackedNative.Unmarshal(m, b)
+}
+func (m *NinRepPackedNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepPackedNative.Marshal(b, m, deterministic)
 }
 func (dst *NinRepPackedNative) XXX_Merge(src proto.Message) {
@@ -303,7 +309,10 @@ func (m *NinRepNativeUnsafe) Reset()                    { *m = NinRepNativeUnsaf
 func (m *NinRepNativeUnsafe) String() string            { return proto.CompactTextString(m) }
 func (*NinRepNativeUnsafe) ProtoMessage()               {}
 func (*NinRepNativeUnsafe) Descriptor() ([]byte, []int) { return fileDescriptorPacked, []int{2} }
-func (m *NinRepNativeUnsafe) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinRepNativeUnsafe) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinRepNativeUnsafe.Unmarshal(m, b)
+}
+func (m *NinRepNativeUnsafe) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepNativeUnsafe.Marshal(b, m, deterministic)
 }
 func (dst *NinRepNativeUnsafe) XXX_Merge(src proto.Message) {
@@ -432,7 +441,10 @@ func (m *NinRepPackedNativeUnsafe) Reset()                    { *m = NinRepPacke
 func (m *NinRepPackedNativeUnsafe) String() string            { return proto.CompactTextString(m) }
 func (*NinRepPackedNativeUnsafe) ProtoMessage()               {}
 func (*NinRepPackedNativeUnsafe) Descriptor() ([]byte, []int) { return fileDescriptorPacked, []int{3} }
-func (m *NinRepPackedNativeUnsafe) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinRepPackedNativeUnsafe) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinRepPackedNativeUnsafe.Unmarshal(m, b)
+}
+func (m *NinRepPackedNativeUnsafe) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepPackedNativeUnsafe.Marshal(b, m, deterministic)
 }
 func (dst *NinRepPackedNativeUnsafe) XXX_Merge(src proto.Message) {

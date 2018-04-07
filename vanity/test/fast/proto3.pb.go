@@ -31,6 +31,12 @@ func (m *Aproto3) Reset()                    { *m = Aproto3{} }
 func (m *Aproto3) String() string            { return proto.CompactTextString(m) }
 func (*Aproto3) ProtoMessage()               {}
 func (*Aproto3) Descriptor() ([]byte, []int) { return fileDescriptorProto3, []int{0} }
+func (m *Aproto3) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Aproto3.Unmarshal(m, b)
+}
+func (m *Aproto3) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Aproto3.Marshal(b, m, deterministic)
+}
 func (dst *Aproto3) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Aproto3.Merge(dst, src)
 }

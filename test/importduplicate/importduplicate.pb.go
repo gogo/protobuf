@@ -40,10 +40,10 @@ func (m *MapAndSortKeys) Reset()                    { *m = MapAndSortKeys{} }
 func (m *MapAndSortKeys) String() string            { return proto.CompactTextString(m) }
 func (*MapAndSortKeys) ProtoMessage()               {}
 func (*MapAndSortKeys) Descriptor() ([]byte, []int) { return fileDescriptorImportduplicate, []int{0} }
-func (m *MapAndSortKeys) Unmarshal(b []byte) error {
+func (m *MapAndSortKeys) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MapAndSortKeys.Unmarshal(m, b)
 }
-func (m *MapAndSortKeys) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MapAndSortKeys) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MapAndSortKeys.Marshal(b, m, deterministic)
 }
 func (dst *MapAndSortKeys) XXX_Merge(src proto.Message) {

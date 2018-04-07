@@ -69,10 +69,10 @@ func (m *NidOptEnum) Reset()                    { *m = NidOptEnum{} }
 func (m *NidOptEnum) String() string            { return proto.CompactTextString(m) }
 func (*NidOptEnum) ProtoMessage()               {}
 func (*NidOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorEnumstringer, []int{0} }
-func (m *NidOptEnum) Unmarshal(b []byte) error {
+func (m *NidOptEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptEnum.Unmarshal(m, b)
 }
-func (m *NidOptEnum) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NidOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidOptEnum.Marshal(b, m, deterministic)
 }
 func (dst *NidOptEnum) XXX_Merge(src proto.Message) {
@@ -105,10 +105,10 @@ func (m *NinOptEnum) Reset()                    { *m = NinOptEnum{} }
 func (m *NinOptEnum) String() string            { return proto.CompactTextString(m) }
 func (*NinOptEnum) ProtoMessage()               {}
 func (*NinOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorEnumstringer, []int{1} }
-func (m *NinOptEnum) Unmarshal(b []byte) error {
+func (m *NinOptEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptEnum.Unmarshal(m, b)
 }
-func (m *NinOptEnum) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptEnum.Marshal(b, m, deterministic)
 }
 func (dst *NinOptEnum) XXX_Merge(src proto.Message) {
@@ -141,10 +141,10 @@ func (m *NidRepEnum) Reset()                    { *m = NidRepEnum{} }
 func (m *NidRepEnum) String() string            { return proto.CompactTextString(m) }
 func (*NidRepEnum) ProtoMessage()               {}
 func (*NidRepEnum) Descriptor() ([]byte, []int) { return fileDescriptorEnumstringer, []int{2} }
-func (m *NidRepEnum) Unmarshal(b []byte) error {
+func (m *NidRepEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepEnum.Unmarshal(m, b)
 }
-func (m *NidRepEnum) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NidRepEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidRepEnum.Marshal(b, m, deterministic)
 }
 func (dst *NidRepEnum) XXX_Merge(src proto.Message) {
@@ -177,10 +177,10 @@ func (m *NinRepEnum) Reset()                    { *m = NinRepEnum{} }
 func (m *NinRepEnum) String() string            { return proto.CompactTextString(m) }
 func (*NinRepEnum) ProtoMessage()               {}
 func (*NinRepEnum) Descriptor() ([]byte, []int) { return fileDescriptorEnumstringer, []int{3} }
-func (m *NinRepEnum) Unmarshal(b []byte) error {
+func (m *NinRepEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepEnum.Unmarshal(m, b)
 }
-func (m *NinRepEnum) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinRepEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepEnum.Marshal(b, m, deterministic)
 }
 func (dst *NinRepEnum) XXX_Merge(src proto.Message) {

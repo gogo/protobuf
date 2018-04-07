@@ -157,10 +157,10 @@ func (m *OnlyEnums) Reset()                    { *m = OnlyEnums{} }
 func (m *OnlyEnums) String() string            { return proto.CompactTextString(m) }
 func (*OnlyEnums) ProtoMessage()               {}
 func (*OnlyEnums) Descriptor() ([]byte, []int) { return fileDescriptorEnumcustomname, []int{0} }
-func (m *OnlyEnums) Unmarshal(b []byte) error {
+func (m *OnlyEnums) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OnlyEnums.Unmarshal(m, b)
 }
-func (m *OnlyEnums) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *OnlyEnums) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OnlyEnums.Marshal(b, m, deterministic)
 }
 func (dst *OnlyEnums) XXX_Merge(src proto.Message) {

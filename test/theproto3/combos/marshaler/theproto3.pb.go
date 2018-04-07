@@ -101,8 +101,11 @@ type Message struct {
 func (m *Message) Reset()                    { *m = Message{} }
 func (*Message) ProtoMessage()               {}
 func (*Message) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{0} }
-func (m *Message) Unmarshal(b []byte) error {
+func (m *Message) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Message.Unmarshal(m, b)
+}
+func (m *Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Message.Marshal(b, m, deterministic)
 }
 func (dst *Message) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Message.Merge(dst, src)
@@ -126,8 +129,11 @@ type Nested struct {
 func (m *Nested) Reset()                    { *m = Nested{} }
 func (*Nested) ProtoMessage()               {}
 func (*Nested) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{1} }
-func (m *Nested) Unmarshal(b []byte) error {
+func (m *Nested) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Nested.Unmarshal(m, b)
+}
+func (m *Nested) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Nested.Marshal(b, m, deterministic)
 }
 func (dst *Nested) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Nested.Merge(dst, src)
@@ -167,8 +173,11 @@ type AllMaps struct {
 func (m *AllMaps) Reset()                    { *m = AllMaps{} }
 func (*AllMaps) ProtoMessage()               {}
 func (*AllMaps) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{2} }
-func (m *AllMaps) Unmarshal(b []byte) error {
+func (m *AllMaps) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AllMaps.Unmarshal(m, b)
+}
+func (m *AllMaps) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AllMaps.Marshal(b, m, deterministic)
 }
 func (dst *AllMaps) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AllMaps.Merge(dst, src)
@@ -208,8 +217,11 @@ type AllMapsOrdered struct {
 func (m *AllMapsOrdered) Reset()                    { *m = AllMapsOrdered{} }
 func (*AllMapsOrdered) ProtoMessage()               {}
 func (*AllMapsOrdered) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{3} }
-func (m *AllMapsOrdered) Unmarshal(b []byte) error {
+func (m *AllMapsOrdered) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AllMapsOrdered.Unmarshal(m, b)
+}
+func (m *AllMapsOrdered) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AllMapsOrdered.Marshal(b, m, deterministic)
 }
 func (dst *AllMapsOrdered) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AllMapsOrdered.Merge(dst, src)
@@ -235,8 +247,11 @@ type MessageWithMap struct {
 func (m *MessageWithMap) Reset()                    { *m = MessageWithMap{} }
 func (*MessageWithMap) ProtoMessage()               {}
 func (*MessageWithMap) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{4} }
-func (m *MessageWithMap) Unmarshal(b []byte) error {
+func (m *MessageWithMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MessageWithMap.Unmarshal(m, b)
+}
+func (m *MessageWithMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MessageWithMap.Marshal(b, m, deterministic)
 }
 func (dst *MessageWithMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MessageWithMap.Merge(dst, src)
@@ -260,8 +275,11 @@ type FloatingPoint struct {
 func (m *FloatingPoint) Reset()                    { *m = FloatingPoint{} }
 func (*FloatingPoint) ProtoMessage()               {}
 func (*FloatingPoint) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{5} }
-func (m *FloatingPoint) Unmarshal(b []byte) error {
+func (m *FloatingPoint) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FloatingPoint.Unmarshal(m, b)
+}
+func (m *FloatingPoint) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_FloatingPoint.Marshal(b, m, deterministic)
 }
 func (dst *FloatingPoint) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FloatingPoint.Merge(dst, src)
@@ -286,8 +304,11 @@ type Uint128Pair struct {
 func (m *Uint128Pair) Reset()                    { *m = Uint128Pair{} }
 func (*Uint128Pair) ProtoMessage()               {}
 func (*Uint128Pair) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{6} }
-func (m *Uint128Pair) Unmarshal(b []byte) error {
+func (m *Uint128Pair) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Uint128Pair.Unmarshal(m, b)
+}
+func (m *Uint128Pair) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Uint128Pair.Marshal(b, m, deterministic)
 }
 func (dst *Uint128Pair) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Uint128Pair.Merge(dst, src)
@@ -310,8 +331,11 @@ type ContainsNestedMap struct {
 func (m *ContainsNestedMap) Reset()                    { *m = ContainsNestedMap{} }
 func (*ContainsNestedMap) ProtoMessage()               {}
 func (*ContainsNestedMap) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{7} }
-func (m *ContainsNestedMap) Unmarshal(b []byte) error {
+func (m *ContainsNestedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ContainsNestedMap.Unmarshal(m, b)
+}
+func (m *ContainsNestedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ContainsNestedMap.Marshal(b, m, deterministic)
 }
 func (dst *ContainsNestedMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ContainsNestedMap.Merge(dst, src)
@@ -337,8 +361,11 @@ func (*ContainsNestedMap_NestedMap) ProtoMessage() {}
 func (*ContainsNestedMap_NestedMap) Descriptor() ([]byte, []int) {
 	return fileDescriptorTheproto3, []int{7, 0}
 }
-func (m *ContainsNestedMap_NestedMap) Unmarshal(b []byte) error {
+func (m *ContainsNestedMap_NestedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ContainsNestedMap_NestedMap.Unmarshal(m, b)
+}
+func (m *ContainsNestedMap_NestedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ContainsNestedMap_NestedMap.Marshal(b, m, deterministic)
 }
 func (dst *ContainsNestedMap_NestedMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ContainsNestedMap_NestedMap.Merge(dst, src)
@@ -362,8 +389,11 @@ type NotPacked struct {
 func (m *NotPacked) Reset()                    { *m = NotPacked{} }
 func (*NotPacked) ProtoMessage()               {}
 func (*NotPacked) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{8} }
-func (m *NotPacked) Unmarshal(b []byte) error {
+func (m *NotPacked) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NotPacked.Unmarshal(m, b)
+}
+func (m *NotPacked) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NotPacked.Marshal(b, m, deterministic)
 }
 func (dst *NotPacked) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NotPacked.Merge(dst, src)

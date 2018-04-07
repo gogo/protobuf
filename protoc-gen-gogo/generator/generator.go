@@ -402,10 +402,10 @@ func (ms *messageSymbol) GenerateAlias(g *Generator, pkg string) {
 	g.P("func (m *", ms.sym, ") Reset() { (*", remoteSym, ")(m).Reset() }")
 	g.P("func (m *", ms.sym, ") String() string { return (*", remoteSym, ")(m).String() }")
 	g.P("func (*", ms.sym, ") ProtoMessage() {}")
-	g.P("func (m *", ms.sym, ") Unmarshal(buf []byte) error ",
-		"{ return (*", remoteSym, ")(m).Unmarshal(buf) }")
-	g.P("func (m *", ms.sym, ") Marshal(b []byte, deterministic bool) ([]byte, error) ",
-		"{ return (*", remoteSym, ")(m).Marshal(b, deterministic) }")
+	g.P("func (m *", ms.sym, ") XXX_Unmarshal(buf []byte) error ",
+		"{ return (*", remoteSym, ")(m).XXX_Unmarshal(buf) }")
+	g.P("func (m *", ms.sym, ") XXX_Marshal(b []byte, deterministic bool) ([]byte, error) ",
+		"{ return (*", remoteSym, ")(m).XXX_Marshal(b, deterministic) }")
 	g.P("func (m *", ms.sym, ") XXX_Size() int ",
 		"{ return (*", remoteSym, ")(m).XXX_Size() }")
 	g.P("func (m *", ms.sym, ") XXX_DiscardUnknown() ",
@@ -2408,8 +2408,6 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			g.P("return ", g.Pkg["proto"], ".UnmarshalMessageSetJSON(buf, &m.XXX_InternalExtensions)")
 			g.Out()
 			g.P("}")
-			g.P("// ensure ", ccTypeName, " satisfies proto.Unmarshaler")
-			g.P("var _ ", g.Pkg["proto"], ".Unmarshaler = (*", ccTypeName, ")(nil)")
 		}
 
 		g.P()
@@ -2447,24 +2445,17 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	// calling Unmarshal, Marshal, Merge, Size, and Discard directly on that.
 
 	// Wrapper for table-driven marshaling and unmarshaling.
-	if !gogoproto.IsUnmarshaler(g.file.FileDescriptorProto, message.DescriptorProto) &&
-		!gogoproto.IsUnsafeUnmarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
-		g.P("func (m *", ccTypeName, ") Unmarshal(b []byte) error {")
-		g.In()
-		g.P("return xxx_messageInfo_", ccTypeName, ".Unmarshal(m, b)")
-		g.Out()
-		g.P("}")
-	}
+	g.P("func (m *", ccTypeName, ") XXX_Unmarshal(b []byte) error {")
+	g.In()
+	g.P("return xxx_messageInfo_", ccTypeName, ".Unmarshal(m, b)")
+	g.Out()
+	g.P("}")
 
-	if !gogoproto.IsMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) &&
-		!gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) &&
-		!gogoproto.IsStableMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
-		g.P("func (m *", ccTypeName, ") Marshal(b []byte, deterministic bool) ([]byte, error) {")
-		g.In()
-		g.P("return xxx_messageInfo_", ccTypeName, ".Marshal(b, m, deterministic)")
-		g.Out()
-		g.P("}")
-	}
+	g.P("func (m *", ccTypeName, ") XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {")
+	g.In()
+	g.P("return xxx_messageInfo_", ccTypeName, ".Marshal(b, m, deterministic)")
+	g.Out()
+	g.P("}")
 
 	g.P("func (dst *", ccTypeName, ") XXX_Merge(src ", g.Pkg["proto"], ".Message) {")
 	g.In()

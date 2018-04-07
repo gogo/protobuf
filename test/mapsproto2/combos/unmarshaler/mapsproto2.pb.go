@@ -83,7 +83,10 @@ type FloatingPoint struct {
 func (m *FloatingPoint) Reset()                    { *m = FloatingPoint{} }
 func (*FloatingPoint) ProtoMessage()               {}
 func (*FloatingPoint) Descriptor() ([]byte, []int) { return fileDescriptorMapsproto2, []int{0} }
-func (m *FloatingPoint) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *FloatingPoint) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_FloatingPoint.Unmarshal(m, b)
+}
+func (m *FloatingPoint) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_FloatingPoint.Marshal(b, m, deterministic)
 }
 func (dst *FloatingPoint) XXX_Merge(src proto.Message) {
@@ -111,7 +114,10 @@ type CustomMap struct {
 func (m *CustomMap) Reset()                    { *m = CustomMap{} }
 func (*CustomMap) ProtoMessage()               {}
 func (*CustomMap) Descriptor() ([]byte, []int) { return fileDescriptorMapsproto2, []int{1} }
-func (m *CustomMap) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *CustomMap) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomMap.Unmarshal(m, b)
+}
+func (m *CustomMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomMap.Marshal(b, m, deterministic)
 }
 func (dst *CustomMap) XXX_Merge(src proto.Message) {
@@ -152,7 +158,10 @@ type AllMaps struct {
 func (m *AllMaps) Reset()                    { *m = AllMaps{} }
 func (*AllMaps) ProtoMessage()               {}
 func (*AllMaps) Descriptor() ([]byte, []int) { return fileDescriptorMapsproto2, []int{2} }
-func (m *AllMaps) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *AllMaps) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AllMaps.Unmarshal(m, b)
+}
+func (m *AllMaps) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_AllMaps.Marshal(b, m, deterministic)
 }
 func (dst *AllMaps) XXX_Merge(src proto.Message) {
@@ -193,6 +202,12 @@ type AllMapsOrdered struct {
 func (m *AllMapsOrdered) Reset()                    { *m = AllMapsOrdered{} }
 func (*AllMapsOrdered) ProtoMessage()               {}
 func (*AllMapsOrdered) Descriptor() ([]byte, []int) { return fileDescriptorMapsproto2, []int{3} }
+func (m *AllMapsOrdered) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AllMapsOrdered.Unmarshal(m, b)
+}
+func (m *AllMapsOrdered) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AllMapsOrdered.Marshal(b, m, deterministic)
+}
 func (dst *AllMapsOrdered) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AllMapsOrdered.Merge(dst, src)
 }

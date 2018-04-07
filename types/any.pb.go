@@ -145,6 +145,12 @@ func (m *Any) Reset()                    { *m = Any{} }
 func (*Any) ProtoMessage()               {}
 func (*Any) Descriptor() ([]byte, []int) { return fileDescriptorAny, []int{0} }
 func (*Any) XXX_WellKnownType() string   { return "Any" }
+func (m *Any) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Any.Unmarshal(m, b)
+}
+func (m *Any) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Any.Marshal(b, m, deterministic)
+}
 func (dst *Any) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Any.Merge(dst, src)
 }

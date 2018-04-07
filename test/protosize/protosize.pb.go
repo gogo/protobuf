@@ -37,6 +37,12 @@ func (m *SizeMessage) Reset()                    { *m = SizeMessage{} }
 func (m *SizeMessage) String() string            { return proto.CompactTextString(m) }
 func (*SizeMessage) ProtoMessage()               {}
 func (*SizeMessage) Descriptor() ([]byte, []int) { return fileDescriptorProtosize, []int{0} }
+func (m *SizeMessage) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SizeMessage.Unmarshal(m, b)
+}
+func (m *SizeMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SizeMessage.Marshal(b, m, deterministic)
+}
 func (dst *SizeMessage) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_SizeMessage.Merge(dst, src)
 }

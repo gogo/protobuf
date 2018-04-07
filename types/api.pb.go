@@ -73,6 +73,12 @@ type Api struct {
 func (m *Api) Reset()                    { *m = Api{} }
 func (*Api) ProtoMessage()               {}
 func (*Api) Descriptor() ([]byte, []int) { return fileDescriptorApi, []int{0} }
+func (m *Api) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Api.Unmarshal(m, b)
+}
+func (m *Api) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Api.Marshal(b, m, deterministic)
+}
 func (dst *Api) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Api.Merge(dst, src)
 }
@@ -162,6 +168,12 @@ type Method struct {
 func (m *Method) Reset()                    { *m = Method{} }
 func (*Method) ProtoMessage()               {}
 func (*Method) Descriptor() ([]byte, []int) { return fileDescriptorApi, []int{1} }
+func (m *Method) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Method.Unmarshal(m, b)
+}
+func (m *Method) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Method.Marshal(b, m, deterministic)
+}
 func (dst *Method) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Method.Merge(dst, src)
 }
@@ -319,6 +331,12 @@ type Mixin struct {
 func (m *Mixin) Reset()                    { *m = Mixin{} }
 func (*Mixin) ProtoMessage()               {}
 func (*Mixin) Descriptor() ([]byte, []int) { return fileDescriptorApi, []int{2} }
+func (m *Mixin) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Mixin.Unmarshal(m, b)
+}
+func (m *Mixin) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Mixin.Marshal(b, m, deterministic)
+}
 func (dst *Mixin) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Mixin.Merge(dst, src)
 }

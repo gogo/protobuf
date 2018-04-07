@@ -37,10 +37,10 @@ type Groups1 struct {
 func (m *Groups1) Reset()                    { *m = Groups1{} }
 func (*Groups1) ProtoMessage()               {}
 func (*Groups1) Descriptor() ([]byte, []int) { return fileDescriptorGroup, []int{0} }
-func (m *Groups1) Unmarshal(b []byte) error {
+func (m *Groups1) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Groups1.Unmarshal(m, b)
 }
-func (m *Groups1) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Groups1) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Groups1.Marshal(b, m, deterministic)
 }
 func (dst *Groups1) XXX_Merge(src proto.Message) {
@@ -66,10 +66,10 @@ type Groups1_G struct {
 func (m *Groups1_G) Reset()                    { *m = Groups1_G{} }
 func (*Groups1_G) ProtoMessage()               {}
 func (*Groups1_G) Descriptor() ([]byte, []int) { return fileDescriptorGroup, []int{0, 0} }
-func (m *Groups1_G) Unmarshal(b []byte) error {
+func (m *Groups1_G) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Groups1_G.Unmarshal(m, b)
 }
-func (m *Groups1_G) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Groups1_G) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Groups1_G.Marshal(b, m, deterministic)
 }
 func (dst *Groups1_G) XXX_Merge(src proto.Message) {
@@ -94,10 +94,10 @@ type Groups2 struct {
 func (m *Groups2) Reset()                    { *m = Groups2{} }
 func (*Groups2) ProtoMessage()               {}
 func (*Groups2) Descriptor() ([]byte, []int) { return fileDescriptorGroup, []int{1} }
-func (m *Groups2) Unmarshal(b []byte) error {
+func (m *Groups2) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Groups2.Unmarshal(m, b)
 }
-func (m *Groups2) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Groups2) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Groups2.Marshal(b, m, deterministic)
 }
 func (dst *Groups2) XXX_Merge(src proto.Message) {
@@ -123,10 +123,10 @@ type Groups2_G struct {
 func (m *Groups2_G) Reset()                    { *m = Groups2_G{} }
 func (*Groups2_G) ProtoMessage()               {}
 func (*Groups2_G) Descriptor() ([]byte, []int) { return fileDescriptorGroup, []int{1, 0} }
-func (m *Groups2_G) Unmarshal(b []byte) error {
+func (m *Groups2_G) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Groups2_G.Unmarshal(m, b)
 }
-func (m *Groups2_G) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Groups2_G) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Groups2_G.Marshal(b, m, deterministic)
 }
 func (dst *Groups2_G) XXX_Merge(src proto.Message) {

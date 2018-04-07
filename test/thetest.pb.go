@@ -235,10 +235,10 @@ type NidOptNative struct {
 func (m *NidOptNative) Reset()                    { *m = NidOptNative{} }
 func (*NidOptNative) ProtoMessage()               {}
 func (*NidOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{0} }
-func (m *NidOptNative) Unmarshal(b []byte) error {
+func (m *NidOptNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptNative.Unmarshal(m, b)
 }
-func (m *NidOptNative) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NidOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidOptNative.Marshal(b, m, deterministic)
 }
 func (dst *NidOptNative) XXX_Merge(src proto.Message) {
@@ -277,10 +277,10 @@ type NinOptNative struct {
 func (m *NinOptNative) Reset()                    { *m = NinOptNative{} }
 func (*NinOptNative) ProtoMessage()               {}
 func (*NinOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{1} }
-func (m *NinOptNative) Unmarshal(b []byte) error {
+func (m *NinOptNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptNative.Unmarshal(m, b)
 }
-func (m *NinOptNative) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptNative.Marshal(b, m, deterministic)
 }
 func (dst *NinOptNative) XXX_Merge(src proto.Message) {
@@ -319,10 +319,10 @@ type NidRepNative struct {
 func (m *NidRepNative) Reset()                    { *m = NidRepNative{} }
 func (*NidRepNative) ProtoMessage()               {}
 func (*NidRepNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{2} }
-func (m *NidRepNative) Unmarshal(b []byte) error {
+func (m *NidRepNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepNative.Unmarshal(m, b)
 }
-func (m *NidRepNative) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NidRepNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidRepNative.Marshal(b, m, deterministic)
 }
 func (dst *NidRepNative) XXX_Merge(src proto.Message) {
@@ -361,10 +361,10 @@ type NinRepNative struct {
 func (m *NinRepNative) Reset()                    { *m = NinRepNative{} }
 func (*NinRepNative) ProtoMessage()               {}
 func (*NinRepNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{3} }
-func (m *NinRepNative) Unmarshal(b []byte) error {
+func (m *NinRepNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepNative.Unmarshal(m, b)
 }
-func (m *NinRepNative) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinRepNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepNative.Marshal(b, m, deterministic)
 }
 func (dst *NinRepNative) XXX_Merge(src proto.Message) {
@@ -401,10 +401,10 @@ type NidRepPackedNative struct {
 func (m *NidRepPackedNative) Reset()                    { *m = NidRepPackedNative{} }
 func (*NidRepPackedNative) ProtoMessage()               {}
 func (*NidRepPackedNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{4} }
-func (m *NidRepPackedNative) Unmarshal(b []byte) error {
+func (m *NidRepPackedNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepPackedNative.Unmarshal(m, b)
 }
-func (m *NidRepPackedNative) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NidRepPackedNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidRepPackedNative.Marshal(b, m, deterministic)
 }
 func (dst *NidRepPackedNative) XXX_Merge(src proto.Message) {
@@ -441,10 +441,10 @@ type NinRepPackedNative struct {
 func (m *NinRepPackedNative) Reset()                    { *m = NinRepPackedNative{} }
 func (*NinRepPackedNative) ProtoMessage()               {}
 func (*NinRepPackedNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{5} }
-func (m *NinRepPackedNative) Unmarshal(b []byte) error {
+func (m *NinRepPackedNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepPackedNative.Unmarshal(m, b)
 }
-func (m *NinRepPackedNative) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinRepPackedNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepPackedNative.Marshal(b, m, deterministic)
 }
 func (dst *NinRepPackedNative) XXX_Merge(src proto.Message) {
@@ -478,10 +478,10 @@ type NidOptStruct struct {
 func (m *NidOptStruct) Reset()                    { *m = NidOptStruct{} }
 func (*NidOptStruct) ProtoMessage()               {}
 func (*NidOptStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{6} }
-func (m *NidOptStruct) Unmarshal(b []byte) error {
+func (m *NidOptStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptStruct.Unmarshal(m, b)
 }
-func (m *NidOptStruct) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NidOptStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidOptStruct.Marshal(b, m, deterministic)
 }
 func (dst *NidOptStruct) XXX_Merge(src proto.Message) {
@@ -515,10 +515,10 @@ type NinOptStruct struct {
 func (m *NinOptStruct) Reset()                    { *m = NinOptStruct{} }
 func (*NinOptStruct) ProtoMessage()               {}
 func (*NinOptStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{7} }
-func (m *NinOptStruct) Unmarshal(b []byte) error {
+func (m *NinOptStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptStruct.Unmarshal(m, b)
 }
-func (m *NinOptStruct) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinOptStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptStruct.Marshal(b, m, deterministic)
 }
 func (dst *NinOptStruct) XXX_Merge(src proto.Message) {
@@ -552,10 +552,10 @@ type NidRepStruct struct {
 func (m *NidRepStruct) Reset()                    { *m = NidRepStruct{} }
 func (*NidRepStruct) ProtoMessage()               {}
 func (*NidRepStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{8} }
-func (m *NidRepStruct) Unmarshal(b []byte) error {
+func (m *NidRepStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepStruct.Unmarshal(m, b)
 }
-func (m *NidRepStruct) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NidRepStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidRepStruct.Marshal(b, m, deterministic)
 }
 func (dst *NidRepStruct) XXX_Merge(src proto.Message) {
@@ -589,10 +589,10 @@ type NinRepStruct struct {
 func (m *NinRepStruct) Reset()                    { *m = NinRepStruct{} }
 func (*NinRepStruct) ProtoMessage()               {}
 func (*NinRepStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{9} }
-func (m *NinRepStruct) Unmarshal(b []byte) error {
+func (m *NinRepStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepStruct.Unmarshal(m, b)
 }
-func (m *NinRepStruct) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinRepStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepStruct.Marshal(b, m, deterministic)
 }
 func (dst *NinRepStruct) XXX_Merge(src proto.Message) {
@@ -619,10 +619,10 @@ type NidEmbeddedStruct struct {
 func (m *NidEmbeddedStruct) Reset()                    { *m = NidEmbeddedStruct{} }
 func (*NidEmbeddedStruct) ProtoMessage()               {}
 func (*NidEmbeddedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{10} }
-func (m *NidEmbeddedStruct) Unmarshal(b []byte) error {
+func (m *NidEmbeddedStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidEmbeddedStruct.Unmarshal(m, b)
 }
-func (m *NidEmbeddedStruct) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NidEmbeddedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidEmbeddedStruct.Marshal(b, m, deterministic)
 }
 func (dst *NidEmbeddedStruct) XXX_Merge(src proto.Message) {
@@ -649,10 +649,10 @@ type NinEmbeddedStruct struct {
 func (m *NinEmbeddedStruct) Reset()                    { *m = NinEmbeddedStruct{} }
 func (*NinEmbeddedStruct) ProtoMessage()               {}
 func (*NinEmbeddedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{11} }
-func (m *NinEmbeddedStruct) Unmarshal(b []byte) error {
+func (m *NinEmbeddedStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinEmbeddedStruct.Unmarshal(m, b)
 }
-func (m *NinEmbeddedStruct) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinEmbeddedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinEmbeddedStruct.Marshal(b, m, deterministic)
 }
 func (dst *NinEmbeddedStruct) XXX_Merge(src proto.Message) {
@@ -678,10 +678,10 @@ type NidNestedStruct struct {
 func (m *NidNestedStruct) Reset()                    { *m = NidNestedStruct{} }
 func (*NidNestedStruct) ProtoMessage()               {}
 func (*NidNestedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{12} }
-func (m *NidNestedStruct) Unmarshal(b []byte) error {
+func (m *NidNestedStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidNestedStruct.Unmarshal(m, b)
 }
-func (m *NidNestedStruct) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NidNestedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidNestedStruct.Marshal(b, m, deterministic)
 }
 func (dst *NidNestedStruct) XXX_Merge(src proto.Message) {
@@ -707,10 +707,10 @@ type NinNestedStruct struct {
 func (m *NinNestedStruct) Reset()                    { *m = NinNestedStruct{} }
 func (*NinNestedStruct) ProtoMessage()               {}
 func (*NinNestedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{13} }
-func (m *NinNestedStruct) Unmarshal(b []byte) error {
+func (m *NinNestedStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinNestedStruct.Unmarshal(m, b)
 }
-func (m *NinNestedStruct) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinNestedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinNestedStruct.Marshal(b, m, deterministic)
 }
 func (dst *NinNestedStruct) XXX_Merge(src proto.Message) {
@@ -736,10 +736,10 @@ type NidOptCustom struct {
 func (m *NidOptCustom) Reset()                    { *m = NidOptCustom{} }
 func (*NidOptCustom) ProtoMessage()               {}
 func (*NidOptCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{14} }
-func (m *NidOptCustom) Unmarshal(b []byte) error {
+func (m *NidOptCustom) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptCustom.Unmarshal(m, b)
 }
-func (m *NidOptCustom) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NidOptCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidOptCustom.Marshal(b, m, deterministic)
 }
 func (dst *NidOptCustom) XXX_Merge(src proto.Message) {
@@ -764,10 +764,10 @@ type CustomDash struct {
 func (m *CustomDash) Reset()                    { *m = CustomDash{} }
 func (*CustomDash) ProtoMessage()               {}
 func (*CustomDash) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{15} }
-func (m *CustomDash) Unmarshal(b []byte) error {
+func (m *CustomDash) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomDash.Unmarshal(m, b)
 }
-func (m *CustomDash) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *CustomDash) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomDash.Marshal(b, m, deterministic)
 }
 func (dst *CustomDash) XXX_Merge(src proto.Message) {
@@ -793,10 +793,10 @@ type NinOptCustom struct {
 func (m *NinOptCustom) Reset()                    { *m = NinOptCustom{} }
 func (*NinOptCustom) ProtoMessage()               {}
 func (*NinOptCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{16} }
-func (m *NinOptCustom) Unmarshal(b []byte) error {
+func (m *NinOptCustom) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptCustom.Unmarshal(m, b)
 }
-func (m *NinOptCustom) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinOptCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptCustom.Marshal(b, m, deterministic)
 }
 func (dst *NinOptCustom) XXX_Merge(src proto.Message) {
@@ -822,10 +822,10 @@ type NidRepCustom struct {
 func (m *NidRepCustom) Reset()                    { *m = NidRepCustom{} }
 func (*NidRepCustom) ProtoMessage()               {}
 func (*NidRepCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{17} }
-func (m *NidRepCustom) Unmarshal(b []byte) error {
+func (m *NidRepCustom) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepCustom.Unmarshal(m, b)
 }
-func (m *NidRepCustom) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NidRepCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidRepCustom.Marshal(b, m, deterministic)
 }
 func (dst *NidRepCustom) XXX_Merge(src proto.Message) {
@@ -851,10 +851,10 @@ type NinRepCustom struct {
 func (m *NinRepCustom) Reset()                    { *m = NinRepCustom{} }
 func (*NinRepCustom) ProtoMessage()               {}
 func (*NinRepCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{18} }
-func (m *NinRepCustom) Unmarshal(b []byte) error {
+func (m *NinRepCustom) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepCustom.Unmarshal(m, b)
 }
-func (m *NinRepCustom) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinRepCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepCustom.Marshal(b, m, deterministic)
 }
 func (dst *NinRepCustom) XXX_Merge(src proto.Message) {
@@ -887,10 +887,10 @@ type NinOptNativeUnion struct {
 func (m *NinOptNativeUnion) Reset()                    { *m = NinOptNativeUnion{} }
 func (*NinOptNativeUnion) ProtoMessage()               {}
 func (*NinOptNativeUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{19} }
-func (m *NinOptNativeUnion) Unmarshal(b []byte) error {
+func (m *NinOptNativeUnion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptNativeUnion.Unmarshal(m, b)
 }
-func (m *NinOptNativeUnion) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinOptNativeUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptNativeUnion.Marshal(b, m, deterministic)
 }
 func (dst *NinOptNativeUnion) XXX_Merge(src proto.Message) {
@@ -923,10 +923,10 @@ type NinOptStructUnion struct {
 func (m *NinOptStructUnion) Reset()                    { *m = NinOptStructUnion{} }
 func (*NinOptStructUnion) ProtoMessage()               {}
 func (*NinOptStructUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{20} }
-func (m *NinOptStructUnion) Unmarshal(b []byte) error {
+func (m *NinOptStructUnion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptStructUnion.Unmarshal(m, b)
 }
-func (m *NinOptStructUnion) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinOptStructUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptStructUnion.Marshal(b, m, deterministic)
 }
 func (dst *NinOptStructUnion) XXX_Merge(src proto.Message) {
@@ -953,10 +953,10 @@ type NinEmbeddedStructUnion struct {
 func (m *NinEmbeddedStructUnion) Reset()                    { *m = NinEmbeddedStructUnion{} }
 func (*NinEmbeddedStructUnion) ProtoMessage()               {}
 func (*NinEmbeddedStructUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{21} }
-func (m *NinEmbeddedStructUnion) Unmarshal(b []byte) error {
+func (m *NinEmbeddedStructUnion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinEmbeddedStructUnion.Unmarshal(m, b)
 }
-func (m *NinEmbeddedStructUnion) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinEmbeddedStructUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinEmbeddedStructUnion.Marshal(b, m, deterministic)
 }
 func (dst *NinEmbeddedStructUnion) XXX_Merge(src proto.Message) {
@@ -983,10 +983,10 @@ type NinNestedStructUnion struct {
 func (m *NinNestedStructUnion) Reset()                    { *m = NinNestedStructUnion{} }
 func (*NinNestedStructUnion) ProtoMessage()               {}
 func (*NinNestedStructUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{22} }
-func (m *NinNestedStructUnion) Unmarshal(b []byte) error {
+func (m *NinNestedStructUnion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinNestedStructUnion.Unmarshal(m, b)
 }
-func (m *NinNestedStructUnion) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinNestedStructUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinNestedStructUnion.Marshal(b, m, deterministic)
 }
 func (dst *NinNestedStructUnion) XXX_Merge(src proto.Message) {
@@ -1013,10 +1013,10 @@ type Tree struct {
 func (m *Tree) Reset()                    { *m = Tree{} }
 func (*Tree) ProtoMessage()               {}
 func (*Tree) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{23} }
-func (m *Tree) Unmarshal(b []byte) error {
+func (m *Tree) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Tree.Unmarshal(m, b)
 }
-func (m *Tree) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Tree) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Tree.Marshal(b, m, deterministic)
 }
 func (dst *Tree) XXX_Merge(src proto.Message) {
@@ -1042,10 +1042,10 @@ type OrBranch struct {
 func (m *OrBranch) Reset()                    { *m = OrBranch{} }
 func (*OrBranch) ProtoMessage()               {}
 func (*OrBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{24} }
-func (m *OrBranch) Unmarshal(b []byte) error {
+func (m *OrBranch) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OrBranch.Unmarshal(m, b)
 }
-func (m *OrBranch) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *OrBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OrBranch.Marshal(b, m, deterministic)
 }
 func (dst *OrBranch) XXX_Merge(src proto.Message) {
@@ -1071,10 +1071,10 @@ type AndBranch struct {
 func (m *AndBranch) Reset()                    { *m = AndBranch{} }
 func (*AndBranch) ProtoMessage()               {}
 func (*AndBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{25} }
-func (m *AndBranch) Unmarshal(b []byte) error {
+func (m *AndBranch) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AndBranch.Unmarshal(m, b)
 }
-func (m *AndBranch) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *AndBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_AndBranch.Marshal(b, m, deterministic)
 }
 func (dst *AndBranch) XXX_Merge(src proto.Message) {
@@ -1100,10 +1100,10 @@ type Leaf struct {
 func (m *Leaf) Reset()                    { *m = Leaf{} }
 func (*Leaf) ProtoMessage()               {}
 func (*Leaf) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{26} }
-func (m *Leaf) Unmarshal(b []byte) error {
+func (m *Leaf) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Leaf.Unmarshal(m, b)
 }
-func (m *Leaf) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Leaf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Leaf.Marshal(b, m, deterministic)
 }
 func (dst *Leaf) XXX_Merge(src proto.Message) {
@@ -1130,10 +1130,10 @@ type DeepTree struct {
 func (m *DeepTree) Reset()                    { *m = DeepTree{} }
 func (*DeepTree) ProtoMessage()               {}
 func (*DeepTree) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{27} }
-func (m *DeepTree) Unmarshal(b []byte) error {
+func (m *DeepTree) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeepTree.Unmarshal(m, b)
 }
-func (m *DeepTree) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *DeepTree) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DeepTree.Marshal(b, m, deterministic)
 }
 func (dst *DeepTree) XXX_Merge(src proto.Message) {
@@ -1158,10 +1158,10 @@ type ADeepBranch struct {
 func (m *ADeepBranch) Reset()                    { *m = ADeepBranch{} }
 func (*ADeepBranch) ProtoMessage()               {}
 func (*ADeepBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{28} }
-func (m *ADeepBranch) Unmarshal(b []byte) error {
+func (m *ADeepBranch) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ADeepBranch.Unmarshal(m, b)
 }
-func (m *ADeepBranch) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *ADeepBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ADeepBranch.Marshal(b, m, deterministic)
 }
 func (dst *ADeepBranch) XXX_Merge(src proto.Message) {
@@ -1187,10 +1187,10 @@ type AndDeepBranch struct {
 func (m *AndDeepBranch) Reset()                    { *m = AndDeepBranch{} }
 func (*AndDeepBranch) ProtoMessage()               {}
 func (*AndDeepBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{29} }
-func (m *AndDeepBranch) Unmarshal(b []byte) error {
+func (m *AndDeepBranch) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AndDeepBranch.Unmarshal(m, b)
 }
-func (m *AndDeepBranch) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *AndDeepBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_AndDeepBranch.Marshal(b, m, deterministic)
 }
 func (dst *AndDeepBranch) XXX_Merge(src proto.Message) {
@@ -1215,10 +1215,10 @@ type DeepLeaf struct {
 func (m *DeepLeaf) Reset()                    { *m = DeepLeaf{} }
 func (*DeepLeaf) ProtoMessage()               {}
 func (*DeepLeaf) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{30} }
-func (m *DeepLeaf) Unmarshal(b []byte) error {
+func (m *DeepLeaf) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeepLeaf.Unmarshal(m, b)
 }
-func (m *DeepLeaf) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *DeepLeaf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DeepLeaf.Marshal(b, m, deterministic)
 }
 func (dst *DeepLeaf) XXX_Merge(src proto.Message) {
@@ -1242,10 +1242,10 @@ type Nil struct {
 func (m *Nil) Reset()                    { *m = Nil{} }
 func (*Nil) ProtoMessage()               {}
 func (*Nil) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{31} }
-func (m *Nil) Unmarshal(b []byte) error {
+func (m *Nil) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Nil.Unmarshal(m, b)
 }
-func (m *Nil) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Nil) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Nil.Marshal(b, m, deterministic)
 }
 func (dst *Nil) XXX_Merge(src proto.Message) {
@@ -1270,10 +1270,10 @@ type NidOptEnum struct {
 func (m *NidOptEnum) Reset()                    { *m = NidOptEnum{} }
 func (*NidOptEnum) ProtoMessage()               {}
 func (*NidOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{32} }
-func (m *NidOptEnum) Unmarshal(b []byte) error {
+func (m *NidOptEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptEnum.Unmarshal(m, b)
 }
-func (m *NidOptEnum) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NidOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidOptEnum.Marshal(b, m, deterministic)
 }
 func (dst *NidOptEnum) XXX_Merge(src proto.Message) {
@@ -1300,10 +1300,10 @@ type NinOptEnum struct {
 func (m *NinOptEnum) Reset()                    { *m = NinOptEnum{} }
 func (*NinOptEnum) ProtoMessage()               {}
 func (*NinOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{33} }
-func (m *NinOptEnum) Unmarshal(b []byte) error {
+func (m *NinOptEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptEnum.Unmarshal(m, b)
 }
-func (m *NinOptEnum) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptEnum.Marshal(b, m, deterministic)
 }
 func (dst *NinOptEnum) XXX_Merge(src proto.Message) {
@@ -1330,10 +1330,10 @@ type NidRepEnum struct {
 func (m *NidRepEnum) Reset()                    { *m = NidRepEnum{} }
 func (*NidRepEnum) ProtoMessage()               {}
 func (*NidRepEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{34} }
-func (m *NidRepEnum) Unmarshal(b []byte) error {
+func (m *NidRepEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepEnum.Unmarshal(m, b)
 }
-func (m *NidRepEnum) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NidRepEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidRepEnum.Marshal(b, m, deterministic)
 }
 func (dst *NidRepEnum) XXX_Merge(src proto.Message) {
@@ -1360,10 +1360,10 @@ type NinRepEnum struct {
 func (m *NinRepEnum) Reset()                    { *m = NinRepEnum{} }
 func (*NinRepEnum) ProtoMessage()               {}
 func (*NinRepEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{35} }
-func (m *NinRepEnum) Unmarshal(b []byte) error {
+func (m *NinRepEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepEnum.Unmarshal(m, b)
 }
-func (m *NinRepEnum) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinRepEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepEnum.Marshal(b, m, deterministic)
 }
 func (dst *NinRepEnum) XXX_Merge(src proto.Message) {
@@ -1390,10 +1390,10 @@ type NinOptEnumDefault struct {
 func (m *NinOptEnumDefault) Reset()                    { *m = NinOptEnumDefault{} }
 func (*NinOptEnumDefault) ProtoMessage()               {}
 func (*NinOptEnumDefault) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{36} }
-func (m *NinOptEnumDefault) Unmarshal(b []byte) error {
+func (m *NinOptEnumDefault) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptEnumDefault.Unmarshal(m, b)
 }
-func (m *NinOptEnumDefault) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinOptEnumDefault) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptEnumDefault.Marshal(b, m, deterministic)
 }
 func (dst *NinOptEnumDefault) XXX_Merge(src proto.Message) {
@@ -1445,10 +1445,10 @@ type AnotherNinOptEnum struct {
 func (m *AnotherNinOptEnum) Reset()                    { *m = AnotherNinOptEnum{} }
 func (*AnotherNinOptEnum) ProtoMessage()               {}
 func (*AnotherNinOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{37} }
-func (m *AnotherNinOptEnum) Unmarshal(b []byte) error {
+func (m *AnotherNinOptEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AnotherNinOptEnum.Unmarshal(m, b)
 }
-func (m *AnotherNinOptEnum) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *AnotherNinOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_AnotherNinOptEnum.Marshal(b, m, deterministic)
 }
 func (dst *AnotherNinOptEnum) XXX_Merge(src proto.Message) {
@@ -1475,10 +1475,10 @@ type AnotherNinOptEnumDefault struct {
 func (m *AnotherNinOptEnumDefault) Reset()                    { *m = AnotherNinOptEnumDefault{} }
 func (*AnotherNinOptEnumDefault) ProtoMessage()               {}
 func (*AnotherNinOptEnumDefault) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{38} }
-func (m *AnotherNinOptEnumDefault) Unmarshal(b []byte) error {
+func (m *AnotherNinOptEnumDefault) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AnotherNinOptEnumDefault.Unmarshal(m, b)
 }
-func (m *AnotherNinOptEnumDefault) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *AnotherNinOptEnumDefault) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_AnotherNinOptEnumDefault.Marshal(b, m, deterministic)
 }
 func (dst *AnotherNinOptEnumDefault) XXX_Merge(src proto.Message) {
@@ -1530,10 +1530,10 @@ type Timer struct {
 func (m *Timer) Reset()                    { *m = Timer{} }
 func (*Timer) ProtoMessage()               {}
 func (*Timer) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{39} }
-func (m *Timer) Unmarshal(b []byte) error {
+func (m *Timer) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Timer.Unmarshal(m, b)
 }
-func (m *Timer) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Timer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Timer.Marshal(b, m, deterministic)
 }
 func (dst *Timer) XXX_Merge(src proto.Message) {
@@ -1567,10 +1567,10 @@ var extRange_MyExtendable = []proto.ExtensionRange{
 func (*MyExtendable) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_MyExtendable
 }
-func (m *MyExtendable) Unmarshal(b []byte) error {
+func (m *MyExtendable) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MyExtendable.Unmarshal(m, b)
 }
-func (m *MyExtendable) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MyExtendable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MyExtendable.Marshal(b, m, deterministic)
 }
 func (dst *MyExtendable) XXX_Merge(src proto.Message) {
@@ -1607,10 +1607,10 @@ var extRange_OtherExtenable = []proto.ExtensionRange{
 func (*OtherExtenable) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_OtherExtenable
 }
-func (m *OtherExtenable) Unmarshal(b []byte) error {
+func (m *OtherExtenable) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OtherExtenable.Unmarshal(m, b)
 }
-func (m *OtherExtenable) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *OtherExtenable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OtherExtenable.Marshal(b, m, deterministic)
 }
 func (dst *OtherExtenable) XXX_Merge(src proto.Message) {
@@ -1638,10 +1638,10 @@ type NestedDefinition struct {
 func (m *NestedDefinition) Reset()                    { *m = NestedDefinition{} }
 func (*NestedDefinition) ProtoMessage()               {}
 func (*NestedDefinition) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{42} }
-func (m *NestedDefinition) Unmarshal(b []byte) error {
+func (m *NestedDefinition) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedDefinition.Unmarshal(m, b)
 }
-func (m *NestedDefinition) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NestedDefinition) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NestedDefinition.Marshal(b, m, deterministic)
 }
 func (dst *NestedDefinition) XXX_Merge(src proto.Message) {
@@ -1669,10 +1669,10 @@ func (*NestedDefinition_NestedMessage) ProtoMessage() {}
 func (*NestedDefinition_NestedMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptorThetest, []int{42, 0}
 }
-func (m *NestedDefinition_NestedMessage) Unmarshal(b []byte) error {
+func (m *NestedDefinition_NestedMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedDefinition_NestedMessage.Unmarshal(m, b)
 }
-func (m *NestedDefinition_NestedMessage) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NestedDefinition_NestedMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NestedDefinition_NestedMessage.Marshal(b, m, deterministic)
 }
 func (dst *NestedDefinition_NestedMessage) XXX_Merge(src proto.Message) {
@@ -1701,10 +1701,10 @@ func (*NestedDefinition_NestedMessage_NestedNestedMsg) ProtoMessage() {}
 func (*NestedDefinition_NestedMessage_NestedNestedMsg) Descriptor() ([]byte, []int) {
 	return fileDescriptorThetest, []int{42, 0, 0}
 }
-func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Unmarshal(b []byte) error {
+func (m *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.Unmarshal(m, b)
 }
-func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.Marshal(b, m, deterministic)
 }
 func (dst *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Merge(src proto.Message) {
@@ -1731,10 +1731,10 @@ type NestedScope struct {
 func (m *NestedScope) Reset()                    { *m = NestedScope{} }
 func (*NestedScope) ProtoMessage()               {}
 func (*NestedScope) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{43} }
-func (m *NestedScope) Unmarshal(b []byte) error {
+func (m *NestedScope) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedScope.Unmarshal(m, b)
 }
-func (m *NestedScope) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NestedScope) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NestedScope.Marshal(b, m, deterministic)
 }
 func (dst *NestedScope) XXX_Merge(src proto.Message) {
@@ -1773,10 +1773,10 @@ type NinOptNativeDefault struct {
 func (m *NinOptNativeDefault) Reset()                    { *m = NinOptNativeDefault{} }
 func (*NinOptNativeDefault) ProtoMessage()               {}
 func (*NinOptNativeDefault) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{44} }
-func (m *NinOptNativeDefault) Unmarshal(b []byte) error {
+func (m *NinOptNativeDefault) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptNativeDefault.Unmarshal(m, b)
 }
-func (m *NinOptNativeDefault) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinOptNativeDefault) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptNativeDefault.Marshal(b, m, deterministic)
 }
 func (dst *NinOptNativeDefault) XXX_Merge(src proto.Message) {
@@ -1921,10 +1921,10 @@ type CustomContainer struct {
 func (m *CustomContainer) Reset()                    { *m = CustomContainer{} }
 func (*CustomContainer) ProtoMessage()               {}
 func (*CustomContainer) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{45} }
-func (m *CustomContainer) Unmarshal(b []byte) error {
+func (m *CustomContainer) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomContainer.Unmarshal(m, b)
 }
-func (m *CustomContainer) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *CustomContainer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomContainer.Marshal(b, m, deterministic)
 }
 func (dst *CustomContainer) XXX_Merge(src proto.Message) {
@@ -1963,10 +1963,10 @@ type CustomNameNidOptNative struct {
 func (m *CustomNameNidOptNative) Reset()                    { *m = CustomNameNidOptNative{} }
 func (*CustomNameNidOptNative) ProtoMessage()               {}
 func (*CustomNameNidOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{46} }
-func (m *CustomNameNidOptNative) Unmarshal(b []byte) error {
+func (m *CustomNameNidOptNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameNidOptNative.Unmarshal(m, b)
 }
-func (m *CustomNameNidOptNative) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *CustomNameNidOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomNameNidOptNative.Marshal(b, m, deterministic)
 }
 func (dst *CustomNameNidOptNative) XXX_Merge(src proto.Message) {
@@ -2005,10 +2005,10 @@ type CustomNameNinOptNative struct {
 func (m *CustomNameNinOptNative) Reset()                    { *m = CustomNameNinOptNative{} }
 func (*CustomNameNinOptNative) ProtoMessage()               {}
 func (*CustomNameNinOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{47} }
-func (m *CustomNameNinOptNative) Unmarshal(b []byte) error {
+func (m *CustomNameNinOptNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameNinOptNative.Unmarshal(m, b)
 }
-func (m *CustomNameNinOptNative) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *CustomNameNinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomNameNinOptNative.Marshal(b, m, deterministic)
 }
 func (dst *CustomNameNinOptNative) XXX_Merge(src proto.Message) {
@@ -2047,10 +2047,10 @@ type CustomNameNinRepNative struct {
 func (m *CustomNameNinRepNative) Reset()                    { *m = CustomNameNinRepNative{} }
 func (*CustomNameNinRepNative) ProtoMessage()               {}
 func (*CustomNameNinRepNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{48} }
-func (m *CustomNameNinRepNative) Unmarshal(b []byte) error {
+func (m *CustomNameNinRepNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameNinRepNative.Unmarshal(m, b)
 }
-func (m *CustomNameNinRepNative) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *CustomNameNinRepNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomNameNinRepNative.Marshal(b, m, deterministic)
 }
 func (dst *CustomNameNinRepNative) XXX_Merge(src proto.Message) {
@@ -2084,10 +2084,10 @@ type CustomNameNinStruct struct {
 func (m *CustomNameNinStruct) Reset()                    { *m = CustomNameNinStruct{} }
 func (*CustomNameNinStruct) ProtoMessage()               {}
 func (*CustomNameNinStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{49} }
-func (m *CustomNameNinStruct) Unmarshal(b []byte) error {
+func (m *CustomNameNinStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameNinStruct.Unmarshal(m, b)
 }
-func (m *CustomNameNinStruct) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *CustomNameNinStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomNameNinStruct.Marshal(b, m, deterministic)
 }
 func (dst *CustomNameNinStruct) XXX_Merge(src proto.Message) {
@@ -2115,10 +2115,10 @@ type CustomNameCustomType struct {
 func (m *CustomNameCustomType) Reset()                    { *m = CustomNameCustomType{} }
 func (*CustomNameCustomType) ProtoMessage()               {}
 func (*CustomNameCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{50} }
-func (m *CustomNameCustomType) Unmarshal(b []byte) error {
+func (m *CustomNameCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameCustomType.Unmarshal(m, b)
 }
-func (m *CustomNameCustomType) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *CustomNameCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomNameCustomType.Marshal(b, m, deterministic)
 }
 func (dst *CustomNameCustomType) XXX_Merge(src proto.Message) {
@@ -2147,10 +2147,10 @@ func (*CustomNameNinEmbeddedStructUnion) ProtoMessage() {}
 func (*CustomNameNinEmbeddedStructUnion) Descriptor() ([]byte, []int) {
 	return fileDescriptorThetest, []int{51}
 }
-func (m *CustomNameNinEmbeddedStructUnion) Unmarshal(b []byte) error {
+func (m *CustomNameNinEmbeddedStructUnion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameNinEmbeddedStructUnion.Unmarshal(m, b)
 }
-func (m *CustomNameNinEmbeddedStructUnion) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *CustomNameNinEmbeddedStructUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomNameNinEmbeddedStructUnion.Marshal(b, m, deterministic)
 }
 func (dst *CustomNameNinEmbeddedStructUnion) XXX_Merge(src proto.Message) {
@@ -2176,10 +2176,10 @@ type CustomNameEnum struct {
 func (m *CustomNameEnum) Reset()                    { *m = CustomNameEnum{} }
 func (*CustomNameEnum) ProtoMessage()               {}
 func (*CustomNameEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{52} }
-func (m *CustomNameEnum) Unmarshal(b []byte) error {
+func (m *CustomNameEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameEnum.Unmarshal(m, b)
 }
-func (m *CustomNameEnum) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *CustomNameEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomNameEnum.Marshal(b, m, deterministic)
 }
 func (dst *CustomNameEnum) XXX_Merge(src proto.Message) {
@@ -2219,10 +2219,10 @@ func (m *NoExtensionsMap) GetExtensions() *[]byte {
 	}
 	return &m.XXX_extensions
 }
-func (m *NoExtensionsMap) Unmarshal(b []byte) error {
+func (m *NoExtensionsMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NoExtensionsMap.Unmarshal(m, b)
 }
-func (m *NoExtensionsMap) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NoExtensionsMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NoExtensionsMap.Marshal(b, m, deterministic)
 }
 func (dst *NoExtensionsMap) XXX_Merge(src proto.Message) {
@@ -2246,10 +2246,10 @@ type Unrecognized struct {
 func (m *Unrecognized) Reset()                    { *m = Unrecognized{} }
 func (*Unrecognized) ProtoMessage()               {}
 func (*Unrecognized) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{54} }
-func (m *Unrecognized) Unmarshal(b []byte) error {
+func (m *Unrecognized) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Unrecognized.Unmarshal(m, b)
 }
-func (m *Unrecognized) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Unrecognized) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Unrecognized.Marshal(b, m, deterministic)
 }
 func (dst *Unrecognized) XXX_Merge(src proto.Message) {
@@ -2275,10 +2275,10 @@ type UnrecognizedWithInner struct {
 func (m *UnrecognizedWithInner) Reset()                    { *m = UnrecognizedWithInner{} }
 func (*UnrecognizedWithInner) ProtoMessage()               {}
 func (*UnrecognizedWithInner) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{55} }
-func (m *UnrecognizedWithInner) Unmarshal(b []byte) error {
+func (m *UnrecognizedWithInner) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnrecognizedWithInner.Unmarshal(m, b)
 }
-func (m *UnrecognizedWithInner) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *UnrecognizedWithInner) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_UnrecognizedWithInner.Marshal(b, m, deterministic)
 }
 func (dst *UnrecognizedWithInner) XXX_Merge(src proto.Message) {
@@ -2304,10 +2304,10 @@ func (*UnrecognizedWithInner_Inner) ProtoMessage() {}
 func (*UnrecognizedWithInner_Inner) Descriptor() ([]byte, []int) {
 	return fileDescriptorThetest, []int{55, 0}
 }
-func (m *UnrecognizedWithInner_Inner) Unmarshal(b []byte) error {
+func (m *UnrecognizedWithInner_Inner) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnrecognizedWithInner_Inner.Unmarshal(m, b)
 }
-func (m *UnrecognizedWithInner_Inner) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *UnrecognizedWithInner_Inner) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_UnrecognizedWithInner_Inner.Marshal(b, m, deterministic)
 }
 func (dst *UnrecognizedWithInner_Inner) XXX_Merge(src proto.Message) {
@@ -2333,10 +2333,10 @@ type UnrecognizedWithEmbed struct {
 func (m *UnrecognizedWithEmbed) Reset()                    { *m = UnrecognizedWithEmbed{} }
 func (*UnrecognizedWithEmbed) ProtoMessage()               {}
 func (*UnrecognizedWithEmbed) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{56} }
-func (m *UnrecognizedWithEmbed) Unmarshal(b []byte) error {
+func (m *UnrecognizedWithEmbed) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnrecognizedWithEmbed.Unmarshal(m, b)
 }
-func (m *UnrecognizedWithEmbed) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *UnrecognizedWithEmbed) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_UnrecognizedWithEmbed.Marshal(b, m, deterministic)
 }
 func (dst *UnrecognizedWithEmbed) XXX_Merge(src proto.Message) {
@@ -2362,10 +2362,10 @@ func (*UnrecognizedWithEmbed_Embedded) ProtoMessage() {}
 func (*UnrecognizedWithEmbed_Embedded) Descriptor() ([]byte, []int) {
 	return fileDescriptorThetest, []int{56, 0}
 }
-func (m *UnrecognizedWithEmbed_Embedded) Unmarshal(b []byte) error {
+func (m *UnrecognizedWithEmbed_Embedded) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnrecognizedWithEmbed_Embedded.Unmarshal(m, b)
 }
-func (m *UnrecognizedWithEmbed_Embedded) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *UnrecognizedWithEmbed_Embedded) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_UnrecognizedWithEmbed_Embedded.Marshal(b, m, deterministic)
 }
 func (dst *UnrecognizedWithEmbed_Embedded) XXX_Merge(src proto.Message) {
@@ -2391,10 +2391,10 @@ type Node struct {
 func (m *Node) Reset()                    { *m = Node{} }
 func (*Node) ProtoMessage()               {}
 func (*Node) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{57} }
-func (m *Node) Unmarshal(b []byte) error {
+func (m *Node) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Node.Unmarshal(m, b)
 }
-func (m *Node) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Node) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Node.Marshal(b, m, deterministic)
 }
 func (dst *Node) XXX_Merge(src proto.Message) {
@@ -2419,10 +2419,10 @@ type NonByteCustomType struct {
 func (m *NonByteCustomType) Reset()                    { *m = NonByteCustomType{} }
 func (*NonByteCustomType) ProtoMessage()               {}
 func (*NonByteCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{58} }
-func (m *NonByteCustomType) Unmarshal(b []byte) error {
+func (m *NonByteCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NonByteCustomType.Unmarshal(m, b)
 }
-func (m *NonByteCustomType) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NonByteCustomType.Marshal(b, m, deterministic)
 }
 func (dst *NonByteCustomType) XXX_Merge(src proto.Message) {
@@ -2447,10 +2447,10 @@ type NidOptNonByteCustomType struct {
 func (m *NidOptNonByteCustomType) Reset()                    { *m = NidOptNonByteCustomType{} }
 func (*NidOptNonByteCustomType) ProtoMessage()               {}
 func (*NidOptNonByteCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{59} }
-func (m *NidOptNonByteCustomType) Unmarshal(b []byte) error {
+func (m *NidOptNonByteCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptNonByteCustomType.Unmarshal(m, b)
 }
-func (m *NidOptNonByteCustomType) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NidOptNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidOptNonByteCustomType.Marshal(b, m, deterministic)
 }
 func (dst *NidOptNonByteCustomType) XXX_Merge(src proto.Message) {
@@ -2475,10 +2475,10 @@ type NinOptNonByteCustomType struct {
 func (m *NinOptNonByteCustomType) Reset()                    { *m = NinOptNonByteCustomType{} }
 func (*NinOptNonByteCustomType) ProtoMessage()               {}
 func (*NinOptNonByteCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{60} }
-func (m *NinOptNonByteCustomType) Unmarshal(b []byte) error {
+func (m *NinOptNonByteCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptNonByteCustomType.Unmarshal(m, b)
 }
-func (m *NinOptNonByteCustomType) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinOptNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptNonByteCustomType.Marshal(b, m, deterministic)
 }
 func (dst *NinOptNonByteCustomType) XXX_Merge(src proto.Message) {
@@ -2503,10 +2503,10 @@ type NidRepNonByteCustomType struct {
 func (m *NidRepNonByteCustomType) Reset()                    { *m = NidRepNonByteCustomType{} }
 func (*NidRepNonByteCustomType) ProtoMessage()               {}
 func (*NidRepNonByteCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{61} }
-func (m *NidRepNonByteCustomType) Unmarshal(b []byte) error {
+func (m *NidRepNonByteCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepNonByteCustomType.Unmarshal(m, b)
 }
-func (m *NidRepNonByteCustomType) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NidRepNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidRepNonByteCustomType.Marshal(b, m, deterministic)
 }
 func (dst *NidRepNonByteCustomType) XXX_Merge(src proto.Message) {
@@ -2531,10 +2531,10 @@ type NinRepNonByteCustomType struct {
 func (m *NinRepNonByteCustomType) Reset()                    { *m = NinRepNonByteCustomType{} }
 func (*NinRepNonByteCustomType) ProtoMessage()               {}
 func (*NinRepNonByteCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{62} }
-func (m *NinRepNonByteCustomType) Unmarshal(b []byte) error {
+func (m *NinRepNonByteCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepNonByteCustomType.Unmarshal(m, b)
 }
-func (m *NinRepNonByteCustomType) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *NinRepNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepNonByteCustomType.Marshal(b, m, deterministic)
 }
 func (dst *NinRepNonByteCustomType) XXX_Merge(src proto.Message) {
@@ -2559,10 +2559,10 @@ type ProtoType struct {
 func (m *ProtoType) Reset()                    { *m = ProtoType{} }
 func (*ProtoType) ProtoMessage()               {}
 func (*ProtoType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{63} }
-func (m *ProtoType) Unmarshal(b []byte) error {
+func (m *ProtoType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ProtoType.Unmarshal(m, b)
 }
-func (m *ProtoType) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *ProtoType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ProtoType.Marshal(b, m, deterministic)
 }
 func (dst *ProtoType) XXX_Merge(src proto.Message) {

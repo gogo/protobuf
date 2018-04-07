@@ -237,6 +237,12 @@ type FieldMask struct {
 func (m *FieldMask) Reset()                    { *m = FieldMask{} }
 func (*FieldMask) ProtoMessage()               {}
 func (*FieldMask) Descriptor() ([]byte, []int) { return fileDescriptorFieldMask, []int{0} }
+func (m *FieldMask) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_FieldMask.Unmarshal(m, b)
+}
+func (m *FieldMask) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_FieldMask.Marshal(b, m, deterministic)
+}
 func (dst *FieldMask) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FieldMask.Merge(dst, src)
 }

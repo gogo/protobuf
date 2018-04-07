@@ -37,6 +37,12 @@ func (m *C) Reset()                    { *m = C{} }
 func (m *C) String() string            { return proto.CompactTextString(m) }
 func (*C) ProtoMessage()               {}
 func (*C) Descriptor() ([]byte, []int) { return fileDescriptorC, []int{0} }
+func (m *C) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_C.Unmarshal(m, b)
+}
+func (m *C) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_C.Marshal(b, m, deterministic)
+}
 func (dst *C) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_C.Merge(dst, src)
 }

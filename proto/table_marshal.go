@@ -2672,22 +2672,28 @@ func (u *marshalInfo) appendV1Extensions(b []byte, m map[int32]Extension, determ
 	return b, nil
 }
 
+// newMarshaler is the interface representing objects that can marshal themselves.
+//
+// This exists to support protoc-gen-go generated messages.
+// The proto package will stop type-asserting to this interface in the future.
+//
+// DO NOT DEPEND ON THIS.
 type newMarshaler interface {
 	XXX_Size() int
-	Marshal(b []byte, deterministic bool) ([]byte, error)
+	XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 }
 
 // Size returns the encoded size of a protocol buffer message.
 // This is the main entry point.
 func Size(pb Message) int {
-	if m, ok := pb.(newMarshaler); ok {
-		return m.XXX_Size()
-	}
 	if m, ok := pb.(Marshaler); ok {
 		// If the message can marshal itself, let it do it, for compatibility.
 		// NOTE: This is not efficient.
 		b, _ := m.Marshal()
 		return len(b)
+	}
+	if m, ok := pb.(newMarshaler); ok {
+		return m.XXX_Size()
 	}
 	// in case somehow we didn't generate the wrapper
 	if pb == nil {
@@ -2701,15 +2707,15 @@ func Size(pb Message) int {
 // and encodes it into the wire format, returning the data.
 // This is the main entry point.
 func Marshal(pb Message) ([]byte, error) {
-	if m, ok := pb.(newMarshaler); ok {
-		siz := m.XXX_Size()
-		b := make([]byte, 0, siz)
-		return m.Marshal(b, false)
-	}
 	if m, ok := pb.(Marshaler); ok {
 		// If the message can marshal itself, let it do it, for compatibility.
 		// NOTE: This is not efficient.
 		return m.Marshal()
+	}
+	if m, ok := pb.(newMarshaler); ok {
+		siz := m.XXX_Size()
+		b := make([]byte, 0, siz)
+		return m.XXX_Marshal(b, false)
 	}
 	// in case somehow we didn't generate the wrapper
 	if pb == nil {
@@ -2727,21 +2733,21 @@ func Marshal(pb Message) ([]byte, error) {
 // This is an alternative entry point. It is not necessary to use
 // a Buffer for most applications.
 func (p *Buffer) Marshal(pb Message) error {
-	if m, ok := pb.(newMarshaler); ok {
-		var err error
-		siz := m.XXX_Size()
-		// make sure buf has enough capacity
-		if newCap := len(p.buf) + siz; newCap > cap(p.buf) {
-			p.buf = append(make([]byte, 0, newCap), p.buf...)
-		}
-		p.buf, err = m.Marshal(p.buf, p.deterministic)
-		return err
-	}
 	if m, ok := pb.(Marshaler); ok {
 		// If the message can marshal itself, let it do it, for compatibility.
 		// NOTE: This is not efficient.
 		b, err := m.Marshal()
 		p.buf = append(p.buf, b...)
+		return err
+	}
+	var err error
+	if m, ok := pb.(newMarshaler); ok {
+		siz := m.XXX_Size()
+		// make sure buf has enough capacity
+		if newCap := len(p.buf) + siz; newCap > cap(p.buf) {
+			p.buf = append(make([]byte, 0, newCap), p.buf...)
+		}
+		p.buf, err = m.XXX_Marshal(p.buf, p.deterministic)
 		return err
 	}
 	// in case somehow we didn't generate the wrapper
@@ -2754,7 +2760,6 @@ func (p *Buffer) Marshal(pb Message) error {
 	if newCap := len(p.buf) + siz; newCap > cap(p.buf) {
 		p.buf = append(make([]byte, 0, newCap), p.buf...)
 	}
-	var err error
 	p.buf, err = info.Marshal(p.buf, pb, p.deterministic)
 	return err
 }

@@ -118,6 +118,12 @@ func (m *Timestamp) Reset()                    { *m = Timestamp{} }
 func (*Timestamp) ProtoMessage()               {}
 func (*Timestamp) Descriptor() ([]byte, []int) { return fileDescriptorTimestamp, []int{0} }
 func (*Timestamp) XXX_WellKnownType() string   { return "Timestamp" }
+func (m *Timestamp) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Timestamp.Unmarshal(m, b)
+}
+func (m *Timestamp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Timestamp.Marshal(b, m, deterministic)
+}
 func (dst *Timestamp) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Timestamp.Merge(dst, src)
 }

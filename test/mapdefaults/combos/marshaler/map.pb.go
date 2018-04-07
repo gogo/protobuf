@@ -38,8 +38,11 @@ type MapTest struct {
 func (m *MapTest) Reset()                    { *m = MapTest{} }
 func (*MapTest) ProtoMessage()               {}
 func (*MapTest) Descriptor() ([]byte, []int) { return fileDescriptorMap, []int{0} }
-func (m *MapTest) Unmarshal(b []byte) error {
+func (m *MapTest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MapTest.Unmarshal(m, b)
+}
+func (m *MapTest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MapTest.Marshal(b, m, deterministic)
 }
 func (dst *MapTest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MapTest.Merge(dst, src)
@@ -63,8 +66,11 @@ type FakeMap struct {
 func (m *FakeMap) Reset()                    { *m = FakeMap{} }
 func (*FakeMap) ProtoMessage()               {}
 func (*FakeMap) Descriptor() ([]byte, []int) { return fileDescriptorMap, []int{1} }
-func (m *FakeMap) Unmarshal(b []byte) error {
+func (m *FakeMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FakeMap.Unmarshal(m, b)
+}
+func (m *FakeMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_FakeMap.Marshal(b, m, deterministic)
 }
 func (dst *FakeMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FakeMap.Merge(dst, src)
@@ -90,8 +96,11 @@ type FakeMapEntry struct {
 func (m *FakeMapEntry) Reset()                    { *m = FakeMapEntry{} }
 func (*FakeMapEntry) ProtoMessage()               {}
 func (*FakeMapEntry) Descriptor() ([]byte, []int) { return fileDescriptorMap, []int{2} }
-func (m *FakeMapEntry) Unmarshal(b []byte) error {
+func (m *FakeMapEntry) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FakeMapEntry.Unmarshal(m, b)
+}
+func (m *FakeMapEntry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_FakeMapEntry.Marshal(b, m, deterministic)
 }
 func (dst *FakeMapEntry) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FakeMapEntry.Merge(dst, src)

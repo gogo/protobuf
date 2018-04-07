@@ -35,6 +35,12 @@ func (m *UnorderedFields) Reset()                    { *m = UnorderedFields{} }
 func (m *UnorderedFields) String() string            { return proto.CompactTextString(m) }
 func (*UnorderedFields) ProtoMessage()               {}
 func (*UnorderedFields) Descriptor() ([]byte, []int) { return fileDescriptorIssue42, []int{0} }
+func (m *UnorderedFields) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UnorderedFields.Unmarshal(m, b)
+}
+func (m *UnorderedFields) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UnorderedFields.Marshal(b, m, deterministic)
+}
 func (dst *UnorderedFields) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UnorderedFields.Merge(dst, src)
 }
@@ -73,6 +79,12 @@ func (m *OrderedFields) Reset()                    { *m = OrderedFields{} }
 func (m *OrderedFields) String() string            { return proto.CompactTextString(m) }
 func (*OrderedFields) ProtoMessage()               {}
 func (*OrderedFields) Descriptor() ([]byte, []int) { return fileDescriptorIssue42, []int{1} }
+func (m *OrderedFields) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_OrderedFields.Unmarshal(m, b)
+}
+func (m *OrderedFields) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OrderedFields.Marshal(b, m, deterministic)
+}
 func (dst *OrderedFields) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OrderedFields.Merge(dst, src)
 }

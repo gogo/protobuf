@@ -36,6 +36,12 @@ func (m *Nil) Reset()                    { *m = Nil{} }
 func (m *Nil) String() string            { return proto.CompactTextString(m) }
 func (*Nil) ProtoMessage()               {}
 func (*Nil) Descriptor() ([]byte, []int) { return fileDescriptorFuzz, []int{0} }
+func (m *Nil) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Nil.Unmarshal(m, b)
+}
+func (m *Nil) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Nil.Marshal(b, m, deterministic)
+}
 func (dst *Nil) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Nil.Merge(dst, src)
 }
@@ -71,6 +77,12 @@ func (m *NinRepPackedNative) Reset()                    { *m = NinRepPackedNativ
 func (m *NinRepPackedNative) String() string            { return proto.CompactTextString(m) }
 func (*NinRepPackedNative) ProtoMessage()               {}
 func (*NinRepPackedNative) Descriptor() ([]byte, []int) { return fileDescriptorFuzz, []int{1} }
+func (m *NinRepPackedNative) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinRepPackedNative.Unmarshal(m, b)
+}
+func (m *NinRepPackedNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NinRepPackedNative.Marshal(b, m, deterministic)
+}
 func (dst *NinRepPackedNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinRepPackedNative.Merge(dst, src)
 }
@@ -199,6 +211,12 @@ func (m *NinOptNative) Reset()                    { *m = NinOptNative{} }
 func (m *NinOptNative) String() string            { return proto.CompactTextString(m) }
 func (*NinOptNative) ProtoMessage()               {}
 func (*NinOptNative) Descriptor() ([]byte, []int) { return fileDescriptorFuzz, []int{2} }
+func (m *NinOptNative) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinOptNative.Unmarshal(m, b)
+}
+func (m *NinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NinOptNative.Marshal(b, m, deterministic)
+}
 func (dst *NinOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptNative.Merge(dst, src)
 }
@@ -336,6 +354,12 @@ func (m *NinOptStruct) Reset()                    { *m = NinOptStruct{} }
 func (m *NinOptStruct) String() string            { return proto.CompactTextString(m) }
 func (*NinOptStruct) ProtoMessage()               {}
 func (*NinOptStruct) Descriptor() ([]byte, []int) { return fileDescriptorFuzz, []int{3} }
+func (m *NinOptStruct) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinOptStruct.Unmarshal(m, b)
+}
+func (m *NinOptStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NinOptStruct.Marshal(b, m, deterministic)
+}
 func (dst *NinOptStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptStruct.Merge(dst, src)
 }

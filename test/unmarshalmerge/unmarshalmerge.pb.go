@@ -38,7 +38,10 @@ type Big struct {
 func (m *Big) Reset()                    { *m = Big{} }
 func (*Big) ProtoMessage()               {}
 func (*Big) Descriptor() ([]byte, []int) { return fileDescriptorUnmarshalmerge, []int{0} }
-func (m *Big) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Big) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Big.Unmarshal(m, b)
+}
+func (m *Big) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Big.Marshal(b, m, deterministic)
 }
 func (dst *Big) XXX_Merge(src proto.Message) {
@@ -78,7 +81,10 @@ type BigUnsafe struct {
 func (m *BigUnsafe) Reset()                    { *m = BigUnsafe{} }
 func (*BigUnsafe) ProtoMessage()               {}
 func (*BigUnsafe) Descriptor() ([]byte, []int) { return fileDescriptorUnmarshalmerge, []int{1} }
-func (m *BigUnsafe) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *BigUnsafe) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_BigUnsafe.Unmarshal(m, b)
+}
+func (m *BigUnsafe) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_BigUnsafe.Marshal(b, m, deterministic)
 }
 func (dst *BigUnsafe) XXX_Merge(src proto.Message) {
@@ -117,7 +123,10 @@ type Sub struct {
 func (m *Sub) Reset()                    { *m = Sub{} }
 func (*Sub) ProtoMessage()               {}
 func (*Sub) Descriptor() ([]byte, []int) { return fileDescriptorUnmarshalmerge, []int{2} }
-func (m *Sub) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Sub) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Sub.Unmarshal(m, b)
+}
+func (m *Sub) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Sub.Marshal(b, m, deterministic)
 }
 func (dst *Sub) XXX_Merge(src proto.Message) {
@@ -159,7 +168,10 @@ type IntMerge struct {
 func (m *IntMerge) Reset()                    { *m = IntMerge{} }
 func (*IntMerge) ProtoMessage()               {}
 func (*IntMerge) Descriptor() ([]byte, []int) { return fileDescriptorUnmarshalmerge, []int{3} }
-func (m *IntMerge) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *IntMerge) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_IntMerge.Unmarshal(m, b)
+}
+func (m *IntMerge) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_IntMerge.Marshal(b, m, deterministic)
 }
 func (dst *IntMerge) XXX_Merge(src proto.Message) {

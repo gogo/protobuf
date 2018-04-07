@@ -31,7 +31,10 @@ func (m *TestRequest) Reset()                    { *m = TestRequest{} }
 func (m *TestRequest) String() string            { return proto.CompactTextString(m) }
 func (*TestRequest) ProtoMessage()               {}
 func (*TestRequest) Descriptor() ([]byte, []int) { return fileDescriptorEmpty, []int{0} }
-func (m *TestRequest) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *TestRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_TestRequest.Unmarshal(m, b)
+}
+func (m *TestRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_TestRequest.Marshal(b, m, deterministic)
 }
 func (dst *TestRequest) XXX_Merge(src proto.Message) {

@@ -42,8 +42,11 @@ type Subby struct {
 func (m *Subby) Reset()                    { *m = Subby{} }
 func (*Subby) ProtoMessage()               {}
 func (*Subby) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{0} }
-func (m *Subby) Unmarshal(b []byte) error {
+func (m *Subby) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Subby.Unmarshal(m, b)
+}
+func (m *Subby) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Subby.Marshal(b, m, deterministic)
 }
 func (dst *Subby) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Subby.Merge(dst, src)
@@ -84,8 +87,11 @@ type AllTypesOneOf struct {
 func (m *AllTypesOneOf) Reset()                    { *m = AllTypesOneOf{} }
 func (*AllTypesOneOf) ProtoMessage()               {}
 func (*AllTypesOneOf) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{1} }
-func (m *AllTypesOneOf) Unmarshal(b []byte) error {
+func (m *AllTypesOneOf) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AllTypesOneOf.Unmarshal(m, b)
+}
+func (m *AllTypesOneOf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AllTypesOneOf.Marshal(b, m, deterministic)
 }
 func (dst *AllTypesOneOf) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AllTypesOneOf.Merge(dst, src)
@@ -582,8 +588,11 @@ type TwoOneofs struct {
 func (m *TwoOneofs) Reset()                    { *m = TwoOneofs{} }
 func (*TwoOneofs) ProtoMessage()               {}
 func (*TwoOneofs) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{2} }
-func (m *TwoOneofs) Unmarshal(b []byte) error {
+func (m *TwoOneofs) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TwoOneofs.Unmarshal(m, b)
+}
+func (m *TwoOneofs) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TwoOneofs.Marshal(b, m, deterministic)
 }
 func (dst *TwoOneofs) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_TwoOneofs.Merge(dst, src)
@@ -847,8 +856,11 @@ type CustomOneof struct {
 func (m *CustomOneof) Reset()                    { *m = CustomOneof{} }
 func (*CustomOneof) ProtoMessage()               {}
 func (*CustomOneof) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{3} }
-func (m *CustomOneof) Unmarshal(b []byte) error {
+func (m *CustomOneof) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomOneof.Unmarshal(m, b)
+}
+func (m *CustomOneof) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CustomOneof.Marshal(b, m, deterministic)
 }
 func (dst *CustomOneof) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomOneof.Merge(dst, src)

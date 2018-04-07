@@ -35,6 +35,12 @@ type B struct {
 func (m *B) Reset()                    { *m = B{} }
 func (*B) ProtoMessage()               {}
 func (*B) Descriptor() ([]byte, []int) { return fileDescriptorGogovanity, []int{0} }
+func (m *B) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_B.Unmarshal(m, b)
+}
+func (m *B) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_B.Marshal(b, m, deterministic)
+}
 func (dst *B) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_B.Merge(dst, src)
 }

@@ -33,6 +33,12 @@ type SourceContext struct {
 func (m *SourceContext) Reset()                    { *m = SourceContext{} }
 func (*SourceContext) ProtoMessage()               {}
 func (*SourceContext) Descriptor() ([]byte, []int) { return fileDescriptorSourceContext, []int{0} }
+func (m *SourceContext) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SourceContext.Unmarshal(m, b)
+}
+func (m *SourceContext) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SourceContext.Marshal(b, m, deterministic)
+}
 func (dst *SourceContext) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_SourceContext.Merge(dst, src)
 }

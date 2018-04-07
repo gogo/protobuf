@@ -31,10 +31,10 @@ func (m *MyMessage) Reset()                    { *m = MyMessage{} }
 func (m *MyMessage) String() string            { return proto.CompactTextString(m) }
 func (*MyMessage) ProtoMessage()               {}
 func (*MyMessage) Descriptor() ([]byte, []int) { return fileDescriptorEnumprefix, []int{0} }
-func (m *MyMessage) Unmarshal(b []byte) error {
+func (m *MyMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MyMessage.Unmarshal(m, b)
 }
-func (m *MyMessage) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MyMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MyMessage.Marshal(b, m, deterministic)
 }
 func (dst *MyMessage) XXX_Merge(src proto.Message) {

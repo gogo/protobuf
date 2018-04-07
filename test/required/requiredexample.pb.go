@@ -36,6 +36,12 @@ func (m *RequiredExample) Reset()                    { *m = RequiredExample{} }
 func (m *RequiredExample) String() string            { return proto.CompactTextString(m) }
 func (*RequiredExample) ProtoMessage()               {}
 func (*RequiredExample) Descriptor() ([]byte, []int) { return fileDescriptorRequiredexample, []int{0} }
+func (m *RequiredExample) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RequiredExample.Unmarshal(m, b)
+}
+func (m *RequiredExample) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RequiredExample.Marshal(b, m, deterministic)
+}
 func (dst *RequiredExample) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_RequiredExample.Merge(dst, src)
 }
@@ -94,6 +100,12 @@ func (m *NidOptNative) Reset()                    { *m = NidOptNative{} }
 func (m *NidOptNative) String() string            { return proto.CompactTextString(m) }
 func (*NidOptNative) ProtoMessage()               {}
 func (*NidOptNative) Descriptor() ([]byte, []int) { return fileDescriptorRequiredexample, []int{1} }
+func (m *NidOptNative) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NidOptNative.Unmarshal(m, b)
+}
+func (m *NidOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NidOptNative.Marshal(b, m, deterministic)
+}
 func (dst *NidOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidOptNative.Merge(dst, src)
 }
@@ -236,6 +248,12 @@ func (m *NinOptNative) Reset()                    { *m = NinOptNative{} }
 func (m *NinOptNative) String() string            { return proto.CompactTextString(m) }
 func (*NinOptNative) ProtoMessage()               {}
 func (*NinOptNative) Descriptor() ([]byte, []int) { return fileDescriptorRequiredexample, []int{2} }
+func (m *NinOptNative) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NinOptNative.Unmarshal(m, b)
+}
+func (m *NinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NinOptNative.Marshal(b, m, deterministic)
+}
 func (dst *NinOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptNative.Merge(dst, src)
 }
@@ -365,6 +383,12 @@ func (m *NestedNinOptNative) String() string { return proto.CompactTextString(m)
 func (*NestedNinOptNative) ProtoMessage()    {}
 func (*NestedNinOptNative) Descriptor() ([]byte, []int) {
 	return fileDescriptorRequiredexample, []int{3}
+}
+func (m *NestedNinOptNative) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NestedNinOptNative.Unmarshal(m, b)
+}
+func (m *NestedNinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NestedNinOptNative.Marshal(b, m, deterministic)
 }
 func (dst *NestedNinOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NestedNinOptNative.Merge(dst, src)

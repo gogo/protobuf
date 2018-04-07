@@ -47,10 +47,10 @@ func (m *StdTypes) Reset()                    { *m = StdTypes{} }
 func (m *StdTypes) String() string            { return proto.CompactTextString(m) }
 func (*StdTypes) ProtoMessage()               {}
 func (*StdTypes) Descriptor() ([]byte, []int) { return fileDescriptorStdtypes, []int{0} }
-func (m *StdTypes) Unmarshal(b []byte) error {
+func (m *StdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StdTypes.Unmarshal(m, b)
 }
-func (m *StdTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *StdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_StdTypes.Marshal(b, m, deterministic)
 }
 func (dst *StdTypes) XXX_Merge(src proto.Message) {
@@ -107,10 +107,10 @@ func (m *RepStdTypes) Reset()                    { *m = RepStdTypes{} }
 func (m *RepStdTypes) String() string            { return proto.CompactTextString(m) }
 func (*RepStdTypes) ProtoMessage()               {}
 func (*RepStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorStdtypes, []int{1} }
-func (m *RepStdTypes) Unmarshal(b []byte) error {
+func (m *RepStdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RepStdTypes.Unmarshal(m, b)
 }
-func (m *RepStdTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *RepStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_RepStdTypes.Marshal(b, m, deterministic)
 }
 func (dst *RepStdTypes) XXX_Merge(src proto.Message) {
@@ -167,10 +167,10 @@ func (m *MapStdTypes) Reset()                    { *m = MapStdTypes{} }
 func (m *MapStdTypes) String() string            { return proto.CompactTextString(m) }
 func (*MapStdTypes) ProtoMessage()               {}
 func (*MapStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorStdtypes, []int{2} }
-func (m *MapStdTypes) Unmarshal(b []byte) error {
+func (m *MapStdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MapStdTypes.Unmarshal(m, b)
 }
-func (m *MapStdTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MapStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MapStdTypes.Marshal(b, m, deterministic)
 }
 func (dst *MapStdTypes) XXX_Merge(src proto.Message) {
@@ -227,10 +227,10 @@ func (m *OneofStdTypes) Reset()                    { *m = OneofStdTypes{} }
 func (m *OneofStdTypes) String() string            { return proto.CompactTextString(m) }
 func (*OneofStdTypes) ProtoMessage()               {}
 func (*OneofStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorStdtypes, []int{3} }
-func (m *OneofStdTypes) Unmarshal(b []byte) error {
+func (m *OneofStdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OneofStdTypes.Unmarshal(m, b)
 }
-func (m *OneofStdTypes) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *OneofStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OneofStdTypes.Marshal(b, m, deterministic)
 }
 func (dst *OneofStdTypes) XXX_Merge(src proto.Message) {

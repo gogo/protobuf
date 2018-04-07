@@ -36,10 +36,10 @@ func (m *Version) Reset()                    { *m = Version{} }
 func (m *Version) String() string            { return proto.CompactTextString(m) }
 func (*Version) ProtoMessage()               {}
 func (*Version) Descriptor() ([]byte, []int) { return fileDescriptorPlugin, []int{0} }
-func (m *Version) Unmarshal(b []byte) error {
+func (m *Version) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Version.Unmarshal(m, b)
 }
-func (m *Version) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Version) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Version.Marshal(b, m, deterministic)
 }
 func (dst *Version) XXX_Merge(src proto.Message) {
@@ -116,10 +116,10 @@ func (m *CodeGeneratorRequest) Reset()                    { *m = CodeGeneratorRe
 func (m *CodeGeneratorRequest) String() string            { return proto.CompactTextString(m) }
 func (*CodeGeneratorRequest) ProtoMessage()               {}
 func (*CodeGeneratorRequest) Descriptor() ([]byte, []int) { return fileDescriptorPlugin, []int{1} }
-func (m *CodeGeneratorRequest) Unmarshal(b []byte) error {
+func (m *CodeGeneratorRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CodeGeneratorRequest.Unmarshal(m, b)
 }
-func (m *CodeGeneratorRequest) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *CodeGeneratorRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CodeGeneratorRequest.Marshal(b, m, deterministic)
 }
 func (dst *CodeGeneratorRequest) XXX_Merge(src proto.Message) {
@@ -183,10 +183,10 @@ func (m *CodeGeneratorResponse) Reset()                    { *m = CodeGeneratorR
 func (m *CodeGeneratorResponse) String() string            { return proto.CompactTextString(m) }
 func (*CodeGeneratorResponse) ProtoMessage()               {}
 func (*CodeGeneratorResponse) Descriptor() ([]byte, []int) { return fileDescriptorPlugin, []int{2} }
-func (m *CodeGeneratorResponse) Unmarshal(b []byte) error {
+func (m *CodeGeneratorResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CodeGeneratorResponse.Unmarshal(m, b)
 }
-func (m *CodeGeneratorResponse) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *CodeGeneratorResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CodeGeneratorResponse.Marshal(b, m, deterministic)
 }
 func (dst *CodeGeneratorResponse) XXX_Merge(src proto.Message) {
@@ -280,10 +280,10 @@ func (*CodeGeneratorResponse_File) ProtoMessage()    {}
 func (*CodeGeneratorResponse_File) Descriptor() ([]byte, []int) {
 	return fileDescriptorPlugin, []int{2, 0}
 }
-func (m *CodeGeneratorResponse_File) Unmarshal(b []byte) error {
+func (m *CodeGeneratorResponse_File) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CodeGeneratorResponse_File.Unmarshal(m, b)
 }
-func (m *CodeGeneratorResponse_File) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *CodeGeneratorResponse_File) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CodeGeneratorResponse_File.Marshal(b, m, deterministic)
 }
 func (dst *CodeGeneratorResponse_File) XXX_Merge(src proto.Message) {

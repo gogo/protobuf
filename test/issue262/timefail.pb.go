@@ -39,6 +39,12 @@ type TimeFail struct {
 func (m *TimeFail) Reset()                    { *m = TimeFail{} }
 func (*TimeFail) ProtoMessage()               {}
 func (*TimeFail) Descriptor() ([]byte, []int) { return fileDescriptorTimefail, []int{0} }
+func (m *TimeFail) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_TimeFail.Unmarshal(m, b)
+}
+func (m *TimeFail) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TimeFail.Marshal(b, m, deterministic)
+}
 func (dst *TimeFail) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_TimeFail.Merge(dst, src)
 }

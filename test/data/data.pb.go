@@ -36,6 +36,12 @@ type MyMessage struct {
 func (m *MyMessage) Reset()                    { *m = MyMessage{} }
 func (*MyMessage) ProtoMessage()               {}
 func (*MyMessage) Descriptor() ([]byte, []int) { return fileDescriptorData, []int{0} }
+func (m *MyMessage) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_MyMessage.Unmarshal(m, b)
+}
+func (m *MyMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MyMessage.Marshal(b, m, deterministic)
+}
 func (dst *MyMessage) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MyMessage.Merge(dst, src)
 }

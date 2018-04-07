@@ -25,6 +25,12 @@ func (m *Dropped) Reset()                    { *m = Dropped{} }
 func (m *Dropped) String() string            { return proto.CompactTextString(m) }
 func (*Dropped) ProtoMessage()               {}
 func (*Dropped) Descriptor() ([]byte, []int) { return fileDescriptorTypedeclall, []int{0} }
+func (m *Dropped) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Dropped.Unmarshal(m, b)
+}
+func (m *Dropped) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Dropped.Marshal(b, m, deterministic)
+}
 func (dst *Dropped) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Dropped.Merge(dst, src)
 }
@@ -55,6 +61,12 @@ func (m *DroppedWithoutGetters) Reset()                    { *m = DroppedWithout
 func (m *DroppedWithoutGetters) String() string            { return proto.CompactTextString(m) }
 func (*DroppedWithoutGetters) ProtoMessage()               {}
 func (*DroppedWithoutGetters) Descriptor() ([]byte, []int) { return fileDescriptorTypedeclall, []int{1} }
+func (m *DroppedWithoutGetters) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DroppedWithoutGetters.Unmarshal(m, b)
+}
+func (m *DroppedWithoutGetters) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DroppedWithoutGetters.Marshal(b, m, deterministic)
+}
 func (dst *DroppedWithoutGetters) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DroppedWithoutGetters.Merge(dst, src)
 }
@@ -78,6 +90,12 @@ func (m *Kept) Reset()                    { *m = Kept{} }
 func (m *Kept) String() string            { return proto.CompactTextString(m) }
 func (*Kept) ProtoMessage()               {}
 func (*Kept) Descriptor() ([]byte, []int) { return fileDescriptorTypedeclall, []int{2} }
+func (m *Kept) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Kept.Unmarshal(m, b)
+}
+func (m *Kept) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Kept.Marshal(b, m, deterministic)
+}
 func (dst *Kept) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Kept.Merge(dst, src)
 }

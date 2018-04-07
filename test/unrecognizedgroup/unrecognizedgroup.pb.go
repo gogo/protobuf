@@ -43,6 +43,12 @@ type NewNoGroup struct {
 func (m *NewNoGroup) Reset()                    { *m = NewNoGroup{} }
 func (*NewNoGroup) ProtoMessage()               {}
 func (*NewNoGroup) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognizedgroup, []int{0} }
+func (m *NewNoGroup) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_NewNoGroup.Unmarshal(m, b)
+}
+func (m *NewNoGroup) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_NewNoGroup.Marshal(b, m, deterministic)
+}
 func (dst *NewNoGroup) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NewNoGroup.Merge(dst, src)
 }
@@ -65,6 +71,12 @@ type A struct {
 func (m *A) Reset()                    { *m = A{} }
 func (*A) ProtoMessage()               {}
 func (*A) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognizedgroup, []int{1} }
+func (m *A) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_A.Unmarshal(m, b)
+}
+func (m *A) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_A.Marshal(b, m, deterministic)
+}
 func (dst *A) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_A.Merge(dst, src)
 }
@@ -90,10 +102,10 @@ type OldWithGroup struct {
 func (m *OldWithGroup) Reset()                    { *m = OldWithGroup{} }
 func (*OldWithGroup) ProtoMessage()               {}
 func (*OldWithGroup) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognizedgroup, []int{2} }
-func (m *OldWithGroup) Unmarshal(b []byte) error {
+func (m *OldWithGroup) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OldWithGroup.Unmarshal(m, b)
 }
-func (m *OldWithGroup) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *OldWithGroup) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OldWithGroup.Marshal(b, m, deterministic)
 }
 func (dst *OldWithGroup) XXX_Merge(src proto.Message) {
@@ -122,10 +134,10 @@ func (*OldWithGroup_Group1) ProtoMessage() {}
 func (*OldWithGroup_Group1) Descriptor() ([]byte, []int) {
 	return fileDescriptorUnrecognizedgroup, []int{2, 0}
 }
-func (m *OldWithGroup_Group1) Unmarshal(b []byte) error {
+func (m *OldWithGroup_Group1) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OldWithGroup_Group1.Unmarshal(m, b)
 }
-func (m *OldWithGroup_Group1) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *OldWithGroup_Group1) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OldWithGroup_Group1.Marshal(b, m, deterministic)
 }
 func (dst *OldWithGroup_Group1) XXX_Merge(src proto.Message) {
@@ -153,10 +165,10 @@ func (*OldWithGroup_Group2) ProtoMessage() {}
 func (*OldWithGroup_Group2) Descriptor() ([]byte, []int) {
 	return fileDescriptorUnrecognizedgroup, []int{2, 1}
 }
-func (m *OldWithGroup_Group2) Unmarshal(b []byte) error {
+func (m *OldWithGroup_Group2) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OldWithGroup_Group2.Unmarshal(m, b)
 }
-func (m *OldWithGroup_Group2) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *OldWithGroup_Group2) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OldWithGroup_Group2.Marshal(b, m, deterministic)
 }
 func (dst *OldWithGroup_Group2) XXX_Merge(src proto.Message) {

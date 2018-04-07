@@ -33,10 +33,10 @@ func (m *MoreDefaultsB) Reset()                    { *m = MoreDefaultsB{} }
 func (m *MoreDefaultsB) String() string            { return proto.CompactTextString(m) }
 func (*MoreDefaultsB) ProtoMessage()               {}
 func (*MoreDefaultsB) Descriptor() ([]byte, []int) { return fileDescriptorMd, []int{0} }
-func (m *MoreDefaultsB) Unmarshal(b []byte) error {
+func (m *MoreDefaultsB) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MoreDefaultsB.Unmarshal(m, b)
 }
-func (m *MoreDefaultsB) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MoreDefaultsB) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MoreDefaultsB.Marshal(b, m, deterministic)
 }
 func (dst *MoreDefaultsB) XXX_Merge(src proto.Message) {
@@ -74,10 +74,10 @@ func (m *MoreDefaultsA) Reset()                    { *m = MoreDefaultsA{} }
 func (m *MoreDefaultsA) String() string            { return proto.CompactTextString(m) }
 func (*MoreDefaultsA) ProtoMessage()               {}
 func (*MoreDefaultsA) Descriptor() ([]byte, []int) { return fileDescriptorMd, []int{1} }
-func (m *MoreDefaultsA) Unmarshal(b []byte) error {
+func (m *MoreDefaultsA) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MoreDefaultsA.Unmarshal(m, b)
 }
-func (m *MoreDefaultsA) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MoreDefaultsA) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MoreDefaultsA.Marshal(b, m, deterministic)
 }
 func (dst *MoreDefaultsA) XXX_Merge(src proto.Message) {

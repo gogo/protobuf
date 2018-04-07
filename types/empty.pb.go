@@ -38,6 +38,12 @@ func (m *Empty) Reset()                    { *m = Empty{} }
 func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptorEmpty, []int{0} }
 func (*Empty) XXX_WellKnownType() string   { return "Empty" }
+func (m *Empty) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Empty.Unmarshal(m, b)
+}
+func (m *Empty) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Empty.Marshal(b, m, deterministic)
+}
 func (dst *Empty) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Empty.Merge(dst, src)
 }

@@ -41,7 +41,10 @@ type Castaway struct {
 func (m *Castaway) Reset()                    { *m = Castaway{} }
 func (*Castaway) ProtoMessage()               {}
 func (*Castaway) Descriptor() ([]byte, []int) { return fileDescriptorCastvalue, []int{0} }
-func (m *Castaway) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Castaway) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Castaway.Unmarshal(m, b)
+}
+func (m *Castaway) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Castaway.Marshal(b, m, deterministic)
 }
 func (dst *Castaway) XXX_Merge(src proto.Message) {
@@ -66,7 +69,10 @@ type Wilson struct {
 func (m *Wilson) Reset()                    { *m = Wilson{} }
 func (*Wilson) ProtoMessage()               {}
 func (*Wilson) Descriptor() ([]byte, []int) { return fileDescriptorCastvalue, []int{1} }
-func (m *Wilson) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Wilson) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Wilson.Unmarshal(m, b)
+}
+func (m *Wilson) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Wilson.Marshal(b, m, deterministic)
 }
 func (dst *Wilson) XXX_Merge(src proto.Message) {

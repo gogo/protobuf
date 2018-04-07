@@ -37,10 +37,10 @@ type Subby struct {
 func (m *Subby) Reset()                    { *m = Subby{} }
 func (*Subby) ProtoMessage()               {}
 func (*Subby) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{0} }
-func (m *Subby) Unmarshal(b []byte) error {
+func (m *Subby) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Subby.Unmarshal(m, b)
 }
-func (m *Subby) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Subby) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Subby.Marshal(b, m, deterministic)
 }
 func (dst *Subby) XXX_Merge(src proto.Message) {
@@ -82,10 +82,10 @@ type SampleOneOf struct {
 func (m *SampleOneOf) Reset()                    { *m = SampleOneOf{} }
 func (*SampleOneOf) ProtoMessage()               {}
 func (*SampleOneOf) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{1} }
-func (m *SampleOneOf) Unmarshal(b []byte) error {
+func (m *SampleOneOf) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SampleOneOf.Unmarshal(m, b)
 }
-func (m *SampleOneOf) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *SampleOneOf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SampleOneOf.Marshal(b, m, deterministic)
 }
 func (dst *SampleOneOf) XXX_Merge(src proto.Message) {

@@ -41,6 +41,12 @@ type A struct {
 func (m *A) Reset()                    { *m = A{} }
 func (*A) ProtoMessage()               {}
 func (*A) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{0} }
+func (m *A) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_A.Unmarshal(m, b)
+}
+func (m *A) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_A.Marshal(b, m, deterministic)
+}
 func (dst *A) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_A.Merge(dst, src)
 }
@@ -65,6 +71,12 @@ type B struct {
 func (m *B) Reset()                    { *m = B{} }
 func (*B) ProtoMessage()               {}
 func (*B) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{1} }
+func (m *B) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_B.Unmarshal(m, b)
+}
+func (m *B) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_B.Marshal(b, m, deterministic)
+}
 func (dst *B) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_B.Merge(dst, src)
 }
@@ -87,6 +99,12 @@ type D struct {
 func (m *D) Reset()                    { *m = D{} }
 func (*D) ProtoMessage()               {}
 func (*D) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{2} }
+func (m *D) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_D.Unmarshal(m, b)
+}
+func (m *D) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_D.Marshal(b, m, deterministic)
+}
 func (dst *D) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_D.Merge(dst, src)
 }
@@ -114,6 +132,12 @@ type C struct {
 func (m *C) Reset()                    { *m = C{} }
 func (*C) ProtoMessage()               {}
 func (*C) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{3} }
+func (m *C) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_C.Unmarshal(m, b)
+}
+func (m *C) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_C.Marshal(b, m, deterministic)
+}
 func (dst *C) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_C.Merge(dst, src)
 }
@@ -136,6 +160,12 @@ type U struct {
 func (m *U) Reset()                    { *m = U{} }
 func (*U) ProtoMessage()               {}
 func (*U) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{4} }
+func (m *U) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_U.Unmarshal(m, b)
+}
+func (m *U) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_U.Marshal(b, m, deterministic)
+}
 func (dst *U) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_U.Merge(dst, src)
 }
@@ -158,10 +188,10 @@ type UnoM struct {
 func (m *UnoM) Reset()                    { *m = UnoM{} }
 func (*UnoM) ProtoMessage()               {}
 func (*UnoM) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{5} }
-func (m *UnoM) Unmarshal(b []byte) error {
+func (m *UnoM) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnoM.Unmarshal(m, b)
 }
-func (m *UnoM) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *UnoM) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_UnoM.Marshal(b, m, deterministic)
 }
 func (dst *UnoM) XXX_Merge(src proto.Message) {
@@ -186,6 +216,12 @@ type OldA struct {
 func (m *OldA) Reset()                    { *m = OldA{} }
 func (*OldA) ProtoMessage()               {}
 func (*OldA) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{6} }
+func (m *OldA) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_OldA.Unmarshal(m, b)
+}
+func (m *OldA) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OldA.Marshal(b, m, deterministic)
+}
 func (dst *OldA) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldA.Merge(dst, src)
 }
@@ -209,6 +245,12 @@ type OldB struct {
 func (m *OldB) Reset()                    { *m = OldB{} }
 func (*OldB) ProtoMessage()               {}
 func (*OldB) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{7} }
+func (m *OldB) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_OldB.Unmarshal(m, b)
+}
+func (m *OldB) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OldB.Marshal(b, m, deterministic)
+}
 func (dst *OldB) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldB.Merge(dst, src)
 }
@@ -235,6 +277,12 @@ type OldC struct {
 func (m *OldC) Reset()                    { *m = OldC{} }
 func (*OldC) ProtoMessage()               {}
 func (*OldC) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{8} }
+func (m *OldC) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_OldC.Unmarshal(m, b)
+}
+func (m *OldC) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OldC.Marshal(b, m, deterministic)
+}
 func (dst *OldC) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldC.Merge(dst, src)
 }
@@ -258,6 +306,12 @@ type OldU struct {
 func (m *OldU) Reset()                    { *m = OldU{} }
 func (*OldU) ProtoMessage()               {}
 func (*OldU) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{9} }
+func (m *OldU) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_OldU.Unmarshal(m, b)
+}
+func (m *OldU) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OldU.Marshal(b, m, deterministic)
+}
 func (dst *OldU) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldU.Merge(dst, src)
 }
@@ -281,10 +335,10 @@ type OldUnoM struct {
 func (m *OldUnoM) Reset()                    { *m = OldUnoM{} }
 func (*OldUnoM) ProtoMessage()               {}
 func (*OldUnoM) Descriptor() ([]byte, []int) { return fileDescriptorUnrecognized, []int{10} }
-func (m *OldUnoM) Unmarshal(b []byte) error {
+func (m *OldUnoM) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OldUnoM.Unmarshal(m, b)
 }
-func (m *OldUnoM) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *OldUnoM) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OldUnoM.Marshal(b, m, deterministic)
 }
 func (dst *OldUnoM) XXX_Merge(src proto.Message) {

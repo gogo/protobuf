@@ -35,6 +35,12 @@ func (m *IndexQuery) Reset()                    { *m = IndexQuery{} }
 func (m *IndexQuery) String() string            { return proto.CompactTextString(m) }
 func (*IndexQuery) ProtoMessage()               {}
 func (*IndexQuery) Descriptor() ([]byte, []int) { return fileDescriptorIndex, []int{0} }
+func (m *IndexQuery) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_IndexQuery.Unmarshal(m, b)
+}
+func (m *IndexQuery) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_IndexQuery.Marshal(b, m, deterministic)
+}
 func (dst *IndexQuery) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_IndexQuery.Merge(dst, src)
 }

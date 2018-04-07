@@ -182,6 +182,12 @@ type Type struct {
 func (m *Type) Reset()                    { *m = Type{} }
 func (*Type) ProtoMessage()               {}
 func (*Type) Descriptor() ([]byte, []int) { return fileDescriptorType, []int{0} }
+func (m *Type) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Type.Unmarshal(m, b)
+}
+func (m *Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Type.Marshal(b, m, deterministic)
+}
 func (dst *Type) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Type.Merge(dst, src)
 }
@@ -272,6 +278,12 @@ type Field struct {
 func (m *Field) Reset()                    { *m = Field{} }
 func (*Field) ProtoMessage()               {}
 func (*Field) Descriptor() ([]byte, []int) { return fileDescriptorType, []int{1} }
+func (m *Field) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Field.Unmarshal(m, b)
+}
+func (m *Field) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Field.Marshal(b, m, deterministic)
+}
 func (dst *Field) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Field.Merge(dst, src)
 }
@@ -378,6 +390,12 @@ type Enum struct {
 func (m *Enum) Reset()                    { *m = Enum{} }
 func (*Enum) ProtoMessage()               {}
 func (*Enum) Descriptor() ([]byte, []int) { return fileDescriptorType, []int{2} }
+func (m *Enum) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Enum.Unmarshal(m, b)
+}
+func (m *Enum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Enum.Marshal(b, m, deterministic)
+}
 func (dst *Enum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Enum.Merge(dst, src)
 }
@@ -445,6 +463,12 @@ type EnumValue struct {
 func (m *EnumValue) Reset()                    { *m = EnumValue{} }
 func (*EnumValue) ProtoMessage()               {}
 func (*EnumValue) Descriptor() ([]byte, []int) { return fileDescriptorType, []int{3} }
+func (m *EnumValue) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_EnumValue.Unmarshal(m, b)
+}
+func (m *EnumValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_EnumValue.Marshal(b, m, deterministic)
+}
 func (dst *EnumValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_EnumValue.Merge(dst, src)
 }
@@ -503,6 +527,12 @@ type Option struct {
 func (m *Option) Reset()                    { *m = Option{} }
 func (*Option) ProtoMessage()               {}
 func (*Option) Descriptor() ([]byte, []int) { return fileDescriptorType, []int{4} }
+func (m *Option) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Option.Unmarshal(m, b)
+}
+func (m *Option) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Option.Marshal(b, m, deterministic)
+}
 func (dst *Option) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Option.Merge(dst, src)
 }

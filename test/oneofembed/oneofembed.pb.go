@@ -32,10 +32,10 @@ func (m *Foo) Reset()                    { *m = Foo{} }
 func (m *Foo) String() string            { return proto1.CompactTextString(m) }
 func (*Foo) ProtoMessage()               {}
 func (*Foo) Descriptor() ([]byte, []int) { return fileDescriptorOneofembed, []int{0} }
-func (m *Foo) Unmarshal(b []byte) error {
+func (m *Foo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Foo.Unmarshal(m, b)
 }
-func (m *Foo) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Foo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Foo.Marshal(b, m, deterministic)
 }
 func (dst *Foo) XXX_Merge(src proto1.Message) {
@@ -64,10 +64,10 @@ func (m *Bar) Reset()                    { *m = Bar{} }
 func (m *Bar) String() string            { return proto1.CompactTextString(m) }
 func (*Bar) ProtoMessage()               {}
 func (*Bar) Descriptor() ([]byte, []int) { return fileDescriptorOneofembed, []int{1} }
-func (m *Bar) Unmarshal(b []byte) error {
+func (m *Bar) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Bar.Unmarshal(m, b)
 }
-func (m *Bar) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Bar) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Bar.Marshal(b, m, deterministic)
 }
 func (dst *Bar) XXX_Merge(src proto1.Message) {

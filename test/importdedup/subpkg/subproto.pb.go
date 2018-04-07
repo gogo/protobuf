@@ -29,10 +29,10 @@ func (m *SubObject) Reset()                    { *m = SubObject{} }
 func (m *SubObject) String() string            { return proto.CompactTextString(m) }
 func (*SubObject) ProtoMessage()               {}
 func (*SubObject) Descriptor() ([]byte, []int) { return fileDescriptorSubproto, []int{0} }
-func (m *SubObject) Unmarshal(b []byte) error {
+func (m *SubObject) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SubObject.Unmarshal(m, b)
 }
-func (m *SubObject) Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *SubObject) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SubObject.Marshal(b, m, deterministic)
 }
 func (dst *SubObject) XXX_Merge(src proto.Message) {

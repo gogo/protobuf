@@ -100,6 +100,12 @@ func (m *Duration) Reset()                    { *m = Duration{} }
 func (*Duration) ProtoMessage()               {}
 func (*Duration) Descriptor() ([]byte, []int) { return fileDescriptorDuration, []int{0} }
 func (*Duration) XXX_WellKnownType() string   { return "Duration" }
+func (m *Duration) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Duration.Unmarshal(m, b)
+}
+func (m *Duration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Duration.Marshal(b, m, deterministic)
+}
 func (dst *Duration) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Duration.Merge(dst, src)
 }
