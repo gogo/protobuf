@@ -1,6 +1,6 @@
 // Go support for Protocol Buffers - Google's data interchange format
 //
-// Copyright 2011 The Go Authors.  All rights reserved.
+// Copyright 2014 The Go Authors.  All rights reserved.
 // https://github.com/golang/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
@@ -29,15 +29,27 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto2";
+syntax = "proto3";
 
-package imp;
+package proto3;
 
-message PubliclyImportedMessage {
-  optional int64 field = 1;
+option go_package = "github.com/gogo/protobuf/protoc-gen-gogo/testdata/proto3";
+
+message Request {
+  enum Flavour {
+    SWEET = 0;
+    SOUR = 1;
+    UMAMI = 2;
+    GOPHERLICIOUS = 3;
+  }
+  string name = 1;
+  repeated int64 key = 2;
+  Flavour taste = 3;
+  Book book = 4;
+  repeated int64 unpacked = 5 [packed=false];
 }
 
-enum PubliclyImportedEnum {
-  GLASSES = 1;
-  HAIR = 2;
+message Book {
+  string title = 1;
+  bytes raw_data = 2;
 }

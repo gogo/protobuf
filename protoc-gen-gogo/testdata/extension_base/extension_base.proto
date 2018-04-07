@@ -31,40 +31,18 @@
 
 syntax = "proto2";
 
-package imp;
+package extension_base;
 
-import "imp2.proto";
-import "imp3.proto";
+option go_package = "github.com/gogo/protobuf/protoc-gen-gogo/testdata/extension_base";
 
-message ImportedMessage {
-  required int64 field = 1;
-
-  // The forwarded getters for these fields are fiddly to get right.
-  optional ImportedMessage2 local_msg = 2;
-  optional ForeignImportedMessage foreign_msg = 3;  // in imp3.proto
-  optional Owner enum_field = 4;
-  oneof union {
-    int32 state = 9;
-  }
-
-  repeated string name = 5;
-  repeated Owner boss = 6;
-  repeated ImportedMessage2 memo = 7;
-
-  map<string, ImportedMessage2> msg_map = 8;
-
-  enum Owner {
-    DAVE = 1;
-    MIKE = 2;
-  }
-
-  extensions 90 to 100;
+message BaseMessage {
+  optional int32 height = 1;
+  extensions 4 to 9;
+  extensions 16 to max;
 }
 
-message ImportedMessage2 {
-}
-
-message ImportedExtendable {
+// Another message that may be extended, using message_set_wire_format.
+message OldStyleMessage {
   option message_set_wire_format = true;
   extensions 100 to max;
 }

@@ -58,9 +58,7 @@ gofmt:
 	gofmt -l -s -w .
 
 regenerate:
-	make -C protoc-gen-gogo/descriptor regenerate
-	make -C protoc-gen-gogo/plugin regenerate
-	make -C protoc-gen-gogo/testdata regenerate
+	make -C protoc-gen-gogo regenerate
 	make -C gogoproto regenerate
 	make -C proto/test_proto regenerate
 	make -C proto/proto3_proto regenerate
@@ -142,7 +140,7 @@ drone:
 
 testall:
 	go get -u github.com/golang/protobuf/proto
-	make -C protoc-gen-gogo/testdata test
+	make -C protoc-gen-gogo test
 	make -C vanity/test test
 	make -C test/registration test
 	make tests

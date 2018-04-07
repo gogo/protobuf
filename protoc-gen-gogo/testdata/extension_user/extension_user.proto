@@ -1,6 +1,6 @@
 // Go support for Protocol Buffers - Google's data interchange format
 //
-// Copyright 2015 The Go Authors.  All rights reserved.
+// Copyright 2010 The Go Authors.  All rights reserved.
 // https://github.com/golang/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
@@ -29,31 +29,74 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
+syntax = "proto2";
 
-package grpc.testing;
+import "extension_base/extension_base.proto";
+import "extension_extra/extension_extra.proto";
 
-message SimpleRequest {
+package extension_user;
+
+option go_package = "github.com/gogo/protobuf/protoc-gen-gogo/testdata/extension_user";
+
+message UserMessage {
+  optional string name = 1;
+  optional string rank = 2;
 }
 
-message SimpleResponse {
+// Extend with a message
+extend extension_base.BaseMessage {
+  optional UserMessage user_message = 5;
 }
 
-message StreamMsg {
+// Extend with a foreign message
+extend extension_base.BaseMessage {
+  optional extension_extra.ExtraMessage extra_message = 9;
 }
 
-message StreamMsg2 {
+// Extend with some primitive types
+extend extension_base.BaseMessage {
+  optional int32 width = 6;
+  optional int64 area = 7;
 }
 
-service Test {
-  rpc UnaryCall(SimpleRequest) returns (SimpleResponse);
+// Extend inside the scope of another type
+message LoudMessage {
+  extend extension_base.BaseMessage {
+    optional uint32 volume = 8;
+  }
+  extensions 100 to max;
+}
 
-  // This RPC streams from the server only.
-  rpc Downstream(SimpleRequest) returns (stream StreamMsg);
+// Extend inside the scope of another type, using a message.
+message LoginMessage {
+  extend extension_base.BaseMessage {
+    optional UserMessage user_message = 16;
+  }
+}
 
-  // This RPC streams from the client.
-  rpc Upstream(stream StreamMsg) returns (SimpleResponse);
+// Extend with a repeated field
+extend extension_base.BaseMessage {
+  repeated Detail detail = 17;
+}
 
-  // This one streams in both directions.
-  rpc Bidi(stream StreamMsg) returns (stream StreamMsg2);
+message Detail {
+  optional string color = 1;
+}
+
+// An extension of an extension
+message Announcement {
+  optional string words = 1;
+  extend LoudMessage {
+    optional Announcement loud_ext = 100;
+  }
+}
+
+// Something that can be put in a message set.
+message OldStyleParcel {
+  extend extension_base.OldStyleMessage {
+    optional OldStyleParcel message_set_extension = 2001;
+  }
+
+  required string name = 1;
+  optional int32 height = 2;
 }
