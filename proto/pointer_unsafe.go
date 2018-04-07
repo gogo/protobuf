@@ -29,7 +29,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// +build !purego !appengine,!js
+// +build !purego,!appengine,!js
 
 // This file contains the implementation of the proto field accesses using package unsafe.
 
@@ -54,6 +54,9 @@ func toField(f *reflect.StructField) field {
 
 // invalidField is an invalid field identifier.
 const invalidField = ^field(0)
+
+// zeroField is a noop when calling pointer.offset.
+const zeroField = field(0)
 
 // IsValid reports whether the field identifier is valid.
 func (f field) IsValid() bool {
@@ -102,6 +105,13 @@ func valToPointer(v reflect.Value) pointer {
 // offset converts from a pointer to a structure to a pointer to
 // one of its fields.
 func (p pointer) offset(f field) pointer {
+	// For safety, we should panic if !f.IsValid, however calling panic causes
+	// this to no longer be inlineable, which is a serious performance cost.
+	/*
+		if !f.IsValid() {
+			panic("invalid field")
+		}
+	*/
 	return pointer{p: unsafe.Pointer(uintptr(p.p) + uintptr(f))}
 }
 
