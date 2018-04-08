@@ -134,10 +134,10 @@ type importedPackage struct {
 	used         bool
 	pkg          string
 	name         string
-	importPrefix GoImportPath
+	importPrefix string
 }
 
-func newImportedPackage(importPrefix GoImportPath, pkg string) *importedPackage {
+func newImportedPackage(importPrefix string, pkg string) *importedPackage {
 	return &importedPackage{
 		pkg:          pkg,
 		importPrefix: importPrefix,
@@ -161,7 +161,7 @@ func (this *importedPackage) Name() string {
 }
 
 func (this *importedPackage) Location() string {
-	return string(this.importPrefix) + this.pkg
+	return this.importPrefix + this.pkg
 }
 
 func (g *Generator) GetFieldName(message *Descriptor, field *descriptor.FieldDescriptorProto) string {
