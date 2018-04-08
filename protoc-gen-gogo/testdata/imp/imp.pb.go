@@ -40,6 +40,30 @@ func (m *PubliclyImportedMessage) GetField() int64 {
 	return (*imp2.PubliclyImportedMessage)(m).GetField()
 }
 
+// PubliclyImportedMessage2 from public import imp/imp2/imp2.proto
+type PubliclyImportedMessage2 imp2.PubliclyImportedMessage2
+
+func (m *PubliclyImportedMessage2) Reset() { (*imp2.PubliclyImportedMessage2)(m).Reset() }
+func (m *PubliclyImportedMessage2) String() string {
+	return (*imp2.PubliclyImportedMessage2)(m).String()
+}
+func (*PubliclyImportedMessage2) ProtoMessage() {}
+func (m *PubliclyImportedMessage2) XXX_Unmarshal(buf []byte) error {
+	return (*imp2.PubliclyImportedMessage2)(m).XXX_Unmarshal(buf)
+}
+func (m *PubliclyImportedMessage2) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return (*imp2.PubliclyImportedMessage2)(m).XXX_Marshal(b, deterministic)
+}
+func (m *PubliclyImportedMessage2) XXX_Size() int {
+	return (*imp2.PubliclyImportedMessage2)(m).XXX_Size()
+}
+func (m *PubliclyImportedMessage2) XXX_DiscardUnknown() {
+	(*imp2.PubliclyImportedMessage2)(m).XXX_DiscardUnknown()
+}
+func (m *PubliclyImportedMessage2) GetField() *PubliclyImportedMessage {
+	return (*PubliclyImportedMessage)((*imp2.PubliclyImportedMessage2)(m).GetField())
+}
+
 // PubliclyImportedEnum from public import imp/imp2/imp2.proto
 type PubliclyImportedEnum imp2.PubliclyImportedEnum
 
