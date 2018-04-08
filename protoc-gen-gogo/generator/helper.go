@@ -442,6 +442,5 @@ func (g *Generator) useTypes() string {
 }
 
 func (d *FileDescriptor) GoPackageName() string {
-	pkgName, _ := d.goPackageName()
-	return string(pkgName)
+	return string(d.packageName)
 }
