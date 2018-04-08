@@ -6,7 +6,7 @@ package proto3extension
 import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -20,7 +20,7 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 var E_Primary = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         51234,
 	Name:          "proto3extension.primary",
@@ -29,7 +29,7 @@ var E_Primary = &proto.ExtensionDesc{
 }
 
 var E_Index = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         51235,
 	Name:          "proto3extension.index",

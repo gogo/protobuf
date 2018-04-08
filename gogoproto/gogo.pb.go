@@ -6,7 +6,7 @@ package gogoproto // import "github.com/gogo/protobuf/gogoproto"
 import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -20,7 +20,7 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 var E_GoprotoEnumPrefix = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.EnumOptions)(nil),
+	ExtendedType:  (*descriptor.EnumOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         62001,
 	Name:          "gogoproto.goproto_enum_prefix",
@@ -29,7 +29,7 @@ var E_GoprotoEnumPrefix = &proto.ExtensionDesc{
 }
 
 var E_GoprotoEnumStringer = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.EnumOptions)(nil),
+	ExtendedType:  (*descriptor.EnumOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         62021,
 	Name:          "gogoproto.goproto_enum_stringer",
@@ -38,7 +38,7 @@ var E_GoprotoEnumStringer = &proto.ExtensionDesc{
 }
 
 var E_EnumStringer = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.EnumOptions)(nil),
+	ExtendedType:  (*descriptor.EnumOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         62022,
 	Name:          "gogoproto.enum_stringer",
@@ -47,7 +47,7 @@ var E_EnumStringer = &proto.ExtensionDesc{
 }
 
 var E_EnumCustomname = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.EnumOptions)(nil),
+	ExtendedType:  (*descriptor.EnumOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         62023,
 	Name:          "gogoproto.enum_customname",
@@ -56,7 +56,7 @@ var E_EnumCustomname = &proto.ExtensionDesc{
 }
 
 var E_Enumdecl = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.EnumOptions)(nil),
+	ExtendedType:  (*descriptor.EnumOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         62024,
 	Name:          "gogoproto.enumdecl",
@@ -65,7 +65,7 @@ var E_Enumdecl = &proto.ExtensionDesc{
 }
 
 var E_EnumvalueCustomname = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.EnumValueOptions)(nil),
+	ExtendedType:  (*descriptor.EnumValueOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         66001,
 	Name:          "gogoproto.enumvalue_customname",
@@ -74,7 +74,7 @@ var E_EnumvalueCustomname = &proto.ExtensionDesc{
 }
 
 var E_GoprotoGettersAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63001,
 	Name:          "gogoproto.goproto_getters_all",
@@ -83,7 +83,7 @@ var E_GoprotoGettersAll = &proto.ExtensionDesc{
 }
 
 var E_GoprotoEnumPrefixAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63002,
 	Name:          "gogoproto.goproto_enum_prefix_all",
@@ -92,7 +92,7 @@ var E_GoprotoEnumPrefixAll = &proto.ExtensionDesc{
 }
 
 var E_GoprotoStringerAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63003,
 	Name:          "gogoproto.goproto_stringer_all",
@@ -101,7 +101,7 @@ var E_GoprotoStringerAll = &proto.ExtensionDesc{
 }
 
 var E_VerboseEqualAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63004,
 	Name:          "gogoproto.verbose_equal_all",
@@ -110,7 +110,7 @@ var E_VerboseEqualAll = &proto.ExtensionDesc{
 }
 
 var E_FaceAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63005,
 	Name:          "gogoproto.face_all",
@@ -119,7 +119,7 @@ var E_FaceAll = &proto.ExtensionDesc{
 }
 
 var E_GostringAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63006,
 	Name:          "gogoproto.gostring_all",
@@ -128,7 +128,7 @@ var E_GostringAll = &proto.ExtensionDesc{
 }
 
 var E_PopulateAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63007,
 	Name:          "gogoproto.populate_all",
@@ -137,7 +137,7 @@ var E_PopulateAll = &proto.ExtensionDesc{
 }
 
 var E_StringerAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63008,
 	Name:          "gogoproto.stringer_all",
@@ -146,7 +146,7 @@ var E_StringerAll = &proto.ExtensionDesc{
 }
 
 var E_OnlyoneAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63009,
 	Name:          "gogoproto.onlyone_all",
@@ -155,7 +155,7 @@ var E_OnlyoneAll = &proto.ExtensionDesc{
 }
 
 var E_EqualAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63013,
 	Name:          "gogoproto.equal_all",
@@ -164,7 +164,7 @@ var E_EqualAll = &proto.ExtensionDesc{
 }
 
 var E_DescriptionAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63014,
 	Name:          "gogoproto.description_all",
@@ -173,7 +173,7 @@ var E_DescriptionAll = &proto.ExtensionDesc{
 }
 
 var E_TestgenAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63015,
 	Name:          "gogoproto.testgen_all",
@@ -182,7 +182,7 @@ var E_TestgenAll = &proto.ExtensionDesc{
 }
 
 var E_BenchgenAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63016,
 	Name:          "gogoproto.benchgen_all",
@@ -191,7 +191,7 @@ var E_BenchgenAll = &proto.ExtensionDesc{
 }
 
 var E_MarshalerAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63017,
 	Name:          "gogoproto.marshaler_all",
@@ -200,7 +200,7 @@ var E_MarshalerAll = &proto.ExtensionDesc{
 }
 
 var E_UnmarshalerAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63018,
 	Name:          "gogoproto.unmarshaler_all",
@@ -209,7 +209,7 @@ var E_UnmarshalerAll = &proto.ExtensionDesc{
 }
 
 var E_StableMarshalerAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63019,
 	Name:          "gogoproto.stable_marshaler_all",
@@ -218,7 +218,7 @@ var E_StableMarshalerAll = &proto.ExtensionDesc{
 }
 
 var E_SizerAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63020,
 	Name:          "gogoproto.sizer_all",
@@ -227,7 +227,7 @@ var E_SizerAll = &proto.ExtensionDesc{
 }
 
 var E_GoprotoEnumStringerAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63021,
 	Name:          "gogoproto.goproto_enum_stringer_all",
@@ -236,7 +236,7 @@ var E_GoprotoEnumStringerAll = &proto.ExtensionDesc{
 }
 
 var E_EnumStringerAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63022,
 	Name:          "gogoproto.enum_stringer_all",
@@ -245,7 +245,7 @@ var E_EnumStringerAll = &proto.ExtensionDesc{
 }
 
 var E_UnsafeMarshalerAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63023,
 	Name:          "gogoproto.unsafe_marshaler_all",
@@ -254,7 +254,7 @@ var E_UnsafeMarshalerAll = &proto.ExtensionDesc{
 }
 
 var E_UnsafeUnmarshalerAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63024,
 	Name:          "gogoproto.unsafe_unmarshaler_all",
@@ -263,7 +263,7 @@ var E_UnsafeUnmarshalerAll = &proto.ExtensionDesc{
 }
 
 var E_GoprotoExtensionsMapAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63025,
 	Name:          "gogoproto.goproto_extensions_map_all",
@@ -272,7 +272,7 @@ var E_GoprotoExtensionsMapAll = &proto.ExtensionDesc{
 }
 
 var E_GoprotoUnrecognizedAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63026,
 	Name:          "gogoproto.goproto_unrecognized_all",
@@ -281,7 +281,7 @@ var E_GoprotoUnrecognizedAll = &proto.ExtensionDesc{
 }
 
 var E_GogoprotoImport = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63027,
 	Name:          "gogoproto.gogoproto_import",
@@ -290,7 +290,7 @@ var E_GogoprotoImport = &proto.ExtensionDesc{
 }
 
 var E_ProtosizerAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63028,
 	Name:          "gogoproto.protosizer_all",
@@ -299,7 +299,7 @@ var E_ProtosizerAll = &proto.ExtensionDesc{
 }
 
 var E_CompareAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63029,
 	Name:          "gogoproto.compare_all",
@@ -308,7 +308,7 @@ var E_CompareAll = &proto.ExtensionDesc{
 }
 
 var E_TypedeclAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63030,
 	Name:          "gogoproto.typedecl_all",
@@ -317,7 +317,7 @@ var E_TypedeclAll = &proto.ExtensionDesc{
 }
 
 var E_EnumdeclAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63031,
 	Name:          "gogoproto.enumdecl_all",
@@ -326,7 +326,7 @@ var E_EnumdeclAll = &proto.ExtensionDesc{
 }
 
 var E_GoprotoRegistration = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63032,
 	Name:          "gogoproto.goproto_registration",
@@ -335,7 +335,7 @@ var E_GoprotoRegistration = &proto.ExtensionDesc{
 }
 
 var E_MessagenameAll = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FileOptions)(nil),
+	ExtendedType:  (*descriptor.FileOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         63033,
 	Name:          "gogoproto.messagename_all",
@@ -344,7 +344,7 @@ var E_MessagenameAll = &proto.ExtensionDesc{
 }
 
 var E_GoprotoGetters = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64001,
 	Name:          "gogoproto.goproto_getters",
@@ -353,7 +353,7 @@ var E_GoprotoGetters = &proto.ExtensionDesc{
 }
 
 var E_GoprotoStringer = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64003,
 	Name:          "gogoproto.goproto_stringer",
@@ -362,7 +362,7 @@ var E_GoprotoStringer = &proto.ExtensionDesc{
 }
 
 var E_VerboseEqual = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64004,
 	Name:          "gogoproto.verbose_equal",
@@ -371,7 +371,7 @@ var E_VerboseEqual = &proto.ExtensionDesc{
 }
 
 var E_Face = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64005,
 	Name:          "gogoproto.face",
@@ -380,7 +380,7 @@ var E_Face = &proto.ExtensionDesc{
 }
 
 var E_Gostring = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64006,
 	Name:          "gogoproto.gostring",
@@ -389,7 +389,7 @@ var E_Gostring = &proto.ExtensionDesc{
 }
 
 var E_Populate = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64007,
 	Name:          "gogoproto.populate",
@@ -398,7 +398,7 @@ var E_Populate = &proto.ExtensionDesc{
 }
 
 var E_Stringer = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         67008,
 	Name:          "gogoproto.stringer",
@@ -407,7 +407,7 @@ var E_Stringer = &proto.ExtensionDesc{
 }
 
 var E_Onlyone = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64009,
 	Name:          "gogoproto.onlyone",
@@ -416,7 +416,7 @@ var E_Onlyone = &proto.ExtensionDesc{
 }
 
 var E_Equal = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64013,
 	Name:          "gogoproto.equal",
@@ -425,7 +425,7 @@ var E_Equal = &proto.ExtensionDesc{
 }
 
 var E_Description = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64014,
 	Name:          "gogoproto.description",
@@ -434,7 +434,7 @@ var E_Description = &proto.ExtensionDesc{
 }
 
 var E_Testgen = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64015,
 	Name:          "gogoproto.testgen",
@@ -443,7 +443,7 @@ var E_Testgen = &proto.ExtensionDesc{
 }
 
 var E_Benchgen = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64016,
 	Name:          "gogoproto.benchgen",
@@ -452,7 +452,7 @@ var E_Benchgen = &proto.ExtensionDesc{
 }
 
 var E_Marshaler = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64017,
 	Name:          "gogoproto.marshaler",
@@ -461,7 +461,7 @@ var E_Marshaler = &proto.ExtensionDesc{
 }
 
 var E_Unmarshaler = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64018,
 	Name:          "gogoproto.unmarshaler",
@@ -470,7 +470,7 @@ var E_Unmarshaler = &proto.ExtensionDesc{
 }
 
 var E_StableMarshaler = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64019,
 	Name:          "gogoproto.stable_marshaler",
@@ -479,7 +479,7 @@ var E_StableMarshaler = &proto.ExtensionDesc{
 }
 
 var E_Sizer = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64020,
 	Name:          "gogoproto.sizer",
@@ -488,7 +488,7 @@ var E_Sizer = &proto.ExtensionDesc{
 }
 
 var E_UnsafeMarshaler = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64023,
 	Name:          "gogoproto.unsafe_marshaler",
@@ -497,7 +497,7 @@ var E_UnsafeMarshaler = &proto.ExtensionDesc{
 }
 
 var E_UnsafeUnmarshaler = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64024,
 	Name:          "gogoproto.unsafe_unmarshaler",
@@ -506,7 +506,7 @@ var E_UnsafeUnmarshaler = &proto.ExtensionDesc{
 }
 
 var E_GoprotoExtensionsMap = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64025,
 	Name:          "gogoproto.goproto_extensions_map",
@@ -515,7 +515,7 @@ var E_GoprotoExtensionsMap = &proto.ExtensionDesc{
 }
 
 var E_GoprotoUnrecognized = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64026,
 	Name:          "gogoproto.goproto_unrecognized",
@@ -524,7 +524,7 @@ var E_GoprotoUnrecognized = &proto.ExtensionDesc{
 }
 
 var E_Protosizer = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64028,
 	Name:          "gogoproto.protosizer",
@@ -533,7 +533,7 @@ var E_Protosizer = &proto.ExtensionDesc{
 }
 
 var E_Compare = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64029,
 	Name:          "gogoproto.compare",
@@ -542,7 +542,7 @@ var E_Compare = &proto.ExtensionDesc{
 }
 
 var E_Typedecl = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64030,
 	Name:          "gogoproto.typedecl",
@@ -551,7 +551,7 @@ var E_Typedecl = &proto.ExtensionDesc{
 }
 
 var E_Messagename = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.MessageOptions)(nil),
+	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         64033,
 	Name:          "gogoproto.messagename",
@@ -560,7 +560,7 @@ var E_Messagename = &proto.ExtensionDesc{
 }
 
 var E_Nullable = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         65001,
 	Name:          "gogoproto.nullable",
@@ -569,7 +569,7 @@ var E_Nullable = &proto.ExtensionDesc{
 }
 
 var E_Embed = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         65002,
 	Name:          "gogoproto.embed",
@@ -578,7 +578,7 @@ var E_Embed = &proto.ExtensionDesc{
 }
 
 var E_Customtype = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         65003,
 	Name:          "gogoproto.customtype",
@@ -587,7 +587,7 @@ var E_Customtype = &proto.ExtensionDesc{
 }
 
 var E_Customname = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         65004,
 	Name:          "gogoproto.customname",
@@ -596,7 +596,7 @@ var E_Customname = &proto.ExtensionDesc{
 }
 
 var E_Jsontag = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         65005,
 	Name:          "gogoproto.jsontag",
@@ -605,7 +605,7 @@ var E_Jsontag = &proto.ExtensionDesc{
 }
 
 var E_Moretags = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         65006,
 	Name:          "gogoproto.moretags",
@@ -614,7 +614,7 @@ var E_Moretags = &proto.ExtensionDesc{
 }
 
 var E_Casttype = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         65007,
 	Name:          "gogoproto.casttype",
@@ -623,7 +623,7 @@ var E_Casttype = &proto.ExtensionDesc{
 }
 
 var E_Castkey = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         65008,
 	Name:          "gogoproto.castkey",
@@ -632,7 +632,7 @@ var E_Castkey = &proto.ExtensionDesc{
 }
 
 var E_Castvalue = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*string)(nil),
 	Field:         65009,
 	Name:          "gogoproto.castvalue",
@@ -641,7 +641,7 @@ var E_Castvalue = &proto.ExtensionDesc{
 }
 
 var E_Stdtime = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         65010,
 	Name:          "gogoproto.stdtime",
@@ -650,7 +650,7 @@ var E_Stdtime = &proto.ExtensionDesc{
 }
 
 var E_Stdduration = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.FieldOptions)(nil),
+	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         65011,
 	Name:          "gogoproto.stdduration",

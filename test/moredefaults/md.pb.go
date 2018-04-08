@@ -7,7 +7,7 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
-import test "github.com/gogo/protobuf/test/example"
+import example "github.com/gogo/protobuf/test/example"
 
 import bytes "bytes"
 
@@ -65,8 +65,8 @@ type MoreDefaultsA struct {
 	Field2               int64          `protobuf:"varint,2,opt,name=Field2" json:"Field2"`
 	B1                   *MoreDefaultsB `protobuf:"bytes,3,opt,name=B1" json:"B1,omitempty"`
 	B2                   MoreDefaultsB  `protobuf:"bytes,4,opt,name=B2" json:"B2"`
-	A1                   *test.A        `protobuf:"bytes,5,opt,name=A1" json:"A1,omitempty"`
-	A2                   test.A         `protobuf:"bytes,6,opt,name=A2" json:"A2"`
+	A1                   *example.A     `protobuf:"bytes,5,opt,name=A1" json:"A1,omitempty"`
+	A2                   example.A      `protobuf:"bytes,6,opt,name=A2" json:"A2"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -126,18 +126,18 @@ func (m *MoreDefaultsA) GetB2() MoreDefaultsB {
 	return MoreDefaultsB{}
 }
 
-func (m *MoreDefaultsA) GetA1() *test.A {
+func (m *MoreDefaultsA) GetA1() *example.A {
 	if m != nil {
 		return m.A1
 	}
 	return nil
 }
 
-func (m *MoreDefaultsA) GetA2() test.A {
+func (m *MoreDefaultsA) GetA2() example.A {
 	if m != nil {
 		return m.A2
 	}
-	return test.A{}
+	return example.A{}
 }
 
 func init() {
@@ -256,9 +256,9 @@ func NewPopulatedMoreDefaultsA(r randyMd, easy bool) *MoreDefaultsA {
 	v3 := NewPopulatedMoreDefaultsB(r, easy)
 	this.B2 = *v3
 	if r.Intn(10) != 0 {
-		this.A1 = test.NewPopulatedA(r, easy)
+		this.A1 = example.NewPopulatedA(r, easy)
 	}
-	v4 := test.NewPopulatedA(r, easy)
+	v4 := example.NewPopulatedA(r, easy)
 	this.A2 = *v4
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedMd(r, 7)

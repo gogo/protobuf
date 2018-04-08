@@ -11,15 +11,16 @@ import _ "github.com/gogo/protobuf/gogoproto"
 import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
 import github_com_gogo_protobuf_test_casttype "github.com/gogo/protobuf/test/casttype"
 
-import descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-import gzip "compress/gzip"
+import github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+import compress_gzip "compress/gzip"
 import bytes "bytes"
-import ioutil "io/ioutil"
+import io_ioutil "io/ioutil"
 
 import strings "strings"
 import reflect "reflect"
 
-import binary "encoding/binary"
+import encoding_binary "encoding/binary"
 
 import io "io"
 
@@ -1048,20 +1049,20 @@ func init() {
 	proto.RegisterType((*TwoOneofs)(nil), "one.TwoOneofs")
 	proto.RegisterType((*CustomOneof)(nil), "one.CustomOneof")
 }
-func (this *Subby) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *Subby) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return OneDescription()
 }
-func (this *AllTypesOneOf) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *AllTypesOneOf) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return OneDescription()
 }
-func (this *TwoOneofs) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *TwoOneofs) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return OneDescription()
 }
-func (this *CustomOneof) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *CustomOneof) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return OneDescription()
 }
-func OneDescription() (desc *descriptor.FileDescriptorSet) {
-	d := &descriptor.FileDescriptorSet{}
+func OneDescription() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+	d := &github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet{}
 	var gzipped = []byte{
 		// 4179 bytes of a gzipped FileDescriptorSet
 		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x5a, 0x6b, 0x6c, 0xe4, 0xd6,
@@ -1328,15 +1329,15 @@ func OneDescription() (desc *descriptor.FileDescriptorSet) {
 		0x35, 0x00, 0x00,
 	}
 	r := bytes.NewReader(gzipped)
-	gzipr, err := gzip.NewReader(r)
+	gzipr, err := compress_gzip.NewReader(r)
 	if err != nil {
 		panic(err)
 	}
-	ungzipped, err := ioutil.ReadAll(gzipr)
+	ungzipped, err := io_ioutil.ReadAll(gzipr)
 	if err != nil {
 		panic(err)
 	}
-	if err := proto.Unmarshal(ungzipped, d); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(ungzipped, d); err != nil {
 		panic(err)
 	}
 	return d
@@ -3389,7 +3390,7 @@ func (m *AllTypesOneOf_Field1) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x9
 	i++
-	binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
 	i += 8
 	return i, nil
 }
@@ -3397,7 +3398,7 @@ func (m *AllTypesOneOf_Field2) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x15
 	i++
-	binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
 	i += 4
 	return i, nil
 }
@@ -3447,7 +3448,7 @@ func (m *AllTypesOneOf_Field9) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x4d
 	i++
-	binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field9))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field9))
 	i += 4
 	return i, nil
 }
@@ -3455,7 +3456,7 @@ func (m *AllTypesOneOf_Field10) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x55
 	i++
-	binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field10))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field10))
 	i += 4
 	return i, nil
 }
@@ -3463,7 +3464,7 @@ func (m *AllTypesOneOf_Field11) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x59
 	i++
-	binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field11))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field11))
 	i += 8
 	return i, nil
 }
@@ -3471,7 +3472,7 @@ func (m *AllTypesOneOf_Field12) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x61
 	i++
-	binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field12))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field12))
 	i += 8
 	return i, nil
 }
@@ -3560,7 +3561,7 @@ func (m *TwoOneofs_Field1) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x9
 	i++
-	binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
 	i += 8
 	return i, nil
 }
@@ -3568,7 +3569,7 @@ func (m *TwoOneofs_Field2) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x15
 	i++
-	binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
 	i += 4
 	return i, nil
 }
@@ -4713,7 +4714,7 @@ func (m *AllTypesOneOf) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.TestOneof = &AllTypesOneOf_Field1{float64(math.Float64frombits(v))}
 		case 2:
@@ -4724,7 +4725,7 @@ func (m *AllTypesOneOf) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.TestOneof = &AllTypesOneOf_Field2{float32(math.Float32frombits(v))}
 		case 3:
@@ -4857,7 +4858,7 @@ func (m *AllTypesOneOf) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.TestOneof = &AllTypesOneOf_Field9{v}
 		case 10:
@@ -4868,7 +4869,7 @@ func (m *AllTypesOneOf) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = int32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = int32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.TestOneof = &AllTypesOneOf_Field10{v}
 		case 11:
@@ -4879,7 +4880,7 @@ func (m *AllTypesOneOf) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.TestOneof = &AllTypesOneOf_Field11{v}
 		case 12:
@@ -4890,7 +4891,7 @@ func (m *AllTypesOneOf) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = int64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = int64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.TestOneof = &AllTypesOneOf_Field12{v}
 		case 13:
@@ -5064,7 +5065,7 @@ func (m *TwoOneofs) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.One = &TwoOneofs_Field1{float64(math.Float64frombits(v))}
 		case 2:
@@ -5075,7 +5076,7 @@ func (m *TwoOneofs) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.One = &TwoOneofs_Field2{float32(math.Float32frombits(v))}
 		case 3:

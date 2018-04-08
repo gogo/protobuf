@@ -4,12 +4,13 @@
 package theproto3
 
 import testing "testing"
-import rand "math/rand"
+import math_rand "math/rand"
 import time "time"
-import proto "github.com/gogo/protobuf/proto"
-import jsonpb "github.com/gogo/protobuf/jsonpb"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+import github_com_gogo_protobuf_jsonpb "github.com/gogo/protobuf/jsonpb"
 import fmt "fmt"
-import parser "go/parser"
+import go_parser "go/parser"
+import proto "github.com/gogo/protobuf/proto"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 import _ "github.com/gogo/protobuf/test/combos/both"
@@ -21,14 +22,14 @@ var _ = math.Inf
 
 func TestMessageProto(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessage(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &Message{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	littlefuzz := make([]byte, len(dAtA))
@@ -49,13 +50,13 @@ func TestMessageProto(t *testing.T) {
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
 		// shouldn't panic
-		_ = proto.Unmarshal(littlefuzz, msg)
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
 func TestMessageMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessage(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
@@ -67,7 +68,7 @@ func TestMessageMarshalTo(t *testing.T) {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &Message{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	for i := range dAtA {
@@ -82,7 +83,7 @@ func TestMessageMarshalTo(t *testing.T) {
 }
 
 func BenchmarkMessageProtoMarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*Message, 10000)
 	for i := 0; i < 10000; i++ {
@@ -90,7 +91,7 @@ func BenchmarkMessageProtoMarshal(b *testing.B) {
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		dAtA, err := proto.Marshal(pops[i%10000])
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(pops[i%10000])
 		if err != nil {
 			panic(err)
 		}
@@ -100,11 +101,11 @@ func BenchmarkMessageProtoMarshal(b *testing.B) {
 }
 
 func BenchmarkMessageProtoUnmarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	datas := make([][]byte, 10000)
 	for i := 0; i < 10000; i++ {
-		dAtA, err := proto.Marshal(NewPopulatedMessage(popr, false))
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedMessage(popr, false))
 		if err != nil {
 			panic(err)
 		}
@@ -114,7 +115,7 @@ func BenchmarkMessageProtoUnmarshal(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		total += len(datas[i%10000])
-		if err := proto.Unmarshal(datas[i%10000], msg); err != nil {
+		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
 			panic(err)
 		}
 	}
@@ -123,14 +124,14 @@ func BenchmarkMessageProtoUnmarshal(b *testing.B) {
 
 func TestNestedProto(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNested(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &Nested{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	littlefuzz := make([]byte, len(dAtA))
@@ -151,13 +152,13 @@ func TestNestedProto(t *testing.T) {
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
 		// shouldn't panic
-		_ = proto.Unmarshal(littlefuzz, msg)
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
 func TestNestedMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNested(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
@@ -169,7 +170,7 @@ func TestNestedMarshalTo(t *testing.T) {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &Nested{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	for i := range dAtA {
@@ -184,7 +185,7 @@ func TestNestedMarshalTo(t *testing.T) {
 }
 
 func BenchmarkNestedProtoMarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*Nested, 10000)
 	for i := 0; i < 10000; i++ {
@@ -192,7 +193,7 @@ func BenchmarkNestedProtoMarshal(b *testing.B) {
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		dAtA, err := proto.Marshal(pops[i%10000])
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(pops[i%10000])
 		if err != nil {
 			panic(err)
 		}
@@ -202,11 +203,11 @@ func BenchmarkNestedProtoMarshal(b *testing.B) {
 }
 
 func BenchmarkNestedProtoUnmarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	datas := make([][]byte, 10000)
 	for i := 0; i < 10000; i++ {
-		dAtA, err := proto.Marshal(NewPopulatedNested(popr, false))
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedNested(popr, false))
 		if err != nil {
 			panic(err)
 		}
@@ -216,7 +217,7 @@ func BenchmarkNestedProtoUnmarshal(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		total += len(datas[i%10000])
-		if err := proto.Unmarshal(datas[i%10000], msg); err != nil {
+		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
 			panic(err)
 		}
 	}
@@ -225,14 +226,14 @@ func BenchmarkNestedProtoUnmarshal(b *testing.B) {
 
 func TestAllMapsProto(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMaps(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &AllMaps{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	littlefuzz := make([]byte, len(dAtA))
@@ -253,13 +254,13 @@ func TestAllMapsProto(t *testing.T) {
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
 		// shouldn't panic
-		_ = proto.Unmarshal(littlefuzz, msg)
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
 func TestAllMapsMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMaps(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
@@ -271,7 +272,7 @@ func TestAllMapsMarshalTo(t *testing.T) {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &AllMaps{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	for i := range dAtA {
@@ -286,7 +287,7 @@ func TestAllMapsMarshalTo(t *testing.T) {
 }
 
 func BenchmarkAllMapsProtoMarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*AllMaps, 10000)
 	for i := 0; i < 10000; i++ {
@@ -294,7 +295,7 @@ func BenchmarkAllMapsProtoMarshal(b *testing.B) {
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		dAtA, err := proto.Marshal(pops[i%10000])
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(pops[i%10000])
 		if err != nil {
 			panic(err)
 		}
@@ -304,11 +305,11 @@ func BenchmarkAllMapsProtoMarshal(b *testing.B) {
 }
 
 func BenchmarkAllMapsProtoUnmarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	datas := make([][]byte, 10000)
 	for i := 0; i < 10000; i++ {
-		dAtA, err := proto.Marshal(NewPopulatedAllMaps(popr, false))
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedAllMaps(popr, false))
 		if err != nil {
 			panic(err)
 		}
@@ -318,7 +319,7 @@ func BenchmarkAllMapsProtoUnmarshal(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		total += len(datas[i%10000])
-		if err := proto.Unmarshal(datas[i%10000], msg); err != nil {
+		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
 			panic(err)
 		}
 	}
@@ -327,14 +328,14 @@ func BenchmarkAllMapsProtoUnmarshal(b *testing.B) {
 
 func TestAllMapsOrderedProto(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMapsOrdered(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &AllMapsOrdered{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	littlefuzz := make([]byte, len(dAtA))
@@ -355,13 +356,13 @@ func TestAllMapsOrderedProto(t *testing.T) {
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
 		// shouldn't panic
-		_ = proto.Unmarshal(littlefuzz, msg)
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
 func TestAllMapsOrderedMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMapsOrdered(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
@@ -373,7 +374,7 @@ func TestAllMapsOrderedMarshalTo(t *testing.T) {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &AllMapsOrdered{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	for i := range dAtA {
@@ -388,7 +389,7 @@ func TestAllMapsOrderedMarshalTo(t *testing.T) {
 }
 
 func BenchmarkAllMapsOrderedProtoMarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*AllMapsOrdered, 10000)
 	for i := 0; i < 10000; i++ {
@@ -396,7 +397,7 @@ func BenchmarkAllMapsOrderedProtoMarshal(b *testing.B) {
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		dAtA, err := proto.Marshal(pops[i%10000])
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(pops[i%10000])
 		if err != nil {
 			panic(err)
 		}
@@ -406,11 +407,11 @@ func BenchmarkAllMapsOrderedProtoMarshal(b *testing.B) {
 }
 
 func BenchmarkAllMapsOrderedProtoUnmarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	datas := make([][]byte, 10000)
 	for i := 0; i < 10000; i++ {
-		dAtA, err := proto.Marshal(NewPopulatedAllMapsOrdered(popr, false))
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedAllMapsOrdered(popr, false))
 		if err != nil {
 			panic(err)
 		}
@@ -420,7 +421,7 @@ func BenchmarkAllMapsOrderedProtoUnmarshal(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		total += len(datas[i%10000])
-		if err := proto.Unmarshal(datas[i%10000], msg); err != nil {
+		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
 			panic(err)
 		}
 	}
@@ -429,14 +430,14 @@ func BenchmarkAllMapsOrderedProtoUnmarshal(b *testing.B) {
 
 func TestMessageWithMapProto(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessageWithMap(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &MessageWithMap{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	littlefuzz := make([]byte, len(dAtA))
@@ -457,13 +458,13 @@ func TestMessageWithMapProto(t *testing.T) {
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
 		// shouldn't panic
-		_ = proto.Unmarshal(littlefuzz, msg)
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
 func TestMessageWithMapMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessageWithMap(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
@@ -475,7 +476,7 @@ func TestMessageWithMapMarshalTo(t *testing.T) {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &MessageWithMap{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	for i := range dAtA {
@@ -490,7 +491,7 @@ func TestMessageWithMapMarshalTo(t *testing.T) {
 }
 
 func BenchmarkMessageWithMapProtoMarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*MessageWithMap, 10000)
 	for i := 0; i < 10000; i++ {
@@ -498,7 +499,7 @@ func BenchmarkMessageWithMapProtoMarshal(b *testing.B) {
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		dAtA, err := proto.Marshal(pops[i%10000])
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(pops[i%10000])
 		if err != nil {
 			panic(err)
 		}
@@ -508,11 +509,11 @@ func BenchmarkMessageWithMapProtoMarshal(b *testing.B) {
 }
 
 func BenchmarkMessageWithMapProtoUnmarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	datas := make([][]byte, 10000)
 	for i := 0; i < 10000; i++ {
-		dAtA, err := proto.Marshal(NewPopulatedMessageWithMap(popr, false))
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedMessageWithMap(popr, false))
 		if err != nil {
 			panic(err)
 		}
@@ -522,7 +523,7 @@ func BenchmarkMessageWithMapProtoUnmarshal(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		total += len(datas[i%10000])
-		if err := proto.Unmarshal(datas[i%10000], msg); err != nil {
+		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
 			panic(err)
 		}
 	}
@@ -531,14 +532,14 @@ func BenchmarkMessageWithMapProtoUnmarshal(b *testing.B) {
 
 func TestFloatingPointProto(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedFloatingPoint(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &FloatingPoint{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	littlefuzz := make([]byte, len(dAtA))
@@ -559,13 +560,13 @@ func TestFloatingPointProto(t *testing.T) {
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
 		// shouldn't panic
-		_ = proto.Unmarshal(littlefuzz, msg)
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
 func TestFloatingPointMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedFloatingPoint(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
@@ -577,7 +578,7 @@ func TestFloatingPointMarshalTo(t *testing.T) {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &FloatingPoint{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	for i := range dAtA {
@@ -592,7 +593,7 @@ func TestFloatingPointMarshalTo(t *testing.T) {
 }
 
 func BenchmarkFloatingPointProtoMarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*FloatingPoint, 10000)
 	for i := 0; i < 10000; i++ {
@@ -600,7 +601,7 @@ func BenchmarkFloatingPointProtoMarshal(b *testing.B) {
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		dAtA, err := proto.Marshal(pops[i%10000])
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(pops[i%10000])
 		if err != nil {
 			panic(err)
 		}
@@ -610,11 +611,11 @@ func BenchmarkFloatingPointProtoMarshal(b *testing.B) {
 }
 
 func BenchmarkFloatingPointProtoUnmarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	datas := make([][]byte, 10000)
 	for i := 0; i < 10000; i++ {
-		dAtA, err := proto.Marshal(NewPopulatedFloatingPoint(popr, false))
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedFloatingPoint(popr, false))
 		if err != nil {
 			panic(err)
 		}
@@ -624,7 +625,7 @@ func BenchmarkFloatingPointProtoUnmarshal(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		total += len(datas[i%10000])
-		if err := proto.Unmarshal(datas[i%10000], msg); err != nil {
+		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
 			panic(err)
 		}
 	}
@@ -633,14 +634,14 @@ func BenchmarkFloatingPointProtoUnmarshal(b *testing.B) {
 
 func TestUint128PairProto(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUint128Pair(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &Uint128Pair{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	littlefuzz := make([]byte, len(dAtA))
@@ -661,13 +662,13 @@ func TestUint128PairProto(t *testing.T) {
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
 		// shouldn't panic
-		_ = proto.Unmarshal(littlefuzz, msg)
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
 func TestUint128PairMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUint128Pair(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
@@ -679,7 +680,7 @@ func TestUint128PairMarshalTo(t *testing.T) {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &Uint128Pair{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	for i := range dAtA {
@@ -694,7 +695,7 @@ func TestUint128PairMarshalTo(t *testing.T) {
 }
 
 func BenchmarkUint128PairProtoMarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*Uint128Pair, 10000)
 	for i := 0; i < 10000; i++ {
@@ -702,7 +703,7 @@ func BenchmarkUint128PairProtoMarshal(b *testing.B) {
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		dAtA, err := proto.Marshal(pops[i%10000])
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(pops[i%10000])
 		if err != nil {
 			panic(err)
 		}
@@ -712,11 +713,11 @@ func BenchmarkUint128PairProtoMarshal(b *testing.B) {
 }
 
 func BenchmarkUint128PairProtoUnmarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	datas := make([][]byte, 10000)
 	for i := 0; i < 10000; i++ {
-		dAtA, err := proto.Marshal(NewPopulatedUint128Pair(popr, false))
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedUint128Pair(popr, false))
 		if err != nil {
 			panic(err)
 		}
@@ -726,7 +727,7 @@ func BenchmarkUint128PairProtoUnmarshal(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		total += len(datas[i%10000])
-		if err := proto.Unmarshal(datas[i%10000], msg); err != nil {
+		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
 			panic(err)
 		}
 	}
@@ -735,14 +736,14 @@ func BenchmarkUint128PairProtoUnmarshal(b *testing.B) {
 
 func TestContainsNestedMapProto(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &ContainsNestedMap{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	littlefuzz := make([]byte, len(dAtA))
@@ -763,13 +764,13 @@ func TestContainsNestedMapProto(t *testing.T) {
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
 		// shouldn't panic
-		_ = proto.Unmarshal(littlefuzz, msg)
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
 func TestContainsNestedMapMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
@@ -781,7 +782,7 @@ func TestContainsNestedMapMarshalTo(t *testing.T) {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &ContainsNestedMap{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	for i := range dAtA {
@@ -796,7 +797,7 @@ func TestContainsNestedMapMarshalTo(t *testing.T) {
 }
 
 func BenchmarkContainsNestedMapProtoMarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*ContainsNestedMap, 10000)
 	for i := 0; i < 10000; i++ {
@@ -804,7 +805,7 @@ func BenchmarkContainsNestedMapProtoMarshal(b *testing.B) {
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		dAtA, err := proto.Marshal(pops[i%10000])
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(pops[i%10000])
 		if err != nil {
 			panic(err)
 		}
@@ -814,11 +815,11 @@ func BenchmarkContainsNestedMapProtoMarshal(b *testing.B) {
 }
 
 func BenchmarkContainsNestedMapProtoUnmarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	datas := make([][]byte, 10000)
 	for i := 0; i < 10000; i++ {
-		dAtA, err := proto.Marshal(NewPopulatedContainsNestedMap(popr, false))
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedContainsNestedMap(popr, false))
 		if err != nil {
 			panic(err)
 		}
@@ -828,7 +829,7 @@ func BenchmarkContainsNestedMapProtoUnmarshal(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		total += len(datas[i%10000])
-		if err := proto.Unmarshal(datas[i%10000], msg); err != nil {
+		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
 			panic(err)
 		}
 	}
@@ -837,14 +838,14 @@ func BenchmarkContainsNestedMapProtoUnmarshal(b *testing.B) {
 
 func TestContainsNestedMap_NestedMapProto(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap_NestedMap(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &ContainsNestedMap_NestedMap{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	littlefuzz := make([]byte, len(dAtA))
@@ -865,13 +866,13 @@ func TestContainsNestedMap_NestedMapProto(t *testing.T) {
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
 		// shouldn't panic
-		_ = proto.Unmarshal(littlefuzz, msg)
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
 func TestContainsNestedMap_NestedMapMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap_NestedMap(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
@@ -883,7 +884,7 @@ func TestContainsNestedMap_NestedMapMarshalTo(t *testing.T) {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &ContainsNestedMap_NestedMap{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	for i := range dAtA {
@@ -898,7 +899,7 @@ func TestContainsNestedMap_NestedMapMarshalTo(t *testing.T) {
 }
 
 func BenchmarkContainsNestedMap_NestedMapProtoMarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*ContainsNestedMap_NestedMap, 10000)
 	for i := 0; i < 10000; i++ {
@@ -906,7 +907,7 @@ func BenchmarkContainsNestedMap_NestedMapProtoMarshal(b *testing.B) {
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		dAtA, err := proto.Marshal(pops[i%10000])
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(pops[i%10000])
 		if err != nil {
 			panic(err)
 		}
@@ -916,11 +917,11 @@ func BenchmarkContainsNestedMap_NestedMapProtoMarshal(b *testing.B) {
 }
 
 func BenchmarkContainsNestedMap_NestedMapProtoUnmarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	datas := make([][]byte, 10000)
 	for i := 0; i < 10000; i++ {
-		dAtA, err := proto.Marshal(NewPopulatedContainsNestedMap_NestedMap(popr, false))
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedContainsNestedMap_NestedMap(popr, false))
 		if err != nil {
 			panic(err)
 		}
@@ -930,7 +931,7 @@ func BenchmarkContainsNestedMap_NestedMapProtoUnmarshal(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		total += len(datas[i%10000])
-		if err := proto.Unmarshal(datas[i%10000], msg); err != nil {
+		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
 			panic(err)
 		}
 	}
@@ -939,14 +940,14 @@ func BenchmarkContainsNestedMap_NestedMapProtoUnmarshal(b *testing.B) {
 
 func TestNotPackedProto(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNotPacked(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &NotPacked{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	littlefuzz := make([]byte, len(dAtA))
@@ -967,13 +968,13 @@ func TestNotPackedProto(t *testing.T) {
 			littlefuzz = append(littlefuzz, byte(popr.Intn(256)))
 		}
 		// shouldn't panic
-		_ = proto.Unmarshal(littlefuzz, msg)
+		_ = github_com_gogo_protobuf_proto.Unmarshal(littlefuzz, msg)
 	}
 }
 
 func TestNotPackedMarshalTo(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNotPacked(popr, false)
 	size := p.Size()
 	dAtA := make([]byte, size)
@@ -985,7 +986,7 @@ func TestNotPackedMarshalTo(t *testing.T) {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &NotPacked{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	for i := range dAtA {
@@ -1000,7 +1001,7 @@ func TestNotPackedMarshalTo(t *testing.T) {
 }
 
 func BenchmarkNotPackedProtoMarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*NotPacked, 10000)
 	for i := 0; i < 10000; i++ {
@@ -1008,7 +1009,7 @@ func BenchmarkNotPackedProtoMarshal(b *testing.B) {
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		dAtA, err := proto.Marshal(pops[i%10000])
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(pops[i%10000])
 		if err != nil {
 			panic(err)
 		}
@@ -1018,11 +1019,11 @@ func BenchmarkNotPackedProtoMarshal(b *testing.B) {
 }
 
 func BenchmarkNotPackedProtoUnmarshal(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	datas := make([][]byte, 10000)
 	for i := 0; i < 10000; i++ {
-		dAtA, err := proto.Marshal(NewPopulatedNotPacked(popr, false))
+		dAtA, err := github_com_gogo_protobuf_proto.Marshal(NewPopulatedNotPacked(popr, false))
 		if err != nil {
 			panic(err)
 		}
@@ -1032,7 +1033,7 @@ func BenchmarkNotPackedProtoUnmarshal(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		total += len(datas[i%10000])
-		if err := proto.Unmarshal(datas[i%10000], msg); err != nil {
+		if err := github_com_gogo_protobuf_proto.Unmarshal(datas[i%10000], msg); err != nil {
 			panic(err)
 		}
 	}
@@ -1041,15 +1042,15 @@ func BenchmarkNotPackedProtoUnmarshal(b *testing.B) {
 
 func TestMessageJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessage(popr, true)
-	marshaler := jsonpb.Marshaler{}
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &Message{}
-	err = jsonpb.UnmarshalString(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -1062,15 +1063,15 @@ func TestMessageJSON(t *testing.T) {
 }
 func TestNestedJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNested(popr, true)
-	marshaler := jsonpb.Marshaler{}
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &Nested{}
-	err = jsonpb.UnmarshalString(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -1083,15 +1084,15 @@ func TestNestedJSON(t *testing.T) {
 }
 func TestAllMapsJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMaps(popr, true)
-	marshaler := jsonpb.Marshaler{}
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &AllMaps{}
-	err = jsonpb.UnmarshalString(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -1104,15 +1105,15 @@ func TestAllMapsJSON(t *testing.T) {
 }
 func TestAllMapsOrderedJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMapsOrdered(popr, true)
-	marshaler := jsonpb.Marshaler{}
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &AllMapsOrdered{}
-	err = jsonpb.UnmarshalString(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -1125,15 +1126,15 @@ func TestAllMapsOrderedJSON(t *testing.T) {
 }
 func TestMessageWithMapJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessageWithMap(popr, true)
-	marshaler := jsonpb.Marshaler{}
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &MessageWithMap{}
-	err = jsonpb.UnmarshalString(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -1146,15 +1147,15 @@ func TestMessageWithMapJSON(t *testing.T) {
 }
 func TestFloatingPointJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedFloatingPoint(popr, true)
-	marshaler := jsonpb.Marshaler{}
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &FloatingPoint{}
-	err = jsonpb.UnmarshalString(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -1167,15 +1168,15 @@ func TestFloatingPointJSON(t *testing.T) {
 }
 func TestUint128PairJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUint128Pair(popr, true)
-	marshaler := jsonpb.Marshaler{}
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &Uint128Pair{}
-	err = jsonpb.UnmarshalString(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -1188,15 +1189,15 @@ func TestUint128PairJSON(t *testing.T) {
 }
 func TestContainsNestedMapJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap(popr, true)
-	marshaler := jsonpb.Marshaler{}
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &ContainsNestedMap{}
-	err = jsonpb.UnmarshalString(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -1209,15 +1210,15 @@ func TestContainsNestedMapJSON(t *testing.T) {
 }
 func TestContainsNestedMap_NestedMapJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap_NestedMap(popr, true)
-	marshaler := jsonpb.Marshaler{}
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &ContainsNestedMap_NestedMap{}
-	err = jsonpb.UnmarshalString(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -1230,15 +1231,15 @@ func TestContainsNestedMap_NestedMapJSON(t *testing.T) {
 }
 func TestNotPackedJSON(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNotPacked(popr, true)
-	marshaler := jsonpb.Marshaler{}
+	marshaler := github_com_gogo_protobuf_jsonpb.Marshaler{}
 	jsondata, err := marshaler.MarshalToString(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	msg := &NotPacked{}
-	err = jsonpb.UnmarshalString(jsondata, msg)
+	err = github_com_gogo_protobuf_jsonpb.UnmarshalString(jsondata, msg)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -1251,11 +1252,11 @@ func TestNotPackedJSON(t *testing.T) {
 }
 func TestMessageProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessage(popr, true)
-	dAtA := proto.MarshalTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &Message{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1268,11 +1269,11 @@ func TestMessageProtoText(t *testing.T) {
 
 func TestMessageProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessage(popr, true)
-	dAtA := proto.CompactTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &Message{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1285,11 +1286,11 @@ func TestMessageProtoCompactText(t *testing.T) {
 
 func TestNestedProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNested(popr, true)
-	dAtA := proto.MarshalTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &Nested{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1302,11 +1303,11 @@ func TestNestedProtoText(t *testing.T) {
 
 func TestNestedProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNested(popr, true)
-	dAtA := proto.CompactTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &Nested{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1319,11 +1320,11 @@ func TestNestedProtoCompactText(t *testing.T) {
 
 func TestAllMapsProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMaps(popr, true)
-	dAtA := proto.MarshalTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &AllMaps{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1336,11 +1337,11 @@ func TestAllMapsProtoText(t *testing.T) {
 
 func TestAllMapsProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMaps(popr, true)
-	dAtA := proto.CompactTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &AllMaps{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1353,11 +1354,11 @@ func TestAllMapsProtoCompactText(t *testing.T) {
 
 func TestAllMapsOrderedProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMapsOrdered(popr, true)
-	dAtA := proto.MarshalTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &AllMapsOrdered{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1370,11 +1371,11 @@ func TestAllMapsOrderedProtoText(t *testing.T) {
 
 func TestAllMapsOrderedProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMapsOrdered(popr, true)
-	dAtA := proto.CompactTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &AllMapsOrdered{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1387,11 +1388,11 @@ func TestAllMapsOrderedProtoCompactText(t *testing.T) {
 
 func TestMessageWithMapProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessageWithMap(popr, true)
-	dAtA := proto.MarshalTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &MessageWithMap{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1404,11 +1405,11 @@ func TestMessageWithMapProtoText(t *testing.T) {
 
 func TestMessageWithMapProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessageWithMap(popr, true)
-	dAtA := proto.CompactTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &MessageWithMap{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1421,11 +1422,11 @@ func TestMessageWithMapProtoCompactText(t *testing.T) {
 
 func TestFloatingPointProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedFloatingPoint(popr, true)
-	dAtA := proto.MarshalTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &FloatingPoint{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1438,11 +1439,11 @@ func TestFloatingPointProtoText(t *testing.T) {
 
 func TestFloatingPointProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedFloatingPoint(popr, true)
-	dAtA := proto.CompactTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &FloatingPoint{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1455,11 +1456,11 @@ func TestFloatingPointProtoCompactText(t *testing.T) {
 
 func TestUint128PairProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUint128Pair(popr, true)
-	dAtA := proto.MarshalTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &Uint128Pair{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1472,11 +1473,11 @@ func TestUint128PairProtoText(t *testing.T) {
 
 func TestUint128PairProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUint128Pair(popr, true)
-	dAtA := proto.CompactTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &Uint128Pair{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1489,11 +1490,11 @@ func TestUint128PairProtoCompactText(t *testing.T) {
 
 func TestContainsNestedMapProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap(popr, true)
-	dAtA := proto.MarshalTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &ContainsNestedMap{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1506,11 +1507,11 @@ func TestContainsNestedMapProtoText(t *testing.T) {
 
 func TestContainsNestedMapProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap(popr, true)
-	dAtA := proto.CompactTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &ContainsNestedMap{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1523,11 +1524,11 @@ func TestContainsNestedMapProtoCompactText(t *testing.T) {
 
 func TestContainsNestedMap_NestedMapProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap_NestedMap(popr, true)
-	dAtA := proto.MarshalTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &ContainsNestedMap_NestedMap{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1540,11 +1541,11 @@ func TestContainsNestedMap_NestedMapProtoText(t *testing.T) {
 
 func TestContainsNestedMap_NestedMapProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap_NestedMap(popr, true)
-	dAtA := proto.CompactTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &ContainsNestedMap_NestedMap{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1557,11 +1558,11 @@ func TestContainsNestedMap_NestedMapProtoCompactText(t *testing.T) {
 
 func TestNotPackedProtoText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNotPacked(popr, true)
-	dAtA := proto.MarshalTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.MarshalTextString(p)
 	msg := &NotPacked{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1574,11 +1575,11 @@ func TestNotPackedProtoText(t *testing.T) {
 
 func TestNotPackedProtoCompactText(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNotPacked(popr, true)
-	dAtA := proto.CompactTextString(p)
+	dAtA := github_com_gogo_protobuf_proto.CompactTextString(p)
 	msg := &NotPacked{}
-	if err := proto.UnmarshalText(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.UnmarshalText(dAtA, msg); err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1593,14 +1594,14 @@ func TestTheproto3Description(t *testing.T) {
 	Theproto3Description()
 }
 func TestMessageVerboseEqual(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedMessage(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &Message{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1608,14 +1609,14 @@ func TestMessageVerboseEqual(t *testing.T) {
 	}
 }
 func TestNestedVerboseEqual(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNested(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &Nested{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1623,14 +1624,14 @@ func TestNestedVerboseEqual(t *testing.T) {
 	}
 }
 func TestAllMapsVerboseEqual(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAllMaps(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &AllMaps{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1638,14 +1639,14 @@ func TestAllMapsVerboseEqual(t *testing.T) {
 	}
 }
 func TestAllMapsOrderedVerboseEqual(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAllMapsOrdered(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &AllMapsOrdered{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1653,14 +1654,14 @@ func TestAllMapsOrderedVerboseEqual(t *testing.T) {
 	}
 }
 func TestMessageWithMapVerboseEqual(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedMessageWithMap(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &MessageWithMap{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1668,14 +1669,14 @@ func TestMessageWithMapVerboseEqual(t *testing.T) {
 	}
 }
 func TestFloatingPointVerboseEqual(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedFloatingPoint(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &FloatingPoint{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1683,14 +1684,14 @@ func TestFloatingPointVerboseEqual(t *testing.T) {
 	}
 }
 func TestUint128PairVerboseEqual(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedUint128Pair(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &Uint128Pair{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1698,14 +1699,14 @@ func TestUint128PairVerboseEqual(t *testing.T) {
 	}
 }
 func TestContainsNestedMapVerboseEqual(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedContainsNestedMap(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &ContainsNestedMap{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1713,14 +1714,14 @@ func TestContainsNestedMapVerboseEqual(t *testing.T) {
 	}
 }
 func TestContainsNestedMap_NestedMapVerboseEqual(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedContainsNestedMap_NestedMap(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &ContainsNestedMap_NestedMap{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1728,14 +1729,14 @@ func TestContainsNestedMap_NestedMapVerboseEqual(t *testing.T) {
 	}
 }
 func TestNotPackedVerboseEqual(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNotPacked(popr, false)
-	dAtA, err := proto.Marshal(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		panic(err)
 	}
 	msg := &NotPacked{}
-	if err := proto.Unmarshal(dAtA, msg); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(dAtA, msg); err != nil {
 		panic(err)
 	}
 	if err := p.VerboseEqual(msg); err != nil {
@@ -1743,7 +1744,7 @@ func TestNotPackedVerboseEqual(t *testing.T) {
 	}
 }
 func TestMessageFace(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedMessage(popr, true)
 	msg := p.TestProto()
 	if !p.Equal(msg) {
@@ -1751,7 +1752,7 @@ func TestMessageFace(t *testing.T) {
 	}
 }
 func TestNestedFace(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNested(popr, true)
 	msg := p.TestProto()
 	if !p.Equal(msg) {
@@ -1759,7 +1760,7 @@ func TestNestedFace(t *testing.T) {
 	}
 }
 func TestAllMapsFace(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAllMaps(popr, true)
 	msg := p.TestProto()
 	if !p.Equal(msg) {
@@ -1767,7 +1768,7 @@ func TestAllMapsFace(t *testing.T) {
 	}
 }
 func TestAllMapsOrderedFace(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAllMapsOrdered(popr, true)
 	msg := p.TestProto()
 	if !p.Equal(msg) {
@@ -1775,7 +1776,7 @@ func TestAllMapsOrderedFace(t *testing.T) {
 	}
 }
 func TestMessageWithMapFace(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedMessageWithMap(popr, true)
 	msg := p.TestProto()
 	if !p.Equal(msg) {
@@ -1783,7 +1784,7 @@ func TestMessageWithMapFace(t *testing.T) {
 	}
 }
 func TestFloatingPointFace(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedFloatingPoint(popr, true)
 	msg := p.TestProto()
 	if !p.Equal(msg) {
@@ -1791,7 +1792,7 @@ func TestFloatingPointFace(t *testing.T) {
 	}
 }
 func TestUint128PairFace(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedUint128Pair(popr, true)
 	msg := p.TestProto()
 	if !p.Equal(msg) {
@@ -1799,7 +1800,7 @@ func TestUint128PairFace(t *testing.T) {
 	}
 }
 func TestContainsNestedMapFace(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedContainsNestedMap(popr, true)
 	msg := p.TestProto()
 	if !p.Equal(msg) {
@@ -1807,7 +1808,7 @@ func TestContainsNestedMapFace(t *testing.T) {
 	}
 }
 func TestContainsNestedMap_NestedMapFace(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedContainsNestedMap_NestedMap(popr, true)
 	msg := p.TestProto()
 	if !p.Equal(msg) {
@@ -1815,7 +1816,7 @@ func TestContainsNestedMap_NestedMapFace(t *testing.T) {
 	}
 }
 func TestNotPackedFace(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNotPacked(popr, true)
 	msg := p.TestProto()
 	if !p.Equal(msg) {
@@ -1823,141 +1824,141 @@ func TestNotPackedFace(t *testing.T) {
 	}
 }
 func TestMessageGoString(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedMessage(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
-	_, err := parser.ParseExpr(s1)
+	_, err := go_parser.ParseExpr(s1)
 	if err != nil {
 		t.Fatal(err)
 	}
 }
 func TestNestedGoString(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNested(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
-	_, err := parser.ParseExpr(s1)
+	_, err := go_parser.ParseExpr(s1)
 	if err != nil {
 		t.Fatal(err)
 	}
 }
 func TestAllMapsGoString(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAllMaps(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
-	_, err := parser.ParseExpr(s1)
+	_, err := go_parser.ParseExpr(s1)
 	if err != nil {
 		t.Fatal(err)
 	}
 }
 func TestAllMapsOrderedGoString(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAllMapsOrdered(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
-	_, err := parser.ParseExpr(s1)
+	_, err := go_parser.ParseExpr(s1)
 	if err != nil {
 		t.Fatal(err)
 	}
 }
 func TestMessageWithMapGoString(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedMessageWithMap(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
-	_, err := parser.ParseExpr(s1)
+	_, err := go_parser.ParseExpr(s1)
 	if err != nil {
 		t.Fatal(err)
 	}
 }
 func TestFloatingPointGoString(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedFloatingPoint(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
-	_, err := parser.ParseExpr(s1)
+	_, err := go_parser.ParseExpr(s1)
 	if err != nil {
 		t.Fatal(err)
 	}
 }
 func TestUint128PairGoString(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedUint128Pair(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
-	_, err := parser.ParseExpr(s1)
+	_, err := go_parser.ParseExpr(s1)
 	if err != nil {
 		t.Fatal(err)
 	}
 }
 func TestContainsNestedMapGoString(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedContainsNestedMap(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
-	_, err := parser.ParseExpr(s1)
+	_, err := go_parser.ParseExpr(s1)
 	if err != nil {
 		t.Fatal(err)
 	}
 }
 func TestContainsNestedMap_NestedMapGoString(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedContainsNestedMap_NestedMap(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
-	_, err := parser.ParseExpr(s1)
+	_, err := go_parser.ParseExpr(s1)
 	if err != nil {
 		t.Fatal(err)
 	}
 }
 func TestNotPackedGoString(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNotPacked(popr, false)
 	s1 := p.GoString()
 	s2 := fmt.Sprintf("%#v", p)
 	if s1 != s2 {
 		t.Fatalf("GoString want %v got %v", s1, s2)
 	}
-	_, err := parser.ParseExpr(s1)
+	_, err := go_parser.ParseExpr(s1)
 	if err != nil {
 		t.Fatal(err)
 	}
 }
 func TestMessageSize(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessage(popr, true)
-	size2 := proto.Size(p)
-	dAtA, err := proto.Marshal(p)
+	size2 := github_com_gogo_protobuf_proto.Size(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -1968,14 +1969,14 @@ func TestMessageSize(t *testing.T) {
 	if size2 != size {
 		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
-	size3 := proto.Size(p)
+	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
 		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
 func BenchmarkMessageSize(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*Message, 1000)
 	for i := 0; i < 1000; i++ {
@@ -1990,10 +1991,10 @@ func BenchmarkMessageSize(b *testing.B) {
 
 func TestNestedSize(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNested(popr, true)
-	size2 := proto.Size(p)
-	dAtA, err := proto.Marshal(p)
+	size2 := github_com_gogo_protobuf_proto.Size(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -2004,14 +2005,14 @@ func TestNestedSize(t *testing.T) {
 	if size2 != size {
 		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
-	size3 := proto.Size(p)
+	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
 		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
 func BenchmarkNestedSize(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*Nested, 1000)
 	for i := 0; i < 1000; i++ {
@@ -2026,10 +2027,10 @@ func BenchmarkNestedSize(b *testing.B) {
 
 func TestAllMapsSize(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMaps(popr, true)
-	size2 := proto.Size(p)
-	dAtA, err := proto.Marshal(p)
+	size2 := github_com_gogo_protobuf_proto.Size(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -2040,14 +2041,14 @@ func TestAllMapsSize(t *testing.T) {
 	if size2 != size {
 		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
-	size3 := proto.Size(p)
+	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
 		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
 func BenchmarkAllMapsSize(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*AllMaps, 1000)
 	for i := 0; i < 1000; i++ {
@@ -2062,10 +2063,10 @@ func BenchmarkAllMapsSize(b *testing.B) {
 
 func TestAllMapsOrderedSize(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedAllMapsOrdered(popr, true)
-	size2 := proto.Size(p)
-	dAtA, err := proto.Marshal(p)
+	size2 := github_com_gogo_protobuf_proto.Size(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -2076,14 +2077,14 @@ func TestAllMapsOrderedSize(t *testing.T) {
 	if size2 != size {
 		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
-	size3 := proto.Size(p)
+	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
 		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
 func BenchmarkAllMapsOrderedSize(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*AllMapsOrdered, 1000)
 	for i := 0; i < 1000; i++ {
@@ -2098,10 +2099,10 @@ func BenchmarkAllMapsOrderedSize(b *testing.B) {
 
 func TestMessageWithMapSize(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedMessageWithMap(popr, true)
-	size2 := proto.Size(p)
-	dAtA, err := proto.Marshal(p)
+	size2 := github_com_gogo_protobuf_proto.Size(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -2112,14 +2113,14 @@ func TestMessageWithMapSize(t *testing.T) {
 	if size2 != size {
 		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
-	size3 := proto.Size(p)
+	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
 		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
 func BenchmarkMessageWithMapSize(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*MessageWithMap, 1000)
 	for i := 0; i < 1000; i++ {
@@ -2134,10 +2135,10 @@ func BenchmarkMessageWithMapSize(b *testing.B) {
 
 func TestFloatingPointSize(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedFloatingPoint(popr, true)
-	size2 := proto.Size(p)
-	dAtA, err := proto.Marshal(p)
+	size2 := github_com_gogo_protobuf_proto.Size(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -2148,14 +2149,14 @@ func TestFloatingPointSize(t *testing.T) {
 	if size2 != size {
 		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
-	size3 := proto.Size(p)
+	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
 		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
 func BenchmarkFloatingPointSize(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*FloatingPoint, 1000)
 	for i := 0; i < 1000; i++ {
@@ -2170,10 +2171,10 @@ func BenchmarkFloatingPointSize(b *testing.B) {
 
 func TestUint128PairSize(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedUint128Pair(popr, true)
-	size2 := proto.Size(p)
-	dAtA, err := proto.Marshal(p)
+	size2 := github_com_gogo_protobuf_proto.Size(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -2184,14 +2185,14 @@ func TestUint128PairSize(t *testing.T) {
 	if size2 != size {
 		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
-	size3 := proto.Size(p)
+	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
 		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
 func BenchmarkUint128PairSize(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*Uint128Pair, 1000)
 	for i := 0; i < 1000; i++ {
@@ -2206,10 +2207,10 @@ func BenchmarkUint128PairSize(b *testing.B) {
 
 func TestContainsNestedMapSize(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap(popr, true)
-	size2 := proto.Size(p)
-	dAtA, err := proto.Marshal(p)
+	size2 := github_com_gogo_protobuf_proto.Size(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -2220,14 +2221,14 @@ func TestContainsNestedMapSize(t *testing.T) {
 	if size2 != size {
 		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
-	size3 := proto.Size(p)
+	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
 		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
 func BenchmarkContainsNestedMapSize(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*ContainsNestedMap, 1000)
 	for i := 0; i < 1000; i++ {
@@ -2242,10 +2243,10 @@ func BenchmarkContainsNestedMapSize(b *testing.B) {
 
 func TestContainsNestedMap_NestedMapSize(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedContainsNestedMap_NestedMap(popr, true)
-	size2 := proto.Size(p)
-	dAtA, err := proto.Marshal(p)
+	size2 := github_com_gogo_protobuf_proto.Size(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -2256,14 +2257,14 @@ func TestContainsNestedMap_NestedMapSize(t *testing.T) {
 	if size2 != size {
 		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
-	size3 := proto.Size(p)
+	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
 		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
 func BenchmarkContainsNestedMap_NestedMapSize(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*ContainsNestedMap_NestedMap, 1000)
 	for i := 0; i < 1000; i++ {
@@ -2278,10 +2279,10 @@ func BenchmarkContainsNestedMap_NestedMapSize(b *testing.B) {
 
 func TestNotPackedSize(t *testing.T) {
 	seed := time.Now().UnixNano()
-	popr := rand.New(rand.NewSource(seed))
+	popr := math_rand.New(math_rand.NewSource(seed))
 	p := NewPopulatedNotPacked(popr, true)
-	size2 := proto.Size(p)
-	dAtA, err := proto.Marshal(p)
+	size2 := github_com_gogo_protobuf_proto.Size(p)
+	dAtA, err := github_com_gogo_protobuf_proto.Marshal(p)
 	if err != nil {
 		t.Fatalf("seed = %d, err = %v", seed, err)
 	}
@@ -2292,14 +2293,14 @@ func TestNotPackedSize(t *testing.T) {
 	if size2 != size {
 		t.Errorf("seed = %d, size %v != before marshal proto.Size %v", seed, size, size2)
 	}
-	size3 := proto.Size(p)
+	size3 := github_com_gogo_protobuf_proto.Size(p)
 	if size3 != size {
 		t.Errorf("seed = %d, size %v != after marshal proto.Size %v", seed, size, size3)
 	}
 }
 
 func BenchmarkNotPackedSize(b *testing.B) {
-	popr := rand.New(rand.NewSource(616))
+	popr := math_rand.New(math_rand.NewSource(616))
 	total := 0
 	pops := make([]*NotPacked, 1000)
 	for i := 0; i < 1000; i++ {
@@ -2313,7 +2314,7 @@ func BenchmarkNotPackedSize(b *testing.B) {
 }
 
 func TestMessageStringer(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedMessage(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -2322,7 +2323,7 @@ func TestMessageStringer(t *testing.T) {
 	}
 }
 func TestNestedStringer(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNested(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -2331,7 +2332,7 @@ func TestNestedStringer(t *testing.T) {
 	}
 }
 func TestAllMapsStringer(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAllMaps(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -2340,7 +2341,7 @@ func TestAllMapsStringer(t *testing.T) {
 	}
 }
 func TestAllMapsOrderedStringer(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedAllMapsOrdered(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -2349,7 +2350,7 @@ func TestAllMapsOrderedStringer(t *testing.T) {
 	}
 }
 func TestMessageWithMapStringer(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedMessageWithMap(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -2358,7 +2359,7 @@ func TestMessageWithMapStringer(t *testing.T) {
 	}
 }
 func TestFloatingPointStringer(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedFloatingPoint(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -2367,7 +2368,7 @@ func TestFloatingPointStringer(t *testing.T) {
 	}
 }
 func TestUint128PairStringer(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedUint128Pair(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -2376,7 +2377,7 @@ func TestUint128PairStringer(t *testing.T) {
 	}
 }
 func TestContainsNestedMapStringer(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedContainsNestedMap(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -2385,7 +2386,7 @@ func TestContainsNestedMapStringer(t *testing.T) {
 	}
 }
 func TestContainsNestedMap_NestedMapStringer(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedContainsNestedMap_NestedMap(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)
@@ -2394,7 +2395,7 @@ func TestContainsNestedMap_NestedMapStringer(t *testing.T) {
 	}
 }
 func TestNotPackedStringer(t *testing.T) {
-	popr := rand.New(rand.NewSource(time.Now().UnixNano()))
+	popr := math_rand.New(math_rand.NewSource(time.Now().UnixNano()))
 	p := NewPopulatedNotPacked(popr, false)
 	s1 := p.String()
 	s2 := fmt.Sprintf("%v", p)

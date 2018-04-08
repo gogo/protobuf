@@ -6,12 +6,7 @@ package conformance
 import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import google_protobuf "github.com/gogo/protobuf/types"
-import google_protobuf1 "github.com/gogo/protobuf/types"
-import google_protobuf2 "github.com/gogo/protobuf/types"
-import google_protobuf3 "github.com/gogo/protobuf/types"
-import google_protobuf4 "github.com/gogo/protobuf/types"
-import google_protobuf5 "github.com/gogo/protobuf/types"
+import types "github.com/gogo/protobuf/types"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -581,36 +576,36 @@ type TestAllTypes struct {
 	//	*TestAllTypes_OneofEnum
 	OneofField isTestAllTypes_OneofField `protobuf_oneof:"oneof_field"`
 	// Well-known types
-	OptionalBoolWrapper   *google_protobuf5.BoolValue     `protobuf:"bytes,201,opt,name=optional_bool_wrapper,json=optionalBoolWrapper" json:"optional_bool_wrapper,omitempty"`
-	OptionalInt32Wrapper  *google_protobuf5.Int32Value    `protobuf:"bytes,202,opt,name=optional_int32_wrapper,json=optionalInt32Wrapper" json:"optional_int32_wrapper,omitempty"`
-	OptionalInt64Wrapper  *google_protobuf5.Int64Value    `protobuf:"bytes,203,opt,name=optional_int64_wrapper,json=optionalInt64Wrapper" json:"optional_int64_wrapper,omitempty"`
-	OptionalUint32Wrapper *google_protobuf5.UInt32Value   `protobuf:"bytes,204,opt,name=optional_uint32_wrapper,json=optionalUint32Wrapper" json:"optional_uint32_wrapper,omitempty"`
-	OptionalUint64Wrapper *google_protobuf5.UInt64Value   `protobuf:"bytes,205,opt,name=optional_uint64_wrapper,json=optionalUint64Wrapper" json:"optional_uint64_wrapper,omitempty"`
-	OptionalFloatWrapper  *google_protobuf5.FloatValue    `protobuf:"bytes,206,opt,name=optional_float_wrapper,json=optionalFloatWrapper" json:"optional_float_wrapper,omitempty"`
-	OptionalDoubleWrapper *google_protobuf5.DoubleValue   `protobuf:"bytes,207,opt,name=optional_double_wrapper,json=optionalDoubleWrapper" json:"optional_double_wrapper,omitempty"`
-	OptionalStringWrapper *google_protobuf5.StringValue   `protobuf:"bytes,208,opt,name=optional_string_wrapper,json=optionalStringWrapper" json:"optional_string_wrapper,omitempty"`
-	OptionalBytesWrapper  *google_protobuf5.BytesValue    `protobuf:"bytes,209,opt,name=optional_bytes_wrapper,json=optionalBytesWrapper" json:"optional_bytes_wrapper,omitempty"`
-	RepeatedBoolWrapper   []*google_protobuf5.BoolValue   `protobuf:"bytes,211,rep,name=repeated_bool_wrapper,json=repeatedBoolWrapper" json:"repeated_bool_wrapper,omitempty"`
-	RepeatedInt32Wrapper  []*google_protobuf5.Int32Value  `protobuf:"bytes,212,rep,name=repeated_int32_wrapper,json=repeatedInt32Wrapper" json:"repeated_int32_wrapper,omitempty"`
-	RepeatedInt64Wrapper  []*google_protobuf5.Int64Value  `protobuf:"bytes,213,rep,name=repeated_int64_wrapper,json=repeatedInt64Wrapper" json:"repeated_int64_wrapper,omitempty"`
-	RepeatedUint32Wrapper []*google_protobuf5.UInt32Value `protobuf:"bytes,214,rep,name=repeated_uint32_wrapper,json=repeatedUint32Wrapper" json:"repeated_uint32_wrapper,omitempty"`
-	RepeatedUint64Wrapper []*google_protobuf5.UInt64Value `protobuf:"bytes,215,rep,name=repeated_uint64_wrapper,json=repeatedUint64Wrapper" json:"repeated_uint64_wrapper,omitempty"`
-	RepeatedFloatWrapper  []*google_protobuf5.FloatValue  `protobuf:"bytes,216,rep,name=repeated_float_wrapper,json=repeatedFloatWrapper" json:"repeated_float_wrapper,omitempty"`
-	RepeatedDoubleWrapper []*google_protobuf5.DoubleValue `protobuf:"bytes,217,rep,name=repeated_double_wrapper,json=repeatedDoubleWrapper" json:"repeated_double_wrapper,omitempty"`
-	RepeatedStringWrapper []*google_protobuf5.StringValue `protobuf:"bytes,218,rep,name=repeated_string_wrapper,json=repeatedStringWrapper" json:"repeated_string_wrapper,omitempty"`
-	RepeatedBytesWrapper  []*google_protobuf5.BytesValue  `protobuf:"bytes,219,rep,name=repeated_bytes_wrapper,json=repeatedBytesWrapper" json:"repeated_bytes_wrapper,omitempty"`
-	OptionalDuration      *google_protobuf1.Duration      `protobuf:"bytes,301,opt,name=optional_duration,json=optionalDuration" json:"optional_duration,omitempty"`
-	OptionalTimestamp     *google_protobuf4.Timestamp     `protobuf:"bytes,302,opt,name=optional_timestamp,json=optionalTimestamp" json:"optional_timestamp,omitempty"`
-	OptionalFieldMask     *google_protobuf2.FieldMask     `protobuf:"bytes,303,opt,name=optional_field_mask,json=optionalFieldMask" json:"optional_field_mask,omitempty"`
-	OptionalStruct        *google_protobuf3.Struct        `protobuf:"bytes,304,opt,name=optional_struct,json=optionalStruct" json:"optional_struct,omitempty"`
-	OptionalAny           *google_protobuf.Any            `protobuf:"bytes,305,opt,name=optional_any,json=optionalAny" json:"optional_any,omitempty"`
-	OptionalValue         *google_protobuf3.Value         `protobuf:"bytes,306,opt,name=optional_value,json=optionalValue" json:"optional_value,omitempty"`
-	RepeatedDuration      []*google_protobuf1.Duration    `protobuf:"bytes,311,rep,name=repeated_duration,json=repeatedDuration" json:"repeated_duration,omitempty"`
-	RepeatedTimestamp     []*google_protobuf4.Timestamp   `protobuf:"bytes,312,rep,name=repeated_timestamp,json=repeatedTimestamp" json:"repeated_timestamp,omitempty"`
-	RepeatedFieldmask     []*google_protobuf2.FieldMask   `protobuf:"bytes,313,rep,name=repeated_fieldmask,json=repeatedFieldmask" json:"repeated_fieldmask,omitempty"`
-	RepeatedStruct        []*google_protobuf3.Struct      `protobuf:"bytes,324,rep,name=repeated_struct,json=repeatedStruct" json:"repeated_struct,omitempty"`
-	RepeatedAny           []*google_protobuf.Any          `protobuf:"bytes,315,rep,name=repeated_any,json=repeatedAny" json:"repeated_any,omitempty"`
-	RepeatedValue         []*google_protobuf3.Value       `protobuf:"bytes,316,rep,name=repeated_value,json=repeatedValue" json:"repeated_value,omitempty"`
+	OptionalBoolWrapper   *types.BoolValue     `protobuf:"bytes,201,opt,name=optional_bool_wrapper,json=optionalBoolWrapper" json:"optional_bool_wrapper,omitempty"`
+	OptionalInt32Wrapper  *types.Int32Value    `protobuf:"bytes,202,opt,name=optional_int32_wrapper,json=optionalInt32Wrapper" json:"optional_int32_wrapper,omitempty"`
+	OptionalInt64Wrapper  *types.Int64Value    `protobuf:"bytes,203,opt,name=optional_int64_wrapper,json=optionalInt64Wrapper" json:"optional_int64_wrapper,omitempty"`
+	OptionalUint32Wrapper *types.UInt32Value   `protobuf:"bytes,204,opt,name=optional_uint32_wrapper,json=optionalUint32Wrapper" json:"optional_uint32_wrapper,omitempty"`
+	OptionalUint64Wrapper *types.UInt64Value   `protobuf:"bytes,205,opt,name=optional_uint64_wrapper,json=optionalUint64Wrapper" json:"optional_uint64_wrapper,omitempty"`
+	OptionalFloatWrapper  *types.FloatValue    `protobuf:"bytes,206,opt,name=optional_float_wrapper,json=optionalFloatWrapper" json:"optional_float_wrapper,omitempty"`
+	OptionalDoubleWrapper *types.DoubleValue   `protobuf:"bytes,207,opt,name=optional_double_wrapper,json=optionalDoubleWrapper" json:"optional_double_wrapper,omitempty"`
+	OptionalStringWrapper *types.StringValue   `protobuf:"bytes,208,opt,name=optional_string_wrapper,json=optionalStringWrapper" json:"optional_string_wrapper,omitempty"`
+	OptionalBytesWrapper  *types.BytesValue    `protobuf:"bytes,209,opt,name=optional_bytes_wrapper,json=optionalBytesWrapper" json:"optional_bytes_wrapper,omitempty"`
+	RepeatedBoolWrapper   []*types.BoolValue   `protobuf:"bytes,211,rep,name=repeated_bool_wrapper,json=repeatedBoolWrapper" json:"repeated_bool_wrapper,omitempty"`
+	RepeatedInt32Wrapper  []*types.Int32Value  `protobuf:"bytes,212,rep,name=repeated_int32_wrapper,json=repeatedInt32Wrapper" json:"repeated_int32_wrapper,omitempty"`
+	RepeatedInt64Wrapper  []*types.Int64Value  `protobuf:"bytes,213,rep,name=repeated_int64_wrapper,json=repeatedInt64Wrapper" json:"repeated_int64_wrapper,omitempty"`
+	RepeatedUint32Wrapper []*types.UInt32Value `protobuf:"bytes,214,rep,name=repeated_uint32_wrapper,json=repeatedUint32Wrapper" json:"repeated_uint32_wrapper,omitempty"`
+	RepeatedUint64Wrapper []*types.UInt64Value `protobuf:"bytes,215,rep,name=repeated_uint64_wrapper,json=repeatedUint64Wrapper" json:"repeated_uint64_wrapper,omitempty"`
+	RepeatedFloatWrapper  []*types.FloatValue  `protobuf:"bytes,216,rep,name=repeated_float_wrapper,json=repeatedFloatWrapper" json:"repeated_float_wrapper,omitempty"`
+	RepeatedDoubleWrapper []*types.DoubleValue `protobuf:"bytes,217,rep,name=repeated_double_wrapper,json=repeatedDoubleWrapper" json:"repeated_double_wrapper,omitempty"`
+	RepeatedStringWrapper []*types.StringValue `protobuf:"bytes,218,rep,name=repeated_string_wrapper,json=repeatedStringWrapper" json:"repeated_string_wrapper,omitempty"`
+	RepeatedBytesWrapper  []*types.BytesValue  `protobuf:"bytes,219,rep,name=repeated_bytes_wrapper,json=repeatedBytesWrapper" json:"repeated_bytes_wrapper,omitempty"`
+	OptionalDuration      *types.Duration      `protobuf:"bytes,301,opt,name=optional_duration,json=optionalDuration" json:"optional_duration,omitempty"`
+	OptionalTimestamp     *types.Timestamp     `protobuf:"bytes,302,opt,name=optional_timestamp,json=optionalTimestamp" json:"optional_timestamp,omitempty"`
+	OptionalFieldMask     *types.FieldMask     `protobuf:"bytes,303,opt,name=optional_field_mask,json=optionalFieldMask" json:"optional_field_mask,omitempty"`
+	OptionalStruct        *types.Struct        `protobuf:"bytes,304,opt,name=optional_struct,json=optionalStruct" json:"optional_struct,omitempty"`
+	OptionalAny           *types.Any           `protobuf:"bytes,305,opt,name=optional_any,json=optionalAny" json:"optional_any,omitempty"`
+	OptionalValue         *types.Value         `protobuf:"bytes,306,opt,name=optional_value,json=optionalValue" json:"optional_value,omitempty"`
+	RepeatedDuration      []*types.Duration    `protobuf:"bytes,311,rep,name=repeated_duration,json=repeatedDuration" json:"repeated_duration,omitempty"`
+	RepeatedTimestamp     []*types.Timestamp   `protobuf:"bytes,312,rep,name=repeated_timestamp,json=repeatedTimestamp" json:"repeated_timestamp,omitempty"`
+	RepeatedFieldmask     []*types.FieldMask   `protobuf:"bytes,313,rep,name=repeated_fieldmask,json=repeatedFieldmask" json:"repeated_fieldmask,omitempty"`
+	RepeatedStruct        []*types.Struct      `protobuf:"bytes,324,rep,name=repeated_struct,json=repeatedStruct" json:"repeated_struct,omitempty"`
+	RepeatedAny           []*types.Any         `protobuf:"bytes,315,rep,name=repeated_any,json=repeatedAny" json:"repeated_any,omitempty"`
+	RepeatedValue         []*types.Value       `protobuf:"bytes,316,rep,name=repeated_value,json=repeatedValue" json:"repeated_value,omitempty"`
 	// Test field-name-to-JSON-name convention.
 	// (protobuf says names can be any valid C/C++ identifier.)
 	Fieldname1           int32    `protobuf:"varint,401,opt,name=fieldname1,proto3" json:"fieldname1,omitempty"`
@@ -1206,210 +1201,210 @@ func (m *TestAllTypes) GetOneofEnum() TestAllTypes_NestedEnum {
 	return TestAllTypes_FOO
 }
 
-func (m *TestAllTypes) GetOptionalBoolWrapper() *google_protobuf5.BoolValue {
+func (m *TestAllTypes) GetOptionalBoolWrapper() *types.BoolValue {
 	if m != nil {
 		return m.OptionalBoolWrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetOptionalInt32Wrapper() *google_protobuf5.Int32Value {
+func (m *TestAllTypes) GetOptionalInt32Wrapper() *types.Int32Value {
 	if m != nil {
 		return m.OptionalInt32Wrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetOptionalInt64Wrapper() *google_protobuf5.Int64Value {
+func (m *TestAllTypes) GetOptionalInt64Wrapper() *types.Int64Value {
 	if m != nil {
 		return m.OptionalInt64Wrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetOptionalUint32Wrapper() *google_protobuf5.UInt32Value {
+func (m *TestAllTypes) GetOptionalUint32Wrapper() *types.UInt32Value {
 	if m != nil {
 		return m.OptionalUint32Wrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetOptionalUint64Wrapper() *google_protobuf5.UInt64Value {
+func (m *TestAllTypes) GetOptionalUint64Wrapper() *types.UInt64Value {
 	if m != nil {
 		return m.OptionalUint64Wrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetOptionalFloatWrapper() *google_protobuf5.FloatValue {
+func (m *TestAllTypes) GetOptionalFloatWrapper() *types.FloatValue {
 	if m != nil {
 		return m.OptionalFloatWrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetOptionalDoubleWrapper() *google_protobuf5.DoubleValue {
+func (m *TestAllTypes) GetOptionalDoubleWrapper() *types.DoubleValue {
 	if m != nil {
 		return m.OptionalDoubleWrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetOptionalStringWrapper() *google_protobuf5.StringValue {
+func (m *TestAllTypes) GetOptionalStringWrapper() *types.StringValue {
 	if m != nil {
 		return m.OptionalStringWrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetOptionalBytesWrapper() *google_protobuf5.BytesValue {
+func (m *TestAllTypes) GetOptionalBytesWrapper() *types.BytesValue {
 	if m != nil {
 		return m.OptionalBytesWrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetRepeatedBoolWrapper() []*google_protobuf5.BoolValue {
+func (m *TestAllTypes) GetRepeatedBoolWrapper() []*types.BoolValue {
 	if m != nil {
 		return m.RepeatedBoolWrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetRepeatedInt32Wrapper() []*google_protobuf5.Int32Value {
+func (m *TestAllTypes) GetRepeatedInt32Wrapper() []*types.Int32Value {
 	if m != nil {
 		return m.RepeatedInt32Wrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetRepeatedInt64Wrapper() []*google_protobuf5.Int64Value {
+func (m *TestAllTypes) GetRepeatedInt64Wrapper() []*types.Int64Value {
 	if m != nil {
 		return m.RepeatedInt64Wrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetRepeatedUint32Wrapper() []*google_protobuf5.UInt32Value {
+func (m *TestAllTypes) GetRepeatedUint32Wrapper() []*types.UInt32Value {
 	if m != nil {
 		return m.RepeatedUint32Wrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetRepeatedUint64Wrapper() []*google_protobuf5.UInt64Value {
+func (m *TestAllTypes) GetRepeatedUint64Wrapper() []*types.UInt64Value {
 	if m != nil {
 		return m.RepeatedUint64Wrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetRepeatedFloatWrapper() []*google_protobuf5.FloatValue {
+func (m *TestAllTypes) GetRepeatedFloatWrapper() []*types.FloatValue {
 	if m != nil {
 		return m.RepeatedFloatWrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetRepeatedDoubleWrapper() []*google_protobuf5.DoubleValue {
+func (m *TestAllTypes) GetRepeatedDoubleWrapper() []*types.DoubleValue {
 	if m != nil {
 		return m.RepeatedDoubleWrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetRepeatedStringWrapper() []*google_protobuf5.StringValue {
+func (m *TestAllTypes) GetRepeatedStringWrapper() []*types.StringValue {
 	if m != nil {
 		return m.RepeatedStringWrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetRepeatedBytesWrapper() []*google_protobuf5.BytesValue {
+func (m *TestAllTypes) GetRepeatedBytesWrapper() []*types.BytesValue {
 	if m != nil {
 		return m.RepeatedBytesWrapper
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetOptionalDuration() *google_protobuf1.Duration {
+func (m *TestAllTypes) GetOptionalDuration() *types.Duration {
 	if m != nil {
 		return m.OptionalDuration
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetOptionalTimestamp() *google_protobuf4.Timestamp {
+func (m *TestAllTypes) GetOptionalTimestamp() *types.Timestamp {
 	if m != nil {
 		return m.OptionalTimestamp
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetOptionalFieldMask() *google_protobuf2.FieldMask {
+func (m *TestAllTypes) GetOptionalFieldMask() *types.FieldMask {
 	if m != nil {
 		return m.OptionalFieldMask
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetOptionalStruct() *google_protobuf3.Struct {
+func (m *TestAllTypes) GetOptionalStruct() *types.Struct {
 	if m != nil {
 		return m.OptionalStruct
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetOptionalAny() *google_protobuf.Any {
+func (m *TestAllTypes) GetOptionalAny() *types.Any {
 	if m != nil {
 		return m.OptionalAny
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetOptionalValue() *google_protobuf3.Value {
+func (m *TestAllTypes) GetOptionalValue() *types.Value {
 	if m != nil {
 		return m.OptionalValue
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetRepeatedDuration() []*google_protobuf1.Duration {
+func (m *TestAllTypes) GetRepeatedDuration() []*types.Duration {
 	if m != nil {
 		return m.RepeatedDuration
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetRepeatedTimestamp() []*google_protobuf4.Timestamp {
+func (m *TestAllTypes) GetRepeatedTimestamp() []*types.Timestamp {
 	if m != nil {
 		return m.RepeatedTimestamp
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetRepeatedFieldmask() []*google_protobuf2.FieldMask {
+func (m *TestAllTypes) GetRepeatedFieldmask() []*types.FieldMask {
 	if m != nil {
 		return m.RepeatedFieldmask
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetRepeatedStruct() []*google_protobuf3.Struct {
+func (m *TestAllTypes) GetRepeatedStruct() []*types.Struct {
 	if m != nil {
 		return m.RepeatedStruct
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetRepeatedAny() []*google_protobuf.Any {
+func (m *TestAllTypes) GetRepeatedAny() []*types.Any {
 	if m != nil {
 		return m.RepeatedAny
 	}
 	return nil
 }
 
-func (m *TestAllTypes) GetRepeatedValue() []*google_protobuf3.Value {
+func (m *TestAllTypes) GetRepeatedValue() []*types.Value {
 	if m != nil {
 		return m.RepeatedValue
 	}

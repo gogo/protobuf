@@ -10,16 +10,17 @@ import _ "github.com/gogo/protobuf/gogoproto"
 
 import github_com_gogo_protobuf_test_casttype "github.com/gogo/protobuf/test/casttype"
 
-import descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-import gzip "compress/gzip"
+import github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+import compress_gzip "compress/gzip"
 import bytes "bytes"
-import ioutil "io/ioutil"
+import io_ioutil "io/ioutil"
 
 import strings "strings"
 import reflect "reflect"
-import sortkeys "github.com/gogo/protobuf/sortkeys"
+import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
-import binary "encoding/binary"
+import encoding_binary "encoding/binary"
 
 import io "io"
 
@@ -117,14 +118,14 @@ func init() {
 	proto.RegisterMapType((map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson)(nil), "casttype.Castaway.MyNullableMapEntry")
 	proto.RegisterType((*Wilson)(nil), "casttype.Wilson")
 }
-func (this *Castaway) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *Castaway) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return CasttypeDescription()
 }
-func (this *Wilson) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *Wilson) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return CasttypeDescription()
 }
-func CasttypeDescription() (desc *descriptor.FileDescriptorSet) {
-	d := &descriptor.FileDescriptorSet{}
+func CasttypeDescription() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+	d := &github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet{}
 	var gzipped = []byte{
 		// 4261 bytes of a gzipped FileDescriptorSet
 		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x5b, 0x5d, 0x70, 0x1b, 0xd7,
@@ -396,15 +397,15 @@ func CasttypeDescription() (desc *descriptor.FileDescriptorSet) {
 		0x6a, 0xcc, 0x38, 0x00, 0x00,
 	}
 	r := bytes.NewReader(gzipped)
-	gzipr, err := gzip.NewReader(r)
+	gzipr, err := compress_gzip.NewReader(r)
 	if err != nil {
 		panic(err)
 	}
-	ungzipped, err := ioutil.ReadAll(gzipr)
+	ungzipped, err := io_ioutil.ReadAll(gzipr)
 	if err != nil {
 		panic(err)
 	}
-	if err := proto.Unmarshal(ungzipped, d); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(ungzipped, d); err != nil {
 		panic(err)
 	}
 	return d
@@ -747,7 +748,7 @@ func (this *Wilson) Equal(that interface{}) bool {
 }
 
 type CastawayFace interface {
-	Proto() proto.Message
+	Proto() github_com_gogo_protobuf_proto.Message
 	GetInt32Ptr() *int32
 	GetInt32() int32
 	GetMyUint64Ptr() *github_com_gogo_protobuf_test_casttype.MyUint64Type
@@ -766,11 +767,11 @@ type CastawayFace interface {
 	GetString_() *github_com_gogo_protobuf_test_casttype.MyStringType
 }
 
-func (this *Castaway) Proto() proto.Message {
+func (this *Castaway) Proto() github_com_gogo_protobuf_proto.Message {
 	return this
 }
 
-func (this *Castaway) TestProto() proto.Message {
+func (this *Castaway) TestProto() github_com_gogo_protobuf_proto.Message {
 	return NewCastawayFromFace(this)
 }
 
@@ -860,15 +861,15 @@ func NewCastawayFromFace(that CastawayFace) *Castaway {
 }
 
 type WilsonFace interface {
-	Proto() proto.Message
+	Proto() github_com_gogo_protobuf_proto.Message
 	GetInt64() *int64
 }
 
-func (this *Wilson) Proto() proto.Message {
+func (this *Wilson) Proto() github_com_gogo_protobuf_proto.Message {
 	return this
 }
 
-func (this *Wilson) TestProto() proto.Message {
+func (this *Wilson) TestProto() github_com_gogo_protobuf_proto.Message {
 	return NewWilsonFromFace(this)
 }
 
@@ -917,7 +918,7 @@ func (this *Castaway) GoString() string {
 	for k := range this.MyMap {
 		keysForMyMap = append(keysForMyMap, k)
 	}
-	sortkeys.Strings(keysForMyMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForMyMap)
 	mapStringForMyMap := "github_com_gogo_protobuf_test_casttype.MyMapType{"
 	for _, k := range keysForMyMap {
 		mapStringForMyMap += fmt.Sprintf("%#v: %#v,", k, this.MyMap[k])
@@ -930,7 +931,7 @@ func (this *Castaway) GoString() string {
 	for k := range this.MyCustomMap {
 		keysForMyCustomMap = append(keysForMyCustomMap, string(k))
 	}
-	sortkeys.Strings(keysForMyCustomMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForMyCustomMap)
 	mapStringForMyCustomMap := "map[github_com_gogo_protobuf_test_casttype.MyStringType]github_com_gogo_protobuf_test_casttype.MyUint64Type{"
 	for _, k := range keysForMyCustomMap {
 		mapStringForMyCustomMap += fmt.Sprintf("%#v: %#v,", k, this.MyCustomMap[github_com_gogo_protobuf_test_casttype.MyStringType(k)])
@@ -943,7 +944,7 @@ func (this *Castaway) GoString() string {
 	for k := range this.MyNullableMap {
 		keysForMyNullableMap = append(keysForMyNullableMap, int32(k))
 	}
-	sortkeys.Int32s(keysForMyNullableMap)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForMyNullableMap)
 	mapStringForMyNullableMap := "map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson{"
 	for _, k := range keysForMyNullableMap {
 		mapStringForMyNullableMap += fmt.Sprintf("%#v: %#v,", k, this.MyNullableMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(k)])
@@ -956,7 +957,7 @@ func (this *Castaway) GoString() string {
 	for k := range this.MyEmbeddedMap {
 		keysForMyEmbeddedMap = append(keysForMyEmbeddedMap, int32(k))
 	}
-	sortkeys.Int32s(keysForMyEmbeddedMap)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForMyEmbeddedMap)
 	mapStringForMyEmbeddedMap := "map[github_com_gogo_protobuf_test_casttype.MyInt32Type]Wilson{"
 	for _, k := range keysForMyEmbeddedMap {
 		mapStringForMyEmbeddedMap += fmt.Sprintf("%#v: %#v,", k, this.MyEmbeddedMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(k)])
@@ -1031,22 +1032,22 @@ func (m *Castaway) MarshalTo(dAtA []byte) (int, error) {
 	if m.MyFloat32Ptr != nil {
 		dAtA[i] = 0x2d
 		i++
-		binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.MyFloat32Ptr))))
+		encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(*m.MyFloat32Ptr))))
 		i += 4
 	}
 	dAtA[i] = 0x35
 	i++
-	binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.MyFloat32))))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.MyFloat32))))
 	i += 4
 	if m.MyFloat64Ptr != nil {
 		dAtA[i] = 0x39
 		i++
-		binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.MyFloat64Ptr))))
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(*m.MyFloat64Ptr))))
 		i += 8
 	}
 	dAtA[i] = 0x41
 	i++
-	binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.MyFloat64))))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.MyFloat64))))
 	i += 8
 	if m.MyBytes != nil {
 		dAtA[i] = 0x4a
@@ -1501,7 +1502,7 @@ func (this *Castaway) String() string {
 	for k := range this.MyMap {
 		keysForMyMap = append(keysForMyMap, k)
 	}
-	sortkeys.Strings(keysForMyMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForMyMap)
 	mapStringForMyMap := "github_com_gogo_protobuf_test_casttype.MyMapType{"
 	for _, k := range keysForMyMap {
 		mapStringForMyMap += fmt.Sprintf("%v: %v,", k, this.MyMap[k])
@@ -1511,7 +1512,7 @@ func (this *Castaway) String() string {
 	for k := range this.MyCustomMap {
 		keysForMyCustomMap = append(keysForMyCustomMap, string(k))
 	}
-	sortkeys.Strings(keysForMyCustomMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForMyCustomMap)
 	mapStringForMyCustomMap := "map[github_com_gogo_protobuf_test_casttype.MyStringType]github_com_gogo_protobuf_test_casttype.MyUint64Type{"
 	for _, k := range keysForMyCustomMap {
 		mapStringForMyCustomMap += fmt.Sprintf("%v: %v,", k, this.MyCustomMap[github_com_gogo_protobuf_test_casttype.MyStringType(k)])
@@ -1521,7 +1522,7 @@ func (this *Castaway) String() string {
 	for k := range this.MyNullableMap {
 		keysForMyNullableMap = append(keysForMyNullableMap, int32(k))
 	}
-	sortkeys.Int32s(keysForMyNullableMap)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForMyNullableMap)
 	mapStringForMyNullableMap := "map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson{"
 	for _, k := range keysForMyNullableMap {
 		mapStringForMyNullableMap += fmt.Sprintf("%v: %v,", k, this.MyNullableMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(k)])
@@ -1531,7 +1532,7 @@ func (this *Castaway) String() string {
 	for k := range this.MyEmbeddedMap {
 		keysForMyEmbeddedMap = append(keysForMyEmbeddedMap, int32(k))
 	}
-	sortkeys.Int32s(keysForMyEmbeddedMap)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForMyEmbeddedMap)
 	mapStringForMyEmbeddedMap := "map[github_com_gogo_protobuf_test_casttype.MyInt32Type]Wilson{"
 	for _, k := range keysForMyEmbeddedMap {
 		mapStringForMyEmbeddedMap += fmt.Sprintf("%v: %v,", k, this.MyEmbeddedMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(k)])
@@ -1693,7 +1694,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			v2 := github_com_gogo_protobuf_test_casttype.MyFloat32Type(math.Float32frombits(v))
 			m.MyFloat32Ptr = &v2
@@ -1705,7 +1706,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 4) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint32(binary.LittleEndian.Uint32(dAtA[iNdEx:]))
+			v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
 			iNdEx += 4
 			m.MyFloat32 = github_com_gogo_protobuf_test_casttype.MyFloat32Type(math.Float32frombits(v))
 		case 7:
@@ -1716,7 +1717,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			v2 := github_com_gogo_protobuf_test_casttype.MyFloat64Type(math.Float64frombits(v))
 			m.MyFloat64Ptr = &v2
@@ -1728,7 +1729,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			if (iNdEx + 8) > l {
 				return io.ErrUnexpectedEOF
 			}
-			v = uint64(binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
 			iNdEx += 8
 			m.MyFloat64 = github_com_gogo_protobuf_test_casttype.MyFloat64Type(math.Float64frombits(v))
 		case 9:

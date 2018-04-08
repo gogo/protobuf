@@ -3,7 +3,7 @@
 
 package proto
 
-import proto1 "github.com/gogo/protobuf/proto"
+import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
@@ -14,7 +14,7 @@ import strings "strings"
 import reflect "reflect"
 
 // Reference imports to suppress errors if they are not otherwise used.
-var _ = proto1.Marshal
+var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
@@ -22,7 +22,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto1.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Subject struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -31,7 +31,7 @@ type Subject struct {
 }
 
 func (m *Subject) Reset()         { *m = Subject{} }
-func (m *Subject) String() string { return proto1.CompactTextString(m) }
+func (m *Subject) String() string { return proto.CompactTextString(m) }
 func (*Subject) ProtoMessage()    {}
 func (*Subject) Descriptor() ([]byte, []int) {
 	return fileDescriptor_proto_2eb405ba8c57e5a9, []int{0}
@@ -42,7 +42,7 @@ func (m *Subject) XXX_Unmarshal(b []byte) error {
 func (m *Subject) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Subject.Marshal(b, m, deterministic)
 }
-func (dst *Subject) XXX_Merge(src proto1.Message) {
+func (dst *Subject) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Subject.Merge(dst, src)
 }
 func (m *Subject) XXX_Size() int {
@@ -52,10 +52,10 @@ func (m *Subject) XXX_DiscardUnknown() {
 	xxx_messageInfo_Subject.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Subject proto1.InternalMessageInfo
+var xxx_messageInfo_Subject proto.InternalMessageInfo
 
 func init() {
-	proto1.RegisterType((*Subject)(nil), "proto.Subject")
+	proto.RegisterType((*Subject)(nil), "proto.Subject")
 }
 func (this *Subject) Equal(that interface{}) bool {
 	if that == nil {
@@ -182,7 +182,7 @@ func encodeVarintPopulateProto(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 
-func init() { proto1.RegisterFile("proto/proto.proto", fileDescriptor_proto_2eb405ba8c57e5a9) }
+func init() { proto.RegisterFile("proto/proto.proto", fileDescriptor_proto_2eb405ba8c57e5a9) }
 
 var fileDescriptor_proto_2eb405ba8c57e5a9 = []byte{
 	// 103 bytes of a gzipped FileDescriptorProto

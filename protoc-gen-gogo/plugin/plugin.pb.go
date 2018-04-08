@@ -6,7 +6,7 @@ package plugin_go // import ""
 import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -106,7 +106,7 @@ type CodeGeneratorRequest struct {
 	//
 	// Type names of fields and extensions in the FileDescriptorProto are always
 	// fully qualified.
-	ProtoFile []*google_protobuf.FileDescriptorProto `protobuf:"bytes,15,rep,name=proto_file,json=protoFile" json:"proto_file,omitempty"`
+	ProtoFile []*descriptor.FileDescriptorProto `protobuf:"bytes,15,rep,name=proto_file,json=protoFile" json:"proto_file,omitempty"`
 	// The version number of protocol compiler.
 	CompilerVersion      *Version `protobuf:"bytes,3,opt,name=compiler_version,json=compilerVersion" json:"compiler_version,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -152,7 +152,7 @@ func (m *CodeGeneratorRequest) GetParameter() string {
 	return ""
 }
 
-func (m *CodeGeneratorRequest) GetProtoFile() []*google_protobuf.FileDescriptorProto {
+func (m *CodeGeneratorRequest) GetProtoFile() []*descriptor.FileDescriptorProto {
 	if m != nil {
 		return m.ProtoFile
 	}

@@ -118,7 +118,7 @@ func (this *pluginImports) NewImport(pkg string) Single {
 func (this *pluginImports) GenerateImports(file *FileDescriptor) {
 	for _, s := range this.singles {
 		if s.IsUsed() {
-			this.generator.PrintImport(s.Name(), s.Location())
+			this.generator.PrintImport(GoPackageName(s.Name()), GoImportPath(s.Location()))
 		}
 	}
 }
@@ -134,10 +134,10 @@ type importedPackage struct {
 	used         bool
 	pkg          string
 	name         string
-	importPrefix string
+	importPrefix GoImportPath
 }
 
-func newImportedPackage(importPrefix, pkg string) *importedPackage {
+func newImportedPackage(importPrefix GoImportPath, pkg string) *importedPackage {
 	return &importedPackage{
 		pkg:          pkg,
 		importPrefix: importPrefix,
@@ -146,7 +146,7 @@ func newImportedPackage(importPrefix, pkg string) *importedPackage {
 
 func (this *importedPackage) Use() string {
 	if !this.used {
-		this.name = RegisterUniquePackageName(this.pkg, nil)
+		this.name = string(cleanPackageName(this.pkg))
 		this.used = true
 	}
 	return this.name
@@ -161,7 +161,7 @@ func (this *importedPackage) Name() string {
 }
 
 func (this *importedPackage) Location() string {
-	return this.importPrefix + this.pkg
+	return string(this.importPrefix) + this.pkg
 }
 
 func (g *Generator) GetFieldName(message *Descriptor, field *descriptor.FieldDescriptorProto) string {
@@ -182,7 +182,7 @@ func (g *Generator) GetFieldName(message *Descriptor, field *descriptor.FieldDes
 			return fieldname + "_"
 		}
 	}
-	if !gogoproto.IsProtoSizer(message.file, message.DescriptorProto) {
+	if !gogoproto.IsProtoSizer(message.file.FileDescriptorProto, message.DescriptorProto) {
 		if fieldname == "Size" {
 			return fieldname + "_"
 		}
@@ -204,7 +204,7 @@ func (g *Generator) GetOneOfFieldName(message *Descriptor, field *descriptor.Fie
 			return fieldname + "_"
 		}
 	}
-	if !gogoproto.IsProtoSizer(message.file, message.DescriptorProto) {
+	if !gogoproto.IsProtoSizer(message.file.FileDescriptorProto, message.DescriptorProto) {
 		if fieldname == "Size" {
 			return fieldname + "_"
 		}
@@ -339,14 +339,9 @@ func (g *Generator) GeneratePlugin(p Plugin) {
 	}
 }
 
-func (g *Generator) SetFile(file *descriptor.FileDescriptorProto) {
-	g.file = g.FileOf(file)
-}
-
 func (g *Generator) generatePlugin(file *FileDescriptor, p Plugin) {
 	g.writtenImports = make(map[string]bool)
-	g.file = g.FileOf(file.FileDescriptorProto)
-	g.usedPackages = make(map[string]bool)
+	g.file = file
 
 	// Run the plugins before the imports so we know which imports are necessary.
 	p.Generate(file)
@@ -444,4 +439,9 @@ func (g *Generator) useTypes() string {
 	pkg := strings.Map(badToUnderscore, "github.com/gogo/protobuf/types")
 	g.customImports = append(g.customImports, "github.com/gogo/protobuf/types")
 	return pkg
+}
+
+func (d *FileDescriptor) GoPackageName() string {
+	pkgName, _ := d.goPackageName()
+	return string(pkgName)
 }

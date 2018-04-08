@@ -6,8 +6,8 @@ package proto3_proto
 import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import google_protobuf "github.com/gogo/protobuf/types"
 import test_proto "github.com/gogo/protobuf/proto/test_proto"
+import types "github.com/gogo/protobuf/types"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -64,8 +64,8 @@ type Message struct {
 	Terrain              map[string]*Nested                 `protobuf:"bytes,10,rep,name=terrain" json:"terrain,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	Proto2Field          *test_proto.SubDefaults            `protobuf:"bytes,11,opt,name=proto2_field,json=proto2Field" json:"proto2_field,omitempty"`
 	Proto2Value          map[string]*test_proto.SubDefaults `protobuf:"bytes,13,rep,name=proto2_value,json=proto2Value" json:"proto2_value,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Anything             *google_protobuf.Any               `protobuf:"bytes,14,opt,name=anything" json:"anything,omitempty"`
-	ManyThings           []*google_protobuf.Any             `protobuf:"bytes,15,rep,name=many_things,json=manyThings" json:"many_things,omitempty"`
+	Anything             *types.Any                         `protobuf:"bytes,14,opt,name=anything" json:"anything,omitempty"`
+	ManyThings           []*types.Any                       `protobuf:"bytes,15,rep,name=many_things,json=manyThings" json:"many_things,omitempty"`
 	Submessage           *Message                           `protobuf:"bytes,17,opt,name=submessage" json:"submessage,omitempty"`
 	Children             []*Message                         `protobuf:"bytes,18,rep,name=children" json:"children,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                           `json:"-"`
@@ -195,14 +195,14 @@ func (m *Message) GetProto2Value() map[string]*test_proto.SubDefaults {
 	return nil
 }
 
-func (m *Message) GetAnything() *google_protobuf.Any {
+func (m *Message) GetAnything() *types.Any {
 	if m != nil {
 		return m.Anything
 	}
 	return nil
 }
 
-func (m *Message) GetManyThings() []*google_protobuf.Any {
+func (m *Message) GetManyThings() []*types.Any {
 	if m != nil {
 		return m.ManyThings
 	}

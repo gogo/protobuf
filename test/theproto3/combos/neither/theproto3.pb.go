@@ -7,20 +7,21 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
-import test "github.com/gogo/protobuf/test/combos/both"
+import both "github.com/gogo/protobuf/test/combos/both"
 
 import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
 
-import descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-import gzip "compress/gzip"
+import github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+import compress_gzip "compress/gzip"
 import bytes "bytes"
-import ioutil "io/ioutil"
+import io_ioutil "io/ioutil"
 
 import strconv "strconv"
 
 import strings "strings"
 import reflect "reflect"
-import sortkeys "github.com/gogo/protobuf/sortkeys"
+import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -93,8 +94,8 @@ type Message struct {
 	Key                  []uint64                   `protobuf:"varint,5,rep,packed,name=key" json:"key,omitempty"`
 	Nested               *Nested                    `protobuf:"bytes,6,opt,name=nested" json:"nested,omitempty"`
 	Terrain              map[int64]*Nested          `protobuf:"bytes,10,rep,name=terrain" json:"terrain,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Proto2Field          *test.NinOptNative         `protobuf:"bytes,11,opt,name=proto2_field,json=proto2Field" json:"proto2_field,omitempty"`
-	Proto2Value          map[int64]*test.NinOptEnum `protobuf:"bytes,13,rep,name=proto2_value,json=proto2Value" json:"proto2_value,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	Proto2Field          *both.NinOptNative         `protobuf:"bytes,11,opt,name=proto2_field,json=proto2Field" json:"proto2_field,omitempty"`
+	Proto2Value          map[int64]*both.NinOptEnum `protobuf:"bytes,13,rep,name=proto2_value,json=proto2Value" json:"proto2_value,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_NoUnkeyedLiteral struct{}                   `json:"-"`
 	XXX_unrecognized     []byte                     `json:"-"`
 	XXX_sizecache        int32                      `json:"-"`
@@ -429,7 +430,7 @@ var xxx_messageInfo_NotPacked proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*Message)(nil), "theproto3.Message")
-	proto.RegisterMapType((map[int64]*test.NinOptEnum)(nil), "theproto3.Message.Proto2ValueEntry")
+	proto.RegisterMapType((map[int64]*both.NinOptEnum)(nil), "theproto3.Message.Proto2ValueEntry")
 	proto.RegisterMapType((map[int64]*Nested)(nil), "theproto3.Message.TerrainEntry")
 	proto.RegisterType((*Nested)(nil), "theproto3.Nested")
 	proto.RegisterType((*AllMaps)(nil), "theproto3.AllMaps")
@@ -481,38 +482,38 @@ func init() {
 	proto.RegisterEnum("theproto3.MapEnum", MapEnum_name, MapEnum_value)
 	proto.RegisterEnum("theproto3.Message_Humour", Message_Humour_name, Message_Humour_value)
 }
-func (this *Message) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *Message) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return Theproto3Description()
 }
-func (this *Nested) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *Nested) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return Theproto3Description()
 }
-func (this *AllMaps) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *AllMaps) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return Theproto3Description()
 }
-func (this *AllMapsOrdered) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *AllMapsOrdered) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return Theproto3Description()
 }
-func (this *MessageWithMap) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *MessageWithMap) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return Theproto3Description()
 }
-func (this *FloatingPoint) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *FloatingPoint) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return Theproto3Description()
 }
-func (this *Uint128Pair) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *Uint128Pair) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return Theproto3Description()
 }
-func (this *ContainsNestedMap) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *ContainsNestedMap) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return Theproto3Description()
 }
-func (this *ContainsNestedMap_NestedMap) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *ContainsNestedMap_NestedMap) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return Theproto3Description()
 }
-func (this *NotPacked) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *NotPacked) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return Theproto3Description()
 }
-func Theproto3Description() (desc *descriptor.FileDescriptorSet) {
-	d := &descriptor.FileDescriptorSet{}
+func Theproto3Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+	d := &github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet{}
 	var gzipped = []byte{
 		// 7987 bytes of a gzipped FileDescriptorSet
 		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x7d, 0x5b, 0x70, 0x23, 0xd7,
@@ -1017,15 +1018,15 @@ func Theproto3Description() (desc *descriptor.FileDescriptorSet) {
 		0x81, 0x00, 0x00,
 	}
 	r := bytes.NewReader(gzipped)
-	gzipr, err := gzip.NewReader(r)
+	gzipr, err := compress_gzip.NewReader(r)
 	if err != nil {
 		panic(err)
 	}
-	ungzipped, err := ioutil.ReadAll(gzipr)
+	ungzipped, err := io_ioutil.ReadAll(gzipr)
 	if err != nil {
 		panic(err)
 	}
-	if err := proto.Unmarshal(ungzipped, d); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(ungzipped, d); err != nil {
 		panic(err)
 	}
 	return d
@@ -2344,7 +2345,7 @@ func (this *NotPacked) Equal(that interface{}) bool {
 }
 
 type MessageFace interface {
-	Proto() proto.Message
+	Proto() github_com_gogo_protobuf_proto.Message
 	GetName() string
 	GetHilarity() Message_Humour
 	GetHeightInCm() uint32
@@ -2355,15 +2356,15 @@ type MessageFace interface {
 	GetKey() []uint64
 	GetNested() *Nested
 	GetTerrain() map[int64]*Nested
-	GetProto2Field() *test.NinOptNative
-	GetProto2Value() map[int64]*test.NinOptEnum
+	GetProto2Field() *both.NinOptNative
+	GetProto2Value() map[int64]*both.NinOptEnum
 }
 
-func (this *Message) Proto() proto.Message {
+func (this *Message) Proto() github_com_gogo_protobuf_proto.Message {
 	return this
 }
 
-func (this *Message) TestProto() proto.Message {
+func (this *Message) TestProto() github_com_gogo_protobuf_proto.Message {
 	return NewMessageFromFace(this)
 }
 
@@ -2407,11 +2408,11 @@ func (this *Message) GetTerrain() map[int64]*Nested {
 	return this.Terrain
 }
 
-func (this *Message) GetProto2Field() *test.NinOptNative {
+func (this *Message) GetProto2Field() *both.NinOptNative {
 	return this.Proto2Field
 }
 
-func (this *Message) GetProto2Value() map[int64]*test.NinOptEnum {
+func (this *Message) GetProto2Value() map[int64]*both.NinOptEnum {
 	return this.Proto2Value
 }
 
@@ -2433,15 +2434,15 @@ func NewMessageFromFace(that MessageFace) *Message {
 }
 
 type NestedFace interface {
-	Proto() proto.Message
+	Proto() github_com_gogo_protobuf_proto.Message
 	GetBunny() string
 }
 
-func (this *Nested) Proto() proto.Message {
+func (this *Nested) Proto() github_com_gogo_protobuf_proto.Message {
 	return this
 }
 
-func (this *Nested) TestProto() proto.Message {
+func (this *Nested) TestProto() github_com_gogo_protobuf_proto.Message {
 	return NewNestedFromFace(this)
 }
 
@@ -2456,7 +2457,7 @@ func NewNestedFromFace(that NestedFace) *Nested {
 }
 
 type AllMapsFace interface {
-	Proto() proto.Message
+	Proto() github_com_gogo_protobuf_proto.Message
 	GetStringToDoubleMap() map[string]float64
 	GetStringToFloatMap() map[string]float32
 	GetInt32Map() map[int32]int32
@@ -2476,11 +2477,11 @@ type AllMapsFace interface {
 	GetStringToMsgMap() map[string]*FloatingPoint
 }
 
-func (this *AllMaps) Proto() proto.Message {
+func (this *AllMaps) Proto() github_com_gogo_protobuf_proto.Message {
 	return this
 }
 
-func (this *AllMaps) TestProto() proto.Message {
+func (this *AllMaps) TestProto() github_com_gogo_protobuf_proto.Message {
 	return NewAllMapsFromFace(this)
 }
 
@@ -2575,7 +2576,7 @@ func NewAllMapsFromFace(that AllMapsFace) *AllMaps {
 }
 
 type AllMapsOrderedFace interface {
-	Proto() proto.Message
+	Proto() github_com_gogo_protobuf_proto.Message
 	GetStringToDoubleMap() map[string]float64
 	GetStringToFloatMap() map[string]float32
 	GetInt32Map() map[int32]int32
@@ -2595,11 +2596,11 @@ type AllMapsOrderedFace interface {
 	GetStringToMsgMap() map[string]*FloatingPoint
 }
 
-func (this *AllMapsOrdered) Proto() proto.Message {
+func (this *AllMapsOrdered) Proto() github_com_gogo_protobuf_proto.Message {
 	return this
 }
 
-func (this *AllMapsOrdered) TestProto() proto.Message {
+func (this *AllMapsOrdered) TestProto() github_com_gogo_protobuf_proto.Message {
 	return NewAllMapsOrderedFromFace(this)
 }
 
@@ -2694,17 +2695,17 @@ func NewAllMapsOrderedFromFace(that AllMapsOrderedFace) *AllMapsOrdered {
 }
 
 type MessageWithMapFace interface {
-	Proto() proto.Message
+	Proto() github_com_gogo_protobuf_proto.Message
 	GetNameMapping() map[int32]string
 	GetMsgMapping() map[int64]*FloatingPoint
 	GetByteMapping() map[bool][]byte
 }
 
-func (this *MessageWithMap) Proto() proto.Message {
+func (this *MessageWithMap) Proto() github_com_gogo_protobuf_proto.Message {
 	return this
 }
 
-func (this *MessageWithMap) TestProto() proto.Message {
+func (this *MessageWithMap) TestProto() github_com_gogo_protobuf_proto.Message {
 	return NewMessageWithMapFromFace(this)
 }
 
@@ -2729,15 +2730,15 @@ func NewMessageWithMapFromFace(that MessageWithMapFace) *MessageWithMap {
 }
 
 type FloatingPointFace interface {
-	Proto() proto.Message
+	Proto() github_com_gogo_protobuf_proto.Message
 	GetF() float64
 }
 
-func (this *FloatingPoint) Proto() proto.Message {
+func (this *FloatingPoint) Proto() github_com_gogo_protobuf_proto.Message {
 	return this
 }
 
-func (this *FloatingPoint) TestProto() proto.Message {
+func (this *FloatingPoint) TestProto() github_com_gogo_protobuf_proto.Message {
 	return NewFloatingPointFromFace(this)
 }
 
@@ -2752,16 +2753,16 @@ func NewFloatingPointFromFace(that FloatingPointFace) *FloatingPoint {
 }
 
 type Uint128PairFace interface {
-	Proto() proto.Message
+	Proto() github_com_gogo_protobuf_proto.Message
 	GetLeft() github_com_gogo_protobuf_test_custom.Uint128
 	GetRight() *github_com_gogo_protobuf_test_custom.Uint128
 }
 
-func (this *Uint128Pair) Proto() proto.Message {
+func (this *Uint128Pair) Proto() github_com_gogo_protobuf_proto.Message {
 	return this
 }
 
-func (this *Uint128Pair) TestProto() proto.Message {
+func (this *Uint128Pair) TestProto() github_com_gogo_protobuf_proto.Message {
 	return NewUint128PairFromFace(this)
 }
 
@@ -2781,14 +2782,14 @@ func NewUint128PairFromFace(that Uint128PairFace) *Uint128Pair {
 }
 
 type ContainsNestedMapFace interface {
-	Proto() proto.Message
+	Proto() github_com_gogo_protobuf_proto.Message
 }
 
-func (this *ContainsNestedMap) Proto() proto.Message {
+func (this *ContainsNestedMap) Proto() github_com_gogo_protobuf_proto.Message {
 	return this
 }
 
-func (this *ContainsNestedMap) TestProto() proto.Message {
+func (this *ContainsNestedMap) TestProto() github_com_gogo_protobuf_proto.Message {
 	return NewContainsNestedMapFromFace(this)
 }
 
@@ -2798,15 +2799,15 @@ func NewContainsNestedMapFromFace(that ContainsNestedMapFace) *ContainsNestedMap
 }
 
 type ContainsNestedMap_NestedMapFace interface {
-	Proto() proto.Message
+	Proto() github_com_gogo_protobuf_proto.Message
 	GetNestedMapField() map[string]float64
 }
 
-func (this *ContainsNestedMap_NestedMap) Proto() proto.Message {
+func (this *ContainsNestedMap_NestedMap) Proto() github_com_gogo_protobuf_proto.Message {
 	return this
 }
 
-func (this *ContainsNestedMap_NestedMap) TestProto() proto.Message {
+func (this *ContainsNestedMap_NestedMap) TestProto() github_com_gogo_protobuf_proto.Message {
 	return NewContainsNestedMap_NestedMapFromFace(this)
 }
 
@@ -2821,15 +2822,15 @@ func NewContainsNestedMap_NestedMapFromFace(that ContainsNestedMap_NestedMapFace
 }
 
 type NotPackedFace interface {
-	Proto() proto.Message
+	Proto() github_com_gogo_protobuf_proto.Message
 	GetKey() []uint64
 }
 
-func (this *NotPacked) Proto() proto.Message {
+func (this *NotPacked) Proto() github_com_gogo_protobuf_proto.Message {
 	return this
 }
 
-func (this *NotPacked) TestProto() proto.Message {
+func (this *NotPacked) TestProto() github_com_gogo_protobuf_proto.Message {
 	return NewNotPackedFromFace(this)
 }
 
@@ -2864,7 +2865,7 @@ func (this *Message) GoString() string {
 	for k := range this.Terrain {
 		keysForTerrain = append(keysForTerrain, k)
 	}
-	sortkeys.Int64s(keysForTerrain)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForTerrain)
 	mapStringForTerrain := "map[int64]*Nested{"
 	for _, k := range keysForTerrain {
 		mapStringForTerrain += fmt.Sprintf("%#v: %#v,", k, this.Terrain[k])
@@ -2880,8 +2881,8 @@ func (this *Message) GoString() string {
 	for k := range this.Proto2Value {
 		keysForProto2Value = append(keysForProto2Value, k)
 	}
-	sortkeys.Int64s(keysForProto2Value)
-	mapStringForProto2Value := "map[int64]*test.NinOptEnum{"
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForProto2Value)
+	mapStringForProto2Value := "map[int64]*both.NinOptEnum{"
 	for _, k := range keysForProto2Value {
 		mapStringForProto2Value += fmt.Sprintf("%#v: %#v,", k, this.Proto2Value[k])
 	}
@@ -2918,7 +2919,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.StringToDoubleMap {
 		keysForStringToDoubleMap = append(keysForStringToDoubleMap, k)
 	}
-	sortkeys.Strings(keysForStringToDoubleMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToDoubleMap)
 	mapStringForStringToDoubleMap := "map[string]float64{"
 	for _, k := range keysForStringToDoubleMap {
 		mapStringForStringToDoubleMap += fmt.Sprintf("%#v: %#v,", k, this.StringToDoubleMap[k])
@@ -2931,7 +2932,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.StringToFloatMap {
 		keysForStringToFloatMap = append(keysForStringToFloatMap, k)
 	}
-	sortkeys.Strings(keysForStringToFloatMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToFloatMap)
 	mapStringForStringToFloatMap := "map[string]float32{"
 	for _, k := range keysForStringToFloatMap {
 		mapStringForStringToFloatMap += fmt.Sprintf("%#v: %#v,", k, this.StringToFloatMap[k])
@@ -2944,7 +2945,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.Int32Map {
 		keysForInt32Map = append(keysForInt32Map, k)
 	}
-	sortkeys.Int32s(keysForInt32Map)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForInt32Map)
 	mapStringForInt32Map := "map[int32]int32{"
 	for _, k := range keysForInt32Map {
 		mapStringForInt32Map += fmt.Sprintf("%#v: %#v,", k, this.Int32Map[k])
@@ -2957,7 +2958,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.Int64Map {
 		keysForInt64Map = append(keysForInt64Map, k)
 	}
-	sortkeys.Int64s(keysForInt64Map)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForInt64Map)
 	mapStringForInt64Map := "map[int64]int64{"
 	for _, k := range keysForInt64Map {
 		mapStringForInt64Map += fmt.Sprintf("%#v: %#v,", k, this.Int64Map[k])
@@ -2970,7 +2971,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.Uint32Map {
 		keysForUint32Map = append(keysForUint32Map, k)
 	}
-	sortkeys.Uint32s(keysForUint32Map)
+	github_com_gogo_protobuf_sortkeys.Uint32s(keysForUint32Map)
 	mapStringForUint32Map := "map[uint32]uint32{"
 	for _, k := range keysForUint32Map {
 		mapStringForUint32Map += fmt.Sprintf("%#v: %#v,", k, this.Uint32Map[k])
@@ -2983,7 +2984,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.Uint64Map {
 		keysForUint64Map = append(keysForUint64Map, k)
 	}
-	sortkeys.Uint64s(keysForUint64Map)
+	github_com_gogo_protobuf_sortkeys.Uint64s(keysForUint64Map)
 	mapStringForUint64Map := "map[uint64]uint64{"
 	for _, k := range keysForUint64Map {
 		mapStringForUint64Map += fmt.Sprintf("%#v: %#v,", k, this.Uint64Map[k])
@@ -2996,7 +2997,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.Sint32Map {
 		keysForSint32Map = append(keysForSint32Map, k)
 	}
-	sortkeys.Int32s(keysForSint32Map)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForSint32Map)
 	mapStringForSint32Map := "map[int32]int32{"
 	for _, k := range keysForSint32Map {
 		mapStringForSint32Map += fmt.Sprintf("%#v: %#v,", k, this.Sint32Map[k])
@@ -3009,7 +3010,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.Sint64Map {
 		keysForSint64Map = append(keysForSint64Map, k)
 	}
-	sortkeys.Int64s(keysForSint64Map)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForSint64Map)
 	mapStringForSint64Map := "map[int64]int64{"
 	for _, k := range keysForSint64Map {
 		mapStringForSint64Map += fmt.Sprintf("%#v: %#v,", k, this.Sint64Map[k])
@@ -3022,7 +3023,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.Fixed32Map {
 		keysForFixed32Map = append(keysForFixed32Map, k)
 	}
-	sortkeys.Uint32s(keysForFixed32Map)
+	github_com_gogo_protobuf_sortkeys.Uint32s(keysForFixed32Map)
 	mapStringForFixed32Map := "map[uint32]uint32{"
 	for _, k := range keysForFixed32Map {
 		mapStringForFixed32Map += fmt.Sprintf("%#v: %#v,", k, this.Fixed32Map[k])
@@ -3035,7 +3036,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.Sfixed32Map {
 		keysForSfixed32Map = append(keysForSfixed32Map, k)
 	}
-	sortkeys.Int32s(keysForSfixed32Map)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForSfixed32Map)
 	mapStringForSfixed32Map := "map[int32]int32{"
 	for _, k := range keysForSfixed32Map {
 		mapStringForSfixed32Map += fmt.Sprintf("%#v: %#v,", k, this.Sfixed32Map[k])
@@ -3048,7 +3049,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.Fixed64Map {
 		keysForFixed64Map = append(keysForFixed64Map, k)
 	}
-	sortkeys.Uint64s(keysForFixed64Map)
+	github_com_gogo_protobuf_sortkeys.Uint64s(keysForFixed64Map)
 	mapStringForFixed64Map := "map[uint64]uint64{"
 	for _, k := range keysForFixed64Map {
 		mapStringForFixed64Map += fmt.Sprintf("%#v: %#v,", k, this.Fixed64Map[k])
@@ -3061,7 +3062,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.Sfixed64Map {
 		keysForSfixed64Map = append(keysForSfixed64Map, k)
 	}
-	sortkeys.Int64s(keysForSfixed64Map)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForSfixed64Map)
 	mapStringForSfixed64Map := "map[int64]int64{"
 	for _, k := range keysForSfixed64Map {
 		mapStringForSfixed64Map += fmt.Sprintf("%#v: %#v,", k, this.Sfixed64Map[k])
@@ -3074,7 +3075,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.BoolMap {
 		keysForBoolMap = append(keysForBoolMap, k)
 	}
-	sortkeys.Bools(keysForBoolMap)
+	github_com_gogo_protobuf_sortkeys.Bools(keysForBoolMap)
 	mapStringForBoolMap := "map[bool]bool{"
 	for _, k := range keysForBoolMap {
 		mapStringForBoolMap += fmt.Sprintf("%#v: %#v,", k, this.BoolMap[k])
@@ -3087,7 +3088,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.StringMap {
 		keysForStringMap = append(keysForStringMap, k)
 	}
-	sortkeys.Strings(keysForStringMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
 	mapStringForStringMap := "map[string]string{"
 	for _, k := range keysForStringMap {
 		mapStringForStringMap += fmt.Sprintf("%#v: %#v,", k, this.StringMap[k])
@@ -3100,7 +3101,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.StringToBytesMap {
 		keysForStringToBytesMap = append(keysForStringToBytesMap, k)
 	}
-	sortkeys.Strings(keysForStringToBytesMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToBytesMap)
 	mapStringForStringToBytesMap := "map[string][]byte{"
 	for _, k := range keysForStringToBytesMap {
 		mapStringForStringToBytesMap += fmt.Sprintf("%#v: %#v,", k, this.StringToBytesMap[k])
@@ -3113,7 +3114,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.StringToEnumMap {
 		keysForStringToEnumMap = append(keysForStringToEnumMap, k)
 	}
-	sortkeys.Strings(keysForStringToEnumMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToEnumMap)
 	mapStringForStringToEnumMap := "map[string]MapEnum{"
 	for _, k := range keysForStringToEnumMap {
 		mapStringForStringToEnumMap += fmt.Sprintf("%#v: %#v,", k, this.StringToEnumMap[k])
@@ -3126,7 +3127,7 @@ func (this *AllMaps) GoString() string {
 	for k := range this.StringToMsgMap {
 		keysForStringToMsgMap = append(keysForStringToMsgMap, k)
 	}
-	sortkeys.Strings(keysForStringToMsgMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToMsgMap)
 	mapStringForStringToMsgMap := "map[string]*FloatingPoint{"
 	for _, k := range keysForStringToMsgMap {
 		mapStringForStringToMsgMap += fmt.Sprintf("%#v: %#v,", k, this.StringToMsgMap[k])
@@ -3151,7 +3152,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.StringToDoubleMap {
 		keysForStringToDoubleMap = append(keysForStringToDoubleMap, k)
 	}
-	sortkeys.Strings(keysForStringToDoubleMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToDoubleMap)
 	mapStringForStringToDoubleMap := "map[string]float64{"
 	for _, k := range keysForStringToDoubleMap {
 		mapStringForStringToDoubleMap += fmt.Sprintf("%#v: %#v,", k, this.StringToDoubleMap[k])
@@ -3164,7 +3165,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.StringToFloatMap {
 		keysForStringToFloatMap = append(keysForStringToFloatMap, k)
 	}
-	sortkeys.Strings(keysForStringToFloatMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToFloatMap)
 	mapStringForStringToFloatMap := "map[string]float32{"
 	for _, k := range keysForStringToFloatMap {
 		mapStringForStringToFloatMap += fmt.Sprintf("%#v: %#v,", k, this.StringToFloatMap[k])
@@ -3177,7 +3178,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.Int32Map {
 		keysForInt32Map = append(keysForInt32Map, k)
 	}
-	sortkeys.Int32s(keysForInt32Map)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForInt32Map)
 	mapStringForInt32Map := "map[int32]int32{"
 	for _, k := range keysForInt32Map {
 		mapStringForInt32Map += fmt.Sprintf("%#v: %#v,", k, this.Int32Map[k])
@@ -3190,7 +3191,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.Int64Map {
 		keysForInt64Map = append(keysForInt64Map, k)
 	}
-	sortkeys.Int64s(keysForInt64Map)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForInt64Map)
 	mapStringForInt64Map := "map[int64]int64{"
 	for _, k := range keysForInt64Map {
 		mapStringForInt64Map += fmt.Sprintf("%#v: %#v,", k, this.Int64Map[k])
@@ -3203,7 +3204,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.Uint32Map {
 		keysForUint32Map = append(keysForUint32Map, k)
 	}
-	sortkeys.Uint32s(keysForUint32Map)
+	github_com_gogo_protobuf_sortkeys.Uint32s(keysForUint32Map)
 	mapStringForUint32Map := "map[uint32]uint32{"
 	for _, k := range keysForUint32Map {
 		mapStringForUint32Map += fmt.Sprintf("%#v: %#v,", k, this.Uint32Map[k])
@@ -3216,7 +3217,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.Uint64Map {
 		keysForUint64Map = append(keysForUint64Map, k)
 	}
-	sortkeys.Uint64s(keysForUint64Map)
+	github_com_gogo_protobuf_sortkeys.Uint64s(keysForUint64Map)
 	mapStringForUint64Map := "map[uint64]uint64{"
 	for _, k := range keysForUint64Map {
 		mapStringForUint64Map += fmt.Sprintf("%#v: %#v,", k, this.Uint64Map[k])
@@ -3229,7 +3230,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.Sint32Map {
 		keysForSint32Map = append(keysForSint32Map, k)
 	}
-	sortkeys.Int32s(keysForSint32Map)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForSint32Map)
 	mapStringForSint32Map := "map[int32]int32{"
 	for _, k := range keysForSint32Map {
 		mapStringForSint32Map += fmt.Sprintf("%#v: %#v,", k, this.Sint32Map[k])
@@ -3242,7 +3243,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.Sint64Map {
 		keysForSint64Map = append(keysForSint64Map, k)
 	}
-	sortkeys.Int64s(keysForSint64Map)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForSint64Map)
 	mapStringForSint64Map := "map[int64]int64{"
 	for _, k := range keysForSint64Map {
 		mapStringForSint64Map += fmt.Sprintf("%#v: %#v,", k, this.Sint64Map[k])
@@ -3255,7 +3256,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.Fixed32Map {
 		keysForFixed32Map = append(keysForFixed32Map, k)
 	}
-	sortkeys.Uint32s(keysForFixed32Map)
+	github_com_gogo_protobuf_sortkeys.Uint32s(keysForFixed32Map)
 	mapStringForFixed32Map := "map[uint32]uint32{"
 	for _, k := range keysForFixed32Map {
 		mapStringForFixed32Map += fmt.Sprintf("%#v: %#v,", k, this.Fixed32Map[k])
@@ -3268,7 +3269,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.Sfixed32Map {
 		keysForSfixed32Map = append(keysForSfixed32Map, k)
 	}
-	sortkeys.Int32s(keysForSfixed32Map)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForSfixed32Map)
 	mapStringForSfixed32Map := "map[int32]int32{"
 	for _, k := range keysForSfixed32Map {
 		mapStringForSfixed32Map += fmt.Sprintf("%#v: %#v,", k, this.Sfixed32Map[k])
@@ -3281,7 +3282,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.Fixed64Map {
 		keysForFixed64Map = append(keysForFixed64Map, k)
 	}
-	sortkeys.Uint64s(keysForFixed64Map)
+	github_com_gogo_protobuf_sortkeys.Uint64s(keysForFixed64Map)
 	mapStringForFixed64Map := "map[uint64]uint64{"
 	for _, k := range keysForFixed64Map {
 		mapStringForFixed64Map += fmt.Sprintf("%#v: %#v,", k, this.Fixed64Map[k])
@@ -3294,7 +3295,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.Sfixed64Map {
 		keysForSfixed64Map = append(keysForSfixed64Map, k)
 	}
-	sortkeys.Int64s(keysForSfixed64Map)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForSfixed64Map)
 	mapStringForSfixed64Map := "map[int64]int64{"
 	for _, k := range keysForSfixed64Map {
 		mapStringForSfixed64Map += fmt.Sprintf("%#v: %#v,", k, this.Sfixed64Map[k])
@@ -3307,7 +3308,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.BoolMap {
 		keysForBoolMap = append(keysForBoolMap, k)
 	}
-	sortkeys.Bools(keysForBoolMap)
+	github_com_gogo_protobuf_sortkeys.Bools(keysForBoolMap)
 	mapStringForBoolMap := "map[bool]bool{"
 	for _, k := range keysForBoolMap {
 		mapStringForBoolMap += fmt.Sprintf("%#v: %#v,", k, this.BoolMap[k])
@@ -3320,7 +3321,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.StringMap {
 		keysForStringMap = append(keysForStringMap, k)
 	}
-	sortkeys.Strings(keysForStringMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
 	mapStringForStringMap := "map[string]string{"
 	for _, k := range keysForStringMap {
 		mapStringForStringMap += fmt.Sprintf("%#v: %#v,", k, this.StringMap[k])
@@ -3333,7 +3334,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.StringToBytesMap {
 		keysForStringToBytesMap = append(keysForStringToBytesMap, k)
 	}
-	sortkeys.Strings(keysForStringToBytesMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToBytesMap)
 	mapStringForStringToBytesMap := "map[string][]byte{"
 	for _, k := range keysForStringToBytesMap {
 		mapStringForStringToBytesMap += fmt.Sprintf("%#v: %#v,", k, this.StringToBytesMap[k])
@@ -3346,7 +3347,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.StringToEnumMap {
 		keysForStringToEnumMap = append(keysForStringToEnumMap, k)
 	}
-	sortkeys.Strings(keysForStringToEnumMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToEnumMap)
 	mapStringForStringToEnumMap := "map[string]MapEnum{"
 	for _, k := range keysForStringToEnumMap {
 		mapStringForStringToEnumMap += fmt.Sprintf("%#v: %#v,", k, this.StringToEnumMap[k])
@@ -3359,7 +3360,7 @@ func (this *AllMapsOrdered) GoString() string {
 	for k := range this.StringToMsgMap {
 		keysForStringToMsgMap = append(keysForStringToMsgMap, k)
 	}
-	sortkeys.Strings(keysForStringToMsgMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToMsgMap)
 	mapStringForStringToMsgMap := "map[string]*FloatingPoint{"
 	for _, k := range keysForStringToMsgMap {
 		mapStringForStringToMsgMap += fmt.Sprintf("%#v: %#v,", k, this.StringToMsgMap[k])
@@ -3384,7 +3385,7 @@ func (this *MessageWithMap) GoString() string {
 	for k := range this.NameMapping {
 		keysForNameMapping = append(keysForNameMapping, k)
 	}
-	sortkeys.Int32s(keysForNameMapping)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForNameMapping)
 	mapStringForNameMapping := "map[int32]string{"
 	for _, k := range keysForNameMapping {
 		mapStringForNameMapping += fmt.Sprintf("%#v: %#v,", k, this.NameMapping[k])
@@ -3397,7 +3398,7 @@ func (this *MessageWithMap) GoString() string {
 	for k := range this.MsgMapping {
 		keysForMsgMapping = append(keysForMsgMapping, k)
 	}
-	sortkeys.Int64s(keysForMsgMapping)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForMsgMapping)
 	mapStringForMsgMapping := "map[int64]*FloatingPoint{"
 	for _, k := range keysForMsgMapping {
 		mapStringForMsgMapping += fmt.Sprintf("%#v: %#v,", k, this.MsgMapping[k])
@@ -3410,7 +3411,7 @@ func (this *MessageWithMap) GoString() string {
 	for k := range this.ByteMapping {
 		keysForByteMapping = append(keysForByteMapping, k)
 	}
-	sortkeys.Bools(keysForByteMapping)
+	github_com_gogo_protobuf_sortkeys.Bools(keysForByteMapping)
 	mapStringForByteMapping := "map[bool][]byte{"
 	for _, k := range keysForByteMapping {
 		mapStringForByteMapping += fmt.Sprintf("%#v: %#v,", k, this.ByteMapping[k])
@@ -3474,7 +3475,7 @@ func (this *ContainsNestedMap_NestedMap) GoString() string {
 	for k := range this.NestedMapField {
 		keysForNestedMapField = append(keysForNestedMapField, k)
 	}
-	sortkeys.Strings(keysForNestedMapField)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForNestedMapField)
 	mapStringForNestedMapField := "map[string]float64{"
 	for _, k := range keysForNestedMapField {
 		mapStringForNestedMapField += fmt.Sprintf("%#v: %#v,", k, this.NestedMapField[k])
@@ -3545,13 +3546,13 @@ func NewPopulatedMessage(r randyTheproto3, easy bool) *Message {
 		}
 	}
 	if r.Intn(10) != 0 {
-		this.Proto2Field = test.NewPopulatedNinOptNative(r, easy)
+		this.Proto2Field = both.NewPopulatedNinOptNative(r, easy)
 	}
 	if r.Intn(10) != 0 {
 		v4 := r.Intn(10)
-		this.Proto2Value = make(map[int64]*test.NinOptEnum)
+		this.Proto2Value = make(map[int64]*both.NinOptEnum)
 		for i := 0; i < v4; i++ {
-			this.Proto2Value[int64(r.Int63())] = test.NewPopulatedNinOptEnum(r, easy)
+			this.Proto2Value[int64(r.Int63())] = both.NewPopulatedNinOptEnum(r, easy)
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -4600,7 +4601,7 @@ func (this *Message) String() string {
 	for k := range this.Terrain {
 		keysForTerrain = append(keysForTerrain, k)
 	}
-	sortkeys.Int64s(keysForTerrain)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForTerrain)
 	mapStringForTerrain := "map[int64]*Nested{"
 	for _, k := range keysForTerrain {
 		mapStringForTerrain += fmt.Sprintf("%v: %v,", k, this.Terrain[k])
@@ -4610,8 +4611,8 @@ func (this *Message) String() string {
 	for k := range this.Proto2Value {
 		keysForProto2Value = append(keysForProto2Value, k)
 	}
-	sortkeys.Int64s(keysForProto2Value)
-	mapStringForProto2Value := "map[int64]*test.NinOptEnum{"
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForProto2Value)
+	mapStringForProto2Value := "map[int64]*both.NinOptEnum{"
 	for _, k := range keysForProto2Value {
 		mapStringForProto2Value += fmt.Sprintf("%v: %v,", k, this.Proto2Value[k])
 	}
@@ -4627,7 +4628,7 @@ func (this *Message) String() string {
 		`Key:` + fmt.Sprintf("%v", this.Key) + `,`,
 		`Nested:` + strings.Replace(fmt.Sprintf("%v", this.Nested), "Nested", "Nested", 1) + `,`,
 		`Terrain:` + mapStringForTerrain + `,`,
-		`Proto2Field:` + strings.Replace(fmt.Sprintf("%v", this.Proto2Field), "NinOptNative", "test.NinOptNative", 1) + `,`,
+		`Proto2Field:` + strings.Replace(fmt.Sprintf("%v", this.Proto2Field), "NinOptNative", "both.NinOptNative", 1) + `,`,
 		`Proto2Value:` + mapStringForProto2Value + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
@@ -4653,7 +4654,7 @@ func (this *AllMaps) String() string {
 	for k := range this.StringToDoubleMap {
 		keysForStringToDoubleMap = append(keysForStringToDoubleMap, k)
 	}
-	sortkeys.Strings(keysForStringToDoubleMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToDoubleMap)
 	mapStringForStringToDoubleMap := "map[string]float64{"
 	for _, k := range keysForStringToDoubleMap {
 		mapStringForStringToDoubleMap += fmt.Sprintf("%v: %v,", k, this.StringToDoubleMap[k])
@@ -4663,7 +4664,7 @@ func (this *AllMaps) String() string {
 	for k := range this.StringToFloatMap {
 		keysForStringToFloatMap = append(keysForStringToFloatMap, k)
 	}
-	sortkeys.Strings(keysForStringToFloatMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToFloatMap)
 	mapStringForStringToFloatMap := "map[string]float32{"
 	for _, k := range keysForStringToFloatMap {
 		mapStringForStringToFloatMap += fmt.Sprintf("%v: %v,", k, this.StringToFloatMap[k])
@@ -4673,7 +4674,7 @@ func (this *AllMaps) String() string {
 	for k := range this.Int32Map {
 		keysForInt32Map = append(keysForInt32Map, k)
 	}
-	sortkeys.Int32s(keysForInt32Map)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForInt32Map)
 	mapStringForInt32Map := "map[int32]int32{"
 	for _, k := range keysForInt32Map {
 		mapStringForInt32Map += fmt.Sprintf("%v: %v,", k, this.Int32Map[k])
@@ -4683,7 +4684,7 @@ func (this *AllMaps) String() string {
 	for k := range this.Int64Map {
 		keysForInt64Map = append(keysForInt64Map, k)
 	}
-	sortkeys.Int64s(keysForInt64Map)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForInt64Map)
 	mapStringForInt64Map := "map[int64]int64{"
 	for _, k := range keysForInt64Map {
 		mapStringForInt64Map += fmt.Sprintf("%v: %v,", k, this.Int64Map[k])
@@ -4693,7 +4694,7 @@ func (this *AllMaps) String() string {
 	for k := range this.Uint32Map {
 		keysForUint32Map = append(keysForUint32Map, k)
 	}
-	sortkeys.Uint32s(keysForUint32Map)
+	github_com_gogo_protobuf_sortkeys.Uint32s(keysForUint32Map)
 	mapStringForUint32Map := "map[uint32]uint32{"
 	for _, k := range keysForUint32Map {
 		mapStringForUint32Map += fmt.Sprintf("%v: %v,", k, this.Uint32Map[k])
@@ -4703,7 +4704,7 @@ func (this *AllMaps) String() string {
 	for k := range this.Uint64Map {
 		keysForUint64Map = append(keysForUint64Map, k)
 	}
-	sortkeys.Uint64s(keysForUint64Map)
+	github_com_gogo_protobuf_sortkeys.Uint64s(keysForUint64Map)
 	mapStringForUint64Map := "map[uint64]uint64{"
 	for _, k := range keysForUint64Map {
 		mapStringForUint64Map += fmt.Sprintf("%v: %v,", k, this.Uint64Map[k])
@@ -4713,7 +4714,7 @@ func (this *AllMaps) String() string {
 	for k := range this.Sint32Map {
 		keysForSint32Map = append(keysForSint32Map, k)
 	}
-	sortkeys.Int32s(keysForSint32Map)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForSint32Map)
 	mapStringForSint32Map := "map[int32]int32{"
 	for _, k := range keysForSint32Map {
 		mapStringForSint32Map += fmt.Sprintf("%v: %v,", k, this.Sint32Map[k])
@@ -4723,7 +4724,7 @@ func (this *AllMaps) String() string {
 	for k := range this.Sint64Map {
 		keysForSint64Map = append(keysForSint64Map, k)
 	}
-	sortkeys.Int64s(keysForSint64Map)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForSint64Map)
 	mapStringForSint64Map := "map[int64]int64{"
 	for _, k := range keysForSint64Map {
 		mapStringForSint64Map += fmt.Sprintf("%v: %v,", k, this.Sint64Map[k])
@@ -4733,7 +4734,7 @@ func (this *AllMaps) String() string {
 	for k := range this.Fixed32Map {
 		keysForFixed32Map = append(keysForFixed32Map, k)
 	}
-	sortkeys.Uint32s(keysForFixed32Map)
+	github_com_gogo_protobuf_sortkeys.Uint32s(keysForFixed32Map)
 	mapStringForFixed32Map := "map[uint32]uint32{"
 	for _, k := range keysForFixed32Map {
 		mapStringForFixed32Map += fmt.Sprintf("%v: %v,", k, this.Fixed32Map[k])
@@ -4743,7 +4744,7 @@ func (this *AllMaps) String() string {
 	for k := range this.Sfixed32Map {
 		keysForSfixed32Map = append(keysForSfixed32Map, k)
 	}
-	sortkeys.Int32s(keysForSfixed32Map)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForSfixed32Map)
 	mapStringForSfixed32Map := "map[int32]int32{"
 	for _, k := range keysForSfixed32Map {
 		mapStringForSfixed32Map += fmt.Sprintf("%v: %v,", k, this.Sfixed32Map[k])
@@ -4753,7 +4754,7 @@ func (this *AllMaps) String() string {
 	for k := range this.Fixed64Map {
 		keysForFixed64Map = append(keysForFixed64Map, k)
 	}
-	sortkeys.Uint64s(keysForFixed64Map)
+	github_com_gogo_protobuf_sortkeys.Uint64s(keysForFixed64Map)
 	mapStringForFixed64Map := "map[uint64]uint64{"
 	for _, k := range keysForFixed64Map {
 		mapStringForFixed64Map += fmt.Sprintf("%v: %v,", k, this.Fixed64Map[k])
@@ -4763,7 +4764,7 @@ func (this *AllMaps) String() string {
 	for k := range this.Sfixed64Map {
 		keysForSfixed64Map = append(keysForSfixed64Map, k)
 	}
-	sortkeys.Int64s(keysForSfixed64Map)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForSfixed64Map)
 	mapStringForSfixed64Map := "map[int64]int64{"
 	for _, k := range keysForSfixed64Map {
 		mapStringForSfixed64Map += fmt.Sprintf("%v: %v,", k, this.Sfixed64Map[k])
@@ -4773,7 +4774,7 @@ func (this *AllMaps) String() string {
 	for k := range this.BoolMap {
 		keysForBoolMap = append(keysForBoolMap, k)
 	}
-	sortkeys.Bools(keysForBoolMap)
+	github_com_gogo_protobuf_sortkeys.Bools(keysForBoolMap)
 	mapStringForBoolMap := "map[bool]bool{"
 	for _, k := range keysForBoolMap {
 		mapStringForBoolMap += fmt.Sprintf("%v: %v,", k, this.BoolMap[k])
@@ -4783,7 +4784,7 @@ func (this *AllMaps) String() string {
 	for k := range this.StringMap {
 		keysForStringMap = append(keysForStringMap, k)
 	}
-	sortkeys.Strings(keysForStringMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
 	mapStringForStringMap := "map[string]string{"
 	for _, k := range keysForStringMap {
 		mapStringForStringMap += fmt.Sprintf("%v: %v,", k, this.StringMap[k])
@@ -4793,7 +4794,7 @@ func (this *AllMaps) String() string {
 	for k := range this.StringToBytesMap {
 		keysForStringToBytesMap = append(keysForStringToBytesMap, k)
 	}
-	sortkeys.Strings(keysForStringToBytesMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToBytesMap)
 	mapStringForStringToBytesMap := "map[string][]byte{"
 	for _, k := range keysForStringToBytesMap {
 		mapStringForStringToBytesMap += fmt.Sprintf("%v: %v,", k, this.StringToBytesMap[k])
@@ -4803,7 +4804,7 @@ func (this *AllMaps) String() string {
 	for k := range this.StringToEnumMap {
 		keysForStringToEnumMap = append(keysForStringToEnumMap, k)
 	}
-	sortkeys.Strings(keysForStringToEnumMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToEnumMap)
 	mapStringForStringToEnumMap := "map[string]MapEnum{"
 	for _, k := range keysForStringToEnumMap {
 		mapStringForStringToEnumMap += fmt.Sprintf("%v: %v,", k, this.StringToEnumMap[k])
@@ -4813,7 +4814,7 @@ func (this *AllMaps) String() string {
 	for k := range this.StringToMsgMap {
 		keysForStringToMsgMap = append(keysForStringToMsgMap, k)
 	}
-	sortkeys.Strings(keysForStringToMsgMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToMsgMap)
 	mapStringForStringToMsgMap := "map[string]*FloatingPoint{"
 	for _, k := range keysForStringToMsgMap {
 		mapStringForStringToMsgMap += fmt.Sprintf("%v: %v,", k, this.StringToMsgMap[k])
@@ -4850,7 +4851,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.StringToDoubleMap {
 		keysForStringToDoubleMap = append(keysForStringToDoubleMap, k)
 	}
-	sortkeys.Strings(keysForStringToDoubleMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToDoubleMap)
 	mapStringForStringToDoubleMap := "map[string]float64{"
 	for _, k := range keysForStringToDoubleMap {
 		mapStringForStringToDoubleMap += fmt.Sprintf("%v: %v,", k, this.StringToDoubleMap[k])
@@ -4860,7 +4861,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.StringToFloatMap {
 		keysForStringToFloatMap = append(keysForStringToFloatMap, k)
 	}
-	sortkeys.Strings(keysForStringToFloatMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToFloatMap)
 	mapStringForStringToFloatMap := "map[string]float32{"
 	for _, k := range keysForStringToFloatMap {
 		mapStringForStringToFloatMap += fmt.Sprintf("%v: %v,", k, this.StringToFloatMap[k])
@@ -4870,7 +4871,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.Int32Map {
 		keysForInt32Map = append(keysForInt32Map, k)
 	}
-	sortkeys.Int32s(keysForInt32Map)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForInt32Map)
 	mapStringForInt32Map := "map[int32]int32{"
 	for _, k := range keysForInt32Map {
 		mapStringForInt32Map += fmt.Sprintf("%v: %v,", k, this.Int32Map[k])
@@ -4880,7 +4881,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.Int64Map {
 		keysForInt64Map = append(keysForInt64Map, k)
 	}
-	sortkeys.Int64s(keysForInt64Map)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForInt64Map)
 	mapStringForInt64Map := "map[int64]int64{"
 	for _, k := range keysForInt64Map {
 		mapStringForInt64Map += fmt.Sprintf("%v: %v,", k, this.Int64Map[k])
@@ -4890,7 +4891,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.Uint32Map {
 		keysForUint32Map = append(keysForUint32Map, k)
 	}
-	sortkeys.Uint32s(keysForUint32Map)
+	github_com_gogo_protobuf_sortkeys.Uint32s(keysForUint32Map)
 	mapStringForUint32Map := "map[uint32]uint32{"
 	for _, k := range keysForUint32Map {
 		mapStringForUint32Map += fmt.Sprintf("%v: %v,", k, this.Uint32Map[k])
@@ -4900,7 +4901,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.Uint64Map {
 		keysForUint64Map = append(keysForUint64Map, k)
 	}
-	sortkeys.Uint64s(keysForUint64Map)
+	github_com_gogo_protobuf_sortkeys.Uint64s(keysForUint64Map)
 	mapStringForUint64Map := "map[uint64]uint64{"
 	for _, k := range keysForUint64Map {
 		mapStringForUint64Map += fmt.Sprintf("%v: %v,", k, this.Uint64Map[k])
@@ -4910,7 +4911,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.Sint32Map {
 		keysForSint32Map = append(keysForSint32Map, k)
 	}
-	sortkeys.Int32s(keysForSint32Map)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForSint32Map)
 	mapStringForSint32Map := "map[int32]int32{"
 	for _, k := range keysForSint32Map {
 		mapStringForSint32Map += fmt.Sprintf("%v: %v,", k, this.Sint32Map[k])
@@ -4920,7 +4921,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.Sint64Map {
 		keysForSint64Map = append(keysForSint64Map, k)
 	}
-	sortkeys.Int64s(keysForSint64Map)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForSint64Map)
 	mapStringForSint64Map := "map[int64]int64{"
 	for _, k := range keysForSint64Map {
 		mapStringForSint64Map += fmt.Sprintf("%v: %v,", k, this.Sint64Map[k])
@@ -4930,7 +4931,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.Fixed32Map {
 		keysForFixed32Map = append(keysForFixed32Map, k)
 	}
-	sortkeys.Uint32s(keysForFixed32Map)
+	github_com_gogo_protobuf_sortkeys.Uint32s(keysForFixed32Map)
 	mapStringForFixed32Map := "map[uint32]uint32{"
 	for _, k := range keysForFixed32Map {
 		mapStringForFixed32Map += fmt.Sprintf("%v: %v,", k, this.Fixed32Map[k])
@@ -4940,7 +4941,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.Sfixed32Map {
 		keysForSfixed32Map = append(keysForSfixed32Map, k)
 	}
-	sortkeys.Int32s(keysForSfixed32Map)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForSfixed32Map)
 	mapStringForSfixed32Map := "map[int32]int32{"
 	for _, k := range keysForSfixed32Map {
 		mapStringForSfixed32Map += fmt.Sprintf("%v: %v,", k, this.Sfixed32Map[k])
@@ -4950,7 +4951,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.Fixed64Map {
 		keysForFixed64Map = append(keysForFixed64Map, k)
 	}
-	sortkeys.Uint64s(keysForFixed64Map)
+	github_com_gogo_protobuf_sortkeys.Uint64s(keysForFixed64Map)
 	mapStringForFixed64Map := "map[uint64]uint64{"
 	for _, k := range keysForFixed64Map {
 		mapStringForFixed64Map += fmt.Sprintf("%v: %v,", k, this.Fixed64Map[k])
@@ -4960,7 +4961,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.Sfixed64Map {
 		keysForSfixed64Map = append(keysForSfixed64Map, k)
 	}
-	sortkeys.Int64s(keysForSfixed64Map)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForSfixed64Map)
 	mapStringForSfixed64Map := "map[int64]int64{"
 	for _, k := range keysForSfixed64Map {
 		mapStringForSfixed64Map += fmt.Sprintf("%v: %v,", k, this.Sfixed64Map[k])
@@ -4970,7 +4971,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.BoolMap {
 		keysForBoolMap = append(keysForBoolMap, k)
 	}
-	sortkeys.Bools(keysForBoolMap)
+	github_com_gogo_protobuf_sortkeys.Bools(keysForBoolMap)
 	mapStringForBoolMap := "map[bool]bool{"
 	for _, k := range keysForBoolMap {
 		mapStringForBoolMap += fmt.Sprintf("%v: %v,", k, this.BoolMap[k])
@@ -4980,7 +4981,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.StringMap {
 		keysForStringMap = append(keysForStringMap, k)
 	}
-	sortkeys.Strings(keysForStringMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
 	mapStringForStringMap := "map[string]string{"
 	for _, k := range keysForStringMap {
 		mapStringForStringMap += fmt.Sprintf("%v: %v,", k, this.StringMap[k])
@@ -4990,7 +4991,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.StringToBytesMap {
 		keysForStringToBytesMap = append(keysForStringToBytesMap, k)
 	}
-	sortkeys.Strings(keysForStringToBytesMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToBytesMap)
 	mapStringForStringToBytesMap := "map[string][]byte{"
 	for _, k := range keysForStringToBytesMap {
 		mapStringForStringToBytesMap += fmt.Sprintf("%v: %v,", k, this.StringToBytesMap[k])
@@ -5000,7 +5001,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.StringToEnumMap {
 		keysForStringToEnumMap = append(keysForStringToEnumMap, k)
 	}
-	sortkeys.Strings(keysForStringToEnumMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToEnumMap)
 	mapStringForStringToEnumMap := "map[string]MapEnum{"
 	for _, k := range keysForStringToEnumMap {
 		mapStringForStringToEnumMap += fmt.Sprintf("%v: %v,", k, this.StringToEnumMap[k])
@@ -5010,7 +5011,7 @@ func (this *AllMapsOrdered) String() string {
 	for k := range this.StringToMsgMap {
 		keysForStringToMsgMap = append(keysForStringToMsgMap, k)
 	}
-	sortkeys.Strings(keysForStringToMsgMap)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForStringToMsgMap)
 	mapStringForStringToMsgMap := "map[string]*FloatingPoint{"
 	for _, k := range keysForStringToMsgMap {
 		mapStringForStringToMsgMap += fmt.Sprintf("%v: %v,", k, this.StringToMsgMap[k])
@@ -5047,7 +5048,7 @@ func (this *MessageWithMap) String() string {
 	for k := range this.NameMapping {
 		keysForNameMapping = append(keysForNameMapping, k)
 	}
-	sortkeys.Int32s(keysForNameMapping)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForNameMapping)
 	mapStringForNameMapping := "map[int32]string{"
 	for _, k := range keysForNameMapping {
 		mapStringForNameMapping += fmt.Sprintf("%v: %v,", k, this.NameMapping[k])
@@ -5057,7 +5058,7 @@ func (this *MessageWithMap) String() string {
 	for k := range this.MsgMapping {
 		keysForMsgMapping = append(keysForMsgMapping, k)
 	}
-	sortkeys.Int64s(keysForMsgMapping)
+	github_com_gogo_protobuf_sortkeys.Int64s(keysForMsgMapping)
 	mapStringForMsgMapping := "map[int64]*FloatingPoint{"
 	for _, k := range keysForMsgMapping {
 		mapStringForMsgMapping += fmt.Sprintf("%v: %v,", k, this.MsgMapping[k])
@@ -5067,7 +5068,7 @@ func (this *MessageWithMap) String() string {
 	for k := range this.ByteMapping {
 		keysForByteMapping = append(keysForByteMapping, k)
 	}
-	sortkeys.Bools(keysForByteMapping)
+	github_com_gogo_protobuf_sortkeys.Bools(keysForByteMapping)
 	mapStringForByteMapping := "map[bool][]byte{"
 	for _, k := range keysForByteMapping {
 		mapStringForByteMapping += fmt.Sprintf("%v: %v,", k, this.ByteMapping[k])
@@ -5123,7 +5124,7 @@ func (this *ContainsNestedMap_NestedMap) String() string {
 	for k := range this.NestedMapField {
 		keysForNestedMapField = append(keysForNestedMapField, k)
 	}
-	sortkeys.Strings(keysForNestedMapField)
+	github_com_gogo_protobuf_sortkeys.Strings(keysForNestedMapField)
 	mapStringForNestedMapField := "map[string]float64{"
 	for _, k := range keysForNestedMapField {
 		mapStringForNestedMapField += fmt.Sprintf("%v: %v,", k, this.NestedMapField[k])

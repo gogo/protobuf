@@ -8,15 +8,16 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 
-import descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-import gzip "compress/gzip"
+import github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+import compress_gzip "compress/gzip"
 import bytes "bytes"
-import ioutil "io/ioutil"
+import io_ioutil "io/ioutil"
 
 import strings "strings"
 import reflect "reflect"
 
-import binary "encoding/binary"
+import encoding_binary "encoding/binary"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -574,14 +575,14 @@ func init() {
 	proto.RegisterType((*Subby)(nil), "one.Subby")
 	proto.RegisterType((*SampleOneOf)(nil), "one.SampleOneOf")
 }
-func (this *Subby) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *Subby) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return OneDescription()
 }
-func (this *SampleOneOf) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *SampleOneOf) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return OneDescription()
 }
-func OneDescription() (desc *descriptor.FileDescriptorSet) {
-	d := &descriptor.FileDescriptorSet{}
+func OneDescription() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+	d := &github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet{}
 	var gzipped = []byte{
 		// 3997 bytes of a gzipped FileDescriptorSet
 		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x5a, 0x5d, 0x70, 0xe3, 0xd6,
@@ -836,15 +837,15 @@ func OneDescription() (desc *descriptor.FileDescriptorSet) {
 		0x3f, 0x00, 0x00, 0xff, 0xff, 0x84, 0x35, 0xfb, 0xc7, 0xb5, 0x33, 0x00, 0x00,
 	}
 	r := bytes.NewReader(gzipped)
-	gzipr, err := gzip.NewReader(r)
+	gzipr, err := compress_gzip.NewReader(r)
 	if err != nil {
 		panic(err)
 	}
-	ungzipped, err := ioutil.ReadAll(gzipr)
+	ungzipped, err := io_ioutil.ReadAll(gzipr)
 	if err != nil {
 		panic(err)
 	}
-	if err := proto.Unmarshal(ungzipped, d); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(ungzipped, d); err != nil {
 		panic(err)
 	}
 	return d
@@ -2068,7 +2069,7 @@ func (m *SampleOneOf_Field1) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x9
 	i++
-	binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
 	i += 8
 	return i, nil
 }
@@ -2076,7 +2077,7 @@ func (m *SampleOneOf_Field2) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x15
 	i++
-	binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
 	i += 4
 	return i, nil
 }
@@ -2126,7 +2127,7 @@ func (m *SampleOneOf_Field9) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x4d
 	i++
-	binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field9))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field9))
 	i += 4
 	return i, nil
 }
@@ -2134,7 +2135,7 @@ func (m *SampleOneOf_Field10) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x55
 	i++
-	binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field10))
+	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field10))
 	i += 4
 	return i, nil
 }
@@ -2142,7 +2143,7 @@ func (m *SampleOneOf_Field11) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x59
 	i++
-	binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field11))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field11))
 	i += 8
 	return i, nil
 }
@@ -2150,7 +2151,7 @@ func (m *SampleOneOf_Field12) MarshalTo(dAtA []byte) (int, error) {
 	i := 0
 	dAtA[i] = 0x61
 	i++
-	binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field12))
+	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field12))
 	i += 8
 	return i, nil
 }

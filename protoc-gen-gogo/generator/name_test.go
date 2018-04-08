@@ -77,7 +77,7 @@ func TestGoPackageOption(t *testing.T) {
 			},
 		}
 		impPath, pkg, ok := d.goPackageOption()
-		if impPath != tc.impPath || pkg != tc.pkg || ok != tc.ok {
+		if string(impPath) != tc.impPath || string(pkg) != tc.pkg || ok != tc.ok {
 			t.Errorf("go_package = %q => (%q, %q, %t), want (%q, %q, %t)", tc.in,
 				impPath, pkg, ok, tc.impPath, tc.pkg, tc.ok)
 		}

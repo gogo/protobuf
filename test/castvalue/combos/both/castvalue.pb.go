@@ -8,14 +8,15 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 
-import descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-import gzip "compress/gzip"
+import github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+import compress_gzip "compress/gzip"
 import bytes "bytes"
-import ioutil "io/ioutil"
+import io_ioutil "io/ioutil"
 
 import strings "strings"
 import reflect "reflect"
-import sortkeys "github.com/gogo/protobuf/sortkeys"
+import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
 import io "io"
 
@@ -97,14 +98,14 @@ func init() {
 	proto.RegisterMapType((map[int32]*MyWilson)(nil), "castvalue.Castaway.CastMapValueMessageNullableEntry")
 	proto.RegisterType((*Wilson)(nil), "castvalue.Wilson")
 }
-func (this *Castaway) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *Castaway) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return CastvalueDescription()
 }
-func (this *Wilson) Description() (desc *descriptor.FileDescriptorSet) {
+func (this *Wilson) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return CastvalueDescription()
 }
-func CastvalueDescription() (desc *descriptor.FileDescriptorSet) {
-	d := &descriptor.FileDescriptorSet{}
+func CastvalueDescription() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
+	d := &github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet{}
 	var gzipped = []byte{
 		// 3930 bytes of a gzipped FileDescriptorSet
 		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x5a, 0x5d, 0x70, 0x1b, 0xd7,
@@ -355,15 +356,15 @@ func CastvalueDescription() (desc *descriptor.FileDescriptorSet) {
 		0xff, 0xff, 0x80, 0x50, 0x88, 0xf5, 0xa6, 0x33, 0x00, 0x00,
 	}
 	r := bytes.NewReader(gzipped)
-	gzipr, err := gzip.NewReader(r)
+	gzipr, err := compress_gzip.NewReader(r)
 	if err != nil {
 		panic(err)
 	}
-	ungzipped, err := ioutil.ReadAll(gzipr)
+	ungzipped, err := io_ioutil.ReadAll(gzipr)
 	if err != nil {
 		panic(err)
 	}
-	if err := proto.Unmarshal(ungzipped, d); err != nil {
+	if err := github_com_gogo_protobuf_proto.Unmarshal(ungzipped, d); err != nil {
 		panic(err)
 	}
 	return d
@@ -536,16 +537,16 @@ func (this *Wilson) Equal(that interface{}) bool {
 }
 
 type CastawayFace interface {
-	Proto() proto.Message
+	Proto() github_com_gogo_protobuf_proto.Message
 	GetCastMapValueMessage() map[int32]MyWilson
 	GetCastMapValueMessageNullable() map[int32]*MyWilson
 }
 
-func (this *Castaway) Proto() proto.Message {
+func (this *Castaway) Proto() github_com_gogo_protobuf_proto.Message {
 	return this
 }
 
-func (this *Castaway) TestProto() proto.Message {
+func (this *Castaway) TestProto() github_com_gogo_protobuf_proto.Message {
 	return NewCastawayFromFace(this)
 }
 
@@ -565,15 +566,15 @@ func NewCastawayFromFace(that CastawayFace) *Castaway {
 }
 
 type WilsonFace interface {
-	Proto() proto.Message
+	Proto() github_com_gogo_protobuf_proto.Message
 	GetInt64() *int64
 }
 
-func (this *Wilson) Proto() proto.Message {
+func (this *Wilson) Proto() github_com_gogo_protobuf_proto.Message {
 	return this
 }
 
-func (this *Wilson) TestProto() proto.Message {
+func (this *Wilson) TestProto() github_com_gogo_protobuf_proto.Message {
 	return NewWilsonFromFace(this)
 }
 
@@ -597,7 +598,7 @@ func (this *Castaway) GoString() string {
 	for k := range this.CastMapValueMessage {
 		keysForCastMapValueMessage = append(keysForCastMapValueMessage, k)
 	}
-	sortkeys.Int32s(keysForCastMapValueMessage)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForCastMapValueMessage)
 	mapStringForCastMapValueMessage := "map[int32]MyWilson{"
 	for _, k := range keysForCastMapValueMessage {
 		mapStringForCastMapValueMessage += fmt.Sprintf("%#v: %#v,", k, this.CastMapValueMessage[k])
@@ -610,7 +611,7 @@ func (this *Castaway) GoString() string {
 	for k := range this.CastMapValueMessageNullable {
 		keysForCastMapValueMessageNullable = append(keysForCastMapValueMessageNullable, k)
 	}
-	sortkeys.Int32s(keysForCastMapValueMessageNullable)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForCastMapValueMessageNullable)
 	mapStringForCastMapValueMessageNullable := "map[int32]*MyWilson{"
 	for _, k := range keysForCastMapValueMessageNullable {
 		mapStringForCastMapValueMessageNullable += fmt.Sprintf("%#v: %#v,", k, this.CastMapValueMessageNullable[k])
@@ -929,7 +930,7 @@ func (this *Castaway) String() string {
 	for k := range this.CastMapValueMessage {
 		keysForCastMapValueMessage = append(keysForCastMapValueMessage, k)
 	}
-	sortkeys.Int32s(keysForCastMapValueMessage)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForCastMapValueMessage)
 	mapStringForCastMapValueMessage := "map[int32]MyWilson{"
 	for _, k := range keysForCastMapValueMessage {
 		mapStringForCastMapValueMessage += fmt.Sprintf("%v: %v,", k, this.CastMapValueMessage[k])
@@ -939,7 +940,7 @@ func (this *Castaway) String() string {
 	for k := range this.CastMapValueMessageNullable {
 		keysForCastMapValueMessageNullable = append(keysForCastMapValueMessageNullable, k)
 	}
-	sortkeys.Int32s(keysForCastMapValueMessageNullable)
+	github_com_gogo_protobuf_sortkeys.Int32s(keysForCastMapValueMessageNullable)
 	mapStringForCastMapValueMessageNullable := "map[int32]*MyWilson{"
 	for _, k := range keysForCastMapValueMessageNullable {
 		mapStringForCastMapValueMessageNullable += fmt.Sprintf("%v: %v,", k, this.CastMapValueMessageNullable[k])

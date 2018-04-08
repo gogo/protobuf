@@ -3,7 +3,7 @@
 
 package proto
 
-import proto1 "github.com/gogo/protobuf/proto"
+import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
@@ -11,9 +11,10 @@ import _ "github.com/gogo/protobuf/gogoproto"
 import bytes "bytes"
 
 import io "io"
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
 // Reference imports to suppress errors if they are not otherwise used.
-var _ = proto1.Marshal
+var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
@@ -21,7 +22,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto1.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Foo struct {
 	Bar                  *uint64  `protobuf:"varint,1,req,name=bar" json:"bar,omitempty"`
@@ -31,7 +32,7 @@ type Foo struct {
 }
 
 func (m *Foo) Reset()         { *m = Foo{} }
-func (m *Foo) String() string { return proto1.CompactTextString(m) }
+func (m *Foo) String() string { return proto.CompactTextString(m) }
 func (*Foo) ProtoMessage()    {}
 func (*Foo) Descriptor() ([]byte, []int) {
 	return fileDescriptor_proto_77f3bd346fa75d17, []int{0}
@@ -42,7 +43,7 @@ func (m *Foo) XXX_Unmarshal(b []byte) error {
 func (m *Foo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Foo.Marshal(b, m, deterministic)
 }
-func (dst *Foo) XXX_Merge(src proto1.Message) {
+func (dst *Foo) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Foo.Merge(dst, src)
 }
 func (m *Foo) XXX_Size() int {
@@ -52,7 +53,7 @@ func (m *Foo) XXX_DiscardUnknown() {
 	xxx_messageInfo_Foo.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Foo proto1.InternalMessageInfo
+var xxx_messageInfo_Foo proto.InternalMessageInfo
 
 func (m *Foo) GetBar() uint64 {
 	if m != nil && m.Bar != nil {
@@ -62,7 +63,7 @@ func (m *Foo) GetBar() uint64 {
 }
 
 func init() {
-	proto1.RegisterType((*Foo)(nil), "proto.Foo")
+	proto.RegisterType((*Foo)(nil), "proto.Foo")
 }
 func (this *Foo) Equal(that interface{}) bool {
 	if that == nil {
@@ -247,7 +248,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 		}
 	}
 	if hasFields[0]&uint64(0x00000001) == 0 {
-		return proto1.NewRequiredNotSetError("bar")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("bar")
 	}
 
 	if iNdEx > l {
@@ -360,7 +361,7 @@ var (
 	ErrIntOverflowProto   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto1.RegisterFile("proto.proto", fileDescriptor_proto_77f3bd346fa75d17) }
+func init() { proto.RegisterFile("proto.proto", fileDescriptor_proto_77f3bd346fa75d17) }
 
 var fileDescriptor_proto_77f3bd346fa75d17 = []byte{
 	// 109 bytes of a gzipped FileDescriptorProto

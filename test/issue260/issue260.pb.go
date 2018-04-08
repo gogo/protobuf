@@ -11,7 +11,7 @@ import _ "github.com/gogo/protobuf/types"
 
 import time "time"
 
-import types "github.com/gogo/protobuf/types"
+import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 
 import io "io"
 
@@ -381,8 +381,8 @@ func (m *DroppedWithoutGetters) MarshalTo(dAtA []byte) (int, error) {
 	}
 	dAtA[i] = 0x1a
 	i++
-	i = encodeVarintIssue260(dAtA, i, uint64(types.SizeOfStdTime(m.Timestamp)))
-	n1, err := types.StdTimeMarshalTo(m.Timestamp, dAtA[i:])
+	i = encodeVarintIssue260(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(m.Timestamp)))
+	n1, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(m.Timestamp, dAtA[i:])
 	if err != nil {
 		return 0, err
 	}
@@ -450,7 +450,7 @@ func NewPopulatedDroppedWithoutGetters(r randyIssue260, easy bool) *DroppedWitho
 	if r.Intn(2) == 0 {
 		this.Width *= -1
 	}
-	v1 := types.NewPopulatedStdTime(r, easy)
+	v1 := github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 	this.Timestamp = *v1
 	if !easy && r.Intn(10) != 0 {
 	}
@@ -563,7 +563,7 @@ func (m *DroppedWithoutGetters) Size() (n int) {
 	if m.Width != 0 {
 		n += 1 + sovIssue260(uint64(m.Width))
 	}
-	l = types.SizeOfStdTime(m.Timestamp)
+	l = github_com_gogo_protobuf_types.SizeOfStdTime(m.Timestamp)
 	n += 1 + l + sovIssue260(uint64(l))
 	return n
 }
@@ -785,7 +785,7 @@ func (m *DroppedWithoutGetters) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := types.StdTimeUnmarshal(&m.Timestamp, dAtA[iNdEx:postIndex]); err != nil {
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(&m.Timestamp, dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

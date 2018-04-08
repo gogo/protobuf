@@ -6,13 +6,9 @@ package jsonpb
 import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import google_protobuf "github.com/gogo/protobuf/types"
-import google_protobuf1 "github.com/gogo/protobuf/types"
-import google_protobuf2 "github.com/gogo/protobuf/types"
-import google_protobuf3 "github.com/gogo/protobuf/types"
-import google_protobuf4 "github.com/gogo/protobuf/types"
 
 // skipping weak import gogoproto "github.com/gogo/protobuf/gogoproto"
+import types "github.com/gogo/protobuf/types"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -837,24 +833,24 @@ var E_Complex_RealExtension = &proto.ExtensionDesc{
 }
 
 type KnownTypes struct {
-	An                   *google_protobuf.Any          `protobuf:"bytes,14,opt,name=an" json:"an,omitempty"`
-	Dur                  *google_protobuf1.Duration    `protobuf:"bytes,1,opt,name=dur" json:"dur,omitempty"`
-	St                   *google_protobuf2.Struct      `protobuf:"bytes,12,opt,name=st" json:"st,omitempty"`
-	Ts                   *google_protobuf3.Timestamp   `protobuf:"bytes,2,opt,name=ts" json:"ts,omitempty"`
-	Lv                   *google_protobuf2.ListValue   `protobuf:"bytes,15,opt,name=lv" json:"lv,omitempty"`
-	Val                  *google_protobuf2.Value       `protobuf:"bytes,16,opt,name=val" json:"val,omitempty"`
-	Dbl                  *google_protobuf4.DoubleValue `protobuf:"bytes,3,opt,name=dbl" json:"dbl,omitempty"`
-	Flt                  *google_protobuf4.FloatValue  `protobuf:"bytes,4,opt,name=flt" json:"flt,omitempty"`
-	I64                  *google_protobuf4.Int64Value  `protobuf:"bytes,5,opt,name=i64" json:"i64,omitempty"`
-	U64                  *google_protobuf4.UInt64Value `protobuf:"bytes,6,opt,name=u64" json:"u64,omitempty"`
-	I32                  *google_protobuf4.Int32Value  `protobuf:"bytes,7,opt,name=i32" json:"i32,omitempty"`
-	U32                  *google_protobuf4.UInt32Value `protobuf:"bytes,8,opt,name=u32" json:"u32,omitempty"`
-	Bool                 *google_protobuf4.BoolValue   `protobuf:"bytes,9,opt,name=bool" json:"bool,omitempty"`
-	Str                  *google_protobuf4.StringValue `protobuf:"bytes,10,opt,name=str" json:"str,omitempty"`
-	Bytes                *google_protobuf4.BytesValue  `protobuf:"bytes,11,opt,name=bytes" json:"bytes,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
-	XXX_unrecognized     []byte                        `json:"-"`
-	XXX_sizecache        int32                         `json:"-"`
+	An                   *types.Any         `protobuf:"bytes,14,opt,name=an" json:"an,omitempty"`
+	Dur                  *types.Duration    `protobuf:"bytes,1,opt,name=dur" json:"dur,omitempty"`
+	St                   *types.Struct      `protobuf:"bytes,12,opt,name=st" json:"st,omitempty"`
+	Ts                   *types.Timestamp   `protobuf:"bytes,2,opt,name=ts" json:"ts,omitempty"`
+	Lv                   *types.ListValue   `protobuf:"bytes,15,opt,name=lv" json:"lv,omitempty"`
+	Val                  *types.Value       `protobuf:"bytes,16,opt,name=val" json:"val,omitempty"`
+	Dbl                  *types.DoubleValue `protobuf:"bytes,3,opt,name=dbl" json:"dbl,omitempty"`
+	Flt                  *types.FloatValue  `protobuf:"bytes,4,opt,name=flt" json:"flt,omitempty"`
+	I64                  *types.Int64Value  `protobuf:"bytes,5,opt,name=i64" json:"i64,omitempty"`
+	U64                  *types.UInt64Value `protobuf:"bytes,6,opt,name=u64" json:"u64,omitempty"`
+	I32                  *types.Int32Value  `protobuf:"bytes,7,opt,name=i32" json:"i32,omitempty"`
+	U32                  *types.UInt32Value `protobuf:"bytes,8,opt,name=u32" json:"u32,omitempty"`
+	Bool                 *types.BoolValue   `protobuf:"bytes,9,opt,name=bool" json:"bool,omitempty"`
+	Str                  *types.StringValue `protobuf:"bytes,10,opt,name=str" json:"str,omitempty"`
+	Bytes                *types.BytesValue  `protobuf:"bytes,11,opt,name=bytes" json:"bytes,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
 }
 
 func (m *KnownTypes) Reset()         { *m = KnownTypes{} }
@@ -881,105 +877,105 @@ func (m *KnownTypes) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_KnownTypes proto.InternalMessageInfo
 
-func (m *KnownTypes) GetAn() *google_protobuf.Any {
+func (m *KnownTypes) GetAn() *types.Any {
 	if m != nil {
 		return m.An
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetDur() *google_protobuf1.Duration {
+func (m *KnownTypes) GetDur() *types.Duration {
 	if m != nil {
 		return m.Dur
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetSt() *google_protobuf2.Struct {
+func (m *KnownTypes) GetSt() *types.Struct {
 	if m != nil {
 		return m.St
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetTs() *google_protobuf3.Timestamp {
+func (m *KnownTypes) GetTs() *types.Timestamp {
 	if m != nil {
 		return m.Ts
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetLv() *google_protobuf2.ListValue {
+func (m *KnownTypes) GetLv() *types.ListValue {
 	if m != nil {
 		return m.Lv
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetVal() *google_protobuf2.Value {
+func (m *KnownTypes) GetVal() *types.Value {
 	if m != nil {
 		return m.Val
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetDbl() *google_protobuf4.DoubleValue {
+func (m *KnownTypes) GetDbl() *types.DoubleValue {
 	if m != nil {
 		return m.Dbl
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetFlt() *google_protobuf4.FloatValue {
+func (m *KnownTypes) GetFlt() *types.FloatValue {
 	if m != nil {
 		return m.Flt
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetI64() *google_protobuf4.Int64Value {
+func (m *KnownTypes) GetI64() *types.Int64Value {
 	if m != nil {
 		return m.I64
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetU64() *google_protobuf4.UInt64Value {
+func (m *KnownTypes) GetU64() *types.UInt64Value {
 	if m != nil {
 		return m.U64
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetI32() *google_protobuf4.Int32Value {
+func (m *KnownTypes) GetI32() *types.Int32Value {
 	if m != nil {
 		return m.I32
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetU32() *google_protobuf4.UInt32Value {
+func (m *KnownTypes) GetU32() *types.UInt32Value {
 	if m != nil {
 		return m.U32
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetBool() *google_protobuf4.BoolValue {
+func (m *KnownTypes) GetBool() *types.BoolValue {
 	if m != nil {
 		return m.Bool
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetStr() *google_protobuf4.StringValue {
+func (m *KnownTypes) GetStr() *types.StringValue {
 	if m != nil {
 		return m.Str
 	}
 	return nil
 }
 
-func (m *KnownTypes) GetBytes() *google_protobuf4.BytesValue {
+func (m *KnownTypes) GetBytes() *types.BytesValue {
 	if m != nil {
 		return m.Bytes
 	}
@@ -1118,10 +1114,10 @@ func (m *MsgWithRequiredBytes) GetByts() []byte {
 }
 
 type MsgWithRequiredWKT struct {
-	Str                  *google_protobuf4.StringValue `protobuf:"bytes,1,req,name=str" json:"str,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                      `json:"-"`
-	XXX_unrecognized     []byte                        `json:"-"`
-	XXX_sizecache        int32                         `json:"-"`
+	Str                  *types.StringValue `protobuf:"bytes,1,req,name=str" json:"str,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
 }
 
 func (m *MsgWithRequiredWKT) Reset()         { *m = MsgWithRequiredWKT{} }
@@ -1148,7 +1144,7 @@ func (m *MsgWithRequiredWKT) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgWithRequiredWKT proto.InternalMessageInfo
 
-func (m *MsgWithRequiredWKT) GetStr() *google_protobuf4.StringValue {
+func (m *MsgWithRequiredWKT) GetStr() *types.StringValue {
 	if m != nil {
 		return m.Str
 	}

@@ -6,8 +6,8 @@ package events // import ""
 import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import issue312 "github.com/gogo/protobuf/test/issue312"
 import _ "github.com/gogo/protobuf/gogoproto"
+import issue312 "github.com/gogo/protobuf/test/issue312"
 
 import bytes "bytes"
 
