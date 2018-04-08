@@ -333,7 +333,7 @@ func (g *Generator) GeneratePlugin(p Plugin) {
 			continue
 		}
 		g.Response.File = append(g.Response.File, &plugin.CodeGeneratorResponse_File{
-			Name:    proto.String(file.goFileName()),
+			Name:    proto.String(file.goFileName(g.pathType)),
 			Content: proto.String(g.String()),
 		})
 	}
