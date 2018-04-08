@@ -29,6 +29,25 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+PROTOBUF_ROOT=$(HOME)/src/protobuf
+
+all:
+	@echo To run the tests in this directory, acquire the main protobuf
+	@echo distribution from:
+	@echo
+	@echo '   https://github.com/google/protobuf'
+	@echo
+	@echo Build the test runner with:
+	@echo
+	@echo '   cd conformance && make conformance-test-runner'
+	@echo
+	@echo And run the tests in this directory with:
+	@echo
+	@echo '   make test PROTOBUF_ROOT=<protobuf distribution>'
+
+test:
+	./test.sh $(PROTOBUF_ROOT)
+
 regenerate:
 	protoc-min-version --version="3.0.0" --proto_path=$(GOPATH)/src:$(GOPATH)/src/github.com/gogo/protobuf/protobuf:. --gogo_out=\
 	Mgoogle/protobuf/any.proto=github.com/gogo/protobuf/types,\
@@ -37,4 +56,4 @@ regenerate:
 	Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/wrappers.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/field_mask.proto=github.com/gogo/protobuf/types\
-	:. conformance_proto/conformance.proto
+	:. ./internal/conformance_proto/conformance.proto

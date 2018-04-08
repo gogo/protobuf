@@ -63,7 +63,7 @@ regenerate:
 	make -C proto/test_proto regenerate
 	make -C proto/proto3_proto regenerate
 	make -C jsonpb/jsonpb_test_proto regenerate
-	make -C _conformance regenerate
+	make -C conformance regenerate
 	make -C protobuf regenerate
 	make -C test regenerate
 	make -C test/example regenerate
@@ -143,6 +143,7 @@ testall:
 	make -C protoc-gen-gogo test
 	make -C vanity/test test
 	make -C test/registration test
+	make -C conformance test
 	make tests
 
 bench:
