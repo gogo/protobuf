@@ -650,12 +650,12 @@ func _OneofProtoTypes_OneofSizer(msg proto.Message) (n int) {
 	switch x := m.OneOfProtoTimes.(type) {
 	case *OneofProtoTypes_Timestamp:
 		s := proto.Size(x.Timestamp)
-		n += proto.SizeVarint(1<<3 | proto.WireBytes)
+		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
 	case *OneofProtoTypes_Duration:
 		s := proto.Size(x.Duration)
-		n += proto.SizeVarint(2<<3 | proto.WireBytes)
+		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
 	case nil:
@@ -817,12 +817,12 @@ func _OneofStdTypes_OneofSizer(msg proto.Message) (n int) {
 	switch x := m.OneOfStdTimes.(type) {
 	case *OneofStdTypes_Timestamp:
 		s := github_com_gogo_protobuf_types.SizeOfStdTime(*x.Timestamp)
-		n += proto.SizeVarint(1<<3 | proto.WireBytes)
+		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
 	case *OneofStdTypes_Duration:
 		s := github_com_gogo_protobuf_types.SizeOfStdDuration(*x.Duration)
-		n += proto.SizeVarint(2<<3 | proto.WireBytes)
+		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
 	case nil:

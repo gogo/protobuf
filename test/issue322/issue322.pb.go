@@ -129,7 +129,7 @@ func _OneofTest_OneofSizer(msg proto.Message) (n int) {
 	// union
 	switch x := m.Union.(type) {
 	case *OneofTest_I:
-		n += proto.SizeVarint(1<<3 | proto.WireVarint)
+		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(x.I))
 	case nil:
 	default:

@@ -182,10 +182,10 @@ func _Bar_OneofSizer(msg proto.Message) (n int) {
 	// pick
 	switch x := m.Pick.(type) {
 	case *Bar_A:
-		n += proto.SizeVarint(11<<3 | proto.WireVarint)
+		n += 1 // tag and wire
 		n += 1
 	case *Bar_B:
-		n += proto.SizeVarint(12<<3 | proto.WireVarint)
+		n += 1 // tag and wire
 		n += 1
 	case nil:
 	default:
