@@ -43,10 +43,12 @@ type StdTypes struct {
 	XXX_sizecache        int32          `json:"-"`
 }
 
-func (m *StdTypes) Reset()                    { *m = StdTypes{} }
-func (m *StdTypes) String() string            { return proto.CompactTextString(m) }
-func (*StdTypes) ProtoMessage()               {}
-func (*StdTypes) Descriptor() ([]byte, []int) { return fileDescriptorStdtypes, []int{0} }
+func (m *StdTypes) Reset()         { *m = StdTypes{} }
+func (m *StdTypes) String() string { return proto.CompactTextString(m) }
+func (*StdTypes) ProtoMessage()    {}
+func (*StdTypes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_stdtypes_bc26b660d02d7cef, []int{0}
+}
 func (m *StdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StdTypes.Unmarshal(m, b)
 }
@@ -103,10 +105,12 @@ type RepStdTypes struct {
 	XXX_sizecache        int32            `json:"-"`
 }
 
-func (m *RepStdTypes) Reset()                    { *m = RepStdTypes{} }
-func (m *RepStdTypes) String() string            { return proto.CompactTextString(m) }
-func (*RepStdTypes) ProtoMessage()               {}
-func (*RepStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorStdtypes, []int{1} }
+func (m *RepStdTypes) Reset()         { *m = RepStdTypes{} }
+func (m *RepStdTypes) String() string { return proto.CompactTextString(m) }
+func (*RepStdTypes) ProtoMessage()    {}
+func (*RepStdTypes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_stdtypes_bc26b660d02d7cef, []int{1}
+}
 func (m *RepStdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RepStdTypes.Unmarshal(m, b)
 }
@@ -163,10 +167,12 @@ type MapStdTypes struct {
 	XXX_sizecache        int32                    `json:"-"`
 }
 
-func (m *MapStdTypes) Reset()                    { *m = MapStdTypes{} }
-func (m *MapStdTypes) String() string            { return proto.CompactTextString(m) }
-func (*MapStdTypes) ProtoMessage()               {}
-func (*MapStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorStdtypes, []int{2} }
+func (m *MapStdTypes) Reset()         { *m = MapStdTypes{} }
+func (m *MapStdTypes) String() string { return proto.CompactTextString(m) }
+func (*MapStdTypes) ProtoMessage()    {}
+func (*MapStdTypes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_stdtypes_bc26b660d02d7cef, []int{2}
+}
 func (m *MapStdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MapStdTypes.Unmarshal(m, b)
 }
@@ -223,10 +229,12 @@ type OneofStdTypes struct {
 	XXX_sizecache        int32                         `json:"-"`
 }
 
-func (m *OneofStdTypes) Reset()                    { *m = OneofStdTypes{} }
-func (m *OneofStdTypes) String() string            { return proto.CompactTextString(m) }
-func (*OneofStdTypes) ProtoMessage()               {}
-func (*OneofStdTypes) Descriptor() ([]byte, []int) { return fileDescriptorStdtypes, []int{3} }
+func (m *OneofStdTypes) Reset()         { *m = OneofStdTypes{} }
+func (m *OneofStdTypes) String() string { return proto.CompactTextString(m) }
+func (*OneofStdTypes) ProtoMessage()    {}
+func (*OneofStdTypes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_stdtypes_bc26b660d02d7cef, []int{3}
+}
 func (m *OneofStdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OneofStdTypes.Unmarshal(m, b)
 }
@@ -1398,9 +1406,9 @@ func sozStdtypes(x uint64) (n int) {
 	return sovStdtypes(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
 
-func init() { proto.RegisterFile("stdtypes.proto", fileDescriptorStdtypes) }
+func init() { proto.RegisterFile("stdtypes.proto", fileDescriptor_stdtypes_bc26b660d02d7cef) }
 
-var fileDescriptorStdtypes = []byte{
+var fileDescriptor_stdtypes_bc26b660d02d7cef = []byte{
 	// 540 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x94, 0x31, 0x6f, 0xd3, 0x40,
 	0x1c, 0xc5, 0x7d, 0x4e, 0x82, 0xd2, 0x7f, 0xd4, 0x52, 0x4e, 0x02, 0x19, 0x0f, 0x97, 0x2a, 0x30,

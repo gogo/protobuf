@@ -36,9 +36,11 @@ type TimeFail struct {
 	XXX_sizecache        int32      `json:"-"`
 }
 
-func (m *TimeFail) Reset()                    { *m = TimeFail{} }
-func (*TimeFail) ProtoMessage()               {}
-func (*TimeFail) Descriptor() ([]byte, []int) { return fileDescriptorTimefail, []int{0} }
+func (m *TimeFail) Reset()      { *m = TimeFail{} }
+func (*TimeFail) ProtoMessage() {}
+func (*TimeFail) Descriptor() ([]byte, []int) {
+	return fileDescriptor_timefail_540b49e689fc70b1, []int{0}
+}
 func (m *TimeFail) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TimeFail.Unmarshal(m, b)
 }
@@ -379,9 +381,9 @@ var (
 	ErrIntOverflowTimefail   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("timefail.proto", fileDescriptorTimefail) }
+func init() { proto.RegisterFile("timefail.proto", fileDescriptor_timefail_540b49e689fc70b1) }
 
-var fileDescriptorTimefail = []byte{
+var fileDescriptor_timefail_540b49e689fc70b1 = []byte{
 	// 202 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2b, 0xc9, 0xcc, 0x4d,
 	0x4d, 0x4b, 0xcc, 0xcc, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x80, 0xf1, 0xa5, 0x74,

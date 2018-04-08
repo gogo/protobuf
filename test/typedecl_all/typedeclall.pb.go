@@ -21,10 +21,12 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
-func (m *Dropped) Reset()                    { *m = Dropped{} }
-func (m *Dropped) String() string            { return proto.CompactTextString(m) }
-func (*Dropped) ProtoMessage()               {}
-func (*Dropped) Descriptor() ([]byte, []int) { return fileDescriptorTypedeclall, []int{0} }
+func (m *Dropped) Reset()         { *m = Dropped{} }
+func (m *Dropped) String() string { return proto.CompactTextString(m) }
+func (*Dropped) ProtoMessage()    {}
+func (*Dropped) Descriptor() ([]byte, []int) {
+	return fileDescriptor_typedeclall_37fb6c37f980aef5, []int{0}
+}
 func (m *Dropped) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Dropped.Unmarshal(m, b)
 }
@@ -57,10 +59,12 @@ func (m *Dropped) GetAge() int32 {
 	return 0
 }
 
-func (m *DroppedWithoutGetters) Reset()                    { *m = DroppedWithoutGetters{} }
-func (m *DroppedWithoutGetters) String() string            { return proto.CompactTextString(m) }
-func (*DroppedWithoutGetters) ProtoMessage()               {}
-func (*DroppedWithoutGetters) Descriptor() ([]byte, []int) { return fileDescriptorTypedeclall, []int{1} }
+func (m *DroppedWithoutGetters) Reset()         { *m = DroppedWithoutGetters{} }
+func (m *DroppedWithoutGetters) String() string { return proto.CompactTextString(m) }
+func (*DroppedWithoutGetters) ProtoMessage()    {}
+func (*DroppedWithoutGetters) Descriptor() ([]byte, []int) {
+	return fileDescriptor_typedeclall_37fb6c37f980aef5, []int{1}
+}
 func (m *DroppedWithoutGetters) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DroppedWithoutGetters.Unmarshal(m, b)
 }
@@ -86,10 +90,12 @@ type Kept struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Kept) Reset()                    { *m = Kept{} }
-func (m *Kept) String() string            { return proto.CompactTextString(m) }
-func (*Kept) ProtoMessage()               {}
-func (*Kept) Descriptor() ([]byte, []int) { return fileDescriptorTypedeclall, []int{2} }
+func (m *Kept) Reset()         { *m = Kept{} }
+func (m *Kept) String() string { return proto.CompactTextString(m) }
+func (*Kept) ProtoMessage()    {}
+func (*Kept) Descriptor() ([]byte, []int) {
+	return fileDescriptor_typedeclall_37fb6c37f980aef5, []int{2}
+}
 func (m *Kept) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Kept.Unmarshal(m, b)
 }
@@ -953,9 +959,9 @@ var (
 	ErrIntOverflowTypedeclall   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("typedeclall.proto", fileDescriptorTypedeclall) }
+func init() { proto.RegisterFile("typedeclall.proto", fileDescriptor_typedeclall_37fb6c37f980aef5) }
 
-var fileDescriptorTypedeclall = []byte{
+var fileDescriptor_typedeclall_37fb6c37f980aef5 = []byte{
 	// 253 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2c, 0xa9, 0x2c, 0x48,
 	0x4d, 0x49, 0x4d, 0xce, 0x49, 0xcc, 0xc9, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x46,

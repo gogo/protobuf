@@ -28,10 +28,12 @@ type UserMessage struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *UserMessage) Reset()                    { *m = UserMessage{} }
-func (m *UserMessage) String() string            { return proto.CompactTextString(m) }
-func (*UserMessage) ProtoMessage()               {}
-func (*UserMessage) Descriptor() ([]byte, []int) { return fileDescriptorExtensionUser, []int{0} }
+func (m *UserMessage) Reset()         { *m = UserMessage{} }
+func (m *UserMessage) String() string { return proto.CompactTextString(m) }
+func (*UserMessage) ProtoMessage()    {}
+func (*UserMessage) Descriptor() ([]byte, []int) {
+	return fileDescriptor_extension_user_026ca4e46735207f, []int{0}
+}
 func (m *UserMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UserMessage.Unmarshal(m, b)
 }
@@ -72,10 +74,12 @@ type LoudMessage struct {
 	XXX_sizecache                int32  `json:"-"`
 }
 
-func (m *LoudMessage) Reset()                    { *m = LoudMessage{} }
-func (m *LoudMessage) String() string            { return proto.CompactTextString(m) }
-func (*LoudMessage) ProtoMessage()               {}
-func (*LoudMessage) Descriptor() ([]byte, []int) { return fileDescriptorExtensionUser, []int{1} }
+func (m *LoudMessage) Reset()         { *m = LoudMessage{} }
+func (m *LoudMessage) String() string { return proto.CompactTextString(m) }
+func (*LoudMessage) ProtoMessage()    {}
+func (*LoudMessage) Descriptor() ([]byte, []int) {
+	return fileDescriptor_extension_user_026ca4e46735207f, []int{1}
+}
 
 var extRange_LoudMessage = []proto.ExtensionRange{
 	{Start: 100, End: 536870911},
@@ -118,10 +122,12 @@ type LoginMessage struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *LoginMessage) Reset()                    { *m = LoginMessage{} }
-func (m *LoginMessage) String() string            { return proto.CompactTextString(m) }
-func (*LoginMessage) ProtoMessage()               {}
-func (*LoginMessage) Descriptor() ([]byte, []int) { return fileDescriptorExtensionUser, []int{2} }
+func (m *LoginMessage) Reset()         { *m = LoginMessage{} }
+func (m *LoginMessage) String() string { return proto.CompactTextString(m) }
+func (*LoginMessage) ProtoMessage()    {}
+func (*LoginMessage) Descriptor() ([]byte, []int) {
+	return fileDescriptor_extension_user_026ca4e46735207f, []int{2}
+}
 func (m *LoginMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LoginMessage.Unmarshal(m, b)
 }
@@ -156,10 +162,12 @@ type Detail struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Detail) Reset()                    { *m = Detail{} }
-func (m *Detail) String() string            { return proto.CompactTextString(m) }
-func (*Detail) ProtoMessage()               {}
-func (*Detail) Descriptor() ([]byte, []int) { return fileDescriptorExtensionUser, []int{3} }
+func (m *Detail) Reset()         { *m = Detail{} }
+func (m *Detail) String() string { return proto.CompactTextString(m) }
+func (*Detail) ProtoMessage()    {}
+func (*Detail) Descriptor() ([]byte, []int) {
+	return fileDescriptor_extension_user_026ca4e46735207f, []int{3}
+}
 func (m *Detail) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Detail.Unmarshal(m, b)
 }
@@ -193,10 +201,12 @@ type Announcement struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Announcement) Reset()                    { *m = Announcement{} }
-func (m *Announcement) String() string            { return proto.CompactTextString(m) }
-func (*Announcement) ProtoMessage()               {}
-func (*Announcement) Descriptor() ([]byte, []int) { return fileDescriptorExtensionUser, []int{4} }
+func (m *Announcement) Reset()         { *m = Announcement{} }
+func (m *Announcement) String() string { return proto.CompactTextString(m) }
+func (*Announcement) ProtoMessage()    {}
+func (*Announcement) Descriptor() ([]byte, []int) {
+	return fileDescriptor_extension_user_026ca4e46735207f, []int{4}
+}
 func (m *Announcement) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Announcement.Unmarshal(m, b)
 }
@@ -240,10 +250,12 @@ type OldStyleParcel struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *OldStyleParcel) Reset()                    { *m = OldStyleParcel{} }
-func (m *OldStyleParcel) String() string            { return proto.CompactTextString(m) }
-func (*OldStyleParcel) ProtoMessage()               {}
-func (*OldStyleParcel) Descriptor() ([]byte, []int) { return fileDescriptorExtensionUser, []int{5} }
+func (m *OldStyleParcel) Reset()         { *m = OldStyleParcel{} }
+func (m *OldStyleParcel) String() string { return proto.CompactTextString(m) }
+func (*OldStyleParcel) ProtoMessage()    {}
+func (*OldStyleParcel) Descriptor() ([]byte, []int) {
+	return fileDescriptor_extension_user_026ca4e46735207f, []int{5}
+}
 func (m *OldStyleParcel) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OldStyleParcel.Unmarshal(m, b)
 }
@@ -348,9 +360,11 @@ func init() {
 	proto.RegisterExtension(E_Detail)
 }
 
-func init() { proto.RegisterFile("extension_user/extension_user.proto", fileDescriptorExtensionUser) }
+func init() {
+	proto.RegisterFile("extension_user/extension_user.proto", fileDescriptor_extension_user_026ca4e46735207f)
+}
 
-var fileDescriptorExtensionUser = []byte{
+var fileDescriptor_extension_user_026ca4e46735207f = []byte{
 	// 490 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x54, 0xc1, 0x6e, 0xd3, 0x40,
 	0x10, 0x95, 0xdb, 0xc6, 0x4d, 0xc7, 0x69, 0x29, 0x06, 0xaa, 0xa8, 0x40, 0xb1, 0x8c, 0x90, 0x2c,

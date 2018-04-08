@@ -27,10 +27,12 @@ type TestRequest struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *TestRequest) Reset()                    { *m = TestRequest{} }
-func (m *TestRequest) String() string            { return proto.CompactTextString(m) }
-func (*TestRequest) ProtoMessage()               {}
-func (*TestRequest) Descriptor() ([]byte, []int) { return fileDescriptorEmpty, []int{0} }
+func (m *TestRequest) Reset()         { *m = TestRequest{} }
+func (m *TestRequest) String() string { return proto.CompactTextString(m) }
+func (*TestRequest) ProtoMessage()    {}
+func (*TestRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_empty_5bb98b2f7e13ce4b, []int{0}
+}
 func (m *TestRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TestRequest.Unmarshal(m, b)
 }
@@ -208,9 +210,9 @@ var (
 	ErrIntOverflowEmpty   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("empty.proto", fileDescriptorEmpty) }
+func init() { proto.RegisterFile("empty.proto", fileDescriptor_empty_5bb98b2f7e13ce4b) }
 
-var fileDescriptorEmpty = []byte{
+var fileDescriptor_empty_5bb98b2f7e13ce4b = []byte{
 	// 92 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4e, 0xcd, 0x2d, 0x28,
 	0xa9, 0xd4, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x05, 0x73, 0xa4, 0x74, 0xd3, 0x33, 0x4b,

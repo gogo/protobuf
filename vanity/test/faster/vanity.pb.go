@@ -27,10 +27,12 @@ type A struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *A) Reset()                    { *m = A{} }
-func (m *A) String() string            { return proto.CompactTextString(m) }
-func (*A) ProtoMessage()               {}
-func (*A) Descriptor() ([]byte, []int) { return fileDescriptorVanity, []int{0} }
+func (m *A) Reset()         { *m = A{} }
+func (m *A) String() string { return proto.CompactTextString(m) }
+func (*A) ProtoMessage()    {}
+func (*A) Descriptor() ([]byte, []int) {
+	return fileDescriptor_vanity_ee422b61c12e2be7, []int{0}
+}
 func (m *A) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_A.Unmarshal(m, b)
 }
@@ -330,9 +332,9 @@ var (
 	ErrIntOverflowVanity   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("vanity.proto", fileDescriptorVanity) }
+func init() { proto.RegisterFile("vanity.proto", fileDescriptor_vanity_ee422b61c12e2be7) }
 
-var fileDescriptorVanity = []byte{
+var fileDescriptor_vanity_ee422b61c12e2be7 = []byte{
 	// 109 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x29, 0x4b, 0xcc, 0xcb,
 	0x2c, 0xa9, 0xd4, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x83, 0xf0, 0x94, 0xac, 0xb9, 0x18,

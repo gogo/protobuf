@@ -46,7 +46,9 @@ var WireFormat_value = map[string]int32{
 func (x WireFormat) String() string {
 	return proto.EnumName(WireFormat_name, int32(x))
 }
-func (WireFormat) EnumDescriptor() ([]byte, []int) { return fileDescriptorConformance, []int{0} }
+func (WireFormat) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_conformance_9387364062095c94, []int{0}
+}
 
 type ForeignEnum int32
 
@@ -70,7 +72,9 @@ var ForeignEnum_value = map[string]int32{
 func (x ForeignEnum) String() string {
 	return proto.EnumName(ForeignEnum_name, int32(x))
 }
-func (ForeignEnum) EnumDescriptor() ([]byte, []int) { return fileDescriptorConformance, []int{1} }
+func (ForeignEnum) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_conformance_9387364062095c94, []int{1}
+}
 
 type TestAllTypes_NestedEnum int32
 
@@ -98,7 +102,7 @@ func (x TestAllTypes_NestedEnum) String() string {
 	return proto.EnumName(TestAllTypes_NestedEnum_name, int32(x))
 }
 func (TestAllTypes_NestedEnum) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptorConformance, []int{2, 0}
+	return fileDescriptor_conformance_9387364062095c94, []int{2, 0}
 }
 
 // Represents a single test case's input.  The testee should:
@@ -121,10 +125,12 @@ type ConformanceRequest struct {
 	XXX_sizecache         int32      `json:"-"`
 }
 
-func (m *ConformanceRequest) Reset()                    { *m = ConformanceRequest{} }
-func (m *ConformanceRequest) String() string            { return proto.CompactTextString(m) }
-func (*ConformanceRequest) ProtoMessage()               {}
-func (*ConformanceRequest) Descriptor() ([]byte, []int) { return fileDescriptorConformance, []int{0} }
+func (m *ConformanceRequest) Reset()         { *m = ConformanceRequest{} }
+func (m *ConformanceRequest) String() string { return proto.CompactTextString(m) }
+func (*ConformanceRequest) ProtoMessage()    {}
+func (*ConformanceRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_conformance_9387364062095c94, []int{0}
+}
 func (m *ConformanceRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ConformanceRequest.Unmarshal(m, b)
 }
@@ -266,10 +272,12 @@ type ConformanceResponse struct {
 	XXX_sizecache        int32                        `json:"-"`
 }
 
-func (m *ConformanceResponse) Reset()                    { *m = ConformanceResponse{} }
-func (m *ConformanceResponse) String() string            { return proto.CompactTextString(m) }
-func (*ConformanceResponse) ProtoMessage()               {}
-func (*ConformanceResponse) Descriptor() ([]byte, []int) { return fileDescriptorConformance, []int{1} }
+func (m *ConformanceResponse) Reset()         { *m = ConformanceResponse{} }
+func (m *ConformanceResponse) String() string { return proto.CompactTextString(m) }
+func (*ConformanceResponse) ProtoMessage()    {}
+func (*ConformanceResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_conformance_9387364062095c94, []int{1}
+}
 func (m *ConformanceResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ConformanceResponse.Unmarshal(m, b)
 }
@@ -628,10 +636,12 @@ type TestAllTypes struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *TestAllTypes) Reset()                    { *m = TestAllTypes{} }
-func (m *TestAllTypes) String() string            { return proto.CompactTextString(m) }
-func (*TestAllTypes) ProtoMessage()               {}
-func (*TestAllTypes) Descriptor() ([]byte, []int) { return fileDescriptorConformance, []int{2} }
+func (m *TestAllTypes) Reset()         { *m = TestAllTypes{} }
+func (m *TestAllTypes) String() string { return proto.CompactTextString(m) }
+func (*TestAllTypes) ProtoMessage()    {}
+func (*TestAllTypes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_conformance_9387364062095c94, []int{2}
+}
 func (m *TestAllTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TestAllTypes.Unmarshal(m, b)
 }
@@ -1717,7 +1727,7 @@ func (m *TestAllTypes_NestedMessage) Reset()         { *m = TestAllTypes_NestedM
 func (m *TestAllTypes_NestedMessage) String() string { return proto.CompactTextString(m) }
 func (*TestAllTypes_NestedMessage) ProtoMessage()    {}
 func (*TestAllTypes_NestedMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptorConformance, []int{2, 0}
+	return fileDescriptor_conformance_9387364062095c94, []int{2, 0}
 }
 func (m *TestAllTypes_NestedMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TestAllTypes_NestedMessage.Unmarshal(m, b)
@@ -1758,10 +1768,12 @@ type ForeignMessage struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *ForeignMessage) Reset()                    { *m = ForeignMessage{} }
-func (m *ForeignMessage) String() string            { return proto.CompactTextString(m) }
-func (*ForeignMessage) ProtoMessage()               {}
-func (*ForeignMessage) Descriptor() ([]byte, []int) { return fileDescriptorConformance, []int{3} }
+func (m *ForeignMessage) Reset()         { *m = ForeignMessage{} }
+func (m *ForeignMessage) String() string { return proto.CompactTextString(m) }
+func (*ForeignMessage) ProtoMessage()    {}
+func (*ForeignMessage) Descriptor() ([]byte, []int) {
+	return fileDescriptor_conformance_9387364062095c94, []int{3}
+}
 func (m *ForeignMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ForeignMessage.Unmarshal(m, b)
 }
@@ -1817,9 +1829,11 @@ func init() {
 	proto.RegisterEnum("conformance.TestAllTypes_NestedEnum", TestAllTypes_NestedEnum_name, TestAllTypes_NestedEnum_value)
 }
 
-func init() { proto.RegisterFile("conformance_proto/conformance.proto", fileDescriptorConformance) }
+func init() {
+	proto.RegisterFile("conformance_proto/conformance.proto", fileDescriptor_conformance_9387364062095c94)
+}
 
-var fileDescriptorConformance = []byte{
+var fileDescriptor_conformance_9387364062095c94 = []byte{
 	// 2737 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x5a, 0xd9, 0x72, 0xdb, 0xc8,
 	0xd5, 0x16, 0x08, 0x59, 0x4b, 0x93, 0x92, 0xa8, 0xd6, 0xd6, 0x96, 0x5d, 0x63, 0x58, 0xb2, 0x7f,

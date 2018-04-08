@@ -32,10 +32,12 @@ type RequiredExample struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *RequiredExample) Reset()                    { *m = RequiredExample{} }
-func (m *RequiredExample) String() string            { return proto.CompactTextString(m) }
-func (*RequiredExample) ProtoMessage()               {}
-func (*RequiredExample) Descriptor() ([]byte, []int) { return fileDescriptorRequiredexample, []int{0} }
+func (m *RequiredExample) Reset()         { *m = RequiredExample{} }
+func (m *RequiredExample) String() string { return proto.CompactTextString(m) }
+func (*RequiredExample) ProtoMessage()    {}
+func (*RequiredExample) Descriptor() ([]byte, []int) {
+	return fileDescriptor_requiredexample_2673f47f43fdf851, []int{0}
+}
 func (m *RequiredExample) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RequiredExample.Unmarshal(m, b)
 }
@@ -96,10 +98,12 @@ type NidOptNative struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NidOptNative) Reset()                    { *m = NidOptNative{} }
-func (m *NidOptNative) String() string            { return proto.CompactTextString(m) }
-func (*NidOptNative) ProtoMessage()               {}
-func (*NidOptNative) Descriptor() ([]byte, []int) { return fileDescriptorRequiredexample, []int{1} }
+func (m *NidOptNative) Reset()         { *m = NidOptNative{} }
+func (m *NidOptNative) String() string { return proto.CompactTextString(m) }
+func (*NidOptNative) ProtoMessage()    {}
+func (*NidOptNative) Descriptor() ([]byte, []int) {
+	return fileDescriptor_requiredexample_2673f47f43fdf851, []int{1}
+}
 func (m *NidOptNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptNative.Unmarshal(m, b)
 }
@@ -244,10 +248,12 @@ type NinOptNative struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NinOptNative) Reset()                    { *m = NinOptNative{} }
-func (m *NinOptNative) String() string            { return proto.CompactTextString(m) }
-func (*NinOptNative) ProtoMessage()               {}
-func (*NinOptNative) Descriptor() ([]byte, []int) { return fileDescriptorRequiredexample, []int{2} }
+func (m *NinOptNative) Reset()         { *m = NinOptNative{} }
+func (m *NinOptNative) String() string { return proto.CompactTextString(m) }
+func (*NinOptNative) ProtoMessage()    {}
+func (*NinOptNative) Descriptor() ([]byte, []int) {
+	return fileDescriptor_requiredexample_2673f47f43fdf851, []int{2}
+}
 func (m *NinOptNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptNative.Unmarshal(m, b)
 }
@@ -382,7 +388,7 @@ func (m *NestedNinOptNative) Reset()         { *m = NestedNinOptNative{} }
 func (m *NestedNinOptNative) String() string { return proto.CompactTextString(m) }
 func (*NestedNinOptNative) ProtoMessage()    {}
 func (*NestedNinOptNative) Descriptor() ([]byte, []int) {
-	return fileDescriptorRequiredexample, []int{3}
+	return fileDescriptor_requiredexample_2673f47f43fdf851, []int{3}
 }
 func (m *NestedNinOptNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedNinOptNative.Unmarshal(m, b)
@@ -2175,9 +2181,11 @@ var (
 	ErrIntOverflowRequiredexample   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("requiredexample.proto", fileDescriptorRequiredexample) }
+func init() {
+	proto.RegisterFile("requiredexample.proto", fileDescriptor_requiredexample_2673f47f43fdf851)
+}
 
-var fileDescriptorRequiredexample = []byte{
+var fileDescriptor_requiredexample_2673f47f43fdf851 = []byte{
 	// 469 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0xd4, 0xdd, 0x8e, 0xd2, 0x40,
 	0x14, 0xc0, 0x71, 0x3b, 0x65, 0xf9, 0x98, 0x05, 0xd9, 0x6d, 0xe2, 0xe4, 0xc4, 0x98, 0x7a, 0xc2,

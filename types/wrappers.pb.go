@@ -21,6 +21,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+
 // Wrapper message for `double`.
 //
 // The JSON representation for `DoubleValue` is JSON number.
@@ -32,10 +38,12 @@ type DoubleValue struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *DoubleValue) Reset()                    { *m = DoubleValue{} }
-func (*DoubleValue) ProtoMessage()               {}
-func (*DoubleValue) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{0} }
-func (*DoubleValue) XXX_WellKnownType() string   { return "DoubleValue" }
+func (m *DoubleValue) Reset()      { *m = DoubleValue{} }
+func (*DoubleValue) ProtoMessage() {}
+func (*DoubleValue) Descriptor() ([]byte, []int) {
+	return fileDescriptor_wrappers_b0966e4a6118a07f, []int{0}
+}
+func (*DoubleValue) XXX_WellKnownType() string { return "DoubleValue" }
 func (m *DoubleValue) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DoubleValue.Unmarshal(m, b)
 }
@@ -76,10 +84,12 @@ type FloatValue struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *FloatValue) Reset()                    { *m = FloatValue{} }
-func (*FloatValue) ProtoMessage()               {}
-func (*FloatValue) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{1} }
-func (*FloatValue) XXX_WellKnownType() string   { return "FloatValue" }
+func (m *FloatValue) Reset()      { *m = FloatValue{} }
+func (*FloatValue) ProtoMessage() {}
+func (*FloatValue) Descriptor() ([]byte, []int) {
+	return fileDescriptor_wrappers_b0966e4a6118a07f, []int{1}
+}
+func (*FloatValue) XXX_WellKnownType() string { return "FloatValue" }
 func (m *FloatValue) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FloatValue.Unmarshal(m, b)
 }
@@ -120,10 +130,12 @@ type Int64Value struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Int64Value) Reset()                    { *m = Int64Value{} }
-func (*Int64Value) ProtoMessage()               {}
-func (*Int64Value) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{2} }
-func (*Int64Value) XXX_WellKnownType() string   { return "Int64Value" }
+func (m *Int64Value) Reset()      { *m = Int64Value{} }
+func (*Int64Value) ProtoMessage() {}
+func (*Int64Value) Descriptor() ([]byte, []int) {
+	return fileDescriptor_wrappers_b0966e4a6118a07f, []int{2}
+}
+func (*Int64Value) XXX_WellKnownType() string { return "Int64Value" }
 func (m *Int64Value) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Int64Value.Unmarshal(m, b)
 }
@@ -164,10 +176,12 @@ type UInt64Value struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *UInt64Value) Reset()                    { *m = UInt64Value{} }
-func (*UInt64Value) ProtoMessage()               {}
-func (*UInt64Value) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{3} }
-func (*UInt64Value) XXX_WellKnownType() string   { return "UInt64Value" }
+func (m *UInt64Value) Reset()      { *m = UInt64Value{} }
+func (*UInt64Value) ProtoMessage() {}
+func (*UInt64Value) Descriptor() ([]byte, []int) {
+	return fileDescriptor_wrappers_b0966e4a6118a07f, []int{3}
+}
+func (*UInt64Value) XXX_WellKnownType() string { return "UInt64Value" }
 func (m *UInt64Value) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UInt64Value.Unmarshal(m, b)
 }
@@ -208,10 +222,12 @@ type Int32Value struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Int32Value) Reset()                    { *m = Int32Value{} }
-func (*Int32Value) ProtoMessage()               {}
-func (*Int32Value) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{4} }
-func (*Int32Value) XXX_WellKnownType() string   { return "Int32Value" }
+func (m *Int32Value) Reset()      { *m = Int32Value{} }
+func (*Int32Value) ProtoMessage() {}
+func (*Int32Value) Descriptor() ([]byte, []int) {
+	return fileDescriptor_wrappers_b0966e4a6118a07f, []int{4}
+}
+func (*Int32Value) XXX_WellKnownType() string { return "Int32Value" }
 func (m *Int32Value) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Int32Value.Unmarshal(m, b)
 }
@@ -252,10 +268,12 @@ type UInt32Value struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *UInt32Value) Reset()                    { *m = UInt32Value{} }
-func (*UInt32Value) ProtoMessage()               {}
-func (*UInt32Value) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{5} }
-func (*UInt32Value) XXX_WellKnownType() string   { return "UInt32Value" }
+func (m *UInt32Value) Reset()      { *m = UInt32Value{} }
+func (*UInt32Value) ProtoMessage() {}
+func (*UInt32Value) Descriptor() ([]byte, []int) {
+	return fileDescriptor_wrappers_b0966e4a6118a07f, []int{5}
+}
+func (*UInt32Value) XXX_WellKnownType() string { return "UInt32Value" }
 func (m *UInt32Value) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UInt32Value.Unmarshal(m, b)
 }
@@ -296,10 +314,12 @@ type BoolValue struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *BoolValue) Reset()                    { *m = BoolValue{} }
-func (*BoolValue) ProtoMessage()               {}
-func (*BoolValue) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{6} }
-func (*BoolValue) XXX_WellKnownType() string   { return "BoolValue" }
+func (m *BoolValue) Reset()      { *m = BoolValue{} }
+func (*BoolValue) ProtoMessage() {}
+func (*BoolValue) Descriptor() ([]byte, []int) {
+	return fileDescriptor_wrappers_b0966e4a6118a07f, []int{6}
+}
+func (*BoolValue) XXX_WellKnownType() string { return "BoolValue" }
 func (m *BoolValue) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BoolValue.Unmarshal(m, b)
 }
@@ -340,10 +360,12 @@ type StringValue struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *StringValue) Reset()                    { *m = StringValue{} }
-func (*StringValue) ProtoMessage()               {}
-func (*StringValue) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{7} }
-func (*StringValue) XXX_WellKnownType() string   { return "StringValue" }
+func (m *StringValue) Reset()      { *m = StringValue{} }
+func (*StringValue) ProtoMessage() {}
+func (*StringValue) Descriptor() ([]byte, []int) {
+	return fileDescriptor_wrappers_b0966e4a6118a07f, []int{7}
+}
+func (*StringValue) XXX_WellKnownType() string { return "StringValue" }
 func (m *StringValue) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StringValue.Unmarshal(m, b)
 }
@@ -384,10 +406,12 @@ type BytesValue struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *BytesValue) Reset()                    { *m = BytesValue{} }
-func (*BytesValue) ProtoMessage()               {}
-func (*BytesValue) Descriptor() ([]byte, []int) { return fileDescriptorWrappers, []int{8} }
-func (*BytesValue) XXX_WellKnownType() string   { return "BytesValue" }
+func (m *BytesValue) Reset()      { *m = BytesValue{} }
+func (*BytesValue) ProtoMessage() {}
+func (*BytesValue) Descriptor() ([]byte, []int) {
+	return fileDescriptor_wrappers_b0966e4a6118a07f, []int{8}
+}
+func (*BytesValue) XXX_WellKnownType() string { return "BytesValue" }
 func (m *BytesValue) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BytesValue.Unmarshal(m, b)
 }
@@ -2509,9 +2533,11 @@ var (
 	ErrIntOverflowWrappers   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("google/protobuf/wrappers.proto", fileDescriptorWrappers) }
+func init() {
+	proto.RegisterFile("google/protobuf/wrappers.proto", fileDescriptor_wrappers_b0966e4a6118a07f)
+}
 
-var fileDescriptorWrappers = []byte{
+var fileDescriptor_wrappers_b0966e4a6118a07f = []byte{
 	// 289 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4b, 0xcf, 0xcf, 0x4f,
 	0xcf, 0x49, 0xd5, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0x4f, 0x2a, 0x4d, 0xd3, 0x2f, 0x2f, 0x4a, 0x2c,

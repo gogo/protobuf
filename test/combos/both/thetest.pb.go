@@ -74,7 +74,9 @@ func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
 	*x = TheTestEnum(value)
 	return nil
 }
-func (TheTestEnum) EnumDescriptor() ([]byte, []int) { return fileDescriptorThetest, []int{0} }
+func (TheTestEnum) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{0}
+}
 
 type AnotherTestEnum int32
 
@@ -108,7 +110,9 @@ func (x *AnotherTestEnum) UnmarshalJSON(data []byte) error {
 	*x = AnotherTestEnum(value)
 	return nil
 }
-func (AnotherTestEnum) EnumDescriptor() ([]byte, []int) { return fileDescriptorThetest, []int{1} }
+func (AnotherTestEnum) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{1}
+}
 
 // YetAnotherTestEnum is used to test cross-package import of custom name
 // fields and default resolution.
@@ -144,7 +148,9 @@ func (x *YetAnotherTestEnum) UnmarshalJSON(data []byte) error {
 	*x = YetAnotherTestEnum(value)
 	return nil
 }
-func (YetAnotherTestEnum) EnumDescriptor() ([]byte, []int) { return fileDescriptorThetest, []int{2} }
+func (YetAnotherTestEnum) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{2}
+}
 
 // YetAnotherTestEnum is used to test cross-package import of custom name
 // fields and default resolution.
@@ -180,7 +186,9 @@ func (x *YetYetAnotherTestEnum) UnmarshalJSON(data []byte) error {
 	*x = YetYetAnotherTestEnum(value)
 	return nil
 }
-func (YetYetAnotherTestEnum) EnumDescriptor() ([]byte, []int) { return fileDescriptorThetest, []int{3} }
+func (YetYetAnotherTestEnum) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{3}
+}
 
 type NestedDefinition_NestedEnum int32
 
@@ -212,7 +220,7 @@ func (x *NestedDefinition_NestedEnum) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (NestedDefinition_NestedEnum) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptorThetest, []int{42, 0}
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{42, 0}
 }
 
 type NidOptNative struct {
@@ -236,9 +244,11 @@ type NidOptNative struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NidOptNative) Reset()                    { *m = NidOptNative{} }
-func (*NidOptNative) ProtoMessage()               {}
-func (*NidOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{0} }
+func (m *NidOptNative) Reset()      { *m = NidOptNative{} }
+func (*NidOptNative) ProtoMessage() {}
+func (*NidOptNative) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{0}
+}
 func (m *NidOptNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptNative.Unmarshal(m, b)
 }
@@ -278,9 +288,11 @@ type NinOptNative struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NinOptNative) Reset()                    { *m = NinOptNative{} }
-func (*NinOptNative) ProtoMessage()               {}
-func (*NinOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{1} }
+func (m *NinOptNative) Reset()      { *m = NinOptNative{} }
+func (*NinOptNative) ProtoMessage() {}
+func (*NinOptNative) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{1}
+}
 func (m *NinOptNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptNative.Unmarshal(m, b)
 }
@@ -320,9 +332,11 @@ type NidRepNative struct {
 	XXX_sizecache        int32     `json:"-"`
 }
 
-func (m *NidRepNative) Reset()                    { *m = NidRepNative{} }
-func (*NidRepNative) ProtoMessage()               {}
-func (*NidRepNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{2} }
+func (m *NidRepNative) Reset()      { *m = NidRepNative{} }
+func (*NidRepNative) ProtoMessage() {}
+func (*NidRepNative) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{2}
+}
 func (m *NidRepNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepNative.Unmarshal(m, b)
 }
@@ -362,9 +376,11 @@ type NinRepNative struct {
 	XXX_sizecache        int32     `json:"-"`
 }
 
-func (m *NinRepNative) Reset()                    { *m = NinRepNative{} }
-func (*NinRepNative) ProtoMessage()               {}
-func (*NinRepNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{3} }
+func (m *NinRepNative) Reset()      { *m = NinRepNative{} }
+func (*NinRepNative) ProtoMessage() {}
+func (*NinRepNative) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{3}
+}
 func (m *NinRepNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepNative.Unmarshal(m, b)
 }
@@ -402,9 +418,11 @@ type NidRepPackedNative struct {
 	XXX_sizecache        int32     `json:"-"`
 }
 
-func (m *NidRepPackedNative) Reset()                    { *m = NidRepPackedNative{} }
-func (*NidRepPackedNative) ProtoMessage()               {}
-func (*NidRepPackedNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{4} }
+func (m *NidRepPackedNative) Reset()      { *m = NidRepPackedNative{} }
+func (*NidRepPackedNative) ProtoMessage() {}
+func (*NidRepPackedNative) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{4}
+}
 func (m *NidRepPackedNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepPackedNative.Unmarshal(m, b)
 }
@@ -442,9 +460,11 @@ type NinRepPackedNative struct {
 	XXX_sizecache        int32     `json:"-"`
 }
 
-func (m *NinRepPackedNative) Reset()                    { *m = NinRepPackedNative{} }
-func (*NinRepPackedNative) ProtoMessage()               {}
-func (*NinRepPackedNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{5} }
+func (m *NinRepPackedNative) Reset()      { *m = NinRepPackedNative{} }
+func (*NinRepPackedNative) ProtoMessage() {}
+func (*NinRepPackedNative) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{5}
+}
 func (m *NinRepPackedNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepPackedNative.Unmarshal(m, b)
 }
@@ -479,9 +499,11 @@ type NidOptStruct struct {
 	XXX_sizecache        int32        `json:"-"`
 }
 
-func (m *NidOptStruct) Reset()                    { *m = NidOptStruct{} }
-func (*NidOptStruct) ProtoMessage()               {}
-func (*NidOptStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{6} }
+func (m *NidOptStruct) Reset()      { *m = NidOptStruct{} }
+func (*NidOptStruct) ProtoMessage() {}
+func (*NidOptStruct) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{6}
+}
 func (m *NidOptStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptStruct.Unmarshal(m, b)
 }
@@ -516,9 +538,11 @@ type NinOptStruct struct {
 	XXX_sizecache        int32         `json:"-"`
 }
 
-func (m *NinOptStruct) Reset()                    { *m = NinOptStruct{} }
-func (*NinOptStruct) ProtoMessage()               {}
-func (*NinOptStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{7} }
+func (m *NinOptStruct) Reset()      { *m = NinOptStruct{} }
+func (*NinOptStruct) ProtoMessage() {}
+func (*NinOptStruct) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{7}
+}
 func (m *NinOptStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptStruct.Unmarshal(m, b)
 }
@@ -553,9 +577,11 @@ type NidRepStruct struct {
 	XXX_sizecache        int32          `json:"-"`
 }
 
-func (m *NidRepStruct) Reset()                    { *m = NidRepStruct{} }
-func (*NidRepStruct) ProtoMessage()               {}
-func (*NidRepStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{8} }
+func (m *NidRepStruct) Reset()      { *m = NidRepStruct{} }
+func (*NidRepStruct) ProtoMessage() {}
+func (*NidRepStruct) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{8}
+}
 func (m *NidRepStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepStruct.Unmarshal(m, b)
 }
@@ -590,9 +616,11 @@ type NinRepStruct struct {
 	XXX_sizecache        int32           `json:"-"`
 }
 
-func (m *NinRepStruct) Reset()                    { *m = NinRepStruct{} }
-func (*NinRepStruct) ProtoMessage()               {}
-func (*NinRepStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{9} }
+func (m *NinRepStruct) Reset()      { *m = NinRepStruct{} }
+func (*NinRepStruct) ProtoMessage() {}
+func (*NinRepStruct) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{9}
+}
 func (m *NinRepStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepStruct.Unmarshal(m, b)
 }
@@ -620,9 +648,11 @@ type NidEmbeddedStruct struct {
 	XXX_sizecache        int32        `json:"-"`
 }
 
-func (m *NidEmbeddedStruct) Reset()                    { *m = NidEmbeddedStruct{} }
-func (*NidEmbeddedStruct) ProtoMessage()               {}
-func (*NidEmbeddedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{10} }
+func (m *NidEmbeddedStruct) Reset()      { *m = NidEmbeddedStruct{} }
+func (*NidEmbeddedStruct) ProtoMessage() {}
+func (*NidEmbeddedStruct) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{10}
+}
 func (m *NidEmbeddedStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidEmbeddedStruct.Unmarshal(m, b)
 }
@@ -650,9 +680,11 @@ type NinEmbeddedStruct struct {
 	XXX_sizecache        int32         `json:"-"`
 }
 
-func (m *NinEmbeddedStruct) Reset()                    { *m = NinEmbeddedStruct{} }
-func (*NinEmbeddedStruct) ProtoMessage()               {}
-func (*NinEmbeddedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{11} }
+func (m *NinEmbeddedStruct) Reset()      { *m = NinEmbeddedStruct{} }
+func (*NinEmbeddedStruct) ProtoMessage() {}
+func (*NinEmbeddedStruct) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{11}
+}
 func (m *NinEmbeddedStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinEmbeddedStruct.Unmarshal(m, b)
 }
@@ -679,9 +711,11 @@ type NidNestedStruct struct {
 	XXX_sizecache        int32          `json:"-"`
 }
 
-func (m *NidNestedStruct) Reset()                    { *m = NidNestedStruct{} }
-func (*NidNestedStruct) ProtoMessage()               {}
-func (*NidNestedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{12} }
+func (m *NidNestedStruct) Reset()      { *m = NidNestedStruct{} }
+func (*NidNestedStruct) ProtoMessage() {}
+func (*NidNestedStruct) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{12}
+}
 func (m *NidNestedStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidNestedStruct.Unmarshal(m, b)
 }
@@ -708,9 +742,11 @@ type NinNestedStruct struct {
 	XXX_sizecache        int32           `json:"-"`
 }
 
-func (m *NinNestedStruct) Reset()                    { *m = NinNestedStruct{} }
-func (*NinNestedStruct) ProtoMessage()               {}
-func (*NinNestedStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{13} }
+func (m *NinNestedStruct) Reset()      { *m = NinNestedStruct{} }
+func (*NinNestedStruct) ProtoMessage() {}
+func (*NinNestedStruct) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{13}
+}
 func (m *NinNestedStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinNestedStruct.Unmarshal(m, b)
 }
@@ -737,9 +773,11 @@ type NidOptCustom struct {
 	XXX_sizecache        int32                                        `json:"-"`
 }
 
-func (m *NidOptCustom) Reset()                    { *m = NidOptCustom{} }
-func (*NidOptCustom) ProtoMessage()               {}
-func (*NidOptCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{14} }
+func (m *NidOptCustom) Reset()      { *m = NidOptCustom{} }
+func (*NidOptCustom) ProtoMessage() {}
+func (*NidOptCustom) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{14}
+}
 func (m *NidOptCustom) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptCustom.Unmarshal(m, b)
 }
@@ -765,9 +803,11 @@ type CustomDash struct {
 	XXX_sizecache        int32                                                 `json:"-"`
 }
 
-func (m *CustomDash) Reset()                    { *m = CustomDash{} }
-func (*CustomDash) ProtoMessage()               {}
-func (*CustomDash) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{15} }
+func (m *CustomDash) Reset()      { *m = CustomDash{} }
+func (*CustomDash) ProtoMessage() {}
+func (*CustomDash) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{15}
+}
 func (m *CustomDash) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomDash.Unmarshal(m, b)
 }
@@ -794,9 +834,11 @@ type NinOptCustom struct {
 	XXX_sizecache        int32                                         `json:"-"`
 }
 
-func (m *NinOptCustom) Reset()                    { *m = NinOptCustom{} }
-func (*NinOptCustom) ProtoMessage()               {}
-func (*NinOptCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{16} }
+func (m *NinOptCustom) Reset()      { *m = NinOptCustom{} }
+func (*NinOptCustom) ProtoMessage() {}
+func (*NinOptCustom) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{16}
+}
 func (m *NinOptCustom) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptCustom.Unmarshal(m, b)
 }
@@ -823,9 +865,11 @@ type NidRepCustom struct {
 	XXX_sizecache        int32                                          `json:"-"`
 }
 
-func (m *NidRepCustom) Reset()                    { *m = NidRepCustom{} }
-func (*NidRepCustom) ProtoMessage()               {}
-func (*NidRepCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{17} }
+func (m *NidRepCustom) Reset()      { *m = NidRepCustom{} }
+func (*NidRepCustom) ProtoMessage() {}
+func (*NidRepCustom) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{17}
+}
 func (m *NidRepCustom) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepCustom.Unmarshal(m, b)
 }
@@ -852,9 +896,11 @@ type NinRepCustom struct {
 	XXX_sizecache        int32                                          `json:"-"`
 }
 
-func (m *NinRepCustom) Reset()                    { *m = NinRepCustom{} }
-func (*NinRepCustom) ProtoMessage()               {}
-func (*NinRepCustom) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{18} }
+func (m *NinRepCustom) Reset()      { *m = NinRepCustom{} }
+func (*NinRepCustom) ProtoMessage() {}
+func (*NinRepCustom) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{18}
+}
 func (m *NinRepCustom) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepCustom.Unmarshal(m, b)
 }
@@ -888,9 +934,11 @@ type NinOptNativeUnion struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NinOptNativeUnion) Reset()                    { *m = NinOptNativeUnion{} }
-func (*NinOptNativeUnion) ProtoMessage()               {}
-func (*NinOptNativeUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{19} }
+func (m *NinOptNativeUnion) Reset()      { *m = NinOptNativeUnion{} }
+func (*NinOptNativeUnion) ProtoMessage() {}
+func (*NinOptNativeUnion) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{19}
+}
 func (m *NinOptNativeUnion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptNativeUnion.Unmarshal(m, b)
 }
@@ -924,9 +972,11 @@ type NinOptStructUnion struct {
 	XXX_sizecache        int32         `json:"-"`
 }
 
-func (m *NinOptStructUnion) Reset()                    { *m = NinOptStructUnion{} }
-func (*NinOptStructUnion) ProtoMessage()               {}
-func (*NinOptStructUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{20} }
+func (m *NinOptStructUnion) Reset()      { *m = NinOptStructUnion{} }
+func (*NinOptStructUnion) ProtoMessage() {}
+func (*NinOptStructUnion) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{20}
+}
 func (m *NinOptStructUnion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptStructUnion.Unmarshal(m, b)
 }
@@ -954,9 +1004,11 @@ type NinEmbeddedStructUnion struct {
 	XXX_sizecache        int32         `json:"-"`
 }
 
-func (m *NinEmbeddedStructUnion) Reset()                    { *m = NinEmbeddedStructUnion{} }
-func (*NinEmbeddedStructUnion) ProtoMessage()               {}
-func (*NinEmbeddedStructUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{21} }
+func (m *NinEmbeddedStructUnion) Reset()      { *m = NinEmbeddedStructUnion{} }
+func (*NinEmbeddedStructUnion) ProtoMessage() {}
+func (*NinEmbeddedStructUnion) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{21}
+}
 func (m *NinEmbeddedStructUnion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinEmbeddedStructUnion.Unmarshal(m, b)
 }
@@ -984,9 +1036,11 @@ type NinNestedStructUnion struct {
 	XXX_sizecache        int32                   `json:"-"`
 }
 
-func (m *NinNestedStructUnion) Reset()                    { *m = NinNestedStructUnion{} }
-func (*NinNestedStructUnion) ProtoMessage()               {}
-func (*NinNestedStructUnion) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{22} }
+func (m *NinNestedStructUnion) Reset()      { *m = NinNestedStructUnion{} }
+func (*NinNestedStructUnion) ProtoMessage() {}
+func (*NinNestedStructUnion) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{22}
+}
 func (m *NinNestedStructUnion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinNestedStructUnion.Unmarshal(m, b)
 }
@@ -1014,9 +1068,11 @@ type Tree struct {
 	XXX_sizecache        int32      `json:"-"`
 }
 
-func (m *Tree) Reset()                    { *m = Tree{} }
-func (*Tree) ProtoMessage()               {}
-func (*Tree) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{23} }
+func (m *Tree) Reset()      { *m = Tree{} }
+func (*Tree) ProtoMessage() {}
+func (*Tree) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{23}
+}
 func (m *Tree) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Tree.Unmarshal(m, b)
 }
@@ -1043,9 +1099,11 @@ type OrBranch struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *OrBranch) Reset()                    { *m = OrBranch{} }
-func (*OrBranch) ProtoMessage()               {}
-func (*OrBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{24} }
+func (m *OrBranch) Reset()      { *m = OrBranch{} }
+func (*OrBranch) ProtoMessage() {}
+func (*OrBranch) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{24}
+}
 func (m *OrBranch) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OrBranch.Unmarshal(m, b)
 }
@@ -1072,9 +1130,11 @@ type AndBranch struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *AndBranch) Reset()                    { *m = AndBranch{} }
-func (*AndBranch) ProtoMessage()               {}
-func (*AndBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{25} }
+func (m *AndBranch) Reset()      { *m = AndBranch{} }
+func (*AndBranch) ProtoMessage() {}
+func (*AndBranch) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{25}
+}
 func (m *AndBranch) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AndBranch.Unmarshal(m, b)
 }
@@ -1101,9 +1161,11 @@ type Leaf struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Leaf) Reset()                    { *m = Leaf{} }
-func (*Leaf) ProtoMessage()               {}
-func (*Leaf) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{26} }
+func (m *Leaf) Reset()      { *m = Leaf{} }
+func (*Leaf) ProtoMessage() {}
+func (*Leaf) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{26}
+}
 func (m *Leaf) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Leaf.Unmarshal(m, b)
 }
@@ -1131,9 +1193,11 @@ type DeepTree struct {
 	XXX_sizecache        int32          `json:"-"`
 }
 
-func (m *DeepTree) Reset()                    { *m = DeepTree{} }
-func (*DeepTree) ProtoMessage()               {}
-func (*DeepTree) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{27} }
+func (m *DeepTree) Reset()      { *m = DeepTree{} }
+func (*DeepTree) ProtoMessage() {}
+func (*DeepTree) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{27}
+}
 func (m *DeepTree) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeepTree.Unmarshal(m, b)
 }
@@ -1159,9 +1223,11 @@ type ADeepBranch struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *ADeepBranch) Reset()                    { *m = ADeepBranch{} }
-func (*ADeepBranch) ProtoMessage()               {}
-func (*ADeepBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{28} }
+func (m *ADeepBranch) Reset()      { *m = ADeepBranch{} }
+func (*ADeepBranch) ProtoMessage() {}
+func (*ADeepBranch) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{28}
+}
 func (m *ADeepBranch) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ADeepBranch.Unmarshal(m, b)
 }
@@ -1188,9 +1254,11 @@ type AndDeepBranch struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *AndDeepBranch) Reset()                    { *m = AndDeepBranch{} }
-func (*AndDeepBranch) ProtoMessage()               {}
-func (*AndDeepBranch) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{29} }
+func (m *AndDeepBranch) Reset()      { *m = AndDeepBranch{} }
+func (*AndDeepBranch) ProtoMessage() {}
+func (*AndDeepBranch) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{29}
+}
 func (m *AndDeepBranch) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AndDeepBranch.Unmarshal(m, b)
 }
@@ -1216,9 +1284,11 @@ type DeepLeaf struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *DeepLeaf) Reset()                    { *m = DeepLeaf{} }
-func (*DeepLeaf) ProtoMessage()               {}
-func (*DeepLeaf) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{30} }
+func (m *DeepLeaf) Reset()      { *m = DeepLeaf{} }
+func (*DeepLeaf) ProtoMessage() {}
+func (*DeepLeaf) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{30}
+}
 func (m *DeepLeaf) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeepLeaf.Unmarshal(m, b)
 }
@@ -1243,9 +1313,11 @@ type Nil struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Nil) Reset()                    { *m = Nil{} }
-func (*Nil) ProtoMessage()               {}
-func (*Nil) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{31} }
+func (m *Nil) Reset()      { *m = Nil{} }
+func (*Nil) ProtoMessage() {}
+func (*Nil) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{31}
+}
 func (m *Nil) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Nil.Unmarshal(m, b)
 }
@@ -1271,9 +1343,11 @@ type NidOptEnum struct {
 	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *NidOptEnum) Reset()                    { *m = NidOptEnum{} }
-func (*NidOptEnum) ProtoMessage()               {}
-func (*NidOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{32} }
+func (m *NidOptEnum) Reset()      { *m = NidOptEnum{} }
+func (*NidOptEnum) ProtoMessage() {}
+func (*NidOptEnum) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{32}
+}
 func (m *NidOptEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptEnum.Unmarshal(m, b)
 }
@@ -1301,9 +1375,11 @@ type NinOptEnum struct {
 	XXX_sizecache        int32                  `json:"-"`
 }
 
-func (m *NinOptEnum) Reset()                    { *m = NinOptEnum{} }
-func (*NinOptEnum) ProtoMessage()               {}
-func (*NinOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{33} }
+func (m *NinOptEnum) Reset()      { *m = NinOptEnum{} }
+func (*NinOptEnum) ProtoMessage() {}
+func (*NinOptEnum) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{33}
+}
 func (m *NinOptEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptEnum.Unmarshal(m, b)
 }
@@ -1331,9 +1407,11 @@ type NidRepEnum struct {
 	XXX_sizecache        int32                   `json:"-"`
 }
 
-func (m *NidRepEnum) Reset()                    { *m = NidRepEnum{} }
-func (*NidRepEnum) ProtoMessage()               {}
-func (*NidRepEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{34} }
+func (m *NidRepEnum) Reset()      { *m = NidRepEnum{} }
+func (*NidRepEnum) ProtoMessage() {}
+func (*NidRepEnum) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{34}
+}
 func (m *NidRepEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepEnum.Unmarshal(m, b)
 }
@@ -1361,9 +1439,11 @@ type NinRepEnum struct {
 	XXX_sizecache        int32                   `json:"-"`
 }
 
-func (m *NinRepEnum) Reset()                    { *m = NinRepEnum{} }
-func (*NinRepEnum) ProtoMessage()               {}
-func (*NinRepEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{35} }
+func (m *NinRepEnum) Reset()      { *m = NinRepEnum{} }
+func (*NinRepEnum) ProtoMessage() {}
+func (*NinRepEnum) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{35}
+}
 func (m *NinRepEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepEnum.Unmarshal(m, b)
 }
@@ -1391,9 +1471,11 @@ type NinOptEnumDefault struct {
 	XXX_sizecache        int32                  `json:"-"`
 }
 
-func (m *NinOptEnumDefault) Reset()                    { *m = NinOptEnumDefault{} }
-func (*NinOptEnumDefault) ProtoMessage()               {}
-func (*NinOptEnumDefault) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{36} }
+func (m *NinOptEnumDefault) Reset()      { *m = NinOptEnumDefault{} }
+func (*NinOptEnumDefault) ProtoMessage() {}
+func (*NinOptEnumDefault) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{36}
+}
 func (m *NinOptEnumDefault) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptEnumDefault.Unmarshal(m, b)
 }
@@ -1446,9 +1528,11 @@ type AnotherNinOptEnum struct {
 	XXX_sizecache        int32                  `json:"-"`
 }
 
-func (m *AnotherNinOptEnum) Reset()                    { *m = AnotherNinOptEnum{} }
-func (*AnotherNinOptEnum) ProtoMessage()               {}
-func (*AnotherNinOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{37} }
+func (m *AnotherNinOptEnum) Reset()      { *m = AnotherNinOptEnum{} }
+func (*AnotherNinOptEnum) ProtoMessage() {}
+func (*AnotherNinOptEnum) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{37}
+}
 func (m *AnotherNinOptEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AnotherNinOptEnum.Unmarshal(m, b)
 }
@@ -1476,9 +1560,11 @@ type AnotherNinOptEnumDefault struct {
 	XXX_sizecache        int32                  `json:"-"`
 }
 
-func (m *AnotherNinOptEnumDefault) Reset()                    { *m = AnotherNinOptEnumDefault{} }
-func (*AnotherNinOptEnumDefault) ProtoMessage()               {}
-func (*AnotherNinOptEnumDefault) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{38} }
+func (m *AnotherNinOptEnumDefault) Reset()      { *m = AnotherNinOptEnumDefault{} }
+func (*AnotherNinOptEnumDefault) ProtoMessage() {}
+func (*AnotherNinOptEnumDefault) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{38}
+}
 func (m *AnotherNinOptEnumDefault) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AnotherNinOptEnumDefault.Unmarshal(m, b)
 }
@@ -1531,9 +1617,11 @@ type Timer struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Timer) Reset()                    { *m = Timer{} }
-func (*Timer) ProtoMessage()               {}
-func (*Timer) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{39} }
+func (m *Timer) Reset()      { *m = Timer{} }
+func (*Timer) ProtoMessage() {}
+func (*Timer) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{39}
+}
 func (m *Timer) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Timer.Unmarshal(m, b)
 }
@@ -1560,9 +1648,11 @@ type MyExtendable struct {
 	XXX_sizecache                int32  `json:"-"`
 }
 
-func (m *MyExtendable) Reset()                    { *m = MyExtendable{} }
-func (*MyExtendable) ProtoMessage()               {}
-func (*MyExtendable) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{40} }
+func (m *MyExtendable) Reset()      { *m = MyExtendable{} }
+func (*MyExtendable) ProtoMessage() {}
+func (*MyExtendable) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{40}
+}
 
 var extRange_MyExtendable = []proto.ExtensionRange{
 	{Start: 100, End: 199},
@@ -1599,9 +1689,11 @@ type OtherExtenable struct {
 	XXX_sizecache                int32  `json:"-"`
 }
 
-func (m *OtherExtenable) Reset()                    { *m = OtherExtenable{} }
-func (*OtherExtenable) ProtoMessage()               {}
-func (*OtherExtenable) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{41} }
+func (m *OtherExtenable) Reset()      { *m = OtherExtenable{} }
+func (*OtherExtenable) ProtoMessage() {}
+func (*OtherExtenable) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{41}
+}
 
 var extRange_OtherExtenable = []proto.ExtensionRange{
 	{Start: 14, End: 16},
@@ -1639,9 +1731,11 @@ type NestedDefinition struct {
 	XXX_sizecache        int32                                           `json:"-"`
 }
 
-func (m *NestedDefinition) Reset()                    { *m = NestedDefinition{} }
-func (*NestedDefinition) ProtoMessage()               {}
-func (*NestedDefinition) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{42} }
+func (m *NestedDefinition) Reset()      { *m = NestedDefinition{} }
+func (*NestedDefinition) ProtoMessage() {}
+func (*NestedDefinition) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{42}
+}
 func (m *NestedDefinition) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedDefinition.Unmarshal(m, b)
 }
@@ -1671,7 +1765,7 @@ type NestedDefinition_NestedMessage struct {
 func (m *NestedDefinition_NestedMessage) Reset()      { *m = NestedDefinition_NestedMessage{} }
 func (*NestedDefinition_NestedMessage) ProtoMessage() {}
 func (*NestedDefinition_NestedMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptorThetest, []int{42, 0}
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{42, 0}
 }
 func (m *NestedDefinition_NestedMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedDefinition_NestedMessage.Unmarshal(m, b)
@@ -1703,7 +1797,7 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Reset() {
 }
 func (*NestedDefinition_NestedMessage_NestedNestedMsg) ProtoMessage() {}
 func (*NestedDefinition_NestedMessage_NestedNestedMsg) Descriptor() ([]byte, []int) {
-	return fileDescriptorThetest, []int{42, 0, 0}
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{42, 0, 0}
 }
 func (m *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.Unmarshal(m, b)
@@ -1732,9 +1826,11 @@ type NestedScope struct {
 	XXX_sizecache        int32                                           `json:"-"`
 }
 
-func (m *NestedScope) Reset()                    { *m = NestedScope{} }
-func (*NestedScope) ProtoMessage()               {}
-func (*NestedScope) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{43} }
+func (m *NestedScope) Reset()      { *m = NestedScope{} }
+func (*NestedScope) ProtoMessage() {}
+func (*NestedScope) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{43}
+}
 func (m *NestedScope) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedScope.Unmarshal(m, b)
 }
@@ -1774,9 +1870,11 @@ type NinOptNativeDefault struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NinOptNativeDefault) Reset()                    { *m = NinOptNativeDefault{} }
-func (*NinOptNativeDefault) ProtoMessage()               {}
-func (*NinOptNativeDefault) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{44} }
+func (m *NinOptNativeDefault) Reset()      { *m = NinOptNativeDefault{} }
+func (*NinOptNativeDefault) ProtoMessage() {}
+func (*NinOptNativeDefault) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{44}
+}
 func (m *NinOptNativeDefault) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptNativeDefault.Unmarshal(m, b)
 }
@@ -1922,9 +2020,11 @@ type CustomContainer struct {
 	XXX_sizecache        int32        `json:"-"`
 }
 
-func (m *CustomContainer) Reset()                    { *m = CustomContainer{} }
-func (*CustomContainer) ProtoMessage()               {}
-func (*CustomContainer) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{45} }
+func (m *CustomContainer) Reset()      { *m = CustomContainer{} }
+func (*CustomContainer) ProtoMessage() {}
+func (*CustomContainer) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{45}
+}
 func (m *CustomContainer) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomContainer.Unmarshal(m, b)
 }
@@ -1964,9 +2064,11 @@ type CustomNameNidOptNative struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CustomNameNidOptNative) Reset()                    { *m = CustomNameNidOptNative{} }
-func (*CustomNameNidOptNative) ProtoMessage()               {}
-func (*CustomNameNidOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{46} }
+func (m *CustomNameNidOptNative) Reset()      { *m = CustomNameNidOptNative{} }
+func (*CustomNameNidOptNative) ProtoMessage() {}
+func (*CustomNameNidOptNative) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{46}
+}
 func (m *CustomNameNidOptNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameNidOptNative.Unmarshal(m, b)
 }
@@ -2006,9 +2108,11 @@ type CustomNameNinOptNative struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CustomNameNinOptNative) Reset()                    { *m = CustomNameNinOptNative{} }
-func (*CustomNameNinOptNative) ProtoMessage()               {}
-func (*CustomNameNinOptNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{47} }
+func (m *CustomNameNinOptNative) Reset()      { *m = CustomNameNinOptNative{} }
+func (*CustomNameNinOptNative) ProtoMessage() {}
+func (*CustomNameNinOptNative) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{47}
+}
 func (m *CustomNameNinOptNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameNinOptNative.Unmarshal(m, b)
 }
@@ -2048,9 +2152,11 @@ type CustomNameNinRepNative struct {
 	XXX_sizecache        int32     `json:"-"`
 }
 
-func (m *CustomNameNinRepNative) Reset()                    { *m = CustomNameNinRepNative{} }
-func (*CustomNameNinRepNative) ProtoMessage()               {}
-func (*CustomNameNinRepNative) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{48} }
+func (m *CustomNameNinRepNative) Reset()      { *m = CustomNameNinRepNative{} }
+func (*CustomNameNinRepNative) ProtoMessage() {}
+func (*CustomNameNinRepNative) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{48}
+}
 func (m *CustomNameNinRepNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameNinRepNative.Unmarshal(m, b)
 }
@@ -2085,9 +2191,11 @@ type CustomNameNinStruct struct {
 	XXX_sizecache        int32           `json:"-"`
 }
 
-func (m *CustomNameNinStruct) Reset()                    { *m = CustomNameNinStruct{} }
-func (*CustomNameNinStruct) ProtoMessage()               {}
-func (*CustomNameNinStruct) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{49} }
+func (m *CustomNameNinStruct) Reset()      { *m = CustomNameNinStruct{} }
+func (*CustomNameNinStruct) ProtoMessage() {}
+func (*CustomNameNinStruct) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{49}
+}
 func (m *CustomNameNinStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameNinStruct.Unmarshal(m, b)
 }
@@ -2116,9 +2224,11 @@ type CustomNameCustomType struct {
 	XXX_sizecache        int32                                          `json:"-"`
 }
 
-func (m *CustomNameCustomType) Reset()                    { *m = CustomNameCustomType{} }
-func (*CustomNameCustomType) ProtoMessage()               {}
-func (*CustomNameCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{50} }
+func (m *CustomNameCustomType) Reset()      { *m = CustomNameCustomType{} }
+func (*CustomNameCustomType) ProtoMessage() {}
+func (*CustomNameCustomType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{50}
+}
 func (m *CustomNameCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameCustomType.Unmarshal(m, b)
 }
@@ -2149,7 +2259,7 @@ type CustomNameNinEmbeddedStructUnion struct {
 func (m *CustomNameNinEmbeddedStructUnion) Reset()      { *m = CustomNameNinEmbeddedStructUnion{} }
 func (*CustomNameNinEmbeddedStructUnion) ProtoMessage() {}
 func (*CustomNameNinEmbeddedStructUnion) Descriptor() ([]byte, []int) {
-	return fileDescriptorThetest, []int{51}
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{51}
 }
 func (m *CustomNameNinEmbeddedStructUnion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameNinEmbeddedStructUnion.Unmarshal(m, b)
@@ -2177,9 +2287,11 @@ type CustomNameEnum struct {
 	XXX_sizecache        int32         `json:"-"`
 }
 
-func (m *CustomNameEnum) Reset()                    { *m = CustomNameEnum{} }
-func (*CustomNameEnum) ProtoMessage()               {}
-func (*CustomNameEnum) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{52} }
+func (m *CustomNameEnum) Reset()      { *m = CustomNameEnum{} }
+func (*CustomNameEnum) ProtoMessage() {}
+func (*CustomNameEnum) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{52}
+}
 func (m *CustomNameEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameEnum.Unmarshal(m, b)
 }
@@ -2206,9 +2318,11 @@ type NoExtensionsMap struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NoExtensionsMap) Reset()                    { *m = NoExtensionsMap{} }
-func (*NoExtensionsMap) ProtoMessage()               {}
-func (*NoExtensionsMap) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{53} }
+func (m *NoExtensionsMap) Reset()      { *m = NoExtensionsMap{} }
+func (*NoExtensionsMap) ProtoMessage() {}
+func (*NoExtensionsMap) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{53}
+}
 
 var extRange_NoExtensionsMap = []proto.ExtensionRange{
 	{Start: 100, End: 199},
@@ -2247,9 +2361,11 @@ type Unrecognized struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Unrecognized) Reset()                    { *m = Unrecognized{} }
-func (*Unrecognized) ProtoMessage()               {}
-func (*Unrecognized) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{54} }
+func (m *Unrecognized) Reset()      { *m = Unrecognized{} }
+func (*Unrecognized) ProtoMessage() {}
+func (*Unrecognized) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{54}
+}
 func (m *Unrecognized) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Unrecognized.Unmarshal(m, b)
 }
@@ -2276,9 +2392,11 @@ type UnrecognizedWithInner struct {
 	XXX_sizecache        int32                          `json:"-"`
 }
 
-func (m *UnrecognizedWithInner) Reset()                    { *m = UnrecognizedWithInner{} }
-func (*UnrecognizedWithInner) ProtoMessage()               {}
-func (*UnrecognizedWithInner) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{55} }
+func (m *UnrecognizedWithInner) Reset()      { *m = UnrecognizedWithInner{} }
+func (*UnrecognizedWithInner) ProtoMessage() {}
+func (*UnrecognizedWithInner) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{55}
+}
 func (m *UnrecognizedWithInner) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnrecognizedWithInner.Unmarshal(m, b)
 }
@@ -2306,7 +2424,7 @@ type UnrecognizedWithInner_Inner struct {
 func (m *UnrecognizedWithInner_Inner) Reset()      { *m = UnrecognizedWithInner_Inner{} }
 func (*UnrecognizedWithInner_Inner) ProtoMessage() {}
 func (*UnrecognizedWithInner_Inner) Descriptor() ([]byte, []int) {
-	return fileDescriptorThetest, []int{55, 0}
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{55, 0}
 }
 func (m *UnrecognizedWithInner_Inner) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnrecognizedWithInner_Inner.Unmarshal(m, b)
@@ -2334,9 +2452,11 @@ type UnrecognizedWithEmbed struct {
 	XXX_sizecache                  int32    `json:"-"`
 }
 
-func (m *UnrecognizedWithEmbed) Reset()                    { *m = UnrecognizedWithEmbed{} }
-func (*UnrecognizedWithEmbed) ProtoMessage()               {}
-func (*UnrecognizedWithEmbed) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{56} }
+func (m *UnrecognizedWithEmbed) Reset()      { *m = UnrecognizedWithEmbed{} }
+func (*UnrecognizedWithEmbed) ProtoMessage() {}
+func (*UnrecognizedWithEmbed) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{56}
+}
 func (m *UnrecognizedWithEmbed) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnrecognizedWithEmbed.Unmarshal(m, b)
 }
@@ -2364,7 +2484,7 @@ type UnrecognizedWithEmbed_Embedded struct {
 func (m *UnrecognizedWithEmbed_Embedded) Reset()      { *m = UnrecognizedWithEmbed_Embedded{} }
 func (*UnrecognizedWithEmbed_Embedded) ProtoMessage() {}
 func (*UnrecognizedWithEmbed_Embedded) Descriptor() ([]byte, []int) {
-	return fileDescriptorThetest, []int{56, 0}
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{56, 0}
 }
 func (m *UnrecognizedWithEmbed_Embedded) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnrecognizedWithEmbed_Embedded.Unmarshal(m, b)
@@ -2392,9 +2512,11 @@ type Node struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Node) Reset()                    { *m = Node{} }
-func (*Node) ProtoMessage()               {}
-func (*Node) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{57} }
+func (m *Node) Reset()      { *m = Node{} }
+func (*Node) ProtoMessage() {}
+func (*Node) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{57}
+}
 func (m *Node) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Node.Unmarshal(m, b)
 }
@@ -2420,9 +2542,11 @@ type NonByteCustomType struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NonByteCustomType) Reset()                    { *m = NonByteCustomType{} }
-func (*NonByteCustomType) ProtoMessage()               {}
-func (*NonByteCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{58} }
+func (m *NonByteCustomType) Reset()      { *m = NonByteCustomType{} }
+func (*NonByteCustomType) ProtoMessage() {}
+func (*NonByteCustomType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{58}
+}
 func (m *NonByteCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NonByteCustomType.Unmarshal(m, b)
 }
@@ -2448,9 +2572,11 @@ type NidOptNonByteCustomType struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NidOptNonByteCustomType) Reset()                    { *m = NidOptNonByteCustomType{} }
-func (*NidOptNonByteCustomType) ProtoMessage()               {}
-func (*NidOptNonByteCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{59} }
+func (m *NidOptNonByteCustomType) Reset()      { *m = NidOptNonByteCustomType{} }
+func (*NidOptNonByteCustomType) ProtoMessage() {}
+func (*NidOptNonByteCustomType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{59}
+}
 func (m *NidOptNonByteCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptNonByteCustomType.Unmarshal(m, b)
 }
@@ -2476,9 +2602,11 @@ type NinOptNonByteCustomType struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NinOptNonByteCustomType) Reset()                    { *m = NinOptNonByteCustomType{} }
-func (*NinOptNonByteCustomType) ProtoMessage()               {}
-func (*NinOptNonByteCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{60} }
+func (m *NinOptNonByteCustomType) Reset()      { *m = NinOptNonByteCustomType{} }
+func (*NinOptNonByteCustomType) ProtoMessage() {}
+func (*NinOptNonByteCustomType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{60}
+}
 func (m *NinOptNonByteCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptNonByteCustomType.Unmarshal(m, b)
 }
@@ -2504,9 +2632,11 @@ type NidRepNonByteCustomType struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NidRepNonByteCustomType) Reset()                    { *m = NidRepNonByteCustomType{} }
-func (*NidRepNonByteCustomType) ProtoMessage()               {}
-func (*NidRepNonByteCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{61} }
+func (m *NidRepNonByteCustomType) Reset()      { *m = NidRepNonByteCustomType{} }
+func (*NidRepNonByteCustomType) ProtoMessage() {}
+func (*NidRepNonByteCustomType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{61}
+}
 func (m *NidRepNonByteCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepNonByteCustomType.Unmarshal(m, b)
 }
@@ -2532,9 +2662,11 @@ type NinRepNonByteCustomType struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *NinRepNonByteCustomType) Reset()                    { *m = NinRepNonByteCustomType{} }
-func (*NinRepNonByteCustomType) ProtoMessage()               {}
-func (*NinRepNonByteCustomType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{62} }
+func (m *NinRepNonByteCustomType) Reset()      { *m = NinRepNonByteCustomType{} }
+func (*NinRepNonByteCustomType) ProtoMessage() {}
+func (*NinRepNonByteCustomType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{62}
+}
 func (m *NinRepNonByteCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepNonByteCustomType.Unmarshal(m, b)
 }
@@ -2560,9 +2692,11 @@ type ProtoType struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *ProtoType) Reset()                    { *m = ProtoType{} }
-func (*ProtoType) ProtoMessage()               {}
-func (*ProtoType) Descriptor() ([]byte, []int) { return fileDescriptorThetest, []int{63} }
+func (m *ProtoType) Reset()      { *m = ProtoType{} }
+func (*ProtoType) ProtoMessage() {}
+func (*ProtoType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_thetest_3e4f682cb8349b83, []int{63}
+}
 func (m *ProtoType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ProtoType.Unmarshal(m, b)
 }
@@ -44274,9 +44408,9 @@ var (
 	ErrIntOverflowThetest   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("combos/both/thetest.proto", fileDescriptorThetest) }
+func init() { proto.RegisterFile("combos/both/thetest.proto", fileDescriptor_thetest_3e4f682cb8349b83) }
 
-var fileDescriptorThetest = []byte{
+var fileDescriptor_thetest_3e4f682cb8349b83 = []byte{
 	// 3081 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x5a, 0x4d, 0x6c, 0x1b, 0xc7,
 	0x15, 0xd6, 0xec, 0x50, 0x0a, 0xf5, 0x24, 0x4b, 0xf4, 0x26, 0x56, 0xb6, 0x8c, 0xba, 0xa2, 0x37,

@@ -30,10 +30,12 @@ type M struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *M) Reset()                    { *m = M{} }
-func (m *M) String() string            { return proto.CompactTextString(m) }
-func (*M) ProtoMessage()               {}
-func (*M) Descriptor() ([]byte, []int) { return fileDescriptorAsym, []int{0} }
+func (m *M) Reset()         { *m = M{} }
+func (m *M) String() string { return proto.CompactTextString(m) }
+func (*M) ProtoMessage()    {}
+func (*M) Descriptor() ([]byte, []int) {
+	return fileDescriptor_asym_34ee0efbcd9b19e2, []int{0}
+}
 func (m *M) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_M.Unmarshal(m, b)
 }
@@ -58,10 +60,12 @@ type MyType struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *MyType) Reset()                    { *m = MyType{} }
-func (m *MyType) String() string            { return proto.CompactTextString(m) }
-func (*MyType) ProtoMessage()               {}
-func (*MyType) Descriptor() ([]byte, []int) { return fileDescriptorAsym, []int{1} }
+func (m *MyType) Reset()         { *m = MyType{} }
+func (m *MyType) String() string { return proto.CompactTextString(m) }
+func (*MyType) ProtoMessage()    {}
+func (*MyType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_asym_34ee0efbcd9b19e2, []int{1}
+}
 func (m *MyType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MyType.Unmarshal(m, b)
 }
@@ -605,9 +609,9 @@ var (
 	ErrIntOverflowAsym   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("asym.proto", fileDescriptorAsym) }
+func init() { proto.RegisterFile("asym.proto", fileDescriptor_asym_34ee0efbcd9b19e2) }
 
-var fileDescriptorAsym = []byte{
+var fileDescriptor_asym_34ee0efbcd9b19e2 = []byte{
 	// 158 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4a, 0x2c, 0xae, 0xcc,
 	0xd5, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x01, 0xb1, 0xa5, 0x74, 0xd3, 0x33, 0x4b, 0x32,

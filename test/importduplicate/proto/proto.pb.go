@@ -30,10 +30,12 @@ type Subject struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Subject) Reset()                    { *m = Subject{} }
-func (m *Subject) String() string            { return proto1.CompactTextString(m) }
-func (*Subject) ProtoMessage()               {}
-func (*Subject) Descriptor() ([]byte, []int) { return fileDescriptorProto, []int{0} }
+func (m *Subject) Reset()         { *m = Subject{} }
+func (m *Subject) String() string { return proto1.CompactTextString(m) }
+func (*Subject) ProtoMessage()    {}
+func (*Subject) Descriptor() ([]byte, []int) {
+	return fileDescriptor_proto_2eb405ba8c57e5a9, []int{0}
+}
 func (m *Subject) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Subject.Unmarshal(m, b)
 }
@@ -180,9 +182,9 @@ func encodeVarintPopulateProto(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 
-func init() { proto1.RegisterFile("proto/proto.proto", fileDescriptorProto) }
+func init() { proto1.RegisterFile("proto/proto.proto", fileDescriptor_proto_2eb405ba8c57e5a9) }
 
-var fileDescriptorProto = []byte{
+var fileDescriptor_proto_2eb405ba8c57e5a9 = []byte{
 	// 103 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2c, 0x28, 0xca, 0x2f,
 	0xc9, 0xd7, 0x07, 0x93, 0x7a, 0x60, 0x52, 0x88, 0x15, 0x4c, 0x49, 0xe9, 0xa6, 0x67, 0x96, 0x64,

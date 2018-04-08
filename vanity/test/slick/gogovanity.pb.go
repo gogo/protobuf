@@ -32,9 +32,11 @@ type B struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *B) Reset()                    { *m = B{} }
-func (*B) ProtoMessage()               {}
-func (*B) Descriptor() ([]byte, []int) { return fileDescriptorGogovanity, []int{0} }
+func (m *B) Reset()      { *m = B{} }
+func (*B) ProtoMessage() {}
+func (*B) Descriptor() ([]byte, []int) {
+	return fileDescriptor_gogovanity_fc574e04ada47644, []int{0}
+}
 func (m *B) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_B.Unmarshal(m, b)
 }
@@ -457,9 +459,9 @@ var (
 	ErrIntOverflowGogovanity   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("gogovanity.proto", fileDescriptorGogovanity) }
+func init() { proto.RegisterFile("gogovanity.proto", fileDescriptor_gogovanity_fc574e04ada47644) }
 
-var fileDescriptorGogovanity = []byte{
+var fileDescriptor_gogovanity_fc574e04ada47644 = []byte{
 	// 192 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x48, 0xcf, 0x4f, 0xcf,
 	0x2f, 0x4b, 0xcc, 0xcb, 0x2c, 0xa9, 0xd4, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x83, 0xf0,

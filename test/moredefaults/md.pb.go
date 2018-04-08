@@ -29,10 +29,12 @@ type MoreDefaultsB struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *MoreDefaultsB) Reset()                    { *m = MoreDefaultsB{} }
-func (m *MoreDefaultsB) String() string            { return proto.CompactTextString(m) }
-func (*MoreDefaultsB) ProtoMessage()               {}
-func (*MoreDefaultsB) Descriptor() ([]byte, []int) { return fileDescriptorMd, []int{0} }
+func (m *MoreDefaultsB) Reset()         { *m = MoreDefaultsB{} }
+func (m *MoreDefaultsB) String() string { return proto.CompactTextString(m) }
+func (*MoreDefaultsB) ProtoMessage()    {}
+func (*MoreDefaultsB) Descriptor() ([]byte, []int) {
+	return fileDescriptor_md_dba3fb70ca5eb304, []int{0}
+}
 func (m *MoreDefaultsB) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MoreDefaultsB.Unmarshal(m, b)
 }
@@ -70,10 +72,12 @@ type MoreDefaultsA struct {
 	XXX_sizecache        int32          `json:"-"`
 }
 
-func (m *MoreDefaultsA) Reset()                    { *m = MoreDefaultsA{} }
-func (m *MoreDefaultsA) String() string            { return proto.CompactTextString(m) }
-func (*MoreDefaultsA) ProtoMessage()               {}
-func (*MoreDefaultsA) Descriptor() ([]byte, []int) { return fileDescriptorMd, []int{1} }
+func (m *MoreDefaultsA) Reset()         { *m = MoreDefaultsA{} }
+func (m *MoreDefaultsA) String() string { return proto.CompactTextString(m) }
+func (*MoreDefaultsA) ProtoMessage()    {}
+func (*MoreDefaultsA) Descriptor() ([]byte, []int) {
+	return fileDescriptor_md_dba3fb70ca5eb304, []int{1}
+}
 func (m *MoreDefaultsA) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MoreDefaultsA.Unmarshal(m, b)
 }
@@ -335,9 +339,9 @@ func encodeVarintPopulateMd(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 
-func init() { proto.RegisterFile("md.proto", fileDescriptorMd) }
+func init() { proto.RegisterFile("md.proto", fileDescriptor_md_dba3fb70ca5eb304) }
 
-var fileDescriptorMd = []byte{
+var fileDescriptor_md_dba3fb70ca5eb304 = []byte{
 	// 258 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xc8, 0x4d, 0xd1, 0x2b,
 	0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0xc9, 0xcd, 0x2f, 0x4a, 0x4d, 0x49, 0x4d, 0x4b, 0x2c, 0xcd,

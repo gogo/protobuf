@@ -72,7 +72,9 @@ func (x *MapEnum) UnmarshalJSON(data []byte) error {
 	*x = MapEnum(value)
 	return nil
 }
-func (MapEnum) EnumDescriptor() ([]byte, []int) { return fileDescriptorMapsproto2, []int{0} }
+func (MapEnum) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_mapsproto2_7bd3336f77331b84, []int{0}
+}
 
 type FloatingPoint struct {
 	F                    *float64 `protobuf:"fixed64,1,opt,name=f" json:"f,omitempty"`
@@ -81,9 +83,11 @@ type FloatingPoint struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *FloatingPoint) Reset()                    { *m = FloatingPoint{} }
-func (*FloatingPoint) ProtoMessage()               {}
-func (*FloatingPoint) Descriptor() ([]byte, []int) { return fileDescriptorMapsproto2, []int{0} }
+func (m *FloatingPoint) Reset()      { *m = FloatingPoint{} }
+func (*FloatingPoint) ProtoMessage() {}
+func (*FloatingPoint) Descriptor() ([]byte, []int) {
+	return fileDescriptor_mapsproto2_7bd3336f77331b84, []int{0}
+}
 func (m *FloatingPoint) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FloatingPoint.Unmarshal(m, b)
 }
@@ -112,9 +116,11 @@ type CustomMap struct {
 	XXX_sizecache        int32                                                    `json:"-"`
 }
 
-func (m *CustomMap) Reset()                    { *m = CustomMap{} }
-func (*CustomMap) ProtoMessage()               {}
-func (*CustomMap) Descriptor() ([]byte, []int) { return fileDescriptorMapsproto2, []int{1} }
+func (m *CustomMap) Reset()      { *m = CustomMap{} }
+func (*CustomMap) ProtoMessage() {}
+func (*CustomMap) Descriptor() ([]byte, []int) {
+	return fileDescriptor_mapsproto2_7bd3336f77331b84, []int{1}
+}
 func (m *CustomMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomMap.Unmarshal(m, b)
 }
@@ -156,9 +162,11 @@ type AllMaps struct {
 	XXX_sizecache        int32                     `json:"-"`
 }
 
-func (m *AllMaps) Reset()                    { *m = AllMaps{} }
-func (*AllMaps) ProtoMessage()               {}
-func (*AllMaps) Descriptor() ([]byte, []int) { return fileDescriptorMapsproto2, []int{2} }
+func (m *AllMaps) Reset()      { *m = AllMaps{} }
+func (*AllMaps) ProtoMessage() {}
+func (*AllMaps) Descriptor() ([]byte, []int) {
+	return fileDescriptor_mapsproto2_7bd3336f77331b84, []int{2}
+}
 func (m *AllMaps) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AllMaps.Unmarshal(m, b)
 }
@@ -200,9 +208,11 @@ type AllMapsOrdered struct {
 	XXX_sizecache        int32                     `json:"-"`
 }
 
-func (m *AllMapsOrdered) Reset()                    { *m = AllMapsOrdered{} }
-func (*AllMapsOrdered) ProtoMessage()               {}
-func (*AllMapsOrdered) Descriptor() ([]byte, []int) { return fileDescriptorMapsproto2, []int{3} }
+func (m *AllMapsOrdered) Reset()      { *m = AllMapsOrdered{} }
+func (*AllMapsOrdered) ProtoMessage() {}
+func (*AllMapsOrdered) Descriptor() ([]byte, []int) {
+	return fileDescriptor_mapsproto2_7bd3336f77331b84, []int{3}
+}
 func (m *AllMapsOrdered) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AllMapsOrdered.Unmarshal(m, b)
 }
@@ -8652,9 +8662,11 @@ var (
 	ErrIntOverflowMapsproto2   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("combos/both/mapsproto2.proto", fileDescriptorMapsproto2) }
+func init() {
+	proto.RegisterFile("combos/both/mapsproto2.proto", fileDescriptor_mapsproto2_7bd3336f77331b84)
+}
 
-var fileDescriptorMapsproto2 = []byte{
+var fileDescriptor_mapsproto2_7bd3336f77331b84 = []byte{
 	// 1143 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x97, 0xcb, 0x6f, 0x1a, 0x57,
 	0x14, 0xc6, 0xb9, 0x3c, 0x0c, 0x5c, 0xde, 0x37, 0x69, 0x85, 0x50, 0x7b, 0x71, 0xe8, 0x8b, 0x90,

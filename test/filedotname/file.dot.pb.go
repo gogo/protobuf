@@ -34,9 +34,11 @@ type M struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *M) Reset()                    { *m = M{} }
-func (*M) ProtoMessage()               {}
-func (*M) Descriptor() ([]byte, []int) { return fileDescriptorFileDot, []int{0} }
+func (m *M) Reset()      { *m = M{} }
+func (*M) ProtoMessage() {}
+func (*M) Descriptor() ([]byte, []int) {
+	return fileDescriptor_file_dot_75a42d5db4a044f0, []int{0}
+}
 func (m *M) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_M.Unmarshal(m, b)
 }
@@ -567,9 +569,9 @@ func valueToStringFileDot(v interface{}) string {
 	return fmt.Sprintf("*%v", pv)
 }
 
-func init() { proto.RegisterFile("file.dot.proto", fileDescriptorFileDot) }
+func init() { proto.RegisterFile("file.dot.proto", fileDescriptor_file_dot_75a42d5db4a044f0) }
 
-var fileDescriptorFileDot = []byte{
+var fileDescriptor_file_dot_75a42d5db4a044f0 = []byte{
 	// 179 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x24, 0xcb, 0xaf, 0x6e, 0xc2, 0x50,
 	0x1c, 0xc5, 0xf1, 0xdf, 0x91, 0xeb, 0x96, 0x25, 0xab, 0x5a, 0x26, 0x4e, 0x96, 0xa9, 0x99, 0xb5,

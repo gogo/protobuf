@@ -24,6 +24,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+
 // `NullValue` is a singleton enumeration to represent the null value for the
 // `Value` type union.
 //
@@ -42,8 +48,10 @@ var NullValue_value = map[string]int32{
 	"NULL_VALUE": 0,
 }
 
-func (NullValue) EnumDescriptor() ([]byte, []int) { return fileDescriptorStruct, []int{0} }
-func (NullValue) XXX_WellKnownType() string       { return "NullValue" }
+func (NullValue) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_struct_e8dc68d36b73896c, []int{0}
+}
+func (NullValue) XXX_WellKnownType() string { return "NullValue" }
 
 // `Struct` represents a structured data value, consisting of fields
 // which map to dynamically typed values. In some languages, `Struct`
@@ -61,10 +69,12 @@ type Struct struct {
 	XXX_sizecache        int32             `json:"-"`
 }
 
-func (m *Struct) Reset()                    { *m = Struct{} }
-func (*Struct) ProtoMessage()               {}
-func (*Struct) Descriptor() ([]byte, []int) { return fileDescriptorStruct, []int{0} }
-func (*Struct) XXX_WellKnownType() string   { return "Struct" }
+func (m *Struct) Reset()      { *m = Struct{} }
+func (*Struct) ProtoMessage() {}
+func (*Struct) Descriptor() ([]byte, []int) {
+	return fileDescriptor_struct_e8dc68d36b73896c, []int{0}
+}
+func (*Struct) XXX_WellKnownType() string { return "Struct" }
 func (m *Struct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Struct.Unmarshal(m, b)
 }
@@ -116,10 +126,12 @@ type Value struct {
 	XXX_sizecache        int32        `json:"-"`
 }
 
-func (m *Value) Reset()                    { *m = Value{} }
-func (*Value) ProtoMessage()               {}
-func (*Value) Descriptor() ([]byte, []int) { return fileDescriptorStruct, []int{1} }
-func (*Value) XXX_WellKnownType() string   { return "Value" }
+func (m *Value) Reset()      { *m = Value{} }
+func (*Value) ProtoMessage() {}
+func (*Value) Descriptor() ([]byte, []int) {
+	return fileDescriptor_struct_e8dc68d36b73896c, []int{1}
+}
+func (*Value) XXX_WellKnownType() string { return "Value" }
 func (m *Value) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Value.Unmarshal(m, b)
 }
@@ -370,10 +382,12 @@ type ListValue struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *ListValue) Reset()                    { *m = ListValue{} }
-func (*ListValue) ProtoMessage()               {}
-func (*ListValue) Descriptor() ([]byte, []int) { return fileDescriptorStruct, []int{2} }
-func (*ListValue) XXX_WellKnownType() string   { return "ListValue" }
+func (m *ListValue) Reset()      { *m = ListValue{} }
+func (*ListValue) ProtoMessage() {}
+func (*ListValue) Descriptor() ([]byte, []int) {
+	return fileDescriptor_struct_e8dc68d36b73896c, []int{2}
+}
+func (*ListValue) XXX_WellKnownType() string { return "ListValue" }
 func (m *ListValue) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListValue.Unmarshal(m, b)
 }
@@ -1881,9 +1895,11 @@ var (
 	ErrIntOverflowStruct   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("google/protobuf/struct.proto", fileDescriptorStruct) }
+func init() {
+	proto.RegisterFile("google/protobuf/struct.proto", fileDescriptor_struct_e8dc68d36b73896c)
+}
 
-var fileDescriptorStruct = []byte{
+var fileDescriptor_struct_e8dc68d36b73896c = []byte{
 	// 443 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x91, 0xb1, 0x6f, 0xd3, 0x40,
 	0x14, 0xc6, 0xfd, 0x9c, 0xc6, 0x22, 0xcf, 0xa8, 0x54, 0x87, 0x04, 0x51, 0x41, 0x47, 0x94, 0x2e,

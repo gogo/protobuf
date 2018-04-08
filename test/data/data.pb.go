@@ -33,9 +33,11 @@ type MyMessage struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *MyMessage) Reset()                    { *m = MyMessage{} }
-func (*MyMessage) ProtoMessage()               {}
-func (*MyMessage) Descriptor() ([]byte, []int) { return fileDescriptorData, []int{0} }
+func (m *MyMessage) Reset()      { *m = MyMessage{} }
+func (*MyMessage) ProtoMessage() {}
+func (*MyMessage) Descriptor() ([]byte, []int) {
+	return fileDescriptor_data_ad073f7719d49453, []int{0}
+}
 func (m *MyMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MyMessage.Unmarshal(m, b)
 }
@@ -480,9 +482,9 @@ var (
 	ErrIntOverflowData   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("data.proto", fileDescriptorData) }
+func init() { proto.RegisterFile("data.proto", fileDescriptor_data_ad073f7719d49453) }
 
-var fileDescriptorData = []byte{
+var fileDescriptor_data_ad073f7719d49453 = []byte{
 	// 160 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4a, 0x49, 0x2c, 0x49,
 	0xd4, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x01, 0xb1, 0xa5, 0x74, 0xd3, 0x33, 0x4b, 0x32,

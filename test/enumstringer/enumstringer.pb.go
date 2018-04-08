@@ -56,7 +56,9 @@ func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
 	*x = TheTestEnum(value)
 	return nil
 }
-func (TheTestEnum) EnumDescriptor() ([]byte, []int) { return fileDescriptorEnumstringer, []int{0} }
+func (TheTestEnum) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_enumstringer_cc4e1499449a36f3, []int{0}
+}
 
 type NidOptEnum struct {
 	Field1               TheTestEnum `protobuf:"varint,1,opt,name=Field1,enum=enumstringer.TheTestEnum" json:"Field1"`
@@ -65,10 +67,12 @@ type NidOptEnum struct {
 	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *NidOptEnum) Reset()                    { *m = NidOptEnum{} }
-func (m *NidOptEnum) String() string            { return proto.CompactTextString(m) }
-func (*NidOptEnum) ProtoMessage()               {}
-func (*NidOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorEnumstringer, []int{0} }
+func (m *NidOptEnum) Reset()         { *m = NidOptEnum{} }
+func (m *NidOptEnum) String() string { return proto.CompactTextString(m) }
+func (*NidOptEnum) ProtoMessage()    {}
+func (*NidOptEnum) Descriptor() ([]byte, []int) {
+	return fileDescriptor_enumstringer_cc4e1499449a36f3, []int{0}
+}
 func (m *NidOptEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptEnum.Unmarshal(m, b)
 }
@@ -101,10 +105,12 @@ type NinOptEnum struct {
 	XXX_sizecache        int32        `json:"-"`
 }
 
-func (m *NinOptEnum) Reset()                    { *m = NinOptEnum{} }
-func (m *NinOptEnum) String() string            { return proto.CompactTextString(m) }
-func (*NinOptEnum) ProtoMessage()               {}
-func (*NinOptEnum) Descriptor() ([]byte, []int) { return fileDescriptorEnumstringer, []int{1} }
+func (m *NinOptEnum) Reset()         { *m = NinOptEnum{} }
+func (m *NinOptEnum) String() string { return proto.CompactTextString(m) }
+func (*NinOptEnum) ProtoMessage()    {}
+func (*NinOptEnum) Descriptor() ([]byte, []int) {
+	return fileDescriptor_enumstringer_cc4e1499449a36f3, []int{1}
+}
 func (m *NinOptEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptEnum.Unmarshal(m, b)
 }
@@ -137,10 +143,12 @@ type NidRepEnum struct {
 	XXX_sizecache        int32         `json:"-"`
 }
 
-func (m *NidRepEnum) Reset()                    { *m = NidRepEnum{} }
-func (m *NidRepEnum) String() string            { return proto.CompactTextString(m) }
-func (*NidRepEnum) ProtoMessage()               {}
-func (*NidRepEnum) Descriptor() ([]byte, []int) { return fileDescriptorEnumstringer, []int{2} }
+func (m *NidRepEnum) Reset()         { *m = NidRepEnum{} }
+func (m *NidRepEnum) String() string { return proto.CompactTextString(m) }
+func (*NidRepEnum) ProtoMessage()    {}
+func (*NidRepEnum) Descriptor() ([]byte, []int) {
+	return fileDescriptor_enumstringer_cc4e1499449a36f3, []int{2}
+}
 func (m *NidRepEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepEnum.Unmarshal(m, b)
 }
@@ -173,10 +181,12 @@ type NinRepEnum struct {
 	XXX_sizecache        int32         `json:"-"`
 }
 
-func (m *NinRepEnum) Reset()                    { *m = NinRepEnum{} }
-func (m *NinRepEnum) String() string            { return proto.CompactTextString(m) }
-func (*NinRepEnum) ProtoMessage()               {}
-func (*NinRepEnum) Descriptor() ([]byte, []int) { return fileDescriptorEnumstringer, []int{3} }
+func (m *NinRepEnum) Reset()         { *m = NinRepEnum{} }
+func (m *NinRepEnum) String() string { return proto.CompactTextString(m) }
+func (*NinRepEnum) ProtoMessage()    {}
+func (*NinRepEnum) Descriptor() ([]byte, []int) {
+	return fileDescriptor_enumstringer_cc4e1499449a36f3, []int{3}
+}
 func (m *NinRepEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepEnum.Unmarshal(m, b)
 }
@@ -605,9 +615,9 @@ func encodeVarintPopulateEnumstringer(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 
-func init() { proto.RegisterFile("enumstringer.proto", fileDescriptorEnumstringer) }
+func init() { proto.RegisterFile("enumstringer.proto", fileDescriptor_enumstringer_cc4e1499449a36f3) }
 
-var fileDescriptorEnumstringer = []byte{
+var fileDescriptor_enumstringer_cc4e1499449a36f3 = []byte{
 	// 208 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x4a, 0xcd, 0x2b, 0xcd,
 	0x2d, 0x2e, 0x29, 0xca, 0xcc, 0x4b, 0x4f, 0x2d, 0xd2, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2,

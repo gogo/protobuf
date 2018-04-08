@@ -27,10 +27,12 @@ type MyMessage struct {
 	XXX_sizecache        int32            `json:"-"`
 }
 
-func (m *MyMessage) Reset()                    { *m = MyMessage{} }
-func (m *MyMessage) String() string            { return proto.CompactTextString(m) }
-func (*MyMessage) ProtoMessage()               {}
-func (*MyMessage) Descriptor() ([]byte, []int) { return fileDescriptorEnumprefix, []int{0} }
+func (m *MyMessage) Reset()         { *m = MyMessage{} }
+func (m *MyMessage) String() string { return proto.CompactTextString(m) }
+func (*MyMessage) ProtoMessage()    {}
+func (*MyMessage) Descriptor() ([]byte, []int) {
+	return fileDescriptor_enumprefix_6ff751a3ee38216f, []int{0}
+}
 func (m *MyMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MyMessage.Unmarshal(m, b)
 }
@@ -60,9 +62,9 @@ func init() {
 	proto.RegisterType((*MyMessage)(nil), "enumprefix.MyMessage")
 }
 
-func init() { proto.RegisterFile("enumprefix.proto", fileDescriptorEnumprefix) }
+func init() { proto.RegisterFile("enumprefix.proto", fileDescriptor_enumprefix_6ff751a3ee38216f) }
 
-var fileDescriptorEnumprefix = []byte{
+var fileDescriptor_enumprefix_6ff751a3ee38216f = []byte{
 	// 149 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x48, 0xcd, 0x2b, 0xcd,
 	0x2d, 0x28, 0x4a, 0x4d, 0xcb, 0xac, 0xd0, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x42, 0x88,

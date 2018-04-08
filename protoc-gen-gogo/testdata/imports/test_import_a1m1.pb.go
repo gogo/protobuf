@@ -26,10 +26,12 @@ type A1M1 struct {
 	XXX_sizecache        int32      `json:"-"`
 }
 
-func (m *A1M1) Reset()                    { *m = A1M1{} }
-func (m *A1M1) String() string            { return proto.CompactTextString(m) }
-func (*A1M1) ProtoMessage()               {}
-func (*A1M1) Descriptor() ([]byte, []int) { return fileDescriptorTestImportA1M1, []int{0} }
+func (m *A1M1) Reset()         { *m = A1M1{} }
+func (m *A1M1) String() string { return proto.CompactTextString(m) }
+func (*A1M1) ProtoMessage()    {}
+func (*A1M1) Descriptor() ([]byte, []int) {
+	return fileDescriptor_test_import_a1m1_2621f8d5ff4f97af, []int{0}
+}
 func (m *A1M1) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_A1M1.Unmarshal(m, b)
 }
@@ -59,9 +61,11 @@ func init() {
 	proto.RegisterType((*A1M1)(nil), "test.A1M1")
 }
 
-func init() { proto.RegisterFile("imports/test_import_a1m1.proto", fileDescriptorTestImportA1M1) }
+func init() {
+	proto.RegisterFile("imports/test_import_a1m1.proto", fileDescriptor_test_import_a1m1_2621f8d5ff4f97af)
+}
 
-var fileDescriptorTestImportA1M1 = []byte{
+var fileDescriptor_test_import_a1m1_2621f8d5ff4f97af = []byte{
 	// 147 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0xcb, 0xcc, 0x2d, 0xc8,
 	0x2f, 0x2a, 0x29, 0xd6, 0x2f, 0x49, 0x2d, 0x2e, 0x89, 0x87, 0x70, 0xe2, 0x13, 0x0d, 0x73, 0x0d,

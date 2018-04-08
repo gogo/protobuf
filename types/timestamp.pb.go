@@ -19,6 +19,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+
 // A Timestamp represents a point in time independent of any time zone
 // or calendar, represented as seconds and fractions of seconds at
 // nanosecond resolution in UTC Epoch time. It is encoded using the
@@ -114,10 +120,12 @@ type Timestamp struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Timestamp) Reset()                    { *m = Timestamp{} }
-func (*Timestamp) ProtoMessage()               {}
-func (*Timestamp) Descriptor() ([]byte, []int) { return fileDescriptorTimestamp, []int{0} }
-func (*Timestamp) XXX_WellKnownType() string   { return "Timestamp" }
+func (m *Timestamp) Reset()      { *m = Timestamp{} }
+func (*Timestamp) ProtoMessage() {}
+func (*Timestamp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_timestamp_0a0a9bc758317e91, []int{0}
+}
+func (*Timestamp) XXX_WellKnownType() string { return "Timestamp" }
 func (m *Timestamp) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Timestamp.Unmarshal(m, b)
 }
@@ -512,9 +520,11 @@ var (
 	ErrIntOverflowTimestamp   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("google/protobuf/timestamp.proto", fileDescriptorTimestamp) }
+func init() {
+	proto.RegisterFile("google/protobuf/timestamp.proto", fileDescriptor_timestamp_0a0a9bc758317e91)
+}
 
-var fileDescriptorTimestamp = []byte{
+var fileDescriptor_timestamp_0a0a9bc758317e91 = []byte{
 	// 216 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4f, 0xcf, 0xcf, 0x4f,
 	0xcf, 0x49, 0xd5, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0x4f, 0x2a, 0x4d, 0xd3, 0x2f, 0xc9, 0xcc, 0x4d,

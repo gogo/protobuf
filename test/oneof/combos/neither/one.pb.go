@@ -37,9 +37,11 @@ type Subby struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Subby) Reset()                    { *m = Subby{} }
-func (*Subby) ProtoMessage()               {}
-func (*Subby) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{0} }
+func (m *Subby) Reset()      { *m = Subby{} }
+func (*Subby) ProtoMessage() {}
+func (*Subby) Descriptor() ([]byte, []int) {
+	return fileDescriptor_one_1be15a5672864d55, []int{0}
+}
 func (m *Subby) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Subby.Unmarshal(m, b)
 }
@@ -82,9 +84,11 @@ type AllTypesOneOf struct {
 	XXX_sizecache        int32                     `json:"-"`
 }
 
-func (m *AllTypesOneOf) Reset()                    { *m = AllTypesOneOf{} }
-func (*AllTypesOneOf) ProtoMessage()               {}
-func (*AllTypesOneOf) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{1} }
+func (m *AllTypesOneOf) Reset()      { *m = AllTypesOneOf{} }
+func (*AllTypesOneOf) ProtoMessage() {}
+func (*AllTypesOneOf) Descriptor() ([]byte, []int) {
+	return fileDescriptor_one_1be15a5672864d55, []int{1}
+}
 func (m *AllTypesOneOf) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AllTypesOneOf.Unmarshal(m, b)
 }
@@ -582,9 +586,11 @@ type TwoOneofs struct {
 	XXX_sizecache        int32           `json:"-"`
 }
 
-func (m *TwoOneofs) Reset()                    { *m = TwoOneofs{} }
-func (*TwoOneofs) ProtoMessage()               {}
-func (*TwoOneofs) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{2} }
+func (m *TwoOneofs) Reset()      { *m = TwoOneofs{} }
+func (*TwoOneofs) ProtoMessage() {}
+func (*TwoOneofs) Descriptor() ([]byte, []int) {
+	return fileDescriptor_one_1be15a5672864d55, []int{2}
+}
 func (m *TwoOneofs) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TwoOneofs.Unmarshal(m, b)
 }
@@ -848,9 +854,11 @@ type CustomOneof struct {
 	XXX_sizecache        int32                `json:"-"`
 }
 
-func (m *CustomOneof) Reset()                    { *m = CustomOneof{} }
-func (*CustomOneof) ProtoMessage()               {}
-func (*CustomOneof) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{3} }
+func (m *CustomOneof) Reset()      { *m = CustomOneof{} }
+func (*CustomOneof) ProtoMessage() {}
+func (*CustomOneof) Descriptor() ([]byte, []int) {
+	return fileDescriptor_one_1be15a5672864d55, []int{3}
+}
 func (m *CustomOneof) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomOneof.Unmarshal(m, b)
 }
@@ -4214,9 +4222,9 @@ func valueToStringOne(v interface{}) string {
 	return fmt.Sprintf("*%v", pv)
 }
 
-func init() { proto.RegisterFile("combos/neither/one.proto", fileDescriptorOne) }
+func init() { proto.RegisterFile("combos/neither/one.proto", fileDescriptor_one_1be15a5672864d55) }
 
-var fileDescriptorOne = []byte{
+var fileDescriptor_one_1be15a5672864d55 = []byte{
 	// 598 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0xd3, 0xbf, 0x4f, 0x1b, 0x3f,
 	0x14, 0x00, 0x70, 0x3f, 0x42, 0x42, 0x70, 0xc2, 0x97, 0x7c, 0x6f, 0x72, 0x19, 0x8c, 0x95, 0xb6,

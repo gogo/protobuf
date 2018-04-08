@@ -19,6 +19,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+
 // A generic empty message that you can re-use to avoid defining duplicated
 // empty messages in your APIs. A typical example is to use it as the request
 // or the response type of an API method. For instance:
@@ -34,10 +40,12 @@ type Empty struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Empty) Reset()                    { *m = Empty{} }
-func (*Empty) ProtoMessage()               {}
-func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptorEmpty, []int{0} }
-func (*Empty) XXX_WellKnownType() string   { return "Empty" }
+func (m *Empty) Reset()      { *m = Empty{} }
+func (*Empty) ProtoMessage() {}
+func (*Empty) Descriptor() ([]byte, []int) {
+	return fileDescriptor_empty_fa64318be3e23895, []int{0}
+}
+func (*Empty) XXX_WellKnownType() string { return "Empty" }
 func (m *Empty) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Empty.Unmarshal(m, b)
 }
@@ -442,9 +450,9 @@ var (
 	ErrIntOverflowEmpty   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("google/protobuf/empty.proto", fileDescriptorEmpty) }
+func init() { proto.RegisterFile("google/protobuf/empty.proto", fileDescriptor_empty_fa64318be3e23895) }
 
-var fileDescriptorEmpty = []byte{
+var fileDescriptor_empty_fa64318be3e23895 = []byte{
 	// 180 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4e, 0xcf, 0xcf, 0x4f,
 	0xcf, 0x49, 0xd5, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0x4f, 0x2a, 0x4d, 0xd3, 0x4f, 0xcd, 0x2d, 0x28,

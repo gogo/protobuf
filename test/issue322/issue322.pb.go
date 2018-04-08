@@ -35,10 +35,12 @@ type OneofTest struct {
 	XXX_sizecache        int32             `json:"-"`
 }
 
-func (m *OneofTest) Reset()                    { *m = OneofTest{} }
-func (m *OneofTest) String() string            { return proto.CompactTextString(m) }
-func (*OneofTest) ProtoMessage()               {}
-func (*OneofTest) Descriptor() ([]byte, []int) { return fileDescriptorIssue322, []int{0} }
+func (m *OneofTest) Reset()         { *m = OneofTest{} }
+func (m *OneofTest) String() string { return proto.CompactTextString(m) }
+func (*OneofTest) ProtoMessage()    {}
+func (*OneofTest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_issue322_3e2db2f0d45a9027, []int{0}
+}
 func (m *OneofTest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OneofTest.Unmarshal(m, b)
 }
@@ -573,9 +575,9 @@ var (
 	ErrIntOverflowIssue322   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("issue322.proto", fileDescriptorIssue322) }
+func init() { proto.RegisterFile("issue322.proto", fileDescriptor_issue322_3e2db2f0d45a9027) }
 
-var fileDescriptorIssue322 = []byte{
+var fileDescriptor_issue322_3e2db2f0d45a9027 = []byte{
 	// 149 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0x2c, 0x2e, 0x2e,
 	0x4d, 0x35, 0x36, 0x32, 0xd2, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x29, 0x49, 0x2d, 0x2e,

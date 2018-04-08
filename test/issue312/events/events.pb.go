@@ -32,10 +32,12 @@ type Subtype struct {
 	XXX_sizecache        int32               `json:"-"`
 }
 
-func (m *Subtype) Reset()                    { *m = Subtype{} }
-func (m *Subtype) String() string            { return proto.CompactTextString(m) }
-func (*Subtype) ProtoMessage()               {}
-func (*Subtype) Descriptor() ([]byte, []int) { return fileDescriptorEvents, []int{0} }
+func (m *Subtype) Reset()         { *m = Subtype{} }
+func (m *Subtype) String() string { return proto.CompactTextString(m) }
+func (*Subtype) ProtoMessage()    {}
+func (*Subtype) Descriptor() ([]byte, []int) {
+	return fileDescriptor_events_4681b5f19350f6a9, []int{0}
+}
 func (m *Subtype) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Subtype.Unmarshal(m, b)
 }
@@ -205,9 +207,9 @@ func encodeVarintPopulateEvents(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 
-func init() { proto.RegisterFile("events.proto", fileDescriptorEvents) }
+func init() { proto.RegisterFile("events.proto", fileDescriptor_events_4681b5f19350f6a9) }
 
-var fileDescriptorEvents = []byte{
+var fileDescriptor_events_4681b5f19350f6a9 = []byte{
 	// 162 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x49, 0x2d, 0x4b, 0xcd,
 	0x2b, 0x29, 0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0xcf, 0x2c, 0x2e, 0x2e, 0x4d, 0x35,

@@ -19,6 +19,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+
 // A Duration represents a signed, fixed-length span of time represented
 // as a count of seconds and fractions of seconds at nanosecond
 // resolution. It is independent of any calendar and concepts like "day"
@@ -96,10 +102,12 @@ type Duration struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Duration) Reset()                    { *m = Duration{} }
-func (*Duration) ProtoMessage()               {}
-func (*Duration) Descriptor() ([]byte, []int) { return fileDescriptorDuration, []int{0} }
-func (*Duration) XXX_WellKnownType() string   { return "Duration" }
+func (m *Duration) Reset()      { *m = Duration{} }
+func (*Duration) ProtoMessage() {}
+func (*Duration) Descriptor() ([]byte, []int) {
+	return fileDescriptor_duration_7f04bf66a647e6f6, []int{0}
+}
+func (*Duration) XXX_WellKnownType() string { return "Duration" }
 func (m *Duration) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Duration.Unmarshal(m, b)
 }
@@ -494,9 +502,11 @@ var (
 	ErrIntOverflowDuration   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("google/protobuf/duration.proto", fileDescriptorDuration) }
+func init() {
+	proto.RegisterFile("google/protobuf/duration.proto", fileDescriptor_duration_7f04bf66a647e6f6)
+}
 
-var fileDescriptorDuration = []byte{
+var fileDescriptor_duration_7f04bf66a647e6f6 = []byte{
 	// 215 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4b, 0xcf, 0xcf, 0x4f,
 	0xcf, 0x49, 0xd5, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0x4f, 0x2a, 0x4d, 0xd3, 0x4f, 0x29, 0x2d, 0x4a,

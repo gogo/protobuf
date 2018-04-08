@@ -19,6 +19,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+
 // `FieldMask` represents a set of symbolic field paths, for example:
 //
 //     paths: "f.a"
@@ -234,9 +240,11 @@ type FieldMask struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *FieldMask) Reset()                    { *m = FieldMask{} }
-func (*FieldMask) ProtoMessage()               {}
-func (*FieldMask) Descriptor() ([]byte, []int) { return fileDescriptorFieldMask, []int{0} }
+func (m *FieldMask) Reset()      { *m = FieldMask{} }
+func (*FieldMask) ProtoMessage() {}
+func (*FieldMask) Descriptor() ([]byte, []int) {
+	return fileDescriptor_field_mask_3abe20b2f0d4cb1c, []int{0}
+}
 func (m *FieldMask) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FieldMask.Unmarshal(m, b)
 }
@@ -727,9 +735,11 @@ var (
 	ErrIntOverflowFieldMask   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("google/protobuf/field_mask.proto", fileDescriptorFieldMask) }
+func init() {
+	proto.RegisterFile("google/protobuf/field_mask.proto", fileDescriptor_field_mask_3abe20b2f0d4cb1c)
+}
 
-var fileDescriptorFieldMask = []byte{
+var fileDescriptor_field_mask_3abe20b2f0d4cb1c = []byte{
 	// 204 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0x48, 0xcf, 0xcf, 0x4f,
 	0xcf, 0x49, 0xd5, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0x4f, 0x2a, 0x4d, 0xd3, 0x4f, 0xcb, 0x4c, 0xcd,

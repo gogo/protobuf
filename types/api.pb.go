@@ -19,6 +19,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+
 // Api is a light-weight descriptor for an API Interface.
 //
 // Interfaces are also described as "protocol buffer services" in some contexts,
@@ -70,9 +76,11 @@ type Api struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Api) Reset()                    { *m = Api{} }
-func (*Api) ProtoMessage()               {}
-func (*Api) Descriptor() ([]byte, []int) { return fileDescriptorApi, []int{0} }
+func (m *Api) Reset()      { *m = Api{} }
+func (*Api) ProtoMessage() {}
+func (*Api) Descriptor() ([]byte, []int) {
+	return fileDescriptor_api_658bf9e68d9b66a3, []int{0}
+}
 func (m *Api) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Api.Unmarshal(m, b)
 }
@@ -165,9 +173,11 @@ type Method struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Method) Reset()                    { *m = Method{} }
-func (*Method) ProtoMessage()               {}
-func (*Method) Descriptor() ([]byte, []int) { return fileDescriptorApi, []int{1} }
+func (m *Method) Reset()      { *m = Method{} }
+func (*Method) ProtoMessage() {}
+func (*Method) Descriptor() ([]byte, []int) {
+	return fileDescriptor_api_658bf9e68d9b66a3, []int{1}
+}
 func (m *Method) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Method.Unmarshal(m, b)
 }
@@ -328,9 +338,11 @@ type Mixin struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Mixin) Reset()                    { *m = Mixin{} }
-func (*Mixin) ProtoMessage()               {}
-func (*Mixin) Descriptor() ([]byte, []int) { return fileDescriptorApi, []int{2} }
+func (m *Mixin) Reset()      { *m = Mixin{} }
+func (*Mixin) ProtoMessage() {}
+func (*Mixin) Descriptor() ([]byte, []int) {
+	return fileDescriptor_api_658bf9e68d9b66a3, []int{2}
+}
 func (m *Mixin) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Mixin.Unmarshal(m, b)
 }
@@ -1982,9 +1994,9 @@ var (
 	ErrIntOverflowApi   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("google/protobuf/api.proto", fileDescriptorApi) }
+func init() { proto.RegisterFile("google/protobuf/api.proto", fileDescriptor_api_658bf9e68d9b66a3) }
 
-var fileDescriptorApi = []byte{
+var fileDescriptor_api_658bf9e68d9b66a3 = []byte{
 	// 472 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x91, 0x31, 0x6f, 0x13, 0x31,
 	0x14, 0xc7, 0xf3, 0xee, 0x92, 0x4b, 0x71, 0x45, 0x0a, 0x46, 0x02, 0x93, 0xc1, 0x3a, 0x55, 0x0c,

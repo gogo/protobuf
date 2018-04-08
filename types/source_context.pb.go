@@ -19,6 +19,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+
 // `SourceContext` represents information about the source of a
 // protobuf element, like the file in which it is defined.
 type SourceContext struct {
@@ -30,9 +36,11 @@ type SourceContext struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *SourceContext) Reset()                    { *m = SourceContext{} }
-func (*SourceContext) ProtoMessage()               {}
-func (*SourceContext) Descriptor() ([]byte, []int) { return fileDescriptorSourceContext, []int{0} }
+func (m *SourceContext) Reset()      { *m = SourceContext{} }
+func (*SourceContext) ProtoMessage() {}
+func (*SourceContext) Descriptor() ([]byte, []int) {
+	return fileDescriptor_source_context_d25fd312302631f7, []int{0}
+}
 func (m *SourceContext) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SourceContext.Unmarshal(m, b)
 }
@@ -495,9 +503,11 @@ var (
 	ErrIntOverflowSourceContext   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("google/protobuf/source_context.proto", fileDescriptorSourceContext) }
+func init() {
+	proto.RegisterFile("google/protobuf/source_context.proto", fileDescriptor_source_context_d25fd312302631f7)
+}
 
-var fileDescriptorSourceContext = []byte{
+var fileDescriptor_source_context_d25fd312302631f7 = []byte{
 	// 216 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0x49, 0xcf, 0xcf, 0x4f,
 	0xcf, 0x49, 0xd5, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0x4f, 0x2a, 0x4d, 0xd3, 0x2f, 0xce, 0x2f, 0x2d,

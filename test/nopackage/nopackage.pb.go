@@ -29,10 +29,12 @@ type M struct {
 	XXX_sizecache        int32              `json:"-"`
 }
 
-func (m *M) Reset()                    { *m = M{} }
-func (m *M) String() string            { return proto.CompactTextString(m) }
-func (*M) ProtoMessage()               {}
-func (*M) Descriptor() ([]byte, []int) { return fileDescriptorNopackage, []int{0} }
+func (m *M) Reset()         { *m = M{} }
+func (m *M) String() string { return proto.CompactTextString(m) }
+func (*M) ProtoMessage()    {}
+func (*M) Descriptor() ([]byte, []int) {
+	return fileDescriptor_nopackage_085d7f4350f51d1d, []int{0}
+}
 func (m *M) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_M.Unmarshal(m, b)
 }
@@ -395,9 +397,9 @@ var (
 	ErrIntOverflowNopackage   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("nopackage.proto", fileDescriptorNopackage) }
+func init() { proto.RegisterFile("nopackage.proto", fileDescriptor_nopackage_085d7f4350f51d1d) }
 
-var fileDescriptorNopackage = []byte{
+var fileDescriptor_nopackage_085d7f4350f51d1d = []byte{
 	// 134 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcf, 0xcb, 0x2f, 0x48,
 	0x4c, 0xce, 0x4e, 0x4c, 0x4f, 0xd5, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x57, 0x0a, 0xe2, 0x62, 0xf4,

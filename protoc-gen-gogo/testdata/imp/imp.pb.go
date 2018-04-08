@@ -50,7 +50,9 @@ func (x *ImportedMessage_Owner) UnmarshalJSON(data []byte) error {
 	*x = ImportedMessage_Owner(value)
 	return nil
 }
-func (ImportedMessage_Owner) EnumDescriptor() ([]byte, []int) { return fileDescriptorImp, []int{0, 0} }
+func (ImportedMessage_Owner) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_imp_6059ce224d6efed4, []int{0, 0}
+}
 
 type ImportedMessage struct {
 	Field *int64 `protobuf:"varint,1,req,name=field" json:"field,omitempty"`
@@ -71,10 +73,12 @@ type ImportedMessage struct {
 	XXX_sizecache                int32  `json:"-"`
 }
 
-func (m *ImportedMessage) Reset()                    { *m = ImportedMessage{} }
-func (m *ImportedMessage) String() string            { return proto.CompactTextString(m) }
-func (*ImportedMessage) ProtoMessage()               {}
-func (*ImportedMessage) Descriptor() ([]byte, []int) { return fileDescriptorImp, []int{0} }
+func (m *ImportedMessage) Reset()         { *m = ImportedMessage{} }
+func (m *ImportedMessage) String() string { return proto.CompactTextString(m) }
+func (*ImportedMessage) ProtoMessage()    {}
+func (*ImportedMessage) Descriptor() ([]byte, []int) {
+	return fileDescriptor_imp_6059ce224d6efed4, []int{0}
+}
 
 var extRange_ImportedMessage = []proto.ExtensionRange{
 	{Start: 90, End: 100},
@@ -237,10 +241,12 @@ type ImportedMessage2 struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *ImportedMessage2) Reset()                    { *m = ImportedMessage2{} }
-func (m *ImportedMessage2) String() string            { return proto.CompactTextString(m) }
-func (*ImportedMessage2) ProtoMessage()               {}
-func (*ImportedMessage2) Descriptor() ([]byte, []int) { return fileDescriptorImp, []int{1} }
+func (m *ImportedMessage2) Reset()         { *m = ImportedMessage2{} }
+func (m *ImportedMessage2) String() string { return proto.CompactTextString(m) }
+func (*ImportedMessage2) ProtoMessage()    {}
+func (*ImportedMessage2) Descriptor() ([]byte, []int) {
+	return fileDescriptor_imp_6059ce224d6efed4, []int{1}
+}
 func (m *ImportedMessage2) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ImportedMessage2.Unmarshal(m, b)
 }
@@ -266,10 +272,12 @@ type ImportedExtendable struct {
 	XXX_sizecache                int32  `json:"-"`
 }
 
-func (m *ImportedExtendable) Reset()                    { *m = ImportedExtendable{} }
-func (m *ImportedExtendable) String() string            { return proto.CompactTextString(m) }
-func (*ImportedExtendable) ProtoMessage()               {}
-func (*ImportedExtendable) Descriptor() ([]byte, []int) { return fileDescriptorImp, []int{2} }
+func (m *ImportedExtendable) Reset()         { *m = ImportedExtendable{} }
+func (m *ImportedExtendable) String() string { return proto.CompactTextString(m) }
+func (*ImportedExtendable) ProtoMessage()    {}
+func (*ImportedExtendable) Descriptor() ([]byte, []int) {
+	return fileDescriptor_imp_6059ce224d6efed4, []int{2}
+}
 
 func (m *ImportedExtendable) MarshalJSON() ([]byte, error) {
 	return proto.MarshalMessageSetJSON(&m.XXX_InternalExtensions)
@@ -311,9 +319,9 @@ func init() {
 	proto.RegisterEnum("imp.ImportedMessage_Owner", ImportedMessage_Owner_name, ImportedMessage_Owner_value)
 }
 
-func init() { proto.RegisterFile("imp/imp.proto", fileDescriptorImp) }
+func init() { proto.RegisterFile("imp/imp.proto", fileDescriptor_imp_6059ce224d6efed4) }
 
-var fileDescriptorImp = []byte{
+var fileDescriptor_imp_6059ce224d6efed4 = []byte{
 	// 419 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x52, 0x4d, 0x6f, 0xd4, 0x30,
 	0x10, 0xc5, 0xf9, 0xe8, 0x26, 0xb3, 0xa2, 0x44, 0x16, 0xa0, 0x68, 0x7b, 0xb1, 0x72, 0x0a, 0x45,

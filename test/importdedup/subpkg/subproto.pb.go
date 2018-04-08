@@ -25,10 +25,12 @@ type SubObject struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *SubObject) Reset()                    { *m = SubObject{} }
-func (m *SubObject) String() string            { return proto.CompactTextString(m) }
-func (*SubObject) ProtoMessage()               {}
-func (*SubObject) Descriptor() ([]byte, []int) { return fileDescriptorSubproto, []int{0} }
+func (m *SubObject) Reset()         { *m = SubObject{} }
+func (m *SubObject) String() string { return proto.CompactTextString(m) }
+func (*SubObject) ProtoMessage()    {}
+func (*SubObject) Descriptor() ([]byte, []int) {
+	return fileDescriptor_subproto_094c5f22e1aecb1e, []int{0}
+}
 func (m *SubObject) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SubObject.Unmarshal(m, b)
 }
@@ -51,9 +53,9 @@ func init() {
 	proto.RegisterType((*SubObject)(nil), "subpkg.SubObject")
 }
 
-func init() { proto.RegisterFile("subpkg/subproto.proto", fileDescriptorSubproto) }
+func init() { proto.RegisterFile("subpkg/subproto.proto", fileDescriptor_subproto_094c5f22e1aecb1e) }
 
-var fileDescriptorSubproto = []byte{
+var fileDescriptor_subproto_094c5f22e1aecb1e = []byte{
 	// 88 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2d, 0x2e, 0x4d, 0x2a,
 	0xc8, 0x4e, 0xd7, 0x07, 0x51, 0x45, 0xf9, 0x25, 0xf9, 0x7a, 0x60, 0x52, 0x88, 0x0d, 0x22, 0x2c,

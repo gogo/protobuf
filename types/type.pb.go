@@ -21,6 +21,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+
 // The syntax in which a protocol buffer element is defined.
 type Syntax int32
 
@@ -40,7 +46,9 @@ var Syntax_value = map[string]int32{
 	"SYNTAX_PROTO3": 1,
 }
 
-func (Syntax) EnumDescriptor() ([]byte, []int) { return fileDescriptorType, []int{0} }
+func (Syntax) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_type_345e3aff58b7b252, []int{0}
+}
 
 // Basic field types.
 type Field_Kind int32
@@ -129,7 +137,9 @@ var Field_Kind_value = map[string]int32{
 	"TYPE_SINT64":   18,
 }
 
-func (Field_Kind) EnumDescriptor() ([]byte, []int) { return fileDescriptorType, []int{1, 0} }
+func (Field_Kind) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_type_345e3aff58b7b252, []int{1, 0}
+}
 
 // Whether a field is optional, required, or repeated.
 type Field_Cardinality int32
@@ -158,7 +168,9 @@ var Field_Cardinality_value = map[string]int32{
 	"CARDINALITY_REPEATED": 3,
 }
 
-func (Field_Cardinality) EnumDescriptor() ([]byte, []int) { return fileDescriptorType, []int{1, 1} }
+func (Field_Cardinality) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_type_345e3aff58b7b252, []int{1, 1}
+}
 
 // A protocol buffer message type.
 type Type struct {
@@ -179,9 +191,11 @@ type Type struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Type) Reset()                    { *m = Type{} }
-func (*Type) ProtoMessage()               {}
-func (*Type) Descriptor() ([]byte, []int) { return fileDescriptorType, []int{0} }
+func (m *Type) Reset()      { *m = Type{} }
+func (*Type) ProtoMessage() {}
+func (*Type) Descriptor() ([]byte, []int) {
+	return fileDescriptor_type_345e3aff58b7b252, []int{0}
+}
 func (m *Type) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Type.Unmarshal(m, b)
 }
@@ -275,9 +289,11 @@ type Field struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Field) Reset()                    { *m = Field{} }
-func (*Field) ProtoMessage()               {}
-func (*Field) Descriptor() ([]byte, []int) { return fileDescriptorType, []int{1} }
+func (m *Field) Reset()      { *m = Field{} }
+func (*Field) ProtoMessage() {}
+func (*Field) Descriptor() ([]byte, []int) {
+	return fileDescriptor_type_345e3aff58b7b252, []int{1}
+}
 func (m *Field) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Field.Unmarshal(m, b)
 }
@@ -387,9 +403,11 @@ type Enum struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Enum) Reset()                    { *m = Enum{} }
-func (*Enum) ProtoMessage()               {}
-func (*Enum) Descriptor() ([]byte, []int) { return fileDescriptorType, []int{2} }
+func (m *Enum) Reset()      { *m = Enum{} }
+func (*Enum) ProtoMessage() {}
+func (*Enum) Descriptor() ([]byte, []int) {
+	return fileDescriptor_type_345e3aff58b7b252, []int{2}
+}
 func (m *Enum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Enum.Unmarshal(m, b)
 }
@@ -460,9 +478,11 @@ type EnumValue struct {
 	XXX_sizecache        int32     `json:"-"`
 }
 
-func (m *EnumValue) Reset()                    { *m = EnumValue{} }
-func (*EnumValue) ProtoMessage()               {}
-func (*EnumValue) Descriptor() ([]byte, []int) { return fileDescriptorType, []int{3} }
+func (m *EnumValue) Reset()      { *m = EnumValue{} }
+func (*EnumValue) ProtoMessage() {}
+func (*EnumValue) Descriptor() ([]byte, []int) {
+	return fileDescriptor_type_345e3aff58b7b252, []int{3}
+}
 func (m *EnumValue) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_EnumValue.Unmarshal(m, b)
 }
@@ -524,9 +544,11 @@ type Option struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Option) Reset()                    { *m = Option{} }
-func (*Option) ProtoMessage()               {}
-func (*Option) Descriptor() ([]byte, []int) { return fileDescriptorType, []int{4} }
+func (m *Option) Reset()      { *m = Option{} }
+func (*Option) ProtoMessage() {}
+func (*Option) Descriptor() ([]byte, []int) {
+	return fileDescriptor_type_345e3aff58b7b252, []int{4}
+}
 func (m *Option) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Option.Unmarshal(m, b)
 }
@@ -3101,9 +3123,9 @@ var (
 	ErrIntOverflowType   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("google/protobuf/type.proto", fileDescriptorType) }
+func init() { proto.RegisterFile("google/protobuf/type.proto", fileDescriptor_type_345e3aff58b7b252) }
 
-var fileDescriptorType = []byte{
+var fileDescriptor_type_345e3aff58b7b252 = []byte{
 	// 844 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x55, 0xcf, 0x73, 0xda, 0x46,
 	0x14, 0x66, 0x41, 0xc8, 0xe8, 0x61, 0xf0, 0x66, 0x93, 0x49, 0x14, 0x67, 0x46, 0x65, 0x68, 0x0f,

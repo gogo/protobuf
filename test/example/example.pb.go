@@ -41,9 +41,11 @@ type A struct {
 	XXX_sizecache        int32                              `json:"-"`
 }
 
-func (m *A) Reset()                    { *m = A{} }
-func (*A) ProtoMessage()               {}
-func (*A) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{0} }
+func (m *A) Reset()      { *m = A{} }
+func (*A) ProtoMessage() {}
+func (*A) Descriptor() ([]byte, []int) {
+	return fileDescriptor_example_32f420a2a58e4270, []int{0}
+}
 func (m *A) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_A.Unmarshal(m, b)
 }
@@ -70,9 +72,11 @@ type B struct {
 	XXX_sizecache        int32                                          `json:"-"`
 }
 
-func (m *B) Reset()                    { *m = B{} }
-func (*B) ProtoMessage()               {}
-func (*B) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{1} }
+func (m *B) Reset()      { *m = B{} }
+func (*B) ProtoMessage() {}
+func (*B) Descriptor() ([]byte, []int) {
+	return fileDescriptor_example_32f420a2a58e4270, []int{1}
+}
 func (m *B) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_B.Unmarshal(m, b)
 }
@@ -98,9 +102,11 @@ type C struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *C) Reset()                    { *m = C{} }
-func (*C) ProtoMessage()               {}
-func (*C) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{2} }
+func (m *C) Reset()      { *m = C{} }
+func (*C) ProtoMessage() {}
+func (*C) Descriptor() ([]byte, []int) {
+	return fileDescriptor_example_32f420a2a58e4270, []int{2}
+}
 func (m *C) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_C.Unmarshal(m, b)
 }
@@ -134,9 +140,11 @@ type U struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *U) Reset()                    { *m = U{} }
-func (*U) ProtoMessage()               {}
-func (*U) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{3} }
+func (m *U) Reset()      { *m = U{} }
+func (*U) ProtoMessage() {}
+func (*U) Descriptor() ([]byte, []int) {
+	return fileDescriptor_example_32f420a2a58e4270, []int{3}
+}
 func (m *U) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_U.Unmarshal(m, b)
 }
@@ -176,9 +184,11 @@ type E struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *E) Reset()                    { *m = E{} }
-func (*E) ProtoMessage()               {}
-func (*E) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{4} }
+func (m *E) Reset()      { *m = E{} }
+func (*E) ProtoMessage() {}
+func (*E) Descriptor() ([]byte, []int) {
+	return fileDescriptor_example_32f420a2a58e4270, []int{4}
+}
 
 var extRange_E = []proto.ExtensionRange{
 	{Start: 1, End: 536870911},
@@ -217,9 +227,11 @@ type R struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *R) Reset()                    { *m = R{} }
-func (*R) ProtoMessage()               {}
-func (*R) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{5} }
+func (m *R) Reset()      { *m = R{} }
+func (*R) ProtoMessage() {}
+func (*R) Descriptor() ([]byte, []int) {
+	return fileDescriptor_example_32f420a2a58e4270, []int{5}
+}
 func (m *R) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_R.Unmarshal(m, b)
 }
@@ -252,9 +264,11 @@ type CastType struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CastType) Reset()                    { *m = CastType{} }
-func (*CastType) ProtoMessage()               {}
-func (*CastType) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{6} }
+func (m *CastType) Reset()      { *m = CastType{} }
+func (*CastType) ProtoMessage() {}
+func (*CastType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_example_32f420a2a58e4270, []int{6}
+}
 func (m *CastType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CastType.Unmarshal(m, b)
 }
@@ -2562,9 +2576,9 @@ var (
 	ErrIntOverflowExample   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("example.proto", fileDescriptorExample) }
+func init() { proto.RegisterFile("example.proto", fileDescriptor_example_32f420a2a58e4270) }
 
-var fileDescriptorExample = []byte{
+var fileDescriptor_example_32f420a2a58e4270 = []byte{
 	// 425 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x90, 0x41, 0x6b, 0x13, 0x41,
 	0x14, 0xc7, 0xf3, 0x36, 0xdb, 0xba, 0x7d, 0x6d, 0x41, 0x46, 0x0a, 0x41, 0x64, 0x26, 0xac, 0x20,

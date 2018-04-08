@@ -34,9 +34,11 @@ type Subby struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Subby) Reset()                    { *m = Subby{} }
-func (*Subby) ProtoMessage()               {}
-func (*Subby) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{0} }
+func (m *Subby) Reset()      { *m = Subby{} }
+func (*Subby) ProtoMessage() {}
+func (*Subby) Descriptor() ([]byte, []int) {
+	return fileDescriptor_one_827a0063df79db69, []int{0}
+}
 func (m *Subby) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Subby.Unmarshal(m, b)
 }
@@ -79,9 +81,11 @@ type SampleOneOf struct {
 	XXX_sizecache        int32                   `json:"-"`
 }
 
-func (m *SampleOneOf) Reset()                    { *m = SampleOneOf{} }
-func (*SampleOneOf) ProtoMessage()               {}
-func (*SampleOneOf) Descriptor() ([]byte, []int) { return fileDescriptorOne, []int{1} }
+func (m *SampleOneOf) Reset()      { *m = SampleOneOf{} }
+func (*SampleOneOf) ProtoMessage() {}
+func (*SampleOneOf) Descriptor() ([]byte, []int) {
+	return fileDescriptor_one_827a0063df79db69, []int{1}
+}
 func (m *SampleOneOf) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SampleOneOf.Unmarshal(m, b)
 }
@@ -2569,9 +2573,9 @@ func valueToStringOne(v interface{}) string {
 	return fmt.Sprintf("*%v", pv)
 }
 
-func init() { proto.RegisterFile("combos/neither/one.proto", fileDescriptorOne) }
+func init() { proto.RegisterFile("combos/neither/one.proto", fileDescriptor_one_827a0063df79db69) }
 
-var fileDescriptorOne = []byte{
+var fileDescriptor_one_827a0063df79db69 = []byte{
 	// 405 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x44, 0xd2, 0xbf, 0x4f, 0x1b, 0x31,
 	0x14, 0x07, 0x70, 0x3f, 0x8e, 0x24, 0xe0, 0x84, 0x92, 0xde, 0xf4, 0xca, 0xf0, 0x64, 0x31, 0x79,
