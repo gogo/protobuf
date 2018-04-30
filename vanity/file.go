@@ -183,3 +183,7 @@ func TurnOnCompareAll(file *descriptor.FileDescriptorProto) {
 func TurnOnMessageNameAll(file *descriptor.FileDescriptorProto) {
 	SetBoolFileOption(gogoproto.E_MessagenameAll, true)(file)
 }
+
+func TurnOnGoRegistration(file *descriptor.FileDescriptorProto) {
+	SetBoolFileOption(gogoproto.E_GoprotoRegistration, true)(file)
+}
