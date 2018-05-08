@@ -56,7 +56,7 @@ func (dst *StdTypes) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_StdTypes.Merge(dst, src)
 }
 func (m *StdTypes) XXX_Size() int {
-	return xxx_messageInfo_StdTypes.Size(m)
+	return m.Size()
 }
 func (m *StdTypes) XXX_DiscardUnknown() {
 	xxx_messageInfo_StdTypes.DiscardUnknown(m)
@@ -118,7 +118,7 @@ func (dst *RepStdTypes) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_RepStdTypes.Merge(dst, src)
 }
 func (m *RepStdTypes) XXX_Size() int {
-	return xxx_messageInfo_RepStdTypes.Size(m)
+	return m.Size()
 }
 func (m *RepStdTypes) XXX_DiscardUnknown() {
 	xxx_messageInfo_RepStdTypes.DiscardUnknown(m)
@@ -180,7 +180,7 @@ func (dst *MapStdTypes) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MapStdTypes.Merge(dst, src)
 }
 func (m *MapStdTypes) XXX_Size() int {
-	return xxx_messageInfo_MapStdTypes.Size(m)
+	return m.Size()
 }
 func (m *MapStdTypes) XXX_DiscardUnknown() {
 	xxx_messageInfo_MapStdTypes.DiscardUnknown(m)
@@ -242,7 +242,7 @@ func (dst *OneofStdTypes) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OneofStdTypes.Merge(dst, src)
 }
 func (m *OneofStdTypes) XXX_Size() int {
-	return xxx_messageInfo_OneofStdTypes.Size(m)
+	return m.Size()
 }
 func (m *OneofStdTypes) XXX_DiscardUnknown() {
 	xxx_messageInfo_OneofStdTypes.DiscardUnknown(m)

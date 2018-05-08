@@ -110,7 +110,7 @@ func (*Message) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_42f7388870cddc3f, []int{0}
 }
 func (m *Message) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Message.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Message.Marshal(b, m, deterministic)
@@ -119,7 +119,7 @@ func (dst *Message) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Message.Merge(dst, src)
 }
 func (m *Message) XXX_Size() int {
-	return xxx_messageInfo_Message.Size(m)
+	return m.Size()
 }
 func (m *Message) XXX_DiscardUnknown() {
 	xxx_messageInfo_Message.DiscardUnknown(m)
@@ -140,7 +140,7 @@ func (*Nested) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_42f7388870cddc3f, []int{1}
 }
 func (m *Nested) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Nested.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Nested) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Nested.Marshal(b, m, deterministic)
@@ -149,7 +149,7 @@ func (dst *Nested) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Nested.Merge(dst, src)
 }
 func (m *Nested) XXX_Size() int {
-	return xxx_messageInfo_Nested.Size(m)
+	return m.Size()
 }
 func (m *Nested) XXX_DiscardUnknown() {
 	xxx_messageInfo_Nested.DiscardUnknown(m)
@@ -186,7 +186,7 @@ func (*AllMaps) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_42f7388870cddc3f, []int{2}
 }
 func (m *AllMaps) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AllMaps.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *AllMaps) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_AllMaps.Marshal(b, m, deterministic)
@@ -195,7 +195,7 @@ func (dst *AllMaps) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AllMaps.Merge(dst, src)
 }
 func (m *AllMaps) XXX_Size() int {
-	return xxx_messageInfo_AllMaps.Size(m)
+	return m.Size()
 }
 func (m *AllMaps) XXX_DiscardUnknown() {
 	xxx_messageInfo_AllMaps.DiscardUnknown(m)
@@ -232,16 +232,20 @@ func (*AllMapsOrdered) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_42f7388870cddc3f, []int{3}
 }
 func (m *AllMapsOrdered) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AllMapsOrdered.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *AllMapsOrdered) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_AllMapsOrdered.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *AllMapsOrdered) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AllMapsOrdered.Merge(dst, src)
 }
 func (m *AllMapsOrdered) XXX_Size() int {
-	return xxx_messageInfo_AllMapsOrdered.Size(m)
+	return m.Size()
 }
 func (m *AllMapsOrdered) XXX_DiscardUnknown() {
 	xxx_messageInfo_AllMapsOrdered.DiscardUnknown(m)
@@ -264,7 +268,7 @@ func (*MessageWithMap) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_42f7388870cddc3f, []int{4}
 }
 func (m *MessageWithMap) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_MessageWithMap.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *MessageWithMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MessageWithMap.Marshal(b, m, deterministic)
@@ -273,7 +277,7 @@ func (dst *MessageWithMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MessageWithMap.Merge(dst, src)
 }
 func (m *MessageWithMap) XXX_Size() int {
-	return xxx_messageInfo_MessageWithMap.Size(m)
+	return m.Size()
 }
 func (m *MessageWithMap) XXX_DiscardUnknown() {
 	xxx_messageInfo_MessageWithMap.DiscardUnknown(m)
@@ -294,7 +298,7 @@ func (*FloatingPoint) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_42f7388870cddc3f, []int{5}
 }
 func (m *FloatingPoint) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_FloatingPoint.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *FloatingPoint) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_FloatingPoint.Marshal(b, m, deterministic)
@@ -303,7 +307,7 @@ func (dst *FloatingPoint) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FloatingPoint.Merge(dst, src)
 }
 func (m *FloatingPoint) XXX_Size() int {
-	return xxx_messageInfo_FloatingPoint.Size(m)
+	return m.Size()
 }
 func (m *FloatingPoint) XXX_DiscardUnknown() {
 	xxx_messageInfo_FloatingPoint.DiscardUnknown(m)
@@ -325,7 +329,7 @@ func (*Uint128Pair) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_42f7388870cddc3f, []int{6}
 }
 func (m *Uint128Pair) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Uint128Pair.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Uint128Pair) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Uint128Pair.Marshal(b, m, deterministic)
@@ -334,7 +338,7 @@ func (dst *Uint128Pair) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Uint128Pair.Merge(dst, src)
 }
 func (m *Uint128Pair) XXX_Size() int {
-	return xxx_messageInfo_Uint128Pair.Size(m)
+	return m.Size()
 }
 func (m *Uint128Pair) XXX_DiscardUnknown() {
 	xxx_messageInfo_Uint128Pair.DiscardUnknown(m)
@@ -354,7 +358,7 @@ func (*ContainsNestedMap) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_42f7388870cddc3f, []int{7}
 }
 func (m *ContainsNestedMap) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ContainsNestedMap.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *ContainsNestedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ContainsNestedMap.Marshal(b, m, deterministic)
@@ -363,7 +367,7 @@ func (dst *ContainsNestedMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ContainsNestedMap.Merge(dst, src)
 }
 func (m *ContainsNestedMap) XXX_Size() int {
-	return xxx_messageInfo_ContainsNestedMap.Size(m)
+	return m.Size()
 }
 func (m *ContainsNestedMap) XXX_DiscardUnknown() {
 	xxx_messageInfo_ContainsNestedMap.DiscardUnknown(m)
@@ -384,7 +388,7 @@ func (*ContainsNestedMap_NestedMap) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_42f7388870cddc3f, []int{7, 0}
 }
 func (m *ContainsNestedMap_NestedMap) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ContainsNestedMap_NestedMap.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *ContainsNestedMap_NestedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ContainsNestedMap_NestedMap.Marshal(b, m, deterministic)
@@ -393,7 +397,7 @@ func (dst *ContainsNestedMap_NestedMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ContainsNestedMap_NestedMap.Merge(dst, src)
 }
 func (m *ContainsNestedMap_NestedMap) XXX_Size() int {
-	return xxx_messageInfo_ContainsNestedMap_NestedMap.Size(m)
+	return m.Size()
 }
 func (m *ContainsNestedMap_NestedMap) XXX_DiscardUnknown() {
 	xxx_messageInfo_ContainsNestedMap_NestedMap.DiscardUnknown(m)
@@ -414,7 +418,7 @@ func (*NotPacked) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_42f7388870cddc3f, []int{8}
 }
 func (m *NotPacked) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NotPacked.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NotPacked) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NotPacked.Marshal(b, m, deterministic)
@@ -423,7 +427,7 @@ func (dst *NotPacked) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NotPacked.Merge(dst, src)
 }
 func (m *NotPacked) XXX_Size() int {
-	return xxx_messageInfo_NotPacked.Size(m)
+	return m.Size()
 }
 func (m *NotPacked) XXX_DiscardUnknown() {
 	xxx_messageInfo_NotPacked.DiscardUnknown(m)

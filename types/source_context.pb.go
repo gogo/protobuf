@@ -42,16 +42,20 @@ func (*SourceContext) Descriptor() ([]byte, []int) {
 	return fileDescriptor_source_context_d25fd312302631f7, []int{0}
 }
 func (m *SourceContext) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_SourceContext.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *SourceContext) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_SourceContext.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *SourceContext) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_SourceContext.Merge(dst, src)
 }
 func (m *SourceContext) XXX_Size() int {
-	return xxx_messageInfo_SourceContext.Size(m)
+	return m.Size()
 }
 func (m *SourceContext) XXX_DiscardUnknown() {
 	xxx_messageInfo_SourceContext.DiscardUnknown(m)

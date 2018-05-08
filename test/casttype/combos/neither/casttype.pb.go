@@ -68,7 +68,7 @@ func (dst *Castaway) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Castaway.Merge(dst, src)
 }
 func (m *Castaway) XXX_Size() int {
-	return xxx_messageInfo_Castaway.Size(m)
+	return m.Size()
 }
 func (m *Castaway) XXX_DiscardUnknown() {
 	xxx_messageInfo_Castaway.DiscardUnknown(m)
@@ -98,7 +98,7 @@ func (dst *Wilson) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Wilson.Merge(dst, src)
 }
 func (m *Wilson) XXX_Size() int {
-	return xxx_messageInfo_Wilson.Size(m)
+	return m.Size()
 }
 func (m *Wilson) XXX_DiscardUnknown() {
 	xxx_messageInfo_Wilson.DiscardUnknown(m)

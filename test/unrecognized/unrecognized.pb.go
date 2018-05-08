@@ -45,16 +45,20 @@ func (*A) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{0}
 }
 func (m *A) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_A.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *A) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_A.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *A) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_A.Merge(dst, src)
 }
 func (m *A) XXX_Size() int {
-	return xxx_messageInfo_A.Size(m)
+	return m.Size()
 }
 func (m *A) XXX_DiscardUnknown() {
 	xxx_messageInfo_A.DiscardUnknown(m)
@@ -77,16 +81,20 @@ func (*B) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{1}
 }
 func (m *B) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_B.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *B) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_B.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *B) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_B.Merge(dst, src)
 }
 func (m *B) XXX_Size() int {
-	return xxx_messageInfo_B.Size(m)
+	return m.Size()
 }
 func (m *B) XXX_DiscardUnknown() {
 	xxx_messageInfo_B.DiscardUnknown(m)
@@ -107,16 +115,20 @@ func (*D) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{2}
 }
 func (m *D) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_D.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *D) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_D.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *D) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_D.Merge(dst, src)
 }
 func (m *D) XXX_Size() int {
-	return xxx_messageInfo_D.Size(m)
+	return m.Size()
 }
 func (m *D) XXX_DiscardUnknown() {
 	xxx_messageInfo_D.DiscardUnknown(m)
@@ -142,16 +154,20 @@ func (*C) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{3}
 }
 func (m *C) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_C.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *C) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_C.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *C) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_C.Merge(dst, src)
 }
 func (m *C) XXX_Size() int {
-	return xxx_messageInfo_C.Size(m)
+	return m.Size()
 }
 func (m *C) XXX_DiscardUnknown() {
 	xxx_messageInfo_C.DiscardUnknown(m)
@@ -172,16 +188,20 @@ func (*U) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{4}
 }
 func (m *U) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_U.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *U) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_U.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *U) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_U.Merge(dst, src)
 }
 func (m *U) XXX_Size() int {
-	return xxx_messageInfo_U.Size(m)
+	return m.Size()
 }
 func (m *U) XXX_DiscardUnknown() {
 	xxx_messageInfo_U.DiscardUnknown(m)
@@ -232,16 +252,20 @@ func (*OldA) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{6}
 }
 func (m *OldA) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_OldA.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *OldA) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_OldA.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *OldA) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldA.Merge(dst, src)
 }
 func (m *OldA) XXX_Size() int {
-	return xxx_messageInfo_OldA.Size(m)
+	return m.Size()
 }
 func (m *OldA) XXX_DiscardUnknown() {
 	xxx_messageInfo_OldA.DiscardUnknown(m)
@@ -263,16 +287,20 @@ func (*OldB) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{7}
 }
 func (m *OldB) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_OldB.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *OldB) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_OldB.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *OldB) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldB.Merge(dst, src)
 }
 func (m *OldB) XXX_Size() int {
-	return xxx_messageInfo_OldB.Size(m)
+	return m.Size()
 }
 func (m *OldB) XXX_DiscardUnknown() {
 	xxx_messageInfo_OldB.DiscardUnknown(m)
@@ -297,16 +325,20 @@ func (*OldC) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{8}
 }
 func (m *OldC) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_OldC.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *OldC) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_OldC.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *OldC) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldC.Merge(dst, src)
 }
 func (m *OldC) XXX_Size() int {
-	return xxx_messageInfo_OldC.Size(m)
+	return m.Size()
 }
 func (m *OldC) XXX_DiscardUnknown() {
 	xxx_messageInfo_OldC.DiscardUnknown(m)
@@ -328,16 +360,20 @@ func (*OldU) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{9}
 }
 func (m *OldU) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_OldU.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *OldU) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_OldU.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *OldU) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldU.Merge(dst, src)
 }
 func (m *OldU) XXX_Size() int {
-	return xxx_messageInfo_OldU.Size(m)
+	return m.Size()
 }
 func (m *OldU) XXX_DiscardUnknown() {
 	xxx_messageInfo_OldU.DiscardUnknown(m)

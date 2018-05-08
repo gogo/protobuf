@@ -36,16 +36,20 @@ func (*B) Descriptor() ([]byte, []int) {
 	return fileDescriptor_gogovanity_3d56375bbc5ff070, []int{0}
 }
 func (m *B) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_B.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *B) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_B.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *B) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_B.Merge(dst, src)
 }
 func (m *B) XXX_Size() int {
-	return xxx_messageInfo_B.Size(m)
+	return m.Size()
 }
 func (m *B) XXX_DiscardUnknown() {
 	xxx_messageInfo_B.DiscardUnknown(m)

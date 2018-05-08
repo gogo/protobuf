@@ -44,7 +44,7 @@ func (*Subby) Descriptor() ([]byte, []int) {
 	return fileDescriptor_one_2f1bc4354e19d7a9, []int{0}
 }
 func (m *Subby) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Subby.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Subby) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Subby.Marshal(b, m, deterministic)
@@ -53,7 +53,7 @@ func (dst *Subby) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Subby.Merge(dst, src)
 }
 func (m *Subby) XXX_Size() int {
-	return xxx_messageInfo_Subby.Size(m)
+	return m.Size()
 }
 func (m *Subby) XXX_DiscardUnknown() {
 	xxx_messageInfo_Subby.DiscardUnknown(m)
@@ -91,7 +91,7 @@ func (*SampleOneOf) Descriptor() ([]byte, []int) {
 	return fileDescriptor_one_2f1bc4354e19d7a9, []int{1}
 }
 func (m *SampleOneOf) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_SampleOneOf.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *SampleOneOf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SampleOneOf.Marshal(b, m, deterministic)
@@ -100,7 +100,7 @@ func (dst *SampleOneOf) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_SampleOneOf.Merge(dst, src)
 }
 func (m *SampleOneOf) XXX_Size() int {
-	return xxx_messageInfo_SampleOneOf.Size(m)
+	return m.Size()
 }
 func (m *SampleOneOf) XXX_DiscardUnknown() {
 	xxx_messageInfo_SampleOneOf.DiscardUnknown(m)

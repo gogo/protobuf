@@ -42,7 +42,7 @@ func (*Big) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unmarshalmerge_5567ee50c42503cc, []int{0}
 }
 func (m *Big) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Big.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Big) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Big.Marshal(b, m, deterministic)
@@ -131,7 +131,7 @@ func (*Sub) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unmarshalmerge_5567ee50c42503cc, []int{2}
 }
 func (m *Sub) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Sub.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Sub) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Sub.Marshal(b, m, deterministic)
@@ -178,7 +178,7 @@ func (*IntMerge) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unmarshalmerge_5567ee50c42503cc, []int{3}
 }
 func (m *IntMerge) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_IntMerge.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *IntMerge) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_IntMerge.Marshal(b, m, deterministic)

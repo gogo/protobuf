@@ -2686,14 +2686,14 @@ type newMarshaler interface {
 // Size returns the encoded size of a protocol buffer message.
 // This is the main entry point.
 func Size(pb Message) int {
+	if m, ok := pb.(newMarshaler); ok {
+		return m.XXX_Size()
+	}
 	if m, ok := pb.(Marshaler); ok {
 		// If the message can marshal itself, let it do it, for compatibility.
 		// NOTE: This is not efficient.
 		b, _ := m.Marshal()
 		return len(b)
-	}
-	if m, ok := pb.(newMarshaler); ok {
-		return m.XXX_Size()
 	}
 	// in case somehow we didn't generate the wrapper
 	if pb == nil {
@@ -2707,15 +2707,15 @@ func Size(pb Message) int {
 // and encodes it into the wire format, returning the data.
 // This is the main entry point.
 func Marshal(pb Message) ([]byte, error) {
-	if m, ok := pb.(Marshaler); ok {
-		// If the message can marshal itself, let it do it, for compatibility.
-		// NOTE: This is not efficient.
-		return m.Marshal()
-	}
 	if m, ok := pb.(newMarshaler); ok {
 		siz := m.XXX_Size()
 		b := make([]byte, 0, siz)
 		return m.XXX_Marshal(b, false)
+	}
+	if m, ok := pb.(Marshaler); ok {
+		// If the message can marshal itself, let it do it, for compatibility.
+		// NOTE: This is not efficient.
+		return m.Marshal()
 	}
 	// in case somehow we didn't generate the wrapper
 	if pb == nil {
@@ -2733,19 +2733,18 @@ func Marshal(pb Message) ([]byte, error) {
 // This is an alternative entry point. It is not necessary to use
 // a Buffer for most applications.
 func (p *Buffer) Marshal(pb Message) error {
+	var err error
+	if m, ok := pb.(newMarshaler); ok {
+		siz := m.XXX_Size()
+		p.grow(siz) // make sure buf has enough capacity
+		p.buf, err = m.XXX_Marshal(p.buf, p.deterministic)
+		return err
+	}
 	if m, ok := pb.(Marshaler); ok {
 		// If the message can marshal itself, let it do it, for compatibility.
 		// NOTE: This is not efficient.
 		b, err := m.Marshal()
 		p.buf = append(p.buf, b...)
-		return err
-	}
-	var err error
-	if m, ok := pb.(newMarshaler); ok {
-		siz := m.XXX_Size()
-		// make sure buf has enough capacity
-		p.grow(siz) // make sure buf has enough capacity
-		p.buf, err = m.XXX_Marshal(p.buf, p.deterministic)
 		return err
 	}
 	// in case somehow we didn't generate the wrapper

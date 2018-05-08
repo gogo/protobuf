@@ -38,16 +38,20 @@ func (*UnorderedFields) Descriptor() ([]byte, []int) {
 	return fileDescriptor_issue42_6157ac17a2848d4f, []int{0}
 }
 func (m *UnorderedFields) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UnorderedFields.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *UnorderedFields) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UnorderedFields.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *UnorderedFields) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UnorderedFields.Merge(dst, src)
 }
 func (m *UnorderedFields) XXX_Size() int {
-	return xxx_messageInfo_UnorderedFields.Size(m)
+	return m.Size()
 }
 func (m *UnorderedFields) XXX_DiscardUnknown() {
 	xxx_messageInfo_UnorderedFields.DiscardUnknown(m)
@@ -84,16 +88,20 @@ func (*OrderedFields) Descriptor() ([]byte, []int) {
 	return fileDescriptor_issue42_6157ac17a2848d4f, []int{1}
 }
 func (m *OrderedFields) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_OrderedFields.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *OrderedFields) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_OrderedFields.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *OrderedFields) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OrderedFields.Merge(dst, src)
 }
 func (m *OrderedFields) XXX_Size() int {
-	return xxx_messageInfo_OrderedFields.Size(m)
+	return m.Size()
 }
 func (m *OrderedFields) XXX_DiscardUnknown() {
 	xxx_messageInfo_OrderedFields.DiscardUnknown(m)

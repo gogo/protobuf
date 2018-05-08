@@ -45,16 +45,20 @@ func (*DoubleValue) Descriptor() ([]byte, []int) {
 }
 func (*DoubleValue) XXX_WellKnownType() string { return "DoubleValue" }
 func (m *DoubleValue) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DoubleValue.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *DoubleValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DoubleValue.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *DoubleValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DoubleValue.Merge(dst, src)
 }
 func (m *DoubleValue) XXX_Size() int {
-	return xxx_messageInfo_DoubleValue.Size(m)
+	return m.Size()
 }
 func (m *DoubleValue) XXX_DiscardUnknown() {
 	xxx_messageInfo_DoubleValue.DiscardUnknown(m)
@@ -91,16 +95,20 @@ func (*FloatValue) Descriptor() ([]byte, []int) {
 }
 func (*FloatValue) XXX_WellKnownType() string { return "FloatValue" }
 func (m *FloatValue) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_FloatValue.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *FloatValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_FloatValue.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *FloatValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FloatValue.Merge(dst, src)
 }
 func (m *FloatValue) XXX_Size() int {
-	return xxx_messageInfo_FloatValue.Size(m)
+	return m.Size()
 }
 func (m *FloatValue) XXX_DiscardUnknown() {
 	xxx_messageInfo_FloatValue.DiscardUnknown(m)
@@ -137,16 +145,20 @@ func (*Int64Value) Descriptor() ([]byte, []int) {
 }
 func (*Int64Value) XXX_WellKnownType() string { return "Int64Value" }
 func (m *Int64Value) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Int64Value.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Int64Value) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Int64Value.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *Int64Value) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Int64Value.Merge(dst, src)
 }
 func (m *Int64Value) XXX_Size() int {
-	return xxx_messageInfo_Int64Value.Size(m)
+	return m.Size()
 }
 func (m *Int64Value) XXX_DiscardUnknown() {
 	xxx_messageInfo_Int64Value.DiscardUnknown(m)
@@ -183,16 +195,20 @@ func (*UInt64Value) Descriptor() ([]byte, []int) {
 }
 func (*UInt64Value) XXX_WellKnownType() string { return "UInt64Value" }
 func (m *UInt64Value) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UInt64Value.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *UInt64Value) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UInt64Value.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *UInt64Value) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UInt64Value.Merge(dst, src)
 }
 func (m *UInt64Value) XXX_Size() int {
-	return xxx_messageInfo_UInt64Value.Size(m)
+	return m.Size()
 }
 func (m *UInt64Value) XXX_DiscardUnknown() {
 	xxx_messageInfo_UInt64Value.DiscardUnknown(m)
@@ -229,16 +245,20 @@ func (*Int32Value) Descriptor() ([]byte, []int) {
 }
 func (*Int32Value) XXX_WellKnownType() string { return "Int32Value" }
 func (m *Int32Value) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Int32Value.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Int32Value) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Int32Value.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *Int32Value) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Int32Value.Merge(dst, src)
 }
 func (m *Int32Value) XXX_Size() int {
-	return xxx_messageInfo_Int32Value.Size(m)
+	return m.Size()
 }
 func (m *Int32Value) XXX_DiscardUnknown() {
 	xxx_messageInfo_Int32Value.DiscardUnknown(m)
@@ -275,16 +295,20 @@ func (*UInt32Value) Descriptor() ([]byte, []int) {
 }
 func (*UInt32Value) XXX_WellKnownType() string { return "UInt32Value" }
 func (m *UInt32Value) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UInt32Value.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *UInt32Value) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UInt32Value.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *UInt32Value) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UInt32Value.Merge(dst, src)
 }
 func (m *UInt32Value) XXX_Size() int {
-	return xxx_messageInfo_UInt32Value.Size(m)
+	return m.Size()
 }
 func (m *UInt32Value) XXX_DiscardUnknown() {
 	xxx_messageInfo_UInt32Value.DiscardUnknown(m)
@@ -321,16 +345,20 @@ func (*BoolValue) Descriptor() ([]byte, []int) {
 }
 func (*BoolValue) XXX_WellKnownType() string { return "BoolValue" }
 func (m *BoolValue) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_BoolValue.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *BoolValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_BoolValue.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *BoolValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_BoolValue.Merge(dst, src)
 }
 func (m *BoolValue) XXX_Size() int {
-	return xxx_messageInfo_BoolValue.Size(m)
+	return m.Size()
 }
 func (m *BoolValue) XXX_DiscardUnknown() {
 	xxx_messageInfo_BoolValue.DiscardUnknown(m)
@@ -367,16 +395,20 @@ func (*StringValue) Descriptor() ([]byte, []int) {
 }
 func (*StringValue) XXX_WellKnownType() string { return "StringValue" }
 func (m *StringValue) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_StringValue.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *StringValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_StringValue.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *StringValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_StringValue.Merge(dst, src)
 }
 func (m *StringValue) XXX_Size() int {
-	return xxx_messageInfo_StringValue.Size(m)
+	return m.Size()
 }
 func (m *StringValue) XXX_DiscardUnknown() {
 	xxx_messageInfo_StringValue.DiscardUnknown(m)
@@ -413,16 +445,20 @@ func (*BytesValue) Descriptor() ([]byte, []int) {
 }
 func (*BytesValue) XXX_WellKnownType() string { return "BytesValue" }
 func (m *BytesValue) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_BytesValue.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *BytesValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_BytesValue.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *BytesValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_BytesValue.Merge(dst, src)
 }
 func (m *BytesValue) XXX_Size() int {
-	return xxx_messageInfo_BytesValue.Size(m)
+	return m.Size()
 }
 func (m *BytesValue) XXX_DiscardUnknown() {
 	xxx_messageInfo_BytesValue.DiscardUnknown(m)

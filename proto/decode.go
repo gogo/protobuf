@@ -334,11 +334,11 @@ type newUnmarshaler interface {
 // to preserve and append to existing data.
 func Unmarshal(buf []byte, pb Message) error {
 	pb.Reset()
-	if u, ok := pb.(Unmarshaler); ok {
-		return u.Unmarshal(buf)
-	}
 	if u, ok := pb.(newUnmarshaler); ok {
 		return u.XXX_Unmarshal(buf)
+	}
+	if u, ok := pb.(Unmarshaler); ok {
+		return u.Unmarshal(buf)
 	}
 	return NewBuffer(buf).Unmarshal(pb)
 }
@@ -350,6 +350,9 @@ func Unmarshal(buf []byte, pb Message) error {
 // UnmarshalMerge merges into existing data in pb.
 // Most code should use Unmarshal instead.
 func UnmarshalMerge(buf []byte, pb Message) error {
+	if u, ok := pb.(newUnmarshaler); ok {
+		return u.XXX_Unmarshal(buf)
+	}
 	if u, ok := pb.(Unmarshaler); ok {
 		// NOTE: The history of proto have unfortunately been inconsistent
 		// whether Unmarshaler should or should not implicitly clear itself.
@@ -358,9 +361,6 @@ func UnmarshalMerge(buf []byte, pb Message) error {
 		//
 		// See https://github.com/golang/protobuf/issues/424
 		return u.Unmarshal(buf)
-	}
-	if u, ok := pb.(newUnmarshaler); ok {
-		return u.XXX_Unmarshal(buf)
 	}
 	return NewBuffer(buf).Unmarshal(pb)
 }
@@ -396,6 +396,11 @@ func (p *Buffer) DecodeGroup(pb Message) error {
 // Unlike proto.Unmarshal, this does not reset pb before starting to unmarshal.
 func (p *Buffer) Unmarshal(pb Message) error {
 	// If the object can unmarshal itself, let it.
+	if u, ok := pb.(newUnmarshaler); ok {
+		err := u.XXX_Unmarshal(p.buf[p.index:])
+		p.index = len(p.buf)
+		return err
+	}
 	if u, ok := pb.(Unmarshaler); ok {
 		// NOTE: The history of proto have unfortunately been inconsistent
 		// whether Unmarshaler should or should not implicitly clear itself.
@@ -404,11 +409,6 @@ func (p *Buffer) Unmarshal(pb Message) error {
 		//
 		// See https://github.com/golang/protobuf/issues/424
 		err := u.Unmarshal(p.buf[p.index:])
-		p.index = len(p.buf)
-		return err
-	}
-	if u, ok := pb.(newUnmarshaler); ok {
-		err := u.XXX_Unmarshal(p.buf[p.index:])
 		p.index = len(p.buf)
 		return err
 	}

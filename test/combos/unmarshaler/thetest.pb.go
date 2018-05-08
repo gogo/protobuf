@@ -250,7 +250,7 @@ func (*NidOptNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{0}
 }
 func (m *NidOptNative) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NidOptNative.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NidOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidOptNative.Marshal(b, m, deterministic)
@@ -259,7 +259,7 @@ func (dst *NidOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidOptNative.Merge(dst, src)
 }
 func (m *NidOptNative) XXX_Size() int {
-	return xxx_messageInfo_NidOptNative.Size(m)
+	return m.Size()
 }
 func (m *NidOptNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidOptNative.DiscardUnknown(m)
@@ -294,7 +294,7 @@ func (*NinOptNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{1}
 }
 func (m *NinOptNative) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinOptNative.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptNative.Marshal(b, m, deterministic)
@@ -303,7 +303,7 @@ func (dst *NinOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptNative.Merge(dst, src)
 }
 func (m *NinOptNative) XXX_Size() int {
-	return xxx_messageInfo_NinOptNative.Size(m)
+	return m.Size()
 }
 func (m *NinOptNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptNative.DiscardUnknown(m)
@@ -338,7 +338,7 @@ func (*NidRepNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{2}
 }
 func (m *NidRepNative) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NidRepNative.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NidRepNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidRepNative.Marshal(b, m, deterministic)
@@ -347,7 +347,7 @@ func (dst *NidRepNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidRepNative.Merge(dst, src)
 }
 func (m *NidRepNative) XXX_Size() int {
-	return xxx_messageInfo_NidRepNative.Size(m)
+	return m.Size()
 }
 func (m *NidRepNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidRepNative.DiscardUnknown(m)
@@ -382,7 +382,7 @@ func (*NinRepNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{3}
 }
 func (m *NinRepNative) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinRepNative.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinRepNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepNative.Marshal(b, m, deterministic)
@@ -391,7 +391,7 @@ func (dst *NinRepNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinRepNative.Merge(dst, src)
 }
 func (m *NinRepNative) XXX_Size() int {
-	return xxx_messageInfo_NinRepNative.Size(m)
+	return m.Size()
 }
 func (m *NinRepNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinRepNative.DiscardUnknown(m)
@@ -424,7 +424,7 @@ func (*NidRepPackedNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{4}
 }
 func (m *NidRepPackedNative) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NidRepPackedNative.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NidRepPackedNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidRepPackedNative.Marshal(b, m, deterministic)
@@ -433,7 +433,7 @@ func (dst *NidRepPackedNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidRepPackedNative.Merge(dst, src)
 }
 func (m *NidRepPackedNative) XXX_Size() int {
-	return xxx_messageInfo_NidRepPackedNative.Size(m)
+	return m.Size()
 }
 func (m *NidRepPackedNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidRepPackedNative.DiscardUnknown(m)
@@ -466,7 +466,7 @@ func (*NinRepPackedNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{5}
 }
 func (m *NinRepPackedNative) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinRepPackedNative.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinRepPackedNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepPackedNative.Marshal(b, m, deterministic)
@@ -475,7 +475,7 @@ func (dst *NinRepPackedNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinRepPackedNative.Merge(dst, src)
 }
 func (m *NinRepPackedNative) XXX_Size() int {
-	return xxx_messageInfo_NinRepPackedNative.Size(m)
+	return m.Size()
 }
 func (m *NinRepPackedNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinRepPackedNative.DiscardUnknown(m)
@@ -505,7 +505,7 @@ func (*NidOptStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{6}
 }
 func (m *NidOptStruct) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NidOptStruct.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NidOptStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidOptStruct.Marshal(b, m, deterministic)
@@ -514,7 +514,7 @@ func (dst *NidOptStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidOptStruct.Merge(dst, src)
 }
 func (m *NidOptStruct) XXX_Size() int {
-	return xxx_messageInfo_NidOptStruct.Size(m)
+	return m.Size()
 }
 func (m *NidOptStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidOptStruct.DiscardUnknown(m)
@@ -544,7 +544,7 @@ func (*NinOptStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{7}
 }
 func (m *NinOptStruct) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinOptStruct.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinOptStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptStruct.Marshal(b, m, deterministic)
@@ -553,7 +553,7 @@ func (dst *NinOptStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptStruct.Merge(dst, src)
 }
 func (m *NinOptStruct) XXX_Size() int {
-	return xxx_messageInfo_NinOptStruct.Size(m)
+	return m.Size()
 }
 func (m *NinOptStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptStruct.DiscardUnknown(m)
@@ -583,7 +583,7 @@ func (*NidRepStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{8}
 }
 func (m *NidRepStruct) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NidRepStruct.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NidRepStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidRepStruct.Marshal(b, m, deterministic)
@@ -592,7 +592,7 @@ func (dst *NidRepStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidRepStruct.Merge(dst, src)
 }
 func (m *NidRepStruct) XXX_Size() int {
-	return xxx_messageInfo_NidRepStruct.Size(m)
+	return m.Size()
 }
 func (m *NidRepStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidRepStruct.DiscardUnknown(m)
@@ -622,7 +622,7 @@ func (*NinRepStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{9}
 }
 func (m *NinRepStruct) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinRepStruct.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinRepStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepStruct.Marshal(b, m, deterministic)
@@ -631,7 +631,7 @@ func (dst *NinRepStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinRepStruct.Merge(dst, src)
 }
 func (m *NinRepStruct) XXX_Size() int {
-	return xxx_messageInfo_NinRepStruct.Size(m)
+	return m.Size()
 }
 func (m *NinRepStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinRepStruct.DiscardUnknown(m)
@@ -654,7 +654,7 @@ func (*NidEmbeddedStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{10}
 }
 func (m *NidEmbeddedStruct) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NidEmbeddedStruct.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NidEmbeddedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidEmbeddedStruct.Marshal(b, m, deterministic)
@@ -663,7 +663,7 @@ func (dst *NidEmbeddedStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidEmbeddedStruct.Merge(dst, src)
 }
 func (m *NidEmbeddedStruct) XXX_Size() int {
-	return xxx_messageInfo_NidEmbeddedStruct.Size(m)
+	return m.Size()
 }
 func (m *NidEmbeddedStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidEmbeddedStruct.DiscardUnknown(m)
@@ -686,7 +686,7 @@ func (*NinEmbeddedStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{11}
 }
 func (m *NinEmbeddedStruct) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinEmbeddedStruct.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinEmbeddedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinEmbeddedStruct.Marshal(b, m, deterministic)
@@ -695,7 +695,7 @@ func (dst *NinEmbeddedStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinEmbeddedStruct.Merge(dst, src)
 }
 func (m *NinEmbeddedStruct) XXX_Size() int {
-	return xxx_messageInfo_NinEmbeddedStruct.Size(m)
+	return m.Size()
 }
 func (m *NinEmbeddedStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinEmbeddedStruct.DiscardUnknown(m)
@@ -717,7 +717,7 @@ func (*NidNestedStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{12}
 }
 func (m *NidNestedStruct) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NidNestedStruct.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NidNestedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidNestedStruct.Marshal(b, m, deterministic)
@@ -726,7 +726,7 @@ func (dst *NidNestedStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidNestedStruct.Merge(dst, src)
 }
 func (m *NidNestedStruct) XXX_Size() int {
-	return xxx_messageInfo_NidNestedStruct.Size(m)
+	return m.Size()
 }
 func (m *NidNestedStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidNestedStruct.DiscardUnknown(m)
@@ -748,7 +748,7 @@ func (*NinNestedStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{13}
 }
 func (m *NinNestedStruct) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinNestedStruct.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinNestedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinNestedStruct.Marshal(b, m, deterministic)
@@ -757,7 +757,7 @@ func (dst *NinNestedStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinNestedStruct.Merge(dst, src)
 }
 func (m *NinNestedStruct) XXX_Size() int {
-	return xxx_messageInfo_NinNestedStruct.Size(m)
+	return m.Size()
 }
 func (m *NinNestedStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinNestedStruct.DiscardUnknown(m)
@@ -779,7 +779,7 @@ func (*NidOptCustom) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{14}
 }
 func (m *NidOptCustom) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NidOptCustom.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NidOptCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidOptCustom.Marshal(b, m, deterministic)
@@ -788,7 +788,7 @@ func (dst *NidOptCustom) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidOptCustom.Merge(dst, src)
 }
 func (m *NidOptCustom) XXX_Size() int {
-	return xxx_messageInfo_NidOptCustom.Size(m)
+	return m.Size()
 }
 func (m *NidOptCustom) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidOptCustom.DiscardUnknown(m)
@@ -809,7 +809,7 @@ func (*CustomDash) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{15}
 }
 func (m *CustomDash) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CustomDash.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *CustomDash) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomDash.Marshal(b, m, deterministic)
@@ -818,7 +818,7 @@ func (dst *CustomDash) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomDash.Merge(dst, src)
 }
 func (m *CustomDash) XXX_Size() int {
-	return xxx_messageInfo_CustomDash.Size(m)
+	return m.Size()
 }
 func (m *CustomDash) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomDash.DiscardUnknown(m)
@@ -840,7 +840,7 @@ func (*NinOptCustom) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{16}
 }
 func (m *NinOptCustom) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinOptCustom.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinOptCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptCustom.Marshal(b, m, deterministic)
@@ -849,7 +849,7 @@ func (dst *NinOptCustom) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptCustom.Merge(dst, src)
 }
 func (m *NinOptCustom) XXX_Size() int {
-	return xxx_messageInfo_NinOptCustom.Size(m)
+	return m.Size()
 }
 func (m *NinOptCustom) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptCustom.DiscardUnknown(m)
@@ -871,7 +871,7 @@ func (*NidRepCustom) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{17}
 }
 func (m *NidRepCustom) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NidRepCustom.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NidRepCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidRepCustom.Marshal(b, m, deterministic)
@@ -880,7 +880,7 @@ func (dst *NidRepCustom) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidRepCustom.Merge(dst, src)
 }
 func (m *NidRepCustom) XXX_Size() int {
-	return xxx_messageInfo_NidRepCustom.Size(m)
+	return m.Size()
 }
 func (m *NidRepCustom) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidRepCustom.DiscardUnknown(m)
@@ -902,7 +902,7 @@ func (*NinRepCustom) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{18}
 }
 func (m *NinRepCustom) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinRepCustom.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinRepCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepCustom.Marshal(b, m, deterministic)
@@ -911,7 +911,7 @@ func (dst *NinRepCustom) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinRepCustom.Merge(dst, src)
 }
 func (m *NinRepCustom) XXX_Size() int {
-	return xxx_messageInfo_NinRepCustom.Size(m)
+	return m.Size()
 }
 func (m *NinRepCustom) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinRepCustom.DiscardUnknown(m)
@@ -940,7 +940,7 @@ func (*NinOptNativeUnion) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{19}
 }
 func (m *NinOptNativeUnion) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinOptNativeUnion.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinOptNativeUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptNativeUnion.Marshal(b, m, deterministic)
@@ -949,7 +949,7 @@ func (dst *NinOptNativeUnion) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptNativeUnion.Merge(dst, src)
 }
 func (m *NinOptNativeUnion) XXX_Size() int {
-	return xxx_messageInfo_NinOptNativeUnion.Size(m)
+	return m.Size()
 }
 func (m *NinOptNativeUnion) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptNativeUnion.DiscardUnknown(m)
@@ -978,7 +978,7 @@ func (*NinOptStructUnion) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{20}
 }
 func (m *NinOptStructUnion) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinOptStructUnion.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinOptStructUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptStructUnion.Marshal(b, m, deterministic)
@@ -987,7 +987,7 @@ func (dst *NinOptStructUnion) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptStructUnion.Merge(dst, src)
 }
 func (m *NinOptStructUnion) XXX_Size() int {
-	return xxx_messageInfo_NinOptStructUnion.Size(m)
+	return m.Size()
 }
 func (m *NinOptStructUnion) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptStructUnion.DiscardUnknown(m)
@@ -1010,7 +1010,7 @@ func (*NinEmbeddedStructUnion) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{21}
 }
 func (m *NinEmbeddedStructUnion) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinEmbeddedStructUnion.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinEmbeddedStructUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinEmbeddedStructUnion.Marshal(b, m, deterministic)
@@ -1019,7 +1019,7 @@ func (dst *NinEmbeddedStructUnion) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinEmbeddedStructUnion.Merge(dst, src)
 }
 func (m *NinEmbeddedStructUnion) XXX_Size() int {
-	return xxx_messageInfo_NinEmbeddedStructUnion.Size(m)
+	return m.Size()
 }
 func (m *NinEmbeddedStructUnion) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinEmbeddedStructUnion.DiscardUnknown(m)
@@ -1042,7 +1042,7 @@ func (*NinNestedStructUnion) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{22}
 }
 func (m *NinNestedStructUnion) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinNestedStructUnion.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinNestedStructUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinNestedStructUnion.Marshal(b, m, deterministic)
@@ -1051,7 +1051,7 @@ func (dst *NinNestedStructUnion) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinNestedStructUnion.Merge(dst, src)
 }
 func (m *NinNestedStructUnion) XXX_Size() int {
-	return xxx_messageInfo_NinNestedStructUnion.Size(m)
+	return m.Size()
 }
 func (m *NinNestedStructUnion) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinNestedStructUnion.DiscardUnknown(m)
@@ -1074,7 +1074,7 @@ func (*Tree) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{23}
 }
 func (m *Tree) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Tree.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Tree) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Tree.Marshal(b, m, deterministic)
@@ -1083,7 +1083,7 @@ func (dst *Tree) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Tree.Merge(dst, src)
 }
 func (m *Tree) XXX_Size() int {
-	return xxx_messageInfo_Tree.Size(m)
+	return m.Size()
 }
 func (m *Tree) XXX_DiscardUnknown() {
 	xxx_messageInfo_Tree.DiscardUnknown(m)
@@ -1105,7 +1105,7 @@ func (*OrBranch) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{24}
 }
 func (m *OrBranch) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_OrBranch.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *OrBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OrBranch.Marshal(b, m, deterministic)
@@ -1114,7 +1114,7 @@ func (dst *OrBranch) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OrBranch.Merge(dst, src)
 }
 func (m *OrBranch) XXX_Size() int {
-	return xxx_messageInfo_OrBranch.Size(m)
+	return m.Size()
 }
 func (m *OrBranch) XXX_DiscardUnknown() {
 	xxx_messageInfo_OrBranch.DiscardUnknown(m)
@@ -1136,7 +1136,7 @@ func (*AndBranch) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{25}
 }
 func (m *AndBranch) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AndBranch.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *AndBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_AndBranch.Marshal(b, m, deterministic)
@@ -1145,7 +1145,7 @@ func (dst *AndBranch) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AndBranch.Merge(dst, src)
 }
 func (m *AndBranch) XXX_Size() int {
-	return xxx_messageInfo_AndBranch.Size(m)
+	return m.Size()
 }
 func (m *AndBranch) XXX_DiscardUnknown() {
 	xxx_messageInfo_AndBranch.DiscardUnknown(m)
@@ -1167,7 +1167,7 @@ func (*Leaf) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{26}
 }
 func (m *Leaf) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Leaf.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Leaf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Leaf.Marshal(b, m, deterministic)
@@ -1176,7 +1176,7 @@ func (dst *Leaf) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Leaf.Merge(dst, src)
 }
 func (m *Leaf) XXX_Size() int {
-	return xxx_messageInfo_Leaf.Size(m)
+	return m.Size()
 }
 func (m *Leaf) XXX_DiscardUnknown() {
 	xxx_messageInfo_Leaf.DiscardUnknown(m)
@@ -1199,7 +1199,7 @@ func (*DeepTree) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{27}
 }
 func (m *DeepTree) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DeepTree.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *DeepTree) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DeepTree.Marshal(b, m, deterministic)
@@ -1208,7 +1208,7 @@ func (dst *DeepTree) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DeepTree.Merge(dst, src)
 }
 func (m *DeepTree) XXX_Size() int {
-	return xxx_messageInfo_DeepTree.Size(m)
+	return m.Size()
 }
 func (m *DeepTree) XXX_DiscardUnknown() {
 	xxx_messageInfo_DeepTree.DiscardUnknown(m)
@@ -1229,7 +1229,7 @@ func (*ADeepBranch) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{28}
 }
 func (m *ADeepBranch) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ADeepBranch.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *ADeepBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ADeepBranch.Marshal(b, m, deterministic)
@@ -1238,7 +1238,7 @@ func (dst *ADeepBranch) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ADeepBranch.Merge(dst, src)
 }
 func (m *ADeepBranch) XXX_Size() int {
-	return xxx_messageInfo_ADeepBranch.Size(m)
+	return m.Size()
 }
 func (m *ADeepBranch) XXX_DiscardUnknown() {
 	xxx_messageInfo_ADeepBranch.DiscardUnknown(m)
@@ -1260,7 +1260,7 @@ func (*AndDeepBranch) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{29}
 }
 func (m *AndDeepBranch) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AndDeepBranch.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *AndDeepBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_AndDeepBranch.Marshal(b, m, deterministic)
@@ -1269,7 +1269,7 @@ func (dst *AndDeepBranch) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AndDeepBranch.Merge(dst, src)
 }
 func (m *AndDeepBranch) XXX_Size() int {
-	return xxx_messageInfo_AndDeepBranch.Size(m)
+	return m.Size()
 }
 func (m *AndDeepBranch) XXX_DiscardUnknown() {
 	xxx_messageInfo_AndDeepBranch.DiscardUnknown(m)
@@ -1290,7 +1290,7 @@ func (*DeepLeaf) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{30}
 }
 func (m *DeepLeaf) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DeepLeaf.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *DeepLeaf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_DeepLeaf.Marshal(b, m, deterministic)
@@ -1299,7 +1299,7 @@ func (dst *DeepLeaf) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DeepLeaf.Merge(dst, src)
 }
 func (m *DeepLeaf) XXX_Size() int {
-	return xxx_messageInfo_DeepLeaf.Size(m)
+	return m.Size()
 }
 func (m *DeepLeaf) XXX_DiscardUnknown() {
 	xxx_messageInfo_DeepLeaf.DiscardUnknown(m)
@@ -1319,7 +1319,7 @@ func (*Nil) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{31}
 }
 func (m *Nil) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Nil.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Nil) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Nil.Marshal(b, m, deterministic)
@@ -1328,7 +1328,7 @@ func (dst *Nil) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Nil.Merge(dst, src)
 }
 func (m *Nil) XXX_Size() int {
-	return xxx_messageInfo_Nil.Size(m)
+	return m.Size()
 }
 func (m *Nil) XXX_DiscardUnknown() {
 	xxx_messageInfo_Nil.DiscardUnknown(m)
@@ -1349,7 +1349,7 @@ func (*NidOptEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{32}
 }
 func (m *NidOptEnum) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NidOptEnum.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NidOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidOptEnum.Marshal(b, m, deterministic)
@@ -1358,7 +1358,7 @@ func (dst *NidOptEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidOptEnum.Merge(dst, src)
 }
 func (m *NidOptEnum) XXX_Size() int {
-	return xxx_messageInfo_NidOptEnum.Size(m)
+	return m.Size()
 }
 func (m *NidOptEnum) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidOptEnum.DiscardUnknown(m)
@@ -1381,7 +1381,7 @@ func (*NinOptEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{33}
 }
 func (m *NinOptEnum) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinOptEnum.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptEnum.Marshal(b, m, deterministic)
@@ -1390,7 +1390,7 @@ func (dst *NinOptEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptEnum.Merge(dst, src)
 }
 func (m *NinOptEnum) XXX_Size() int {
-	return xxx_messageInfo_NinOptEnum.Size(m)
+	return m.Size()
 }
 func (m *NinOptEnum) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptEnum.DiscardUnknown(m)
@@ -1413,7 +1413,7 @@ func (*NidRepEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{34}
 }
 func (m *NidRepEnum) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NidRepEnum.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NidRepEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidRepEnum.Marshal(b, m, deterministic)
@@ -1422,7 +1422,7 @@ func (dst *NidRepEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidRepEnum.Merge(dst, src)
 }
 func (m *NidRepEnum) XXX_Size() int {
-	return xxx_messageInfo_NidRepEnum.Size(m)
+	return m.Size()
 }
 func (m *NidRepEnum) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidRepEnum.DiscardUnknown(m)
@@ -1445,7 +1445,7 @@ func (*NinRepEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{35}
 }
 func (m *NinRepEnum) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinRepEnum.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinRepEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepEnum.Marshal(b, m, deterministic)
@@ -1454,7 +1454,7 @@ func (dst *NinRepEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinRepEnum.Merge(dst, src)
 }
 func (m *NinRepEnum) XXX_Size() int {
-	return xxx_messageInfo_NinRepEnum.Size(m)
+	return m.Size()
 }
 func (m *NinRepEnum) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinRepEnum.DiscardUnknown(m)
@@ -1477,7 +1477,7 @@ func (*NinOptEnumDefault) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{36}
 }
 func (m *NinOptEnumDefault) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinOptEnumDefault.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinOptEnumDefault) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptEnumDefault.Marshal(b, m, deterministic)
@@ -1486,7 +1486,7 @@ func (dst *NinOptEnumDefault) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptEnumDefault.Merge(dst, src)
 }
 func (m *NinOptEnumDefault) XXX_Size() int {
-	return xxx_messageInfo_NinOptEnumDefault.Size(m)
+	return m.Size()
 }
 func (m *NinOptEnumDefault) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptEnumDefault.DiscardUnknown(m)
@@ -1534,7 +1534,7 @@ func (*AnotherNinOptEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{37}
 }
 func (m *AnotherNinOptEnum) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AnotherNinOptEnum.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *AnotherNinOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_AnotherNinOptEnum.Marshal(b, m, deterministic)
@@ -1543,7 +1543,7 @@ func (dst *AnotherNinOptEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AnotherNinOptEnum.Merge(dst, src)
 }
 func (m *AnotherNinOptEnum) XXX_Size() int {
-	return xxx_messageInfo_AnotherNinOptEnum.Size(m)
+	return m.Size()
 }
 func (m *AnotherNinOptEnum) XXX_DiscardUnknown() {
 	xxx_messageInfo_AnotherNinOptEnum.DiscardUnknown(m)
@@ -1566,7 +1566,7 @@ func (*AnotherNinOptEnumDefault) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{38}
 }
 func (m *AnotherNinOptEnumDefault) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_AnotherNinOptEnumDefault.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *AnotherNinOptEnumDefault) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_AnotherNinOptEnumDefault.Marshal(b, m, deterministic)
@@ -1575,7 +1575,7 @@ func (dst *AnotherNinOptEnumDefault) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AnotherNinOptEnumDefault.Merge(dst, src)
 }
 func (m *AnotherNinOptEnumDefault) XXX_Size() int {
-	return xxx_messageInfo_AnotherNinOptEnumDefault.Size(m)
+	return m.Size()
 }
 func (m *AnotherNinOptEnumDefault) XXX_DiscardUnknown() {
 	xxx_messageInfo_AnotherNinOptEnumDefault.DiscardUnknown(m)
@@ -1623,7 +1623,7 @@ func (*Timer) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{39}
 }
 func (m *Timer) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Timer.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Timer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Timer.Marshal(b, m, deterministic)
@@ -1632,7 +1632,7 @@ func (dst *Timer) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Timer.Merge(dst, src)
 }
 func (m *Timer) XXX_Size() int {
-	return xxx_messageInfo_Timer.Size(m)
+	return m.Size()
 }
 func (m *Timer) XXX_DiscardUnknown() {
 	xxx_messageInfo_Timer.DiscardUnknown(m)
@@ -1662,7 +1662,7 @@ func (*MyExtendable) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_MyExtendable
 }
 func (m *MyExtendable) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_MyExtendable.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *MyExtendable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MyExtendable.Marshal(b, m, deterministic)
@@ -1671,7 +1671,7 @@ func (dst *MyExtendable) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MyExtendable.Merge(dst, src)
 }
 func (m *MyExtendable) XXX_Size() int {
-	return xxx_messageInfo_MyExtendable.Size(m)
+	return m.Size()
 }
 func (m *MyExtendable) XXX_DiscardUnknown() {
 	xxx_messageInfo_MyExtendable.DiscardUnknown(m)
@@ -1704,7 +1704,7 @@ func (*OtherExtenable) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_OtherExtenable
 }
 func (m *OtherExtenable) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_OtherExtenable.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *OtherExtenable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OtherExtenable.Marshal(b, m, deterministic)
@@ -1713,7 +1713,7 @@ func (dst *OtherExtenable) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OtherExtenable.Merge(dst, src)
 }
 func (m *OtherExtenable) XXX_Size() int {
-	return xxx_messageInfo_OtherExtenable.Size(m)
+	return m.Size()
 }
 func (m *OtherExtenable) XXX_DiscardUnknown() {
 	xxx_messageInfo_OtherExtenable.DiscardUnknown(m)
@@ -1737,7 +1737,7 @@ func (*NestedDefinition) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{42}
 }
 func (m *NestedDefinition) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NestedDefinition.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NestedDefinition) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NestedDefinition.Marshal(b, m, deterministic)
@@ -1746,7 +1746,7 @@ func (dst *NestedDefinition) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NestedDefinition.Merge(dst, src)
 }
 func (m *NestedDefinition) XXX_Size() int {
-	return xxx_messageInfo_NestedDefinition.Size(m)
+	return m.Size()
 }
 func (m *NestedDefinition) XXX_DiscardUnknown() {
 	xxx_messageInfo_NestedDefinition.DiscardUnknown(m)
@@ -1768,7 +1768,7 @@ func (*NestedDefinition_NestedMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{42, 0}
 }
 func (m *NestedDefinition_NestedMessage) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NestedDefinition_NestedMessage.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NestedDefinition_NestedMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NestedDefinition_NestedMessage.Marshal(b, m, deterministic)
@@ -1777,7 +1777,7 @@ func (dst *NestedDefinition_NestedMessage) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NestedDefinition_NestedMessage.Merge(dst, src)
 }
 func (m *NestedDefinition_NestedMessage) XXX_Size() int {
-	return xxx_messageInfo_NestedDefinition_NestedMessage.Size(m)
+	return m.Size()
 }
 func (m *NestedDefinition_NestedMessage) XXX_DiscardUnknown() {
 	xxx_messageInfo_NestedDefinition_NestedMessage.DiscardUnknown(m)
@@ -1800,7 +1800,7 @@ func (*NestedDefinition_NestedMessage_NestedNestedMsg) Descriptor() ([]byte, []i
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{42, 0, 0}
 }
 func (m *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.Marshal(b, m, deterministic)
@@ -1809,7 +1809,7 @@ func (dst *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Merge(src proto.M
 	xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.Merge(dst, src)
 }
 func (m *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Size() int {
-	return xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.Size(m)
+	return m.Size()
 }
 func (m *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_DiscardUnknown() {
 	xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.DiscardUnknown(m)
@@ -1832,7 +1832,7 @@ func (*NestedScope) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{43}
 }
 func (m *NestedScope) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NestedScope.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NestedScope) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NestedScope.Marshal(b, m, deterministic)
@@ -1841,7 +1841,7 @@ func (dst *NestedScope) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NestedScope.Merge(dst, src)
 }
 func (m *NestedScope) XXX_Size() int {
-	return xxx_messageInfo_NestedScope.Size(m)
+	return m.Size()
 }
 func (m *NestedScope) XXX_DiscardUnknown() {
 	xxx_messageInfo_NestedScope.DiscardUnknown(m)
@@ -1876,7 +1876,7 @@ func (*NinOptNativeDefault) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{44}
 }
 func (m *NinOptNativeDefault) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinOptNativeDefault.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinOptNativeDefault) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptNativeDefault.Marshal(b, m, deterministic)
@@ -1885,7 +1885,7 @@ func (dst *NinOptNativeDefault) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptNativeDefault.Merge(dst, src)
 }
 func (m *NinOptNativeDefault) XXX_Size() int {
-	return xxx_messageInfo_NinOptNativeDefault.Size(m)
+	return m.Size()
 }
 func (m *NinOptNativeDefault) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptNativeDefault.DiscardUnknown(m)
@@ -2026,7 +2026,7 @@ func (*CustomContainer) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{45}
 }
 func (m *CustomContainer) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CustomContainer.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *CustomContainer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomContainer.Marshal(b, m, deterministic)
@@ -2035,7 +2035,7 @@ func (dst *CustomContainer) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomContainer.Merge(dst, src)
 }
 func (m *CustomContainer) XXX_Size() int {
-	return xxx_messageInfo_CustomContainer.Size(m)
+	return m.Size()
 }
 func (m *CustomContainer) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomContainer.DiscardUnknown(m)
@@ -2070,7 +2070,7 @@ func (*CustomNameNidOptNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{46}
 }
 func (m *CustomNameNidOptNative) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CustomNameNidOptNative.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *CustomNameNidOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomNameNidOptNative.Marshal(b, m, deterministic)
@@ -2079,7 +2079,7 @@ func (dst *CustomNameNidOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomNameNidOptNative.Merge(dst, src)
 }
 func (m *CustomNameNidOptNative) XXX_Size() int {
-	return xxx_messageInfo_CustomNameNidOptNative.Size(m)
+	return m.Size()
 }
 func (m *CustomNameNidOptNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomNameNidOptNative.DiscardUnknown(m)
@@ -2114,7 +2114,7 @@ func (*CustomNameNinOptNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{47}
 }
 func (m *CustomNameNinOptNative) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CustomNameNinOptNative.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *CustomNameNinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomNameNinOptNative.Marshal(b, m, deterministic)
@@ -2123,7 +2123,7 @@ func (dst *CustomNameNinOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomNameNinOptNative.Merge(dst, src)
 }
 func (m *CustomNameNinOptNative) XXX_Size() int {
-	return xxx_messageInfo_CustomNameNinOptNative.Size(m)
+	return m.Size()
 }
 func (m *CustomNameNinOptNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomNameNinOptNative.DiscardUnknown(m)
@@ -2158,7 +2158,7 @@ func (*CustomNameNinRepNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{48}
 }
 func (m *CustomNameNinRepNative) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CustomNameNinRepNative.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *CustomNameNinRepNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomNameNinRepNative.Marshal(b, m, deterministic)
@@ -2167,7 +2167,7 @@ func (dst *CustomNameNinRepNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomNameNinRepNative.Merge(dst, src)
 }
 func (m *CustomNameNinRepNative) XXX_Size() int {
-	return xxx_messageInfo_CustomNameNinRepNative.Size(m)
+	return m.Size()
 }
 func (m *CustomNameNinRepNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomNameNinRepNative.DiscardUnknown(m)
@@ -2197,7 +2197,7 @@ func (*CustomNameNinStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{49}
 }
 func (m *CustomNameNinStruct) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CustomNameNinStruct.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *CustomNameNinStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomNameNinStruct.Marshal(b, m, deterministic)
@@ -2206,7 +2206,7 @@ func (dst *CustomNameNinStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomNameNinStruct.Merge(dst, src)
 }
 func (m *CustomNameNinStruct) XXX_Size() int {
-	return xxx_messageInfo_CustomNameNinStruct.Size(m)
+	return m.Size()
 }
 func (m *CustomNameNinStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomNameNinStruct.DiscardUnknown(m)
@@ -2230,7 +2230,7 @@ func (*CustomNameCustomType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{50}
 }
 func (m *CustomNameCustomType) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CustomNameCustomType.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *CustomNameCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomNameCustomType.Marshal(b, m, deterministic)
@@ -2239,7 +2239,7 @@ func (dst *CustomNameCustomType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomNameCustomType.Merge(dst, src)
 }
 func (m *CustomNameCustomType) XXX_Size() int {
-	return xxx_messageInfo_CustomNameCustomType.Size(m)
+	return m.Size()
 }
 func (m *CustomNameCustomType) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomNameCustomType.DiscardUnknown(m)
@@ -2262,7 +2262,7 @@ func (*CustomNameNinEmbeddedStructUnion) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{51}
 }
 func (m *CustomNameNinEmbeddedStructUnion) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CustomNameNinEmbeddedStructUnion.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *CustomNameNinEmbeddedStructUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomNameNinEmbeddedStructUnion.Marshal(b, m, deterministic)
@@ -2271,7 +2271,7 @@ func (dst *CustomNameNinEmbeddedStructUnion) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomNameNinEmbeddedStructUnion.Merge(dst, src)
 }
 func (m *CustomNameNinEmbeddedStructUnion) XXX_Size() int {
-	return xxx_messageInfo_CustomNameNinEmbeddedStructUnion.Size(m)
+	return m.Size()
 }
 func (m *CustomNameNinEmbeddedStructUnion) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomNameNinEmbeddedStructUnion.DiscardUnknown(m)
@@ -2293,7 +2293,7 @@ func (*CustomNameEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{52}
 }
 func (m *CustomNameEnum) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CustomNameEnum.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *CustomNameEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomNameEnum.Marshal(b, m, deterministic)
@@ -2302,7 +2302,7 @@ func (dst *CustomNameEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomNameEnum.Merge(dst, src)
 }
 func (m *CustomNameEnum) XXX_Size() int {
-	return xxx_messageInfo_CustomNameEnum.Size(m)
+	return m.Size()
 }
 func (m *CustomNameEnum) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomNameEnum.DiscardUnknown(m)
@@ -2338,7 +2338,7 @@ func (m *NoExtensionsMap) GetExtensions() *[]byte {
 	return &m.XXX_extensions
 }
 func (m *NoExtensionsMap) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NoExtensionsMap.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NoExtensionsMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NoExtensionsMap.Marshal(b, m, deterministic)
@@ -2347,7 +2347,7 @@ func (dst *NoExtensionsMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NoExtensionsMap.Merge(dst, src)
 }
 func (m *NoExtensionsMap) XXX_Size() int {
-	return xxx_messageInfo_NoExtensionsMap.Size(m)
+	return m.Size()
 }
 func (m *NoExtensionsMap) XXX_DiscardUnknown() {
 	xxx_messageInfo_NoExtensionsMap.DiscardUnknown(m)
@@ -2367,7 +2367,7 @@ func (*Unrecognized) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{54}
 }
 func (m *Unrecognized) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Unrecognized.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Unrecognized) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Unrecognized.Marshal(b, m, deterministic)
@@ -2376,7 +2376,7 @@ func (dst *Unrecognized) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Unrecognized.Merge(dst, src)
 }
 func (m *Unrecognized) XXX_Size() int {
-	return xxx_messageInfo_Unrecognized.Size(m)
+	return m.Size()
 }
 func (m *Unrecognized) XXX_DiscardUnknown() {
 	xxx_messageInfo_Unrecognized.DiscardUnknown(m)
@@ -2398,7 +2398,7 @@ func (*UnrecognizedWithInner) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{55}
 }
 func (m *UnrecognizedWithInner) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UnrecognizedWithInner.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *UnrecognizedWithInner) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_UnrecognizedWithInner.Marshal(b, m, deterministic)
@@ -2407,7 +2407,7 @@ func (dst *UnrecognizedWithInner) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UnrecognizedWithInner.Merge(dst, src)
 }
 func (m *UnrecognizedWithInner) XXX_Size() int {
-	return xxx_messageInfo_UnrecognizedWithInner.Size(m)
+	return m.Size()
 }
 func (m *UnrecognizedWithInner) XXX_DiscardUnknown() {
 	xxx_messageInfo_UnrecognizedWithInner.DiscardUnknown(m)
@@ -2427,7 +2427,7 @@ func (*UnrecognizedWithInner_Inner) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{55, 0}
 }
 func (m *UnrecognizedWithInner_Inner) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UnrecognizedWithInner_Inner.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *UnrecognizedWithInner_Inner) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_UnrecognizedWithInner_Inner.Marshal(b, m, deterministic)
@@ -2436,7 +2436,7 @@ func (dst *UnrecognizedWithInner_Inner) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UnrecognizedWithInner_Inner.Merge(dst, src)
 }
 func (m *UnrecognizedWithInner_Inner) XXX_Size() int {
-	return xxx_messageInfo_UnrecognizedWithInner_Inner.Size(m)
+	return m.Size()
 }
 func (m *UnrecognizedWithInner_Inner) XXX_DiscardUnknown() {
 	xxx_messageInfo_UnrecognizedWithInner_Inner.DiscardUnknown(m)
@@ -2458,7 +2458,7 @@ func (*UnrecognizedWithEmbed) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{56}
 }
 func (m *UnrecognizedWithEmbed) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UnrecognizedWithEmbed.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *UnrecognizedWithEmbed) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_UnrecognizedWithEmbed.Marshal(b, m, deterministic)
@@ -2467,7 +2467,7 @@ func (dst *UnrecognizedWithEmbed) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UnrecognizedWithEmbed.Merge(dst, src)
 }
 func (m *UnrecognizedWithEmbed) XXX_Size() int {
-	return xxx_messageInfo_UnrecognizedWithEmbed.Size(m)
+	return m.Size()
 }
 func (m *UnrecognizedWithEmbed) XXX_DiscardUnknown() {
 	xxx_messageInfo_UnrecognizedWithEmbed.DiscardUnknown(m)
@@ -2487,7 +2487,7 @@ func (*UnrecognizedWithEmbed_Embedded) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{56, 0}
 }
 func (m *UnrecognizedWithEmbed_Embedded) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UnrecognizedWithEmbed_Embedded.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *UnrecognizedWithEmbed_Embedded) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_UnrecognizedWithEmbed_Embedded.Marshal(b, m, deterministic)
@@ -2496,7 +2496,7 @@ func (dst *UnrecognizedWithEmbed_Embedded) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UnrecognizedWithEmbed_Embedded.Merge(dst, src)
 }
 func (m *UnrecognizedWithEmbed_Embedded) XXX_Size() int {
-	return xxx_messageInfo_UnrecognizedWithEmbed_Embedded.Size(m)
+	return m.Size()
 }
 func (m *UnrecognizedWithEmbed_Embedded) XXX_DiscardUnknown() {
 	xxx_messageInfo_UnrecognizedWithEmbed_Embedded.DiscardUnknown(m)
@@ -2518,7 +2518,7 @@ func (*Node) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{57}
 }
 func (m *Node) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Node.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Node) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Node.Marshal(b, m, deterministic)
@@ -2527,7 +2527,7 @@ func (dst *Node) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Node.Merge(dst, src)
 }
 func (m *Node) XXX_Size() int {
-	return xxx_messageInfo_Node.Size(m)
+	return m.Size()
 }
 func (m *Node) XXX_DiscardUnknown() {
 	xxx_messageInfo_Node.DiscardUnknown(m)
@@ -2548,7 +2548,7 @@ func (*NonByteCustomType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{58}
 }
 func (m *NonByteCustomType) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NonByteCustomType.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NonByteCustomType.Marshal(b, m, deterministic)
@@ -2557,7 +2557,7 @@ func (dst *NonByteCustomType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NonByteCustomType.Merge(dst, src)
 }
 func (m *NonByteCustomType) XXX_Size() int {
-	return xxx_messageInfo_NonByteCustomType.Size(m)
+	return m.Size()
 }
 func (m *NonByteCustomType) XXX_DiscardUnknown() {
 	xxx_messageInfo_NonByteCustomType.DiscardUnknown(m)
@@ -2578,7 +2578,7 @@ func (*NidOptNonByteCustomType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{59}
 }
 func (m *NidOptNonByteCustomType) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NidOptNonByteCustomType.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NidOptNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidOptNonByteCustomType.Marshal(b, m, deterministic)
@@ -2587,7 +2587,7 @@ func (dst *NidOptNonByteCustomType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidOptNonByteCustomType.Merge(dst, src)
 }
 func (m *NidOptNonByteCustomType) XXX_Size() int {
-	return xxx_messageInfo_NidOptNonByteCustomType.Size(m)
+	return m.Size()
 }
 func (m *NidOptNonByteCustomType) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidOptNonByteCustomType.DiscardUnknown(m)
@@ -2608,7 +2608,7 @@ func (*NinOptNonByteCustomType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{60}
 }
 func (m *NinOptNonByteCustomType) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinOptNonByteCustomType.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinOptNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptNonByteCustomType.Marshal(b, m, deterministic)
@@ -2617,7 +2617,7 @@ func (dst *NinOptNonByteCustomType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptNonByteCustomType.Merge(dst, src)
 }
 func (m *NinOptNonByteCustomType) XXX_Size() int {
-	return xxx_messageInfo_NinOptNonByteCustomType.Size(m)
+	return m.Size()
 }
 func (m *NinOptNonByteCustomType) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptNonByteCustomType.DiscardUnknown(m)
@@ -2638,7 +2638,7 @@ func (*NidRepNonByteCustomType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{61}
 }
 func (m *NidRepNonByteCustomType) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NidRepNonByteCustomType.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NidRepNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidRepNonByteCustomType.Marshal(b, m, deterministic)
@@ -2647,7 +2647,7 @@ func (dst *NidRepNonByteCustomType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidRepNonByteCustomType.Merge(dst, src)
 }
 func (m *NidRepNonByteCustomType) XXX_Size() int {
-	return xxx_messageInfo_NidRepNonByteCustomType.Size(m)
+	return m.Size()
 }
 func (m *NidRepNonByteCustomType) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidRepNonByteCustomType.DiscardUnknown(m)
@@ -2668,7 +2668,7 @@ func (*NinRepNonByteCustomType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{62}
 }
 func (m *NinRepNonByteCustomType) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NinRepNonByteCustomType.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinRepNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepNonByteCustomType.Marshal(b, m, deterministic)
@@ -2677,7 +2677,7 @@ func (dst *NinRepNonByteCustomType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinRepNonByteCustomType.Merge(dst, src)
 }
 func (m *NinRepNonByteCustomType) XXX_Size() int {
-	return xxx_messageInfo_NinRepNonByteCustomType.Size(m)
+	return m.Size()
 }
 func (m *NinRepNonByteCustomType) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinRepNonByteCustomType.DiscardUnknown(m)
@@ -2698,7 +2698,7 @@ func (*ProtoType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_4205beeb65ed6104, []int{63}
 }
 func (m *ProtoType) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ProtoType.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *ProtoType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_ProtoType.Marshal(b, m, deterministic)
@@ -2707,7 +2707,7 @@ func (dst *ProtoType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ProtoType.Merge(dst, src)
 }
 func (m *ProtoType) XXX_Size() int {
-	return xxx_messageInfo_ProtoType.Size(m)
+	return m.Size()
 }
 func (m *ProtoType) XXX_DiscardUnknown() {
 	xxx_messageInfo_ProtoType.DiscardUnknown(m)

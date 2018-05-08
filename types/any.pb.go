@@ -148,16 +148,20 @@ func (*Any) Descriptor() ([]byte, []int) {
 }
 func (*Any) XXX_WellKnownType() string { return "Any" }
 func (m *Any) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Any.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Any) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Any.Marshal(b, m, deterministic)
+	buf, err := m.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 func (dst *Any) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Any.Merge(dst, src)
 }
 func (m *Any) XXX_Size() int {
-	return xxx_messageInfo_Any.Size(m)
+	return m.Size()
 }
 func (m *Any) XXX_DiscardUnknown() {
 	xxx_messageInfo_Any.DiscardUnknown(m)
