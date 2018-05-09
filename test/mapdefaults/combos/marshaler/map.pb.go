@@ -42,20 +42,25 @@ func (*MapTest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_map_65406068076b05e6, []int{0}
 }
 func (m *MapTest) XXX_Unmarshal(b []byte) error {
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
 	return xxx_messageInfo_MapTest.Unmarshal(m, b)
 }
 func (m *MapTest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	buf, err := m.Marshal()
-	if err != nil {
-		return nil, err
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
 	}
-	return buf, nil
+	return xxx_messageInfo_MapTest.Marshal(b, m, deterministic)
 }
 func (dst *MapTest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MapTest.Merge(dst, src)
 }
 func (m *MapTest) XXX_Size() int {
-	return m.Size()
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
+	return xxx_messageInfo_MapTest.Size(m)
 }
 func (m *MapTest) XXX_DiscardUnknown() {
 	xxx_messageInfo_MapTest.DiscardUnknown(m)
@@ -76,20 +81,25 @@ func (*FakeMap) Descriptor() ([]byte, []int) {
 	return fileDescriptor_map_65406068076b05e6, []int{1}
 }
 func (m *FakeMap) XXX_Unmarshal(b []byte) error {
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
 	return xxx_messageInfo_FakeMap.Unmarshal(m, b)
 }
 func (m *FakeMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	buf, err := m.Marshal()
-	if err != nil {
-		return nil, err
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
 	}
-	return buf, nil
+	return xxx_messageInfo_FakeMap.Marshal(b, m, deterministic)
 }
 func (dst *FakeMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FakeMap.Merge(dst, src)
 }
 func (m *FakeMap) XXX_Size() int {
-	return m.Size()
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
+	return xxx_messageInfo_FakeMap.Size(m)
 }
 func (m *FakeMap) XXX_DiscardUnknown() {
 	xxx_messageInfo_FakeMap.DiscardUnknown(m)
@@ -112,20 +122,25 @@ func (*FakeMapEntry) Descriptor() ([]byte, []int) {
 	return fileDescriptor_map_65406068076b05e6, []int{2}
 }
 func (m *FakeMapEntry) XXX_Unmarshal(b []byte) error {
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
 	return xxx_messageInfo_FakeMapEntry.Unmarshal(m, b)
 }
 func (m *FakeMapEntry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	buf, err := m.Marshal()
-	if err != nil {
-		return nil, err
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
 	}
-	return buf, nil
+	return xxx_messageInfo_FakeMapEntry.Marshal(b, m, deterministic)
 }
 func (dst *FakeMapEntry) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FakeMapEntry.Merge(dst, src)
 }
 func (m *FakeMapEntry) XXX_Size() int {
-	return m.Size()
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
+	return xxx_messageInfo_FakeMapEntry.Size(m)
 }
 func (m *FakeMapEntry) XXX_DiscardUnknown() {
 	xxx_messageInfo_FakeMapEntry.DiscardUnknown(m)

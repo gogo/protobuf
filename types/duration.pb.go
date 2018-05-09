@@ -109,20 +109,25 @@ func (*Duration) Descriptor() ([]byte, []int) {
 }
 func (*Duration) XXX_WellKnownType() string { return "Duration" }
 func (m *Duration) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
+	return xxx_messageInfo_Duration.Unmarshal(m, b)
 }
 func (m *Duration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	buf, err := m.Marshal()
-	if err != nil {
-		return nil, err
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
 	}
-	return buf, nil
+	return xxx_messageInfo_Duration.Marshal(b, m, deterministic)
 }
 func (dst *Duration) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Duration.Merge(dst, src)
 }
 func (m *Duration) XXX_Size() int {
-	return m.Size()
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
+	return xxx_messageInfo_Duration.Size(m)
 }
 func (m *Duration) XXX_DiscardUnknown() {
 	xxx_messageInfo_Duration.DiscardUnknown(m)

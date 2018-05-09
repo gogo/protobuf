@@ -42,20 +42,25 @@ func (*TimeFail) Descriptor() ([]byte, []int) {
 	return fileDescriptor_timefail_540b49e689fc70b1, []int{0}
 }
 func (m *TimeFail) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
+	return xxx_messageInfo_TimeFail.Unmarshal(m, b)
 }
 func (m *TimeFail) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	buf, err := m.Marshal()
-	if err != nil {
-		return nil, err
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
 	}
-	return buf, nil
+	return xxx_messageInfo_TimeFail.Marshal(b, m, deterministic)
 }
 func (dst *TimeFail) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_TimeFail.Merge(dst, src)
 }
 func (m *TimeFail) XXX_Size() int {
-	return m.Size()
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
+	return xxx_messageInfo_TimeFail.Size(m)
 }
 func (m *TimeFail) XXX_DiscardUnknown() {
 	xxx_messageInfo_TimeFail.DiscardUnknown(m)

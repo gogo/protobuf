@@ -43,20 +43,25 @@ func (*MapStdTypes) Descriptor() ([]byte, []int) {
 	return fileDescriptor_issue261_ea5bab07e532a045, []int{0}
 }
 func (m *MapStdTypes) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
+	return xxx_messageInfo_MapStdTypes.Unmarshal(m, b)
 }
 func (m *MapStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	buf, err := m.Marshal()
-	if err != nil {
-		return nil, err
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
 	}
-	return buf, nil
+	return xxx_messageInfo_MapStdTypes.Marshal(b, m, deterministic)
 }
 func (dst *MapStdTypes) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MapStdTypes.Merge(dst, src)
 }
 func (m *MapStdTypes) XXX_Size() int {
-	return m.Size()
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
+	return xxx_messageInfo_MapStdTypes.Size(m)
 }
 func (m *MapStdTypes) XXX_DiscardUnknown() {
 	xxx_messageInfo_MapStdTypes.DiscardUnknown(m)

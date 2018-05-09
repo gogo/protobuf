@@ -76,20 +76,25 @@ func (*Struct) Descriptor() ([]byte, []int) {
 }
 func (*Struct) XXX_WellKnownType() string { return "Struct" }
 func (m *Struct) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
+	return xxx_messageInfo_Struct.Unmarshal(m, b)
 }
 func (m *Struct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	buf, err := m.Marshal()
-	if err != nil {
-		return nil, err
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
 	}
-	return buf, nil
+	return xxx_messageInfo_Struct.Marshal(b, m, deterministic)
 }
 func (dst *Struct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Struct.Merge(dst, src)
 }
 func (m *Struct) XXX_Size() int {
-	return m.Size()
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
+	return xxx_messageInfo_Struct.Size(m)
 }
 func (m *Struct) XXX_DiscardUnknown() {
 	xxx_messageInfo_Struct.DiscardUnknown(m)
@@ -137,20 +142,25 @@ func (*Value) Descriptor() ([]byte, []int) {
 }
 func (*Value) XXX_WellKnownType() string { return "Value" }
 func (m *Value) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
+	return xxx_messageInfo_Value.Unmarshal(m, b)
 }
 func (m *Value) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	buf, err := m.Marshal()
-	if err != nil {
-		return nil, err
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
 	}
-	return buf, nil
+	return xxx_messageInfo_Value.Marshal(b, m, deterministic)
 }
 func (dst *Value) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Value.Merge(dst, src)
 }
 func (m *Value) XXX_Size() int {
-	return m.Size()
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
+	return xxx_messageInfo_Value.Size(m)
 }
 func (m *Value) XXX_DiscardUnknown() {
 	xxx_messageInfo_Value.DiscardUnknown(m)
@@ -397,20 +407,25 @@ func (*ListValue) Descriptor() ([]byte, []int) {
 }
 func (*ListValue) XXX_WellKnownType() string { return "ListValue" }
 func (m *ListValue) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
+	return xxx_messageInfo_ListValue.Unmarshal(m, b)
 }
 func (m *ListValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	buf, err := m.Marshal()
-	if err != nil {
-		return nil, err
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
 	}
-	return buf, nil
+	return xxx_messageInfo_ListValue.Marshal(b, m, deterministic)
 }
 func (dst *ListValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ListValue.Merge(dst, src)
 }
 func (m *ListValue) XXX_Size() int {
-	return m.Size()
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
+	return xxx_messageInfo_ListValue.Size(m)
 }
 func (m *ListValue) XXX_DiscardUnknown() {
 	xxx_messageInfo_ListValue.DiscardUnknown(m)

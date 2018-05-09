@@ -37,15 +37,24 @@ func (*Subject) Descriptor() ([]byte, []int) {
 	return fileDescriptor_proto_2eb405ba8c57e5a9, []int{0}
 }
 func (m *Subject) XXX_Unmarshal(b []byte) error {
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
 	return xxx_messageInfo_Subject.Unmarshal(m, b)
 }
 func (m *Subject) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
+	}
 	return xxx_messageInfo_Subject.Marshal(b, m, deterministic)
 }
 func (dst *Subject) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Subject.Merge(dst, src)
 }
 func (m *Subject) XXX_Size() int {
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
 	return xxx_messageInfo_Subject.Size(m)
 }
 func (m *Subject) XXX_DiscardUnknown() {

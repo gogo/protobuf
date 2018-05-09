@@ -40,19 +40,24 @@ func (*SizeMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptor_protosize_06b2b18dea724cd1, []int{0}
 }
 func (m *SizeMessage) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
+	return xxx_messageInfo_SizeMessage.Unmarshal(m, b)
 }
 func (m *SizeMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	buf, err := m.Marshal()
-	if err != nil {
-		return nil, err
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
 	}
-	return buf, nil
+	return xxx_messageInfo_SizeMessage.Marshal(b, m, deterministic)
 }
 func (dst *SizeMessage) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_SizeMessage.Merge(dst, src)
 }
 func (m *SizeMessage) XXX_Size() int {
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
 	return xxx_messageInfo_SizeMessage.Size(m)
 }
 func (m *SizeMessage) XXX_DiscardUnknown() {

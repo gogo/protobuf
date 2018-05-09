@@ -47,20 +47,25 @@ func (*Empty) Descriptor() ([]byte, []int) {
 }
 func (*Empty) XXX_WellKnownType() string { return "Empty" }
 func (m *Empty) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
+	return xxx_messageInfo_Empty.Unmarshal(m, b)
 }
 func (m *Empty) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	buf, err := m.Marshal()
-	if err != nil {
-		return nil, err
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
 	}
-	return buf, nil
+	return xxx_messageInfo_Empty.Marshal(b, m, deterministic)
 }
 func (dst *Empty) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Empty.Merge(dst, src)
 }
 func (m *Empty) XXX_Size() int {
-	return m.Size()
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
+	return xxx_messageInfo_Empty.Size(m)
 }
 func (m *Empty) XXX_DiscardUnknown() {
 	xxx_messageInfo_Empty.DiscardUnknown(m)

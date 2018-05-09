@@ -246,20 +246,25 @@ func (*FieldMask) Descriptor() ([]byte, []int) {
 	return fileDescriptor_field_mask_3abe20b2f0d4cb1c, []int{0}
 }
 func (m *FieldMask) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
+	return xxx_messageInfo_FieldMask.Unmarshal(m, b)
 }
 func (m *FieldMask) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	buf, err := m.Marshal()
-	if err != nil {
-		return nil, err
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
 	}
-	return buf, nil
+	return xxx_messageInfo_FieldMask.Marshal(b, m, deterministic)
 }
 func (dst *FieldMask) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FieldMask.Merge(dst, src)
 }
 func (m *FieldMask) XXX_Size() int {
-	return m.Size()
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
+	return xxx_messageInfo_FieldMask.Size(m)
 }
 func (m *FieldMask) XXX_DiscardUnknown() {
 	xxx_messageInfo_FieldMask.DiscardUnknown(m)

@@ -42,15 +42,24 @@ func (*BaseMessage) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_BaseMessage
 }
 func (m *BaseMessage) XXX_Unmarshal(b []byte) error {
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
 	return xxx_messageInfo_BaseMessage.Unmarshal(m, b)
 }
 func (m *BaseMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
+	}
 	return xxx_messageInfo_BaseMessage.Marshal(b, m, deterministic)
 }
 func (dst *BaseMessage) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_BaseMessage.Merge(dst, src)
 }
 func (m *BaseMessage) XXX_Size() int {
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
 	return xxx_messageInfo_BaseMessage.Size(m)
 }
 func (m *BaseMessage) XXX_DiscardUnknown() {
@@ -96,15 +105,24 @@ func (*OldStyleMessage) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_OldStyleMessage
 }
 func (m *OldStyleMessage) XXX_Unmarshal(b []byte) error {
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
 	return xxx_messageInfo_OldStyleMessage.Unmarshal(m, b)
 }
 func (m *OldStyleMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
+	}
 	return xxx_messageInfo_OldStyleMessage.Marshal(b, m, deterministic)
 }
 func (dst *OldStyleMessage) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldStyleMessage.Merge(dst, src)
 }
 func (m *OldStyleMessage) XXX_Size() int {
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
 	return xxx_messageInfo_OldStyleMessage.Size(m)
 }
 func (m *OldStyleMessage) XXX_DiscardUnknown() {

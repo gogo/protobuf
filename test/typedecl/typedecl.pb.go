@@ -28,20 +28,25 @@ func (*Dropped) Descriptor() ([]byte, []int) {
 	return fileDescriptor_typedecl_3980e2f1b7c625af, []int{0}
 }
 func (m *Dropped) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
+	return xxx_messageInfo_Dropped.Unmarshal(m, b)
 }
 func (m *Dropped) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	buf, err := m.Marshal()
-	if err != nil {
-		return nil, err
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
 	}
-	return buf, nil
+	return xxx_messageInfo_Dropped.Marshal(b, m, deterministic)
 }
 func (dst *Dropped) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Dropped.Merge(dst, src)
 }
 func (m *Dropped) XXX_Size() int {
-	return m.Size()
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
+	return xxx_messageInfo_Dropped.Size(m)
 }
 func (m *Dropped) XXX_DiscardUnknown() {
 	xxx_messageInfo_Dropped.DiscardUnknown(m)
@@ -70,20 +75,25 @@ func (*DroppedWithoutGetters) Descriptor() ([]byte, []int) {
 	return fileDescriptor_typedecl_3980e2f1b7c625af, []int{1}
 }
 func (m *DroppedWithoutGetters) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
+	return xxx_messageInfo_DroppedWithoutGetters.Unmarshal(m, b)
 }
 func (m *DroppedWithoutGetters) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	buf, err := m.Marshal()
-	if err != nil {
-		return nil, err
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
 	}
-	return buf, nil
+	return xxx_messageInfo_DroppedWithoutGetters.Marshal(b, m, deterministic)
 }
 func (dst *DroppedWithoutGetters) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DroppedWithoutGetters.Merge(dst, src)
 }
 func (m *DroppedWithoutGetters) XXX_Size() int {
-	return m.Size()
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
+	return xxx_messageInfo_DroppedWithoutGetters.Size(m)
 }
 func (m *DroppedWithoutGetters) XXX_DiscardUnknown() {
 	xxx_messageInfo_DroppedWithoutGetters.DiscardUnknown(m)
@@ -105,20 +115,25 @@ func (*Kept) Descriptor() ([]byte, []int) {
 	return fileDescriptor_typedecl_3980e2f1b7c625af, []int{2}
 }
 func (m *Kept) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
+	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
+		return m.Unmarshal(b)
+	}
+	return xxx_messageInfo_Kept.Unmarshal(m, b)
 }
 func (m *Kept) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	buf, err := m.Marshal()
-	if err != nil {
-		return nil, err
+	if m, ok := (interface{})(m).(proto.Marshaler); ok {
+		return m.Marshal()
 	}
-	return buf, nil
+	return xxx_messageInfo_Kept.Marshal(b, m, deterministic)
 }
 func (dst *Kept) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Kept.Merge(dst, src)
 }
 func (m *Kept) XXX_Size() int {
-	return m.Size()
+	if m, ok := (interface{})(m).(proto.Sizer); ok {
+		return m.Size()
+	}
+	return xxx_messageInfo_Kept.Size(m)
 }
 func (m *Kept) XXX_DiscardUnknown() {
 	xxx_messageInfo_Kept.DiscardUnknown(m)
