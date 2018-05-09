@@ -222,7 +222,11 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 	}
 
 	// Service descriptor.
-	g.P("var ", serviceDescVar, " = ", grpcPkg, ".ServiceDesc {")
+	g.P("func Get", servName, "ServiceDescriptor() ([]byte, []int) { return ", file.VarName(), ", []int{", strconv.Itoa(index), "} }")
+	getServiceDescFn := "Get" + servName + "ServiceDesc()"
+	g.P("var ", serviceDescVar, " = ", getServiceDescFn)
+	g.P("func ", getServiceDescFn, " grpc.ServiceDesc {")
+	g.P("return ", grpcPkg, ".ServiceDesc {")
 	g.P("ServiceName: ", strconv.Quote(fullServName), ",")
 	g.P("HandlerType: (*", serverType, ")(nil),")
 	g.P("Methods: []", grpcPkg, ".MethodDesc{")
@@ -254,6 +258,7 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 	}
 	g.P("},")
 	g.P("Metadata: \"", file.GetName(), "\",")
+	g.P("}")
 	g.P("}")
 	g.P()
 }
