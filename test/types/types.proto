@@ -63,9 +63,8 @@ message KnownTypes {
   google.protobuf.StringValue str = 10;
   google.protobuf.BytesValue bytes = 11;
 
-  // TODO uncomment this once https://github.com/gogo/protobuf/issues/197 is fixed
-  // google.protobuf.Struct st = 12;
-  // google.protobuf.Any an = 14;
+  google.protobuf.Struct st = 12;
+  google.protobuf.Any an = 14;
 }
 
 message ProtoTypes {
