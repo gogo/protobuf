@@ -2055,8 +2055,11 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	for _, n := range methodNames {
 		usedNames[n] = true
 	}
-	if !gogoproto.IsProtoSizer(message.file, message.DescriptorProto) {
+	if gogoproto.IsSizer(message.file, message.DescriptorProto) {
 		usedNames["Size"] = true
+	}
+	if gogoproto.IsProtoSizer(message.file, message.DescriptorProto) {
+		usedNames["ProtoSize"] = true
 	}
 	fieldNames := make(map[*descriptor.FieldDescriptorProto]string)
 	fieldGetterNames := make(map[*descriptor.FieldDescriptorProto]string)
