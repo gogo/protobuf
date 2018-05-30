@@ -77,6 +77,7 @@ regenerate:
 	make -C test/issue8 regenerate
 	make -C test/enumprefix regenerate
 	make -C test/enumcustomname regenerate
+	make -C test/enumomittypealias regenerate
 	make -C test/packed regenerate
 	make -C test/protosize regenerate
 	make -C test/tags regenerate

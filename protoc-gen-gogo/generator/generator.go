@@ -60,7 +60,7 @@ import (
 
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
-	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	"github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	plugin "github.com/gogo/protobuf/protoc-gen-gogo/plugin"
 )
 
@@ -1525,6 +1525,8 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		ccPrefix = ""
 	}
 
+	hasOmitTypeAlias := gogoproto.HasEnumOmitTypeAlias(enum.file, enum.EnumDescriptorProto)
+
 	if gogoproto.HasEnumDecl(enum.file, enum.EnumDescriptorProto) {
 		g.P("type ", ccTypeName, " int32")
 		g.file.addExport(enum, enumSymbol{ccTypeName, enum.proto3()})
@@ -1538,7 +1540,11 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 			}
 			name = ccPrefix + name
 
-			g.P(name, " ", ccTypeName, " = ", e.Number)
+			if hasOmitTypeAlias {
+				g.P(name, " = ", e.Number)
+			} else {
+				g.P(name, " ", ccTypeName, " = ", e.Number)
+			}
 			g.file.addExport(enum, constOrVarSymbol{name, "const", ccTypeName})
 		}
 		g.Out()
@@ -1622,14 +1628,14 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 // The tag is a string like "varint,2,opt,name=fieldname,def=7" that
 // identifies details of the field for the protocol buffer marshaling and unmarshaling
 // code.  The fields are:
-//	wire encoding
-//	protocol tag number
-//	opt,req,rep for optional, required, or repeated
-//	packed whether the encoding is "packed" (optional; repeated primitives only)
-//	name= the original declared name
-//	enum= the name of the enum type if it is an enum-typed field.
-//	proto3 if this field is in a proto3 message
-//	def= string representation of the default value, if any.
+// 	wire encoding
+// 	protocol tag number
+// 	opt,req,rep for optional, required, or repeated
+// 	packed whether the encoding is "packed" (optional; repeated primitives only)
+// 	name= the original declared name
+// 	enum= the name of the enum type if it is an enum-typed field.
+// 	proto3 if this field is in a proto3 message
+// 	def= string representation of the default value, if any.
 // The default value must be in a representation that can be used at run-time
 // to generate the default value. Thus bools become 0 and 1, for instance.
 func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptorProto, wiretype string) string {
