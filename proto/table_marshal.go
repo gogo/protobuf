@@ -2746,7 +2746,8 @@ func (p *Buffer) Marshal(pb Message) error {
 	if m, ok := pb.(Marshaler); ok {
 		// If the message can marshal itself, let it do it, for compatibility.
 		// NOTE: This is not efficient.
-		b, err := m.Marshal()
+		var b []byte
+		b, err = m.Marshal()
 		p.buf = append(p.buf, b...)
 		return err
 	}
