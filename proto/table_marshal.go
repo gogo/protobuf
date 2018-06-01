@@ -213,7 +213,7 @@ func (u *marshalInfo) size(ptr pointer) int {
 // cachedsize gets the size from cache. If there is no cache (i.e. message is not generated),
 // fall back to compute the size.
 func (u *marshalInfo) cachedsize(ptr pointer) int {
-	if s, ok := (reflect.NewAt(u.typ, ptr.p).Interface()).(Sizer); ok {
+	if s, ok := structPointer_Interface(ptr, u.typ).(Sizer); ok {
 		return s.Size()
 	}
 	if u.sizecache.IsValid() {

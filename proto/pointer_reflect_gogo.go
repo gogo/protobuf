@@ -57,3 +57,8 @@ func (p pointer) getSlice(typ reflect.Type) reflect.Value {
 	slice = slice.Elem()
 	return slice
 }
+
+// Interface returns the struct pointer as an interface value.
+func structPointer_Interface(ptr pointer, _ reflect.Type) interface{} {
+	return ptr.v.Interface()
+}
