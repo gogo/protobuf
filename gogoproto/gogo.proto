@@ -96,6 +96,7 @@ extend google.protobuf.MessageOptions {
 	optional bool populate = 64007;
 	optional bool stringer = 67008;
 	optional bool onlyone = 64009;
+	optional string union = 64010;
 
 	optional bool equal = 64013;
 	optional bool description = 64014;

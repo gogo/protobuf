@@ -2113,7 +2113,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		for i, field := range message.Field {
 			fieldName := fieldNames[field]
 			typename, wiretype := g.GoType(message, field)
-			jsonName := *field.Name
+			jsonName := field.GetJsonName()
 			jsonTag := jsonName + ",omitempty"
 			repeatedNativeType := (!field.IsMessage() && !gogoproto.IsCustomType(field) && field.IsRepeated())
 			if !gogoproto.IsNullable(field) && !repeatedNativeType {
@@ -2174,7 +2174,16 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				dname := "is" + ccTypeName + "_" + fname
 				oneofFieldName[*field.OneofIndex] = fname
 				oneofDisc[*field.OneofIndex] = dname
-				otag := `protobuf_oneof:"` + odp.GetName() + `"`
+
+				unionString := gogoproto.UnionString(message.file, message.DescriptorProto)
+				var otag string
+
+				if len(unionString) == 0 {
+					otag = `protobuf_oneof:"` + odp.GetName() + `"`
+				} else {
+					otag = `protobuf_oneof:"` + odp.GetName() + `=` + unionString + `"`
+				}
+
 				g.P(fname, " ", dname, " `", otag, "`")
 			}
 

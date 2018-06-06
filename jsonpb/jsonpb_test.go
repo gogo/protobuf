@@ -323,6 +323,11 @@ var (
 		`"dPinf":"Infinity",` +
 		`"dNinf":"-Infinity"` +
 		`}`
+
+	buildingName = "building"
+	buildingId   = "b1"
+	floorName    = "floor"
+	floorId      = "f1"
 )
 
 func init() {
@@ -396,6 +401,7 @@ var marshalingTests = []struct {
 		`{"mBoolSimple":{"true":{"oInt32":1}}}`},
 	{"oneof, not set", marshaler, &pb.MsgWithOneof{}, `{}`},
 	{"oneof, set", marshaler, &pb.MsgWithOneof{Union: &pb.MsgWithOneof_Title{Title: "Grand Poobah"}}, `{"title":"Grand Poobah"}`},
+	{"union, set", marshaler, &pb.Place{Union: &pb.Place_Building{Building: &pb.Building{Name: &buildingName, Id: &buildingId}}}, `{"@type":"Building","id":"b1","name":"building"}`},
 	{"force orig_name", Marshaler{OrigName: true}, &pb.Simple{OInt32: proto.Int32(4)},
 		`{"o_int32":4}`},
 	{"proto2 extension", marshaler, realNumber, realNumberJSON},
@@ -494,6 +500,7 @@ var unmarshalingTests = []struct {
 	json        string
 	pb          proto.Message
 }{
+	{"oneof union", Unmarshaler{}, `{"@type":"Building","id":"b1","name":"building"}`, &pb.Place{Union: &pb.Place_Building{Building: &pb.Building{Name: &buildingName, Id: &buildingId}}}},
 	{"simple flat object", Unmarshaler{}, simpleObjectJSON, simpleObject},
 	{"simple pretty object", Unmarshaler{}, simpleObjectPrettyJSON, simpleObject},
 	{"repeated fields flat object", Unmarshaler{}, repeatsObjectJSON, repeatsObject},
@@ -545,6 +552,7 @@ var unmarshalingTests = []struct {
 	{"oneof orig_name", Unmarshaler{}, `{"Country":"Australia"}`, &pb.MsgWithOneof{Union: &pb.MsgWithOneof_Country{Country: "Australia"}}},
 	{"oneof spec name2", Unmarshaler{}, `{"homeAddress":"Australia"}`, &pb.MsgWithOneof{Union: &pb.MsgWithOneof_HomeAddress{HomeAddress: "Australia"}}},
 	{"oneof orig_name2", Unmarshaler{}, `{"home_address":"Australia"}`, &pb.MsgWithOneof{Union: &pb.MsgWithOneof_HomeAddress{HomeAddress: "Australia"}}},
+
 	{"orig_name input", Unmarshaler{}, `{"o_bool":true}`, &pb.Simple{OBool: proto.Bool(true)}},
 	{"camelName input", Unmarshaler{}, `{"oBool":true}`, &pb.Simple{OBool: proto.Bool(true)}},
 	{"Duration", Unmarshaler{}, `{"dur":"3.000s"}`, &pb.KnownTypes{Dur: &types.Duration{Seconds: 3}}},

@@ -231,6 +231,50 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 		}
 	}
 
+	// Handle Union message.
+	if s.NumField() > 1 {
+		value := s.Field(0)
+		valueField := s.Type().Field(0)
+
+		oneofTag := valueField.Tag.Get("protobuf_oneof")
+		unionKv := strings.Split(oneofTag, "=")
+		if len(unionKv) == 2 {
+			unionValues := strings.Split(unionKv[1], ",")
+			if sort.SearchStrings(unionValues, "type") != len(unionValues) {
+				sv := value.Elem().Elem() // interface -> *T -> T
+				value = sv.Field(0)
+				valueField = sv.Type().Field(0)
+
+				if sort.SearchStrings(unionValues, "typeField") != len(unionValues) {
+					var b bytes.Buffer
+					writer := &errWriter{writer: &b}
+					err := m.marshalValue(writer, jsonProperties(valueField, m.OrigName), value, "")
+					if err != nil {
+						return err
+					}
+
+					// we are marshaling this object to an Any type
+					var js map[string]*json.RawMessage
+					if err = json.Unmarshal(b.Bytes(), &js); err != nil {
+						return fmt.Errorf("type %T produced invalid JSON: %v", v, err)
+					}
+
+					var name = []byte(`"` + value.Elem().Type().Name() + `"`)
+					var buf []byte
+					js["@type"] = (*json.RawMessage)(&name)
+					if buf, err = json.Marshal(js); err != nil {
+						return err
+					}
+
+					out.write(string(buf))
+					return out.err
+				} else {
+					return m.marshalValue(out, jsonProperties(valueField, m.OrigName), value, indent)
+				}
+			}
+		}
+	}
+
 	out.write("{")
 	if m.Indent != "" {
 		out.write("\n")
@@ -1019,6 +1063,33 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 		}
 		// Check for any oneof fields.
 		if len(jsonFields) > 0 {
+			if len(sprops.OneofTypes) > 0 && len(sprops.Prop) > 0 && strings.Contains(sprops.Prop[0].String(), "union=") {
+				typeName := string(jsonFields["@type"])
+				typeName = strings.Trim(typeName, `"`)
+				if len(typeName) > 0 {
+					delete(jsonFields, "@type")
+
+					for _, oop := range sprops.OneofTypes {
+						unionType := oop.Type.Elem().Field(0).Type
+						if unionType.Elem().Name() == typeName {
+							var buf []byte
+							var err error
+							if buf, err = json.Marshal(jsonFields); err != nil {
+								return err
+							}
+
+							nv := reflect.New(oop.Type.Elem())
+							target.Field(oop.Field).Set(nv)
+
+							union := reflect.New(nv.Elem().Field(0).Type().Elem())
+							nv.Elem().Field(0).Set(union)
+							return u.unmarshalValue(union.Elem(), json.RawMessage(buf), oop.Prop)
+						}
+					}
+				} else {
+				}
+			}
+
 			for _, oop := range sprops.OneofTypes {
 				raw, ok := consumeField(oop.Prop)
 				if !ok {

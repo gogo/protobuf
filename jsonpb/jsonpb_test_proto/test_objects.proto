@@ -114,6 +114,24 @@ message MsgWithOneof {
   }
 }
 
+message Building {
+    optional string id = 1;
+    optional string name = 2;
+}
+
+message Floor {
+    optional string id = 1;
+    optional string name = 2;
+}
+
+message Place {
+    option (gogoproto.union) = "type,typeField";
+    oneof union {
+        Floor floor = 1;
+        Building building = 2;
+    }
+}
+
 message Real {
   optional double value = 1;
   extensions 100 to max;
