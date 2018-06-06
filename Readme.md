@@ -146,5 +146,56 @@ Here is an example using gofast:
 
 See [https://github.com/gogo/grpc-example](https://github.com/gogo/grpc-example) for an example of using gRPC with gogoprotobuf and the wider grpc-ecosystem.
 
+## Passing options to the generator
 
-  
+It is possible to enable or disable file global options by passing
+them with/or without a prefix `no_` to the `options=` part of the
+protoc plugin configuration.
+
+Format is as follows:
+
+    --plugin_out=[{[,]key=[[+]value]}]:output_path
+
+Example of disabling gogo proto imports for generated files with grpc plugin:
+
+    protoc ... --gogofaster_out=plugins=grpc,options=no_gogoproto_import:./grpc_api
+
+List of available plugin parameters:
+
+    - import_prefix
+    - import_path
+    - plugins
+    - options
+
+List of available options:
+
+    - goproto_getters_all
+    - goproto_enum_prefix_all
+    - goproto_stringer_all
+    - verbose_equal_all
+    - face_all
+    - gostring_all
+    - populate_all
+    - stringer_all
+    - onlyone_all
+    - equal_all
+    - description_all
+    - testgen_all
+    - benchgen_all
+    - marshaler_all
+    - unmarshaler_all
+    - stable_marshaler_all
+    - sizer_all
+    - goproto_enum_stringer_all
+    - enum_stringer_all
+    - unsafe_marshaler_all
+    - unsafe_unmarshaler_all
+    - goproto_extensions_map_all
+    - goproto_unrecognized_all
+    - gogoproto_import
+    - protosizer_all
+    - compare_all
+    - typedecl_all
+    - enumdecl_all
+    - goproto_registration
+
