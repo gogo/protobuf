@@ -52,6 +52,7 @@ import (
 	"log"
 	"os"
 	"path"
+	"path/filepath"
 	"sort"
 	"strconv"
 	"strings"
@@ -654,6 +655,7 @@ func (g *Generator) CommandLineParameters(parameter string) {
 
 	g.ImportMap = make(map[string]string)
 	pluginList := "none" // Default list of plugin names to enable (empty means all).
+	optionList := "none" // Default list of plugin names to enable (empty means all).
 	for k, v := range g.Param {
 		switch k {
 		case "import_prefix":
@@ -662,34 +664,66 @@ func (g *Generator) CommandLineParameters(parameter string) {
 			g.PackageImportPath = v
 		case "plugins":
 			pluginList = v
+		case "options":
+			optionList = v
 		default:
 			if len(k) > 0 && k[0] == 'M' {
 				g.ImportMap[k[1:]] = v
 			}
 		}
 	}
-	if pluginList == "" {
-		return
-	}
-	if pluginList == "none" {
-		pluginList = ""
-	}
-	gogoPluginNames := []string{"unmarshal", "unsafeunmarshaler", "union", "stringer", "size", "protosizer", "populate", "marshalto", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck", "oneofcheck", "compare"}
-	pluginList = strings.Join(append(gogoPluginNames, pluginList), "+")
-	if pluginList != "" {
-		// Amend the set of plugins.
-		enabled := make(map[string]bool)
-		for _, name := range strings.Split(pluginList, "+") {
-			enabled[name] = true
+
+	if pluginList != "" && pluginList != "none" {
+		pluginList = strings.Join(append(gogoPluginNames, pluginList), "+")
+		if pluginList != "" {
+			// Amend the set of plugins.
+			enabled := make(map[string]bool)
+			for _, name := range strings.Split(pluginList, "+") {
+				enabled[name] = true
+			}
+			var nplugins pluginSlice
+			for _, p := range plugins {
+				if enabled[p.Name()] {
+					nplugins = append(nplugins, p)
+				}
+			}
+			sort.Sort(nplugins)
+			plugins = nplugins
 		}
-		var nplugins pluginSlice
-		for _, p := range plugins {
-			if enabled[p.Name()] {
-				nplugins = append(nplugins, p)
+	}
+
+	if optionList != "" && optionList != "none" {
+		// Build proto files list for setting up all files options:
+		//     files := req.GetProtoFile()
+		//     files = vanity.FilterFiles(files, vanity.NotGoogleProtobufDescriptorProto)
+		// without introducing ancestor dependency from child package.
+		files := make([]*descriptor.FileDescriptorProto, 0, len(g.Request.GetProtoFile()))
+		for _, fd := range g.Request.GetProtoFile() {
+			if notGoogleProtobufDescriptorProto(fd) {
+				files = append(files, fd)
 			}
 		}
-		sort.Sort(nplugins)
-		plugins = nplugins
+
+		for _, key := range strings.Split(optionList, "+") {
+			name := strings.ToLower(key)
+			value := true
+			if strings.HasPrefix(name, "no_") {
+				name = name[3:]
+				value = false
+			}
+			ext, ok := gogoOptionsMap[name]
+			if !ok {
+				g.Fail("Option", name, "is not available")
+			}
+			for _, fd := range files {
+				if fd.Options == nil {
+					fd.Options = &descriptor.FileOptions{}
+				}
+				if err := proto.SetExtension(fd.Options, ext, &value); err != nil {
+					panic(err)
+				}
+			}
+		}
 	}
 }
 
@@ -3416,6 +3450,12 @@ func baseName(name string) string {
 	return name
 }
 
+func notGoogleProtobufDescriptorProto(file *descriptor.FileDescriptorProto) bool {
+	// can not just check if file.GetName() == "google/protobuf/descriptor.proto" because we do not want to assume compile path
+	_, fileName := filepath.Split(file.GetName())
+	return !(file.GetPackage() == "google.protobuf" && fileName == "descriptor.proto")
+}
+
 // The SourceCodeInfo message describes the location of elements of a parsed
 // .proto file by way of a "path", which is a sequence of integers that
 // describe the route from a FileDescriptorProto to the relevant submessage.
@@ -3436,4 +3476,59 @@ const (
 	messageOneofPath   = 8 // oneof_decl
 	// tag numbers in EnumDescriptorProto
 	enumValuePath = 2 // value
+)
+
+var (
+	gogoPluginNames = []string{
+		"unmarshal",
+		"unsafeunmarshaler",
+		"union",
+		"stringer",
+		"size",
+		"protosizer",
+		"populate",
+		"marshalto",
+		"unsafemarshaler",
+		"gostring",
+		"face",
+		"equal",
+		"enumstringer",
+		"embedcheck",
+		"description",
+		"defaultcheck",
+		"oneofcheck",
+		"compare",
+	}
+
+	gogoOptionsMap = map[string]*proto.ExtensionDesc{
+		"goproto_getters_all":        gogoproto.E_GoprotoGettersAll,
+		"goproto_enum_prefix_all":    gogoproto.E_GoprotoEnumPrefixAll,
+		"goproto_stringer_all":       gogoproto.E_GoprotoStringerAll,
+		"verbose_equal_all":          gogoproto.E_VerboseEqualAll,
+		"face_all":                   gogoproto.E_FaceAll,
+		"gostring_all":               gogoproto.E_GostringAll,
+		"populate_all":               gogoproto.E_PopulateAll,
+		"stringer_all":               gogoproto.E_StringerAll,
+		"onlyone_all":                gogoproto.E_OnlyoneAll,
+		"equal_all":                  gogoproto.E_EqualAll,
+		"description_all":            gogoproto.E_DescriptionAll,
+		"testgen_all":                gogoproto.E_TestgenAll,
+		"benchgen_all":               gogoproto.E_BenchgenAll,
+		"marshaler_all":              gogoproto.E_MarshalerAll,
+		"unmarshaler_all":            gogoproto.E_UnmarshalerAll,
+		"stable_marshaler_all":       gogoproto.E_StableMarshalerAll,
+		"sizer_all":                  gogoproto.E_SizerAll,
+		"goproto_enum_stringer_all":  gogoproto.E_GoprotoEnumStringerAll,
+		"enum_stringer_all":          gogoproto.E_EnumStringerAll,
+		"unsafe_marshaler_all":       gogoproto.E_UnsafeMarshalerAll,
+		"unsafe_unmarshaler_all":     gogoproto.E_UnsafeUnmarshalerAll,
+		"goproto_extensions_map_all": gogoproto.E_GoprotoExtensionsMapAll,
+		"goproto_unrecognized_all":   gogoproto.E_GoprotoUnrecognizedAll,
+		"gogoproto_import":           gogoproto.E_GogoprotoImport,
+		"protosizer_all":             gogoproto.E_ProtosizerAll,
+		"compare_all":                gogoproto.E_CompareAll,
+		"typedecl_all":               gogoproto.E_TypedeclAll,
+		"enumdecl_all":               gogoproto.E_EnumdeclAll,
+		"goproto_registration":       gogoproto.E_GoprotoRegistration,
+	}
 )
