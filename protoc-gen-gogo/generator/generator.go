@@ -716,9 +716,6 @@ func (g *Generator) CommandLineParameters(parameter string) {
 				g.Fail("Option", name, "is not available")
 			}
 			for _, fd := range files {
-				if fileHasBoolExtension(fd, ext) {
-					return
-				}
 				if fd.Options == nil {
 					fd.Options = &descriptor.FileOptions{}
 				}
@@ -3451,23 +3448,6 @@ func baseName(name string) string {
 		name = name[0:i]
 	}
 	return name
-}
-
-func fileHasBoolExtension(file *descriptor.FileDescriptorProto, extension *proto.ExtensionDesc) bool {
-	if file.Options == nil {
-		return false
-	}
-	value, err := proto.GetExtension(file.Options, extension)
-	if err != nil {
-		return false
-	}
-	if value == nil {
-		return false
-	}
-	if value.(*bool) == nil {
-		return false
-	}
-	return true
 }
 
 func notGoogleProtobufDescriptorProto(file *descriptor.FileDescriptorProto) bool {
