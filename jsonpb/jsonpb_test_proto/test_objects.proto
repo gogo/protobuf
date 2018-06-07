@@ -125,7 +125,7 @@ message Floor {
 }
 
 message Place {
-    option (gogoproto.union) = "type,typeField";
+    option (gogoproto.union) = "type,typeFieldAt";
     oneof union {
         Floor floor = 1;
         Building building = 2;

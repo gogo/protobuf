@@ -245,7 +245,10 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 				value = sv.Field(0)
 				valueField = sv.Type().Field(0)
 
-				if sort.SearchStrings(unionValues, "typeField") != len(unionValues) {
+				fmt.Println(unionValues)
+				needTypeField := sort.SearchStrings(unionValues, "typeField") != len(unionValues)
+				needTypeFieldAt := sort.SearchStrings(unionValues, "typeFieldAt") != len(unionValues)
+				if needTypeField || needTypeFieldAt {
 					var b bytes.Buffer
 					writer := &errWriter{writer: &b}
 					err := m.marshalValue(writer, jsonProperties(valueField, m.OrigName), value, "")
@@ -261,7 +264,12 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 
 					var name = []byte(`"` + value.Elem().Type().Name() + `"`)
 					var buf []byte
-					js["@type"] = (*json.RawMessage)(&name)
+					if needTypeFieldAt {
+						js["@type"] = (*json.RawMessage)(&name)
+					} else {
+						js["type"] = (*json.RawMessage)(&name)
+					}
+
 					if buf, err = json.Marshal(js); err != nil {
 						return err
 					}
@@ -1064,10 +1072,17 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 		// Check for any oneof fields.
 		if len(jsonFields) > 0 {
 			if len(sprops.OneofTypes) > 0 && len(sprops.Prop) > 0 && strings.Contains(sprops.Prop[0].String(), "union=") {
-				typeName := string(jsonFields["@type"])
+				var typeFieldName string
+				if strings.Contains(sprops.Prop[0].String(), "typeFieldAt") {
+					typeFieldName = "@type"
+				} else {
+					typeFieldName = "type"
+				}
+
+				typeName := string(jsonFields[typeFieldName])
 				typeName = strings.Trim(typeName, `"`)
 				if len(typeName) > 0 {
-					delete(jsonFields, "@type")
+					delete(jsonFields, typeFieldName)
 
 					for _, oop := range sprops.OneofTypes {
 						unionType := oop.Type.Elem().Field(0).Type
