@@ -2150,7 +2150,13 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				bsonTag = fmt.Sprintf(" bson:%q", bsonTag)
 			}
 
-			tag := fmt.Sprintf("protobuf:%s json:%q%s%s", g.goTag(message, field, wiretype), jsonTag, bsonTag, moreTags)
+			unionTag := ""
+			unionOption := gogoproto.UnionString(message.file, message.DescriptorProto)
+			if len(unionOption) > 0 {
+				unionTag = fmt.Sprintf(" protobuf_union:%q", unionOption)
+			}
+
+			tag := fmt.Sprintf("protobuf:%s json:%q%s%s%s", g.goTag(message, field, wiretype), jsonTag, bsonTag, unionTag, moreTags)
 			if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && gogoproto.IsEmbed(field) {
 				fieldName = ""
 			}

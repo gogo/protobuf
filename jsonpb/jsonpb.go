@@ -147,6 +147,23 @@ type isWkt interface {
 	XXX_WellKnownType() string
 }
 
+func unionTags(tag string) (string, string) {
+	unionValues := strings.Split(tag, ",")
+	fieldValue := ""
+	nameValue := ""
+	for _, str := range unionValues {
+		if strings.HasPrefix(str, "field=") {
+			fieldValue = strings.TrimPrefix(str, "field=")
+			fieldValue = strings.TrimSpace(fieldValue)
+		} else if strings.HasPrefix(str, "name=") {
+			nameValue = strings.TrimPrefix(str, "name=")
+			nameValue = strings.TrimSpace(nameValue)
+		}
+	}
+
+	return fieldValue, nameValue
+}
+
 // marshalObject writes a struct to the Writer.
 func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeURL string) error {
 	if jsm, ok := v.(JSONPBMarshaler); ok {
@@ -236,48 +253,92 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 		value := s.Field(0)
 		valueField := s.Type().Field(0)
 
-		oneofTag := valueField.Tag.Get("protobuf_oneof")
-		unionKv := strings.Split(oneofTag, "=")
-		if len(unionKv) == 2 {
-			unionValues := strings.Split(unionKv[1], ",")
-			if sort.SearchStrings(unionValues, "type") != len(unionValues) {
-				sv := value.Elem().Elem() // interface -> *T -> T
-				value = sv.Field(0)
-				valueField = sv.Type().Field(0)
+		unionTag := valueField.Tag.Get("protobuf_union")
+		if len(unionTag) > 0 {
+			fieldValue, nameValue := unionTags(unionTag)
+			fmt.Sprint("field:", fieldValue, ",name:", nameValue)
 
-				fmt.Println(unionValues)
-				needTypeField := sort.SearchStrings(unionValues, "typeField") != len(unionValues)
-				needTypeFieldAt := sort.SearchStrings(unionValues, "typeFieldAt") != len(unionValues)
-				if needTypeField || needTypeFieldAt {
-					var b bytes.Buffer
-					writer := &errWriter{writer: &b}
-					err := m.marshalValue(writer, jsonProperties(valueField, m.OrigName), value, "")
-					if err != nil {
-						return err
-					}
+			i := 0
+			for i < s.NumField() {
+				value = s.Field(i)
+				valueField = s.Type().Field(i)
 
-					// we are marshaling this object to an Any type
-					var js map[string]*json.RawMessage
-					if err = json.Unmarshal(b.Bytes(), &js); err != nil {
-						return fmt.Errorf("type %T produced invalid JSON: %v", v, err)
-					}
+				if !value.IsNil() {
+					if len(fieldValue) > 0 {
+						var b bytes.Buffer
+						writer := &errWriter{writer: &b}
+						err := m.marshalValue(writer, jsonProperties(valueField, m.OrigName), value, indent)
+						if err != nil {
+							return err
+						}
 
-					var name = []byte(`"` + value.Elem().Type().Name() + `"`)
-					var buf []byte
-					if needTypeFieldAt {
-						js["@type"] = (*json.RawMessage)(&name)
+						// we are marshaling this object to an Any type
+						var js map[string]*json.RawMessage
+						if err = json.Unmarshal(b.Bytes(), &js); err != nil {
+							return fmt.Errorf("type %T produced invalid JSON: %v", v, err)
+						}
+
+						var name = []byte(`"` + value.Elem().Type().Name() + `"`)
+						var buf []byte
+						js[fieldValue] = (*json.RawMessage)(&name)
+
+						if buf, err = json.Marshal(js); err != nil {
+							return err
+						}
+
+						out.write(string(buf))
+						return out.err
 					} else {
-						js["type"] = (*json.RawMessage)(&name)
+						return m.marshalValue(out, jsonProperties(valueField, m.OrigName), value, indent)
 					}
+				}
 
-					if buf, err = json.Marshal(js); err != nil {
-						return err
+				i++
+			}
+		} else {
+			oneofTag := valueField.Tag.Get("protobuf_oneof")
+			unionKv := strings.Split(oneofTag, "=")
+			if len(unionKv) == 2 {
+				unionValues := strings.Split(unionKv[1], ",")
+				if sort.SearchStrings(unionValues, "type") != len(unionValues) {
+					sv := value.Elem().Elem() // interface -> *T -> T
+					value = sv.Field(0)
+					valueField = sv.Type().Field(0)
+
+					fmt.Println(unionValues)
+					needTypeField := sort.SearchStrings(unionValues, "typeField") != len(unionValues)
+					needTypeFieldAt := sort.SearchStrings(unionValues, "typeFieldAt") != len(unionValues)
+					if needTypeField || needTypeFieldAt {
+						var b bytes.Buffer
+						writer := &errWriter{writer: &b}
+						err := m.marshalValue(writer, jsonProperties(valueField, m.OrigName), value, "")
+						if err != nil {
+							return err
+						}
+
+						// we are marshaling this object to an Any type
+						var js map[string]*json.RawMessage
+						if err = json.Unmarshal(b.Bytes(), &js); err != nil {
+							return fmt.Errorf("type %T produced invalid JSON: %v", v, err)
+						}
+
+						var name = []byte(`"` + value.Elem().Type().Name() + `"`)
+						var buf []byte
+						if needTypeFieldAt {
+							js["@type"] = (*json.RawMessage)(&name)
+						} else {
+							js["type"] = (*json.RawMessage)(&name)
+						}
+
+						if buf, err = json.Marshal(js); err != nil {
+							return err
+						}
+
+						out.write(string(buf))
+						return out.err
+					} else {
+						return m.marshalValue(out, jsonProperties(valueField, m.OrigName), value, indent)
 					}
-
-					out.write(string(buf))
-					return out.err
-				} else {
-					return m.marshalValue(out, jsonProperties(valueField, m.OrigName), value, indent)
 				}
 			}
 		}
@@ -1054,7 +1115,49 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 			return raw, true
 		}
 
+		isUnionMessage := func() (bool, string) {
+			tag := ""
+			for i := 0; i < target.NumField(); i++ {
+				valueField := targetType.Field(i)
+
+				if strings.HasPrefix(valueField.Name, "XXX_") {
+					continue
+				}
+
+				tag = valueField.Tag.Get("protobuf_union")
+
+				if len(tag) == 0 {
+					return false, ""
+				}
+			}
+
+			return true, tag
+		}
+
 		sprops := proto.GetProperties(targetType)
+		if result, tag := isUnionMessage(); result {
+			fieldValue, _ := unionTags(tag)
+
+			typeName := string(jsonFields[fieldValue])
+			typeName = strings.Trim(typeName, `"`)
+			if len(typeName) > 0 {
+				delete(jsonFields, fieldValue)
+
+				for i := 0; i < target.NumField(); i++ {
+					ft := targetType.Field(i)
+					if ft.Name == typeName {
+						var buf []byte
+						var err error
+						if buf, err = json.Marshal(jsonFields); err != nil {
+							return err
+						}
+
+						return u.unmarshalValue(target.Field(i), json.RawMessage(buf), sprops.Prop[i])
+					}
+				}
+			}
+		}
+
 		for i := 0; i < target.NumField(); i++ {
 			ft := target.Type().Field(i)
 			if strings.HasPrefix(ft.Name, "XXX_") {

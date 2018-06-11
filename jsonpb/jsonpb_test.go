@@ -401,7 +401,8 @@ var marshalingTests = []struct {
 		`{"mBoolSimple":{"true":{"oInt32":1}}}`},
 	{"oneof, not set", marshaler, &pb.MsgWithOneof{}, `{}`},
 	{"oneof, set", marshaler, &pb.MsgWithOneof{Union: &pb.MsgWithOneof_Title{Title: "Grand Poobah"}}, `{"title":"Grand Poobah"}`},
-	{"union, set", marshaler, &pb.Place{Union: &pb.Place_Building{Building: &pb.Building{Name: &buildingName, Id: &buildingId}}}, `{"@type":"Building","id":"b1","name":"building"}`},
+	{"union_oneof, set", marshaler, &pb.Place{Union: &pb.Place_Building{Building: &pb.Building{Name: &buildingName, Id: &buildingId}}}, `{"@type":"Building","id":"b1","name":"building"}`},
+	{"union, set", marshaler, &pb.UnionPlace{Building: &pb.Building{Name: &buildingName, Id: &buildingId}}, `{"@type":"Building","id":"b1","name":"building"}`},
 	{"force orig_name", Marshaler{OrigName: true}, &pb.Simple{OInt32: proto.Int32(4)},
 		`{"o_int32":4}`},
 	{"proto2 extension", marshaler, realNumber, realNumberJSON},
@@ -500,6 +501,7 @@ var unmarshalingTests = []struct {
 	json        string
 	pb          proto.Message
 }{
+	{"union", Unmarshaler{}, `{"@type":"Building","id":"b1","name":"building"}`, &pb.UnionPlace{Building: &pb.Building{Name: &buildingName, Id: &buildingId}}},
 	{"oneof union", Unmarshaler{}, `{"@type":"Building","id":"b1","name":"building"}`, &pb.Place{Union: &pb.Place_Building{Building: &pb.Building{Name: &buildingName, Id: &buildingId}}}},
 	{"simple flat object", Unmarshaler{}, simpleObjectJSON, simpleObject},
 	{"simple pretty object", Unmarshaler{}, simpleObjectPrettyJSON, simpleObject},

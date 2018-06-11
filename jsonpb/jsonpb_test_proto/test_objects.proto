@@ -132,6 +132,13 @@ message Place {
     }
 }
 
+message UnionPlace {
+    option (gogoproto.union) = "field=@type";
+
+    optional Floor floor = 1;
+    optional Building building = 2;
+}
+
 message Real {
   optional double value = 1;
   extensions 100 to max;

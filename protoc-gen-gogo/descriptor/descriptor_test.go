@@ -1,10 +1,10 @@
 package descriptor_test
 
 import (
-	"fmt"
+	//"fmt"
 	"testing"
 
-	tpb "github.com/gogo/protobuf/proto/testdata"
+	//tpb "github.com/gogo/protobuf/proto/testdata"
 	"github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 )
 
@@ -19,13 +19,13 @@ func TestMessage(t *testing.T) {
 	}
 }
 
-func Example_Options() {
-	var msg *tpb.MyMessageSet
-	_, md := descriptor.ForMessage(msg)
-	if md.GetOptions().GetMessageSetWireFormat() {
-		fmt.Printf("%v uses option message_set_wire_format.\n", md.GetName())
-	}
+//func Example_Options() {
+//	var msg *tpb.MyMessageSet
+//	_, md := descriptor.ForMessage(msg)
+//	if md.GetOptions().GetMessageSetWireFormat() {
+//		fmt.Printf("%v uses option message_set_wire_format.\n", md.GetName())
+//	}
 
-	// Output:
-	// MyMessageSet uses option message_set_wire_format.
-}
+// Output:
+// MyMessageSet uses option message_set_wire_format.
+//}
