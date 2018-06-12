@@ -255,8 +255,7 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 
 		unionTag := valueField.Tag.Get("protobuf_union")
 		if len(unionTag) > 0 {
-			fieldValue, nameValue := unionTags(unionTag)
-			fmt.Sprint("field:", fieldValue, ",name:", nameValue)
+			fieldValue, _ := unionTags(unionTag)
 
 			i := 0
 			for i < s.NumField() {
