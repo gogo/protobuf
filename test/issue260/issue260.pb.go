@@ -40,18 +40,17 @@ func (m *Dropped) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Dropped.Unmarshal(m, b)
 }
 func (m *Dropped) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_Dropped.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *Dropped) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Dropped.Merge(dst, src)
 }
 func (m *Dropped) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_Dropped.Size(m)
 }
 func (m *Dropped) XXX_DiscardUnknown() {
@@ -87,18 +86,17 @@ func (m *DroppedWithoutGetters) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DroppedWithoutGetters.Unmarshal(m, b)
 }
 func (m *DroppedWithoutGetters) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_DroppedWithoutGetters.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *DroppedWithoutGetters) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DroppedWithoutGetters.Merge(dst, src)
 }
 func (m *DroppedWithoutGetters) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_DroppedWithoutGetters.Size(m)
 }
 func (m *DroppedWithoutGetters) XXX_DiscardUnknown() {
@@ -127,18 +125,17 @@ func (m *Kept) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Kept.Unmarshal(m, b)
 }
 func (m *Kept) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_Kept.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *Kept) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Kept.Merge(dst, src)
 }
 func (m *Kept) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_Kept.Size(m)
 }
 func (m *Kept) XXX_DiscardUnknown() {

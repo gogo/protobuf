@@ -40,18 +40,12 @@ func (m *TestRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TestRequest.Unmarshal(m, b)
 }
 func (m *TestRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_TestRequest.Marshal(b, m, deterministic)
 }
 func (dst *TestRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_TestRequest.Merge(dst, src)
 }
 func (m *TestRequest) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_TestRequest.Size(m)
 }
 func (m *TestRequest) XXX_DiscardUnknown() {

@@ -44,18 +44,17 @@ func (m *IndexQuery) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_IndexQuery.Unmarshal(m, b)
 }
 func (m *IndexQuery) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_IndexQuery.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *IndexQuery) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_IndexQuery.Merge(dst, src)
 }
 func (m *IndexQuery) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_IndexQuery.Size(m)
 }
 func (m *IndexQuery) XXX_DiscardUnknown() {

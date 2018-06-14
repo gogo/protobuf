@@ -39,18 +39,12 @@ func (m *A1M2) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_A1M2.Unmarshal(m, b)
 }
 func (m *A1M2) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_A1M2.Marshal(b, m, deterministic)
 }
 func (dst *A1M2) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_A1M2.Merge(dst, src)
 }
 func (m *A1M2) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_A1M2.Size(m)
 }
 func (m *A1M2) XXX_DiscardUnknown() {

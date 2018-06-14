@@ -45,18 +45,17 @@ func (m *MyMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MyMessage.Unmarshal(m, b)
 }
 func (m *MyMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_MyMessage.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *MyMessage) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MyMessage.Merge(dst, src)
 }
 func (m *MyMessage) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_MyMessage.Size(m)
 }
 func (m *MyMessage) XXX_DiscardUnknown() {

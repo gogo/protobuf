@@ -51,18 +51,17 @@ func (m *A) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_A.Unmarshal(m, b)
 }
 func (m *A) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_A.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *A) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_A.Merge(dst, src)
 }
 func (m *A) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_A.Size(m)
 }
 func (m *A) XXX_DiscardUnknown() {
@@ -92,18 +91,17 @@ func (m *B) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_B.Unmarshal(m, b)
 }
 func (m *B) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_B.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *B) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_B.Merge(dst, src)
 }
 func (m *B) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_B.Size(m)
 }
 func (m *B) XXX_DiscardUnknown() {
@@ -131,18 +129,17 @@ func (m *D) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_D.Unmarshal(m, b)
 }
 func (m *D) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_D.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *D) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_D.Merge(dst, src)
 }
 func (m *D) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_D.Size(m)
 }
 func (m *D) XXX_DiscardUnknown() {
@@ -175,18 +172,17 @@ func (m *C) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_C.Unmarshal(m, b)
 }
 func (m *C) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_C.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *C) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_C.Merge(dst, src)
 }
 func (m *C) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_C.Size(m)
 }
 func (m *C) XXX_DiscardUnknown() {
@@ -214,18 +210,17 @@ func (m *U) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_U.Unmarshal(m, b)
 }
 func (m *U) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_U.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *U) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_U.Merge(dst, src)
 }
 func (m *U) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_U.Size(m)
 }
 func (m *U) XXX_DiscardUnknown() {
@@ -253,18 +248,12 @@ func (m *UnoM) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnoM.Unmarshal(m, b)
 }
 func (m *UnoM) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_UnoM.Marshal(b, m, deterministic)
 }
 func (dst *UnoM) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UnoM.Merge(dst, src)
 }
 func (m *UnoM) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_UnoM.Size(m)
 }
 func (m *UnoM) XXX_DiscardUnknown() {
@@ -292,18 +281,17 @@ func (m *OldA) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OldA.Unmarshal(m, b)
 }
 func (m *OldA) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_OldA.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *OldA) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldA.Merge(dst, src)
 }
 func (m *OldA) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_OldA.Size(m)
 }
 func (m *OldA) XXX_DiscardUnknown() {
@@ -332,18 +320,17 @@ func (m *OldB) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OldB.Unmarshal(m, b)
 }
 func (m *OldB) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_OldB.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *OldB) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldB.Merge(dst, src)
 }
 func (m *OldB) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_OldB.Size(m)
 }
 func (m *OldB) XXX_DiscardUnknown() {
@@ -375,18 +362,17 @@ func (m *OldC) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OldC.Unmarshal(m, b)
 }
 func (m *OldC) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_OldC.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *OldC) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldC.Merge(dst, src)
 }
 func (m *OldC) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_OldC.Size(m)
 }
 func (m *OldC) XXX_DiscardUnknown() {
@@ -415,18 +401,17 @@ func (m *OldU) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OldU.Unmarshal(m, b)
 }
 func (m *OldU) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_OldU.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *OldU) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldU.Merge(dst, src)
 }
 func (m *OldU) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_OldU.Size(m)
 }
 func (m *OldU) XXX_DiscardUnknown() {
@@ -455,18 +440,12 @@ func (m *OldUnoM) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OldUnoM.Unmarshal(m, b)
 }
 func (m *OldUnoM) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_OldUnoM.Marshal(b, m, deterministic)
 }
 func (dst *OldUnoM) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldUnoM.Merge(dst, src)
 }
 func (m *OldUnoM) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_OldUnoM.Size(m)
 }
 func (m *OldUnoM) XXX_DiscardUnknown() {

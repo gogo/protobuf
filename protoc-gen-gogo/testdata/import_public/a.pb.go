@@ -54,18 +54,12 @@ func (m *Public) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Public.Unmarshal(m, b)
 }
 func (m *Public) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_Public.Marshal(b, m, deterministic)
 }
 func (dst *Public) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Public.Merge(dst, src)
 }
 func (m *Public) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_Public.Size(m)
 }
 func (m *Public) XXX_DiscardUnknown() {

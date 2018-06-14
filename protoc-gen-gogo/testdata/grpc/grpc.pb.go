@@ -40,18 +40,12 @@ func (m *SimpleRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SimpleRequest.Unmarshal(m, b)
 }
 func (m *SimpleRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_SimpleRequest.Marshal(b, m, deterministic)
 }
 func (dst *SimpleRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_SimpleRequest.Merge(dst, src)
 }
 func (m *SimpleRequest) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_SimpleRequest.Size(m)
 }
 func (m *SimpleRequest) XXX_DiscardUnknown() {
@@ -79,18 +73,12 @@ func (m *SimpleResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SimpleResponse.Unmarshal(m, b)
 }
 func (m *SimpleResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_SimpleResponse.Marshal(b, m, deterministic)
 }
 func (dst *SimpleResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_SimpleResponse.Merge(dst, src)
 }
 func (m *SimpleResponse) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_SimpleResponse.Size(m)
 }
 func (m *SimpleResponse) XXX_DiscardUnknown() {
@@ -118,18 +106,12 @@ func (m *StreamMsg) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StreamMsg.Unmarshal(m, b)
 }
 func (m *StreamMsg) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_StreamMsg.Marshal(b, m, deterministic)
 }
 func (dst *StreamMsg) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_StreamMsg.Merge(dst, src)
 }
 func (m *StreamMsg) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_StreamMsg.Size(m)
 }
 func (m *StreamMsg) XXX_DiscardUnknown() {
@@ -157,18 +139,12 @@ func (m *StreamMsg2) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StreamMsg2.Unmarshal(m, b)
 }
 func (m *StreamMsg2) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_StreamMsg2.Marshal(b, m, deterministic)
 }
 func (dst *StreamMsg2) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_StreamMsg2.Merge(dst, src)
 }
 func (m *StreamMsg2) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_StreamMsg2.Size(m)
 }
 func (m *StreamMsg2) XXX_DiscardUnknown() {

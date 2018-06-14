@@ -26,26 +26,10 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package cachedsize
+package proto
 
 import (
-	"github.com/gogo/protobuf/proto"
-	"testing"
+	"reflect"
 )
 
-func TestCachedSize(t *testing.T) {
-	in := &Foo{Field1: &Bar{Field2: true}}
-
-	data, err := proto.Marshal(in)
-	if err != nil {
-		t.Fatal(err)
-	}
-	out := &Foo{}
-	err = proto.Unmarshal(data, out)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := in.VerboseEqual(out); err != nil {
-		t.Fatal(err)
-	}
-}
+var sizerType = reflect.TypeOf((*Sizer)(nil)).Elem()

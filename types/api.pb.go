@@ -88,18 +88,17 @@ func (m *Api) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Api.Unmarshal(m, b)
 }
 func (m *Api) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_Api.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *Api) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Api.Merge(dst, src)
 }
 func (m *Api) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_Api.Size(m)
 }
 func (m *Api) XXX_DiscardUnknown() {
@@ -194,18 +193,17 @@ func (m *Method) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Method.Unmarshal(m, b)
 }
 func (m *Method) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_Method.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *Method) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Method.Merge(dst, src)
 }
 func (m *Method) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_Method.Size(m)
 }
 func (m *Method) XXX_DiscardUnknown() {
@@ -368,18 +366,17 @@ func (m *Mixin) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Mixin.Unmarshal(m, b)
 }
 func (m *Mixin) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_Mixin.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *Mixin) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Mixin.Merge(dst, src)
 }
 func (m *Mixin) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_Mixin.Size(m)
 }
 func (m *Mixin) XXX_DiscardUnknown() {

@@ -54,9 +54,3 @@ func (p pointer) getSlice(typ reflect.Type) reflect.Value {
 	slice = slice.Elem()
 	return slice
 }
-
-// Interface returns the struct pointer, assumed to have element type t,
-// as an interface value.
-func structPointer_Interface(ptr pointer, t reflect.Type) interface{} {
-	return reflect.NewAt(t, unsafe.Pointer(ptr.p)).Interface()
-}

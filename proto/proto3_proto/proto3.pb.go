@@ -87,18 +87,12 @@ func (m *Message) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Message.Unmarshal(m, b)
 }
 func (m *Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_Message.Marshal(b, m, deterministic)
 }
 func (dst *Message) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Message.Merge(dst, src)
 }
 func (m *Message) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_Message.Size(m)
 }
 func (m *Message) XXX_DiscardUnknown() {
@@ -261,18 +255,12 @@ func (m *Nested) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Nested.Unmarshal(m, b)
 }
 func (m *Nested) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_Nested.Marshal(b, m, deterministic)
 }
 func (dst *Nested) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Nested.Merge(dst, src)
 }
 func (m *Nested) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_Nested.Size(m)
 }
 func (m *Nested) XXX_DiscardUnknown() {
@@ -315,18 +303,12 @@ func (m *MessageWithMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MessageWithMap.Unmarshal(m, b)
 }
 func (m *MessageWithMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_MessageWithMap.Marshal(b, m, deterministic)
 }
 func (dst *MessageWithMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MessageWithMap.Merge(dst, src)
 }
 func (m *MessageWithMap) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_MessageWithMap.Size(m)
 }
 func (m *MessageWithMap) XXX_DiscardUnknown() {
@@ -362,18 +344,12 @@ func (m *IntMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_IntMap.Unmarshal(m, b)
 }
 func (m *IntMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_IntMap.Marshal(b, m, deterministic)
 }
 func (dst *IntMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_IntMap.Merge(dst, src)
 }
 func (m *IntMap) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_IntMap.Size(m)
 }
 func (m *IntMap) XXX_DiscardUnknown() {
@@ -409,18 +385,12 @@ func (m *IntMaps) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_IntMaps.Unmarshal(m, b)
 }
 func (m *IntMaps) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_IntMaps.Marshal(b, m, deterministic)
 }
 func (dst *IntMaps) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_IntMaps.Merge(dst, src)
 }
 func (m *IntMaps) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_IntMaps.Size(m)
 }
 func (m *IntMaps) XXX_DiscardUnknown() {

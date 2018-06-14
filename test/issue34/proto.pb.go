@@ -41,18 +41,12 @@ func (m *Foo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Foo.Unmarshal(m, b)
 }
 func (m *Foo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_Foo.Marshal(b, m, deterministic)
 }
 func (dst *Foo) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Foo.Merge(dst, src)
 }
 func (m *Foo) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_Foo.Size(m)
 }
 func (m *Foo) XXX_DiscardUnknown() {
@@ -88,18 +82,12 @@ func (m *FooWithRepeated) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FooWithRepeated.Unmarshal(m, b)
 }
 func (m *FooWithRepeated) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_FooWithRepeated.Marshal(b, m, deterministic)
 }
 func (dst *FooWithRepeated) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FooWithRepeated.Merge(dst, src)
 }
 func (m *FooWithRepeated) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_FooWithRepeated.Size(m)
 }
 func (m *FooWithRepeated) XXX_DiscardUnknown() {

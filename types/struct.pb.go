@@ -82,18 +82,17 @@ func (m *Struct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Struct.Unmarshal(m, b)
 }
 func (m *Struct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_Struct.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *Struct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Struct.Merge(dst, src)
 }
 func (m *Struct) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_Struct.Size(m)
 }
 func (m *Struct) XXX_DiscardUnknown() {
@@ -148,18 +147,17 @@ func (m *Value) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Value.Unmarshal(m, b)
 }
 func (m *Value) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_Value.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *Value) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Value.Merge(dst, src)
 }
 func (m *Value) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_Value.Size(m)
 }
 func (m *Value) XXX_DiscardUnknown() {
@@ -413,18 +411,17 @@ func (m *ListValue) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListValue.Unmarshal(m, b)
 }
 func (m *ListValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_ListValue.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *ListValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ListValue.Merge(dst, src)
 }
 func (m *ListValue) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_ListValue.Size(m)
 }
 func (m *ListValue) XXX_DiscardUnknown() {

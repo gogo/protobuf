@@ -38,18 +38,12 @@ func (m *SubObject) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SubObject.Unmarshal(m, b)
 }
 func (m *SubObject) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_SubObject.Marshal(b, m, deterministic)
 }
 func (dst *SubObject) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_SubObject.Merge(dst, src)
 }
 func (m *SubObject) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_SubObject.Size(m)
 }
 func (m *SubObject) XXX_DiscardUnknown() {

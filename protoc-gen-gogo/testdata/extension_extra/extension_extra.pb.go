@@ -38,18 +38,12 @@ func (m *ExtraMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ExtraMessage.Unmarshal(m, b)
 }
 func (m *ExtraMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_ExtraMessage.Marshal(b, m, deterministic)
 }
 func (dst *ExtraMessage) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ExtraMessage.Merge(dst, src)
 }
 func (m *ExtraMessage) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_ExtraMessage.Size(m)
 }
 func (m *ExtraMessage) XXX_DiscardUnknown() {
