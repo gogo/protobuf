@@ -139,6 +139,10 @@ message UnionPlace {
     optional Building building = 2;
 }
 
+message UnionPlaces {
+    repeated UnionPlace places = 1;
+}
+
 message Real {
   optional double value = 1;
   extensions 100 to max;

@@ -853,6 +853,65 @@ func Unmarshal(r io.Reader, pb proto.Message) error {
 	return new(Unmarshaler).Unmarshal(r, pb)
 }
 
+type TypeNotMatchError struct {}
+func (t *TypeNotMatchError) Error() string {
+	return "TypeNotMatch"
+}
+
+func UnmarshalArrayObject(r io.Reader, pb proto.Message) error {
+	var msgs []*json.RawMessage
+
+	buf := new(bytes.Buffer)
+	buf.ReadFrom(r)
+	bytes := buf.Bytes()
+
+	if err := json.Unmarshal(bytes, &msgs); err != nil {
+		var m json.RawMessage
+		if err = json.Unmarshal(bytes, &m); err != nil {
+			fmt.Println("err", err)
+			return err
+		} else {
+			msgs = append(msgs, &m)
+		}
+	}
+
+	value := reflect.ValueOf(pb).Elem()
+
+	isArrayObject := func() bool {
+		count := 0
+		for i := 0; i < value.NumField(); i++ {
+			if strings.HasPrefix(value.Type().Field(i).Name, "XXX_") {
+				continue
+			}
+			count++
+		}
+
+		return count == 1
+	}
+
+	if !isArrayObject() {
+		return &TypeNotMatchError{}
+	}
+
+	fieldValue := value.Field(0)
+
+	if fieldValue.Type().Kind() != reflect.Slice {
+		fmt.Println(fieldValue.Type())
+		return &TypeNotMatchError{}
+	}
+
+	u := &Unmarshaler{}
+	if l := len(msgs); l > 0 {
+		fieldValue.Set(reflect.MakeSlice(fieldValue.Type(), l, l))
+		for i := 0; i < l; i++ {
+			if err := u.unmarshalValue(fieldValue.Index(i), *msgs[i], nil); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
 // UnmarshalString will populate the fields of a protocol buffer based
 // on a JSON string. This function is lenient and will decode any options
 // permutations of the related Marshaler.
