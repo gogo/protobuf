@@ -65,9 +65,6 @@ func (*Request) Descriptor() ([]byte, []int) {
 	return fileDescriptor_proto3_1eff755e13e61017, []int{0}
 }
 func (m *Request) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Request.Unmarshal(m, b)
 }
 func (m *Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -135,9 +132,6 @@ func (*Book) Descriptor() ([]byte, []int) {
 	return fileDescriptor_proto3_1eff755e13e61017, []int{1}
 }
 func (m *Book) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Book.Unmarshal(m, b)
 }
 func (m *Book) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

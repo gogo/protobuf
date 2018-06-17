@@ -34,9 +34,6 @@ func (*Outside) Descriptor() ([]byte, []int) {
 	return fileDescriptor_tags_156838d323721841, []int{0}
 }
 func (m *Outside) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Outside.Unmarshal(m, b)
 }
 func (m *Outside) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -75,9 +72,6 @@ func (*Inside) Descriptor() ([]byte, []int) {
 	return fileDescriptor_tags_156838d323721841, []int{1}
 }
 func (m *Inside) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Inside.Unmarshal(m, b)
 }
 func (m *Inside) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

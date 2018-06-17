@@ -162,9 +162,6 @@ func (*OnlyEnums) Descriptor() ([]byte, []int) {
 	return fileDescriptor_enumcustomname_d428393be9e73607, []int{0}
 }
 func (m *OnlyEnums) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_OnlyEnums.Unmarshal(m, b)
 }
 func (m *OnlyEnums) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

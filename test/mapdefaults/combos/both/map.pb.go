@@ -44,10 +44,7 @@ func (*MapTest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_map_746b24fd53d0701f, []int{0}
 }
 func (m *MapTest) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_MapTest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *MapTest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -82,10 +79,7 @@ func (*FakeMap) Descriptor() ([]byte, []int) {
 	return fileDescriptor_map_746b24fd53d0701f, []int{1}
 }
 func (m *FakeMap) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_FakeMap.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *FakeMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -122,10 +116,7 @@ func (*FakeMapEntry) Descriptor() ([]byte, []int) {
 	return fileDescriptor_map_746b24fd53d0701f, []int{2}
 }
 func (m *FakeMapEntry) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_FakeMapEntry.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *FakeMapEntry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

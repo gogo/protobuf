@@ -109,10 +109,7 @@ func (*Duration) Descriptor() ([]byte, []int) {
 }
 func (*Duration) XXX_WellKnownType() string { return "Duration" }
 func (m *Duration) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Duration.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Duration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

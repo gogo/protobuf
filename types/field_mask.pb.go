@@ -246,10 +246,7 @@ func (*FieldMask) Descriptor() ([]byte, []int) {
 	return fileDescriptor_field_mask_3abe20b2f0d4cb1c, []int{0}
 }
 func (m *FieldMask) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_FieldMask.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *FieldMask) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

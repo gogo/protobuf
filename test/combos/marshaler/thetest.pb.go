@@ -249,9 +249,6 @@ func (*NidOptNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{0}
 }
 func (m *NidOptNative) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NidOptNative.Unmarshal(m, b)
 }
 func (m *NidOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -301,9 +298,6 @@ func (*NinOptNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{1}
 }
 func (m *NinOptNative) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinOptNative.Unmarshal(m, b)
 }
 func (m *NinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -353,9 +347,6 @@ func (*NidRepNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{2}
 }
 func (m *NidRepNative) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NidRepNative.Unmarshal(m, b)
 }
 func (m *NidRepNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -405,9 +396,6 @@ func (*NinRepNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{3}
 }
 func (m *NinRepNative) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinRepNative.Unmarshal(m, b)
 }
 func (m *NinRepNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -455,9 +443,6 @@ func (*NidRepPackedNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{4}
 }
 func (m *NidRepPackedNative) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NidRepPackedNative.Unmarshal(m, b)
 }
 func (m *NidRepPackedNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -505,9 +490,6 @@ func (*NinRepPackedNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{5}
 }
 func (m *NinRepPackedNative) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinRepPackedNative.Unmarshal(m, b)
 }
 func (m *NinRepPackedNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -552,9 +534,6 @@ func (*NidOptStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{6}
 }
 func (m *NidOptStruct) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NidOptStruct.Unmarshal(m, b)
 }
 func (m *NidOptStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -599,9 +578,6 @@ func (*NinOptStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{7}
 }
 func (m *NinOptStruct) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinOptStruct.Unmarshal(m, b)
 }
 func (m *NinOptStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -646,9 +622,6 @@ func (*NidRepStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{8}
 }
 func (m *NidRepStruct) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NidRepStruct.Unmarshal(m, b)
 }
 func (m *NidRepStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -693,9 +666,6 @@ func (*NinRepStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{9}
 }
 func (m *NinRepStruct) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinRepStruct.Unmarshal(m, b)
 }
 func (m *NinRepStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -733,9 +703,6 @@ func (*NidEmbeddedStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{10}
 }
 func (m *NidEmbeddedStruct) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NidEmbeddedStruct.Unmarshal(m, b)
 }
 func (m *NidEmbeddedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -773,9 +740,6 @@ func (*NinEmbeddedStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{11}
 }
 func (m *NinEmbeddedStruct) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinEmbeddedStruct.Unmarshal(m, b)
 }
 func (m *NinEmbeddedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -812,9 +776,6 @@ func (*NidNestedStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{12}
 }
 func (m *NidNestedStruct) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NidNestedStruct.Unmarshal(m, b)
 }
 func (m *NidNestedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -851,9 +812,6 @@ func (*NinNestedStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{13}
 }
 func (m *NinNestedStruct) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinNestedStruct.Unmarshal(m, b)
 }
 func (m *NinNestedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -890,9 +848,6 @@ func (*NidOptCustom) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{14}
 }
 func (m *NidOptCustom) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NidOptCustom.Unmarshal(m, b)
 }
 func (m *NidOptCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -928,9 +883,6 @@ func (*CustomDash) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{15}
 }
 func (m *CustomDash) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_CustomDash.Unmarshal(m, b)
 }
 func (m *CustomDash) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -967,9 +919,6 @@ func (*NinOptCustom) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{16}
 }
 func (m *NinOptCustom) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinOptCustom.Unmarshal(m, b)
 }
 func (m *NinOptCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1006,9 +955,6 @@ func (*NidRepCustom) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{17}
 }
 func (m *NidRepCustom) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NidRepCustom.Unmarshal(m, b)
 }
 func (m *NidRepCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1045,9 +991,6 @@ func (*NinRepCustom) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{18}
 }
 func (m *NinRepCustom) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinRepCustom.Unmarshal(m, b)
 }
 func (m *NinRepCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1091,9 +1034,6 @@ func (*NinOptNativeUnion) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{19}
 }
 func (m *NinOptNativeUnion) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinOptNativeUnion.Unmarshal(m, b)
 }
 func (m *NinOptNativeUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1137,9 +1077,6 @@ func (*NinOptStructUnion) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{20}
 }
 func (m *NinOptStructUnion) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinOptStructUnion.Unmarshal(m, b)
 }
 func (m *NinOptStructUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1177,9 +1114,6 @@ func (*NinEmbeddedStructUnion) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{21}
 }
 func (m *NinEmbeddedStructUnion) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinEmbeddedStructUnion.Unmarshal(m, b)
 }
 func (m *NinEmbeddedStructUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1217,9 +1151,6 @@ func (*NinNestedStructUnion) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{22}
 }
 func (m *NinNestedStructUnion) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinNestedStructUnion.Unmarshal(m, b)
 }
 func (m *NinNestedStructUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1257,9 +1188,6 @@ func (*Tree) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{23}
 }
 func (m *Tree) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Tree.Unmarshal(m, b)
 }
 func (m *Tree) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1296,9 +1224,6 @@ func (*OrBranch) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{24}
 }
 func (m *OrBranch) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_OrBranch.Unmarshal(m, b)
 }
 func (m *OrBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1335,9 +1260,6 @@ func (*AndBranch) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{25}
 }
 func (m *AndBranch) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_AndBranch.Unmarshal(m, b)
 }
 func (m *AndBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1374,9 +1296,6 @@ func (*Leaf) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{26}
 }
 func (m *Leaf) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Leaf.Unmarshal(m, b)
 }
 func (m *Leaf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1414,9 +1333,6 @@ func (*DeepTree) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{27}
 }
 func (m *DeepTree) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_DeepTree.Unmarshal(m, b)
 }
 func (m *DeepTree) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1452,9 +1368,6 @@ func (*ADeepBranch) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{28}
 }
 func (m *ADeepBranch) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_ADeepBranch.Unmarshal(m, b)
 }
 func (m *ADeepBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1491,9 +1404,6 @@ func (*AndDeepBranch) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{29}
 }
 func (m *AndDeepBranch) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_AndDeepBranch.Unmarshal(m, b)
 }
 func (m *AndDeepBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1529,9 +1439,6 @@ func (*DeepLeaf) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{30}
 }
 func (m *DeepLeaf) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_DeepLeaf.Unmarshal(m, b)
 }
 func (m *DeepLeaf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1566,9 +1473,6 @@ func (*Nil) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{31}
 }
 func (m *Nil) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Nil.Unmarshal(m, b)
 }
 func (m *Nil) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1604,9 +1508,6 @@ func (*NidOptEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{32}
 }
 func (m *NidOptEnum) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NidOptEnum.Unmarshal(m, b)
 }
 func (m *NidOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1644,9 +1545,6 @@ func (*NinOptEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{33}
 }
 func (m *NinOptEnum) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinOptEnum.Unmarshal(m, b)
 }
 func (m *NinOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1684,9 +1582,6 @@ func (*NidRepEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{34}
 }
 func (m *NidRepEnum) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NidRepEnum.Unmarshal(m, b)
 }
 func (m *NidRepEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1724,9 +1619,6 @@ func (*NinRepEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{35}
 }
 func (m *NinRepEnum) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinRepEnum.Unmarshal(m, b)
 }
 func (m *NinRepEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1764,9 +1656,6 @@ func (*NinOptEnumDefault) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{36}
 }
 func (m *NinOptEnumDefault) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinOptEnumDefault.Unmarshal(m, b)
 }
 func (m *NinOptEnumDefault) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1829,9 +1718,6 @@ func (*AnotherNinOptEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{37}
 }
 func (m *AnotherNinOptEnum) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_AnotherNinOptEnum.Unmarshal(m, b)
 }
 func (m *AnotherNinOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1869,9 +1755,6 @@ func (*AnotherNinOptEnumDefault) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{38}
 }
 func (m *AnotherNinOptEnumDefault) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_AnotherNinOptEnumDefault.Unmarshal(m, b)
 }
 func (m *AnotherNinOptEnumDefault) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1934,9 +1817,6 @@ func (*Timer) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{39}
 }
 func (m *Timer) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Timer.Unmarshal(m, b)
 }
 func (m *Timer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1981,9 +1861,6 @@ func (*MyExtendable) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_MyExtendable
 }
 func (m *MyExtendable) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_MyExtendable.Unmarshal(m, b)
 }
 func (m *MyExtendable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2031,9 +1908,6 @@ func (*OtherExtenable) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_OtherExtenable
 }
 func (m *OtherExtenable) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_OtherExtenable.Unmarshal(m, b)
 }
 func (m *OtherExtenable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2072,9 +1946,6 @@ func (*NestedDefinition) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{42}
 }
 func (m *NestedDefinition) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NestedDefinition.Unmarshal(m, b)
 }
 func (m *NestedDefinition) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2111,9 +1982,6 @@ func (*NestedDefinition_NestedMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{42, 0}
 }
 func (m *NestedDefinition_NestedMessage) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NestedDefinition_NestedMessage.Unmarshal(m, b)
 }
 func (m *NestedDefinition_NestedMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2151,9 +2019,6 @@ func (*NestedDefinition_NestedMessage_NestedNestedMsg) Descriptor() ([]byte, []i
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{42, 0, 0}
 }
 func (m *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.Unmarshal(m, b)
 }
 func (m *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2191,9 +2056,6 @@ func (*NestedScope) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{43}
 }
 func (m *NestedScope) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NestedScope.Unmarshal(m, b)
 }
 func (m *NestedScope) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2243,9 +2105,6 @@ func (*NinOptNativeDefault) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{44}
 }
 func (m *NinOptNativeDefault) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinOptNativeDefault.Unmarshal(m, b)
 }
 func (m *NinOptNativeDefault) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2401,9 +2260,6 @@ func (*CustomContainer) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{45}
 }
 func (m *CustomContainer) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_CustomContainer.Unmarshal(m, b)
 }
 func (m *CustomContainer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2453,9 +2309,6 @@ func (*CustomNameNidOptNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{46}
 }
 func (m *CustomNameNidOptNative) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_CustomNameNidOptNative.Unmarshal(m, b)
 }
 func (m *CustomNameNidOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2505,9 +2358,6 @@ func (*CustomNameNinOptNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{47}
 }
 func (m *CustomNameNinOptNative) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_CustomNameNinOptNative.Unmarshal(m, b)
 }
 func (m *CustomNameNinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2557,9 +2407,6 @@ func (*CustomNameNinRepNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{48}
 }
 func (m *CustomNameNinRepNative) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_CustomNameNinRepNative.Unmarshal(m, b)
 }
 func (m *CustomNameNinRepNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2604,9 +2451,6 @@ func (*CustomNameNinStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{49}
 }
 func (m *CustomNameNinStruct) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_CustomNameNinStruct.Unmarshal(m, b)
 }
 func (m *CustomNameNinStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2645,9 +2489,6 @@ func (*CustomNameCustomType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{50}
 }
 func (m *CustomNameCustomType) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_CustomNameCustomType.Unmarshal(m, b)
 }
 func (m *CustomNameCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2685,9 +2526,6 @@ func (*CustomNameNinEmbeddedStructUnion) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{51}
 }
 func (m *CustomNameNinEmbeddedStructUnion) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_CustomNameNinEmbeddedStructUnion.Unmarshal(m, b)
 }
 func (m *CustomNameNinEmbeddedStructUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2724,9 +2562,6 @@ func (*CustomNameEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{52}
 }
 func (m *CustomNameEnum) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_CustomNameEnum.Unmarshal(m, b)
 }
 func (m *CustomNameEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2777,9 +2612,6 @@ func (m *NoExtensionsMap) GetExtensions() *[]byte {
 	return &m.XXX_extensions
 }
 func (m *NoExtensionsMap) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NoExtensionsMap.Unmarshal(m, b)
 }
 func (m *NoExtensionsMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2814,9 +2646,6 @@ func (*Unrecognized) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{54}
 }
 func (m *Unrecognized) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Unrecognized.Unmarshal(m, b)
 }
 func (m *Unrecognized) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2853,9 +2682,6 @@ func (*UnrecognizedWithInner) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{55}
 }
 func (m *UnrecognizedWithInner) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_UnrecognizedWithInner.Unmarshal(m, b)
 }
 func (m *UnrecognizedWithInner) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2890,9 +2716,6 @@ func (*UnrecognizedWithInner_Inner) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{55, 0}
 }
 func (m *UnrecognizedWithInner_Inner) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_UnrecognizedWithInner_Inner.Unmarshal(m, b)
 }
 func (m *UnrecognizedWithInner_Inner) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2929,9 +2752,6 @@ func (*UnrecognizedWithEmbed) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{56}
 }
 func (m *UnrecognizedWithEmbed) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_UnrecognizedWithEmbed.Unmarshal(m, b)
 }
 func (m *UnrecognizedWithEmbed) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -2966,9 +2786,6 @@ func (*UnrecognizedWithEmbed_Embedded) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{56, 0}
 }
 func (m *UnrecognizedWithEmbed_Embedded) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_UnrecognizedWithEmbed_Embedded.Unmarshal(m, b)
 }
 func (m *UnrecognizedWithEmbed_Embedded) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -3005,9 +2822,6 @@ func (*Node) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{57}
 }
 func (m *Node) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Node.Unmarshal(m, b)
 }
 func (m *Node) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -3043,9 +2857,6 @@ func (*NonByteCustomType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{58}
 }
 func (m *NonByteCustomType) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NonByteCustomType.Unmarshal(m, b)
 }
 func (m *NonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -3081,9 +2892,6 @@ func (*NidOptNonByteCustomType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{59}
 }
 func (m *NidOptNonByteCustomType) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NidOptNonByteCustomType.Unmarshal(m, b)
 }
 func (m *NidOptNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -3119,9 +2927,6 @@ func (*NinOptNonByteCustomType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{60}
 }
 func (m *NinOptNonByteCustomType) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinOptNonByteCustomType.Unmarshal(m, b)
 }
 func (m *NinOptNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -3157,9 +2962,6 @@ func (*NidRepNonByteCustomType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{61}
 }
 func (m *NidRepNonByteCustomType) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NidRepNonByteCustomType.Unmarshal(m, b)
 }
 func (m *NidRepNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -3195,9 +2997,6 @@ func (*NinRepNonByteCustomType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{62}
 }
 func (m *NinRepNonByteCustomType) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinRepNonByteCustomType.Unmarshal(m, b)
 }
 func (m *NinRepNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -3233,9 +3032,6 @@ func (*ProtoType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_thetest_a7a9d0925738b622, []int{63}
 }
 func (m *ProtoType) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_ProtoType.Unmarshal(m, b)
 }
 func (m *ProtoType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

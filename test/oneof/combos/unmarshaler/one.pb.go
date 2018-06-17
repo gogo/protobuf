@@ -47,10 +47,7 @@ func (*Subby) Descriptor() ([]byte, []int) {
 	return fileDescriptor_one_539b073fce05cef9, []int{0}
 }
 func (m *Subby) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Subby.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Subby) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Subby.Marshal(b, m, deterministic)
@@ -97,10 +94,7 @@ func (*AllTypesOneOf) Descriptor() ([]byte, []int) {
 	return fileDescriptor_one_539b073fce05cef9, []int{1}
 }
 func (m *AllTypesOneOf) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_AllTypesOneOf.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *AllTypesOneOf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_AllTypesOneOf.Marshal(b, m, deterministic)
@@ -602,10 +596,7 @@ func (*TwoOneofs) Descriptor() ([]byte, []int) {
 	return fileDescriptor_one_539b073fce05cef9, []int{2}
 }
 func (m *TwoOneofs) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_TwoOneofs.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *TwoOneofs) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_TwoOneofs.Marshal(b, m, deterministic)
@@ -873,10 +864,7 @@ func (*CustomOneof) Descriptor() ([]byte, []int) {
 	return fileDescriptor_one_539b073fce05cef9, []int{3}
 }
 func (m *CustomOneof) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_CustomOneof.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *CustomOneof) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomOneof.Marshal(b, m, deterministic)

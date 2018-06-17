@@ -2332,12 +2332,11 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	// Wrapper for table-driven marshaling and unmarshaling.
 	g.P("func (m *", ccTypeName, ") XXX_Unmarshal(b []byte) error {")
 	g.In()
-	g.P("if m, ok := (interface{})(m).(proto.Unmarshaler); ok {")
-	g.In()
-	g.P("return m.Unmarshal(b)")
-	g.Out()
-	g.P("}")
-	g.P("return xxx_messageInfo_", ccTypeName, ".Unmarshal(m, b)")
+	if gogoproto.IsUnmarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
+		g.P("return m.Unmarshal(b)")
+	} else {
+		g.P("return xxx_messageInfo_", ccTypeName, ".Unmarshal(m, b)")
+	}
 	g.Out()
 	g.P("}")
 

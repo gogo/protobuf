@@ -39,10 +39,7 @@ func (*SizeMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptor_sizeunderscore_50ebf86ef0019e26, []int{0}
 }
 func (m *SizeMessage) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_SizeMessage.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *SizeMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

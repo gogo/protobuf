@@ -37,9 +37,6 @@ func (*Object) Descriptor() ([]byte, []int) {
 	return fileDescriptor_sortable_d1adc3e2593f24f3, []int{0}
 }
 func (m *Object) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Object.Unmarshal(m, b)
 }
 func (m *Object) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

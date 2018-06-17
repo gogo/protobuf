@@ -33,9 +33,6 @@ func (*A) Descriptor() ([]byte, []int) {
 	return fileDescriptor_merge_7440dca413742023, []int{0}
 }
 func (m *A) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_A.Unmarshal(m, b)
 }
 func (m *A) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -74,9 +71,6 @@ func (*B) Descriptor() ([]byte, []int) {
 	return fileDescriptor_merge_7440dca413742023, []int{1}
 }
 func (m *B) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_B.Unmarshal(m, b)
 }
 func (m *B) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

@@ -82,10 +82,7 @@ func (*Api) Descriptor() ([]byte, []int) {
 	return fileDescriptor_api_658bf9e68d9b66a3, []int{0}
 }
 func (m *Api) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Api.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Api) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -187,10 +184,7 @@ func (*Method) Descriptor() ([]byte, []int) {
 	return fileDescriptor_api_658bf9e68d9b66a3, []int{1}
 }
 func (m *Method) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Method.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Method) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -360,10 +354,7 @@ func (*Mixin) Descriptor() ([]byte, []int) {
 	return fileDescriptor_api_658bf9e68d9b66a3, []int{2}
 }
 func (m *Mixin) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Mixin.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Mixin) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

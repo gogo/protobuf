@@ -41,9 +41,6 @@ func (*Subby) Descriptor() ([]byte, []int) {
 	return fileDescriptor_one_827a0063df79db69, []int{0}
 }
 func (m *Subby) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Subby.Unmarshal(m, b)
 }
 func (m *Subby) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -91,9 +88,6 @@ func (*SampleOneOf) Descriptor() ([]byte, []int) {
 	return fileDescriptor_one_827a0063df79db69, []int{1}
 }
 func (m *SampleOneOf) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_SampleOneOf.Unmarshal(m, b)
 }
 func (m *SampleOneOf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

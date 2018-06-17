@@ -81,9 +81,6 @@ func (*Message) Descriptor() ([]byte, []int) {
 	return fileDescriptor_proto3_15962acfc6007607, []int{0}
 }
 func (m *Message) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Message.Unmarshal(m, b)
 }
 func (m *Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -249,9 +246,6 @@ func (*Nested) Descriptor() ([]byte, []int) {
 	return fileDescriptor_proto3_15962acfc6007607, []int{1}
 }
 func (m *Nested) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Nested.Unmarshal(m, b)
 }
 func (m *Nested) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -297,9 +291,6 @@ func (*MessageWithMap) Descriptor() ([]byte, []int) {
 	return fileDescriptor_proto3_15962acfc6007607, []int{2}
 }
 func (m *MessageWithMap) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_MessageWithMap.Unmarshal(m, b)
 }
 func (m *MessageWithMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -338,9 +329,6 @@ func (*IntMap) Descriptor() ([]byte, []int) {
 	return fileDescriptor_proto3_15962acfc6007607, []int{3}
 }
 func (m *IntMap) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_IntMap.Unmarshal(m, b)
 }
 func (m *IntMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -379,9 +367,6 @@ func (*IntMaps) Descriptor() ([]byte, []int) {
 	return fileDescriptor_proto3_15962acfc6007607, []int{4}
 }
 func (m *IntMaps) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_IntMaps.Unmarshal(m, b)
 }
 func (m *IntMaps) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

@@ -197,10 +197,7 @@ func (*Type) Descriptor() ([]byte, []int) {
 	return fileDescriptor_type_345e3aff58b7b252, []int{0}
 }
 func (m *Type) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Type.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -303,10 +300,7 @@ func (*Field) Descriptor() ([]byte, []int) {
 	return fileDescriptor_type_345e3aff58b7b252, []int{1}
 }
 func (m *Field) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Field.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Field) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -425,10 +419,7 @@ func (*Enum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_type_345e3aff58b7b252, []int{2}
 }
 func (m *Enum) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Enum.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Enum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -508,10 +499,7 @@ func (*EnumValue) Descriptor() ([]byte, []int) {
 	return fileDescriptor_type_345e3aff58b7b252, []int{3}
 }
 func (m *EnumValue) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_EnumValue.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *EnumValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -582,10 +570,7 @@ func (*Option) Descriptor() ([]byte, []int) {
 	return fileDescriptor_type_345e3aff58b7b252, []int{4}
 }
 func (m *Option) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Option.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Option) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

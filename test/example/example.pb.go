@@ -48,10 +48,7 @@ func (*A) Descriptor() ([]byte, []int) {
 	return fileDescriptor_example_32f420a2a58e4270, []int{0}
 }
 func (m *A) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_A.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *A) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -87,10 +84,7 @@ func (*B) Descriptor() ([]byte, []int) {
 	return fileDescriptor_example_32f420a2a58e4270, []int{1}
 }
 func (m *B) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_B.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *B) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -125,10 +119,7 @@ func (*C) Descriptor() ([]byte, []int) {
 	return fileDescriptor_example_32f420a2a58e4270, []int{2}
 }
 func (m *C) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_C.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *C) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -171,10 +162,7 @@ func (*U) Descriptor() ([]byte, []int) {
 	return fileDescriptor_example_32f420a2a58e4270, []int{3}
 }
 func (m *U) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_U.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *U) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -237,10 +225,7 @@ func (m *E) GetExtensions() *[]byte {
 	return &m.XXX_extensions
 }
 func (m *E) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_E.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *E) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -274,10 +259,7 @@ func (*R) Descriptor() ([]byte, []int) {
 	return fileDescriptor_example_32f420a2a58e4270, []int{5}
 }
 func (m *R) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_R.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *R) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -319,10 +301,7 @@ func (*CastType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_example_32f420a2a58e4270, []int{6}
 }
 func (m *CastType) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_CastType.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *CastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

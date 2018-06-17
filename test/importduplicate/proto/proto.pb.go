@@ -37,9 +37,6 @@ func (*Subject) Descriptor() ([]byte, []int) {
 	return fileDescriptor_proto_2eb405ba8c57e5a9, []int{0}
 }
 func (m *Subject) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Subject.Unmarshal(m, b)
 }
 func (m *Subject) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

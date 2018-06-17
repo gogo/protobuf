@@ -109,9 +109,6 @@ func (*Message) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_2741054169128c6d, []int{0}
 }
 func (m *Message) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Message.Unmarshal(m, b)
 }
 func (m *Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -147,9 +144,6 @@ func (*Nested) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_2741054169128c6d, []int{1}
 }
 func (m *Nested) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Nested.Unmarshal(m, b)
 }
 func (m *Nested) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -201,9 +195,6 @@ func (*AllMaps) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_2741054169128c6d, []int{2}
 }
 func (m *AllMaps) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_AllMaps.Unmarshal(m, b)
 }
 func (m *AllMaps) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -255,9 +246,6 @@ func (*AllMapsOrdered) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_2741054169128c6d, []int{3}
 }
 func (m *AllMapsOrdered) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_AllMapsOrdered.Unmarshal(m, b)
 }
 func (m *AllMapsOrdered) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -295,9 +283,6 @@ func (*MessageWithMap) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_2741054169128c6d, []int{4}
 }
 func (m *MessageWithMap) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_MessageWithMap.Unmarshal(m, b)
 }
 func (m *MessageWithMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -333,9 +318,6 @@ func (*FloatingPoint) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_2741054169128c6d, []int{5}
 }
 func (m *FloatingPoint) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_FloatingPoint.Unmarshal(m, b)
 }
 func (m *FloatingPoint) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -372,9 +354,6 @@ func (*Uint128Pair) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_2741054169128c6d, []int{6}
 }
 func (m *Uint128Pair) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Uint128Pair.Unmarshal(m, b)
 }
 func (m *Uint128Pair) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -409,9 +388,6 @@ func (*ContainsNestedMap) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_2741054169128c6d, []int{7}
 }
 func (m *ContainsNestedMap) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_ContainsNestedMap.Unmarshal(m, b)
 }
 func (m *ContainsNestedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -447,9 +423,6 @@ func (*ContainsNestedMap_NestedMap) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_2741054169128c6d, []int{7, 0}
 }
 func (m *ContainsNestedMap_NestedMap) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_ContainsNestedMap_NestedMap.Unmarshal(m, b)
 }
 func (m *ContainsNestedMap_NestedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -485,9 +458,6 @@ func (*NotPacked) Descriptor() ([]byte, []int) {
 	return fileDescriptor_theproto3_2741054169128c6d, []int{8}
 }
 func (m *NotPacked) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NotPacked.Unmarshal(m, b)
 }
 func (m *NotPacked) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

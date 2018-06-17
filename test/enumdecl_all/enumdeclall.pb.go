@@ -77,10 +77,7 @@ func (*Message) Descriptor() ([]byte, []int) {
 	return fileDescriptor_enumdeclall_97762bd47095d695, []int{0}
 }
 func (m *Message) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Message.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

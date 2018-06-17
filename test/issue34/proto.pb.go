@@ -35,10 +35,7 @@ func (*Foo) Descriptor() ([]byte, []int) {
 	return fileDescriptor_proto_9c2649a35ed336bb, []int{0}
 }
 func (m *Foo) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Foo.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Foo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Foo.Marshal(b, m, deterministic)
@@ -76,10 +73,7 @@ func (*FooWithRepeated) Descriptor() ([]byte, []int) {
 	return fileDescriptor_proto_9c2649a35ed336bb, []int{1}
 }
 func (m *FooWithRepeated) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_FooWithRepeated.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *FooWithRepeated) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_FooWithRepeated.Marshal(b, m, deterministic)

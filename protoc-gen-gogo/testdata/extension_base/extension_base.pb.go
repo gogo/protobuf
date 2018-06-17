@@ -42,9 +42,6 @@ func (*BaseMessage) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_BaseMessage
 }
 func (m *BaseMessage) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_BaseMessage.Unmarshal(m, b)
 }
 func (m *BaseMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -99,9 +96,6 @@ func (*OldStyleMessage) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_OldStyleMessage
 }
 func (m *OldStyleMessage) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_OldStyleMessage.Unmarshal(m, b)
 }
 func (m *OldStyleMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

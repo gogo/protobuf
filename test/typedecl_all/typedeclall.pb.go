@@ -28,10 +28,7 @@ func (*Dropped) Descriptor() ([]byte, []int) {
 	return fileDescriptor_typedeclall_37fb6c37f980aef5, []int{0}
 }
 func (m *Dropped) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Dropped.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Dropped) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -74,10 +71,7 @@ func (*DroppedWithoutGetters) Descriptor() ([]byte, []int) {
 	return fileDescriptor_typedeclall_37fb6c37f980aef5, []int{1}
 }
 func (m *DroppedWithoutGetters) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_DroppedWithoutGetters.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *DroppedWithoutGetters) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -113,10 +107,7 @@ func (*Kept) Descriptor() ([]byte, []int) {
 	return fileDescriptor_typedeclall_37fb6c37f980aef5, []int{2}
 }
 func (m *Kept) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Kept.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Kept) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

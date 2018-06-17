@@ -37,10 +37,7 @@ func (*B) Descriptor() ([]byte, []int) {
 	return fileDescriptor_gogovanity_77d0a6938d93e1f7, []int{0}
 }
 func (m *B) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_B.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *B) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

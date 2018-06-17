@@ -42,10 +42,7 @@ func (*TimeFail) Descriptor() ([]byte, []int) {
 	return fileDescriptor_timefail_540b49e689fc70b1, []int{0}
 }
 func (m *TimeFail) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_TimeFail.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *TimeFail) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

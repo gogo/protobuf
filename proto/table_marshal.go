@@ -54,19 +54,20 @@ type marshaler func(b []byte, ptr pointer, wiretag uint64, deterministic bool) (
 
 // marshalInfo is the information used for marshaling a message.
 type marshalInfo struct {
-	typ           reflect.Type
-	fields        []*marshalFieldInfo
-	unrecognized  field                      // offset of XXX_unrecognized
-	extensions    field                      // offset of XXX_InternalExtensions
-	v1extensions  field                      // offset of XXX_extensions
-	sizecache     field                      // offset of XXX_sizecache
-	initialized   int32                      // 0 -- only typ is set, 1 -- fully initialized
-	messageset    bool                       // uses message set wire format
-	hasmarshaler  bool                       // has custom marshaler
-	hassizer      bool                       // has custom sizer
-	hasprotosizer bool                       // has custom protosizer
-	sync.RWMutex                             // protect extElems map, also for initialization
-	extElems      map[int32]*marshalElemInfo // info of extension elements
+	typ          reflect.Type
+	fields       []*marshalFieldInfo
+	unrecognized field                      // offset of XXX_unrecognized
+	extensions   field                      // offset of XXX_InternalExtensions
+	v1extensions field                      // offset of XXX_extensions
+	sizecache    field                      // offset of XXX_sizecache
+	initialized  int32                      // 0 -- only typ is set, 1 -- fully initialized
+	messageset   bool                       // uses message set wire format
+	hasmarshaler bool                       // has custom marshaler
+	sync.RWMutex                            // protect extElems map, also for initialization
+	extElems     map[int32]*marshalElemInfo // info of extension elements
+
+	hassizer      bool // has custom sizer
+	hasprotosizer bool // has custom protosizer
 
 	bytesExtensions field // offset of XXX_extensions where the field type is []byte
 }

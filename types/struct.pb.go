@@ -76,10 +76,7 @@ func (*Struct) Descriptor() ([]byte, []int) {
 }
 func (*Struct) XXX_WellKnownType() string { return "Struct" }
 func (m *Struct) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Struct.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Struct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -141,10 +138,7 @@ func (*Value) Descriptor() ([]byte, []int) {
 }
 func (*Value) XXX_WellKnownType() string { return "Value" }
 func (m *Value) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Value.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Value) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -405,10 +399,7 @@ func (*ListValue) Descriptor() ([]byte, []int) {
 }
 func (*ListValue) XXX_WellKnownType() string { return "ListValue" }
 func (m *ListValue) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_ListValue.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *ListValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

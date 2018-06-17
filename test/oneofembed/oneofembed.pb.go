@@ -35,9 +35,6 @@ func (*Foo) Descriptor() ([]byte, []int) {
 	return fileDescriptor_oneofembed_d85d6690bc6cfd92, []int{0}
 }
 func (m *Foo) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Foo.Unmarshal(m, b)
 }
 func (m *Foo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -72,9 +69,6 @@ func (*Bar) Descriptor() ([]byte, []int) {
 	return fileDescriptor_oneofembed_d85d6690bc6cfd92, []int{1}
 }
 func (m *Bar) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Bar.Unmarshal(m, b)
 }
 func (m *Bar) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

@@ -33,9 +33,6 @@ func (*A1M1) Descriptor() ([]byte, []int) {
 	return fileDescriptor_test_import_a1m1_2621f8d5ff4f97af, []int{0}
 }
 func (m *A1M1) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_A1M1.Unmarshal(m, b)
 }
 func (m *A1M1) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

@@ -47,9 +47,6 @@ func (*StdTypes) Descriptor() ([]byte, []int) {
 	return fileDescriptor_stdtypes_bc26b660d02d7cef, []int{0}
 }
 func (m *StdTypes) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_StdTypes.Unmarshal(m, b)
 }
 func (m *StdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -112,9 +109,6 @@ func (*RepStdTypes) Descriptor() ([]byte, []int) {
 	return fileDescriptor_stdtypes_bc26b660d02d7cef, []int{1}
 }
 func (m *RepStdTypes) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_RepStdTypes.Unmarshal(m, b)
 }
 func (m *RepStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -177,9 +171,6 @@ func (*MapStdTypes) Descriptor() ([]byte, []int) {
 	return fileDescriptor_stdtypes_bc26b660d02d7cef, []int{2}
 }
 func (m *MapStdTypes) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_MapStdTypes.Unmarshal(m, b)
 }
 func (m *MapStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -242,9 +233,6 @@ func (*OneofStdTypes) Descriptor() ([]byte, []int) {
 	return fileDescriptor_stdtypes_bc26b660d02d7cef, []int{3}
 }
 func (m *OneofStdTypes) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_OneofStdTypes.Unmarshal(m, b)
 }
 func (m *OneofStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

@@ -41,9 +41,6 @@ func (*Groups1) Descriptor() ([]byte, []int) {
 	return fileDescriptor_group_3742ba72ecbfc017, []int{0}
 }
 func (m *Groups1) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Groups1.Unmarshal(m, b)
 }
 func (m *Groups1) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -75,9 +72,6 @@ func (*Groups1_G) Descriptor() ([]byte, []int) {
 	return fileDescriptor_group_3742ba72ecbfc017, []int{0, 0}
 }
 func (m *Groups1_G) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Groups1_G.Unmarshal(m, b)
 }
 func (m *Groups1_G) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -108,9 +102,6 @@ func (*Groups2) Descriptor() ([]byte, []int) {
 	return fileDescriptor_group_3742ba72ecbfc017, []int{1}
 }
 func (m *Groups2) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Groups2.Unmarshal(m, b)
 }
 func (m *Groups2) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -142,9 +133,6 @@ func (*Groups2_G) Descriptor() ([]byte, []int) {
 	return fileDescriptor_group_3742ba72ecbfc017, []int{1, 0}
 }
 func (m *Groups2_G) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Groups2_G.Unmarshal(m, b)
 }
 func (m *Groups2_G) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

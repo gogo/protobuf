@@ -45,10 +45,7 @@ func (*A) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{0}
 }
 func (m *A) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_A.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *A) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -85,10 +82,7 @@ func (*B) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{1}
 }
 func (m *B) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_B.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *B) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -123,10 +117,7 @@ func (*D) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{2}
 }
 func (m *D) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_D.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *D) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -166,10 +157,7 @@ func (*C) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{3}
 }
 func (m *C) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_C.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *C) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -204,10 +192,7 @@ func (*U) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{4}
 }
 func (m *U) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_U.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *U) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -242,9 +227,6 @@ func (*UnoM) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{5}
 }
 func (m *UnoM) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_UnoM.Unmarshal(m, b)
 }
 func (m *UnoM) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -275,10 +257,7 @@ func (*OldA) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{6}
 }
 func (m *OldA) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_OldA.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *OldA) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -314,10 +293,7 @@ func (*OldB) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{7}
 }
 func (m *OldB) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_OldB.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *OldB) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -356,10 +332,7 @@ func (*OldC) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{8}
 }
 func (m *OldC) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_OldC.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *OldC) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -395,10 +368,7 @@ func (*OldU) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{9}
 }
 func (m *OldU) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_OldU.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *OldU) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -434,9 +404,6 @@ func (*OldUnoM) Descriptor() ([]byte, []int) {
 	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{10}
 }
 func (m *OldUnoM) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_OldUnoM.Unmarshal(m, b)
 }
 func (m *OldUnoM) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

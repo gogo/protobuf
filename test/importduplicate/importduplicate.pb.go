@@ -43,9 +43,6 @@ func (*MapAndSortKeys) Descriptor() ([]byte, []int) {
 	return fileDescriptor_importduplicate_e9d46e93914bce47, []int{0}
 }
 func (m *MapAndSortKeys) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_MapAndSortKeys.Unmarshal(m, b)
 }
 func (m *MapAndSortKeys) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

@@ -35,9 +35,6 @@ func (*UserMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptor_extension_user_026ca4e46735207f, []int{0}
 }
 func (m *UserMessage) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_UserMessage.Unmarshal(m, b)
 }
 func (m *UserMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -92,9 +89,6 @@ func (*LoudMessage) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_LoudMessage
 }
 func (m *LoudMessage) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_LoudMessage.Unmarshal(m, b)
 }
 func (m *LoudMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -135,9 +129,6 @@ func (*LoginMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptor_extension_user_026ca4e46735207f, []int{2}
 }
 func (m *LoginMessage) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_LoginMessage.Unmarshal(m, b)
 }
 func (m *LoginMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -178,9 +169,6 @@ func (*Detail) Descriptor() ([]byte, []int) {
 	return fileDescriptor_extension_user_026ca4e46735207f, []int{3}
 }
 func (m *Detail) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Detail.Unmarshal(m, b)
 }
 func (m *Detail) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -220,9 +208,6 @@ func (*Announcement) Descriptor() ([]byte, []int) {
 	return fileDescriptor_extension_user_026ca4e46735207f, []int{4}
 }
 func (m *Announcement) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Announcement.Unmarshal(m, b)
 }
 func (m *Announcement) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -272,9 +257,6 @@ func (*OldStyleParcel) Descriptor() ([]byte, []int) {
 	return fileDescriptor_extension_user_026ca4e46735207f, []int{5}
 }
 func (m *OldStyleParcel) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_OldStyleParcel.Unmarshal(m, b)
 }
 func (m *OldStyleParcel) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

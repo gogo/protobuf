@@ -38,10 +38,7 @@ func (*UnorderedFields) Descriptor() ([]byte, []int) {
 	return fileDescriptor_issue42_6157ac17a2848d4f, []int{0}
 }
 func (m *UnorderedFields) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_UnorderedFields.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *UnorderedFields) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -92,10 +89,7 @@ func (*OrderedFields) Descriptor() ([]byte, []int) {
 	return fileDescriptor_issue42_6157ac17a2848d4f, []int{1}
 }
 func (m *OrderedFields) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_OrderedFields.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *OrderedFields) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

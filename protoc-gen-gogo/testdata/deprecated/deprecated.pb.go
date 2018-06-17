@@ -62,9 +62,6 @@ func (*DeprecatedRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_deprecated_1b284d1f30819a6c, []int{0}
 }
 func (m *DeprecatedRequest) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_DeprecatedRequest.Unmarshal(m, b)
 }
 func (m *DeprecatedRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -98,9 +95,6 @@ func (*DeprecatedResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_deprecated_1b284d1f30819a6c, []int{1}
 }
 func (m *DeprecatedResponse) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_DeprecatedResponse.Unmarshal(m, b)
 }
 func (m *DeprecatedResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

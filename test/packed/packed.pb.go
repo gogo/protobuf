@@ -48,10 +48,7 @@ func (*NinRepNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_packed_0c54be3753617b96, []int{0}
 }
 func (m *NinRepNative) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_NinRepNative.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinRepNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepNative.Marshal(b, m, deterministic)
@@ -185,10 +182,7 @@ func (*NinRepPackedNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_packed_0c54be3753617b96, []int{1}
 }
 func (m *NinRepPackedNative) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_NinRepPackedNative.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinRepPackedNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepPackedNative.Marshal(b, m, deterministic)
@@ -322,9 +316,6 @@ func (*NinRepNativeUnsafe) Descriptor() ([]byte, []int) {
 	return fileDescriptor_packed_0c54be3753617b96, []int{2}
 }
 func (m *NinRepNativeUnsafe) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinRepNativeUnsafe.Unmarshal(m, b)
 }
 func (m *NinRepNativeUnsafe) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -459,9 +450,6 @@ func (*NinRepPackedNativeUnsafe) Descriptor() ([]byte, []int) {
 	return fileDescriptor_packed_0c54be3753617b96, []int{3}
 }
 func (m *NinRepPackedNativeUnsafe) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinRepPackedNativeUnsafe.Unmarshal(m, b)
 }
 func (m *NinRepPackedNativeUnsafe) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

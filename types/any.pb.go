@@ -148,10 +148,7 @@ func (*Any) Descriptor() ([]byte, []int) {
 }
 func (*Any) XXX_WellKnownType() string { return "Any" }
 func (m *Any) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Any.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Any) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

@@ -38,10 +38,7 @@ func (*IndexQuery) Descriptor() ([]byte, []int) {
 	return fileDescriptor_index_5bc64712555c00b6, []int{0}
 }
 func (m *IndexQuery) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_IndexQuery.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *IndexQuery) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

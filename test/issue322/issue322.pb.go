@@ -42,10 +42,7 @@ func (*OneofTest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_issue322_3e2db2f0d45a9027, []int{0}
 }
 func (m *OneofTest) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_OneofTest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *OneofTest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

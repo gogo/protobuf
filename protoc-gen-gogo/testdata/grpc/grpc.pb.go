@@ -34,9 +34,6 @@ func (*SimpleRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_grpc_9f03674ccb9f2c2b, []int{0}
 }
 func (m *SimpleRequest) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_SimpleRequest.Unmarshal(m, b)
 }
 func (m *SimpleRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -67,9 +64,6 @@ func (*SimpleResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_grpc_9f03674ccb9f2c2b, []int{1}
 }
 func (m *SimpleResponse) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_SimpleResponse.Unmarshal(m, b)
 }
 func (m *SimpleResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -100,9 +94,6 @@ func (*StreamMsg) Descriptor() ([]byte, []int) {
 	return fileDescriptor_grpc_9f03674ccb9f2c2b, []int{2}
 }
 func (m *StreamMsg) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_StreamMsg.Unmarshal(m, b)
 }
 func (m *StreamMsg) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -133,9 +124,6 @@ func (*StreamMsg2) Descriptor() ([]byte, []int) {
 	return fileDescriptor_grpc_9f03674ccb9f2c2b, []int{3}
 }
 func (m *StreamMsg2) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_StreamMsg2.Unmarshal(m, b)
 }
 func (m *StreamMsg2) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

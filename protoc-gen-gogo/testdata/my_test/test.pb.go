@@ -203,9 +203,6 @@ func (*Request) Descriptor() ([]byte, []int) {
 	return fileDescriptor_test_220c5cc0922855ae, []int{0}
 }
 func (m *Request) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Request.Unmarshal(m, b)
 }
 func (m *Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -304,9 +301,6 @@ func (*Request_SomeGroup) Descriptor() ([]byte, []int) {
 	return fileDescriptor_test_220c5cc0922855ae, []int{0, 0}
 }
 func (m *Request_SomeGroup) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Request_SomeGroup.Unmarshal(m, b)
 }
 func (m *Request_SomeGroup) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -355,9 +349,6 @@ func (*Reply) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_Reply
 }
 func (m *Reply) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Reply.Unmarshal(m, b)
 }
 func (m *Reply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -405,9 +396,6 @@ func (*Reply_Entry) Descriptor() ([]byte, []int) {
 	return fileDescriptor_test_220c5cc0922855ae, []int{1, 0}
 }
 func (m *Reply_Entry) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Reply_Entry.Unmarshal(m, b)
 }
 func (m *Reply_Entry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -471,9 +459,6 @@ func (*OtherBase) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_OtherBase
 }
 func (m *OtherBase) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_OtherBase.Unmarshal(m, b)
 }
 func (m *OtherBase) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -511,9 +496,6 @@ func (*ReplyExtensions) Descriptor() ([]byte, []int) {
 	return fileDescriptor_test_220c5cc0922855ae, []int{3}
 }
 func (m *ReplyExtensions) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_ReplyExtensions.Unmarshal(m, b)
 }
 func (m *ReplyExtensions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -572,9 +554,6 @@ func (*OtherReplyExtensions) Descriptor() ([]byte, []int) {
 	return fileDescriptor_test_220c5cc0922855ae, []int{4}
 }
 func (m *OtherReplyExtensions) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_OtherReplyExtensions.Unmarshal(m, b)
 }
 func (m *OtherReplyExtensions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -628,9 +607,6 @@ func (*OldReply) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_OldReply
 }
 func (m *OldReply) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_OldReply.Unmarshal(m, b)
 }
 func (m *OldReply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -676,9 +652,6 @@ func (*Communique) Descriptor() ([]byte, []int) {
 	return fileDescriptor_test_220c5cc0922855ae, []int{6}
 }
 func (m *Communique) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Communique.Unmarshal(m, b)
 }
 func (m *Communique) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1032,9 +1005,6 @@ func (*Communique_SomeGroup) Descriptor() ([]byte, []int) {
 	return fileDescriptor_test_220c5cc0922855ae, []int{6, 0}
 }
 func (m *Communique_SomeGroup) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Communique_SomeGroup.Unmarshal(m, b)
 }
 func (m *Communique_SomeGroup) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1072,9 +1042,6 @@ func (*Communique_Delta) Descriptor() ([]byte, []int) {
 	return fileDescriptor_test_220c5cc0922855ae, []int{6, 1}
 }
 func (m *Communique_Delta) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Communique_Delta.Unmarshal(m, b)
 }
 func (m *Communique_Delta) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

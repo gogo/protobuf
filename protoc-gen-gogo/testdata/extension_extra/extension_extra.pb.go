@@ -32,9 +32,6 @@ func (*ExtraMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptor_extension_extra_e06efb14fc6ecf89, []int{0}
 }
 func (m *ExtraMessage) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_ExtraMessage.Unmarshal(m, b)
 }
 func (m *ExtraMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

@@ -127,9 +127,6 @@ func (*ConformanceRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_conformance_64c26947649a56a9, []int{0}
 }
 func (m *ConformanceRequest) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_ConformanceRequest.Unmarshal(m, b)
 }
 func (m *ConformanceRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -277,9 +274,6 @@ func (*ConformanceResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_conformance_64c26947649a56a9, []int{1}
 }
 func (m *ConformanceResponse) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_ConformanceResponse.Unmarshal(m, b)
 }
 func (m *ConformanceResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -632,9 +626,6 @@ func (*TestAllTypes) Descriptor() ([]byte, []int) {
 	return fileDescriptor_conformance_64c26947649a56a9, []int{2}
 }
 func (m *TestAllTypes) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_TestAllTypes.Unmarshal(m, b)
 }
 func (m *TestAllTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1551,9 +1542,6 @@ func (*TestAllTypes_NestedMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptor_conformance_64c26947649a56a9, []int{2, 0}
 }
 func (m *TestAllTypes_NestedMessage) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_TestAllTypes_NestedMessage.Unmarshal(m, b)
 }
 func (m *TestAllTypes_NestedMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -1599,9 +1587,6 @@ func (*ForeignMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptor_conformance_64c26947649a56a9, []int{3}
 }
 func (m *ForeignMessage) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_ForeignMessage.Unmarshal(m, b)
 }
 func (m *ForeignMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

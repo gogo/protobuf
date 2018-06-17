@@ -39,9 +39,6 @@ func (*Version) Descriptor() ([]byte, []int) {
 	return fileDescriptor_plugin_ac234f81c61f07b3, []int{0}
 }
 func (m *Version) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Version.Unmarshal(m, b)
 }
 func (m *Version) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -124,9 +121,6 @@ func (*CodeGeneratorRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_plugin_ac234f81c61f07b3, []int{1}
 }
 func (m *CodeGeneratorRequest) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_CodeGeneratorRequest.Unmarshal(m, b)
 }
 func (m *CodeGeneratorRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -196,9 +190,6 @@ func (*CodeGeneratorResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_plugin_ac234f81c61f07b3, []int{2}
 }
 func (m *CodeGeneratorResponse) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_CodeGeneratorResponse.Unmarshal(m, b)
 }
 func (m *CodeGeneratorResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
@@ -296,9 +287,6 @@ func (*CodeGeneratorResponse_File) Descriptor() ([]byte, []int) {
 	return fileDescriptor_plugin_ac234f81c61f07b3, []int{2, 0}
 }
 func (m *CodeGeneratorResponse_File) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_CodeGeneratorResponse_File.Unmarshal(m, b)
 }
 func (m *CodeGeneratorResponse_File) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {

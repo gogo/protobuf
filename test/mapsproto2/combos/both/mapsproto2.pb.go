@@ -90,10 +90,7 @@ func (*FloatingPoint) Descriptor() ([]byte, []int) {
 	return fileDescriptor_mapsproto2_7bd3336f77331b84, []int{0}
 }
 func (m *FloatingPoint) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_FloatingPoint.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *FloatingPoint) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -131,10 +128,7 @@ func (*CustomMap) Descriptor() ([]byte, []int) {
 	return fileDescriptor_mapsproto2_7bd3336f77331b84, []int{1}
 }
 func (m *CustomMap) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_CustomMap.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *CustomMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -185,10 +179,7 @@ func (*AllMaps) Descriptor() ([]byte, []int) {
 	return fileDescriptor_mapsproto2_7bd3336f77331b84, []int{2}
 }
 func (m *AllMaps) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_AllMaps.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *AllMaps) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
@@ -239,10 +230,7 @@ func (*AllMapsOrdered) Descriptor() ([]byte, []int) {
 	return fileDescriptor_mapsproto2_7bd3336f77331b84, []int{3}
 }
 func (m *AllMapsOrdered) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_AllMapsOrdered.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *AllMapsOrdered) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]

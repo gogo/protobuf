@@ -34,10 +34,7 @@ func (*Aproto3) Descriptor() ([]byte, []int) {
 	return fileDescriptor_proto3_7d4345ceecd7203e, []int{0}
 }
 func (m *Aproto3) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Aproto3.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Aproto3) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
