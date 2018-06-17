@@ -54,18 +54,19 @@ type marshaler func(b []byte, ptr pointer, wiretag uint64, deterministic bool) (
 
 // marshalInfo is the information used for marshaling a message.
 type marshalInfo struct {
-	typ          reflect.Type
-	fields       []*marshalFieldInfo
-	unrecognized field                      // offset of XXX_unrecognized
-	extensions   field                      // offset of XXX_InternalExtensions
-	v1extensions field                      // offset of XXX_extensions
-	sizecache    field                      // offset of XXX_sizecache
-	initialized  int32                      // 0 -- only typ is set, 1 -- fully initialized
-	messageset   bool                       // uses message set wire format
-	hasmarshaler bool                       // has custom marshaler
-	hassizer     bool                       // has custom sizer
-	sync.RWMutex                            // protect extElems map, also for initialization
-	extElems     map[int32]*marshalElemInfo // info of extension elements
+	typ           reflect.Type
+	fields        []*marshalFieldInfo
+	unrecognized  field                      // offset of XXX_unrecognized
+	extensions    field                      // offset of XXX_InternalExtensions
+	v1extensions  field                      // offset of XXX_extensions
+	sizecache     field                      // offset of XXX_sizecache
+	initialized   int32                      // 0 -- only typ is set, 1 -- fully initialized
+	messageset    bool                       // uses message set wire format
+	hasmarshaler  bool                       // has custom marshaler
+	hassizer      bool                       // has custom sizer
+	hasprotosizer bool                       // has custom protosizer
+	sync.RWMutex                             // protect extElems map, also for initialization
+	extElems      map[int32]*marshalElemInfo // info of extension elements
 
 	bytesExtensions field // offset of XXX_extensions where the field type is []byte
 }
@@ -170,23 +171,13 @@ func (u *marshalInfo) size(ptr pointer) int {
 
 	// Uses the message's Size method if available
 	if u.hassizer {
-		// need to call the sizer of all other fields in order
-		// to compute their marshalinfo
-		for _, f := range u.fields {
-			if f.isPointer && ptr.offset(f.field).getPointer().isNil() {
-				// nil pointer always marshals to nothing
-				continue
-			}
-			f.sizer(ptr.offset(f.field), f.tagsize)
-		}
-
 		s := ptr.asPointerTo(u.typ).Interface().(Sizer)
-		n := s.Size()
-		// cache the result for use in marshal
-		if u.sizecache.IsValid() {
-			atomic.StoreInt32(ptr.offset(u.sizecache).toInt32(), int32(n))
-		}
-		return n
+		return s.Size()
+	}
+	// Uses the message's ProtoSize method if available
+	if u.hasprotosizer {
+		s := ptr.asPointerTo(u.typ).Interface().(ProtoSizer)
+		return s.ProtoSize()
 	}
 
 	// If the message can marshal itself, let it do it, for compatibility.
@@ -236,7 +227,15 @@ func (u *marshalInfo) size(ptr pointer) int {
 // cachedsize gets the size from cache. If there is no cache (i.e. message is not generated),
 // fall back to compute the size.
 func (u *marshalInfo) cachedsize(ptr pointer) int {
-	if u.sizecache.IsValid() {
+	if u.hassizer {
+		s := ptr.asPointerTo(u.typ).Interface().(Sizer)
+		return s.Size()
+	}
+	if u.hasprotosizer {
+		s := ptr.asPointerTo(u.typ).Interface().(ProtoSizer)
+		return s.ProtoSize()
+	}
+	if atomic.LoadInt32(&u.initialized) == 1 && u.sizecache.IsValid() {
 		return int(atomic.LoadInt32(ptr.offset(u.sizecache).toInt32()))
 	}
 	return u.size(ptr)
@@ -338,6 +337,9 @@ func (u *marshalInfo) computeMarshalInfo() {
 
 	if reflect.PtrTo(t).Implements(sizerType) {
 		u.hassizer = true
+	}
+	if reflect.PtrTo(t).Implements(protosizerType) {
+		u.hasprotosizer = true
 	}
 	// If the message can marshal itself, let it do it, for compatibility.
 	// NOTE: This is not efficient.
