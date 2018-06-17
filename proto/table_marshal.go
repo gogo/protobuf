@@ -237,8 +237,7 @@ func (u *marshalInfo) size(ptr pointer) int {
 // fall back to compute the size.
 func (u *marshalInfo) cachedsize(ptr pointer) int {
 	if u.sizecache.IsValid() {
-		n := int(atomic.LoadInt32(ptr.offset(u.sizecache).toInt32()))
-		return n
+		return int(atomic.LoadInt32(ptr.offset(u.sizecache).toInt32()))
 	}
 	return u.size(ptr)
 }
