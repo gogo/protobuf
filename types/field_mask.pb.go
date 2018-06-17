@@ -263,7 +263,7 @@ func (dst *FieldMask) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FieldMask.Merge(dst, src)
 }
 func (m *FieldMask) XXX_Size() int {
-	return xxx_messageInfo_FieldMask.Size(m)
+	return m.Size()
 }
 func (m *FieldMask) XXX_DiscardUnknown() {
 	xxx_messageInfo_FieldMask.DiscardUnknown(m)

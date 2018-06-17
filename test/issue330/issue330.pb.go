@@ -54,7 +54,7 @@ func (dst *Object) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Object.Merge(dst, src)
 }
 func (m *Object) XXX_Size() int {
-	return xxx_messageInfo_Object.Size(m)
+	return m.Size()
 }
 func (m *Object) XXX_DiscardUnknown() {
 	xxx_messageInfo_Object.DiscardUnknown(m)

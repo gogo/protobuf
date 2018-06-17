@@ -62,7 +62,7 @@ func (dst *DoubleValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DoubleValue.Merge(dst, src)
 }
 func (m *DoubleValue) XXX_Size() int {
-	return xxx_messageInfo_DoubleValue.Size(m)
+	return m.Size()
 }
 func (m *DoubleValue) XXX_DiscardUnknown() {
 	xxx_messageInfo_DoubleValue.DiscardUnknown(m)
@@ -116,7 +116,7 @@ func (dst *FloatValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FloatValue.Merge(dst, src)
 }
 func (m *FloatValue) XXX_Size() int {
-	return xxx_messageInfo_FloatValue.Size(m)
+	return m.Size()
 }
 func (m *FloatValue) XXX_DiscardUnknown() {
 	xxx_messageInfo_FloatValue.DiscardUnknown(m)
@@ -170,7 +170,7 @@ func (dst *Int64Value) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Int64Value.Merge(dst, src)
 }
 func (m *Int64Value) XXX_Size() int {
-	return xxx_messageInfo_Int64Value.Size(m)
+	return m.Size()
 }
 func (m *Int64Value) XXX_DiscardUnknown() {
 	xxx_messageInfo_Int64Value.DiscardUnknown(m)
@@ -224,7 +224,7 @@ func (dst *UInt64Value) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UInt64Value.Merge(dst, src)
 }
 func (m *UInt64Value) XXX_Size() int {
-	return xxx_messageInfo_UInt64Value.Size(m)
+	return m.Size()
 }
 func (m *UInt64Value) XXX_DiscardUnknown() {
 	xxx_messageInfo_UInt64Value.DiscardUnknown(m)
@@ -278,7 +278,7 @@ func (dst *Int32Value) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Int32Value.Merge(dst, src)
 }
 func (m *Int32Value) XXX_Size() int {
-	return xxx_messageInfo_Int32Value.Size(m)
+	return m.Size()
 }
 func (m *Int32Value) XXX_DiscardUnknown() {
 	xxx_messageInfo_Int32Value.DiscardUnknown(m)
@@ -332,7 +332,7 @@ func (dst *UInt32Value) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UInt32Value.Merge(dst, src)
 }
 func (m *UInt32Value) XXX_Size() int {
-	return xxx_messageInfo_UInt32Value.Size(m)
+	return m.Size()
 }
 func (m *UInt32Value) XXX_DiscardUnknown() {
 	xxx_messageInfo_UInt32Value.DiscardUnknown(m)
@@ -386,7 +386,7 @@ func (dst *BoolValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_BoolValue.Merge(dst, src)
 }
 func (m *BoolValue) XXX_Size() int {
-	return xxx_messageInfo_BoolValue.Size(m)
+	return m.Size()
 }
 func (m *BoolValue) XXX_DiscardUnknown() {
 	xxx_messageInfo_BoolValue.DiscardUnknown(m)
@@ -440,7 +440,7 @@ func (dst *StringValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_StringValue.Merge(dst, src)
 }
 func (m *StringValue) XXX_Size() int {
-	return xxx_messageInfo_StringValue.Size(m)
+	return m.Size()
 }
 func (m *StringValue) XXX_DiscardUnknown() {
 	xxx_messageInfo_StringValue.DiscardUnknown(m)
@@ -494,7 +494,7 @@ func (dst *BytesValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_BytesValue.Merge(dst, src)
 }
 func (m *BytesValue) XXX_Size() int {
-	return xxx_messageInfo_BytesValue.Size(m)
+	return m.Size()
 }
 func (m *BytesValue) XXX_DiscardUnknown() {
 	xxx_messageInfo_BytesValue.DiscardUnknown(m)

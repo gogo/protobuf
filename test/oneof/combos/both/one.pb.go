@@ -65,7 +65,7 @@ func (dst *Subby) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Subby.Merge(dst, src)
 }
 func (m *Subby) XXX_Size() int {
-	return xxx_messageInfo_Subby.Size(m)
+	return m.Size()
 }
 func (m *Subby) XXX_DiscardUnknown() {
 	xxx_messageInfo_Subby.DiscardUnknown(m)
@@ -120,7 +120,7 @@ func (dst *AllTypesOneOf) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AllTypesOneOf.Merge(dst, src)
 }
 func (m *AllTypesOneOf) XXX_Size() int {
-	return xxx_messageInfo_AllTypesOneOf.Size(m)
+	return m.Size()
 }
 func (m *AllTypesOneOf) XXX_DiscardUnknown() {
 	xxx_messageInfo_AllTypesOneOf.DiscardUnknown(m)
@@ -631,7 +631,7 @@ func (dst *TwoOneofs) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_TwoOneofs.Merge(dst, src)
 }
 func (m *TwoOneofs) XXX_Size() int {
-	return xxx_messageInfo_TwoOneofs.Size(m)
+	return m.Size()
 }
 func (m *TwoOneofs) XXX_DiscardUnknown() {
 	xxx_messageInfo_TwoOneofs.DiscardUnknown(m)
@@ -909,7 +909,7 @@ func (dst *CustomOneof) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomOneof.Merge(dst, src)
 }
 func (m *CustomOneof) XXX_Size() int {
-	return xxx_messageInfo_CustomOneof.Size(m)
+	return m.Size()
 }
 func (m *CustomOneof) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomOneof.DiscardUnknown(m)

@@ -45,7 +45,7 @@ func (dst *Dropped) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Dropped.Merge(dst, src)
 }
 func (m *Dropped) XXX_Size() int {
-	return xxx_messageInfo_Dropped.Size(m)
+	return m.Size()
 }
 func (m *Dropped) XXX_DiscardUnknown() {
 	xxx_messageInfo_Dropped.DiscardUnknown(m)
@@ -91,7 +91,7 @@ func (dst *DroppedWithoutGetters) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DroppedWithoutGetters.Merge(dst, src)
 }
 func (m *DroppedWithoutGetters) XXX_Size() int {
-	return xxx_messageInfo_DroppedWithoutGetters.Size(m)
+	return m.Size()
 }
 func (m *DroppedWithoutGetters) XXX_DiscardUnknown() {
 	xxx_messageInfo_DroppedWithoutGetters.DiscardUnknown(m)
@@ -130,7 +130,7 @@ func (dst *Kept) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Kept.Merge(dst, src)
 }
 func (m *Kept) XXX_Size() int {
-	return xxx_messageInfo_Kept.Size(m)
+	return m.Size()
 }
 func (m *Kept) XXX_DiscardUnknown() {
 	xxx_messageInfo_Kept.DiscardUnknown(m)

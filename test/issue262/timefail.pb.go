@@ -59,7 +59,7 @@ func (dst *TimeFail) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_TimeFail.Merge(dst, src)
 }
 func (m *TimeFail) XXX_Size() int {
-	return xxx_messageInfo_TimeFail.Size(m)
+	return m.Size()
 }
 func (m *TimeFail) XXX_DiscardUnknown() {
 	xxx_messageInfo_TimeFail.DiscardUnknown(m)

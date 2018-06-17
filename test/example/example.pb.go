@@ -65,7 +65,7 @@ func (dst *A) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_A.Merge(dst, src)
 }
 func (m *A) XXX_Size() int {
-	return xxx_messageInfo_A.Size(m)
+	return m.Size()
 }
 func (m *A) XXX_DiscardUnknown() {
 	xxx_messageInfo_A.DiscardUnknown(m)
@@ -104,7 +104,7 @@ func (dst *B) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_B.Merge(dst, src)
 }
 func (m *B) XXX_Size() int {
-	return xxx_messageInfo_B.Size(m)
+	return m.Size()
 }
 func (m *B) XXX_DiscardUnknown() {
 	xxx_messageInfo_B.DiscardUnknown(m)
@@ -142,7 +142,7 @@ func (dst *C) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_C.Merge(dst, src)
 }
 func (m *C) XXX_Size() int {
-	return xxx_messageInfo_C.Size(m)
+	return m.Size()
 }
 func (m *C) XXX_DiscardUnknown() {
 	xxx_messageInfo_C.DiscardUnknown(m)
@@ -188,7 +188,7 @@ func (dst *U) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_U.Merge(dst, src)
 }
 func (m *U) XXX_Size() int {
-	return xxx_messageInfo_U.Size(m)
+	return m.Size()
 }
 func (m *U) XXX_DiscardUnknown() {
 	xxx_messageInfo_U.DiscardUnknown(m)
@@ -254,7 +254,7 @@ func (dst *E) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_E.Merge(dst, src)
 }
 func (m *E) XXX_Size() int {
-	return xxx_messageInfo_E.Size(m)
+	return m.Size()
 }
 func (m *E) XXX_DiscardUnknown() {
 	xxx_messageInfo_E.DiscardUnknown(m)
@@ -291,7 +291,7 @@ func (dst *R) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_R.Merge(dst, src)
 }
 func (m *R) XXX_Size() int {
-	return xxx_messageInfo_R.Size(m)
+	return m.Size()
 }
 func (m *R) XXX_DiscardUnknown() {
 	xxx_messageInfo_R.DiscardUnknown(m)
@@ -336,7 +336,7 @@ func (dst *CastType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CastType.Merge(dst, src)
 }
 func (m *CastType) XXX_Size() int {
-	return xxx_messageInfo_CastType.Size(m)
+	return m.Size()
 }
 func (m *CastType) XXX_DiscardUnknown() {
 	xxx_messageInfo_CastType.DiscardUnknown(m)

@@ -60,7 +60,7 @@ func (dst *Subby) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Subby.Merge(dst, src)
 }
 func (m *Subby) XXX_Size() int {
-	return xxx_messageInfo_Subby.Size(m)
+	return m.Size()
 }
 func (m *Subby) XXX_DiscardUnknown() {
 	xxx_messageInfo_Subby.DiscardUnknown(m)
@@ -115,7 +115,7 @@ func (dst *SampleOneOf) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_SampleOneOf.Merge(dst, src)
 }
 func (m *SampleOneOf) XXX_Size() int {
-	return xxx_messageInfo_SampleOneOf.Size(m)
+	return m.Size()
 }
 func (m *SampleOneOf) XXX_DiscardUnknown() {
 	xxx_messageInfo_SampleOneOf.DiscardUnknown(m)

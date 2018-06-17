@@ -266,7 +266,7 @@ func (dst *NidOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidOptNative.Merge(dst, src)
 }
 func (m *NidOptNative) XXX_Size() int {
-	return xxx_messageInfo_NidOptNative.Size(m)
+	return m.Size()
 }
 func (m *NidOptNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidOptNative.DiscardUnknown(m)
@@ -318,7 +318,7 @@ func (dst *NinOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptNative.Merge(dst, src)
 }
 func (m *NinOptNative) XXX_Size() int {
-	return xxx_messageInfo_NinOptNative.Size(m)
+	return m.Size()
 }
 func (m *NinOptNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptNative.DiscardUnknown(m)
@@ -370,7 +370,7 @@ func (dst *NidRepNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidRepNative.Merge(dst, src)
 }
 func (m *NidRepNative) XXX_Size() int {
-	return xxx_messageInfo_NidRepNative.Size(m)
+	return m.Size()
 }
 func (m *NidRepNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidRepNative.DiscardUnknown(m)
@@ -422,7 +422,7 @@ func (dst *NinRepNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinRepNative.Merge(dst, src)
 }
 func (m *NinRepNative) XXX_Size() int {
-	return xxx_messageInfo_NinRepNative.Size(m)
+	return m.Size()
 }
 func (m *NinRepNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinRepNative.DiscardUnknown(m)
@@ -472,7 +472,7 @@ func (dst *NidRepPackedNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidRepPackedNative.Merge(dst, src)
 }
 func (m *NidRepPackedNative) XXX_Size() int {
-	return xxx_messageInfo_NidRepPackedNative.Size(m)
+	return m.Size()
 }
 func (m *NidRepPackedNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidRepPackedNative.DiscardUnknown(m)
@@ -522,7 +522,7 @@ func (dst *NinRepPackedNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinRepPackedNative.Merge(dst, src)
 }
 func (m *NinRepPackedNative) XXX_Size() int {
-	return xxx_messageInfo_NinRepPackedNative.Size(m)
+	return m.Size()
 }
 func (m *NinRepPackedNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinRepPackedNative.DiscardUnknown(m)
@@ -569,7 +569,7 @@ func (dst *NidOptStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidOptStruct.Merge(dst, src)
 }
 func (m *NidOptStruct) XXX_Size() int {
-	return xxx_messageInfo_NidOptStruct.Size(m)
+	return m.Size()
 }
 func (m *NidOptStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidOptStruct.DiscardUnknown(m)
@@ -616,7 +616,7 @@ func (dst *NinOptStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptStruct.Merge(dst, src)
 }
 func (m *NinOptStruct) XXX_Size() int {
-	return xxx_messageInfo_NinOptStruct.Size(m)
+	return m.Size()
 }
 func (m *NinOptStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptStruct.DiscardUnknown(m)
@@ -663,7 +663,7 @@ func (dst *NidRepStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidRepStruct.Merge(dst, src)
 }
 func (m *NidRepStruct) XXX_Size() int {
-	return xxx_messageInfo_NidRepStruct.Size(m)
+	return m.Size()
 }
 func (m *NidRepStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidRepStruct.DiscardUnknown(m)
@@ -710,7 +710,7 @@ func (dst *NinRepStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinRepStruct.Merge(dst, src)
 }
 func (m *NinRepStruct) XXX_Size() int {
-	return xxx_messageInfo_NinRepStruct.Size(m)
+	return m.Size()
 }
 func (m *NinRepStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinRepStruct.DiscardUnknown(m)
@@ -750,7 +750,7 @@ func (dst *NidEmbeddedStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidEmbeddedStruct.Merge(dst, src)
 }
 func (m *NidEmbeddedStruct) XXX_Size() int {
-	return xxx_messageInfo_NidEmbeddedStruct.Size(m)
+	return m.Size()
 }
 func (m *NidEmbeddedStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidEmbeddedStruct.DiscardUnknown(m)
@@ -790,7 +790,7 @@ func (dst *NinEmbeddedStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinEmbeddedStruct.Merge(dst, src)
 }
 func (m *NinEmbeddedStruct) XXX_Size() int {
-	return xxx_messageInfo_NinEmbeddedStruct.Size(m)
+	return m.Size()
 }
 func (m *NinEmbeddedStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinEmbeddedStruct.DiscardUnknown(m)
@@ -829,7 +829,7 @@ func (dst *NidNestedStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidNestedStruct.Merge(dst, src)
 }
 func (m *NidNestedStruct) XXX_Size() int {
-	return xxx_messageInfo_NidNestedStruct.Size(m)
+	return m.Size()
 }
 func (m *NidNestedStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidNestedStruct.DiscardUnknown(m)
@@ -868,7 +868,7 @@ func (dst *NinNestedStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinNestedStruct.Merge(dst, src)
 }
 func (m *NinNestedStruct) XXX_Size() int {
-	return xxx_messageInfo_NinNestedStruct.Size(m)
+	return m.Size()
 }
 func (m *NinNestedStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinNestedStruct.DiscardUnknown(m)
@@ -907,7 +907,7 @@ func (dst *NidOptCustom) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidOptCustom.Merge(dst, src)
 }
 func (m *NidOptCustom) XXX_Size() int {
-	return xxx_messageInfo_NidOptCustom.Size(m)
+	return m.Size()
 }
 func (m *NidOptCustom) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidOptCustom.DiscardUnknown(m)
@@ -945,7 +945,7 @@ func (dst *CustomDash) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomDash.Merge(dst, src)
 }
 func (m *CustomDash) XXX_Size() int {
-	return xxx_messageInfo_CustomDash.Size(m)
+	return m.Size()
 }
 func (m *CustomDash) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomDash.DiscardUnknown(m)
@@ -984,7 +984,7 @@ func (dst *NinOptCustom) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptCustom.Merge(dst, src)
 }
 func (m *NinOptCustom) XXX_Size() int {
-	return xxx_messageInfo_NinOptCustom.Size(m)
+	return m.Size()
 }
 func (m *NinOptCustom) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptCustom.DiscardUnknown(m)
@@ -1023,7 +1023,7 @@ func (dst *NidRepCustom) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidRepCustom.Merge(dst, src)
 }
 func (m *NidRepCustom) XXX_Size() int {
-	return xxx_messageInfo_NidRepCustom.Size(m)
+	return m.Size()
 }
 func (m *NidRepCustom) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidRepCustom.DiscardUnknown(m)
@@ -1062,7 +1062,7 @@ func (dst *NinRepCustom) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinRepCustom.Merge(dst, src)
 }
 func (m *NinRepCustom) XXX_Size() int {
-	return xxx_messageInfo_NinRepCustom.Size(m)
+	return m.Size()
 }
 func (m *NinRepCustom) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinRepCustom.DiscardUnknown(m)
@@ -1108,7 +1108,7 @@ func (dst *NinOptNativeUnion) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptNativeUnion.Merge(dst, src)
 }
 func (m *NinOptNativeUnion) XXX_Size() int {
-	return xxx_messageInfo_NinOptNativeUnion.Size(m)
+	return m.Size()
 }
 func (m *NinOptNativeUnion) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptNativeUnion.DiscardUnknown(m)
@@ -1154,7 +1154,7 @@ func (dst *NinOptStructUnion) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptStructUnion.Merge(dst, src)
 }
 func (m *NinOptStructUnion) XXX_Size() int {
-	return xxx_messageInfo_NinOptStructUnion.Size(m)
+	return m.Size()
 }
 func (m *NinOptStructUnion) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptStructUnion.DiscardUnknown(m)
@@ -1194,7 +1194,7 @@ func (dst *NinEmbeddedStructUnion) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinEmbeddedStructUnion.Merge(dst, src)
 }
 func (m *NinEmbeddedStructUnion) XXX_Size() int {
-	return xxx_messageInfo_NinEmbeddedStructUnion.Size(m)
+	return m.Size()
 }
 func (m *NinEmbeddedStructUnion) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinEmbeddedStructUnion.DiscardUnknown(m)
@@ -1234,7 +1234,7 @@ func (dst *NinNestedStructUnion) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinNestedStructUnion.Merge(dst, src)
 }
 func (m *NinNestedStructUnion) XXX_Size() int {
-	return xxx_messageInfo_NinNestedStructUnion.Size(m)
+	return m.Size()
 }
 func (m *NinNestedStructUnion) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinNestedStructUnion.DiscardUnknown(m)
@@ -1274,7 +1274,7 @@ func (dst *Tree) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Tree.Merge(dst, src)
 }
 func (m *Tree) XXX_Size() int {
-	return xxx_messageInfo_Tree.Size(m)
+	return m.Size()
 }
 func (m *Tree) XXX_DiscardUnknown() {
 	xxx_messageInfo_Tree.DiscardUnknown(m)
@@ -1313,7 +1313,7 @@ func (dst *OrBranch) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OrBranch.Merge(dst, src)
 }
 func (m *OrBranch) XXX_Size() int {
-	return xxx_messageInfo_OrBranch.Size(m)
+	return m.Size()
 }
 func (m *OrBranch) XXX_DiscardUnknown() {
 	xxx_messageInfo_OrBranch.DiscardUnknown(m)
@@ -1352,7 +1352,7 @@ func (dst *AndBranch) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AndBranch.Merge(dst, src)
 }
 func (m *AndBranch) XXX_Size() int {
-	return xxx_messageInfo_AndBranch.Size(m)
+	return m.Size()
 }
 func (m *AndBranch) XXX_DiscardUnknown() {
 	xxx_messageInfo_AndBranch.DiscardUnknown(m)
@@ -1391,7 +1391,7 @@ func (dst *Leaf) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Leaf.Merge(dst, src)
 }
 func (m *Leaf) XXX_Size() int {
-	return xxx_messageInfo_Leaf.Size(m)
+	return m.Size()
 }
 func (m *Leaf) XXX_DiscardUnknown() {
 	xxx_messageInfo_Leaf.DiscardUnknown(m)
@@ -1431,7 +1431,7 @@ func (dst *DeepTree) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DeepTree.Merge(dst, src)
 }
 func (m *DeepTree) XXX_Size() int {
-	return xxx_messageInfo_DeepTree.Size(m)
+	return m.Size()
 }
 func (m *DeepTree) XXX_DiscardUnknown() {
 	xxx_messageInfo_DeepTree.DiscardUnknown(m)
@@ -1469,7 +1469,7 @@ func (dst *ADeepBranch) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ADeepBranch.Merge(dst, src)
 }
 func (m *ADeepBranch) XXX_Size() int {
-	return xxx_messageInfo_ADeepBranch.Size(m)
+	return m.Size()
 }
 func (m *ADeepBranch) XXX_DiscardUnknown() {
 	xxx_messageInfo_ADeepBranch.DiscardUnknown(m)
@@ -1508,7 +1508,7 @@ func (dst *AndDeepBranch) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AndDeepBranch.Merge(dst, src)
 }
 func (m *AndDeepBranch) XXX_Size() int {
-	return xxx_messageInfo_AndDeepBranch.Size(m)
+	return m.Size()
 }
 func (m *AndDeepBranch) XXX_DiscardUnknown() {
 	xxx_messageInfo_AndDeepBranch.DiscardUnknown(m)
@@ -1546,7 +1546,7 @@ func (dst *DeepLeaf) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DeepLeaf.Merge(dst, src)
 }
 func (m *DeepLeaf) XXX_Size() int {
-	return xxx_messageInfo_DeepLeaf.Size(m)
+	return m.Size()
 }
 func (m *DeepLeaf) XXX_DiscardUnknown() {
 	xxx_messageInfo_DeepLeaf.DiscardUnknown(m)
@@ -1583,7 +1583,7 @@ func (dst *Nil) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Nil.Merge(dst, src)
 }
 func (m *Nil) XXX_Size() int {
-	return xxx_messageInfo_Nil.Size(m)
+	return m.Size()
 }
 func (m *Nil) XXX_DiscardUnknown() {
 	xxx_messageInfo_Nil.DiscardUnknown(m)
@@ -1621,7 +1621,7 @@ func (dst *NidOptEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidOptEnum.Merge(dst, src)
 }
 func (m *NidOptEnum) XXX_Size() int {
-	return xxx_messageInfo_NidOptEnum.Size(m)
+	return m.Size()
 }
 func (m *NidOptEnum) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidOptEnum.DiscardUnknown(m)
@@ -1661,7 +1661,7 @@ func (dst *NinOptEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptEnum.Merge(dst, src)
 }
 func (m *NinOptEnum) XXX_Size() int {
-	return xxx_messageInfo_NinOptEnum.Size(m)
+	return m.Size()
 }
 func (m *NinOptEnum) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptEnum.DiscardUnknown(m)
@@ -1701,7 +1701,7 @@ func (dst *NidRepEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidRepEnum.Merge(dst, src)
 }
 func (m *NidRepEnum) XXX_Size() int {
-	return xxx_messageInfo_NidRepEnum.Size(m)
+	return m.Size()
 }
 func (m *NidRepEnum) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidRepEnum.DiscardUnknown(m)
@@ -1741,7 +1741,7 @@ func (dst *NinRepEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinRepEnum.Merge(dst, src)
 }
 func (m *NinRepEnum) XXX_Size() int {
-	return xxx_messageInfo_NinRepEnum.Size(m)
+	return m.Size()
 }
 func (m *NinRepEnum) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinRepEnum.DiscardUnknown(m)
@@ -1781,7 +1781,7 @@ func (dst *NinOptEnumDefault) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptEnumDefault.Merge(dst, src)
 }
 func (m *NinOptEnumDefault) XXX_Size() int {
-	return xxx_messageInfo_NinOptEnumDefault.Size(m)
+	return m.Size()
 }
 func (m *NinOptEnumDefault) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptEnumDefault.DiscardUnknown(m)
@@ -1846,7 +1846,7 @@ func (dst *AnotherNinOptEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AnotherNinOptEnum.Merge(dst, src)
 }
 func (m *AnotherNinOptEnum) XXX_Size() int {
-	return xxx_messageInfo_AnotherNinOptEnum.Size(m)
+	return m.Size()
 }
 func (m *AnotherNinOptEnum) XXX_DiscardUnknown() {
 	xxx_messageInfo_AnotherNinOptEnum.DiscardUnknown(m)
@@ -1886,7 +1886,7 @@ func (dst *AnotherNinOptEnumDefault) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AnotherNinOptEnumDefault.Merge(dst, src)
 }
 func (m *AnotherNinOptEnumDefault) XXX_Size() int {
-	return xxx_messageInfo_AnotherNinOptEnumDefault.Size(m)
+	return m.Size()
 }
 func (m *AnotherNinOptEnumDefault) XXX_DiscardUnknown() {
 	xxx_messageInfo_AnotherNinOptEnumDefault.DiscardUnknown(m)
@@ -1951,7 +1951,7 @@ func (dst *Timer) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Timer.Merge(dst, src)
 }
 func (m *Timer) XXX_Size() int {
-	return xxx_messageInfo_Timer.Size(m)
+	return m.Size()
 }
 func (m *Timer) XXX_DiscardUnknown() {
 	xxx_messageInfo_Timer.DiscardUnknown(m)
@@ -1998,7 +1998,7 @@ func (dst *MyExtendable) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MyExtendable.Merge(dst, src)
 }
 func (m *MyExtendable) XXX_Size() int {
-	return xxx_messageInfo_MyExtendable.Size(m)
+	return m.Size()
 }
 func (m *MyExtendable) XXX_DiscardUnknown() {
 	xxx_messageInfo_MyExtendable.DiscardUnknown(m)
@@ -2048,7 +2048,7 @@ func (dst *OtherExtenable) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OtherExtenable.Merge(dst, src)
 }
 func (m *OtherExtenable) XXX_Size() int {
-	return xxx_messageInfo_OtherExtenable.Size(m)
+	return m.Size()
 }
 func (m *OtherExtenable) XXX_DiscardUnknown() {
 	xxx_messageInfo_OtherExtenable.DiscardUnknown(m)
@@ -2089,7 +2089,7 @@ func (dst *NestedDefinition) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NestedDefinition.Merge(dst, src)
 }
 func (m *NestedDefinition) XXX_Size() int {
-	return xxx_messageInfo_NestedDefinition.Size(m)
+	return m.Size()
 }
 func (m *NestedDefinition) XXX_DiscardUnknown() {
 	xxx_messageInfo_NestedDefinition.DiscardUnknown(m)
@@ -2128,7 +2128,7 @@ func (dst *NestedDefinition_NestedMessage) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NestedDefinition_NestedMessage.Merge(dst, src)
 }
 func (m *NestedDefinition_NestedMessage) XXX_Size() int {
-	return xxx_messageInfo_NestedDefinition_NestedMessage.Size(m)
+	return m.Size()
 }
 func (m *NestedDefinition_NestedMessage) XXX_DiscardUnknown() {
 	xxx_messageInfo_NestedDefinition_NestedMessage.DiscardUnknown(m)
@@ -2168,7 +2168,7 @@ func (dst *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Merge(src proto.M
 	xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.Merge(dst, src)
 }
 func (m *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Size() int {
-	return xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.Size(m)
+	return m.Size()
 }
 func (m *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_DiscardUnknown() {
 	xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.DiscardUnknown(m)
@@ -2208,7 +2208,7 @@ func (dst *NestedScope) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NestedScope.Merge(dst, src)
 }
 func (m *NestedScope) XXX_Size() int {
-	return xxx_messageInfo_NestedScope.Size(m)
+	return m.Size()
 }
 func (m *NestedScope) XXX_DiscardUnknown() {
 	xxx_messageInfo_NestedScope.DiscardUnknown(m)
@@ -2260,7 +2260,7 @@ func (dst *NinOptNativeDefault) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptNativeDefault.Merge(dst, src)
 }
 func (m *NinOptNativeDefault) XXX_Size() int {
-	return xxx_messageInfo_NinOptNativeDefault.Size(m)
+	return m.Size()
 }
 func (m *NinOptNativeDefault) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptNativeDefault.DiscardUnknown(m)
@@ -2418,7 +2418,7 @@ func (dst *CustomContainer) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomContainer.Merge(dst, src)
 }
 func (m *CustomContainer) XXX_Size() int {
-	return xxx_messageInfo_CustomContainer.Size(m)
+	return m.Size()
 }
 func (m *CustomContainer) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomContainer.DiscardUnknown(m)
@@ -2470,7 +2470,7 @@ func (dst *CustomNameNidOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomNameNidOptNative.Merge(dst, src)
 }
 func (m *CustomNameNidOptNative) XXX_Size() int {
-	return xxx_messageInfo_CustomNameNidOptNative.Size(m)
+	return m.Size()
 }
 func (m *CustomNameNidOptNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomNameNidOptNative.DiscardUnknown(m)
@@ -2522,7 +2522,7 @@ func (dst *CustomNameNinOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomNameNinOptNative.Merge(dst, src)
 }
 func (m *CustomNameNinOptNative) XXX_Size() int {
-	return xxx_messageInfo_CustomNameNinOptNative.Size(m)
+	return m.Size()
 }
 func (m *CustomNameNinOptNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomNameNinOptNative.DiscardUnknown(m)
@@ -2574,7 +2574,7 @@ func (dst *CustomNameNinRepNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomNameNinRepNative.Merge(dst, src)
 }
 func (m *CustomNameNinRepNative) XXX_Size() int {
-	return xxx_messageInfo_CustomNameNinRepNative.Size(m)
+	return m.Size()
 }
 func (m *CustomNameNinRepNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomNameNinRepNative.DiscardUnknown(m)
@@ -2621,7 +2621,7 @@ func (dst *CustomNameNinStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomNameNinStruct.Merge(dst, src)
 }
 func (m *CustomNameNinStruct) XXX_Size() int {
-	return xxx_messageInfo_CustomNameNinStruct.Size(m)
+	return m.Size()
 }
 func (m *CustomNameNinStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomNameNinStruct.DiscardUnknown(m)
@@ -2662,7 +2662,7 @@ func (dst *CustomNameCustomType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomNameCustomType.Merge(dst, src)
 }
 func (m *CustomNameCustomType) XXX_Size() int {
-	return xxx_messageInfo_CustomNameCustomType.Size(m)
+	return m.Size()
 }
 func (m *CustomNameCustomType) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomNameCustomType.DiscardUnknown(m)
@@ -2702,7 +2702,7 @@ func (dst *CustomNameNinEmbeddedStructUnion) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomNameNinEmbeddedStructUnion.Merge(dst, src)
 }
 func (m *CustomNameNinEmbeddedStructUnion) XXX_Size() int {
-	return xxx_messageInfo_CustomNameNinEmbeddedStructUnion.Size(m)
+	return m.Size()
 }
 func (m *CustomNameNinEmbeddedStructUnion) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomNameNinEmbeddedStructUnion.DiscardUnknown(m)
@@ -2741,7 +2741,7 @@ func (dst *CustomNameEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomNameEnum.Merge(dst, src)
 }
 func (m *CustomNameEnum) XXX_Size() int {
-	return xxx_messageInfo_CustomNameEnum.Size(m)
+	return m.Size()
 }
 func (m *CustomNameEnum) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomNameEnum.DiscardUnknown(m)
@@ -2794,7 +2794,7 @@ func (dst *NoExtensionsMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NoExtensionsMap.Merge(dst, src)
 }
 func (m *NoExtensionsMap) XXX_Size() int {
-	return xxx_messageInfo_NoExtensionsMap.Size(m)
+	return m.Size()
 }
 func (m *NoExtensionsMap) XXX_DiscardUnknown() {
 	xxx_messageInfo_NoExtensionsMap.DiscardUnknown(m)
@@ -2831,7 +2831,7 @@ func (dst *Unrecognized) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Unrecognized.Merge(dst, src)
 }
 func (m *Unrecognized) XXX_Size() int {
-	return xxx_messageInfo_Unrecognized.Size(m)
+	return m.Size()
 }
 func (m *Unrecognized) XXX_DiscardUnknown() {
 	xxx_messageInfo_Unrecognized.DiscardUnknown(m)
@@ -2870,7 +2870,7 @@ func (dst *UnrecognizedWithInner) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UnrecognizedWithInner.Merge(dst, src)
 }
 func (m *UnrecognizedWithInner) XXX_Size() int {
-	return xxx_messageInfo_UnrecognizedWithInner.Size(m)
+	return m.Size()
 }
 func (m *UnrecognizedWithInner) XXX_DiscardUnknown() {
 	xxx_messageInfo_UnrecognizedWithInner.DiscardUnknown(m)
@@ -2907,7 +2907,7 @@ func (dst *UnrecognizedWithInner_Inner) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UnrecognizedWithInner_Inner.Merge(dst, src)
 }
 func (m *UnrecognizedWithInner_Inner) XXX_Size() int {
-	return xxx_messageInfo_UnrecognizedWithInner_Inner.Size(m)
+	return m.Size()
 }
 func (m *UnrecognizedWithInner_Inner) XXX_DiscardUnknown() {
 	xxx_messageInfo_UnrecognizedWithInner_Inner.DiscardUnknown(m)
@@ -2946,7 +2946,7 @@ func (dst *UnrecognizedWithEmbed) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UnrecognizedWithEmbed.Merge(dst, src)
 }
 func (m *UnrecognizedWithEmbed) XXX_Size() int {
-	return xxx_messageInfo_UnrecognizedWithEmbed.Size(m)
+	return m.Size()
 }
 func (m *UnrecognizedWithEmbed) XXX_DiscardUnknown() {
 	xxx_messageInfo_UnrecognizedWithEmbed.DiscardUnknown(m)
@@ -2983,7 +2983,7 @@ func (dst *UnrecognizedWithEmbed_Embedded) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UnrecognizedWithEmbed_Embedded.Merge(dst, src)
 }
 func (m *UnrecognizedWithEmbed_Embedded) XXX_Size() int {
-	return xxx_messageInfo_UnrecognizedWithEmbed_Embedded.Size(m)
+	return m.Size()
 }
 func (m *UnrecognizedWithEmbed_Embedded) XXX_DiscardUnknown() {
 	xxx_messageInfo_UnrecognizedWithEmbed_Embedded.DiscardUnknown(m)
@@ -3022,7 +3022,7 @@ func (dst *Node) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Node.Merge(dst, src)
 }
 func (m *Node) XXX_Size() int {
-	return xxx_messageInfo_Node.Size(m)
+	return m.Size()
 }
 func (m *Node) XXX_DiscardUnknown() {
 	xxx_messageInfo_Node.DiscardUnknown(m)
@@ -3060,7 +3060,7 @@ func (dst *NonByteCustomType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NonByteCustomType.Merge(dst, src)
 }
 func (m *NonByteCustomType) XXX_Size() int {
-	return xxx_messageInfo_NonByteCustomType.Size(m)
+	return m.Size()
 }
 func (m *NonByteCustomType) XXX_DiscardUnknown() {
 	xxx_messageInfo_NonByteCustomType.DiscardUnknown(m)
@@ -3098,7 +3098,7 @@ func (dst *NidOptNonByteCustomType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidOptNonByteCustomType.Merge(dst, src)
 }
 func (m *NidOptNonByteCustomType) XXX_Size() int {
-	return xxx_messageInfo_NidOptNonByteCustomType.Size(m)
+	return m.Size()
 }
 func (m *NidOptNonByteCustomType) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidOptNonByteCustomType.DiscardUnknown(m)
@@ -3136,7 +3136,7 @@ func (dst *NinOptNonByteCustomType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptNonByteCustomType.Merge(dst, src)
 }
 func (m *NinOptNonByteCustomType) XXX_Size() int {
-	return xxx_messageInfo_NinOptNonByteCustomType.Size(m)
+	return m.Size()
 }
 func (m *NinOptNonByteCustomType) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptNonByteCustomType.DiscardUnknown(m)
@@ -3174,7 +3174,7 @@ func (dst *NidRepNonByteCustomType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidRepNonByteCustomType.Merge(dst, src)
 }
 func (m *NidRepNonByteCustomType) XXX_Size() int {
-	return xxx_messageInfo_NidRepNonByteCustomType.Size(m)
+	return m.Size()
 }
 func (m *NidRepNonByteCustomType) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidRepNonByteCustomType.DiscardUnknown(m)
@@ -3212,7 +3212,7 @@ func (dst *NinRepNonByteCustomType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinRepNonByteCustomType.Merge(dst, src)
 }
 func (m *NinRepNonByteCustomType) XXX_Size() int {
-	return xxx_messageInfo_NinRepNonByteCustomType.Size(m)
+	return m.Size()
 }
 func (m *NinRepNonByteCustomType) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinRepNonByteCustomType.DiscardUnknown(m)
@@ -3250,7 +3250,7 @@ func (dst *ProtoType) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ProtoType.Merge(dst, src)
 }
 func (m *ProtoType) XXX_Size() int {
-	return xxx_messageInfo_ProtoType.Size(m)
+	return m.Size()
 }
 func (m *ProtoType) XXX_DiscardUnknown() {
 	xxx_messageInfo_ProtoType.DiscardUnknown(m)

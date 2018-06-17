@@ -55,7 +55,7 @@ func (dst *IndexQuery) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_IndexQuery.Merge(dst, src)
 }
 func (m *IndexQuery) XXX_Size() int {
-	return xxx_messageInfo_IndexQuery.Size(m)
+	return m.Size()
 }
 func (m *IndexQuery) XXX_DiscardUnknown() {
 	xxx_messageInfo_IndexQuery.DiscardUnknown(m)

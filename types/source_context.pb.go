@@ -59,7 +59,7 @@ func (dst *SourceContext) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_SourceContext.Merge(dst, src)
 }
 func (m *SourceContext) XXX_Size() int {
-	return xxx_messageInfo_SourceContext.Size(m)
+	return m.Size()
 }
 func (m *SourceContext) XXX_DiscardUnknown() {
 	xxx_messageInfo_SourceContext.DiscardUnknown(m)

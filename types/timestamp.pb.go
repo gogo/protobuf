@@ -144,7 +144,7 @@ func (dst *Timestamp) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Timestamp.Merge(dst, src)
 }
 func (m *Timestamp) XXX_Size() int {
-	return xxx_messageInfo_Timestamp.Size(m)
+	return m.Size()
 }
 func (m *Timestamp) XXX_DiscardUnknown() {
 	xxx_messageInfo_Timestamp.DiscardUnknown(m)

@@ -2367,7 +2367,17 @@ func (g *Generator) generateMessage(message *Descriptor) {
 
 	g.P("func (m *", ccTypeName, ") XXX_Size() int {") // avoid name clash with "Size" field in some message
 	g.In()
-	g.P("return xxx_messageInfo_", ccTypeName, ".Size(m)")
+	if (gogoproto.IsMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
+		gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto)) &&
+		gogoproto.IsSizer(g.file.FileDescriptorProto, message.DescriptorProto) {
+		g.P("return m.Size()")
+	} else if (gogoproto.IsMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
+		gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto)) &&
+		gogoproto.IsProtoSizer(g.file.FileDescriptorProto, message.DescriptorProto) {
+		g.P("return m.ProtoSize()")
+	} else {
+		g.P("return xxx_messageInfo_", ccTypeName, ".Size(m)")
+	}
 	g.Out()
 	g.P("}")
 

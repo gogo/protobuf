@@ -169,20 +169,20 @@ func (u *marshalInfo) size(ptr pointer) int {
 		u.computeMarshalInfo()
 	}
 
-	// Uses the message's Size method if available
-	if u.hassizer {
-		s := ptr.asPointerTo(u.typ).Interface().(Sizer)
-		return s.Size()
-	}
-	// Uses the message's ProtoSize method if available
-	if u.hasprotosizer {
-		s := ptr.asPointerTo(u.typ).Interface().(ProtoSizer)
-		return s.ProtoSize()
-	}
-
 	// If the message can marshal itself, let it do it, for compatibility.
 	// NOTE: This is not efficient.
 	if u.hasmarshaler {
+		// Uses the message's Size method if available
+		if u.hassizer {
+			s := ptr.asPointerTo(u.typ).Interface().(Sizer)
+			return s.Size()
+		}
+		// Uses the message's ProtoSize method if available
+		if u.hasprotosizer {
+			s := ptr.asPointerTo(u.typ).Interface().(ProtoSizer)
+			return s.ProtoSize()
+		}
+
 		m := ptr.asPointerTo(u.typ).Interface().(Marshaler)
 		b, _ := m.Marshal()
 		return len(b)
@@ -227,15 +227,7 @@ func (u *marshalInfo) size(ptr pointer) int {
 // cachedsize gets the size from cache. If there is no cache (i.e. message is not generated),
 // fall back to compute the size.
 func (u *marshalInfo) cachedsize(ptr pointer) int {
-	if u.hassizer {
-		s := ptr.asPointerTo(u.typ).Interface().(Sizer)
-		return s.Size()
-	}
-	if u.hasprotosizer {
-		s := ptr.asPointerTo(u.typ).Interface().(ProtoSizer)
-		return s.ProtoSize()
-	}
-	if atomic.LoadInt32(&u.initialized) == 1 && u.sizecache.IsValid() {
+	if u.sizecache.IsValid() {
 		return int(atomic.LoadInt32(ptr.offset(u.sizecache).toInt32()))
 	}
 	return u.size(ptr)

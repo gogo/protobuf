@@ -93,7 +93,7 @@ func (dst *Struct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Struct.Merge(dst, src)
 }
 func (m *Struct) XXX_Size() int {
-	return xxx_messageInfo_Struct.Size(m)
+	return m.Size()
 }
 func (m *Struct) XXX_DiscardUnknown() {
 	xxx_messageInfo_Struct.DiscardUnknown(m)
@@ -158,7 +158,7 @@ func (dst *Value) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Value.Merge(dst, src)
 }
 func (m *Value) XXX_Size() int {
-	return xxx_messageInfo_Value.Size(m)
+	return m.Size()
 }
 func (m *Value) XXX_DiscardUnknown() {
 	xxx_messageInfo_Value.DiscardUnknown(m)
@@ -422,7 +422,7 @@ func (dst *ListValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ListValue.Merge(dst, src)
 }
 func (m *ListValue) XXX_Size() int {
-	return xxx_messageInfo_ListValue.Size(m)
+	return m.Size()
 }
 func (m *ListValue) XXX_DiscardUnknown() {
 	xxx_messageInfo_ListValue.DiscardUnknown(m)

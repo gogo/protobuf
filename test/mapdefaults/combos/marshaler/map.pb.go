@@ -59,7 +59,7 @@ func (dst *MapTest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MapTest.Merge(dst, src)
 }
 func (m *MapTest) XXX_Size() int {
-	return xxx_messageInfo_MapTest.Size(m)
+	return m.Size()
 }
 func (m *MapTest) XXX_DiscardUnknown() {
 	xxx_messageInfo_MapTest.DiscardUnknown(m)
@@ -97,7 +97,7 @@ func (dst *FakeMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FakeMap.Merge(dst, src)
 }
 func (m *FakeMap) XXX_Size() int {
-	return xxx_messageInfo_FakeMap.Size(m)
+	return m.Size()
 }
 func (m *FakeMap) XXX_DiscardUnknown() {
 	xxx_messageInfo_FakeMap.DiscardUnknown(m)
@@ -137,7 +137,7 @@ func (dst *FakeMapEntry) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FakeMapEntry.Merge(dst, src)
 }
 func (m *FakeMapEntry) XXX_Size() int {
-	return xxx_messageInfo_FakeMapEntry.Size(m)
+	return m.Size()
 }
 func (m *FakeMapEntry) XXX_DiscardUnknown() {
 	xxx_messageInfo_FakeMapEntry.DiscardUnknown(m)

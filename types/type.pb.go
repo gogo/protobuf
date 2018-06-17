@@ -214,7 +214,7 @@ func (dst *Type) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Type.Merge(dst, src)
 }
 func (m *Type) XXX_Size() int {
-	return xxx_messageInfo_Type.Size(m)
+	return m.Size()
 }
 func (m *Type) XXX_DiscardUnknown() {
 	xxx_messageInfo_Type.DiscardUnknown(m)
@@ -320,7 +320,7 @@ func (dst *Field) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Field.Merge(dst, src)
 }
 func (m *Field) XXX_Size() int {
-	return xxx_messageInfo_Field.Size(m)
+	return m.Size()
 }
 func (m *Field) XXX_DiscardUnknown() {
 	xxx_messageInfo_Field.DiscardUnknown(m)
@@ -442,7 +442,7 @@ func (dst *Enum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Enum.Merge(dst, src)
 }
 func (m *Enum) XXX_Size() int {
-	return xxx_messageInfo_Enum.Size(m)
+	return m.Size()
 }
 func (m *Enum) XXX_DiscardUnknown() {
 	xxx_messageInfo_Enum.DiscardUnknown(m)
@@ -525,7 +525,7 @@ func (dst *EnumValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_EnumValue.Merge(dst, src)
 }
 func (m *EnumValue) XXX_Size() int {
-	return xxx_messageInfo_EnumValue.Size(m)
+	return m.Size()
 }
 func (m *EnumValue) XXX_DiscardUnknown() {
 	xxx_messageInfo_EnumValue.DiscardUnknown(m)
@@ -599,7 +599,7 @@ func (dst *Option) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Option.Merge(dst, src)
 }
 func (m *Option) XXX_Size() int {
-	return xxx_messageInfo_Option.Size(m)
+	return m.Size()
 }
 func (m *Option) XXX_DiscardUnknown() {
 	xxx_messageInfo_Option.DiscardUnknown(m)

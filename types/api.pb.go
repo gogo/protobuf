@@ -99,7 +99,7 @@ func (dst *Api) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Api.Merge(dst, src)
 }
 func (m *Api) XXX_Size() int {
-	return xxx_messageInfo_Api.Size(m)
+	return m.Size()
 }
 func (m *Api) XXX_DiscardUnknown() {
 	xxx_messageInfo_Api.DiscardUnknown(m)
@@ -204,7 +204,7 @@ func (dst *Method) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Method.Merge(dst, src)
 }
 func (m *Method) XXX_Size() int {
-	return xxx_messageInfo_Method.Size(m)
+	return m.Size()
 }
 func (m *Method) XXX_DiscardUnknown() {
 	xxx_messageInfo_Method.DiscardUnknown(m)
@@ -377,7 +377,7 @@ func (dst *Mixin) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Mixin.Merge(dst, src)
 }
 func (m *Mixin) XXX_Size() int {
-	return xxx_messageInfo_Mixin.Size(m)
+	return m.Size()
 }
 func (m *Mixin) XXX_DiscardUnknown() {
 	xxx_messageInfo_Mixin.DiscardUnknown(m)

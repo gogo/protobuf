@@ -57,7 +57,7 @@ func (dst *RequiredExample) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_RequiredExample.Merge(dst, src)
 }
 func (m *RequiredExample) XXX_Size() int {
-	return xxx_messageInfo_RequiredExample.Size(m)
+	return m.Size()
 }
 func (m *RequiredExample) XXX_DiscardUnknown() {
 	xxx_messageInfo_RequiredExample.DiscardUnknown(m)
@@ -131,7 +131,7 @@ func (dst *NidOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidOptNative.Merge(dst, src)
 }
 func (m *NidOptNative) XXX_Size() int {
-	return xxx_messageInfo_NidOptNative.Size(m)
+	return m.Size()
 }
 func (m *NidOptNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NidOptNative.DiscardUnknown(m)
@@ -289,7 +289,7 @@ func (dst *NinOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptNative.Merge(dst, src)
 }
 func (m *NinOptNative) XXX_Size() int {
-	return xxx_messageInfo_NinOptNative.Size(m)
+	return m.Size()
 }
 func (m *NinOptNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptNative.DiscardUnknown(m)
@@ -433,7 +433,7 @@ func (dst *NestedNinOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NestedNinOptNative.Merge(dst, src)
 }
 func (m *NestedNinOptNative) XXX_Size() int {
-	return xxx_messageInfo_NestedNinOptNative.Size(m)
+	return m.Size()
 }
 func (m *NestedNinOptNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NestedNinOptNative.DiscardUnknown(m)

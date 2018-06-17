@@ -107,7 +107,7 @@ func (dst *FloatingPoint) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FloatingPoint.Merge(dst, src)
 }
 func (m *FloatingPoint) XXX_Size() int {
-	return xxx_messageInfo_FloatingPoint.Size(m)
+	return m.Size()
 }
 func (m *FloatingPoint) XXX_DiscardUnknown() {
 	xxx_messageInfo_FloatingPoint.DiscardUnknown(m)
@@ -148,7 +148,7 @@ func (dst *CustomMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomMap.Merge(dst, src)
 }
 func (m *CustomMap) XXX_Size() int {
-	return xxx_messageInfo_CustomMap.Size(m)
+	return m.Size()
 }
 func (m *CustomMap) XXX_DiscardUnknown() {
 	xxx_messageInfo_CustomMap.DiscardUnknown(m)
@@ -202,7 +202,7 @@ func (dst *AllMaps) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AllMaps.Merge(dst, src)
 }
 func (m *AllMaps) XXX_Size() int {
-	return xxx_messageInfo_AllMaps.Size(m)
+	return m.Size()
 }
 func (m *AllMaps) XXX_DiscardUnknown() {
 	xxx_messageInfo_AllMaps.DiscardUnknown(m)
@@ -256,7 +256,7 @@ func (dst *AllMapsOrdered) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AllMapsOrdered.Merge(dst, src)
 }
 func (m *AllMapsOrdered) XXX_Size() int {
-	return xxx_messageInfo_AllMapsOrdered.Size(m)
+	return m.Size()
 }
 func (m *AllMapsOrdered) XXX_DiscardUnknown() {
 	xxx_messageInfo_AllMapsOrdered.DiscardUnknown(m)
