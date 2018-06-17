@@ -45,25 +45,21 @@ func (*Castaway) Descriptor() ([]byte, []int) {
 	return fileDescriptor_castvalue_a8e85bd7357c5c72, []int{0}
 }
 func (m *Castaway) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Castaway.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Castaway) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_Castaway.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *Castaway) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Castaway.Merge(dst, src)
 }
 func (m *Castaway) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
-	return xxx_messageInfo_Castaway.Size(m)
+	return m.Size()
 }
 func (m *Castaway) XXX_DiscardUnknown() {
 	xxx_messageInfo_Castaway.DiscardUnknown(m)
@@ -84,25 +80,21 @@ func (*Wilson) Descriptor() ([]byte, []int) {
 	return fileDescriptor_castvalue_a8e85bd7357c5c72, []int{1}
 }
 func (m *Wilson) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Wilson.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Wilson) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_Wilson.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *Wilson) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Wilson.Merge(dst, src)
 }
 func (m *Wilson) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
-	return xxx_messageInfo_Wilson.Size(m)
+	return m.Size()
 }
 func (m *Wilson) XXX_DiscardUnknown() {
 	xxx_messageInfo_Wilson.DiscardUnknown(m)

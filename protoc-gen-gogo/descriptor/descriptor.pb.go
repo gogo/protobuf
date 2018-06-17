@@ -334,24 +334,15 @@ func (*FileDescriptorSet) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{0}
 }
 func (m *FileDescriptorSet) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_FileDescriptorSet.Unmarshal(m, b)
 }
 func (m *FileDescriptorSet) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_FileDescriptorSet.Marshal(b, m, deterministic)
 }
 func (dst *FileDescriptorSet) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FileDescriptorSet.Merge(dst, src)
 }
 func (m *FileDescriptorSet) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_FileDescriptorSet.Size(m)
 }
 func (m *FileDescriptorSet) XXX_DiscardUnknown() {
@@ -404,24 +395,15 @@ func (*FileDescriptorProto) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{1}
 }
 func (m *FileDescriptorProto) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_FileDescriptorProto.Unmarshal(m, b)
 }
 func (m *FileDescriptorProto) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_FileDescriptorProto.Marshal(b, m, deterministic)
 }
 func (dst *FileDescriptorProto) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FileDescriptorProto.Merge(dst, src)
 }
 func (m *FileDescriptorProto) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_FileDescriptorProto.Size(m)
 }
 func (m *FileDescriptorProto) XXX_DiscardUnknown() {
@@ -540,24 +522,15 @@ func (*DescriptorProto) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{2}
 }
 func (m *DescriptorProto) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_DescriptorProto.Unmarshal(m, b)
 }
 func (m *DescriptorProto) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_DescriptorProto.Marshal(b, m, deterministic)
 }
 func (dst *DescriptorProto) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DescriptorProto.Merge(dst, src)
 }
 func (m *DescriptorProto) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_DescriptorProto.Size(m)
 }
 func (m *DescriptorProto) XXX_DiscardUnknown() {
@@ -652,24 +625,15 @@ func (*DescriptorProto_ExtensionRange) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{2, 0}
 }
 func (m *DescriptorProto_ExtensionRange) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_DescriptorProto_ExtensionRange.Unmarshal(m, b)
 }
 func (m *DescriptorProto_ExtensionRange) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_DescriptorProto_ExtensionRange.Marshal(b, m, deterministic)
 }
 func (dst *DescriptorProto_ExtensionRange) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DescriptorProto_ExtensionRange.Merge(dst, src)
 }
 func (m *DescriptorProto_ExtensionRange) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_DescriptorProto_ExtensionRange.Size(m)
 }
 func (m *DescriptorProto_ExtensionRange) XXX_DiscardUnknown() {
@@ -717,24 +681,15 @@ func (*DescriptorProto_ReservedRange) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{2, 1}
 }
 func (m *DescriptorProto_ReservedRange) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_DescriptorProto_ReservedRange.Unmarshal(m, b)
 }
 func (m *DescriptorProto_ReservedRange) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_DescriptorProto_ReservedRange.Marshal(b, m, deterministic)
 }
 func (dst *DescriptorProto_ReservedRange) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DescriptorProto_ReservedRange.Merge(dst, src)
 }
 func (m *DescriptorProto_ReservedRange) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_DescriptorProto_ReservedRange.Size(m)
 }
 func (m *DescriptorProto_ReservedRange) XXX_DiscardUnknown() {
@@ -781,24 +736,15 @@ func (*ExtensionRangeOptions) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_ExtensionRangeOptions
 }
 func (m *ExtensionRangeOptions) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_ExtensionRangeOptions.Unmarshal(m, b)
 }
 func (m *ExtensionRangeOptions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_ExtensionRangeOptions.Marshal(b, m, deterministic)
 }
 func (dst *ExtensionRangeOptions) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ExtensionRangeOptions.Merge(dst, src)
 }
 func (m *ExtensionRangeOptions) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_ExtensionRangeOptions.Size(m)
 }
 func (m *ExtensionRangeOptions) XXX_DiscardUnknown() {
@@ -858,24 +804,15 @@ func (*FieldDescriptorProto) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{4}
 }
 func (m *FieldDescriptorProto) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_FieldDescriptorProto.Unmarshal(m, b)
 }
 func (m *FieldDescriptorProto) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_FieldDescriptorProto.Marshal(b, m, deterministic)
 }
 func (dst *FieldDescriptorProto) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FieldDescriptorProto.Merge(dst, src)
 }
 func (m *FieldDescriptorProto) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_FieldDescriptorProto.Size(m)
 }
 func (m *FieldDescriptorProto) XXX_DiscardUnknown() {
@@ -970,24 +907,15 @@ func (*OneofDescriptorProto) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{5}
 }
 func (m *OneofDescriptorProto) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_OneofDescriptorProto.Unmarshal(m, b)
 }
 func (m *OneofDescriptorProto) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_OneofDescriptorProto.Marshal(b, m, deterministic)
 }
 func (dst *OneofDescriptorProto) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OneofDescriptorProto.Merge(dst, src)
 }
 func (m *OneofDescriptorProto) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_OneofDescriptorProto.Size(m)
 }
 func (m *OneofDescriptorProto) XXX_DiscardUnknown() {
@@ -1034,24 +962,15 @@ func (*EnumDescriptorProto) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{6}
 }
 func (m *EnumDescriptorProto) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_EnumDescriptorProto.Unmarshal(m, b)
 }
 func (m *EnumDescriptorProto) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_EnumDescriptorProto.Marshal(b, m, deterministic)
 }
 func (dst *EnumDescriptorProto) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_EnumDescriptorProto.Merge(dst, src)
 }
 func (m *EnumDescriptorProto) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_EnumDescriptorProto.Size(m)
 }
 func (m *EnumDescriptorProto) XXX_DiscardUnknown() {
@@ -1116,24 +1035,15 @@ func (*EnumDescriptorProto_EnumReservedRange) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{6, 0}
 }
 func (m *EnumDescriptorProto_EnumReservedRange) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_EnumDescriptorProto_EnumReservedRange.Unmarshal(m, b)
 }
 func (m *EnumDescriptorProto_EnumReservedRange) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_EnumDescriptorProto_EnumReservedRange.Marshal(b, m, deterministic)
 }
 func (dst *EnumDescriptorProto_EnumReservedRange) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_EnumDescriptorProto_EnumReservedRange.Merge(dst, src)
 }
 func (m *EnumDescriptorProto_EnumReservedRange) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_EnumDescriptorProto_EnumReservedRange.Size(m)
 }
 func (m *EnumDescriptorProto_EnumReservedRange) XXX_DiscardUnknown() {
@@ -1173,24 +1083,15 @@ func (*EnumValueDescriptorProto) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{7}
 }
 func (m *EnumValueDescriptorProto) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_EnumValueDescriptorProto.Unmarshal(m, b)
 }
 func (m *EnumValueDescriptorProto) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_EnumValueDescriptorProto.Marshal(b, m, deterministic)
 }
 func (dst *EnumValueDescriptorProto) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_EnumValueDescriptorProto.Merge(dst, src)
 }
 func (m *EnumValueDescriptorProto) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_EnumValueDescriptorProto.Size(m)
 }
 func (m *EnumValueDescriptorProto) XXX_DiscardUnknown() {
@@ -1237,24 +1138,15 @@ func (*ServiceDescriptorProto) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{8}
 }
 func (m *ServiceDescriptorProto) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_ServiceDescriptorProto.Unmarshal(m, b)
 }
 func (m *ServiceDescriptorProto) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_ServiceDescriptorProto.Marshal(b, m, deterministic)
 }
 func (dst *ServiceDescriptorProto) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ServiceDescriptorProto.Merge(dst, src)
 }
 func (m *ServiceDescriptorProto) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_ServiceDescriptorProto.Size(m)
 }
 func (m *ServiceDescriptorProto) XXX_DiscardUnknown() {
@@ -1308,24 +1200,15 @@ func (*MethodDescriptorProto) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{9}
 }
 func (m *MethodDescriptorProto) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_MethodDescriptorProto.Unmarshal(m, b)
 }
 func (m *MethodDescriptorProto) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_MethodDescriptorProto.Marshal(b, m, deterministic)
 }
 func (dst *MethodDescriptorProto) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MethodDescriptorProto.Merge(dst, src)
 }
 func (m *MethodDescriptorProto) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_MethodDescriptorProto.Size(m)
 }
 func (m *MethodDescriptorProto) XXX_DiscardUnknown() {
@@ -1477,24 +1360,15 @@ func (*FileOptions) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_FileOptions
 }
 func (m *FileOptions) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_FileOptions.Unmarshal(m, b)
 }
 func (m *FileOptions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_FileOptions.Marshal(b, m, deterministic)
 }
 func (dst *FileOptions) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FileOptions.Merge(dst, src)
 }
 func (m *FileOptions) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_FileOptions.Size(m)
 }
 func (m *FileOptions) XXX_DiscardUnknown() {
@@ -1721,24 +1595,15 @@ func (*MessageOptions) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_MessageOptions
 }
 func (m *MessageOptions) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_MessageOptions.Unmarshal(m, b)
 }
 func (m *MessageOptions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_MessageOptions.Marshal(b, m, deterministic)
 }
 func (dst *MessageOptions) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MessageOptions.Merge(dst, src)
 }
 func (m *MessageOptions) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_MessageOptions.Size(m)
 }
 func (m *MessageOptions) XXX_DiscardUnknown() {
@@ -1869,24 +1734,15 @@ func (*FieldOptions) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_FieldOptions
 }
 func (m *FieldOptions) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_FieldOptions.Unmarshal(m, b)
 }
 func (m *FieldOptions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_FieldOptions.Marshal(b, m, deterministic)
 }
 func (dst *FieldOptions) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FieldOptions.Merge(dst, src)
 }
 func (m *FieldOptions) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_FieldOptions.Size(m)
 }
 func (m *FieldOptions) XXX_DiscardUnknown() {
@@ -1974,24 +1830,15 @@ func (*OneofOptions) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_OneofOptions
 }
 func (m *OneofOptions) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_OneofOptions.Unmarshal(m, b)
 }
 func (m *OneofOptions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_OneofOptions.Marshal(b, m, deterministic)
 }
 func (dst *OneofOptions) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OneofOptions.Merge(dst, src)
 }
 func (m *OneofOptions) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_OneofOptions.Size(m)
 }
 func (m *OneofOptions) XXX_DiscardUnknown() {
@@ -2039,24 +1886,15 @@ func (*EnumOptions) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_EnumOptions
 }
 func (m *EnumOptions) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_EnumOptions.Unmarshal(m, b)
 }
 func (m *EnumOptions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_EnumOptions.Marshal(b, m, deterministic)
 }
 func (dst *EnumOptions) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_EnumOptions.Merge(dst, src)
 }
 func (m *EnumOptions) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_EnumOptions.Size(m)
 }
 func (m *EnumOptions) XXX_DiscardUnknown() {
@@ -2117,24 +1955,15 @@ func (*EnumValueOptions) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_EnumValueOptions
 }
 func (m *EnumValueOptions) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_EnumValueOptions.Unmarshal(m, b)
 }
 func (m *EnumValueOptions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_EnumValueOptions.Marshal(b, m, deterministic)
 }
 func (dst *EnumValueOptions) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_EnumValueOptions.Merge(dst, src)
 }
 func (m *EnumValueOptions) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_EnumValueOptions.Size(m)
 }
 func (m *EnumValueOptions) XXX_DiscardUnknown() {
@@ -2188,24 +2017,15 @@ func (*ServiceOptions) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_ServiceOptions
 }
 func (m *ServiceOptions) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_ServiceOptions.Unmarshal(m, b)
 }
 func (m *ServiceOptions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_ServiceOptions.Marshal(b, m, deterministic)
 }
 func (dst *ServiceOptions) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ServiceOptions.Merge(dst, src)
 }
 func (m *ServiceOptions) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_ServiceOptions.Size(m)
 }
 func (m *ServiceOptions) XXX_DiscardUnknown() {
@@ -2260,24 +2080,15 @@ func (*MethodOptions) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_MethodOptions
 }
 func (m *MethodOptions) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_MethodOptions.Unmarshal(m, b)
 }
 func (m *MethodOptions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_MethodOptions.Marshal(b, m, deterministic)
 }
 func (dst *MethodOptions) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MethodOptions.Merge(dst, src)
 }
 func (m *MethodOptions) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_MethodOptions.Size(m)
 }
 func (m *MethodOptions) XXX_DiscardUnknown() {
@@ -2338,24 +2149,15 @@ func (*UninterpretedOption) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{18}
 }
 func (m *UninterpretedOption) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_UninterpretedOption.Unmarshal(m, b)
 }
 func (m *UninterpretedOption) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_UninterpretedOption.Marshal(b, m, deterministic)
 }
 func (dst *UninterpretedOption) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UninterpretedOption.Merge(dst, src)
 }
 func (m *UninterpretedOption) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_UninterpretedOption.Size(m)
 }
 func (m *UninterpretedOption) XXX_DiscardUnknown() {
@@ -2433,24 +2235,15 @@ func (*UninterpretedOption_NamePart) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{18, 0}
 }
 func (m *UninterpretedOption_NamePart) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_UninterpretedOption_NamePart.Unmarshal(m, b)
 }
 func (m *UninterpretedOption_NamePart) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_UninterpretedOption_NamePart.Marshal(b, m, deterministic)
 }
 func (dst *UninterpretedOption_NamePart) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UninterpretedOption_NamePart.Merge(dst, src)
 }
 func (m *UninterpretedOption_NamePart) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_UninterpretedOption_NamePart.Size(m)
 }
 func (m *UninterpretedOption_NamePart) XXX_DiscardUnknown() {
@@ -2532,24 +2325,15 @@ func (*SourceCodeInfo) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{19}
 }
 func (m *SourceCodeInfo) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_SourceCodeInfo.Unmarshal(m, b)
 }
 func (m *SourceCodeInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_SourceCodeInfo.Marshal(b, m, deterministic)
 }
 func (dst *SourceCodeInfo) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_SourceCodeInfo.Merge(dst, src)
 }
 func (m *SourceCodeInfo) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_SourceCodeInfo.Size(m)
 }
 func (m *SourceCodeInfo) XXX_DiscardUnknown() {
@@ -2658,24 +2442,15 @@ func (*SourceCodeInfo_Location) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{19, 0}
 }
 func (m *SourceCodeInfo_Location) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_SourceCodeInfo_Location.Unmarshal(m, b)
 }
 func (m *SourceCodeInfo_Location) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_SourceCodeInfo_Location.Marshal(b, m, deterministic)
 }
 func (dst *SourceCodeInfo_Location) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_SourceCodeInfo_Location.Merge(dst, src)
 }
 func (m *SourceCodeInfo_Location) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_SourceCodeInfo_Location.Size(m)
 }
 func (m *SourceCodeInfo_Location) XXX_DiscardUnknown() {
@@ -2738,24 +2513,15 @@ func (*GeneratedCodeInfo) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{20}
 }
 func (m *GeneratedCodeInfo) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_GeneratedCodeInfo.Unmarshal(m, b)
 }
 func (m *GeneratedCodeInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_GeneratedCodeInfo.Marshal(b, m, deterministic)
 }
 func (dst *GeneratedCodeInfo) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_GeneratedCodeInfo.Merge(dst, src)
 }
 func (m *GeneratedCodeInfo) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_GeneratedCodeInfo.Size(m)
 }
 func (m *GeneratedCodeInfo) XXX_DiscardUnknown() {
@@ -2796,24 +2562,15 @@ func (*GeneratedCodeInfo_Annotation) Descriptor() ([]byte, []int) {
 	return fileDescriptor_descriptor_9588782fb9cbecd6, []int{20, 0}
 }
 func (m *GeneratedCodeInfo_Annotation) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_GeneratedCodeInfo_Annotation.Unmarshal(m, b)
 }
 func (m *GeneratedCodeInfo_Annotation) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_GeneratedCodeInfo_Annotation.Marshal(b, m, deterministic)
 }
 func (dst *GeneratedCodeInfo_Annotation) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_GeneratedCodeInfo_Annotation.Merge(dst, src)
 }
 func (m *GeneratedCodeInfo_Annotation) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_GeneratedCodeInfo_Annotation.Size(m)
 }
 func (m *GeneratedCodeInfo_Annotation) XXX_DiscardUnknown() {

@@ -74,24 +74,15 @@ func (*NidOptEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_enumstringer_cc4e1499449a36f3, []int{0}
 }
 func (m *NidOptEnum) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NidOptEnum.Unmarshal(m, b)
 }
 func (m *NidOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_NidOptEnum.Marshal(b, m, deterministic)
 }
 func (dst *NidOptEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidOptEnum.Merge(dst, src)
 }
 func (m *NidOptEnum) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_NidOptEnum.Size(m)
 }
 func (m *NidOptEnum) XXX_DiscardUnknown() {
@@ -121,24 +112,15 @@ func (*NinOptEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_enumstringer_cc4e1499449a36f3, []int{1}
 }
 func (m *NinOptEnum) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinOptEnum.Unmarshal(m, b)
 }
 func (m *NinOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_NinOptEnum.Marshal(b, m, deterministic)
 }
 func (dst *NinOptEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptEnum.Merge(dst, src)
 }
 func (m *NinOptEnum) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_NinOptEnum.Size(m)
 }
 func (m *NinOptEnum) XXX_DiscardUnknown() {
@@ -168,24 +150,15 @@ func (*NidRepEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_enumstringer_cc4e1499449a36f3, []int{2}
 }
 func (m *NidRepEnum) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NidRepEnum.Unmarshal(m, b)
 }
 func (m *NidRepEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_NidRepEnum.Marshal(b, m, deterministic)
 }
 func (dst *NidRepEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidRepEnum.Merge(dst, src)
 }
 func (m *NidRepEnum) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_NidRepEnum.Size(m)
 }
 func (m *NidRepEnum) XXX_DiscardUnknown() {
@@ -215,24 +188,15 @@ func (*NinRepEnum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_enumstringer_cc4e1499449a36f3, []int{3}
 }
 func (m *NinRepEnum) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_NinRepEnum.Unmarshal(m, b)
 }
 func (m *NinRepEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_NinRepEnum.Marshal(b, m, deterministic)
 }
 func (dst *NinRepEnum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinRepEnum.Merge(dst, src)
 }
 func (m *NinRepEnum) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_NinRepEnum.Size(m)
 }
 func (m *NinRepEnum) XXX_DiscardUnknown() {

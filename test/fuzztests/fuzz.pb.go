@@ -39,25 +39,21 @@ func (*Nil) Descriptor() ([]byte, []int) {
 	return fileDescriptor_fuzz_a9783a48f1b0a0f4, []int{0}
 }
 func (m *Nil) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Nil.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Nil) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_Nil.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *Nil) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Nil.Merge(dst, src)
 }
 func (m *Nil) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
-	return xxx_messageInfo_Nil.Size(m)
+	return m.Size()
 }
 func (m *Nil) XXX_DiscardUnknown() {
 	xxx_messageInfo_Nil.DiscardUnknown(m)
@@ -91,25 +87,21 @@ func (*NinRepPackedNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_fuzz_a9783a48f1b0a0f4, []int{1}
 }
 func (m *NinRepPackedNative) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_NinRepPackedNative.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinRepPackedNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_NinRepPackedNative.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *NinRepPackedNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinRepPackedNative.Merge(dst, src)
 }
 func (m *NinRepPackedNative) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
-	return xxx_messageInfo_NinRepPackedNative.Size(m)
+	return m.Size()
 }
 func (m *NinRepPackedNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinRepPackedNative.DiscardUnknown(m)
@@ -236,25 +228,21 @@ func (*NinOptNative) Descriptor() ([]byte, []int) {
 	return fileDescriptor_fuzz_a9783a48f1b0a0f4, []int{2}
 }
 func (m *NinOptNative) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_NinOptNative.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_NinOptNative.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *NinOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptNative.Merge(dst, src)
 }
 func (m *NinOptNative) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
-	return xxx_messageInfo_NinOptNative.Size(m)
+	return m.Size()
 }
 func (m *NinOptNative) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptNative.DiscardUnknown(m)
@@ -390,25 +378,21 @@ func (*NinOptStruct) Descriptor() ([]byte, []int) {
 	return fileDescriptor_fuzz_a9783a48f1b0a0f4, []int{3}
 }
 func (m *NinOptStruct) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_NinOptStruct.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *NinOptStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_NinOptStruct.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *NinOptStruct) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptStruct.Merge(dst, src)
 }
 func (m *NinOptStruct) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
-	return xxx_messageInfo_NinOptStruct.Size(m)
+	return m.Size()
 }
 func (m *NinOptStruct) XXX_DiscardUnknown() {
 	xxx_messageInfo_NinOptStruct.DiscardUnknown(m)

@@ -1,6 +1,6 @@
 // Protocol Buffers for Go with Gadgets
 //
-// Copyright (c) 2013, The GoGo Authors. All rights reserved.
+// Copyright (c) 2018, The GoGo Authors. All rights reserved.
 // http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
@@ -29,22 +29,8 @@
 package proto
 
 import (
-	"encoding/json"
-	"strconv"
+	"reflect"
 )
 
-type Sizer interface {
-	Size() int
-}
-
-type ProtoSizer interface {
-	ProtoSize() int
-}
-
-func MarshalJSONEnum(m map[int32]string, value int32) ([]byte, error) {
-	s, ok := m[value]
-	if !ok {
-		s = strconv.Itoa(int(value))
-	}
-	return json.Marshal(s)
-}
+var sizerType = reflect.TypeOf((*Sizer)(nil)).Elem()
+var protosizerType = reflect.TypeOf((*ProtoSizer)(nil)).Elem()

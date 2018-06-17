@@ -38,25 +38,21 @@ func (*B) Descriptor() ([]byte, []int) {
 	return fileDescriptor_gogovanity_fc574e04ada47644, []int{0}
 }
 func (m *B) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_B.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *B) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_B.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *B) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_B.Merge(dst, src)
 }
 func (m *B) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
-	return xxx_messageInfo_B.Size(m)
+	return m.Size()
 }
 func (m *B) XXX_DiscardUnknown() {
 	xxx_messageInfo_B.DiscardUnknown(m)

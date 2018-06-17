@@ -41,24 +41,15 @@ func (*Subby) Descriptor() ([]byte, []int) {
 	return fileDescriptor_one_827a0063df79db69, []int{0}
 }
 func (m *Subby) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Subby.Unmarshal(m, b)
 }
 func (m *Subby) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_Subby.Marshal(b, m, deterministic)
 }
 func (dst *Subby) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Subby.Merge(dst, src)
 }
 func (m *Subby) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_Subby.Size(m)
 }
 func (m *Subby) XXX_DiscardUnknown() {
@@ -97,24 +88,15 @@ func (*SampleOneOf) Descriptor() ([]byte, []int) {
 	return fileDescriptor_one_827a0063df79db69, []int{1}
 }
 func (m *SampleOneOf) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_SampleOneOf.Unmarshal(m, b)
 }
 func (m *SampleOneOf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_SampleOneOf.Marshal(b, m, deterministic)
 }
 func (dst *SampleOneOf) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_SampleOneOf.Merge(dst, src)
 }
 func (m *SampleOneOf) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_SampleOneOf.Size(m)
 }
 func (m *SampleOneOf) XXX_DiscardUnknown() {

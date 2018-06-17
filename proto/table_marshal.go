@@ -66,6 +66,9 @@ type marshalInfo struct {
 	sync.RWMutex                            // protect extElems map, also for initialization
 	extElems     map[int32]*marshalElemInfo // info of extension elements
 
+	hassizer      bool // has custom sizer
+	hasprotosizer bool // has custom protosizer
+
 	bytesExtensions field // offset of XXX_extensions where the field type is []byte
 }
 
@@ -170,6 +173,17 @@ func (u *marshalInfo) size(ptr pointer) int {
 	// If the message can marshal itself, let it do it, for compatibility.
 	// NOTE: This is not efficient.
 	if u.hasmarshaler {
+		// Uses the message's Size method if available
+		if u.hassizer {
+			s := ptr.asPointerTo(u.typ).Interface().(Sizer)
+			return s.Size()
+		}
+		// Uses the message's ProtoSize method if available
+		if u.hasprotosizer {
+			s := ptr.asPointerTo(u.typ).Interface().(ProtoSizer)
+			return s.ProtoSize()
+		}
+
 		m := ptr.asPointerTo(u.typ).Interface().(Marshaler)
 		b, _ := m.Marshal()
 		return len(b)
@@ -203,6 +217,7 @@ func (u *marshalInfo) size(ptr pointer) int {
 		s := *ptr.offset(u.unrecognized).toBytes()
 		n += len(s)
 	}
+
 	// cache the result for use in marshal
 	if u.sizecache.IsValid() {
 		atomic.StoreInt32(ptr.offset(u.sizecache).toInt32(), int32(n))
@@ -313,6 +328,12 @@ func (u *marshalInfo) computeMarshalInfo() {
 	u.sizecache = invalidField
 	isOneofMessage := false
 
+	if reflect.PtrTo(t).Implements(sizerType) {
+		u.hassizer = true
+	}
+	if reflect.PtrTo(t).Implements(protosizerType) {
+		u.hasprotosizer = true
+	}
 	// If the message can marshal itself, let it do it, for compatibility.
 	// NOTE: This is not efficient.
 	if reflect.PtrTo(t).Implements(marshalerType) {
@@ -2743,7 +2764,8 @@ func (p *Buffer) Marshal(pb Message) error {
 	if m, ok := pb.(Marshaler); ok {
 		// If the message can marshal itself, let it do it, for compatibility.
 		// NOTE: This is not efficient.
-		b, err := m.Marshal()
+		var b []byte
+		b, err = m.Marshal()
 		p.buf = append(p.buf, b...)
 		return err
 	}

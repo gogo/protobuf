@@ -197,25 +197,21 @@ func (*Type) Descriptor() ([]byte, []int) {
 	return fileDescriptor_type_345e3aff58b7b252, []int{0}
 }
 func (m *Type) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Type.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_Type.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *Type) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Type.Merge(dst, src)
 }
 func (m *Type) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
-	return xxx_messageInfo_Type.Size(m)
+	return m.Size()
 }
 func (m *Type) XXX_DiscardUnknown() {
 	xxx_messageInfo_Type.DiscardUnknown(m)
@@ -304,25 +300,21 @@ func (*Field) Descriptor() ([]byte, []int) {
 	return fileDescriptor_type_345e3aff58b7b252, []int{1}
 }
 func (m *Field) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Field.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Field) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_Field.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *Field) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Field.Merge(dst, src)
 }
 func (m *Field) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
-	return xxx_messageInfo_Field.Size(m)
+	return m.Size()
 }
 func (m *Field) XXX_DiscardUnknown() {
 	xxx_messageInfo_Field.DiscardUnknown(m)
@@ -427,25 +419,21 @@ func (*Enum) Descriptor() ([]byte, []int) {
 	return fileDescriptor_type_345e3aff58b7b252, []int{2}
 }
 func (m *Enum) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Enum.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Enum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_Enum.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *Enum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Enum.Merge(dst, src)
 }
 func (m *Enum) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
-	return xxx_messageInfo_Enum.Size(m)
+	return m.Size()
 }
 func (m *Enum) XXX_DiscardUnknown() {
 	xxx_messageInfo_Enum.DiscardUnknown(m)
@@ -511,25 +499,21 @@ func (*EnumValue) Descriptor() ([]byte, []int) {
 	return fileDescriptor_type_345e3aff58b7b252, []int{3}
 }
 func (m *EnumValue) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_EnumValue.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *EnumValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_EnumValue.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *EnumValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_EnumValue.Merge(dst, src)
 }
 func (m *EnumValue) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
-	return xxx_messageInfo_EnumValue.Size(m)
+	return m.Size()
 }
 func (m *EnumValue) XXX_DiscardUnknown() {
 	xxx_messageInfo_EnumValue.DiscardUnknown(m)
@@ -586,25 +570,21 @@ func (*Option) Descriptor() ([]byte, []int) {
 	return fileDescriptor_type_345e3aff58b7b252, []int{4}
 }
 func (m *Option) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_Option.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Option) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_Option.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *Option) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Option.Merge(dst, src)
 }
 func (m *Option) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
-	return xxx_messageInfo_Option.Size(m)
+	return m.Size()
 }
 func (m *Option) XXX_DiscardUnknown() {
 	xxx_messageInfo_Option.DiscardUnknown(m)

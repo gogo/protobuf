@@ -43,24 +43,15 @@ func (*Castaway) Descriptor() ([]byte, []int) {
 	return fileDescriptor_castvalue_87404b9a479f5489, []int{0}
 }
 func (m *Castaway) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Castaway.Unmarshal(m, b)
 }
 func (m *Castaway) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_Castaway.Marshal(b, m, deterministic)
 }
 func (dst *Castaway) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Castaway.Merge(dst, src)
 }
 func (m *Castaway) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_Castaway.Size(m)
 }
 func (m *Castaway) XXX_DiscardUnknown() {
@@ -82,24 +73,15 @@ func (*Wilson) Descriptor() ([]byte, []int) {
 	return fileDescriptor_castvalue_87404b9a479f5489, []int{1}
 }
 func (m *Wilson) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Wilson.Unmarshal(m, b)
 }
 func (m *Wilson) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_Wilson.Marshal(b, m, deterministic)
 }
 func (dst *Wilson) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Wilson.Merge(dst, src)
 }
 func (m *Wilson) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_Wilson.Size(m)
 }
 func (m *Wilson) XXX_DiscardUnknown() {

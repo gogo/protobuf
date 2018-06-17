@@ -42,25 +42,21 @@ func (*OneofTest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_issue322_3e2db2f0d45a9027, []int{0}
 }
 func (m *OneofTest) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
-	return xxx_messageInfo_OneofTest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *OneofTest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
 	}
-	return xxx_messageInfo_OneofTest.Marshal(b, m, deterministic)
+	return b[:n], nil
 }
 func (dst *OneofTest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OneofTest.Merge(dst, src)
 }
 func (m *OneofTest) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
-	return xxx_messageInfo_OneofTest.Size(m)
+	return m.Size()
 }
 func (m *OneofTest) XXX_DiscardUnknown() {
 	xxx_messageInfo_OneofTest.DiscardUnknown(m)

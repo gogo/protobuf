@@ -62,24 +62,15 @@ func (*DeprecatedRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_deprecated_1b284d1f30819a6c, []int{0}
 }
 func (m *DeprecatedRequest) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_DeprecatedRequest.Unmarshal(m, b)
 }
 func (m *DeprecatedRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_DeprecatedRequest.Marshal(b, m, deterministic)
 }
 func (dst *DeprecatedRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DeprecatedRequest.Merge(dst, src)
 }
 func (m *DeprecatedRequest) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_DeprecatedRequest.Size(m)
 }
 func (m *DeprecatedRequest) XXX_DiscardUnknown() {
@@ -104,24 +95,15 @@ func (*DeprecatedResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_deprecated_1b284d1f30819a6c, []int{1}
 }
 func (m *DeprecatedResponse) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_DeprecatedResponse.Unmarshal(m, b)
 }
 func (m *DeprecatedResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_DeprecatedResponse.Marshal(b, m, deterministic)
 }
 func (dst *DeprecatedResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DeprecatedResponse.Merge(dst, src)
 }
 func (m *DeprecatedResponse) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_DeprecatedResponse.Size(m)
 }
 func (m *DeprecatedResponse) XXX_DiscardUnknown() {

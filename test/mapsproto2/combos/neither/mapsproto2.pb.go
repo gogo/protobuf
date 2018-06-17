@@ -86,24 +86,15 @@ func (*FloatingPoint) Descriptor() ([]byte, []int) {
 	return fileDescriptor_mapsproto2_62fb8c1076af60e4, []int{0}
 }
 func (m *FloatingPoint) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_FloatingPoint.Unmarshal(m, b)
 }
 func (m *FloatingPoint) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_FloatingPoint.Marshal(b, m, deterministic)
 }
 func (dst *FloatingPoint) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FloatingPoint.Merge(dst, src)
 }
 func (m *FloatingPoint) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_FloatingPoint.Size(m)
 }
 func (m *FloatingPoint) XXX_DiscardUnknown() {
@@ -128,24 +119,15 @@ func (*CustomMap) Descriptor() ([]byte, []int) {
 	return fileDescriptor_mapsproto2_62fb8c1076af60e4, []int{1}
 }
 func (m *CustomMap) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_CustomMap.Unmarshal(m, b)
 }
 func (m *CustomMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_CustomMap.Marshal(b, m, deterministic)
 }
 func (dst *CustomMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomMap.Merge(dst, src)
 }
 func (m *CustomMap) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_CustomMap.Size(m)
 }
 func (m *CustomMap) XXX_DiscardUnknown() {
@@ -183,24 +165,15 @@ func (*AllMaps) Descriptor() ([]byte, []int) {
 	return fileDescriptor_mapsproto2_62fb8c1076af60e4, []int{2}
 }
 func (m *AllMaps) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_AllMaps.Unmarshal(m, b)
 }
 func (m *AllMaps) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_AllMaps.Marshal(b, m, deterministic)
 }
 func (dst *AllMaps) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AllMaps.Merge(dst, src)
 }
 func (m *AllMaps) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_AllMaps.Size(m)
 }
 func (m *AllMaps) XXX_DiscardUnknown() {
@@ -238,24 +211,15 @@ func (*AllMapsOrdered) Descriptor() ([]byte, []int) {
 	return fileDescriptor_mapsproto2_62fb8c1076af60e4, []int{3}
 }
 func (m *AllMapsOrdered) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_AllMapsOrdered.Unmarshal(m, b)
 }
 func (m *AllMapsOrdered) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_AllMapsOrdered.Marshal(b, m, deterministic)
 }
 func (dst *AllMapsOrdered) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AllMapsOrdered.Merge(dst, src)
 }
 func (m *AllMapsOrdered) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_AllMapsOrdered.Size(m)
 }
 func (m *AllMapsOrdered) XXX_DiscardUnknown() {

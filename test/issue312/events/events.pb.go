@@ -39,24 +39,15 @@ func (*Subtype) Descriptor() ([]byte, []int) {
 	return fileDescriptor_events_4681b5f19350f6a9, []int{0}
 }
 func (m *Subtype) XXX_Unmarshal(b []byte) error {
-	if m, ok := (interface{})(m).(proto.Unmarshaler); ok {
-		return m.Unmarshal(b)
-	}
 	return xxx_messageInfo_Subtype.Unmarshal(m, b)
 }
 func (m *Subtype) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if m, ok := (interface{})(m).(proto.Marshaler); ok {
-		return m.Marshal()
-	}
 	return xxx_messageInfo_Subtype.Marshal(b, m, deterministic)
 }
 func (dst *Subtype) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Subtype.Merge(dst, src)
 }
 func (m *Subtype) XXX_Size() int {
-	if m, ok := (interface{})(m).(proto.Sizer); ok {
-		return m.Size()
-	}
 	return xxx_messageInfo_Subtype.Size(m)
 }
 func (m *Subtype) XXX_DiscardUnknown() {

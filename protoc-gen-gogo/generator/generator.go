@@ -2332,23 +2332,29 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	// Wrapper for table-driven marshaling and unmarshaling.
 	g.P("func (m *", ccTypeName, ") XXX_Unmarshal(b []byte) error {")
 	g.In()
-	g.P("if m, ok := (interface{})(m).(proto.Unmarshaler); ok {")
-	g.In()
-	g.P("return m.Unmarshal(b)")
-	g.Out()
-	g.P("}")
-	g.P("return xxx_messageInfo_", ccTypeName, ".Unmarshal(m, b)")
+	if gogoproto.IsUnmarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
+		g.P("return m.Unmarshal(b)")
+	} else {
+		g.P("return xxx_messageInfo_", ccTypeName, ".Unmarshal(m, b)")
+	}
 	g.Out()
 	g.P("}")
 
 	g.P("func (m *", ccTypeName, ") XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {")
 	g.In()
-	g.P("if m, ok := (interface{})(m).(proto.Marshaler); ok {")
-	g.In()
-	g.P("return m.Marshal()")
-	g.Out()
-	g.P("}")
-	g.P("return xxx_messageInfo_", ccTypeName, ".Marshal(b, m, deterministic)")
+	if gogoproto.IsMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
+		gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
+		g.P("b = b[:cap(b)]")
+		g.P("n, err := m.MarshalTo(b)")
+		g.P("if err != nil {")
+		g.In()
+		g.P("return nil, err")
+		g.Out()
+		g.P("}")
+		g.P("return b[:n], nil")
+	} else {
+		g.P("return xxx_messageInfo_", ccTypeName, ".Marshal(b, m, deterministic)")
+	}
 	g.Out()
 	g.P("}")
 
@@ -2360,12 +2366,17 @@ func (g *Generator) generateMessage(message *Descriptor) {
 
 	g.P("func (m *", ccTypeName, ") XXX_Size() int {") // avoid name clash with "Size" field in some message
 	g.In()
-	g.P("if m, ok := (interface{})(m).(proto.Sizer); ok {")
-	g.In()
-	g.P("return m.Size()")
-	g.Out()
-	g.P("}")
-	g.P("return xxx_messageInfo_", ccTypeName, ".Size(m)")
+	if (gogoproto.IsMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
+		gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto)) &&
+		gogoproto.IsSizer(g.file.FileDescriptorProto, message.DescriptorProto) {
+		g.P("return m.Size()")
+	} else if (gogoproto.IsMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
+		gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto)) &&
+		gogoproto.IsProtoSizer(g.file.FileDescriptorProto, message.DescriptorProto) {
+		g.P("return m.ProtoSize()")
+	} else {
+		g.P("return xxx_messageInfo_", ccTypeName, ".Size(m)")
+	}
 	g.Out()
 	g.P("}")
 
