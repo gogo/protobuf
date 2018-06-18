@@ -38,16 +38,21 @@ func (*IndexQuery) Descriptor() ([]byte, []int) {
 	return fileDescriptor_index_5bc64712555c00b6, []int{0}
 }
 func (m *IndexQuery) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_IndexQuery.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *IndexQuery) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_IndexQuery.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *IndexQuery) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_IndexQuery.Merge(dst, src)
 }
 func (m *IndexQuery) XXX_Size() int {
-	return xxx_messageInfo_IndexQuery.Size(m)
+	return m.Size()
 }
 func (m *IndexQuery) XXX_DiscardUnknown() {
 	xxx_messageInfo_IndexQuery.DiscardUnknown(m)

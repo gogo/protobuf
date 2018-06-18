@@ -44,7 +44,7 @@ func (*MapTest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_map_c5bc2daa9ca30987, []int{0}
 }
 func (m *MapTest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_MapTest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *MapTest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MapTest.Marshal(b, m, deterministic)
@@ -74,7 +74,7 @@ func (*FakeMap) Descriptor() ([]byte, []int) {
 	return fileDescriptor_map_c5bc2daa9ca30987, []int{1}
 }
 func (m *FakeMap) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_FakeMap.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *FakeMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_FakeMap.Marshal(b, m, deterministic)
@@ -106,7 +106,7 @@ func (*FakeMapEntry) Descriptor() ([]byte, []int) {
 	return fileDescriptor_map_c5bc2daa9ca30987, []int{2}
 }
 func (m *FakeMapEntry) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_FakeMapEntry.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *FakeMapEntry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_FakeMapEntry.Marshal(b, m, deterministic)

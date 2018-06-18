@@ -66,6 +66,9 @@ type marshalInfo struct {
 	sync.RWMutex                            // protect extElems map, also for initialization
 	extElems     map[int32]*marshalElemInfo // info of extension elements
 
+	hassizer      bool // has custom sizer
+	hasprotosizer bool // has custom protosizer
+
 	bytesExtensions field // offset of XXX_extensions where the field type is []byte
 }
 
@@ -170,6 +173,17 @@ func (u *marshalInfo) size(ptr pointer) int {
 	// If the message can marshal itself, let it do it, for compatibility.
 	// NOTE: This is not efficient.
 	if u.hasmarshaler {
+		// Uses the message's Size method if available
+		if u.hassizer {
+			s := ptr.asPointerTo(u.typ).Interface().(Sizer)
+			return s.Size()
+		}
+		// Uses the message's ProtoSize method if available
+		if u.hasprotosizer {
+			s := ptr.asPointerTo(u.typ).Interface().(ProtoSizer)
+			return s.ProtoSize()
+		}
+
 		m := ptr.asPointerTo(u.typ).Interface().(Marshaler)
 		b, _ := m.Marshal()
 		return len(b)
@@ -203,6 +217,7 @@ func (u *marshalInfo) size(ptr pointer) int {
 		s := *ptr.offset(u.unrecognized).toBytes()
 		n += len(s)
 	}
+
 	// cache the result for use in marshal
 	if u.sizecache.IsValid() {
 		atomic.StoreInt32(ptr.offset(u.sizecache).toInt32(), int32(n))
@@ -313,6 +328,12 @@ func (u *marshalInfo) computeMarshalInfo() {
 	u.sizecache = invalidField
 	isOneofMessage := false
 
+	if reflect.PtrTo(t).Implements(sizerType) {
+		u.hassizer = true
+	}
+	if reflect.PtrTo(t).Implements(protosizerType) {
+		u.hasprotosizer = true
+	}
 	// If the message can marshal itself, let it do it, for compatibility.
 	// NOTE: This is not efficient.
 	if reflect.PtrTo(t).Implements(marshalerType) {
@@ -2686,14 +2707,14 @@ type newMarshaler interface {
 // Size returns the encoded size of a protocol buffer message.
 // This is the main entry point.
 func Size(pb Message) int {
+	if m, ok := pb.(newMarshaler); ok {
+		return m.XXX_Size()
+	}
 	if m, ok := pb.(Marshaler); ok {
 		// If the message can marshal itself, let it do it, for compatibility.
 		// NOTE: This is not efficient.
 		b, _ := m.Marshal()
 		return len(b)
-	}
-	if m, ok := pb.(newMarshaler); ok {
-		return m.XXX_Size()
 	}
 	// in case somehow we didn't generate the wrapper
 	if pb == nil {
@@ -2707,15 +2728,15 @@ func Size(pb Message) int {
 // and encodes it into the wire format, returning the data.
 // This is the main entry point.
 func Marshal(pb Message) ([]byte, error) {
-	if m, ok := pb.(Marshaler); ok {
-		// If the message can marshal itself, let it do it, for compatibility.
-		// NOTE: This is not efficient.
-		return m.Marshal()
-	}
 	if m, ok := pb.(newMarshaler); ok {
 		siz := m.XXX_Size()
 		b := make([]byte, 0, siz)
 		return m.XXX_Marshal(b, false)
+	}
+	if m, ok := pb.(Marshaler); ok {
+		// If the message can marshal itself, let it do it, for compatibility.
+		// NOTE: This is not efficient.
+		return m.Marshal()
 	}
 	// in case somehow we didn't generate the wrapper
 	if pb == nil {
@@ -2733,19 +2754,19 @@ func Marshal(pb Message) ([]byte, error) {
 // This is an alternative entry point. It is not necessary to use
 // a Buffer for most applications.
 func (p *Buffer) Marshal(pb Message) error {
-	if m, ok := pb.(Marshaler); ok {
-		// If the message can marshal itself, let it do it, for compatibility.
-		// NOTE: This is not efficient.
-		b, err := m.Marshal()
-		p.buf = append(p.buf, b...)
-		return err
-	}
 	var err error
 	if m, ok := pb.(newMarshaler); ok {
 		siz := m.XXX_Size()
-		// make sure buf has enough capacity
 		p.grow(siz) // make sure buf has enough capacity
 		p.buf, err = m.XXX_Marshal(p.buf, p.deterministic)
+		return err
+	}
+	if m, ok := pb.(Marshaler); ok {
+		// If the message can marshal itself, let it do it, for compatibility.
+		// NOTE: This is not efficient.
+		var b []byte
+		b, err = m.Marshal()
+		p.buf = append(p.buf, b...)
 		return err
 	}
 	// in case somehow we didn't generate the wrapper

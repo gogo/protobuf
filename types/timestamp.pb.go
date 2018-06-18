@@ -127,16 +127,21 @@ func (*Timestamp) Descriptor() ([]byte, []int) {
 }
 func (*Timestamp) XXX_WellKnownType() string { return "Timestamp" }
 func (m *Timestamp) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Timestamp.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Timestamp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Timestamp.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *Timestamp) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Timestamp.Merge(dst, src)
 }
 func (m *Timestamp) XXX_Size() int {
-	return xxx_messageInfo_Timestamp.Size(m)
+	return m.Size()
 }
 func (m *Timestamp) XXX_DiscardUnknown() {
 	xxx_messageInfo_Timestamp.DiscardUnknown(m)

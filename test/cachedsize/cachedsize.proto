@@ -1,6 +1,6 @@
 // Protocol Buffers for Go with Gadgets
 //
-// Copyright (c) 2013, The GoGo Authors. All rights reserved.
+// Copyright (c) 2018, The GoGo Authors. All rights reserved.
 // http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
@@ -26,25 +26,23 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package proto
+syntax = "proto2";
+package cachedsize;
 
-import (
-	"encoding/json"
-	"strconv"
-)
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
-type Sizer interface {
-	Size() int
+option (gogoproto.verbose_equal_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.unmarshaler_all) = false;
+option (gogoproto.marshaler_all) = false;
+option (gogoproto.sizer_all) = true;
+
+option (gogoproto.enum_stringer_all) = true;
+
+message Foo {
+	optional Bar field1 = 1;
 }
 
-type ProtoSizer interface {
-	ProtoSize() int
-}
-
-func MarshalJSONEnum(m map[int32]string, value int32) ([]byte, error) {
-	s, ok := m[value]
-	if !ok {
-		s = strconv.Itoa(int(value))
+message Bar {
+	optional bool field2 = 1 [(gogoproto.nullable) = false];
 	}
-	return json.Marshal(s)
-}

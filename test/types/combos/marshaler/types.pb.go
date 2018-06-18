@@ -53,13 +53,18 @@ func (m *KnownTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_KnownTypes.Unmarshal(m, b)
 }
 func (m *KnownTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_KnownTypes.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *KnownTypes) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_KnownTypes.Merge(dst, src)
 }
 func (m *KnownTypes) XXX_Size() int {
-	return xxx_messageInfo_KnownTypes.Size(m)
+	return m.Size()
 }
 func (m *KnownTypes) XXX_DiscardUnknown() {
 	xxx_messageInfo_KnownTypes.DiscardUnknown(m)
@@ -164,13 +169,18 @@ func (m *ProtoTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ProtoTypes.Unmarshal(m, b)
 }
 func (m *ProtoTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ProtoTypes.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *ProtoTypes) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ProtoTypes.Merge(dst, src)
 }
 func (m *ProtoTypes) XXX_Size() int {
-	return xxx_messageInfo_ProtoTypes.Size(m)
+	return m.Size()
 }
 func (m *ProtoTypes) XXX_DiscardUnknown() {
 	xxx_messageInfo_ProtoTypes.DiscardUnknown(m)
@@ -226,13 +236,18 @@ func (m *StdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StdTypes.Unmarshal(m, b)
 }
 func (m *StdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_StdTypes.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *StdTypes) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_StdTypes.Merge(dst, src)
 }
 func (m *StdTypes) XXX_Size() int {
-	return xxx_messageInfo_StdTypes.Size(m)
+	return m.Size()
 }
 func (m *StdTypes) XXX_DiscardUnknown() {
 	xxx_messageInfo_StdTypes.DiscardUnknown(m)
@@ -288,13 +303,18 @@ func (m *RepProtoTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RepProtoTypes.Unmarshal(m, b)
 }
 func (m *RepProtoTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_RepProtoTypes.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *RepProtoTypes) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_RepProtoTypes.Merge(dst, src)
 }
 func (m *RepProtoTypes) XXX_Size() int {
-	return xxx_messageInfo_RepProtoTypes.Size(m)
+	return m.Size()
 }
 func (m *RepProtoTypes) XXX_DiscardUnknown() {
 	xxx_messageInfo_RepProtoTypes.DiscardUnknown(m)
@@ -350,13 +370,18 @@ func (m *RepStdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RepStdTypes.Unmarshal(m, b)
 }
 func (m *RepStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_RepStdTypes.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *RepStdTypes) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_RepStdTypes.Merge(dst, src)
 }
 func (m *RepStdTypes) XXX_Size() int {
-	return xxx_messageInfo_RepStdTypes.Size(m)
+	return m.Size()
 }
 func (m *RepStdTypes) XXX_DiscardUnknown() {
 	xxx_messageInfo_RepStdTypes.DiscardUnknown(m)
@@ -412,13 +437,18 @@ func (m *MapProtoTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MapProtoTypes.Unmarshal(m, b)
 }
 func (m *MapProtoTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_MapProtoTypes.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *MapProtoTypes) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MapProtoTypes.Merge(dst, src)
 }
 func (m *MapProtoTypes) XXX_Size() int {
-	return xxx_messageInfo_MapProtoTypes.Size(m)
+	return m.Size()
 }
 func (m *MapProtoTypes) XXX_DiscardUnknown() {
 	xxx_messageInfo_MapProtoTypes.DiscardUnknown(m)
@@ -474,13 +504,18 @@ func (m *MapStdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MapStdTypes.Unmarshal(m, b)
 }
 func (m *MapStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_MapStdTypes.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *MapStdTypes) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MapStdTypes.Merge(dst, src)
 }
 func (m *MapStdTypes) XXX_Size() int {
-	return xxx_messageInfo_MapStdTypes.Size(m)
+	return m.Size()
 }
 func (m *MapStdTypes) XXX_DiscardUnknown() {
 	xxx_messageInfo_MapStdTypes.DiscardUnknown(m)
@@ -536,13 +571,18 @@ func (m *OneofProtoTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OneofProtoTypes.Unmarshal(m, b)
 }
 func (m *OneofProtoTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_OneofProtoTypes.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *OneofProtoTypes) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OneofProtoTypes.Merge(dst, src)
 }
 func (m *OneofProtoTypes) XXX_Size() int {
-	return xxx_messageInfo_OneofProtoTypes.Size(m)
+	return m.Size()
 }
 func (m *OneofProtoTypes) XXX_DiscardUnknown() {
 	xxx_messageInfo_OneofProtoTypes.DiscardUnknown(m)
@@ -683,13 +723,18 @@ func (m *OneofStdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OneofStdTypes.Unmarshal(m, b)
 }
 func (m *OneofStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_OneofStdTypes.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *OneofStdTypes) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OneofStdTypes.Merge(dst, src)
 }
 func (m *OneofStdTypes) XXX_Size() int {
-	return xxx_messageInfo_OneofStdTypes.Size(m)
+	return m.Size()
 }
 func (m *OneofStdTypes) XXX_DiscardUnknown() {
 	xxx_messageInfo_OneofStdTypes.DiscardUnknown(m)

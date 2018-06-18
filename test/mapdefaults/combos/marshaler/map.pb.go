@@ -45,13 +45,18 @@ func (m *MapTest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MapTest.Unmarshal(m, b)
 }
 func (m *MapTest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_MapTest.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *MapTest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MapTest.Merge(dst, src)
 }
 func (m *MapTest) XXX_Size() int {
-	return xxx_messageInfo_MapTest.Size(m)
+	return m.Size()
 }
 func (m *MapTest) XXX_DiscardUnknown() {
 	xxx_messageInfo_MapTest.DiscardUnknown(m)
@@ -75,13 +80,18 @@ func (m *FakeMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FakeMap.Unmarshal(m, b)
 }
 func (m *FakeMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_FakeMap.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *FakeMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FakeMap.Merge(dst, src)
 }
 func (m *FakeMap) XXX_Size() int {
-	return xxx_messageInfo_FakeMap.Size(m)
+	return m.Size()
 }
 func (m *FakeMap) XXX_DiscardUnknown() {
 	xxx_messageInfo_FakeMap.DiscardUnknown(m)
@@ -107,13 +117,18 @@ func (m *FakeMapEntry) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FakeMapEntry.Unmarshal(m, b)
 }
 func (m *FakeMapEntry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_FakeMapEntry.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *FakeMapEntry) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FakeMapEntry.Merge(dst, src)
 }
 func (m *FakeMapEntry) XXX_Size() int {
-	return xxx_messageInfo_FakeMapEntry.Size(m)
+	return m.Size()
 }
 func (m *FakeMapEntry) XXX_DiscardUnknown() {
 	xxx_messageInfo_FakeMapEntry.DiscardUnknown(m)

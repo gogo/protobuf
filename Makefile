@@ -119,6 +119,7 @@ regenerate:
 	make -C test/issue330 regenerate
 	make -C test/importcustom-issue389 regenerate
 	make -C test/merge regenerate
+	make -C test/cachedsize regenerate
 	make gofmt
 
 tests:

@@ -53,16 +53,21 @@ func (*Message) Descriptor() ([]byte, []int) {
 	return fileDescriptor_enumdecl_b298d32d6f1455f8, []int{0}
 }
 func (m *Message) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Message.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Message.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *Message) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Message.Merge(dst, src)
 }
 func (m *Message) XXX_Size() int {
-	return xxx_messageInfo_Message.Size(m)
+	return m.Size()
 }
 func (m *Message) XXX_DiscardUnknown() {
 	xxx_messageInfo_Message.DiscardUnknown(m)

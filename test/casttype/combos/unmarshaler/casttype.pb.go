@@ -62,7 +62,7 @@ func (*Castaway) Descriptor() ([]byte, []int) {
 	return fileDescriptor_casttype_bbbbfd21588d9441, []int{0}
 }
 func (m *Castaway) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Castaway.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Castaway) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Castaway.Marshal(b, m, deterministic)
@@ -92,7 +92,7 @@ func (*Wilson) Descriptor() ([]byte, []int) {
 	return fileDescriptor_casttype_bbbbfd21588d9441, []int{1}
 }
 func (m *Wilson) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Wilson.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Wilson) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Wilson.Marshal(b, m, deterministic)

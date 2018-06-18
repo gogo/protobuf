@@ -40,16 +40,21 @@ func (*SizeMessage) Descriptor() ([]byte, []int) {
 	return fileDescriptor_protosize_06b2b18dea724cd1, []int{0}
 }
 func (m *SizeMessage) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_SizeMessage.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *SizeMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_SizeMessage.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *SizeMessage) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_SizeMessage.Merge(dst, src)
 }
 func (m *SizeMessage) XXX_Size() int {
-	return xxx_messageInfo_SizeMessage.Size(m)
+	return m.ProtoSize()
 }
 func (m *SizeMessage) XXX_DiscardUnknown() {
 	xxx_messageInfo_SizeMessage.DiscardUnknown(m)

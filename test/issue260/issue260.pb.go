@@ -34,16 +34,21 @@ func (*Dropped) Descriptor() ([]byte, []int) {
 	return fileDescriptor_issue260_6a5b9ffe9baf64cb, []int{0}
 }
 func (m *Dropped) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Dropped.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Dropped) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Dropped.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *Dropped) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Dropped.Merge(dst, src)
 }
 func (m *Dropped) XXX_Size() int {
-	return xxx_messageInfo_Dropped.Size(m)
+	return m.Size()
 }
 func (m *Dropped) XXX_DiscardUnknown() {
 	xxx_messageInfo_Dropped.DiscardUnknown(m)
@@ -72,16 +77,21 @@ func (*DroppedWithoutGetters) Descriptor() ([]byte, []int) {
 	return fileDescriptor_issue260_6a5b9ffe9baf64cb, []int{1}
 }
 func (m *DroppedWithoutGetters) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_DroppedWithoutGetters.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *DroppedWithoutGetters) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_DroppedWithoutGetters.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *DroppedWithoutGetters) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DroppedWithoutGetters.Merge(dst, src)
 }
 func (m *DroppedWithoutGetters) XXX_Size() int {
-	return xxx_messageInfo_DroppedWithoutGetters.Size(m)
+	return m.Size()
 }
 func (m *DroppedWithoutGetters) XXX_DiscardUnknown() {
 	xxx_messageInfo_DroppedWithoutGetters.DiscardUnknown(m)
@@ -103,16 +113,21 @@ func (*Kept) Descriptor() ([]byte, []int) {
 	return fileDescriptor_issue260_6a5b9ffe9baf64cb, []int{2}
 }
 func (m *Kept) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Kept.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Kept) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Kept.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *Kept) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Kept.Merge(dst, src)
 }
 func (m *Kept) XXX_Size() int {
-	return xxx_messageInfo_Kept.Size(m)
+	return m.Size()
 }
 func (m *Kept) XXX_DiscardUnknown() {
 	xxx_messageInfo_Kept.DiscardUnknown(m)

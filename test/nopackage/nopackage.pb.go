@@ -36,16 +36,21 @@ func (*M) Descriptor() ([]byte, []int) {
 	return fileDescriptor_nopackage_085d7f4350f51d1d, []int{0}
 }
 func (m *M) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_M.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *M) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_M.Marshal(b, m, deterministic)
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
 }
 func (dst *M) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_M.Merge(dst, src)
 }
 func (m *M) XXX_Size() int {
-	return xxx_messageInfo_M.Size(m)
+	return m.Size()
 }
 func (m *M) XXX_DiscardUnknown() {
 	xxx_messageInfo_M.DiscardUnknown(m)
