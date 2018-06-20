@@ -1,0 +1,110 @@
+// Protocol Buffers for Go with Gadgets
+//
+// Copyright (c) 2018, The GoGo Authors. All rights reserved.
+// http://github.com/gogo/protobuf
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+//     * Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above
+// copyright notice, this list of conditions and the following disclaimer
+// in the documentation and/or other materials provided with the
+// distribution.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+package deterministic
+
+import (
+	"bytes"
+	"github.com/gogo/protobuf/proto"
+	"testing"
+)
+
+func getTestMap() map[string]string {
+	return map[string]string{
+		"a": "1",
+		"b": "2",
+		"c": "3",
+		"d": "4",
+		"e": "5",
+		"f": "6",
+		"g": "7",
+		"h": "8",
+		"i": "9",
+		"j": "10",
+		"k": "11",
+		"l": "12",
+		"m": "13",
+		"n": "14",
+	}
+
+}
+
+func TestOrderedMap(t *testing.T) {
+	var b proto.Buffer
+	m := getTestMap()
+	in := &OrderedMap{
+		StringMap: m,
+	}
+	if err := b.Marshal(in); err != nil {
+		t.Fatalf("Marshal failed: %v", err)
+	}
+	data1 := b.Bytes()
+	out := &OrderedMap{}
+	err := proto.Unmarshal(data1, out)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := in.VerboseEqual(out); err != nil {
+		t.Fatal(err)
+	}
+	data2, err := proto.Marshal(in)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if bytes.Compare(data1, data2) != 0 {
+		t.Fatal("byte arrays are not the same")
+	}
+}
+
+func TestUnorderedMap(t *testing.T) {
+	var b proto.Buffer
+	b.SetDeterministic(true)
+	m := getTestMap()
+	in := &UnorderedMap{
+		StringMap: m,
+	}
+	if err := b.Marshal(in); err != nil {
+		t.Fatalf("Marshal failed: %v", err)
+	}
+	data1 := b.Bytes()
+	out := &UnorderedMap{}
+	err := proto.Unmarshal(data1, out)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := in.VerboseEqual(out); err != nil {
+		t.Fatal(err)
+	}
+	data2, err := proto.Marshal(in)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if bytes.Compare(data1, data2) != 0 {
+		t.Fatal("byte arrays are not the same")
+	}
+}
