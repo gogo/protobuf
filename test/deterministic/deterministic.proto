@@ -33,18 +33,49 @@ import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 option (gogoproto.verbose_equal_all) = true;
 option (gogoproto.equal_all) = true;
-option (gogoproto.unmarshaler_all) = true;
-option (gogoproto.marshaler_all) = true;
 option (gogoproto.sizer_all) = true;
 
 option (gogoproto.enum_stringer_all) = true;
 
 message OrderedMap {
+    option (gogoproto.marshaler) = true;
     option (gogoproto.stable_marshaler) = true;
 	map<string, string> StringMap = 1;
 }
 
 message UnorderedMap {
+    option (gogoproto.marshaler) = true;
     option (gogoproto.stable_marshaler) = false;
 	map<string, string> StringMap = 1;
+}
+
+message MapNoMarshaler {
+    option (gogoproto.marshaler) = false;
+	map<string, string> StringMap = 1;
+}
+
+message NestedOrderedMap {
+    option (gogoproto.marshaler) = true;
+    option (gogoproto.stable_marshaler) = true;
+	map<string, string> StringMap = 1;
+    NestedMap1 NestedMap = 2;
+}
+
+message NestedMap1 {
+    option (gogoproto.marshaler) = true;
+    option (gogoproto.stable_marshaler) = true;
+	map<string, string> NestedStringMap = 1;
+}
+
+message NestedUnorderedMap {
+    option (gogoproto.marshaler) = true;
+    option (gogoproto.stable_marshaler) = false;
+    map<string, string> StringMap = 1;
+    NestedMap2 NestedMap = 2;
+}
+
+message NestedMap2 {
+    option (gogoproto.marshaler) = true;
+    option (gogoproto.stable_marshaler) = false;
+	map<string, string> NestedStringMap = 1;
 }
