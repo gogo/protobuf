@@ -560,3 +560,7 @@ message Communique {
     Strings msg = 10;
   }
 }
+
+message CustomDeterministicMarshaler {
+  optional uint64 field1 = 1;
+}

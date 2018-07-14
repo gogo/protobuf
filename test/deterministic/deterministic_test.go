@@ -88,23 +88,7 @@ func TestUnorderedMap(t *testing.T) {
 	in := &UnorderedMap{
 		StringMap: m,
 	}
-	if err := b.Marshal(in); err != nil {
-		t.Fatalf("Marshal failed: %v", err)
-	}
-	data1 := b.Bytes()
-	out := &UnorderedMap{}
-	err := proto.Unmarshal(data1, out)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := in.VerboseEqual(out); err != nil {
-		t.Fatal(err)
-	}
-	data2, err := proto.Marshal(in)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if bytes.Compare(data1, data2) != 0 {
-		t.Fatal("byte arrays are not the same")
+	if err := b.Marshal(in); err == nil {
+		t.Fatalf("Expected Marshal to fail, rejecting deterministic flag")
 	}
 }
