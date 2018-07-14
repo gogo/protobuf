@@ -65,8 +65,7 @@ func TestOrderedMap(t *testing.T) {
 	}
 	data1 := b.Bytes()
 	out := &OrderedMap{}
-	err := proto.Unmarshal(data1, out)
-	if err != nil {
+	if err := proto.Unmarshal(data1, out); err != nil {
 		t.Fatal(err)
 	}
 	if err := in.VerboseEqual(out); err != nil {
@@ -140,8 +139,7 @@ func TestOrderedNestedMap(t *testing.T) {
 	}
 	data1 := b.Bytes()
 	out := &NestedOrderedMap{}
-	err := proto.Unmarshal(data1, out)
-	if err != nil {
+	if err := proto.Unmarshal(data1, out); err != nil {
 		t.Fatal(err)
 	}
 	if err := in.VerboseEqual(out); err != nil {
@@ -181,8 +179,7 @@ func TestOrderedNestedStructMap(t *testing.T) {
 	}
 	data1 := b.Bytes()
 	out := &NestedMap1{}
-	err := proto.Unmarshal(data1, out)
-	if err != nil {
+	if err := proto.Unmarshal(data1, out); err != nil {
 		t.Fatal(err)
 	}
 	if err := in.VerboseEqual(out); err != nil {
