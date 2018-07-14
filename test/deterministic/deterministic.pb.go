@@ -24,7 +24,7 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type OrderedMap struct {
-	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -34,7 +34,7 @@ func (m *OrderedMap) Reset()         { *m = OrderedMap{} }
 func (m *OrderedMap) String() string { return proto.CompactTextString(m) }
 func (*OrderedMap) ProtoMessage()    {}
 func (*OrderedMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_4064ea6d3f97db40, []int{0}
+	return fileDescriptor_deterministic_f6340fb8decdd007, []int{0}
 }
 func (m *OrderedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OrderedMap.Unmarshal(m, b)
@@ -67,7 +67,7 @@ func (m *OrderedMap) GetStringMap() map[string]string {
 }
 
 type UnorderedMap struct {
-	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -77,7 +77,7 @@ func (m *UnorderedMap) Reset()         { *m = UnorderedMap{} }
 func (m *UnorderedMap) String() string { return proto.CompactTextString(m) }
 func (*UnorderedMap) ProtoMessage()    {}
 func (*UnorderedMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_4064ea6d3f97db40, []int{1}
+	return fileDescriptor_deterministic_f6340fb8decdd007, []int{1}
 }
 func (m *UnorderedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnorderedMap.Unmarshal(m, b)
@@ -114,7 +114,7 @@ func (m *UnorderedMap) GetStringMap() map[string]string {
 }
 
 type MapNoMarshaler struct {
-	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -124,7 +124,7 @@ func (m *MapNoMarshaler) Reset()         { *m = MapNoMarshaler{} }
 func (m *MapNoMarshaler) String() string { return proto.CompactTextString(m) }
 func (*MapNoMarshaler) ProtoMessage()    {}
 func (*MapNoMarshaler) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_4064ea6d3f97db40, []int{2}
+	return fileDescriptor_deterministic_f6340fb8decdd007, []int{2}
 }
 func (m *MapNoMarshaler) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MapNoMarshaler.Unmarshal(m, b)
@@ -152,7 +152,7 @@ func (m *MapNoMarshaler) GetStringMap() map[string]string {
 }
 
 type NestedOrderedMap struct {
-	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	NestedMap            *NestedMap1       `protobuf:"bytes,2,opt,name=NestedMap" json:"NestedMap,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
@@ -163,7 +163,7 @@ func (m *NestedOrderedMap) Reset()         { *m = NestedOrderedMap{} }
 func (m *NestedOrderedMap) String() string { return proto.CompactTextString(m) }
 func (*NestedOrderedMap) ProtoMessage()    {}
 func (*NestedOrderedMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_4064ea6d3f97db40, []int{3}
+	return fileDescriptor_deterministic_f6340fb8decdd007, []int{3}
 }
 func (m *NestedOrderedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedOrderedMap.Unmarshal(m, b)
@@ -203,7 +203,7 @@ func (m *NestedOrderedMap) GetNestedMap() *NestedMap1 {
 }
 
 type NestedMap1 struct {
-	NestedStringMap      map[string]string `protobuf:"bytes,1,rep,name=NestedStringMap" json:"NestedStringMap,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	NestedStringMap      map[string]string `protobuf:"bytes,1,rep,name=NestedStringMap" json:"NestedStringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -213,7 +213,7 @@ func (m *NestedMap1) Reset()         { *m = NestedMap1{} }
 func (m *NestedMap1) String() string { return proto.CompactTextString(m) }
 func (*NestedMap1) ProtoMessage()    {}
 func (*NestedMap1) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_4064ea6d3f97db40, []int{4}
+	return fileDescriptor_deterministic_f6340fb8decdd007, []int{4}
 }
 func (m *NestedMap1) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedMap1.Unmarshal(m, b)
@@ -246,7 +246,7 @@ func (m *NestedMap1) GetNestedStringMap() map[string]string {
 }
 
 type NestedUnorderedMap struct {
-	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	NestedMap            *NestedMap2       `protobuf:"bytes,2,opt,name=NestedMap" json:"NestedMap,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
@@ -257,7 +257,7 @@ func (m *NestedUnorderedMap) Reset()         { *m = NestedUnorderedMap{} }
 func (m *NestedUnorderedMap) String() string { return proto.CompactTextString(m) }
 func (*NestedUnorderedMap) ProtoMessage()    {}
 func (*NestedUnorderedMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_4064ea6d3f97db40, []int{5}
+	return fileDescriptor_deterministic_f6340fb8decdd007, []int{5}
 }
 func (m *NestedUnorderedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedUnorderedMap.Unmarshal(m, b)
@@ -301,7 +301,7 @@ func (m *NestedUnorderedMap) GetNestedMap() *NestedMap2 {
 }
 
 type NestedMap2 struct {
-	NestedStringMap      map[string]string `protobuf:"bytes,1,rep,name=NestedStringMap" json:"NestedStringMap,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	NestedStringMap      map[string]string `protobuf:"bytes,1,rep,name=NestedStringMap" json:"NestedStringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -311,7 +311,7 @@ func (m *NestedMap2) Reset()         { *m = NestedMap2{} }
 func (m *NestedMap2) String() string { return proto.CompactTextString(m) }
 func (*NestedMap2) ProtoMessage()    {}
 func (*NestedMap2) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_4064ea6d3f97db40, []int{6}
+	return fileDescriptor_deterministic_f6340fb8decdd007, []int{6}
 }
 func (m *NestedMap2) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedMap2.Unmarshal(m, b)
@@ -1278,10 +1278,10 @@ func sozDeterministic(x uint64) (n int) {
 	return sovDeterministic(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
 
-func init() { proto.RegisterFile("deterministic.proto", fileDescriptor_deterministic_4064ea6d3f97db40) }
+func init() { proto.RegisterFile("deterministic.proto", fileDescriptor_deterministic_f6340fb8decdd007) }
 
-var fileDescriptor_deterministic_4064ea6d3f97db40 = []byte{
-	// 379 bytes of a gzipped FileDescriptorProto
+var fileDescriptor_deterministic_f6340fb8decdd007 = []byte{
+	// 385 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x4e, 0x49, 0x2d, 0x49,
 	0x2d, 0xca, 0xcd, 0xcc, 0xcb, 0x2c, 0x2e, 0xc9, 0x4c, 0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17,
 	0xe2, 0x45, 0x11, 0x94, 0xd2, 0x4d, 0xcf, 0x2c, 0xc9, 0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5,
@@ -1304,6 +1304,7 @@ var fileDescriptor_deterministic_4064ea6d3f97db40 = []byte{
 	0x6c, 0x0a, 0xc9, 0x74, 0xf6, 0x53, 0x46, 0x2e, 0x21, 0x88, 0x71, 0x28, 0xc9, 0xdc, 0x0f, 0x33,
 	0x72, 0x0c, 0xb0, 0x3a, 0x9c, 0xb8, 0xc4, 0x4e, 0x52, 0xf4, 0x18, 0x51, 0x3f, 0x7a, 0x18, 0x50,
 	0xa3, 0xc7, 0x88, 0x8c, 0xe8, 0x31, 0x1a, 0x80, 0xe8, 0x61, 0x70, 0x12, 0x78, 0xf0, 0x50, 0x8e,
-	0x71, 0xc5, 0x23, 0x39, 0xc6, 0x07, 0x8f, 0xe4, 0x18, 0x3f, 0x3c, 0x92, 0x63, 0x04, 0x04, 0x00,
-	0x00, 0xff, 0xff, 0x66, 0x28, 0x8e, 0x1b, 0x84, 0x05, 0x00, 0x00,
+	0x71, 0xc5, 0x23, 0x39, 0xc6, 0x07, 0x8f, 0xe4, 0x18, 0x3f, 0x3c, 0x92, 0x63, 0x4c, 0x62, 0x03,
+	0x97, 0x9b, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0xa0, 0xcf, 0x58, 0xa8, 0x8c, 0x05, 0x00,
+	0x00,
 }
