@@ -7,6 +7,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import bytes "bytes"
+
 import strings "strings"
 import reflect "reflect"
 
@@ -16,6 +18,12 @@ import io "io"
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 // A generic empty message that you can re-use to avoid defining duplicated
 // empty messages in your APIs. A typical example is to use it as the request
@@ -27,12 +35,39 @@ var _ = math.Inf
 //
 // The JSON representation for `Empty` is empty JSON object `{}`.
 type Empty struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Empty) Reset()                    { *m = Empty{} }
-func (*Empty) ProtoMessage()               {}
-func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptorEmpty, []int{0} }
-func (*Empty) XXX_WellKnownType() string   { return "Empty" }
+func (m *Empty) Reset()      { *m = Empty{} }
+func (*Empty) ProtoMessage() {}
+func (*Empty) Descriptor() ([]byte, []int) {
+	return fileDescriptor_empty_fa64318be3e23895, []int{0}
+}
+func (*Empty) XXX_WellKnownType() string { return "Empty" }
+func (m *Empty) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Empty) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
+}
+func (dst *Empty) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Empty.Merge(dst, src)
+}
+func (m *Empty) XXX_Size() int {
+	return m.Size()
+}
+func (m *Empty) XXX_DiscardUnknown() {
+	xxx_messageInfo_Empty.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Empty proto.InternalMessageInfo
 
 func (*Empty) XXX_MessageName() string {
 	return "google.protobuf.Empty"
@@ -65,6 +100,9 @@ func (this *Empty) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *Empty) Equal(that interface{}) bool {
@@ -86,6 +124,9 @@ func (this *Empty) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Empty) GoString() string {
@@ -94,6 +135,9 @@ func (this *Empty) GoString() string {
 	}
 	s := make([]string, 0, 4)
 	s = append(s, "&types.Empty{")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -120,6 +164,9 @@ func (m *Empty) MarshalTo(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
 	return i, nil
 }
 
@@ -135,6 +182,7 @@ func encodeVarintEmpty(dAtA []byte, offset int, v uint64) int {
 func NewPopulatedEmpty(r randyEmpty, easy bool) *Empty {
 	this := &Empty{}
 	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedEmpty(r, 1)
 	}
 	return this
 }
@@ -214,6 +262,9 @@ func encodeVarintPopulateEmpty(dAtA []byte, v uint64) []byte {
 func (m *Empty) Size() (n int) {
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 
@@ -235,6 +286,7 @@ func (this *Empty) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&Empty{`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -288,6 +340,7 @@ func (m *Empty) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -402,9 +455,9 @@ var (
 	ErrIntOverflowEmpty   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("google/protobuf/empty.proto", fileDescriptorEmpty) }
+func init() { proto.RegisterFile("google/protobuf/empty.proto", fileDescriptor_empty_fa64318be3e23895) }
 
-var fileDescriptorEmpty = []byte{
+var fileDescriptor_empty_fa64318be3e23895 = []byte{
 	// 180 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4e, 0xcf, 0xcf, 0x4f,
 	0xcf, 0x49, 0xd5, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0x4f, 0x2a, 0x4d, 0xd3, 0x4f, 0xcd, 0x2d, 0x28,

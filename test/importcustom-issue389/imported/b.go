@@ -19,7 +19,7 @@ func (b B) Size() int {
 }
 
 func NewPopulatedB(r randyA) *B {
-	a := NewPopulatedA(r, false)
+	a := NewPopulatedA(r, true)
 	if a == nil {
 		return nil
 	}

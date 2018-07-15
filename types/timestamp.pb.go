@@ -7,6 +7,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import bytes "bytes"
+
 import strings "strings"
 import reflect "reflect"
 
@@ -16,6 +18,12 @@ import io "io"
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 // A Timestamp represents a point in time independent of any time zone
 // or calendar, represented as seconds and fractions of seconds at
@@ -106,13 +114,40 @@ type Timestamp struct {
 	// second values with fractions must still have non-negative nanos values
 	// that count forward in time. Must be from 0 to 999,999,999
 	// inclusive.
-	Nanos int32 `protobuf:"varint,2,opt,name=nanos,proto3" json:"nanos,omitempty"`
+	Nanos                int32    `protobuf:"varint,2,opt,name=nanos,proto3" json:"nanos,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Timestamp) Reset()                    { *m = Timestamp{} }
-func (*Timestamp) ProtoMessage()               {}
-func (*Timestamp) Descriptor() ([]byte, []int) { return fileDescriptorTimestamp, []int{0} }
-func (*Timestamp) XXX_WellKnownType() string   { return "Timestamp" }
+func (m *Timestamp) Reset()      { *m = Timestamp{} }
+func (*Timestamp) ProtoMessage() {}
+func (*Timestamp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_timestamp_0a0a9bc758317e91, []int{0}
+}
+func (*Timestamp) XXX_WellKnownType() string { return "Timestamp" }
+func (m *Timestamp) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Timestamp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
+}
+func (dst *Timestamp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Timestamp.Merge(dst, src)
+}
+func (m *Timestamp) XXX_Size() int {
+	return m.Size()
+}
+func (m *Timestamp) XXX_DiscardUnknown() {
+	xxx_messageInfo_Timestamp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Timestamp proto.InternalMessageInfo
 
 func (m *Timestamp) GetSeconds() int64 {
 	if m != nil {
@@ -171,6 +206,9 @@ func (this *Timestamp) Compare(that interface{}) int {
 		}
 		return 1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *Timestamp) Equal(that interface{}) bool {
@@ -198,6 +236,9 @@ func (this *Timestamp) Equal(that interface{}) bool {
 	if this.Nanos != that1.Nanos {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Timestamp) GoString() string {
@@ -208,6 +249,9 @@ func (this *Timestamp) GoString() string {
 	s = append(s, "&types.Timestamp{")
 	s = append(s, "Seconds: "+fmt.Sprintf("%#v", this.Seconds)+",\n")
 	s = append(s, "Nanos: "+fmt.Sprintf("%#v", this.Nanos)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -244,6 +288,9 @@ func (m *Timestamp) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintTimestamp(dAtA, i, uint64(m.Nanos))
 	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
 	return i, nil
 }
 
@@ -264,6 +311,9 @@ func (m *Timestamp) Size() (n int) {
 	}
 	if m.Nanos != 0 {
 		n += 1 + sovTimestamp(uint64(m.Nanos))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -360,6 +410,7 @@ func (m *Timestamp) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -474,9 +525,11 @@ var (
 	ErrIntOverflowTimestamp   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("google/protobuf/timestamp.proto", fileDescriptorTimestamp) }
+func init() {
+	proto.RegisterFile("google/protobuf/timestamp.proto", fileDescriptor_timestamp_0a0a9bc758317e91)
+}
 
-var fileDescriptorTimestamp = []byte{
+var fileDescriptor_timestamp_0a0a9bc758317e91 = []byte{
 	// 216 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4f, 0xcf, 0xcf, 0x4f,
 	0xcf, 0x49, 0xd5, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0x4f, 0x2a, 0x4d, 0xd3, 0x2f, 0xc9, 0xcc, 0x4d,

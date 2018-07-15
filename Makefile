@@ -58,13 +58,12 @@ gofmt:
 	gofmt -l -s -w .
 
 regenerate:
-	make -C protoc-gen-gogo/descriptor regenerate
-	make -C protoc-gen-gogo/plugin regenerate
-	make -C protoc-gen-gogo/testdata regenerate
+	make -C protoc-gen-gogo regenerate
 	make -C gogoproto regenerate
-	make -C proto/testdata regenerate
+	make -C proto/test_proto regenerate
+	make -C proto/proto3_proto regenerate
 	make -C jsonpb/jsonpb_test_proto regenerate
-	make -C _conformance regenerate
+	make -C conformance regenerate
 	make -C protobuf regenerate
 	make -C test regenerate
 	make -C test/example regenerate
@@ -119,6 +118,9 @@ regenerate:
 	make -C test/issue322 regenerate
 	make -C test/issue330 regenerate
 	make -C test/importcustom-issue389 regenerate
+	make -C test/merge regenerate
+	make -C test/cachedsize regenerate
+	make -C test/deterministic regenerate
 	make gofmt
 
 tests:
@@ -140,9 +142,10 @@ drone:
 
 testall:
 	go get -u github.com/golang/protobuf/proto
-	make -C protoc-gen-gogo/testdata test
+	make -C protoc-gen-gogo test
 	make -C vanity/test test
 	make -C test/registration test
+	make -C conformance test
 	make tests
 
 bench:

@@ -7,6 +7,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import bytes "bytes"
+
 import strings "strings"
 import reflect "reflect"
 
@@ -16,6 +18,12 @@ import io "io"
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 // A Duration represents a signed, fixed-length span of time represented
 // as a count of seconds and fractions of seconds at nanosecond
@@ -88,13 +96,40 @@ type Duration struct {
 	// of one second or more, a non-zero value for the `nanos` field must be
 	// of the same sign as the `seconds` field. Must be from -999,999,999
 	// to +999,999,999 inclusive.
-	Nanos int32 `protobuf:"varint,2,opt,name=nanos,proto3" json:"nanos,omitempty"`
+	Nanos                int32    `protobuf:"varint,2,opt,name=nanos,proto3" json:"nanos,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Duration) Reset()                    { *m = Duration{} }
-func (*Duration) ProtoMessage()               {}
-func (*Duration) Descriptor() ([]byte, []int) { return fileDescriptorDuration, []int{0} }
-func (*Duration) XXX_WellKnownType() string   { return "Duration" }
+func (m *Duration) Reset()      { *m = Duration{} }
+func (*Duration) ProtoMessage() {}
+func (*Duration) Descriptor() ([]byte, []int) {
+	return fileDescriptor_duration_7f04bf66a647e6f6, []int{0}
+}
+func (*Duration) XXX_WellKnownType() string { return "Duration" }
+func (m *Duration) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Duration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
+}
+func (dst *Duration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Duration.Merge(dst, src)
+}
+func (m *Duration) XXX_Size() int {
+	return m.Size()
+}
+func (m *Duration) XXX_DiscardUnknown() {
+	xxx_messageInfo_Duration.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Duration proto.InternalMessageInfo
 
 func (m *Duration) GetSeconds() int64 {
 	if m != nil {
@@ -153,6 +188,9 @@ func (this *Duration) Compare(that interface{}) int {
 		}
 		return 1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *Duration) Equal(that interface{}) bool {
@@ -180,6 +218,9 @@ func (this *Duration) Equal(that interface{}) bool {
 	if this.Nanos != that1.Nanos {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Duration) GoString() string {
@@ -190,6 +231,9 @@ func (this *Duration) GoString() string {
 	s = append(s, "&types.Duration{")
 	s = append(s, "Seconds: "+fmt.Sprintf("%#v", this.Seconds)+",\n")
 	s = append(s, "Nanos: "+fmt.Sprintf("%#v", this.Nanos)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -226,6 +270,9 @@ func (m *Duration) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintDuration(dAtA, i, uint64(m.Nanos))
 	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
 	return i, nil
 }
 
@@ -246,6 +293,9 @@ func (m *Duration) Size() (n int) {
 	}
 	if m.Nanos != 0 {
 		n += 1 + sovDuration(uint64(m.Nanos))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -342,6 +392,7 @@ func (m *Duration) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -456,9 +507,11 @@ var (
 	ErrIntOverflowDuration   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("google/protobuf/duration.proto", fileDescriptorDuration) }
+func init() {
+	proto.RegisterFile("google/protobuf/duration.proto", fileDescriptor_duration_7f04bf66a647e6f6)
+}
 
-var fileDescriptorDuration = []byte{
+var fileDescriptor_duration_7f04bf66a647e6f6 = []byte{
 	// 215 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4b, 0xcf, 0xcf, 0x4f,
 	0xcf, 0x49, 0xd5, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0x4f, 0x2a, 0x4d, 0xd3, 0x4f, 0x29, 0x2d, 0x4a,

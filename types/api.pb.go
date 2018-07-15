@@ -7,6 +7,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import bytes "bytes"
+
 import strings "strings"
 import reflect "reflect"
 
@@ -16,6 +18,12 @@ import io "io"
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 // Api is a light-weight descriptor for an API Interface.
 //
@@ -62,12 +70,39 @@ type Api struct {
 	// Included interfaces. See [Mixin][].
 	Mixins []*Mixin `protobuf:"bytes,6,rep,name=mixins" json:"mixins,omitempty"`
 	// The source syntax of the service.
-	Syntax Syntax `protobuf:"varint,7,opt,name=syntax,proto3,enum=google.protobuf.Syntax" json:"syntax,omitempty"`
+	Syntax               Syntax   `protobuf:"varint,7,opt,name=syntax,proto3,enum=google.protobuf.Syntax" json:"syntax,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Api) Reset()                    { *m = Api{} }
-func (*Api) ProtoMessage()               {}
-func (*Api) Descriptor() ([]byte, []int) { return fileDescriptorApi, []int{0} }
+func (m *Api) Reset()      { *m = Api{} }
+func (*Api) ProtoMessage() {}
+func (*Api) Descriptor() ([]byte, []int) {
+	return fileDescriptor_api_658bf9e68d9b66a3, []int{0}
+}
+func (m *Api) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Api) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
+}
+func (dst *Api) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Api.Merge(dst, src)
+}
+func (m *Api) XXX_Size() int {
+	return m.Size()
+}
+func (m *Api) XXX_DiscardUnknown() {
+	xxx_messageInfo_Api.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Api proto.InternalMessageInfo
 
 func (m *Api) GetName() string {
 	if m != nil {
@@ -137,12 +172,39 @@ type Method struct {
 	// Any metadata attached to the method.
 	Options []*Option `protobuf:"bytes,6,rep,name=options" json:"options,omitempty"`
 	// The source syntax of this method.
-	Syntax Syntax `protobuf:"varint,7,opt,name=syntax,proto3,enum=google.protobuf.Syntax" json:"syntax,omitempty"`
+	Syntax               Syntax   `protobuf:"varint,7,opt,name=syntax,proto3,enum=google.protobuf.Syntax" json:"syntax,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Method) Reset()                    { *m = Method{} }
-func (*Method) ProtoMessage()               {}
-func (*Method) Descriptor() ([]byte, []int) { return fileDescriptorApi, []int{1} }
+func (m *Method) Reset()      { *m = Method{} }
+func (*Method) ProtoMessage() {}
+func (*Method) Descriptor() ([]byte, []int) {
+	return fileDescriptor_api_658bf9e68d9b66a3, []int{1}
+}
+func (m *Method) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Method) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
+}
+func (dst *Method) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Method.Merge(dst, src)
+}
+func (m *Method) XXX_Size() int {
+	return m.Size()
+}
+func (m *Method) XXX_DiscardUnknown() {
+	xxx_messageInfo_Method.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Method proto.InternalMessageInfo
 
 func (m *Method) GetName() string {
 	if m != nil {
@@ -280,12 +342,39 @@ type Mixin struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// If non-empty specifies a path under which inherited HTTP paths
 	// are rooted.
-	Root string `protobuf:"bytes,2,opt,name=root,proto3" json:"root,omitempty"`
+	Root                 string   `protobuf:"bytes,2,opt,name=root,proto3" json:"root,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Mixin) Reset()                    { *m = Mixin{} }
-func (*Mixin) ProtoMessage()               {}
-func (*Mixin) Descriptor() ([]byte, []int) { return fileDescriptorApi, []int{2} }
+func (m *Mixin) Reset()      { *m = Mixin{} }
+func (*Mixin) ProtoMessage() {}
+func (*Mixin) Descriptor() ([]byte, []int) {
+	return fileDescriptor_api_658bf9e68d9b66a3, []int{2}
+}
+func (m *Mixin) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Mixin) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
+}
+func (dst *Mixin) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Mixin.Merge(dst, src)
+}
+func (m *Mixin) XXX_Size() int {
+	return m.Size()
+}
+func (m *Mixin) XXX_DiscardUnknown() {
+	xxx_messageInfo_Mixin.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Mixin proto.InternalMessageInfo
 
 func (m *Mixin) GetName() string {
 	if m != nil {
@@ -388,6 +477,9 @@ func (this *Api) Compare(that interface{}) int {
 		}
 		return 1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *Method) Compare(that interface{}) int {
@@ -462,6 +554,9 @@ func (this *Method) Compare(that interface{}) int {
 		}
 		return 1
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *Mixin) Compare(that interface{}) int {
@@ -500,6 +595,9 @@ func (this *Mixin) Compare(that interface{}) int {
 			return -1
 		}
 		return 1
+	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
 	}
 	return 0
 }
@@ -558,6 +656,9 @@ func (this *Api) Equal(that interface{}) bool {
 	if this.Syntax != that1.Syntax {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Method) Equal(that interface{}) bool {
@@ -605,6 +706,9 @@ func (this *Method) Equal(that interface{}) bool {
 	if this.Syntax != that1.Syntax {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Mixin) Equal(that interface{}) bool {
@@ -632,6 +736,9 @@ func (this *Mixin) Equal(that interface{}) bool {
 	if this.Root != that1.Root {
 		return false
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *Api) GoString() string {
@@ -655,6 +762,9 @@ func (this *Api) GoString() string {
 		s = append(s, "Mixins: "+fmt.Sprintf("%#v", this.Mixins)+",\n")
 	}
 	s = append(s, "Syntax: "+fmt.Sprintf("%#v", this.Syntax)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -673,6 +783,9 @@ func (this *Method) GoString() string {
 		s = append(s, "Options: "+fmt.Sprintf("%#v", this.Options)+",\n")
 	}
 	s = append(s, "Syntax: "+fmt.Sprintf("%#v", this.Syntax)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -684,6 +797,9 @@ func (this *Mixin) GoString() string {
 	s = append(s, "&types.Mixin{")
 	s = append(s, "Name: "+fmt.Sprintf("%#v", this.Name)+",\n")
 	s = append(s, "Root: "+fmt.Sprintf("%#v", this.Root)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -773,6 +889,9 @@ func (m *Api) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintApi(dAtA, i, uint64(m.Syntax))
 	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
 	return i, nil
 }
 
@@ -846,6 +965,9 @@ func (m *Method) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintApi(dAtA, i, uint64(m.Syntax))
 	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
 	return i, nil
 }
 
@@ -875,6 +997,9 @@ func (m *Mixin) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintApi(dAtA, i, uint64(len(m.Root)))
 		i += copy(dAtA[i:], m.Root)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -918,6 +1043,7 @@ func NewPopulatedApi(r randyApi, easy bool) *Api {
 	}
 	this.Syntax = Syntax([]int32{0, 1}[r.Intn(2)])
 	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedApi(r, 8)
 	}
 	return this
 }
@@ -938,6 +1064,7 @@ func NewPopulatedMethod(r randyApi, easy bool) *Method {
 	}
 	this.Syntax = Syntax([]int32{0, 1}[r.Intn(2)])
 	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedApi(r, 8)
 	}
 	return this
 }
@@ -947,6 +1074,7 @@ func NewPopulatedMixin(r randyApi, easy bool) *Mixin {
 	this.Name = string(randStringApi(r))
 	this.Root = string(randStringApi(r))
 	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedApi(r, 3)
 	}
 	return this
 }
@@ -1059,6 +1187,9 @@ func (m *Api) Size() (n int) {
 	if m.Syntax != 0 {
 		n += 1 + sovApi(uint64(m.Syntax))
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 
@@ -1092,6 +1223,9 @@ func (m *Method) Size() (n int) {
 	if m.Syntax != 0 {
 		n += 1 + sovApi(uint64(m.Syntax))
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 
@@ -1105,6 +1239,9 @@ func (m *Mixin) Size() (n int) {
 	l = len(m.Root)
 	if l > 0 {
 		n += 1 + l + sovApi(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -1134,6 +1271,7 @@ func (this *Api) String() string {
 		`SourceContext:` + strings.Replace(fmt.Sprintf("%v", this.SourceContext), "SourceContext", "SourceContext", 1) + `,`,
 		`Mixins:` + strings.Replace(fmt.Sprintf("%v", this.Mixins), "Mixin", "Mixin", 1) + `,`,
 		`Syntax:` + fmt.Sprintf("%v", this.Syntax) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1150,6 +1288,7 @@ func (this *Method) String() string {
 		`ResponseStreaming:` + fmt.Sprintf("%v", this.ResponseStreaming) + `,`,
 		`Options:` + strings.Replace(fmt.Sprintf("%v", this.Options), "Option", "Option", 1) + `,`,
 		`Syntax:` + fmt.Sprintf("%v", this.Syntax) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1161,6 +1300,7 @@ func (this *Mixin) String() string {
 	s := strings.Join([]string{`&Mixin{`,
 		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
 		`Root:` + fmt.Sprintf("%v", this.Root) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1417,6 +1557,7 @@ func (m *Api) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1644,6 +1785,7 @@ func (m *Method) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1752,6 +1894,7 @@ func (m *Mixin) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -1866,9 +2009,9 @@ var (
 	ErrIntOverflowApi   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("google/protobuf/api.proto", fileDescriptorApi) }
+func init() { proto.RegisterFile("google/protobuf/api.proto", fileDescriptor_api_658bf9e68d9b66a3) }
 
-var fileDescriptorApi = []byte{
+var fileDescriptor_api_658bf9e68d9b66a3 = []byte{
 	// 472 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x91, 0x31, 0x6f, 0x13, 0x31,
 	0x14, 0xc7, 0xf3, 0xee, 0x92, 0x4b, 0x71, 0x45, 0x0a, 0x46, 0x02, 0x93, 0xc1, 0x3a, 0x55, 0x0c,

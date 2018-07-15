@@ -7,6 +7,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import bytes "bytes"
+
 import strings "strings"
 import reflect "reflect"
 
@@ -16,6 +18,12 @@ import io "io"
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 // `FieldMask` represents a set of symbolic field paths, for example:
 //
@@ -226,12 +234,39 @@ var _ = math.Inf
 // `INVALID_ARGUMENT` error if any path is duplicated or unmappable.
 type FieldMask struct {
 	// The set of field mask paths.
-	Paths []string `protobuf:"bytes,1,rep,name=paths" json:"paths,omitempty"`
+	Paths                []string `protobuf:"bytes,1,rep,name=paths" json:"paths,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *FieldMask) Reset()                    { *m = FieldMask{} }
-func (*FieldMask) ProtoMessage()               {}
-func (*FieldMask) Descriptor() ([]byte, []int) { return fileDescriptorFieldMask, []int{0} }
+func (m *FieldMask) Reset()      { *m = FieldMask{} }
+func (*FieldMask) ProtoMessage() {}
+func (*FieldMask) Descriptor() ([]byte, []int) {
+	return fileDescriptor_field_mask_3abe20b2f0d4cb1c, []int{0}
+}
+func (m *FieldMask) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *FieldMask) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	b = b[:cap(b)]
+	n, err := m.MarshalTo(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
+}
+func (dst *FieldMask) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FieldMask.Merge(dst, src)
+}
+func (m *FieldMask) XXX_Size() int {
+	return m.Size()
+}
+func (m *FieldMask) XXX_DiscardUnknown() {
+	xxx_messageInfo_FieldMask.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_FieldMask proto.InternalMessageInfo
 
 func (m *FieldMask) GetPaths() []string {
 	if m != nil {
@@ -285,6 +320,9 @@ func (this *FieldMask) Compare(that interface{}) int {
 			return 1
 		}
 	}
+	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
+		return c
+	}
 	return 0
 }
 func (this *FieldMask) Equal(that interface{}) bool {
@@ -314,6 +352,9 @@ func (this *FieldMask) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
 	return true
 }
 func (this *FieldMask) GoString() string {
@@ -323,6 +364,9 @@ func (this *FieldMask) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&types.FieldMask{")
 	s = append(s, "Paths: "+fmt.Sprintf("%#v", this.Paths)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -364,6 +408,9 @@ func (m *FieldMask) MarshalTo(dAtA []byte) (int, error) {
 			i += copy(dAtA[i:], s)
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
 	return i, nil
 }
 
@@ -384,6 +431,7 @@ func NewPopulatedFieldMask(r randyFieldMask, easy bool) *FieldMask {
 		this.Paths[i] = string(randStringFieldMask(r))
 	}
 	if !easy && r.Intn(10) != 0 {
+		this.XXX_unrecognized = randUnrecognizedFieldMask(r, 2)
 	}
 	return this
 }
@@ -469,6 +517,9 @@ func (m *FieldMask) Size() (n int) {
 			n += 1 + l + sovFieldMask(uint64(l))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
 	return n
 }
 
@@ -491,6 +542,7 @@ func (this *FieldMask) String() string {
 	}
 	s := strings.Join([]string{`&FieldMask{`,
 		`Paths:` + fmt.Sprintf("%v", this.Paths) + `,`,
+		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -573,6 +625,7 @@ func (m *FieldMask) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -687,9 +740,11 @@ var (
 	ErrIntOverflowFieldMask   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("google/protobuf/field_mask.proto", fileDescriptorFieldMask) }
+func init() {
+	proto.RegisterFile("google/protobuf/field_mask.proto", fileDescriptor_field_mask_3abe20b2f0d4cb1c)
+}
 
-var fileDescriptorFieldMask = []byte{
+var fileDescriptor_field_mask_3abe20b2f0d4cb1c = []byte{
 	// 204 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0x48, 0xcf, 0xcf, 0x4f,
 	0xcf, 0x49, 0xd5, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0x4f, 0x2a, 0x4d, 0xd3, 0x4f, 0xcb, 0x4c, 0xcd,
