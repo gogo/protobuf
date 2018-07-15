@@ -91,12 +91,16 @@ func (m *FloatingPoint) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FloatingPoint.Unmarshal(m, b)
 }
 func (m *FloatingPoint) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_FloatingPoint.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *FloatingPoint) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FloatingPoint.Merge(dst, src)
@@ -129,12 +133,16 @@ func (m *CustomMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomMap.Unmarshal(m, b)
 }
 func (m *CustomMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_CustomMap.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *CustomMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CustomMap.Merge(dst, src)
@@ -180,12 +188,16 @@ func (m *AllMaps) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AllMaps.Unmarshal(m, b)
 }
 func (m *AllMaps) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_AllMaps.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *AllMaps) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_AllMaps.Merge(dst, src)

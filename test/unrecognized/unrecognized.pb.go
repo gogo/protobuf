@@ -48,12 +48,16 @@ func (m *A) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *A) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_A.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *A) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_A.Merge(dst, src)
@@ -85,12 +89,16 @@ func (m *B) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *B) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_B.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *B) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_B.Merge(dst, src)
@@ -120,12 +128,16 @@ func (m *D) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *D) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_D.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *D) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_D.Merge(dst, src)
@@ -160,12 +172,16 @@ func (m *C) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *C) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_C.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *C) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_C.Merge(dst, src)
@@ -195,12 +211,16 @@ func (m *U) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *U) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_U.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *U) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_U.Merge(dst, src)
@@ -260,12 +280,16 @@ func (m *OldA) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *OldA) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_OldA.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *OldA) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldA.Merge(dst, src)
@@ -296,12 +320,16 @@ func (m *OldB) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *OldB) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_OldB.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *OldB) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldB.Merge(dst, src)
@@ -335,12 +363,16 @@ func (m *OldC) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *OldC) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_OldC.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *OldC) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldC.Merge(dst, src)
@@ -371,12 +403,16 @@ func (m *OldU) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *OldU) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_OldU.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *OldU) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_OldU.Merge(dst, src)

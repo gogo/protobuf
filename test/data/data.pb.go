@@ -42,12 +42,16 @@ func (m *MyMessage) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *MyMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_MyMessage.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *MyMessage) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MyMessage.Merge(dst, src)

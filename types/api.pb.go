@@ -85,12 +85,16 @@ func (m *Api) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *Api) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_Api.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *Api) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Api.Merge(dst, src)
@@ -187,12 +191,16 @@ func (m *Method) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *Method) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_Method.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *Method) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Method.Merge(dst, src)
@@ -357,12 +365,16 @@ func (m *Mixin) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *Mixin) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_Mixin.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *Mixin) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Mixin.Merge(dst, src)

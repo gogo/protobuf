@@ -45,12 +45,16 @@ func (m *MapTest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MapTest.Unmarshal(m, b)
 }
 func (m *MapTest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_MapTest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *MapTest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_MapTest.Merge(dst, src)
@@ -80,12 +84,16 @@ func (m *FakeMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FakeMap.Unmarshal(m, b)
 }
 func (m *FakeMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_FakeMap.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *FakeMap) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FakeMap.Merge(dst, src)
@@ -117,12 +125,16 @@ func (m *FakeMapEntry) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FakeMapEntry.Unmarshal(m, b)
 }
 func (m *FakeMapEntry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_FakeMapEntry.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *FakeMapEntry) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_FakeMapEntry.Merge(dst, src)

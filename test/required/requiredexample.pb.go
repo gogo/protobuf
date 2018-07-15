@@ -43,12 +43,16 @@ func (m *RequiredExample) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *RequiredExample) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_RequiredExample.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *RequiredExample) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_RequiredExample.Merge(dst, src)
@@ -114,12 +118,16 @@ func (m *NidOptNative) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *NidOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_NidOptNative.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *NidOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NidOptNative.Merge(dst, src)
@@ -269,12 +277,16 @@ func (m *NinOptNative) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *NinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_NinOptNative.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *NinOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NinOptNative.Merge(dst, src)
@@ -410,12 +422,16 @@ func (m *NestedNinOptNative) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *NestedNinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_NestedNinOptNative.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *NestedNinOptNative) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_NestedNinOptNative.Merge(dst, src)

@@ -39,12 +39,16 @@ func (m *Object) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *Object) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_Object.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *Object) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Object.Merge(dst, src)

@@ -200,12 +200,16 @@ func (m *Type) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_Type.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *Type) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Type.Merge(dst, src)
@@ -303,12 +307,16 @@ func (m *Field) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *Field) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_Field.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *Field) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Field.Merge(dst, src)
@@ -422,12 +430,16 @@ func (m *Enum) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *Enum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_Enum.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *Enum) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Enum.Merge(dst, src)
@@ -502,12 +514,16 @@ func (m *EnumValue) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *EnumValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_EnumValue.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *EnumValue) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_EnumValue.Merge(dst, src)
@@ -573,12 +589,16 @@ func (m *Option) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *Option) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_Option.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *Option) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Option.Merge(dst, src)

@@ -31,12 +31,16 @@ func (m *Dropped) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *Dropped) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_Dropped.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *Dropped) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Dropped.Merge(dst, src)
@@ -74,12 +78,16 @@ func (m *DroppedWithoutGetters) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *DroppedWithoutGetters) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_DroppedWithoutGetters.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *DroppedWithoutGetters) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_DroppedWithoutGetters.Merge(dst, src)
@@ -110,12 +118,16 @@ func (m *Kept) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *Kept) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
-	if err != nil {
-		return nil, err
+	if deterministic {
+		return xxx_messageInfo_Kept.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
 	}
-	return b[:n], nil
 }
 func (dst *Kept) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Kept.Merge(dst, src)
