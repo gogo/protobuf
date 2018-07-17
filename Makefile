@@ -121,7 +121,6 @@ regenerate:
 	make -C test/merge regenerate
 	make -C test/cachedsize regenerate
 	make -C test/deterministic regenerate
-	make -C test/issue427 regenerate
 	make gofmt
 
 tests:
@@ -147,6 +146,7 @@ testall:
 	make -C vanity/test test
 	make -C test/registration test
 	make -C conformance test
+	make -C test/issue427 test
 	make tests
 
 bench:
