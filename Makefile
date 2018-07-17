@@ -146,6 +146,7 @@ testall:
 	make -C vanity/test test
 	make -C test/registration test
 	make -C conformance test
+	make -C test/issue427 test
 	make tests
 
 bench:
