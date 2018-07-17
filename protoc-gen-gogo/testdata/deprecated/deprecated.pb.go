@@ -11,8 +11,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
-import golang_org_x_net_context "golang.org/x/net/context"
-import google_golang_org_grpc "google.golang.org/grpc"
+import context "golang.org/x/net/context"
+import grpc "google.golang.org/grpc"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
