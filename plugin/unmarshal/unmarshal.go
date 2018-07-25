@@ -1099,6 +1099,22 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 				p.Out()
 				p.P(`}`)
+
+				var fixedTypeSizeBytes int
+				switch *field.Type {
+				case descriptor.FieldDescriptorProto_TYPE_DOUBLE, descriptor.FieldDescriptorProto_TYPE_FIXED64, descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+					fixedTypeSizeBytes = 8
+				case descriptor.FieldDescriptorProto_TYPE_FLOAT, descriptor.FieldDescriptorProto_TYPE_FIXED32, descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+					fixedTypeSizeBytes = 4
+				}
+				if fixedTypeSizeBytes != 0 {
+					p.P(`if len(m.`, fieldname, `) == 0 {`)
+					p.In()
+					p.P(`m.`, fieldname, ` = make([]`, p.noStarOrSliceType(message, field), `, 0, packedLen/`, fixedTypeSizeBytes, `)`)
+					p.Out()
+					p.P(`}`)
+				}
+
 				p.P(`for iNdEx < postIndex {`)
 				p.In()
 				p.field(file, message, field, fieldname, false)
