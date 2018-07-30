@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package issue427;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/any.proto";
+
+option (gogoproto.protosizer_all) = true;
+option (gogoproto.sizer_all) = false;
+
+message Foo {
+    google.protobuf.Any foo = 1;
+}
+
+service Bar {
+    rpc GetBar (Foo) returns (Foo);
+}
