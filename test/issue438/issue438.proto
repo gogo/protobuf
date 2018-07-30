@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package issue427;
+package issue438;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/any.proto";
@@ -10,8 +10,4 @@ option (gogoproto.sizer_all) = false;
 
 message Foo {
     google.protobuf.Any foo = 1;
-}
-
-service Bar {
-    rpc GetBar (Foo) returns (Foo);
 }
