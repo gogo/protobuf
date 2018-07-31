@@ -3530,6 +3530,9 @@ func (m *C) Unmarshal(dAtA []byte) error {
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
+				if len(m.Field7) == 0 {
+					m.Field7 = make([]float32, 0, packedLen/4)
+				}
 				for iNdEx < postIndex {
 					var v uint32
 					if (iNdEx + 4) > l {
@@ -3626,6 +3629,9 @@ func (m *U) Unmarshal(dAtA []byte) error {
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
+				}
+				if len(m.Field2) == 0 {
+					m.Field2 = make([]float64, 0, packedLen/8)
 				}
 				for iNdEx < postIndex {
 					var v uint64
@@ -4043,6 +4049,9 @@ func (m *OldC) Unmarshal(dAtA []byte) error {
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
+				if len(m.Field7) == 0 {
+					m.Field7 = make([]float32, 0, packedLen/4)
+				}
 				for iNdEx < postIndex {
 					var v uint32
 					if (iNdEx + 4) > l {
@@ -4169,6 +4178,9 @@ func (m *OldU) Unmarshal(dAtA []byte) error {
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
+				}
+				if len(m.Field2) == 0 {
+					m.Field2 = make([]float64, 0, packedLen/8)
 				}
 				for iNdEx < postIndex {
 					var v uint64

@@ -33,10 +33,60 @@ import (
 	"fmt"
 	"github.com/gogo/protobuf/proto"
 	math_rand "math/rand"
+	"runtime"
 	"testing"
 	"time"
 	"unsafe"
 )
+
+func TestIssue436(t *testing.T) {
+	n := 1 << 22 // Makes for 32 MiB
+
+	m := &runtime.MemStats{}
+
+	msgNormal := &NinRepNative{
+		Field1: make([]float64, n),
+	}
+	dataNormal, err := proto.Marshal(msgNormal)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	normalmsg := &NinRepNative{}
+	runtime.ReadMemStats(m)
+	beforeNormal := m.TotalAlloc
+	err = proto.Unmarshal(dataNormal, normalmsg)
+	runtime.ReadMemStats(m)
+	afterNormal := m.TotalAlloc
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	msgPacked := &NinRepPackedNative{
+		Field1: make([]float64, n),
+	}
+	dataPacked, err := proto.Marshal(msgPacked)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	packedmsg := &NinRepPackedNative{}
+	runtime.ReadMemStats(m)
+	beforePacked := m.TotalAlloc
+	err = proto.Unmarshal(dataPacked, packedmsg)
+	runtime.ReadMemStats(m)
+	afterPacked := m.TotalAlloc
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	totalNormal := afterNormal - beforeNormal
+	totalPacked := afterPacked - beforePacked
+	usedRatio := float64(totalPacked) / float64(totalNormal)
+	if usedRatio > 0.5 {
+		t.Fatalf("unmarshaling packed msg allocated too much memory:\nnormal:\t\t%d bytes\npacked:\t\t%d bytes\nused ratio:\t%.2f%%", totalNormal, totalPacked, usedRatio*100)
+	}
+}
 
 /*
 https://github.com/gogo/protobuf/issues/detail?id=21
