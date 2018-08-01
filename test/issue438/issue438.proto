@@ -27,30 +27,27 @@ message Types {
   google.protobuf.FieldMask fm = 7;
   google.protobuf.SourceContext sc = 8;
   google.protobuf.Struct st = 9;
-  // Value depends on interface fieldtypes
   google.protobuf.Value val = 10;
-  // Unsure how to reference these
-  // google.protobuf.NullValue nlval = 11;
-  // google.protobuf.NumberValue nrval = 12;
-  // google.protobuf.StringValue stval = 13;
-  // google.protobuf.BoolValue bval = 14;
-  // google.protobuf.StructValue strval = 15;
-  // google.protobuf.ListValue lstv = 16;
-  google.protobuf.Timestamp ts = 17;
-  google.protobuf.Type t = 18;
-  google.protobuf.Field f = 19;
-  google.protobuf.Enum en = 20;
-  google.protobuf.EnumValue enval = 21;
-  google.protobuf.Option opt = 22;
-  google.protobuf.DoubleValue dbl = 23;
-  google.protobuf.FloatValue flt = 24;
-  google.protobuf.Int64Value i64 = 25;
-  google.protobuf.UInt64Value u64 = 26;
-  google.protobuf.Int32Value i32 = 27;
-  google.protobuf.UInt32Value u32 = 28;
-  google.protobuf.BoolValue bool = 29;
-  google.protobuf.StringValue str = 30;
-  google.protobuf.BytesValue bytes = 31;
+  google.protobuf.NullValue nlval = 11;
+  google.protobuf.StringValue stval = 12;
+  google.protobuf.BoolValue bval = 13;
+  google.protobuf.Struct strval = 14;
+  google.protobuf.ListValue lstv = 15;
+  google.protobuf.Timestamp ts = 16;
+  google.protobuf.Type t = 17;
+  google.protobuf.Field f = 18;
+  google.protobuf.Enum en = 19;
+  google.protobuf.EnumValue enval = 20;
+  google.protobuf.Option opt = 21;
+  google.protobuf.DoubleValue dbl = 22;
+  google.protobuf.FloatValue flt = 23;
+  google.protobuf.Int64Value i64 = 24;
+  google.protobuf.UInt64Value u64 = 25;
+  google.protobuf.Int32Value i32 = 26;
+  google.protobuf.UInt32Value u32 = 27;
+  google.protobuf.BoolValue bool = 28;
+  google.protobuf.StringValue str = 29;
+  google.protobuf.BytesValue bytes = 30;
 }
 
 
