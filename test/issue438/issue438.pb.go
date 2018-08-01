@@ -63,7 +63,7 @@ func (m *Types) Reset()         { *m = Types{} }
 func (m *Types) String() string { return proto.CompactTextString(m) }
 func (*Types) ProtoMessage()    {}
 func (*Types) Descriptor() ([]byte, []int) {
-	return fileDescriptor_issue438_55f5d3100d48977f, []int{0}
+	return fileDescriptor_issue438_27fc88080f7f518f, []int{0}
 }
 func (m *Types) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Types.Unmarshal(m, b)
@@ -384,9 +384,9 @@ func sozIssue438(x uint64) (n int) {
 	return sovIssue438(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
 
-func init() { proto.RegisterFile("issue438.proto", fileDescriptor_issue438_55f5d3100d48977f) }
+func init() { proto.RegisterFile("issue438.proto", fileDescriptor_issue438_27fc88080f7f518f) }
 
-var fileDescriptor_issue438_55f5d3100d48977f = []byte{
+var fileDescriptor_issue438_27fc88080f7f518f = []byte{
 	// 609 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0xd2, 0xdd, 0x6e, 0xd3, 0x30,
 	0x14, 0x07, 0x70, 0x92, 0xac, 0xa3, 0x18, 0x09, 0x09, 0xb3, 0x0f, 0xaf, 0x1b, 0xdd, 0x04, 0x63,
