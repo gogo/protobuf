@@ -39,6 +39,55 @@ import (
 	"unsafe"
 )
 
+func TestVarintIssue436(t *testing.T) {
+	n := 1 << 22 // Makes for 32 MiB
+
+	m := &runtime.MemStats{}
+
+	msgNormal := &NinRepNative{
+		Field8: make([]int64, n),
+	}
+	dataNormal, err := proto.Marshal(msgNormal)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	normalmsg := &NinRepNative{}
+	runtime.ReadMemStats(m)
+	beforeNormal := m.TotalAlloc
+	err = proto.Unmarshal(dataNormal, normalmsg)
+	runtime.ReadMemStats(m)
+	afterNormal := m.TotalAlloc
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	msgPacked := &NinRepPackedNative{
+		Field8: make([]int64, n),
+	}
+	dataPacked, err := proto.Marshal(msgPacked)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	packedmsg := &NinRepPackedNative{}
+	runtime.ReadMemStats(m)
+	beforePacked := m.TotalAlloc
+	err = proto.Unmarshal(dataPacked, packedmsg)
+	runtime.ReadMemStats(m)
+	afterPacked := m.TotalAlloc
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	totalNormal := afterNormal - beforeNormal
+	totalPacked := afterPacked - beforePacked
+	usedRatio := float64(totalPacked) / float64(totalNormal)
+	if usedRatio > 0.5 {
+		t.Fatalf("unmarshaling packed msg allocated too much memory:\nnormal:\t\t%d bytes\npacked:\t\t%d bytes\nused ratio:\t%.2f%%", totalNormal, totalPacked, usedRatio*100)
+	}
+}
+
 func TestIssue436(t *testing.T) {
 	n := 1 << 22 // Makes for 32 MiB
 
