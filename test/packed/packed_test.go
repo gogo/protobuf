@@ -39,6 +39,48 @@ import (
 	"unsafe"
 )
 
+func BenchmarkVarintIssue436(b *testing.B) {
+	n := 1 << 22 // Makes for 32 MiB
+
+	msgNormal := &NinRepNative{
+		Field8: make([]int64, n),
+	}
+	dataNormal, err := proto.Marshal(msgNormal)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	normalmsg := &NinRepNative{}
+
+	for i := 0; i < b.N; i++ {
+		err = proto.Unmarshal(dataNormal, normalmsg)
+		if err != nil {
+			b.Fatal(err)
+		}
+	}
+}
+
+func BenchmarkVarintIssue436withCount(b *testing.B) {
+	n := 1 << 22 // Makes for 32 MiB
+
+	msgPacked := &NinRepPackedNative{
+		Field8: make([]int64, n),
+	}
+	dataPacked, err := proto.Marshal(msgPacked)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	packedmsg := &NinRepPackedNative{}
+
+	for i := 0; i < b.N; i++ {
+		err = proto.Unmarshal(dataPacked, packedmsg)
+		if err != nil {
+			b.Fatal(err)
+		}
+	}
+}
+
 func TestVarintIssue436(t *testing.T) {
 	n := 1 << 22 // Makes for 32 MiB
 
