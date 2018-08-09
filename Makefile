@@ -128,6 +128,7 @@ regenerate:
 	make -C test/cachedsize regenerate
 	make -C test/deterministic regenerate
 	make -C test/issue438 regenerate
+	make -C test/issue444 regenerate
 	make gofmt
 
 tests:
