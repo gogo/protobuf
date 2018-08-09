@@ -28,11 +28,17 @@
 
 GO_VERSION:=$(shell go version)
 
+# Skip known issues from purego tests
+# https://github.com/gogo/protobuf/issues/447
+# https://github.com/gogo/protobuf/issues/448
+# https://github.com/gogo/protobuf/issues/449
+SKIPISSUE:="/jsonpb|/test/casttype/|/test/oneof/combos/|/test/unmarshalmerge"
+
 .PHONY: nuke regenerate tests clean install gofmt vet contributors
 
 all: clean install regenerate install tests errcheck vet
 
-buildserverall: clean install regenerate install tests vet js
+buildserverall: clean install regenerate install tests vet js purego
 
 install:
 	go install ./proto
@@ -163,6 +169,9 @@ ifeq (go1.10, $(findstring go1.10, $(GO_VERSION)))
 	go get -u github.com/gopherjs/gopherjs
 	gopherjs build github.com/gogo/protobuf/protoc-gen-gogo
 endif
+
+purego:
+	go test -tags purego $$(go list ./... | grep -Ev $(SKIPISSUE))
 
 update:
 	(cd protobuf && make update)
