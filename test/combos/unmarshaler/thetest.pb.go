@@ -23683,6 +23683,9 @@ func encodeVarintPopulateThetest(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 func (m *NidOptNative) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 9
@@ -23711,6 +23714,9 @@ func (m *NidOptNative) Size() (n int) {
 }
 
 func (m *NinOptNative) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -23767,6 +23773,9 @@ func (m *NinOptNative) Size() (n int) {
 }
 
 func (m *NidRepNative) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Field1) > 0 {
@@ -23839,6 +23848,9 @@ func (m *NidRepNative) Size() (n int) {
 }
 
 func (m *NinRepNative) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Field1) > 0 {
@@ -23911,6 +23923,9 @@ func (m *NinRepNative) Size() (n int) {
 }
 
 func (m *NidRepPackedNative) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Field1) > 0 {
@@ -23983,6 +23998,9 @@ func (m *NidRepPackedNative) Size() (n int) {
 }
 
 func (m *NinRepPackedNative) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Field1) > 0 {
@@ -24055,6 +24073,9 @@ func (m *NinRepPackedNative) Size() (n int) {
 }
 
 func (m *NidOptStruct) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 9
@@ -24081,6 +24102,9 @@ func (m *NidOptStruct) Size() (n int) {
 }
 
 func (m *NinOptStruct) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -24125,6 +24149,9 @@ func (m *NinOptStruct) Size() (n int) {
 }
 
 func (m *NidRepStruct) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Field1) > 0 {
@@ -24183,6 +24210,9 @@ func (m *NidRepStruct) Size() (n int) {
 }
 
 func (m *NinRepStruct) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Field1) > 0 {
@@ -24241,6 +24271,9 @@ func (m *NinRepStruct) Size() (n int) {
 }
 
 func (m *NidEmbeddedStruct) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.NidOptNative != nil {
@@ -24257,6 +24290,9 @@ func (m *NidEmbeddedStruct) Size() (n int) {
 }
 
 func (m *NinEmbeddedStruct) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.NidOptNative != nil {
@@ -24277,6 +24313,9 @@ func (m *NinEmbeddedStruct) Size() (n int) {
 }
 
 func (m *NidNestedStruct) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = m.Field1.Size()
@@ -24294,6 +24333,9 @@ func (m *NidNestedStruct) Size() (n int) {
 }
 
 func (m *NinNestedStruct) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -24313,6 +24355,9 @@ func (m *NinNestedStruct) Size() (n int) {
 }
 
 func (m *NidOptCustom) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = m.Id.Size()
@@ -24326,6 +24371,9 @@ func (m *NidOptCustom) Size() (n int) {
 }
 
 func (m *CustomDash) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Value != nil {
@@ -24339,6 +24387,9 @@ func (m *CustomDash) Size() (n int) {
 }
 
 func (m *NinOptCustom) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Id != nil {
@@ -24356,6 +24407,9 @@ func (m *NinOptCustom) Size() (n int) {
 }
 
 func (m *NidRepCustom) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Id) > 0 {
@@ -24377,6 +24431,9 @@ func (m *NidRepCustom) Size() (n int) {
 }
 
 func (m *NinRepCustom) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Id) > 0 {
@@ -24398,6 +24455,9 @@ func (m *NinRepCustom) Size() (n int) {
 }
 
 func (m *NinOptNativeUnion) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -24436,6 +24496,9 @@ func (m *NinOptNativeUnion) Size() (n int) {
 }
 
 func (m *NinOptStructUnion) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -24476,6 +24539,9 @@ func (m *NinOptStructUnion) Size() (n int) {
 }
 
 func (m *NinEmbeddedStructUnion) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.NidOptNative != nil {
@@ -24496,6 +24562,9 @@ func (m *NinEmbeddedStructUnion) Size() (n int) {
 }
 
 func (m *NinNestedStructUnion) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -24517,6 +24586,9 @@ func (m *NinNestedStructUnion) Size() (n int) {
 }
 
 func (m *Tree) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Or != nil {
@@ -24538,6 +24610,9 @@ func (m *Tree) Size() (n int) {
 }
 
 func (m *OrBranch) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = m.Left.Size()
@@ -24551,6 +24626,9 @@ func (m *OrBranch) Size() (n int) {
 }
 
 func (m *AndBranch) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = m.Left.Size()
@@ -24564,6 +24642,9 @@ func (m *AndBranch) Size() (n int) {
 }
 
 func (m *Leaf) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sovThetest(uint64(m.Value))
@@ -24576,6 +24657,9 @@ func (m *Leaf) Size() (n int) {
 }
 
 func (m *DeepTree) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Down != nil {
@@ -24597,6 +24681,9 @@ func (m *DeepTree) Size() (n int) {
 }
 
 func (m *ADeepBranch) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = m.Down.Size()
@@ -24608,6 +24695,9 @@ func (m *ADeepBranch) Size() (n int) {
 }
 
 func (m *AndDeepBranch) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = m.Left.Size()
@@ -24621,6 +24711,9 @@ func (m *AndDeepBranch) Size() (n int) {
 }
 
 func (m *DeepLeaf) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = m.Tree.Size()
@@ -24632,6 +24725,9 @@ func (m *DeepLeaf) Size() (n int) {
 }
 
 func (m *Nil) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.XXX_unrecognized != nil {
@@ -24641,6 +24737,9 @@ func (m *Nil) Size() (n int) {
 }
 
 func (m *NidOptEnum) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sovThetest(uint64(m.Field1))
@@ -24651,6 +24750,9 @@ func (m *NidOptEnum) Size() (n int) {
 }
 
 func (m *NinOptEnum) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -24669,6 +24771,9 @@ func (m *NinOptEnum) Size() (n int) {
 }
 
 func (m *NidRepEnum) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Field1) > 0 {
@@ -24693,6 +24798,9 @@ func (m *NidRepEnum) Size() (n int) {
 }
 
 func (m *NinRepEnum) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Field1) > 0 {
@@ -24717,6 +24825,9 @@ func (m *NinRepEnum) Size() (n int) {
 }
 
 func (m *NinOptEnumDefault) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -24735,6 +24846,9 @@ func (m *NinOptEnumDefault) Size() (n int) {
 }
 
 func (m *AnotherNinOptEnum) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -24753,6 +24867,9 @@ func (m *AnotherNinOptEnum) Size() (n int) {
 }
 
 func (m *AnotherNinOptEnumDefault) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -24771,6 +24888,9 @@ func (m *AnotherNinOptEnumDefault) Size() (n int) {
 }
 
 func (m *Timer) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 9
@@ -24786,6 +24906,9 @@ func (m *Timer) Size() (n int) {
 }
 
 func (m *MyExtendable) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -24799,6 +24922,9 @@ func (m *MyExtendable) Size() (n int) {
 }
 
 func (m *OtherExtenable) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field2 != nil {
@@ -24819,6 +24945,9 @@ func (m *OtherExtenable) Size() (n int) {
 }
 
 func (m *NestedDefinition) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -24842,6 +24971,9 @@ func (m *NestedDefinition) Size() (n int) {
 }
 
 func (m *NestedDefinition_NestedMessage) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.NestedField1 != nil {
@@ -24858,6 +24990,9 @@ func (m *NestedDefinition_NestedMessage) Size() (n int) {
 }
 
 func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.NestedNestedField1 != nil {
@@ -24871,6 +25006,9 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Size() (n int) {
 }
 
 func (m *NestedScope) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.A != nil {
@@ -24891,6 +25029,9 @@ func (m *NestedScope) Size() (n int) {
 }
 
 func (m *NinOptNativeDefault) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -24947,6 +25088,9 @@ func (m *NinOptNativeDefault) Size() (n int) {
 }
 
 func (m *CustomContainer) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = m.CustomStruct.Size()
@@ -24958,6 +25102,9 @@ func (m *CustomContainer) Size() (n int) {
 }
 
 func (m *CustomNameNidOptNative) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 9
@@ -24986,6 +25133,9 @@ func (m *CustomNameNidOptNative) Size() (n int) {
 }
 
 func (m *CustomNameNinOptNative) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.FieldA != nil {
@@ -25042,6 +25192,9 @@ func (m *CustomNameNinOptNative) Size() (n int) {
 }
 
 func (m *CustomNameNinRepNative) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.FieldA) > 0 {
@@ -25114,6 +25267,9 @@ func (m *CustomNameNinRepNative) Size() (n int) {
 }
 
 func (m *CustomNameNinStruct) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.FieldA != nil {
@@ -25160,6 +25316,9 @@ func (m *CustomNameNinStruct) Size() (n int) {
 }
 
 func (m *CustomNameCustomType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.FieldA != nil {
@@ -25189,6 +25348,9 @@ func (m *CustomNameCustomType) Size() (n int) {
 }
 
 func (m *CustomNameNinEmbeddedStructUnion) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.NidOptNative != nil {
@@ -25209,6 +25371,9 @@ func (m *CustomNameNinEmbeddedStructUnion) Size() (n int) {
 }
 
 func (m *CustomNameEnum) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.FieldA != nil {
@@ -25226,6 +25391,9 @@ func (m *CustomNameEnum) Size() (n int) {
 }
 
 func (m *NoExtensionsMap) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -25241,6 +25409,9 @@ func (m *NoExtensionsMap) Size() (n int) {
 }
 
 func (m *Unrecognized) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -25251,6 +25422,9 @@ func (m *Unrecognized) Size() (n int) {
 }
 
 func (m *UnrecognizedWithInner) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Embedded) > 0 {
@@ -25270,6 +25444,9 @@ func (m *UnrecognizedWithInner) Size() (n int) {
 }
 
 func (m *UnrecognizedWithInner_Inner) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -25279,6 +25456,9 @@ func (m *UnrecognizedWithInner_Inner) Size() (n int) {
 }
 
 func (m *UnrecognizedWithEmbed) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = m.UnrecognizedWithEmbed_Embedded.Size()
@@ -25294,6 +25474,9 @@ func (m *UnrecognizedWithEmbed) Size() (n int) {
 }
 
 func (m *UnrecognizedWithEmbed_Embedded) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -25303,6 +25486,9 @@ func (m *UnrecognizedWithEmbed_Embedded) Size() (n int) {
 }
 
 func (m *Node) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Label != nil {
@@ -25322,6 +25508,9 @@ func (m *Node) Size() (n int) {
 }
 
 func (m *NonByteCustomType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -25335,6 +25524,9 @@ func (m *NonByteCustomType) Size() (n int) {
 }
 
 func (m *NidOptNonByteCustomType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = m.Field1.Size()
@@ -25346,6 +25538,9 @@ func (m *NidOptNonByteCustomType) Size() (n int) {
 }
 
 func (m *NinOptNonByteCustomType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -25359,6 +25554,9 @@ func (m *NinOptNonByteCustomType) Size() (n int) {
 }
 
 func (m *NidRepNonByteCustomType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Field1) > 0 {
@@ -25374,6 +25572,9 @@ func (m *NidRepNonByteCustomType) Size() (n int) {
 }
 
 func (m *NinRepNonByteCustomType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Field1) > 0 {
@@ -25389,6 +25590,9 @@ func (m *NinRepNonByteCustomType) Size() (n int) {
 }
 
 func (m *ProtoType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field2 != nil {

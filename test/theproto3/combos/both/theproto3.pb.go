@@ -5339,6 +5339,9 @@ func encodeVarintPopulateTheproto3(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 func (m *Message) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.Name)
@@ -5412,6 +5415,9 @@ func (m *Message) Size() (n int) {
 }
 
 func (m *Nested) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.Bunny)
@@ -5425,6 +5431,9 @@ func (m *Nested) Size() (n int) {
 }
 
 func (m *AllMaps) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.StringToDoubleMap) > 0 {
@@ -5579,6 +5588,9 @@ func (m *AllMaps) Size() (n int) {
 }
 
 func (m *AllMapsOrdered) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.StringToDoubleMap) > 0 {
@@ -5733,6 +5745,9 @@ func (m *AllMapsOrdered) Size() (n int) {
 }
 
 func (m *MessageWithMap) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.NameMapping) > 0 {
@@ -5775,6 +5790,9 @@ func (m *MessageWithMap) Size() (n int) {
 }
 
 func (m *FloatingPoint) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.F != 0 {
@@ -5787,6 +5805,9 @@ func (m *FloatingPoint) Size() (n int) {
 }
 
 func (m *Uint128Pair) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = m.Left.Size()
@@ -5802,6 +5823,9 @@ func (m *Uint128Pair) Size() (n int) {
 }
 
 func (m *ContainsNestedMap) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.XXX_unrecognized != nil {
@@ -5811,6 +5835,9 @@ func (m *ContainsNestedMap) Size() (n int) {
 }
 
 func (m *ContainsNestedMap_NestedMap) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.NestedMapField) > 0 {
@@ -5828,6 +5855,9 @@ func (m *ContainsNestedMap_NestedMap) Size() (n int) {
 }
 
 func (m *NotPacked) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Key) > 0 {

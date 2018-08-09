@@ -377,6 +377,9 @@ func encodeVarintPopulateIssue322(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 func (m *OneofTest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Union != nil {
@@ -389,6 +392,9 @@ func (m *OneofTest) Size() (n int) {
 }
 
 func (m *OneofTest_I) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sovIssue322(uint64(m.I))

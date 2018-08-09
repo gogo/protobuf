@@ -1858,6 +1858,9 @@ func encodeVarintPopulateType(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 func (m *Type) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.Name)
@@ -1896,6 +1899,9 @@ func (m *Type) Size() (n int) {
 }
 
 func (m *Field) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Kind != 0 {
@@ -1942,6 +1948,9 @@ func (m *Field) Size() (n int) {
 }
 
 func (m *Enum) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.Name)
@@ -1974,6 +1983,9 @@ func (m *Enum) Size() (n int) {
 }
 
 func (m *EnumValue) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.Name)
@@ -1996,6 +2008,9 @@ func (m *EnumValue) Size() (n int) {
 }
 
 func (m *Option) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.Name)

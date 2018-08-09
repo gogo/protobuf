@@ -61,6 +61,9 @@ func init() {
 	proto.RegisterType((*SizeMe)(nil), "issue444.SizeMe")
 }
 func (m *SizeMe) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.Foo)

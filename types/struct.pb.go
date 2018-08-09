@@ -1150,6 +1150,9 @@ func encodeVarintPopulateStruct(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 func (m *Struct) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Fields) > 0 {
@@ -1172,6 +1175,9 @@ func (m *Struct) Size() (n int) {
 }
 
 func (m *Value) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Kind != nil {
@@ -1184,18 +1190,27 @@ func (m *Value) Size() (n int) {
 }
 
 func (m *Value_NullValue) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sovStruct(uint64(m.NullValue))
 	return n
 }
 func (m *Value_NumberValue) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 9
 	return n
 }
 func (m *Value_StringValue) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.StringValue)
@@ -1203,12 +1218,18 @@ func (m *Value_StringValue) Size() (n int) {
 	return n
 }
 func (m *Value_BoolValue) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 2
 	return n
 }
 func (m *Value_StructValue) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.StructValue != nil {
@@ -1218,6 +1239,9 @@ func (m *Value_StructValue) Size() (n int) {
 	return n
 }
 func (m *Value_ListValue) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.ListValue != nil {
@@ -1227,6 +1251,9 @@ func (m *Value_ListValue) Size() (n int) {
 	return n
 }
 func (m *ListValue) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Values) > 0 {

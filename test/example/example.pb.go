@@ -1675,6 +1675,9 @@ func encodeVarintPopulateExample(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 func (m *A) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.Description)
@@ -1689,6 +1692,9 @@ func (m *A) Size() (n int) {
 }
 
 func (m *B) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = m.A.Size()
@@ -1706,6 +1712,9 @@ func (m *B) Size() (n int) {
 }
 
 func (m *C) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.MySize != nil {
@@ -1718,6 +1727,9 @@ func (m *C) Size() (n int) {
 }
 
 func (m *U) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.A != nil {
@@ -1735,6 +1747,9 @@ func (m *U) Size() (n int) {
 }
 
 func (m *E) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.XXX_extensions != nil {
@@ -1747,6 +1762,9 @@ func (m *E) Size() (n int) {
 }
 
 func (m *R) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Recognized != nil {
@@ -1756,6 +1774,9 @@ func (m *R) Size() (n int) {
 }
 
 func (m *CastType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Int32 != nil {

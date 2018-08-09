@@ -2724,6 +2724,9 @@ func encodeVarintPopulateUnrecognized(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 func (m *A) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.B) > 0 {
@@ -2739,6 +2742,9 @@ func (m *A) Size() (n int) {
 }
 
 func (m *B) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.C != nil {
@@ -2760,6 +2766,9 @@ func (m *B) Size() (n int) {
 }
 
 func (m *D) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -2772,6 +2781,9 @@ func (m *D) Size() (n int) {
 }
 
 func (m *C) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field2 != nil {
@@ -2803,6 +2815,9 @@ func (m *C) Size() (n int) {
 }
 
 func (m *U) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Field2) > 0 {
@@ -2815,6 +2830,9 @@ func (m *U) Size() (n int) {
 }
 
 func (m *OldA) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.B) > 0 {
@@ -2830,6 +2848,9 @@ func (m *OldA) Size() (n int) {
 }
 
 func (m *OldB) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.C != nil {
@@ -2847,6 +2868,9 @@ func (m *OldB) Size() (n int) {
 }
 
 func (m *OldC) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -2872,6 +2896,9 @@ func (m *OldC) Size() (n int) {
 }
 
 func (m *OldU) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
