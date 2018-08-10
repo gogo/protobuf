@@ -253,7 +253,7 @@ func (p *unmarshal) decodeFixed64(varName string, typeName string) {
 	p.P(`iNdEx += 8`)
 }
 
-func (p *unmarshal) declareMapField(varName string, nullable bool, customType bool, field *descriptor.FieldDescriptorProto) {
+func (p *unmarshal) declareMapField(file *generator.FileDescriptor, varName string, nullable bool, customType bool, field *descriptor.FieldDescriptorProto) {
 	switch field.GetType() {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
 		p.P(`var `, varName, ` float64`)
@@ -286,7 +286,24 @@ func (p *unmarshal) declareMapField(varName string, nullable bool, customType bo
 			if nullable {
 				p.P(`var `, varName, ` *`, msgname)
 			} else {
-				p.P(varName, ` := &`, msgname, `{}`)
+				if gogoproto.GeneratesPool(file.FileDescriptorProto) {
+					p.P(`var `, varName, ` *`, msgname)
+					p.P(`if m.pool == nil {`)
+					p.In()
+					p.P(varName, ` = &`, msgname, `{}`)
+					p.Out()
+					p.P(`} else if pooledMessage := m.pool.Get("`, getMessageType(file, desc), `"); pooledMessage != nil {`)
+					p.In()
+					p.P(varName, ` = pooledMessage.(*`, msgname, `)`)
+					p.Out()
+					p.P(`} else {`)
+					p.In()
+					p.P(varName, ` = &`, msgname, `{}`)
+					p.Out()
+					p.P(`}`)
+				} else {
+					p.P(varName, ` := &`, msgname, `{}`)
+				}
 			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
@@ -316,7 +333,7 @@ func (p *unmarshal) declareMapField(varName string, nullable bool, customType bo
 	}
 }
 
-func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.FieldDescriptorProto) {
+func (p *unmarshal) mapField(file *generator.FileDescriptor, varName string, customType bool, field *descriptor.FieldDescriptorProto) {
 	switch field.GetType() {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
 		p.P(`var `, varName, `temp uint64`)
@@ -386,7 +403,23 @@ func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.
 		} else {
 			desc := p.ObjectNamed(field.GetTypeName())
 			msgname := p.TypeName(desc)
-			p.P(varName, ` = &`, msgname, `{}`)
+			if gogoproto.GeneratesPool(file.FileDescriptorProto) {
+				p.P(`if m.pool == nil {`)
+				p.In()
+				p.P(varName, ` = &`, msgname, `{}`)
+				p.Out()
+				p.P(`} else if pooledMessage := m.pool.Get("`, getMessageType(file, desc), `"); pooledMessage != nil {`)
+				p.In()
+				p.P(varName, ` = pooledMessage.(*`, msgname, `)`)
+				p.Out()
+				p.P(`} else {`)
+				p.In()
+				p.P(varName, ` = &`, msgname, `{}`)
+				p.Out()
+				p.P(`}`)
+			} else {
+				p.P(varName, ` = &`, msgname, `{}`)
+			}
 			p.P(`if err := `, varName, `.Unmarshal(`, buf, `); err != nil {`)
 		}
 		p.In()
@@ -649,7 +682,24 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 					p.P(`if err := `, p.typesPkg.Use(), `.StdDurationUnmarshal(&v, `, buf, `); err != nil {`)
 				}
 			} else {
-				p.P(`v := &`, msgname, `{}`)
+				if gogoproto.GeneratesPool(file.FileDescriptorProto) {
+					p.P(`var v *`, msgname)
+					p.P(`if m.pool == nil {`)
+					p.In()
+					p.P(`v = &`, msgname, `{}`)
+					p.Out()
+					p.P(`} else if pooledMessage := m.pool.Get("`, getMessageType(file, desc), `"); pooledMessage != nil {`)
+					p.In()
+					p.P(`v = pooledMessage.(*`, msgname, `)`)
+					p.Out()
+					p.P(`} else {`)
+					p.In()
+					p.P(`v = &`, msgname, `{}`)
+					p.Out()
+					p.P(`}`)
+				} else {
+					p.P(`v := &`, msgname, `{}`)
+				}
 				p.P(`if err := v.Unmarshal(`, buf, `); err != nil {`)
 			}
 			p.In()
@@ -689,8 +739,8 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			p.Out()
 			p.P(`}`)
 
-			p.declareMapField("mapkey", false, false, m.KeyAliasField)
-			p.declareMapField("mapvalue", nullable, gogoproto.IsCustomType(field), m.ValueAliasField)
+			p.declareMapField(file, "mapkey", false, false, m.KeyAliasField)
+			p.declareMapField(file, "mapvalue", nullable, gogoproto.IsCustomType(field), m.ValueAliasField)
 			p.P(`for iNdEx < postIndex {`)
 			p.In()
 
@@ -701,11 +751,11 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 
 			p.P(`if fieldNum == 1 {`)
 			p.In()
-			p.mapField("mapkey", false, m.KeyAliasField)
+			p.mapField(file, "mapkey", false, m.KeyAliasField)
 			p.Out()
 			p.P(`} else if fieldNum == 2 {`)
 			p.In()
-			p.mapField("mapvalue", gogoproto.IsCustomType(field), m.ValueAliasField)
+			p.mapField(file, "mapvalue", gogoproto.IsCustomType(field), m.ValueAliasField)
 			p.Out()
 			p.P(`} else {`)
 			p.In()
@@ -763,7 +813,24 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, time.Duration(0))`)
 				}
 			} else if nullable && !gogoproto.IsCustomType(field) {
-				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, &`, msgname, `{})`)
+				if gogoproto.GeneratesPool(file.FileDescriptorProto) {
+					desc := p.ObjectNamed(field.GetTypeName())
+					p.P(`if m.pool == nil {`)
+					p.In()
+					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, &`, msgname, `{})`)
+					p.Out()
+					p.P(`} else if pooledMessage := m.pool.Get("`, getMessageType(file, desc), `"); pooledMessage != nil {`)
+					p.In()
+					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, pooledMessage.(*`, msgname, `))`)
+					p.Out()
+					p.P(`} else {`)
+					p.In()
+					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, &`, msgname, `{})`)
+					p.Out()
+					p.P(`}`)
+				} else {
+					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, &`, msgname, `{})`)
+				}
 			} else {
 				goType, _ := p.GoType(nil, field)
 				// remove the slice from the type, i.e. []*T -> *T
@@ -801,7 +868,25 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			} else {
 				goType, _ := p.GoType(nil, field)
 				// remove the star from the type
-				p.P(`m.`, fieldname, ` = &`, goType[1:], `{}`)
+				msgname := goType[1:]
+				if gogoproto.GeneratesPool(file.FileDescriptorProto) {
+					desc := p.ObjectNamed(field.GetTypeName())
+					p.P(`if m.pool == nil {`)
+					p.In()
+					p.P(`m.`, fieldname, ` = &`, msgname, `{}`)
+					p.Out()
+					p.P(`} else if pooledMessage := m.pool.Get("`, getMessageType(file, desc), `"); pooledMessage != nil {`)
+					p.In()
+					p.P(`m.`, fieldname, ` = pooledMessage.(*`, msgname, `)`)
+					p.Out()
+					p.P(`} else {`)
+					p.In()
+					p.P(`m.`, fieldname, ` = &`, msgname, `{}`)
+					p.Out()
+					p.P(`}`)
+				} else {
+					p.P(`m.`, fieldname, ` = &`, msgname, `{}`)
+				}
 			}
 			p.Out()
 			p.P(`}`)
@@ -1358,6 +1443,14 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		ErrIntOverflow` + p.localName + ` = ` + fmtPkg.Use() + `.Errorf("proto: integer overflow")
 	)
 	`)
+}
+
+func getMessageType(file *generator.FileDescriptor, message generator.Object) string {
+	fullName := strings.Join(message.TypeName(), ".")
+	if file.Package != nil {
+		fullName = *file.Package + "." + fullName
+	}
+	return fullName
 }
 
 func init() {

@@ -45,6 +45,7 @@ import (
 	_ "github.com/gogo/protobuf/plugin/gostring"
 	_ "github.com/gogo/protobuf/plugin/marshalto"
 	_ "github.com/gogo/protobuf/plugin/oneofcheck"
+	_ "github.com/gogo/protobuf/plugin/pool"
 	_ "github.com/gogo/protobuf/plugin/populate"
 	_ "github.com/gogo/protobuf/plugin/size"
 	_ "github.com/gogo/protobuf/plugin/stringer"

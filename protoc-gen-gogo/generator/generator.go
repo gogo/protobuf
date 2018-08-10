@@ -544,7 +544,7 @@ func (g *Generator) CommandLineParameters(parameter string) {
 	if pluginList == "none" {
 		pluginList = ""
 	}
-	gogoPluginNames := []string{"unmarshal", "unsafeunmarshaler", "union", "stringer", "size", "protosizer", "populate", "marshalto", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck", "oneofcheck", "compare"}
+	gogoPluginNames := []string{"unmarshal", "unsafeunmarshaler", "union", "stringer", "size", "protosizer", "populate", "marshalto", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck", "oneofcheck", "compare", "pool"}
 	pluginList = strings.Join(append(gogoPluginNames, pluginList), "+")
 	if pluginList != "" {
 		// Amend the set of plugins.
@@ -717,6 +717,7 @@ func (g *Generator) SetPackageNames() {
 		"math":         "math",
 		"proto":        "proto",
 		"golang_proto": "golang_proto",
+		"mem":          "mem",
 	}
 }
 
@@ -1386,6 +1387,9 @@ func (g *Generator) generateImports() {
 	}
 	g.PrintImport(GoPackageName(g.Pkg["fmt"]), "fmt")
 	g.PrintImport(GoPackageName(g.Pkg["math"]), "math")
+	if gogoproto.GeneratesPool(g.file.FileDescriptorProto) {
+		g.PrintImport(GoPackageName(g.Pkg["mem"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/gogo/protobuf/mem"))
+	}
 
 	var (
 		imports       = make(map[GoImportPath]bool)
@@ -2212,6 +2216,10 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
 		}
 		g.P("XXX_sizecache\tint32 `json:\"-\"`")
+		if gogoproto.GeneratesPool(g.file.FileDescriptorProto) {
+			g.P()
+			g.P(`pool *`, g.Pkg["mem"], `.Pool`)
+		}
 		g.Out()
 		g.P("}")
 	} else {
@@ -2256,7 +2264,17 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	}
 
 	// Reset, String and ProtoMessage methods.
-	g.P("func (m *", ccTypeName, ") Reset() { *m = ", ccTypeName, "{} }")
+	if gogoproto.GeneratesPool(g.file.FileDescriptorProto) {
+		g.P("func (m *", ccTypeName, ") Reset() {")
+		g.In()
+		for _, field := range message.Field {
+			g.generateResetField(message, field)
+		}
+		g.Out()
+		g.P("}")
+	} else {
+		g.P("func (m *", ccTypeName, ") Reset() { *m = ", ccTypeName, "{} }")
+	}
 	if gogoproto.EnabledGoStringer(g.file.FileDescriptorProto, message.DescriptorProto) {
 		g.P("func (m *", ccTypeName, ") String() string { return ", g.Pkg["proto"], ".CompactTextString(m) }")
 	}
@@ -3364,6 +3382,64 @@ func (g *Generator) generateExtensionRegistration(ext *ExtensionDescriptor) {
 	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
 		g.addInitf("%s.RegisterExtension(%s)", g.Pkg["golang_proto"], ext.DescName())
 	}
+}
+
+func (g *Generator) generateResetField(message *Descriptor, field *descriptor.FieldDescriptorProto) {
+	fieldName := g.GetFieldName(message, field)
+
+	// You could do "for key := range m.fieldName { delete(m.fieldName) }" potentially
+	// But not even sure if this keeps the same map with the same capacity
+	// And it could be very slow
+	if g.IsMap(field) {
+		g.P(`m.`, fieldName, ` = nil`)
+		return
+	}
+
+	if field.IsRepeated() {
+		g.P(`if m.`, fieldName, ` != nil {`)
+		g.In()
+		g.P(`m.`, fieldName, ` = m.`, fieldName, `[:0]`)
+		g.Out()
+		g.P(`}`)
+		return
+	}
+
+	if field.IsRequired() || gogoproto.NeedsNilCheck(message.proto3(), field) {
+		g.P(`m.`, fieldName, ` = nil`)
+		return
+	}
+
+	var zeroValue string
+	switch *field.Type {
+	case descriptor.FieldDescriptorProto_TYPE_DOUBLE,
+		descriptor.FieldDescriptorProto_TYPE_FLOAT:
+		zeroValue = "0.0"
+	case descriptor.FieldDescriptorProto_TYPE_INT64,
+		descriptor.FieldDescriptorProto_TYPE_UINT64,
+		descriptor.FieldDescriptorProto_TYPE_INT32,
+		descriptor.FieldDescriptorProto_TYPE_FIXED64,
+		descriptor.FieldDescriptorProto_TYPE_FIXED32,
+		descriptor.FieldDescriptorProto_TYPE_UINT32,
+		descriptor.FieldDescriptorProto_TYPE_ENUM,
+		descriptor.FieldDescriptorProto_TYPE_SFIXED32,
+		descriptor.FieldDescriptorProto_TYPE_SFIXED64,
+		descriptor.FieldDescriptorProto_TYPE_SINT32,
+		descriptor.FieldDescriptorProto_TYPE_SINT64:
+		zeroValue = "0"
+	case descriptor.FieldDescriptorProto_TYPE_BOOL:
+		zeroValue = "false"
+	case descriptor.FieldDescriptorProto_TYPE_STRING:
+		zeroValue = `""`
+	case descriptor.FieldDescriptorProto_TYPE_GROUP:
+		zeroValue = "nil"
+	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+		zeroValue = "nil"
+	case descriptor.FieldDescriptorProto_TYPE_BYTES:
+		zeroValue = "nil"
+	default:
+		panic("not implemented")
+	}
+	g.P(`m.`, g.GetFieldName(message, field), ` = `, zeroValue)
 }
 
 // And now lots of helper functions.

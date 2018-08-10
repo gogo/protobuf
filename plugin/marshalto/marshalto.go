@@ -178,6 +178,7 @@ type marshalto struct {
 	mathPkg     generator.Single
 	typesPkg    generator.Single
 	binaryPkg   generator.Single
+	memPkg      generator.Single
 	localName   string
 }
 
@@ -1071,6 +1072,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 	p.errorsPkg = p.NewImport("errors")
 	p.binaryPkg = p.NewImport("encoding/binary")
 	p.typesPkg = p.NewImport("github.com/gogo/protobuf/types")
+	p.memPkg = p.NewImport("github.com/gogo/protobuf/mem")
 
 	for _, message := range file.Messages() {
 		if message.DescriptorProto.GetOptions().GetMapEntry() {
@@ -1101,6 +1103,39 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 		p.Out()
 		p.P(`}`)
 		p.P(``)
+
+		if gogoproto.GeneratesPool(file.FileDescriptorProto) {
+			p.P(`func (m *`, ccTypeName, `) MarshalPool() (*`, p.memPkg.Use(), `.Bytes, error) {`)
+			p.In()
+			if gogoproto.IsProtoSizer(file.FileDescriptorProto, message.DescriptorProto) {
+				p.P(`size := m.ProtoSize()`)
+			} else {
+				p.P(`size := m.Size()`)
+			}
+			p.P(`var bytes *`, p.memPkg.Use(), `.Bytes`)
+			p.P(`if m.pool != nil {`)
+			p.In()
+			p.P(`bytes = m.pool.GetBytes(size)`)
+			p.Out()
+			p.P(`} else {`)
+			p.In()
+			p.P(`bytes = `, p.memPkg.Use(), `.NewUnmanagedBytes(size)`)
+			p.Out()
+			p.P(`}`)
+			p.P(`n, err := m.MarshalTo(bytes.Value())`)
+			p.P(`if err != nil {`)
+			p.In()
+			p.P(`bytes.Recycle()`)
+			p.P(`return nil, err`)
+			p.Out()
+			p.P(`}`)
+			p.P(`bytes.Truncate(n)`)
+			p.P(`return bytes, nil`)
+			p.Out()
+			p.P(`}`)
+			p.P(``)
+		}
+
 		p.P(`func (m *`, ccTypeName, `) MarshalTo(dAtA []byte) (int, error) {`)
 		p.In()
 		p.P(`var i int`)

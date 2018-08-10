@@ -356,3 +356,7 @@ func RegistersGolangProto(file *google_protobuf.FileDescriptorProto) bool {
 func HasMessageName(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
 	return proto.GetBoolExtension(message.Options, E_Messagename, proto.GetBoolExtension(file.Options, E_MessagenameAll, false))
 }
+
+func GeneratesPool(file *google_protobuf.FileDescriptorProto) bool {
+	return proto.GetBoolExtension(file.Options, E_Pool, false)
+}
