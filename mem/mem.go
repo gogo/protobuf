@@ -237,7 +237,7 @@ func (p *Pool) Put(messageType string, message PooledMessage) {
 // to be zeroed out, use the MemsetZero function.
 func (p *Pool) GetBytes(valueLen int) *Bytes {
 	for _, segListSize := range p.sortedSegListSizes {
-		if valueLen < segListSize {
+		if valueLen <= segListSize {
 			segListPool, ok := p.segListSizeToSegListPool[segListSize]
 			if !ok {
 				panic(fmt.Sprintf("no segListPool of size %d", segListSize))
