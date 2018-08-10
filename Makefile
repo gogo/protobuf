@@ -31,8 +31,7 @@ GO_VERSION:=$(shell go version)
 # Skip known issues from purego tests
 # https://github.com/gogo/protobuf/issues/447
 # https://github.com/gogo/protobuf/issues/448
-# https://github.com/gogo/protobuf/issues/449
-SKIPISSUE:="/jsonpb|/test/casttype/|/test/oneof/combos/|/test/unmarshalmerge"
+SKIPISSUE:="/jsonpb|/test/casttype/|/test/oneof/combos/"
 
 .PHONY: nuke regenerate tests clean install gofmt vet contributors
 
@@ -128,6 +127,7 @@ regenerate:
 	make -C test/cachedsize regenerate
 	make -C test/deterministic regenerate
 	make -C test/issue438 regenerate
+	make -C test/issue449 regenerate
 	make gofmt
 
 tests:
