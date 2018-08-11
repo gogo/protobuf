@@ -59,7 +59,9 @@ func BenchmarkPoolTrueDisabledWithSegListWithoutMaps(b *testing.B) {
 	}
 }
 
-func BenchmarkPoolTrueEnabledWithoutMaps(b *testing.B) {
+func BenchmarkPoolTrueEnabledWithoutMapsChannelSize0(b *testing.B) {
+	mem.SetBytesPoolChannelSize(0)
+	mem.SetObjectPoolChannelSize(0)
 	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
@@ -69,7 +71,33 @@ func BenchmarkPoolTrueEnabledWithoutMaps(b *testing.B) {
 	mem.DisablePooling()
 }
 
-func BenchmarkPoolTrueEnabledWithSegListWithoutMaps(b *testing.B) {
+func BenchmarkPoolTrueEnabledWithSegListWithoutMapsChannelSize0(b *testing.B) {
+	mem.SetBytesPoolChannelSize(0)
+	mem.SetObjectPoolChannelSize(0)
+	mem.EnablePooling()
+	b.ResetTimer()
+	for iter := 0; iter < b.N; iter++ {
+		benchmarkPoolTrue(b, false, true)
+	}
+	b.StopTimer()
+	mem.DisablePooling()
+}
+
+func BenchmarkPoolTrueEnabledWithoutMapsChannelSize16(b *testing.B) {
+	mem.SetBytesPoolChannelSize(16)
+	mem.SetObjectPoolChannelSize(16)
+	mem.EnablePooling()
+	b.ResetTimer()
+	for iter := 0; iter < b.N; iter++ {
+		benchmarkPoolTrue(b, false, false)
+	}
+	b.StopTimer()
+	mem.DisablePooling()
+}
+
+func BenchmarkPoolTrueEnabledWithSegListWithoutMapsChannelSize16(b *testing.B) {
+	mem.SetBytesPoolChannelSize(16)
+	mem.SetObjectPoolChannelSize(16)
 	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
@@ -97,7 +125,9 @@ func BenchmarkPoolTrueDisabledWithSegListAndMaps(b *testing.B) {
 	}
 }
 
-func BenchmarkPoolTrueEnabledWithMaps(b *testing.B) {
+func BenchmarkPoolTrueEnabledWithMapsChannelSize0(b *testing.B) {
+	mem.SetBytesPoolChannelSize(0)
+	mem.SetObjectPoolChannelSize(0)
 	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
@@ -107,7 +137,33 @@ func BenchmarkPoolTrueEnabledWithMaps(b *testing.B) {
 	mem.DisablePooling()
 }
 
-func BenchmarkPoolTrueEnabledWithSegListAndMaps(b *testing.B) {
+func BenchmarkPoolTrueEnabledWithSegListAndMapsChannelSize0(b *testing.B) {
+	mem.SetBytesPoolChannelSize(0)
+	mem.SetObjectPoolChannelSize(0)
+	mem.EnablePooling()
+	b.ResetTimer()
+	for iter := 0; iter < b.N; iter++ {
+		benchmarkPoolTrue(b, true, true)
+	}
+	b.StopTimer()
+	mem.DisablePooling()
+}
+
+func BenchmarkPoolTrueEnabledWithMapsChannelSize16(b *testing.B) {
+	mem.SetBytesPoolChannelSize(16)
+	mem.SetObjectPoolChannelSize(16)
+	mem.EnablePooling()
+	b.ResetTimer()
+	for iter := 0; iter < b.N; iter++ {
+		benchmarkPoolTrue(b, true, false)
+	}
+	b.StopTimer()
+	mem.DisablePooling()
+}
+
+func BenchmarkPoolTrueEnabledWithSegListAndMapsChannelSize16(b *testing.B) {
+	mem.SetBytesPoolChannelSize(16)
+	mem.SetObjectPoolChannelSize(16)
 	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {

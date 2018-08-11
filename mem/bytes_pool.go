@@ -31,13 +31,12 @@ package mem
 import (
 	"fmt"
 	"sort"
-	"sync/atomic"
 )
 
 // DefaultBytesPoolChannelSize is the default BytesPool channel size.
 //
 // See the BytesPoolWithChannelSize function for more details.
-const DefaultBytesPoolChannelSize uint16 = 128
+const DefaultBytesPoolChannelSize uint16 = 16
 
 // DefaultBytesPoolSegListSizes are the default seg list sizes.
 //
@@ -58,7 +57,6 @@ var DefaultBytesPoolSegListSizes = []int{
 // Users should generally not interact with BytesPools directly, instead
 // relying on the generated functions to call BytesPools.
 type BytesPool struct {
-	enabled                  uint32
 	channelSize              uint16
 	sortedSegListSizes       []int
 	segListSizeToSegListPool map[int]*segListPool
@@ -97,11 +95,8 @@ func BytesPoolWithSegListSizes(segListSizes ...int) BytesPoolOption {
 }
 
 // NewBytesPool creates a new BytesPool.
-//
-// BytesPools are disabled by default. Call Enable to enable this BytesPool.
 func NewBytesPool(options ...BytesPoolOption) *BytesPool {
 	bytesPool := &BytesPool{
-		enabled:                  0,
 		channelSize:              DefaultBytesPoolChannelSize,
 		sortedSegListSizes:       DefaultBytesPoolSegListSizes,
 		segListSizeToSegListPool: make(map[int]*segListPool),
@@ -115,29 +110,13 @@ func NewBytesPool(options ...BytesPoolOption) *BytesPool {
 	return bytesPool
 }
 
-// Enable enables all pooling.
-func (p *BytesPool) Enable() {
-	atomic.StoreUint32(&p.enabled, 1)
-}
-
-// Disable disables all pooling.
-//
-// This results in Get calls returning unmanaged Bytes.
-func (p *BytesPool) Disable() {
-	atomic.StoreUint32(&p.enabled, 0)
-}
-
 // Get gets a Bytes of the given length.
 //
 // This Bytes can be written to by accessing the backing Value.
-// If the BytesPool is disabled, this will return an unmanaged Bytes.
 //
 // Note that there may be existing data inside the Value. If you need the Value
 // to be zeroed out, use the MemsetZero function.
 func (p *BytesPool) Get(valueLen int) *Bytes {
-	if atomic.LoadUint32(&p.enabled) == 0 {
-		return newBytes(nil, valueLen)
-	}
 	for _, segListSize := range p.sortedSegListSizes {
 		if valueLen <= segListSize {
 			segListPool, ok := p.segListSizeToSegListPool[segListSize]

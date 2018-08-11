@@ -255,7 +255,7 @@ func (m *Foo) Marshal() (dAtA []byte, err error) {
 
 func (m *Foo) MarshalPool() (*github_com_gogo_protobuf_mem.Bytes, error) {
 	size := m.ProtoSize()
-	bytes := github_com_gogo_protobuf_mem.GlobalBytesPool.Get(size)
+	bytes := github_com_gogo_protobuf_mem.GetBytes(size)
 	n, err := m.MarshalTo(bytes.Value())
 	if err != nil {
 		bytes.Recycle()
@@ -446,7 +446,7 @@ func (m *Bar) Marshal() (dAtA []byte, err error) {
 
 func (m *Bar) MarshalPool() (*github_com_gogo_protobuf_mem.Bytes, error) {
 	size := m.ProtoSize()
-	bytes := github_com_gogo_protobuf_mem.GlobalBytesPool.Get(size)
+	bytes := github_com_gogo_protobuf_mem.GetBytes(size)
 	n, err := m.MarshalTo(bytes.Value())
 	if err != nil {
 		bytes.Recycle()
@@ -490,11 +490,17 @@ func encodeVarintPooldep(dAtA []byte, offset int, v uint64) int {
 
 // GetFoo gets a reset *Foo.
 func GetFoo() *Foo {
+	if !github_com_gogo_protobuf_mem.PoolingEnabled() {
+		return &Foo{}
+	}
 	return globalFooObjectPool.Get().(*Foo)
 }
 
 // GetBar gets a reset *Bar.
 func GetBar() *Bar {
+	if !github_com_gogo_protobuf_mem.PoolingEnabled() {
+		return &Bar{}
+	}
 	return globalBarObjectPool.Get().(*Bar)
 }
 
@@ -503,8 +509,11 @@ func GetBar() *Bar {
 // Any non-nil fields that are messages will be recycled as well, including elements of repeated fields and values of map fields.
 // Once Recycle is called, the message should no longer be used.
 //
-// If the message is nil, or the message was not allocated from a Pool, this is a no-op.
+// If the message is nil, the message was not allocated from a Pool, or pooling is disabled, this is a no-op.
 func (m *Foo) Recycle() {
+	if !github_com_gogo_protobuf_mem.PoolingEnabled() {
+		return
+	}
 	if m == nil {
 		return
 	}
@@ -533,8 +542,11 @@ func (m *Foo) Recycle() {
 // Any non-nil fields that are messages will be recycled as well, including elements of repeated fields and values of map fields.
 // Once Recycle is called, the message should no longer be used.
 //
-// If the message is nil, or the message was not allocated from a Pool, this is a no-op.
+// If the message is nil, the message was not allocated from a Pool, or pooling is disabled, this is a no-op.
 func (m *Bar) Recycle() {
+	if !github_com_gogo_protobuf_mem.PoolingEnabled() {
+		return
+	}
 	if m == nil {
 		return
 	}
@@ -558,8 +570,18 @@ var (
 )
 
 func init() {
-	github_com_gogo_protobuf_mem.RegisterGlobalObjectPool(globalFooObjectPool)
-	github_com_gogo_protobuf_mem.RegisterGlobalObjectPool(globalBarObjectPool)
+	github_com_gogo_protobuf_mem.RegisterGlobalObjectPool(
+		func() *github_com_gogo_protobuf_mem.ObjectPool { return globalFooObjectPool },
+		func(options ...github_com_gogo_protobuf_mem.ObjectPoolOption) {
+			globalFooObjectPool = github_com_gogo_protobuf_mem.NewObjectPool(newFoo, options...)
+		},
+	)
+	github_com_gogo_protobuf_mem.RegisterGlobalObjectPool(
+		func() *github_com_gogo_protobuf_mem.ObjectPool { return globalBarObjectPool },
+		func(options ...github_com_gogo_protobuf_mem.ObjectPoolOption) {
+			globalBarObjectPool = github_com_gogo_protobuf_mem.NewObjectPool(newBar, options...)
+		},
+	)
 }
 
 func (m *Foo) ProtoSize() (n int) {

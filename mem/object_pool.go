@@ -30,13 +30,12 @@ package mem
 
 import (
 	"sync"
-	"sync/atomic"
 )
 
 // DefaultObjectPoolChannelSize is the default ObjectPool channel size.
 //
 // See the ObjectPoolWithChannelSize function for more details.
-const DefaultObjectPoolChannelSize uint16 = 128
+const DefaultObjectPoolChannelSize uint16 = 16
 
 var globalObjectPool []ObjectPool
 
@@ -51,7 +50,6 @@ type Object interface {
 // Users should generally not interact with ObjectPools directly, instead
 // relying on the generated functions to call ObjectPools.
 type ObjectPool struct {
-	enabled     uint32
 	channelSize uint16
 	constructor func(*ObjectPool) Object
 	syncPool    *sync.Pool
@@ -78,11 +76,8 @@ func ObjectPoolWithChannelSize(channelSize uint16) ObjectPoolOption {
 }
 
 // NewObjectPool creates a new ObjectPool for the given constructor and options.
-//
-// ObjectPools are disabled by default. Call Enable to enable this ObjectPool.
 func NewObjectPool(constructor func(*ObjectPool) Object, options ...ObjectPoolOption) *ObjectPool {
 	objectPool := &ObjectPool{
-		enabled:     0,
 		channelSize: DefaultObjectPoolChannelSize,
 		constructor: constructor,
 	}
@@ -100,25 +95,8 @@ func NewObjectPool(constructor func(*ObjectPool) Object, options ...ObjectPoolOp
 	return objectPool
 }
 
-// Enable enables all pooling.
-func (m *ObjectPool) Enable() {
-	atomic.StoreUint32(&m.enabled, 1)
-}
-
-// Disable disables all pooling.
-//
-// This results in Get returning unmanaged Objects.
-func (m *ObjectPool) Disable() {
-	atomic.StoreUint32(&m.enabled, 0)
-}
-
 // Get returns a pooled object.
-//
-// If the ObjectPool is disabled, this will return an unmanaged Object.
 func (m *ObjectPool) Get() Object {
-	if atomic.LoadUint32(&m.enabled) == 0 {
-		return m.constructor(nil)
-	}
 	if m.c == nil {
 		getObject := m.syncPool.Get().(Object)
 		getObject.Reset()
@@ -136,12 +114,7 @@ func (m *ObjectPool) Get() Object {
 }
 
 // Put puts a pooled object back into the object pool.
-//
-// If the Pool that created this ObjectPool is disabled, this is a no-op.
 func (m *ObjectPool) Put(object Object) {
-	if atomic.LoadUint32(&m.enabled) == 0 {
-		return
-	}
 	if m.c == nil {
 		m.syncPool.Put(object)
 		return

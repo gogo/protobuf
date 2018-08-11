@@ -28,42 +28,104 @@
 
 package mem
 
-import "sync"
-
 var (
-	// GlobalBytesPool is the global BytesPool.
-	GlobalBytesPool = NewBytesPool()
+	// one of the big benefits of globals here is we can cut functions
+	// short without having to make a lot of function calls
+	globalEnabled               bool
+	globalBytesPoolChannelSize  = DefaultBytesPoolChannelSize
+	globalBytesPoolSegListSizes = DefaultBytesPoolSegListSizes
+	globalObjectPoolChannelSize = DefaultObjectPoolChannelSize
 
-	globalObjectPools []*ObjectPool
-
-	lock = &sync.RWMutex{}
+	globalBytesPool         = NewBytesPool()
+	globalObjectPoolGetters []func() *ObjectPool
+	globalObjectPoolSetters []func(...ObjectPoolOption)
 )
 
-// RegisterGlobalObjectPool registers the ObjectPool for enable and disable.
+// EnablePooling enables pooling.
+//
+// Pooling is disabled by default.
+//
+// This should only be called at initialization.
+func EnablePooling() {
+	globalEnabled = true
+}
+
+// DisablePooling disables pooling.
+//
+// Pooling is disabled by default.
+//
+// This should only be called at initialization.
+func DisablePooling() {
+	globalEnabled = false
+}
+
+// SetBytesPoolChannelSize results in the global BytesPool called by GetBytes
+// being set to a new BytesPool with the BytesPoolWithChannelSize option
+// set to the given value.
+func SetBytesPoolChannelSize(channelSize uint16) {
+	globalBytesPoolChannelSize = channelSize
+	resetGlobalBytesPool()
+}
+
+// SetBytesPoolSegListSizes results in the global BytesPool called by GetBytes
+// being set to a new BytesPool with the BytesPoolWithSegListSizes option
+// set to the given value.
+func SetBytesPoolSegListSizes(seglistSizes ...int) {
+	globalBytesPoolSegListSizes = seglistSizes
+	resetGlobalBytesPool()
+}
+
+// SetObjectPoolChannelSize results in the global ObjectPools being set to a
+// new ObjectPool with the ObjectPoolWithChannelSize option set to the given value.
+func SetObjectPoolChannelSize(channelSize uint16) {
+	globalObjectPoolChannelSize = channelSize
+	resetGlobalObjectPools()
+}
+
+// GetBytes gets a Bytes of the given length.
+//
+// This Bytes can be written to by accessing the backing Value.
+// If pooling is not enabled via EnablePooling(), this will return an unmanaged Bytes.
+//
+// Note that there may be existing data inside the Value. If you need the Value
+// to be zeroed out, use the MemsetZero function.
 //
 // This should not be called by users directly.
-func RegisterGlobalObjectPool(globalObjectPool *ObjectPool) {
-	lock.Lock()
-	globalObjectPools = append(globalObjectPools, globalObjectPool)
-	lock.Unlock()
+func GetBytes(valueLen int) *Bytes {
+	if !globalEnabled {
+		return newBytes(nil, valueLen)
+	}
+	return globalBytesPool.Get(valueLen)
 }
 
-// EnablePooling enables pooling on all global pools.
-func EnablePooling() {
-	lock.RLock()
-	GlobalBytesPool.Enable()
-	for _, globalObjectPool := range globalObjectPools {
-		globalObjectPool.Enable()
-	}
-	lock.RUnlock()
+// RegisterGlobalObjectPool registers the ObjectPool getter and setter.
+//
+// This should not be called by users directly.
+//
+// This should only be called at initialization.
+func RegisterGlobalObjectPool(getter func() *ObjectPool, setter func(...ObjectPoolOption)) {
+	globalObjectPoolGetters = append(globalObjectPoolGetters, getter)
+	globalObjectPoolSetters = append(globalObjectPoolSetters, setter)
 }
 
-// DisablePooling disables pooling on all global pools.
-func DisablePooling() {
-	lock.RLock()
-	GlobalBytesPool.Disable()
-	for _, globalObjectPool := range globalObjectPools {
-		globalObjectPool.Disable()
+// PoolingEnabled returns true if pooling is enabled.
+//
+// This should not be called by users directly.
+func PoolingEnabled() bool {
+	return globalEnabled
+}
+
+func resetGlobalBytesPool() {
+	globalBytesPool = NewBytesPool(
+		BytesPoolWithChannelSize(globalBytesPoolChannelSize),
+		BytesPoolWithSegListSizes(globalBytesPoolSegListSizes...),
+	)
+}
+
+func resetGlobalObjectPools() {
+	for _, setter := range globalObjectPoolSetters {
+		setter(
+			ObjectPoolWithChannelSize(globalObjectPoolChannelSize),
+		)
 	}
-	lock.RUnlock()
 }

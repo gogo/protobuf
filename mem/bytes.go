@@ -30,18 +30,11 @@ package mem
 
 // Bytes represents a byte slice created from a BytesPool.
 //
-// Only create these from BytesPools.
+// Only create these from BytePools or GetBytes.
 type Bytes struct {
 	segListPool *segListPool
 	value       []byte
 	valueLen    int
-}
-
-// NewUnmanagedBytes creates a new Bytes unmanaged by any Pool.
-//
-// Users should generally not call this directly.
-func NewUnmanagedBytes(valueLen int) *Bytes {
-	return newBytes(nil, valueLen)
 }
 
 // Value gets the value.
@@ -72,12 +65,9 @@ func (b *Bytes) MemsetZero() {
 
 // Recycle recycles the Bytes.
 //
-// If this is nil, this is a no-op.
+// If this is nil or pooling is not enabled via EnablePooling(), this is a no-op.
 func (b *Bytes) Recycle() {
-	if b == nil {
-		return
-	}
-	if b.segListPool == nil {
+	if b == nil || !globalEnabled || b.segListPool == nil {
 		return
 	}
 	b.segListPool.put(b)
