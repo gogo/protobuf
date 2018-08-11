@@ -107,7 +107,13 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 		p.P(`// is no need for additional setup to use this function.`)
 		p.P(`func Get`, messageGoType, `() *`, messageGoType, `{ `)
 		p.In()
-		p.P(`return Get`, messageGoType, `FromPool(`, p.memPkg.Use(), `.Global())`)
+		p.P(`pooledMessage := global`, messageGoType, `MessagePool.Get()`)
+		p.P(`if pooledMessage == nil {`)
+		p.In()
+		p.P(`return &`, messageGoType, `{}`)
+		p.Out()
+		p.P(`}`)
+		p.P(`return pooledMessage.(*`, messageGoType, `)`)
 		p.Out()
 		p.P(`}`)
 
@@ -225,9 +231,23 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 	}
 
 	// init
+	for _, message := range file.Messages() {
+		// Don't generate for map entry messages.
+		if message.GetOptions().GetMapEntry() {
+			continue
+		}
+		p.P(`var global`, getMessageGoType(message), `MessagePool *`, p.memPkg.Use(), `.MessagePool`)
+	}
 	p.P(`func init() {`)
 	p.In()
 	p.P(`RegisterToPool`, p.localName, `(`, p.memPkg.Use(), `.Global())`)
+	for _, message := range file.Messages() {
+		// Don't generate for map entry messages.
+		if message.GetOptions().GetMapEntry() {
+			continue
+		}
+		p.P(`global`, getMessageGoType(message), `MessagePool = `, p.memPkg.Use(), `.Global().GetMessagePool("`, getMessageType(file, message), `")`)
+	}
 	p.Out()
 	p.P(`}`)
 	p.P()

@@ -38,7 +38,7 @@ import (
 // DefaultChannelSize is the default Pool channel size.
 //
 // See the WithChannelSize function for more details.
-const DefaultChannelSize uint16 = 4
+const DefaultChannelSize uint16 = 128
 
 // DefaultSegListSizes are the default seg list sizes.
 //
@@ -141,7 +141,7 @@ type Pool struct {
 	channelSize        uint16
 	sortedSegListSizes []int
 
-	messageTypeToMessagePool map[string]*messagePool
+	messageTypeToMessagePool map[string]*MessagePool
 	segListSizeToSegListPool map[int]*segListPool
 
 	lock *sync.RWMutex
@@ -209,7 +209,7 @@ func NewPool(options ...PoolOption) *Pool {
 		enabled:                  1,
 		channelSize:              DefaultChannelSize,
 		sortedSegListSizes:       DefaultSegListSizes,
-		messageTypeToMessagePool: make(map[string]*messagePool),
+		messageTypeToMessagePool: make(map[string]*MessagePool),
 		segListSizeToSegListPool: make(map[int]*segListPool),
 		lock: &sync.RWMutex{},
 	}
@@ -252,6 +252,26 @@ func (p *Pool) RegisterConstructor(messageType string, constructor func(*Pool) P
 	}
 }
 
+// GetMessagePool gets a registered message pool.
+//
+// If there is no message pool for the message type, this will panic.
+// This is an optimization so that no map access is needed for generated global functions.
+//
+// Users should never call this directly.
+func (p *Pool) GetMessagePool(messageType string) *MessagePool {
+	if p.lock != nil {
+		p.lock.Lock()
+	}
+	messagePool, ok := p.messageTypeToMessagePool[messageType]
+	if p.lock != nil {
+		p.lock.Unlock()
+	}
+	if !ok {
+		panic(fmt.Sprintf("no message pool for message type %s", messageType))
+	}
+	return messagePool
+}
+
 // Get gets a reset PooledMessage for the given message type.
 //
 // Returns nil if no constructor was registered for the PooledMessage, or if pooling is disabled.
@@ -272,7 +292,7 @@ func (p *Pool) Get(messageType string) PooledMessage {
 	if !ok {
 		return nil
 	}
-	return messagePool.get()
+	return messagePool.Get()
 }
 
 // Put puts a PooledMessage back into the Pool.
@@ -294,7 +314,7 @@ func (p *Pool) Put(messageType string, message PooledMessage) {
 	if !ok {
 		panic(fmt.Sprintf("message type %s was not registered with this Pool", messageType))
 	}
-	messagePool.put(message)
+	messagePool.Put(message)
 }
 
 // GetBytes gets a Bytes of the given length.

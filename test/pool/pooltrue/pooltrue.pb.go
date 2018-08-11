@@ -352,7 +352,11 @@ func RegisterToPoolPooltrue(pool *github_com_gogo_protobuf_mem.Pool) {
 // RegisterToPoolPooltrueis implicitly called on the global Pool so there
 // is no need for additional setup to use this function.
 func GetFoo() *Foo {
-	return GetFooFromPool(github_com_gogo_protobuf_mem.Global())
+	pooledMessage := globalFooMessagePool.Get()
+	if pooledMessage == nil {
+		return &Foo{}
+	}
+	return pooledMessage.(*Foo)
 }
 
 // GetFooFromPool gets a reset *Foo from the given Pool.
@@ -377,7 +381,11 @@ func GetFooFromPool(pool *github_com_gogo_protobuf_mem.Pool) *Foo {
 // RegisterToPoolPooltrueis implicitly called on the global Pool so there
 // is no need for additional setup to use this function.
 func GetBar() *Bar {
-	return GetBarFromPool(github_com_gogo_protobuf_mem.Global())
+	pooledMessage := globalBarMessagePool.Get()
+	if pooledMessage == nil {
+		return &Bar{}
+	}
+	return pooledMessage.(*Bar)
 }
 
 // GetBarFromPool gets a reset *Bar from the given Pool.
@@ -448,8 +456,13 @@ func registerToPoolBar(pool *github_com_gogo_protobuf_mem.Pool) github_com_gogo_
 	return &Bar{pool: pool}
 }
 
+var globalFooMessagePool *github_com_gogo_protobuf_mem.MessagePool
+var globalBarMessagePool *github_com_gogo_protobuf_mem.MessagePool
+
 func init() {
 	RegisterToPoolPooltrue(github_com_gogo_protobuf_mem.Global())
+	globalFooMessagePool = github_com_gogo_protobuf_mem.Global().GetMessagePool("pooltrue.Foo")
+	globalBarMessagePool = github_com_gogo_protobuf_mem.Global().GetMessagePool("pooltrue.Bar")
 }
 
 func (m *Foo) ProtoSize() (n int) {

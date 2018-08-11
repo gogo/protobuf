@@ -41,25 +41,25 @@ import (
 // we can consolidate pooltrue and poolfalse into just pool, and do
 // benchmarking just between enabled and disabled.
 
-func BenchmarkPoolFalse(b *testing.B) {
+func BenchmarkPoolFalseWithoutMaps(b *testing.B) {
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolFalse(b, false)
 	}
 }
 
-func BenchmarkPoolTrueDisabled(b *testing.B) {
+func BenchmarkPoolTrueDisabledWithoutMaps(b *testing.B) {
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolTrue(b, false, false)
 	}
 }
 
-func BenchmarkPoolTrueDisabledWithSegList(b *testing.B) {
+func BenchmarkPoolTrueDisabledWithSegListWithoutMaps(b *testing.B) {
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolTrue(b, false, true)
 	}
 }
 
-func BenchmarkPoolTrueEnabled(b *testing.B) {
+func BenchmarkPoolTrueEnabledWithoutMaps(b *testing.B) {
 	mem.Global().Enable()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
@@ -69,7 +69,7 @@ func BenchmarkPoolTrueEnabled(b *testing.B) {
 	mem.Global().Disable()
 }
 
-func BenchmarkPoolTrueEnabledWithSegList(b *testing.B) {
+func BenchmarkPoolTrueEnabledWithSegListWithoutMaps(b *testing.B) {
 	mem.Global().Enable()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
