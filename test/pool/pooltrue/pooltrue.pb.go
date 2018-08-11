@@ -336,18 +336,29 @@ func encodeVarintPooltrue(dAtA []byte, offset int, v uint64) int {
 	return offset + 1
 }
 
-// PooltruePoolRegister registers constructors for all messages in this file to the given Pool.
+// RegisterToPoolPooltrue registers constructors for all messages in this file to the given Pool.
 //
 // Users must call this function at initialization for the Pool to pool messages in this file.
-func PooltruePoolRegister(pool *github_com_gogo_protobuf_mem.Pool) {
-	pool.RegisterConstructor("pooltrue.Foo", poolRegisterFoo)
-	pool.RegisterConstructor("pooltrue.Bar", poolRegisterBar)
+func RegisterToPoolPooltrue(pool *github_com_gogo_protobuf_mem.Pool) {
+	pool.RegisterConstructor("pooltrue.Foo", registerToPoolFoo)
+	pool.RegisterConstructor("pooltrue.Bar", registerToPoolBar)
 }
 
-// GetFoo gets a reset *Foo from the given Pool.
+// GetFoo gets a reset *Foo from the global Pool.
+//
+// It is generally preferable to create a Pool instance for your application and
+// use GetFooFromPool instead, however this will prove difficult
+// for existing applications wishing to migrate to the Pool API. Additionally,
+// RegisterToPoolPooltrueis implicitly called on the global Pool so there
+// is no need for additional setup to use this function.
+func GetFoo() *Foo {
+	return GetFooFromPool(github_com_gogo_protobuf_mem.GlobalPool)
+}
+
+// GetFooFromPool gets a reset *Foo from the given Pool.
 //
 // If the Pool is nil, or PooltruePoolRegister was not called on this Pool, this will return a new message not managed by any Pool.
-func GetFoo(pool *github_com_gogo_protobuf_mem.Pool) *Foo {
+func GetFooFromPool(pool *github_com_gogo_protobuf_mem.Pool) *Foo {
 	if pool == nil {
 		return &Foo{}
 	}
@@ -358,10 +369,21 @@ func GetFoo(pool *github_com_gogo_protobuf_mem.Pool) *Foo {
 	return pooledMessage.(*Foo)
 }
 
-// GetBar gets a reset *Bar from the given Pool.
+// GetBar gets a reset *Bar from the global Pool.
+//
+// It is generally preferable to create a Pool instance for your application and
+// use GetBarFromPool instead, however this will prove difficult
+// for existing applications wishing to migrate to the Pool API. Additionally,
+// RegisterToPoolPooltrueis implicitly called on the global Pool so there
+// is no need for additional setup to use this function.
+func GetBar() *Bar {
+	return GetBarFromPool(github_com_gogo_protobuf_mem.GlobalPool)
+}
+
+// GetBarFromPool gets a reset *Bar from the given Pool.
 //
 // If the Pool is nil, or PooltruePoolRegister was not called on this Pool, this will return a new message not managed by any Pool.
-func GetBar(pool *github_com_gogo_protobuf_mem.Pool) *Bar {
+func GetBarFromPool(pool *github_com_gogo_protobuf_mem.Pool) *Bar {
 	if pool == nil {
 		return &Bar{}
 	}
@@ -418,12 +440,16 @@ func (this *Bar) Recycle() {
 	this.pool.Put("pooltrue.Bar", this)
 }
 
-func poolRegisterFoo(pool *github_com_gogo_protobuf_mem.Pool) github_com_gogo_protobuf_mem.PooledMessage {
+func registerToPoolFoo(pool *github_com_gogo_protobuf_mem.Pool) github_com_gogo_protobuf_mem.PooledMessage {
 	return &Foo{pool: pool}
 }
 
-func poolRegisterBar(pool *github_com_gogo_protobuf_mem.Pool) github_com_gogo_protobuf_mem.PooledMessage {
+func registerToPoolBar(pool *github_com_gogo_protobuf_mem.Pool) github_com_gogo_protobuf_mem.PooledMessage {
 	return &Bar{pool: pool}
+}
+
+func init() {
+	RegisterToPoolPooltrue(github_com_gogo_protobuf_mem.GlobalPool)
 }
 
 func (m *Foo) ProtoSize() (n int) {

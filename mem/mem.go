@@ -32,8 +32,6 @@ import (
 	"fmt"
 	"sort"
 	"sync"
-
-	"github.com/gogo/protobuf/proto"
 )
 
 // DefaultChannelSize is the default Pool channel size.
@@ -54,6 +52,13 @@ var DefaultSegListSizes = []int{
 	1048576,
 	16777216,
 }
+
+// GlobalPool is a global instance of a Pool.
+//
+// It is generally preferable to create a Pool instance for your application and
+// pass it through to the places it is needed, however this will prove difficult for
+// existing applications wishing to migrate to the Pool API.
+var GlobalPool = NewPool()
 
 // Bytes represents a byte slice created from a Pool.
 //
@@ -113,10 +118,12 @@ func (b *Bytes) Recycle() {
 	}
 }
 
-// PooledMessage is a proto.Message that can be pooled.
+// PooledMessage is a message that can be pooled.
+//
+// This generally is meant for proto.Messages but is compatible with
+// anything that has a Reset and Recycle method.
 type PooledMessage interface {
-	proto.Message
-
+	Reset()
 	Recycle()
 }
 

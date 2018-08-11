@@ -86,59 +86,47 @@ func benchmarkPoolFalse(b *testing.B, withMaps bool) {
 }
 
 func BenchmarkPoolTrue(b *testing.B) {
-	pool := mem.NewPool()
-	pooltrue.PooltruePoolRegister(pool)
-	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
-		benchmarkPoolTrue(b, pool, false, false)
+		benchmarkPoolTrue(b, false, false)
 	}
 }
 
 func BenchmarkPoolTrueWithMaps(b *testing.B) {
-	pool := mem.NewPool()
-	pooltrue.PooltruePoolRegister(pool)
-	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
-		benchmarkPoolTrue(b, pool, true, false)
+		benchmarkPoolTrue(b, true, false)
 	}
 }
 
 func BenchmarkPoolTrueWithSegList(b *testing.B) {
-	pool := mem.NewPool()
-	pooltrue.PooltruePoolRegister(pool)
-	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
-		benchmarkPoolTrue(b, pool, false, true)
+		benchmarkPoolTrue(b, false, true)
 	}
 }
 
 func BenchmarkPoolTrueWithMapsAndSegList(b *testing.B) {
-	pool := mem.NewPool()
-	pooltrue.PooltruePoolRegister(pool)
-	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
-		benchmarkPoolTrue(b, pool, true, true)
+		benchmarkPoolTrue(b, true, true)
 	}
 }
 
-func benchmarkPoolTrue(b *testing.B, pool *mem.Pool, withMaps bool, withSegList bool) {
-	foo := pooltrue.GetFoo(pool)
+func benchmarkPoolTrue(b *testing.B, withMaps bool, withSegList bool) {
+	foo := pooltrue.GetFoo()
 
 	foo.One = 1
 	foo.Two = 2
 	if withMaps {
 		foo.MapBar = make(map[uint32]*pooltrue.Bar)
 	}
-	foo.Bar = pooltrue.GetBar(pool)
+	foo.Bar = pooltrue.GetBar()
 	foo.Bar.OneBar = 10
 	foo.Bar.TwoBar = 20
 	for i := 0; i < 10; i++ {
-		barElem := pooltrue.GetBar(pool)
+		barElem := pooltrue.GetBar()
 		barElem.OneBar = 100
 		barElem.TwoBar = 200
 		foo.RepeatedBar = append(foo.RepeatedBar, barElem)
 		if withMaps {
-			barElem = pooltrue.GetBar(pool)
+			barElem = pooltrue.GetBar()
 			barElem.OneBar = 1000
 			barElem.TwoBar = 2000
 			foo.MapBar[uint32(i)] = barElem
@@ -161,7 +149,7 @@ func benchmarkPoolTrue(b *testing.B, pool *mem.Pool, withMaps bool, withSegList 
 		}
 	}
 
-	unmarshaledFoo := pooltrue.GetFoo(pool)
+	unmarshaledFoo := pooltrue.GetFoo()
 	if err := unmarshaledFoo.Unmarshal(data); err != nil {
 		b.Fatal(err)
 	}
