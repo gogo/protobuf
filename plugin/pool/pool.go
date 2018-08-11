@@ -146,12 +146,7 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 				}
 			}
 		}
-		p.P(`if m.pool == nil {`)
-		p.In()
-		p.P(`return`)
-		p.Out()
-		p.P(`}`)
-		p.P(`m.pool.Put(m)`)
+		p.P(`global`, messageGoType, `ObjectPool.Put(m)`)
 		p.Out()
 		p.P(`}`)
 		p.P()
@@ -160,9 +155,9 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 	// constructors
 	for _, message := range messages {
 		messageGoType := getMessageGoType(message)
-		p.P(`func new`, messageGoType, `(pool *`, p.memPkg.Use(), `.ObjectPool) `, p.memPkg.Use(), `.Object {`)
+		p.P(`func new`, messageGoType, `() `, p.memPkg.Use(), `.Object {`)
 		p.In()
-		p.P(`return &`, messageGoType, `{pool: pool}`)
+		p.P(`return &`, messageGoType, `{}`)
 		p.Out()
 		p.P(`}`)
 		p.P()

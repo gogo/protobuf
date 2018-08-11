@@ -51,7 +51,6 @@ type Object interface {
 // relying on the generated functions to call ObjectPools.
 type ObjectPool struct {
 	channelSize uint16
-	constructor func(*ObjectPool) Object
 	syncPool    *sync.Pool
 	c           chan Object
 }
@@ -76,17 +75,16 @@ func ObjectPoolWithChannelSize(channelSize uint16) ObjectPoolOption {
 }
 
 // NewObjectPool creates a new ObjectPool for the given constructor and options.
-func NewObjectPool(constructor func(*ObjectPool) Object, options ...ObjectPoolOption) *ObjectPool {
+func NewObjectPool(constructor func() Object, options ...ObjectPoolOption) *ObjectPool {
 	objectPool := &ObjectPool{
 		channelSize: DefaultObjectPoolChannelSize,
-		constructor: constructor,
 	}
 	for _, option := range options {
 		option(objectPool)
 	}
 	objectPool.syncPool = &sync.Pool{
 		New: func() interface{} {
-			return constructor(objectPool)
+			return constructor()
 		},
 	}
 	if objectPool.channelSize > 0 {

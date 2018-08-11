@@ -1387,9 +1387,6 @@ func (g *Generator) generateImports() {
 	}
 	g.PrintImport(GoPackageName(g.Pkg["fmt"]), "fmt")
 	g.PrintImport(GoPackageName(g.Pkg["math"]), "math")
-	if gogoproto.GeneratesPool(g.file.FileDescriptorProto) {
-		g.PrintImport(GoPackageName(g.Pkg["mem"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/gogo/protobuf/mem"))
-	}
 
 	var (
 		imports       = make(map[GoImportPath]bool)
@@ -2216,10 +2213,6 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
 		}
 		g.P("XXX_sizecache\tint32 `json:\"-\"`")
-		if gogoproto.GeneratesPool(g.file.FileDescriptorProto) {
-			g.P()
-			g.P(`pool *`, g.Pkg["mem"], `.ObjectPool`)
-		}
 		g.Out()
 		g.P("}")
 	} else {

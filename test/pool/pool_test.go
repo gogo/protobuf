@@ -42,21 +42,27 @@ import (
 // benchmarking just between enabled and disabled.
 
 func BenchmarkPoolFalseWithoutMaps(b *testing.B) {
+	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolFalse(b, false)
 	}
+	b.StopTimer()
 }
 
 func BenchmarkPoolTrueDisabledWithoutMaps(b *testing.B) {
+	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolTrue(b, false, false)
 	}
+	b.StopTimer()
 }
 
 func BenchmarkPoolTrueDisabledWithSegListWithoutMaps(b *testing.B) {
+	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolTrue(b, false, true)
 	}
+	b.StopTimer()
 }
 
 func BenchmarkPoolTrueEnabledWithoutMapsChannelSize0(b *testing.B) {
@@ -110,21 +116,27 @@ func BenchmarkPoolTrueEnabledWithSegListWithoutMapsChannelSize16(b *testing.B) {
 }
 
 func BenchmarkPoolFalseWithMaps(b *testing.B) {
+	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolFalse(b, true)
 	}
+	b.StopTimer()
 }
 
 func BenchmarkPoolTrueDisabledWithMaps(b *testing.B) {
+	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolTrue(b, true, false)
 	}
+	b.StopTimer()
 }
 
 func BenchmarkPoolTrueDisabledWithSegListAndMaps(b *testing.B) {
+	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolTrue(b, true, true)
 	}
+	b.StopTimer()
 }
 
 func BenchmarkPoolTrueEnabledWithMapsChannelSize0(b *testing.B) {
@@ -200,9 +212,6 @@ func benchmarkPoolFalse(b *testing.B, withMaps bool) {
 		}
 	}
 
-	// this is going to allocate the byte slice
-	// if we had a byte slice pool, we could take this out of the benchmark
-	// in terms of memory
 	data, err := foo.Marshal()
 	if err != nil {
 		b.Fatal(err)
@@ -216,7 +225,6 @@ func benchmarkPoolFalse(b *testing.B, withMaps bool) {
 
 func benchmarkPoolTrue(b *testing.B, withMaps bool, withSegList bool) {
 	foo := pooltrue.GetFoo()
-
 	foo.One = 1
 	foo.Two = 2
 	if withMaps {

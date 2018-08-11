@@ -6,7 +6,6 @@ package pooltrue
 import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import mem "github.com/gogo/protobuf/mem"
 import _ "github.com/gogo/protobuf/gogoproto"
 
 import encoding_binary "encoding/binary"
@@ -34,8 +33,6 @@ type Foo struct {
 	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
 	XXX_unrecognized     []byte          `json:"-"`
 	XXX_sizecache        int32           `json:"-"`
-
-	pool *mem.ObjectPool
 }
 
 func (m *Foo) Reset() {
@@ -120,8 +117,6 @@ type Bar struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
-
-	pool *mem.ObjectPool
 }
 
 func (m *Bar) Reset() {
@@ -362,10 +357,7 @@ func (m *Foo) Recycle() {
 	for _, elem := range m.MapBar {
 		elem.Recycle()
 	}
-	if m.pool == nil {
-		return
-	}
-	m.pool.Put(m)
+	globalFooObjectPool.Put(m)
 }
 
 // Recycle puts the message back in the Pool that created it.
@@ -381,18 +373,15 @@ func (m *Bar) Recycle() {
 	if m == nil {
 		return
 	}
-	if m.pool == nil {
-		return
-	}
-	m.pool.Put(m)
+	globalBarObjectPool.Put(m)
 }
 
-func newFoo(pool *github_com_gogo_protobuf_mem.ObjectPool) github_com_gogo_protobuf_mem.Object {
-	return &Foo{pool: pool}
+func newFoo() github_com_gogo_protobuf_mem.Object {
+	return &Foo{}
 }
 
-func newBar(pool *github_com_gogo_protobuf_mem.ObjectPool) github_com_gogo_protobuf_mem.Object {
-	return &Bar{pool: pool}
+func newBar() github_com_gogo_protobuf_mem.Object {
+	return &Bar{}
 }
 
 var (
