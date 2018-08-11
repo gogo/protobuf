@@ -40,6 +40,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/gogo/protobuf/gogoproto"
 	pb "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 )
@@ -409,15 +410,15 @@ func (g *grpc) generateServerMethod(servName, fullServName string, method *pb.Me
 	if !method.GetServerStreaming() && !method.GetClientStreaming() {
 		g.P("func ", hname, "(srv interface{}, ctx ", contextPkg, ".Context, dec func(interface{}) error, interceptor ", grpcPkg, ".UnaryServerInterceptor) (interface{}, error) {")
 
-		//inDesc := g.gen.ObjectNamed(method.GetInputType())
-		//inPkgname := g.gen.DefaultPackageName(inDesc)
-		//inBasename := generator.CamelCaseSlice(inDesc.TypeName())
-		//if gogoproto.HasPool(inDesc.File().FileDescriptorProto) {
-		//g.P(`in := `, inPkgname, `Get`, inBasename, `()`)
-		//g.P(`defer in.Recycle()`)
-		//} else {
-		g.P("in := new(", inType, ")")
-		//}
+		inDesc := g.gen.ObjectNamed(method.GetInputType())
+		inPkgname := g.gen.DefaultPackageName(inDesc)
+		inBasename := generator.CamelCaseSlice(inDesc.TypeName())
+		if gogoproto.HasPool(inDesc.File().FileDescriptorProto) {
+			g.P(`in := `, inPkgname, `Get`, inBasename, `()`)
+			g.P(`defer in.Recycle()`)
+		} else {
+			g.P("in := new(", inType, ")")
+		}
 
 		g.P("if err := dec(in); err != nil { return nil, err }")
 		g.P("if interceptor == nil { return srv.(", servName, "Server).", methName, "(ctx, in) }")

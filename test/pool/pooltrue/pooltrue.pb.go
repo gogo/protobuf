@@ -223,7 +223,8 @@ func RegisterBazServer(s *grpc.Server, srv BazServer) {
 }
 
 func _Baz_Hello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Foo)
+	in := GetFoo()
+	defer in.Recycle()
 	if err := dec(in); err != nil {
 		return nil, err
 	}

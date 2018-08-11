@@ -61,5 +61,5 @@ message Bar {
 }
 
 service Baz {
-  rpc Hello(Foo) returns (Bar);
+  rpc Hello(pooltrue.Foo) returns (Bar);
 }
