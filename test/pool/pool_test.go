@@ -36,7 +36,7 @@ import (
 	"github.com/gogo/protobuf/test/pool/pooltrue"
 )
 
-const numArrayMapElements = 100
+const numArrayMapElements = 10
 
 // The disabled functions should have the same performance as the
 // false functions, this is just as verification. If this is correct,
@@ -47,6 +47,14 @@ func BenchmarkPoolFalseWithoutMaps(b *testing.B) {
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolFalse(b, false)
+	}
+	b.StopTimer()
+}
+
+func BenchmarkPoolFalseWithoutMapsWithHeap(b *testing.B) {
+	b.ResetTimer()
+	for iter := 0; iter < b.N; iter++ {
+		benchmarkPoolFalseWithHeap(b, false)
 	}
 	b.StopTimer()
 }
@@ -121,6 +129,14 @@ func BenchmarkPoolFalseWithMaps(b *testing.B) {
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolFalse(b, true)
+	}
+	b.StopTimer()
+}
+
+func BenchmarkPoolFalseWithMapsWithHeap(b *testing.B) {
+	b.ResetTimer()
+	for iter := 0; iter < b.N; iter++ {
+		benchmarkPoolFalseWithHeap(b, true)
 	}
 	b.StopTimer()
 }
@@ -223,6 +239,43 @@ func benchmarkPoolFalse(b *testing.B, withMaps bool) {
 	if err := unmarshaledFoo.Unmarshal(data); err != nil {
 		b.Fatal(err)
 	}
+}
+
+// we trick Golang into putting all elements we create onto the heap by returning the two
+// Foos we create (that reference all the Bars) to more closely resemble real-world usage of Protobuf structs
+func benchmarkPoolFalseWithHeap(b *testing.B, withMaps bool) (*poolfalse.Foo, *poolfalse.Foo) {
+	foo := &poolfalse.Foo{}
+	foo.One = 1
+	foo.Two = 2
+	if withMaps {
+		foo.MapBar = make(map[uint32]*poolfalse.Bar)
+	}
+	foo.Bar = &poolfalse.Bar{}
+	foo.Bar.OneBar = 10
+	foo.Bar.TwoBar = 20
+	for i := 0; i < numArrayMapElements; i++ {
+		barElem := &poolfalse.Bar{}
+		barElem.OneBar = 100
+		barElem.TwoBar = 200
+		foo.RepeatedBar = append(foo.RepeatedBar, barElem)
+		if withMaps {
+			barElem = &poolfalse.Bar{}
+			barElem.OneBar = 1000
+			barElem.TwoBar = 2000
+			foo.MapBar[uint32(i)] = barElem
+		}
+	}
+
+	data, err := foo.Marshal()
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	unmarshaledFoo := &poolfalse.Foo{}
+	if err := unmarshaledFoo.Unmarshal(data); err != nil {
+		b.Fatal(err)
+	}
+	return foo, unmarshaledFoo
 }
 
 func benchmarkPoolTrue(b *testing.B, withMaps bool, withSegList bool) {
