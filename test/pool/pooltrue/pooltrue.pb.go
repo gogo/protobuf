@@ -35,7 +35,7 @@ type Foo struct {
 	XXX_unrecognized     []byte          `json:"-"`
 	XXX_sizecache        int32           `json:"-"`
 
-	pool *mem.Pool
+	pool *mem.ObjectPool
 }
 
 func (m *Foo) Reset() {
@@ -121,7 +121,7 @@ type Bar struct {
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 
-	pool *mem.Pool
+	pool *mem.ObjectPool
 }
 
 func (m *Bar) Reset() {
@@ -191,12 +191,7 @@ func (m *Foo) Marshal() (dAtA []byte, err error) {
 
 func (m *Foo) MarshalPool() (*github_com_gogo_protobuf_mem.Bytes, error) {
 	size := m.ProtoSize()
-	var bytes *github_com_gogo_protobuf_mem.Bytes
-	if m.pool != nil {
-		bytes = m.pool.GetBytes(size)
-	} else {
-		bytes = github_com_gogo_protobuf_mem.NewUnmanagedBytes(size)
-	}
+	bytes := github_com_gogo_protobuf_mem.GlobalBytesPool.Get(size)
 	n, err := m.MarshalTo(bytes.Value())
 	if err != nil {
 		bytes.Recycle()
@@ -289,12 +284,7 @@ func (m *Bar) Marshal() (dAtA []byte, err error) {
 
 func (m *Bar) MarshalPool() (*github_com_gogo_protobuf_mem.Bytes, error) {
 	size := m.ProtoSize()
-	var bytes *github_com_gogo_protobuf_mem.Bytes
-	if m.pool != nil {
-		bytes = m.pool.GetBytes(size)
-	} else {
-		bytes = github_com_gogo_protobuf_mem.NewUnmanagedBytes(size)
-	}
+	bytes := github_com_gogo_protobuf_mem.GlobalBytesPool.Get(size)
 	n, err := m.MarshalTo(bytes.Value())
 	if err != nil {
 		bytes.Recycle()
@@ -336,124 +326,71 @@ func encodeVarintPooltrue(dAtA []byte, offset int, v uint64) int {
 	return offset + 1
 }
 
-// RegisterToPoolPooltrue registers constructors for all messages in this file to the given Pool.
-//
-// Users must call this function at initialization for the Pool to pool messages in this file.
-func RegisterToPoolPooltrue(pool *github_com_gogo_protobuf_mem.Pool) {
-	pool.RegisterConstructor("pooltrue.Foo", registerToPoolFoo)
-	pool.RegisterConstructor("pooltrue.Bar", registerToPoolBar)
-}
-
-// GetFoo gets a reset *Foo from the global Pool.
-//
-// It is generally preferable to create a Pool instance for your application and
-// use GetFooFromPool instead, however this will prove difficult
-// for existing applications wishing to migrate to the Pool API. Additionally,
-// RegisterToPoolPooltrueis implicitly called on the global Pool so there
-// is no need for additional setup to use this function.
+// GetFoo gets a reset *Foo.
 func GetFoo() *Foo {
-	pooledMessage := globalFooMessagePool.Get()
-	if pooledMessage == nil {
-		return &Foo{}
-	}
-	return pooledMessage.(*Foo)
+	return globalFooObjectPool.Get().(*Foo)
 }
 
-// GetFooFromPool gets a reset *Foo from the given Pool.
-//
-// If the Pool is nil, or PooltruePoolRegister was not called on this Pool, this will return a new message not managed by any Pool.
-func GetFooFromPool(pool *github_com_gogo_protobuf_mem.Pool) *Foo {
-	if pool == nil {
-		return &Foo{}
-	}
-	pooledMessage := pool.Get("pooltrue.Foo")
-	if pooledMessage == nil {
-		return &Foo{}
-	}
-	return pooledMessage.(*Foo)
-}
-
-// GetBar gets a reset *Bar from the global Pool.
-//
-// It is generally preferable to create a Pool instance for your application and
-// use GetBarFromPool instead, however this will prove difficult
-// for existing applications wishing to migrate to the Pool API. Additionally,
-// RegisterToPoolPooltrueis implicitly called on the global Pool so there
-// is no need for additional setup to use this function.
+// GetBar gets a reset *Bar.
 func GetBar() *Bar {
-	pooledMessage := globalBarMessagePool.Get()
-	if pooledMessage == nil {
-		return &Bar{}
-	}
-	return pooledMessage.(*Bar)
-}
-
-// GetBarFromPool gets a reset *Bar from the given Pool.
-//
-// If the Pool is nil, or PooltruePoolRegister was not called on this Pool, this will return a new message not managed by any Pool.
-func GetBarFromPool(pool *github_com_gogo_protobuf_mem.Pool) *Bar {
-	if pool == nil {
-		return &Bar{}
-	}
-	pooledMessage := pool.Get("pooltrue.Bar")
-	if pooledMessage == nil {
-		return &Bar{}
-	}
-	return pooledMessage.(*Bar)
+	return globalBarObjectPool.Get().(*Bar)
 }
 
 // Recycle puts the message back in the Pool that created it.
 //
 // Any non-nil fields that are messages will be recycled as well, including elements of repeated fields and values of map fields.
+// Once Recycle is called, the message should no longer be used.
 //
 // If the message is nil, or the message was not allocated from a Pool, this is a no-op.
-func (this *Foo) Recycle() {
-	if this == nil {
+func (m *Foo) Recycle() {
+	if m == nil {
 		return
 	}
-	this.Bar.Recycle()
-	for _, elem := range this.RepeatedBar {
+	m.Bar.Recycle()
+	for _, value := range m.RepeatedBar {
+		value.Recycle()
+	}
+	for _, elem := range m.MapBar {
 		elem.Recycle()
 	}
-	for _, elem := range this.MapBar {
-		elem.Recycle()
-	}
-	if this.pool == nil {
+	if m.pool == nil {
 		return
 	}
-	this.pool.Put("pooltrue.Foo", this)
+	m.pool.Put(m)
 }
 
 // Recycle puts the message back in the Pool that created it.
 //
 // Any non-nil fields that are messages will be recycled as well, including elements of repeated fields and values of map fields.
+// Once Recycle is called, the message should no longer be used.
 //
 // If the message is nil, or the message was not allocated from a Pool, this is a no-op.
-func (this *Bar) Recycle() {
-	if this == nil {
+func (m *Bar) Recycle() {
+	if m == nil {
 		return
 	}
-	if this.pool == nil {
+	if m.pool == nil {
 		return
 	}
-	this.pool.Put("pooltrue.Bar", this)
+	m.pool.Put(m)
 }
 
-func registerToPoolFoo(pool *github_com_gogo_protobuf_mem.Pool) github_com_gogo_protobuf_mem.PooledMessage {
+func newFoo(pool *github_com_gogo_protobuf_mem.ObjectPool) github_com_gogo_protobuf_mem.Object {
 	return &Foo{pool: pool}
 }
 
-func registerToPoolBar(pool *github_com_gogo_protobuf_mem.Pool) github_com_gogo_protobuf_mem.PooledMessage {
+func newBar(pool *github_com_gogo_protobuf_mem.ObjectPool) github_com_gogo_protobuf_mem.Object {
 	return &Bar{pool: pool}
 }
 
-var globalFooMessagePool *github_com_gogo_protobuf_mem.MessagePool
-var globalBarMessagePool *github_com_gogo_protobuf_mem.MessagePool
+var (
+	globalFooObjectPool = github_com_gogo_protobuf_mem.NewObjectPool(newFoo)
+	globalBarObjectPool = github_com_gogo_protobuf_mem.NewObjectPool(newBar)
+)
 
 func init() {
-	RegisterToPoolPooltrue(github_com_gogo_protobuf_mem.Global())
-	globalFooMessagePool = github_com_gogo_protobuf_mem.Global().GetMessagePool("pooltrue.Foo")
-	globalBarMessagePool = github_com_gogo_protobuf_mem.Global().GetMessagePool("pooltrue.Bar")
+	github_com_gogo_protobuf_mem.RegisterGlobalObjectPool(globalFooObjectPool)
+	github_com_gogo_protobuf_mem.RegisterGlobalObjectPool(globalBarObjectPool)
 }
 
 func (m *Foo) ProtoSize() (n int) {
@@ -607,13 +544,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if m.Bar == nil {
-				if m.pool == nil {
-					m.Bar = &Bar{}
-				} else if pooledMessage := m.pool.Get("pooltrue.Bar"); pooledMessage != nil {
-					m.Bar = pooledMessage.(*Bar)
-				} else {
-					m.Bar = &Bar{}
-				}
+				m.Bar = GetBar()
 			}
 			if err := m.Bar.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -645,13 +576,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.pool == nil {
-				m.RepeatedBar = append(m.RepeatedBar, &Bar{})
-			} else if pooledMessage := m.pool.Get("pooltrue.Bar"); pooledMessage != nil {
-				m.RepeatedBar = append(m.RepeatedBar, pooledMessage.(*Bar))
-			} else {
-				m.RepeatedBar = append(m.RepeatedBar, &Bar{})
-			}
+			m.RepeatedBar = append(m.RepeatedBar, GetBar())
 			if err := m.RepeatedBar[len(m.RepeatedBar)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -746,13 +671,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 					if postmsgIndex > l {
 						return io.ErrUnexpectedEOF
 					}
-					if m.pool == nil {
-						mapvalue = &Bar{}
-					} else if pooledMessage := m.pool.Get("pooltrue.Bar"); pooledMessage != nil {
-						mapvalue = pooledMessage.(*Bar)
-					} else {
-						mapvalue = &Bar{}
-					}
+					mapvalue := GetBar()
 					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
 						return err
 					}

@@ -60,23 +60,23 @@ func BenchmarkPoolTrueDisabledWithSegListWithoutMaps(b *testing.B) {
 }
 
 func BenchmarkPoolTrueEnabledWithoutMaps(b *testing.B) {
-	mem.Global().Enable()
+	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolTrue(b, false, false)
 	}
 	b.StopTimer()
-	mem.Global().Disable()
+	mem.DisablePooling()
 }
 
 func BenchmarkPoolTrueEnabledWithSegListWithoutMaps(b *testing.B) {
-	mem.Global().Enable()
+	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolTrue(b, false, true)
 	}
 	b.StopTimer()
-	mem.Global().Disable()
+	mem.DisablePooling()
 }
 
 func BenchmarkPoolFalseWithMaps(b *testing.B) {
@@ -98,23 +98,23 @@ func BenchmarkPoolTrueDisabledWithSegListAndMaps(b *testing.B) {
 }
 
 func BenchmarkPoolTrueEnabledWithMaps(b *testing.B) {
-	mem.Global().Enable()
+	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolTrue(b, true, false)
 	}
 	b.StopTimer()
-	mem.Global().Disable()
+	mem.DisablePooling()
 }
 
 func BenchmarkPoolTrueEnabledWithSegListAndMaps(b *testing.B) {
-	mem.Global().Enable()
+	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolTrue(b, true, true)
 	}
 	b.StopTimer()
-	mem.Global().Disable()
+	mem.DisablePooling()
 }
 
 func benchmarkPoolFalse(b *testing.B, withMaps bool) {

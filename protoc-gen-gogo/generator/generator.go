@@ -2218,7 +2218,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		g.P("XXX_sizecache\tint32 `json:\"-\"`")
 		if gogoproto.GeneratesPool(g.file.FileDescriptorProto) {
 			g.P()
-			g.P(`pool *`, g.Pkg["mem"], `.Pool`)
+			g.P(`pool *`, g.Pkg["mem"], `.ObjectPool`)
 		}
 		g.Out()
 		g.P("}")
@@ -3603,4 +3603,4 @@ func init() {
 			return
 		}
 	}
-
+}

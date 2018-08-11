@@ -34,7 +34,7 @@ var (
 	// GlobalBytesPool is the global BytesPool.
 	GlobalBytesPool = NewBytesPool()
 
-	globalObjectPools []ObjectPool
+	globalObjectPools []*ObjectPool
 
 	lock = &sync.RWMutex{}
 )
@@ -42,7 +42,7 @@ var (
 // RegisterGlobalObjectPool registers the ObjectPool for enable and disable.
 //
 // This should not be called by users directly.
-func RegisterGlobalObjectPool(globalObjectPool ObjectPool) {
+func RegisterGlobalObjectPool(globalObjectPool *ObjectPool) {
 	lock.Lock()
 	globalObjectPools = append(globalObjectPools, globalObjectPool)
 	lock.Unlock()
