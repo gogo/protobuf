@@ -1104,7 +1104,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 		p.P(`}`)
 		p.P(``)
 
-		if gogoproto.GeneratesPool(file.FileDescriptorProto) {
+		if gogoproto.HasPool(file.FileDescriptorProto) {
 			p.P(`func (m *`, ccTypeName, `) MarshalPool() (*`, p.memPkg.Use(), `.Bytes, error) {`)
 			p.In()
 			if gogoproto.IsProtoSizer(file.FileDescriptorProto, message.DescriptorProto) {

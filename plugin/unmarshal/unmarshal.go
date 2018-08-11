@@ -287,7 +287,7 @@ func (p *unmarshal) declareMapField(varName string, nullable bool, customType bo
 			if nullable {
 				p.P(`var `, varName, ` *`, msgname)
 			} else {
-				if gogoproto.GeneratesPool(desc.File().FileDescriptorProto) {
+				if gogoproto.HasPool(desc.File().FileDescriptorProto) {
 					p.P(varName, ` := `, pkgname, `Get`, generator.CamelCaseSlice(desc.TypeName()), `()`)
 				} else {
 					p.P(varName, ` := &`, msgname, `{}`)
@@ -392,7 +392,7 @@ func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.
 			desc := p.ObjectNamed(field.GetTypeName())
 			pkgname := p.DefaultPackageName(desc)
 			msgname := p.TypeName(desc)
-			if gogoproto.GeneratesPool(desc.File().FileDescriptorProto) {
+			if gogoproto.HasPool(desc.File().FileDescriptorProto) {
 				p.P(varName, ` := `, pkgname, `Get`, generator.CamelCaseSlice(desc.TypeName()), `()`)
 			} else {
 				p.P(varName, ` = &`, msgname, `{}`)
@@ -660,7 +660,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 					p.P(`if err := `, p.typesPkg.Use(), `.StdDurationUnmarshal(&v, `, buf, `); err != nil {`)
 				}
 			} else {
-				if gogoproto.GeneratesPool(file.FileDescriptorProto) {
+				if gogoproto.HasPool(file.FileDescriptorProto) {
 					p.P(`v := `, pkgname, `Get`, generator.CamelCaseSlice(desc.TypeName()), `()`)
 				} else {
 					p.P(`v := &`, msgname, `{}`)
@@ -778,7 +778,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, time.Duration(0))`)
 				}
 			} else if nullable && !gogoproto.IsCustomType(field) {
-				if gogoproto.GeneratesPool(desc.File().FileDescriptorProto) {
+				if gogoproto.HasPool(desc.File().FileDescriptorProto) {
 					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, pkgname, `Get`, generator.CamelCaseSlice(desc.TypeName()), `())`)
 				} else {
 					p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, &`, msgname, `{})`)
@@ -821,7 +821,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 				goType, _ := p.GoType(nil, field)
 				// remove the star from the type
 				msgname := goType[1:]
-				if gogoproto.GeneratesPool(desc.File().FileDescriptorProto) {
+				if gogoproto.HasPool(desc.File().FileDescriptorProto) {
 					p.P(`m.`, fieldname, ` = `, pkgname, `Get`, generator.CamelCaseSlice(desc.TypeName()), `()`)
 				} else {
 					p.P(`m.`, fieldname, ` = &`, msgname, `{}`)

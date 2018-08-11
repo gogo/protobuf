@@ -63,7 +63,7 @@ func (p *pool) Init(g *generator.Generator) {
 func (p *pool) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 
-	if !gogoproto.GeneratesPool(file.FileDescriptorProto) {
+	if !gogoproto.HasPool(file.FileDescriptorProto) {
 		return
 	}
 
@@ -123,7 +123,7 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 				if p.IsMap(field) {
 					valueField := p.GoMapType(nil, field).ValueField
 					if *valueField.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
-						if gogoproto.GeneratesPool(p.ObjectNamed(valueField.GetTypeName()).File().FileDescriptorProto) {
+						if gogoproto.HasPool(p.ObjectNamed(valueField.GetTypeName()).File().FileDescriptorProto) {
 							p.P(`for _, elem := range m.`, fieldName, ` {`)
 							p.In()
 							p.P(`elem.Recycle()`)
@@ -132,7 +132,7 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 						}
 					}
 				} else if field.IsRepeated() {
-					if gogoproto.GeneratesPool(p.ObjectNamed(field.GetTypeName()).File().FileDescriptorProto) {
+					if gogoproto.HasPool(p.ObjectNamed(field.GetTypeName()).File().FileDescriptorProto) {
 						p.P(`for _, value := range m.`, fieldName, ` {`)
 						p.In()
 						p.P(`value.Recycle()`)
@@ -140,7 +140,7 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 						p.P(`}`)
 					}
 				} else {
-					if gogoproto.GeneratesPool(p.ObjectNamed(field.GetTypeName()).File().FileDescriptorProto) {
+					if gogoproto.HasPool(p.ObjectNamed(field.GetTypeName()).File().FileDescriptorProto) {
 						p.P(`m.`, fieldName, `.Recycle()`)
 					}
 				}

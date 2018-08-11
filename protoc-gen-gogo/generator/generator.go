@@ -2257,7 +2257,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	}
 
 	// Reset, String and ProtoMessage methods.
-	if gogoproto.GeneratesPool(g.file.FileDescriptorProto) {
+	if gogoproto.HasPool(g.file.FileDescriptorProto) {
 		g.P("func (m *", ccTypeName, ") Reset() {")
 		g.In()
 		for _, field := range message.Field {
