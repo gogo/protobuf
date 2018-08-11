@@ -36,6 +36,8 @@ import (
 	"github.com/gogo/protobuf/test/pool/pooltrue"
 )
 
+const numArrayMapElements = 100
+
 // The disabled functions should have the same performance as the
 // false functions, this is just as verification. If this is correct,
 // we can consolidate pooltrue and poolfalse into just pool, and do
@@ -199,7 +201,7 @@ func benchmarkPoolFalse(b *testing.B, withMaps bool) {
 	foo.Bar = &poolfalse.Bar{}
 	foo.Bar.OneBar = 10
 	foo.Bar.TwoBar = 20
-	for i := 0; i < 10; i++ {
+	for i := 0; i < numArrayMapElements; i++ {
 		barElem := &poolfalse.Bar{}
 		barElem.OneBar = 100
 		barElem.TwoBar = 200
@@ -233,7 +235,7 @@ func benchmarkPoolTrue(b *testing.B, withMaps bool, withSegList bool) {
 	foo.Bar = pooltrue.GetBar()
 	foo.Bar.OneBar = 10
 	foo.Bar.TwoBar = 20
-	for i := 0; i < 10; i++ {
+	for i := 0; i < numArrayMapElements; i++ {
 		barElem := pooltrue.GetBar()
 		barElem.OneBar = 100
 		barElem.TwoBar = 200
