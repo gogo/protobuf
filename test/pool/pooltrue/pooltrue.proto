@@ -31,8 +31,6 @@ syntax = "proto3";
 package pooltrue;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "pooldep/pooldep.proto";
-import "poolfalse/poolfalse.proto";
 
 option (gogoproto.marshaler_all) = true;
 option (gogoproto.unmarshaler_all) = true;
@@ -45,14 +43,6 @@ message Foo {
   Bar bar = 3;
   repeated Bar repeated_bar = 4;
   map<uint32, Bar> map_bar = 5;
-  // we want to make sure this doesn't get recycled
-  poolfalse.Bar poolfalse_bar = 6;
-  repeated poolfalse.Bar repeated_poolfalse_bar = 7;
-  map<uint32, poolfalse.Bar> map_poolfalse_bar = 8;
-  // we want to make sure this does get recycled
-  pooldep.Bar pooldep_bar = 9;
-  repeated pooldep.Bar repeated_pooldep_bar = 10;
-  map<uint32, pooldep.Bar> map_pooldep_bar = 11;
 }
 
 message Bar {

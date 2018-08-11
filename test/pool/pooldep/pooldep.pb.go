@@ -8,6 +8,8 @@ import fmt "fmt"
 import math "math"
 import mem "github.com/gogo/protobuf/mem"
 import _ "github.com/gogo/protobuf/gogoproto"
+import poolfalse "github.com/gogo/protobuf/test/pool/poolfalse"
+import pooltrue "github.com/gogo/protobuf/test/pool/pooltrue"
 
 import encoding_binary "encoding/binary"
 import github_com_gogo_protobuf_mem "github.com/gogo/protobuf/mem"
@@ -26,14 +28,22 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Foo struct {
-	One                  uint64          `protobuf:"varint,1,opt,name=one,proto3" json:"one,omitempty"`
-	Two                  uint32          `protobuf:"fixed32,2,opt,name=two,proto3" json:"two,omitempty"`
-	Bar                  *Bar            `protobuf:"bytes,3,opt,name=bar" json:"bar,omitempty"`
-	RepeatedBar          []*Bar          `protobuf:"bytes,4,rep,name=repeated_bar,json=repeatedBar" json:"repeated_bar,omitempty"`
-	MapBar               map[uint32]*Bar `protobuf:"bytes,5,rep,name=map_bar,json=mapBar" json:"map_bar,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
+	One         uint64          `protobuf:"varint,1,opt,name=one,proto3" json:"one,omitempty"`
+	Two         uint32          `protobuf:"fixed32,2,opt,name=two,proto3" json:"two,omitempty"`
+	Bar         *Bar            `protobuf:"bytes,3,opt,name=bar" json:"bar,omitempty"`
+	RepeatedBar []*Bar          `protobuf:"bytes,4,rep,name=repeated_bar,json=repeatedBar" json:"repeated_bar,omitempty"`
+	MapBar      map[uint32]*Bar `protobuf:"bytes,5,rep,name=map_bar,json=mapBar" json:"map_bar,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	// we want to make sure this doesn't get recycled
+	PoolfalseBar         *poolfalse.Bar            `protobuf:"bytes,6,opt,name=poolfalse_bar,json=poolfalseBar" json:"poolfalse_bar,omitempty"`
+	RepeatedPoolfalseBar []*poolfalse.Bar          `protobuf:"bytes,7,rep,name=repeated_poolfalse_bar,json=repeatedPoolfalseBar" json:"repeated_poolfalse_bar,omitempty"`
+	MapPoolfalseBar      map[uint32]*poolfalse.Bar `protobuf:"bytes,8,rep,name=map_poolfalse_bar,json=mapPoolfalseBar" json:"map_poolfalse_bar,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	// we want to make sure this does get recycled
+	PooltrueBar          *pooltrue.Bar            `protobuf:"bytes,9,opt,name=pooltrue_bar,json=pooltrueBar" json:"pooltrue_bar,omitempty"`
+	RepeatedPooltrueBar  []*pooltrue.Bar          `protobuf:"bytes,10,rep,name=repeated_pooltrue_bar,json=repeatedPooltrueBar" json:"repeated_pooltrue_bar,omitempty"`
+	MapPooltrueBar       map[uint32]*pooltrue.Bar `protobuf:"bytes,11,rep,name=map_pooltrue_bar,json=mapPooltrueBar" json:"map_pooltrue_bar,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
+	XXX_unrecognized     []byte                   `json:"-"`
+	XXX_sizecache        int32                    `json:"-"`
 
 	pool *mem.ObjectPool
 }
@@ -46,11 +56,21 @@ func (m *Foo) Reset() {
 		m.RepeatedBar = m.RepeatedBar[:0]
 	}
 	m.MapBar = nil
+	m.PoolfalseBar = nil
+	if m.RepeatedPoolfalseBar != nil {
+		m.RepeatedPoolfalseBar = m.RepeatedPoolfalseBar[:0]
+	}
+	m.MapPoolfalseBar = nil
+	m.PooltrueBar = nil
+	if m.RepeatedPooltrueBar != nil {
+		m.RepeatedPooltrueBar = m.RepeatedPooltrueBar[:0]
+	}
+	m.MapPooltrueBar = nil
 }
 func (m *Foo) String() string { return proto.CompactTextString(m) }
 func (*Foo) ProtoMessage()    {}
 func (*Foo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pooldep_d0c342ddb76a1d69, []int{0}
+	return fileDescriptor_pooldep_c148918b2e0d62ff, []int{0}
 }
 func (m *Foo) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -114,6 +134,48 @@ func (m *Foo) GetMapBar() map[uint32]*Bar {
 	return nil
 }
 
+func (m *Foo) GetPoolfalseBar() *poolfalse.Bar {
+	if m != nil {
+		return m.PoolfalseBar
+	}
+	return nil
+}
+
+func (m *Foo) GetRepeatedPoolfalseBar() []*poolfalse.Bar {
+	if m != nil {
+		return m.RepeatedPoolfalseBar
+	}
+	return nil
+}
+
+func (m *Foo) GetMapPoolfalseBar() map[uint32]*poolfalse.Bar {
+	if m != nil {
+		return m.MapPoolfalseBar
+	}
+	return nil
+}
+
+func (m *Foo) GetPooltrueBar() *pooltrue.Bar {
+	if m != nil {
+		return m.PooltrueBar
+	}
+	return nil
+}
+
+func (m *Foo) GetRepeatedPooltrueBar() []*pooltrue.Bar {
+	if m != nil {
+		return m.RepeatedPooltrueBar
+	}
+	return nil
+}
+
+func (m *Foo) GetMapPooltrueBar() map[uint32]*pooltrue.Bar {
+	if m != nil {
+		return m.MapPooltrueBar
+	}
+	return nil
+}
+
 type Bar struct {
 	OneBar               uint64   `protobuf:"varint,1,opt,name=one_bar,json=oneBar,proto3" json:"one_bar,omitempty"`
 	TwoBar               uint32   `protobuf:"fixed32,2,opt,name=two_bar,json=twoBar,proto3" json:"two_bar,omitempty"`
@@ -131,7 +193,7 @@ func (m *Bar) Reset() {
 func (m *Bar) String() string { return proto.CompactTextString(m) }
 func (*Bar) ProtoMessage()    {}
 func (*Bar) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pooldep_d0c342ddb76a1d69, []int{1}
+	return fileDescriptor_pooldep_c148918b2e0d62ff, []int{1}
 }
 func (m *Bar) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -177,6 +239,8 @@ func (m *Bar) GetTwoBar() uint32 {
 func init() {
 	proto.RegisterType((*Foo)(nil), "pooldep.Foo")
 	proto.RegisterMapType((map[uint32]*Bar)(nil), "pooldep.Foo.MapBarEntry")
+	proto.RegisterMapType((map[uint32]*poolfalse.Bar)(nil), "pooldep.Foo.MapPoolfalseBarEntry")
+	proto.RegisterMapType((map[uint32]*pooltrue.Bar)(nil), "pooldep.Foo.MapPooltrueBarEntry")
 	proto.RegisterType((*Bar)(nil), "pooldep.Bar")
 }
 func (m *Foo) Marshal() (dAtA []byte, err error) {
@@ -263,6 +327,104 @@ func (m *Foo) MarshalTo(dAtA []byte) (int, error) {
 					return 0, err
 				}
 				i += n2
+			}
+		}
+	}
+	if m.PoolfalseBar != nil {
+		dAtA[i] = 0x32
+		i++
+		i = encodeVarintPooldep(dAtA, i, uint64(m.PoolfalseBar.ProtoSize()))
+		n3, err := m.PoolfalseBar.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n3
+	}
+	if len(m.RepeatedPoolfalseBar) > 0 {
+		for _, msg := range m.RepeatedPoolfalseBar {
+			dAtA[i] = 0x3a
+			i++
+			i = encodeVarintPooldep(dAtA, i, uint64(msg.ProtoSize()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if len(m.MapPoolfalseBar) > 0 {
+		for k, _ := range m.MapPoolfalseBar {
+			dAtA[i] = 0x42
+			i++
+			v := m.MapPoolfalseBar[k]
+			msgSize := 0
+			if v != nil {
+				msgSize = v.ProtoSize()
+				msgSize += 1 + sovPooldep(uint64(msgSize))
+			}
+			mapSize := 1 + sovPooldep(uint64(k)) + msgSize
+			i = encodeVarintPooldep(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintPooldep(dAtA, i, uint64(k))
+			if v != nil {
+				dAtA[i] = 0x12
+				i++
+				i = encodeVarintPooldep(dAtA, i, uint64(v.ProtoSize()))
+				n4, err := v.MarshalTo(dAtA[i:])
+				if err != nil {
+					return 0, err
+				}
+				i += n4
+			}
+		}
+	}
+	if m.PooltrueBar != nil {
+		dAtA[i] = 0x4a
+		i++
+		i = encodeVarintPooldep(dAtA, i, uint64(m.PooltrueBar.ProtoSize()))
+		n5, err := m.PooltrueBar.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n5
+	}
+	if len(m.RepeatedPooltrueBar) > 0 {
+		for _, msg := range m.RepeatedPooltrueBar {
+			dAtA[i] = 0x52
+			i++
+			i = encodeVarintPooldep(dAtA, i, uint64(msg.ProtoSize()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if len(m.MapPooltrueBar) > 0 {
+		for k, _ := range m.MapPooltrueBar {
+			dAtA[i] = 0x5a
+			i++
+			v := m.MapPooltrueBar[k]
+			msgSize := 0
+			if v != nil {
+				msgSize = v.ProtoSize()
+				msgSize += 1 + sovPooldep(uint64(msgSize))
+			}
+			mapSize := 1 + sovPooldep(uint64(k)) + msgSize
+			i = encodeVarintPooldep(dAtA, i, uint64(mapSize))
+			dAtA[i] = 0x8
+			i++
+			i = encodeVarintPooldep(dAtA, i, uint64(k))
+			if v != nil {
+				dAtA[i] = 0x12
+				i++
+				i = encodeVarintPooldep(dAtA, i, uint64(v.ProtoSize()))
+				n6, err := v.MarshalTo(dAtA[i:])
+				if err != nil {
+					return 0, err
+				}
+				i += n6
 			}
 		}
 	}
@@ -353,6 +515,13 @@ func (m *Foo) Recycle() {
 	for _, elem := range m.MapBar {
 		elem.Recycle()
 	}
+	m.PooltrueBar.Recycle()
+	for _, value := range m.RepeatedPooltrueBar {
+		value.Recycle()
+	}
+	for _, elem := range m.MapPooltrueBar {
+		elem.Recycle()
+	}
 	if m.pool == nil {
 		return
 	}
@@ -414,6 +583,52 @@ func (m *Foo) ProtoSize() (n int) {
 	}
 	if len(m.MapBar) > 0 {
 		for k, v := range m.MapBar {
+			_ = k
+			_ = v
+			l = 0
+			if v != nil {
+				l = v.ProtoSize()
+				l += 1 + sovPooldep(uint64(l))
+			}
+			mapEntrySize := 1 + sovPooldep(uint64(k)) + l
+			n += mapEntrySize + 1 + sovPooldep(uint64(mapEntrySize))
+		}
+	}
+	if m.PoolfalseBar != nil {
+		l = m.PoolfalseBar.ProtoSize()
+		n += 1 + l + sovPooldep(uint64(l))
+	}
+	if len(m.RepeatedPoolfalseBar) > 0 {
+		for _, e := range m.RepeatedPoolfalseBar {
+			l = e.ProtoSize()
+			n += 1 + l + sovPooldep(uint64(l))
+		}
+	}
+	if len(m.MapPoolfalseBar) > 0 {
+		for k, v := range m.MapPoolfalseBar {
+			_ = k
+			_ = v
+			l = 0
+			if v != nil {
+				l = v.ProtoSize()
+				l += 1 + sovPooldep(uint64(l))
+			}
+			mapEntrySize := 1 + sovPooldep(uint64(k)) + l
+			n += mapEntrySize + 1 + sovPooldep(uint64(mapEntrySize))
+		}
+	}
+	if m.PooltrueBar != nil {
+		l = m.PooltrueBar.ProtoSize()
+		n += 1 + l + sovPooldep(uint64(l))
+	}
+	if len(m.RepeatedPooltrueBar) > 0 {
+		for _, e := range m.RepeatedPooltrueBar {
+			l = e.ProtoSize()
+			n += 1 + l + sovPooldep(uint64(l))
+		}
+	}
+	if len(m.MapPooltrueBar) > 0 {
+		for k, v := range m.MapPooltrueBar {
 			_ = k
 			_ = v
 			l = 0
@@ -693,6 +908,358 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 			}
 			m.MapBar[mapkey] = mapvalue
 			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PoolfalseBar", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPooldep
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPooldep
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.PoolfalseBar == nil {
+				m.PoolfalseBar = &poolfalse.Bar{}
+			}
+			if err := m.PoolfalseBar.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RepeatedPoolfalseBar", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPooldep
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPooldep
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.RepeatedPoolfalseBar = append(m.RepeatedPoolfalseBar, &poolfalse.Bar{})
+			if err := m.RepeatedPoolfalseBar[len(m.RepeatedPoolfalseBar)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 8:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MapPoolfalseBar", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPooldep
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPooldep
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.MapPoolfalseBar == nil {
+				m.MapPoolfalseBar = make(map[uint32]*poolfalse.Bar)
+			}
+			var mapkey uint32
+			var mapvalue *poolfalse.Bar
+			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
+				var wire uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPooldep
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					wire |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPooldep
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= (uint32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+				} else if fieldNum == 2 {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPooldep
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= (int(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthPooldep
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if mapmsglen < 0 {
+						return ErrInvalidLengthPooldep
+					}
+					if postmsgIndex > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapvalue = &poolfalse.Bar{}
+					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
+					}
+					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipPooldep(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthPooldep
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
+				}
+			}
+			m.MapPoolfalseBar[mapkey] = mapvalue
+			iNdEx = postIndex
+		case 9:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PooltrueBar", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPooldep
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPooldep
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.PooltrueBar == nil {
+				m.PooltrueBar = pooltrue.GetBar()
+			}
+			if err := m.PooltrueBar.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RepeatedPooltrueBar", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPooldep
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPooldep
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.RepeatedPooltrueBar = append(m.RepeatedPooltrueBar, pooltrue.GetBar())
+			if err := m.RepeatedPooltrueBar[len(m.RepeatedPooltrueBar)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 11:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MapPooltrueBar", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPooldep
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPooldep
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.MapPooltrueBar == nil {
+				m.MapPooltrueBar = make(map[uint32]*pooltrue.Bar)
+			}
+			var mapkey uint32
+			var mapvalue *pooltrue.Bar
+			for iNdEx < postIndex {
+				entryPreIndex := iNdEx
+				var wire uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowPooldep
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					wire |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				fieldNum := int32(wire >> 3)
+				if fieldNum == 1 {
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPooldep
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapkey |= (uint32(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+				} else if fieldNum == 2 {
+					var mapmsglen int
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowPooldep
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						mapmsglen |= (int(b) & 0x7F) << shift
+						if b < 0x80 {
+							break
+						}
+					}
+					if mapmsglen < 0 {
+						return ErrInvalidLengthPooldep
+					}
+					postmsgIndex := iNdEx + mapmsglen
+					if mapmsglen < 0 {
+						return ErrInvalidLengthPooldep
+					}
+					if postmsgIndex > l {
+						return io.ErrUnexpectedEOF
+					}
+					mapvalue := pooltrue.GetBar()
+					if err := mapvalue.Unmarshal(dAtA[iNdEx:postmsgIndex]); err != nil {
+						return err
+					}
+					iNdEx = postmsgIndex
+				} else {
+					iNdEx = entryPreIndex
+					skippy, err := skipPooldep(dAtA[iNdEx:])
+					if err != nil {
+						return err
+					}
+					if skippy < 0 {
+						return ErrInvalidLengthPooldep
+					}
+					if (iNdEx + skippy) > postIndex {
+						return io.ErrUnexpectedEOF
+					}
+					iNdEx += skippy
+				}
+			}
+			m.MapPooltrueBar[mapkey] = mapvalue
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipPooldep(dAtA[iNdEx:])
@@ -900,26 +1467,37 @@ var (
 	ErrIntOverflowPooldep   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("pooldep/pooldep.proto", fileDescriptor_pooldep_d0c342ddb76a1d69) }
+func init() { proto.RegisterFile("pooldep/pooldep.proto", fileDescriptor_pooldep_c148918b2e0d62ff) }
 
-var fileDescriptor_pooldep_d0c342ddb76a1d69 = []byte{
-	// 287 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x90, 0x41, 0x4a, 0xc3, 0x40,
-	0x14, 0x86, 0x99, 0x4e, 0x9b, 0xc0, 0x4b, 0x85, 0x32, 0x20, 0x86, 0x2e, 0x42, 0xc8, 0x2a, 0x1b,
-	0x13, 0xd4, 0x85, 0xe2, 0x32, 0x60, 0x5d, 0xb9, 0xc9, 0x05, 0x64, 0x62, 0xc7, 0x28, 0x36, 0x79,
-	0xc3, 0x30, 0x31, 0xf4, 0x36, 0x1e, 0xc7, 0x65, 0xcf, 0xd0, 0xde, 0xc1, 0xb5, 0xcc, 0x4b, 0x2a,
-	0xa2, 0xab, 0xf9, 0xff, 0xf7, 0xff, 0xc3, 0x7c, 0xf3, 0xe0, 0x54, 0x23, 0x6e, 0xd6, 0x4a, 0xe7,
-	0xe3, 0x99, 0x69, 0x83, 0x16, 0x85, 0x3f, 0xda, 0xe5, 0x79, 0xfd, 0x6a, 0x5f, 0xba, 0x2a, 0x7b,
-	0xc2, 0x26, 0xaf, 0xb1, 0xc6, 0x9c, 0xf2, 0xaa, 0x7b, 0x26, 0x47, 0x86, 0xd4, 0x70, 0x2f, 0xf9,
-	0x62, 0xc0, 0x57, 0x88, 0x62, 0x01, 0x1c, 0x5b, 0x15, 0xb2, 0x98, 0xa5, 0xd3, 0xd2, 0x49, 0x37,
-	0xb1, 0x3d, 0x86, 0x93, 0x98, 0xa5, 0x7e, 0xe9, 0xa4, 0x88, 0x80, 0x57, 0xd2, 0x84, 0x3c, 0x66,
-	0x69, 0x70, 0x39, 0xcf, 0x8e, 0x00, 0x85, 0x34, 0xa5, 0x0b, 0x44, 0x0e, 0x73, 0xa3, 0xb4, 0x92,
-	0x56, 0xad, 0x1f, 0x5d, 0x71, 0x1a, 0xf3, 0x7f, 0xc5, 0xe0, 0xd8, 0x28, 0xa4, 0x11, 0x17, 0xe0,
-	0x37, 0x52, 0x53, 0x77, 0x46, 0xdd, 0xf0, 0xa7, 0xbb, 0x42, 0xcc, 0x1e, 0xa4, 0x2e, 0xa4, 0xb9,
-	0x6b, 0xad, 0xd9, 0x96, 0x5e, 0x43, 0x66, 0x79, 0x0f, 0xc1, 0xaf, 0xb1, 0x83, 0x7c, 0x53, 0x5b,
-	0xc2, 0x3e, 0x29, 0x9d, 0x14, 0x09, 0xcc, 0xde, 0xe5, 0xa6, 0x53, 0x04, 0xfe, 0xf7, 0xf5, 0x21,
-	0xba, 0x9d, 0xdc, 0xb0, 0xe4, 0x1a, 0xb8, 0x43, 0x38, 0x03, 0x1f, 0x5b, 0x45, 0x08, 0xc3, 0xdf,
-	0x3d, 0x6c, 0xd5, 0x18, 0xd8, 0x1e, 0x29, 0x18, 0x56, 0xe0, 0xd9, 0x1e, 0x0b, 0x69, 0x8a, 0xc5,
-	0xe7, 0x3e, 0x62, 0xbb, 0x7d, 0xc4, 0x3e, 0x0e, 0x11, 0xdb, 0x1d, 0x22, 0x56, 0x79, 0xb4, 0xca,
-	0xab, 0xef, 0x00, 0x00, 0x00, 0xff, 0xff, 0x38, 0x8a, 0xed, 0x91, 0x9b, 0x01, 0x00, 0x00,
+var fileDescriptor_pooldep_c148918b2e0d62ff = []byte{
+	// 459 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x53, 0xc1, 0x6e, 0xd3, 0x40,
+	0x10, 0xd5, 0xd6, 0xad, 0x0d, 0x93, 0xa4, 0x84, 0x6d, 0x4b, 0x43, 0x0e, 0x96, 0x09, 0x1c, 0x72,
+	0xc1, 0x06, 0x7a, 0x00, 0x71, 0xc3, 0x82, 0x22, 0x21, 0x55, 0xaa, 0xfc, 0x03, 0x68, 0x43, 0xb7,
+	0x01, 0x11, 0x7b, 0xac, 0x65, 0x4d, 0xd4, 0xbf, 0xe1, 0xc6, 0xaf, 0x70, 0xec, 0x37, 0xb4, 0x3f,
+	0x82, 0x76, 0xd6, 0xde, 0xda, 0xae, 0x4f, 0x9e, 0xd9, 0x37, 0xef, 0x79, 0xde, 0xec, 0x2c, 0x1c,
+	0x95, 0x88, 0x9b, 0x0b, 0x59, 0x26, 0xf5, 0x37, 0x2e, 0x15, 0x6a, 0xe4, 0x41, 0x9d, 0xce, 0x5f,
+	0xae, 0x7f, 0xe8, 0xef, 0xd5, 0x2a, 0xfe, 0x86, 0x79, 0xb2, 0xc6, 0x35, 0x26, 0x84, 0xaf, 0xaa,
+	0x4b, 0xca, 0x28, 0xa1, 0xc8, 0xf2, 0xe6, 0x4f, 0x0d, 0xef, 0x52, 0x6c, 0x7e, 0xc9, 0xc4, 0x45,
+	0x35, 0x74, 0x6c, 0x0e, 0xb4, 0xaa, 0x2c, 0x62, 0x02, 0x0b, 0x2c, 0xfe, 0xfa, 0xe0, 0x9d, 0x22,
+	0xf2, 0x29, 0x78, 0x58, 0xc8, 0x19, 0x8b, 0xd8, 0x72, 0x37, 0x33, 0xa1, 0x39, 0xd1, 0x5b, 0x9c,
+	0xed, 0x44, 0x6c, 0x19, 0x64, 0x26, 0xe4, 0x21, 0x78, 0x2b, 0xa1, 0x66, 0x5e, 0xc4, 0x96, 0xa3,
+	0x37, 0xe3, 0xb8, 0x69, 0x3a, 0x15, 0x2a, 0x33, 0x00, 0x4f, 0x60, 0xac, 0x64, 0x29, 0x85, 0x96,
+	0x17, 0x5f, 0x4d, 0xe1, 0x6e, 0xe4, 0xdd, 0x2b, 0x1c, 0x35, 0x15, 0xa9, 0x50, 0xfc, 0x35, 0x04,
+	0xb9, 0x28, 0xa9, 0x76, 0x8f, 0x6a, 0x67, 0xae, 0xf6, 0x14, 0x31, 0x3e, 0x13, 0x65, 0x2a, 0xd4,
+	0xa7, 0x42, 0xab, 0xab, 0xcc, 0xcf, 0x29, 0xe1, 0x27, 0x30, 0x71, 0xde, 0x88, 0xe8, 0x53, 0x37,
+	0xfb, 0xf1, 0x9d, 0x63, 0xf3, 0x9b, 0xb1, 0x4b, 0x0d, 0xe9, 0x23, 0x3c, 0x71, 0x8d, 0x75, 0xd9,
+	0x01, 0xfd, 0xb6, 0xcf, 0x3e, 0x6c, 0xaa, 0xcf, 0xdb, 0x2a, 0x67, 0xf0, 0xd8, 0x74, 0xdb, 0x15,
+	0x78, 0x40, 0x02, 0xcf, 0xfa, 0x7d, 0xb7, 0x89, 0xd6, 0xc0, 0xa3, 0xbc, 0x7b, 0xca, 0x5f, 0xc1,
+	0xb8, 0xb9, 0x0b, 0x52, 0x7a, 0x48, 0x46, 0x26, 0xb1, 0xbb, 0x20, 0x1a, 0x57, 0x93, 0x19, 0xc6,
+	0x07, 0x38, 0xea, 0xd8, 0x70, 0x54, 0xa0, 0x26, 0x7a, 0xd4, 0x83, 0xb6, 0x89, 0x46, 0xe2, 0x0b,
+	0x4c, 0x1b, 0x0f, 0x8e, 0x3d, 0x22, 0x76, 0x34, 0x64, 0xa1, 0xa6, 0x59, 0x07, 0xfb, 0x79, 0xe7,
+	0x70, 0xfe, 0x19, 0x46, 0xad, 0x1b, 0x32, 0xfb, 0xf2, 0x53, 0x5e, 0xd1, 0x06, 0x4d, 0x32, 0x13,
+	0xf2, 0x05, 0xec, 0xfd, 0x16, 0x9b, 0x4a, 0xd2, 0x0e, 0xf5, 0x17, 0xc1, 0x42, 0xef, 0x77, 0xde,
+	0xb1, 0x79, 0x06, 0x87, 0x43, 0x23, 0x1b, 0x50, 0x7c, 0xd1, 0x55, 0xec, 0xdf, 0x5b, 0x4b, 0xf3,
+	0x1c, 0x0e, 0x06, 0x3c, 0x0c, 0x48, 0x3e, 0xef, 0x4a, 0xf6, 0x86, 0x78, 0xa7, 0xb8, 0x78, 0x0b,
+	0x9e, 0x99, 0xe0, 0x31, 0x04, 0x58, 0xd8, 0xc1, 0xd9, 0xc7, 0xe2, 0x63, 0x21, 0x6b, 0x40, 0x6f,
+	0x91, 0x00, 0xfb, 0x66, 0x7c, 0xbd, 0xc5, 0x54, 0xa8, 0x74, 0xfa, 0xef, 0x26, 0x64, 0xd7, 0x37,
+	0x21, 0xfb, 0x73, 0x1b, 0xb2, 0xeb, 0xdb, 0x90, 0xad, 0x7c, 0x7a, 0x7b, 0x27, 0xff, 0x03, 0x00,
+	0x00, 0xff, 0xff, 0x98, 0xa4, 0x59, 0xe9, 0x00, 0x04, 0x00, 0x00,
 }
