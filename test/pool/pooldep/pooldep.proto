@@ -59,3 +59,7 @@ message Bar {
   uint64 one_bar = 1;
   fixed32 two_bar = 2;
 }
+
+service Baz {
+  rpc Hello(Foo) returns (Bar);
+}

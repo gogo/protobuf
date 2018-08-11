@@ -36,17 +36,17 @@ regenerate:
 	protoc \
 		--proto_path=../../../../../:../../protobuf \
 		--proto_path . \
-		--gogo_out=. \
+		--gogo_out=plugins=grpc:. \
 		pooltrue/pooltrue.proto
 	protoc \
 		--proto_path=../../../../../:../../protobuf \
 		--proto_path . \
-		--gogo_out=. \
+		--gogo_out=plugins=grpc:. \
 		poolfalse/poolfalse.proto
 	protoc \
 		--proto_path=../../../../../:../../protobuf \
 		--proto_path . \
-		--gogo_out=Mpoolfalse/poolfalse.proto=github.com/gogo/protobuf/test/pool/poolfalse,Mpooltrue/pooltrue.proto=github.com/gogo/protobuf/test/pool/pooltrue:. \
+		--gogo_out=plugins=grpc,Mpoolfalse/poolfalse.proto=github.com/gogo/protobuf/test/pool/poolfalse,Mpooltrue/pooltrue.proto=github.com/gogo/protobuf/test/pool/pooltrue:. \
 		pooldep/pooldep.proto
 
 .PHONY: bench
