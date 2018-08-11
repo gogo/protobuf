@@ -36,9 +36,10 @@ import (
 	"github.com/gogo/protobuf/test/pool/pooltrue"
 )
 
-func init() {
-	mem.Global().Enable()
-}
+// The disabled functions should have the same performance as the
+// false functions, this is just as verification. If this is correct,
+// we can consolidate pooltrue and poolfalse into just pool, and do
+// benchmarking just between enabled and disabled.
 
 func BenchmarkPoolFalse(b *testing.B) {
 	for iter := 0; iter < b.N; iter++ {
@@ -46,10 +47,74 @@ func BenchmarkPoolFalse(b *testing.B) {
 	}
 }
 
+func BenchmarkPoolTrueDisabled(b *testing.B) {
+	for iter := 0; iter < b.N; iter++ {
+		benchmarkPoolTrue(b, false, false)
+	}
+}
+
+func BenchmarkPoolTrueDisabledWithSegList(b *testing.B) {
+	for iter := 0; iter < b.N; iter++ {
+		benchmarkPoolTrue(b, false, true)
+	}
+}
+
+func BenchmarkPoolTrueEnabled(b *testing.B) {
+	mem.Global().Enable()
+	b.ResetTimer()
+	for iter := 0; iter < b.N; iter++ {
+		benchmarkPoolTrue(b, false, false)
+	}
+	b.StopTimer()
+	mem.Global().Disable()
+}
+
+func BenchmarkPoolTrueEnabledWithSegList(b *testing.B) {
+	mem.Global().Enable()
+	b.ResetTimer()
+	for iter := 0; iter < b.N; iter++ {
+		benchmarkPoolTrue(b, false, true)
+	}
+	b.StopTimer()
+	mem.Global().Disable()
+}
+
 func BenchmarkPoolFalseWithMaps(b *testing.B) {
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolFalse(b, true)
 	}
+}
+
+func BenchmarkPoolTrueDisabledWithMaps(b *testing.B) {
+	for iter := 0; iter < b.N; iter++ {
+		benchmarkPoolTrue(b, true, false)
+	}
+}
+
+func BenchmarkPoolTrueDisabledWithSegListAndMaps(b *testing.B) {
+	for iter := 0; iter < b.N; iter++ {
+		benchmarkPoolTrue(b, true, true)
+	}
+}
+
+func BenchmarkPoolTrueEnabledWithMaps(b *testing.B) {
+	mem.Global().Enable()
+	b.ResetTimer()
+	for iter := 0; iter < b.N; iter++ {
+		benchmarkPoolTrue(b, true, false)
+	}
+	b.StopTimer()
+	mem.Global().Disable()
+}
+
+func BenchmarkPoolTrueEnabledWithSegListAndMaps(b *testing.B) {
+	mem.Global().Enable()
+	b.ResetTimer()
+	for iter := 0; iter < b.N; iter++ {
+		benchmarkPoolTrue(b, true, true)
+	}
+	b.StopTimer()
+	mem.Global().Disable()
 }
 
 func benchmarkPoolFalse(b *testing.B, withMaps bool) {
@@ -86,30 +151,6 @@ func benchmarkPoolFalse(b *testing.B, withMaps bool) {
 	unmarshaledFoo := &poolfalse.Foo{}
 	if err := unmarshaledFoo.Unmarshal(data); err != nil {
 		b.Fatal(err)
-	}
-}
-
-func BenchmarkPoolTrue(b *testing.B) {
-	for iter := 0; iter < b.N; iter++ {
-		benchmarkPoolTrue(b, false, false)
-	}
-}
-
-func BenchmarkPoolTrueWithMaps(b *testing.B) {
-	for iter := 0; iter < b.N; iter++ {
-		benchmarkPoolTrue(b, true, false)
-	}
-}
-
-func BenchmarkPoolTrueWithSegList(b *testing.B) {
-	for iter := 0; iter < b.N; iter++ {
-		benchmarkPoolTrue(b, false, true)
-	}
-}
-
-func BenchmarkPoolTrueWithMapsAndSegList(b *testing.B) {
-	for iter := 0; iter < b.N; iter++ {
-		benchmarkPoolTrue(b, true, true)
 	}
 }
 
