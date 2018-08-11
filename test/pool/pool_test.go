@@ -36,6 +36,10 @@ import (
 	"github.com/gogo/protobuf/test/pool/pooltrue"
 )
 
+func init() {
+	mem.Global().Enable()
+}
+
 func BenchmarkPoolFalse(b *testing.B) {
 	for iter := 0; iter < b.N; iter++ {
 		benchmarkPoolFalse(b, false)

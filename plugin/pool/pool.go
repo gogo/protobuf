@@ -107,7 +107,7 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 		p.P(`// is no need for additional setup to use this function.`)
 		p.P(`func Get`, messageGoType, `() *`, messageGoType, `{ `)
 		p.In()
-		p.P(`return Get`, messageGoType, `FromPool(`, p.memPkg.Use(), `.GlobalPool)`)
+		p.P(`return Get`, messageGoType, `FromPool(`, p.memPkg.Use(), `.Global())`)
 		p.Out()
 		p.P(`}`)
 
@@ -227,7 +227,7 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 	// init
 	p.P(`func init() {`)
 	p.In()
-	p.P(`RegisterToPool`, p.localName, `(`, p.memPkg.Use(), `.GlobalPool)`)
+	p.P(`RegisterToPool`, p.localName, `(`, p.memPkg.Use(), `.Global())`)
 	p.Out()
 	p.P(`}`)
 	p.P()

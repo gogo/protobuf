@@ -352,7 +352,7 @@ func RegisterToPoolPooltrue(pool *github_com_gogo_protobuf_mem.Pool) {
 // RegisterToPoolPooltrueis implicitly called on the global Pool so there
 // is no need for additional setup to use this function.
 func GetFoo() *Foo {
-	return GetFooFromPool(github_com_gogo_protobuf_mem.GlobalPool)
+	return GetFooFromPool(github_com_gogo_protobuf_mem.Global())
 }
 
 // GetFooFromPool gets a reset *Foo from the given Pool.
@@ -377,7 +377,7 @@ func GetFooFromPool(pool *github_com_gogo_protobuf_mem.Pool) *Foo {
 // RegisterToPoolPooltrueis implicitly called on the global Pool so there
 // is no need for additional setup to use this function.
 func GetBar() *Bar {
-	return GetBarFromPool(github_com_gogo_protobuf_mem.GlobalPool)
+	return GetBarFromPool(github_com_gogo_protobuf_mem.Global())
 }
 
 // GetBarFromPool gets a reset *Bar from the given Pool.
@@ -449,7 +449,7 @@ func registerToPoolBar(pool *github_com_gogo_protobuf_mem.Pool) github_com_gogo_
 }
 
 func init() {
-	RegisterToPoolPooltrue(github_com_gogo_protobuf_mem.GlobalPool)
+	RegisterToPoolPooltrue(github_com_gogo_protobuf_mem.Global())
 }
 
 func (m *Foo) ProtoSize() (n int) {

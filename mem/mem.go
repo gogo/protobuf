@@ -32,6 +32,7 @@ import (
 	"fmt"
 	"sort"
 	"sync"
+	"sync/atomic"
 )
 
 // DefaultChannelSize is the default Pool channel size.
@@ -53,12 +54,19 @@ var DefaultSegListSizes = []int{
 	16777216,
 }
 
-// GlobalPool is a global instance of a Pool.
+var globalPool = NewPool(WithNoLocking(), WithDisabled())
+
+// Global returns the global Pool instance.
 //
 // It is generally preferable to create a Pool instance for your application and
 // pass it through to the places it is needed, however this will prove difficult for
 // existing applications wishing to migrate to the Pool API.
-var GlobalPool = NewPool(WithNoLocking())
+//
+// The Global Pool is disabled by default. To enable pooling in your application using
+// the Get* generated functions for each message, call Global().Enable() at initialization.
+func Global() *Pool {
+	return globalPool
+}
 
 // Bytes represents a byte slice created from a Pool.
 //
@@ -129,6 +137,7 @@ type PooledMessage interface {
 
 // Pool is a pool of PooledMessages and Bytes.
 type Pool struct {
+	enabled            uint32
 	channelSize        uint16
 	sortedSegListSizes []int
 
@@ -174,6 +183,9 @@ func WithSegListSizes(segListSizes ...int) PoolOption {
 // registration. If this option is turned on, you must make all RegisterConstructor calls
 // at initialization, and not call RegisterConstructor afterwards.
 //
+// Generally, you should use this option as it provides a significant performance benefit,
+// just make sure to only call registration functions at initialization.
+//
 // This option is called for the Global Pool.
 func WithNoLocking() PoolOption {
 	return func(pool *Pool) {
@@ -181,9 +193,20 @@ func WithNoLocking() PoolOption {
 	}
 }
 
+// WithDisabled returns a PoolOption that disables the Pool at construction time.
+//
+// This is called on the global pool to make sure there are no ordering issues
+// with other initialization functions.
+func WithDisabled() PoolOption {
+	return func(pool *Pool) {
+		pool.enabled = 0
+	}
+}
+
 // NewPool creates a new Pool.
 func NewPool(options ...PoolOption) *Pool {
 	pool := &Pool{
+		enabled:                  1,
 		channelSize:              DefaultChannelSize,
 		sortedSegListSizes:       DefaultSegListSizes,
 		messageTypeToMessagePool: make(map[string]*messagePool),
@@ -197,6 +220,18 @@ func NewPool(options ...PoolOption) *Pool {
 		pool.segListSizeToSegListPool[segListSize] = newSegListPool(pool, segListSize)
 	}
 	return pool
+}
+
+// Enable enables all pooling.
+func (p *Pool) Enable() {
+	atomic.StoreUint32(&p.enabled, 1)
+}
+
+// Disable disables all pooling.
+//
+// This results in Get and GetBytes calls returning nil messages and unmanaged Bytes.
+func (p *Pool) Disable() {
+	atomic.StoreUint32(&p.enabled, 0)
 }
 
 // RegisterConstructor registers the given constructor for the given message type.
@@ -219,11 +254,14 @@ func (p *Pool) RegisterConstructor(messageType string, constructor func(*Pool) P
 
 // Get gets a reset PooledMessage for the given message type.
 //
-// Returns nil if no constructor was registered for the PooledMessage.
+// Returns nil if no constructor was registered for the PooledMessage, or if pooling is disabled.
 //
 // Users should not call this function directly, instead calling the generated functions
 // for each file.
 func (p *Pool) Get(messageType string) PooledMessage {
+	if p.isDisabled() {
+		return nil
+	}
 	if p.lock != nil {
 		p.lock.RLock()
 	}
@@ -243,6 +281,9 @@ func (p *Pool) Get(messageType string) PooledMessage {
 //
 // Users should call the generated Recycle function instead of calling this directly.
 func (p *Pool) Put(messageType string, message PooledMessage) {
+	if p.isDisabled() {
+		return
+	}
 	if p.lock != nil {
 		p.lock.RLock()
 	}
@@ -263,6 +304,9 @@ func (p *Pool) Put(messageType string, message PooledMessage) {
 // Note that there may be existing data inside the Value. If you need the Value
 // to be zeroed out, use the MemsetZero function.
 func (p *Pool) GetBytes(valueLen int) *Bytes {
+	if p.isDisabled() {
+		return NewUnmanagedBytes(valueLen)
+	}
 	for _, segListSize := range p.sortedSegListSizes {
 		if valueLen <= segListSize {
 			segListPool, ok := p.segListSizeToSegListPool[segListSize]
@@ -274,4 +318,8 @@ func (p *Pool) GetBytes(valueLen int) *Bytes {
 	}
 	// no seg list big enough, make a Bytes without a backing pool
 	return NewUnmanagedBytes(valueLen)
+}
+
+func (p *Pool) isDisabled() bool {
+	return atomic.LoadUint32(&p.enabled) == 0
 }
