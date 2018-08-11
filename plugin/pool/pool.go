@@ -32,8 +32,6 @@ Package pool provides a plugin that generates message pools.
 package pool
 
 import (
-	"strings"
-
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
@@ -47,8 +45,7 @@ type pool struct {
 	*generator.Generator
 	generator.PluginImports
 
-	memPkg    generator.Single
-	localName string
+	memPkg generator.Single
 }
 
 func newPool() *pool {
@@ -65,7 +62,6 @@ func (p *pool) Init(g *generator.Generator) {
 
 func (p *pool) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
-	p.localName = generator.FileName(file)
 
 	if !gogoproto.GeneratesPool(file.FileDescriptorProto) {
 		return
@@ -73,86 +69,40 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 
 	p.memPkg = p.NewImport("github.com/gogo/protobuf/mem")
 
-	// RegisterToPoolFile
-	p.P(`// RegisterToPool`, p.localName, ` registers constructors for all messages in this file to the given Pool.`)
-	p.P(`//`)
-	p.P(`// Users must call this function at initialization for the Pool to pool messages in this file.`)
-	p.P(`func RegisterToPool`, p.localName, ` (pool *`, p.memPkg.Use(), `.Pool) {`)
-	p.In()
+	var messages []*generator.Descriptor
 	for _, message := range file.Messages() {
 		// Don't generate for map entry messages.
-		if message.GetOptions().GetMapEntry() {
-			continue
+		if !message.GetOptions().GetMapEntry() {
+			messages = append(messages, message)
 		}
-		p.P(`pool.RegisterConstructor("`, getMessageType(file, message), `", registerToPool`, getMessageGoType(message), `)`)
 	}
-	p.Out()
-	p.P(`}`)
-	p.P()
+	if len(messages) == 0 {
+		return
+	}
 
-	// GetMessage, GetMessageFromPool
-	for _, message := range file.Messages() {
-		// Don't generate for map entry messages.
-		if message.GetOptions().GetMapEntry() {
-			continue
-		}
+	// GetMessage
+	for _, message := range messages {
 		messageGoType := getMessageGoType(message)
-
-		p.P(`// Get`, messageGoType, ` gets a reset *`, messageGoType, ` from the global Pool.`)
-		p.P(`//`)
-		p.P(`// It is generally preferable to create a Pool instance for your application and`)
-		p.P(`// use Get`, messageGoType, `FromPool instead, however this will prove difficult`)
-		p.P(`// for existing applications wishing to migrate to the Pool API. Additionally,`)
-		p.P(`// RegisterToPool`, p.localName, `is implicitly called on the global Pool so there`)
-		p.P(`// is no need for additional setup to use this function.`)
+		p.P(`// Get`, messageGoType, ` gets a reset *`, messageGoType, `.`)
 		p.P(`func Get`, messageGoType, `() *`, messageGoType, `{ `)
 		p.In()
-		p.P(`pooledMessage := global`, messageGoType, `MessagePool.Get()`)
-		p.P(`if pooledMessage == nil {`)
-		p.In()
-		p.P(`return &`, messageGoType, `{}`)
+		p.P(`return global`, messageGoType, `ObjectPool.Get().(*`, messageGoType, `)`)
 		p.Out()
 		p.P(`}`)
-		p.P(`return pooledMessage.(*`, messageGoType, `)`)
-		p.Out()
-		p.P(`}`)
-
-		p.P(`// Get`, messageGoType, `FromPool gets a reset *`, messageGoType, ` from the given Pool.`)
-		p.P(`//`)
-		p.P(`// If the Pool is nil, or `, p.localName, `PoolRegister was not called on this Pool, this will return a new message not managed by any Pool.`)
-		p.P(`func Get`, messageGoType, `FromPool(pool *`, p.memPkg.Use(), `.Pool) *`, messageGoType, `{ `)
-		p.In()
-		p.P(`if pool == nil {`)
-		p.In()
-		p.P(`return &`, messageGoType, `{}`)
-		p.Out()
-		p.P(`}`)
-		p.P(`pooledMessage := pool.Get("`, getMessageType(file, message), `")`)
-		p.P(`if pooledMessage == nil {`)
-		p.In()
-		p.P(`return &`, messageGoType, `{}`)
-		p.Out()
-		p.P(`}`)
-		p.P(`return pooledMessage.(*`, messageGoType, `)`)
-		p.Out()
-		p.P(`}`)
-		p.P()
 	}
 
 	// message.Recycle
-	for _, message := range file.Messages() {
-		// Don't generate for map entry messages.
-		if message.GetOptions().GetMapEntry() {
-			continue
-		}
+	for _, message := range messages {
+		messageGoType := getMessageGoType(message)
 		p.P(`// Recycle puts the message back in the Pool that created it.`)
 		p.P(`//`)
 		p.P(`// Any non-nil fields that are messages will be recycled as well, including elements of repeated fields and values of map fields.`)
+		p.P(`// Once Recycle is called, the message should no longer be used.`)
 		p.P(`//`)
 		p.P(`// If the message is nil, or the message was not allocated from a Pool, this is a no-op.`)
-		p.P(`func (this *`, getMessageGoType(message), `) Recycle() {`)
+		p.P(`func (m *`, messageGoType, `) Recycle() {`)
 		p.In()
-		p.P(`if this == nil {`)
+		p.P(`if m == nil {`)
 		p.In()
 		p.P(`return`)
 		p.Out()
@@ -164,7 +114,7 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 					valueField := p.GoMapType(nil, field).ValueField
 					if *valueField.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
 						if gogoproto.GeneratesPool(p.ObjectNamed(valueField.GetTypeName()).File().FileDescriptorProto) {
-							p.P(`for _, elem := range this.`, fieldName, ` {`)
+							p.P(`for _, elem := range m.`, fieldName, ` {`)
 							p.In()
 							p.P(`elem.Recycle()`)
 							p.Out()
@@ -173,38 +123,34 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 					}
 				} else if field.IsRepeated() {
 					if gogoproto.GeneratesPool(p.ObjectNamed(field.GetTypeName()).File().FileDescriptorProto) {
-						p.P(`for _, elem := range this.`, fieldName, ` {`)
+						p.P(`for _, value := range m.`, fieldName, ` {`)
 						p.In()
-						p.P(`elem.Recycle()`)
+						p.P(`value.Recycle()`)
 						p.Out()
 						p.P(`}`)
 					}
 				} else {
 					if gogoproto.GeneratesPool(p.ObjectNamed(field.GetTypeName()).File().FileDescriptorProto) {
-						p.P(`this.`, fieldName, `.Recycle()`)
+						p.P(`m.`, fieldName, `.Recycle()`)
 					}
 				}
 			}
 		}
-		p.P(`if this.pool == nil {`)
+		p.P(`if m.pool == nil {`)
 		p.In()
 		p.P(`return`)
 		p.Out()
 		p.P(`}`)
-		p.P(`this.pool.Put("`, getMessageType(file, message), `", this)`)
+		p.P(`m.pool.Put(m)`)
 		p.Out()
 		p.P(`}`)
 		p.P()
 	}
 
-	// registerToPoolMessage
-	for _, message := range file.Messages() {
-		// Don't generate for map entry messages.
-		if message.GetOptions().GetMapEntry() {
-			continue
-		}
+	// constructors
+	for _, message := range messages {
 		messageGoType := getMessageGoType(message)
-		p.P(`func registerToPool`, messageGoType, `(pool *`, p.memPkg.Use(), `.Pool) `, p.memPkg.Use(), `.PooledMessage {`)
+		p.P(`func new`, messageGoType, `(pool *`, p.memPkg.Use(), `.ObjectPool) `, p.memPkg.Use(), `.Object {`)
 		p.In()
 		p.P(`return &`, messageGoType, `{pool: pool}`)
 		p.Out()
@@ -212,35 +158,27 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 		p.P()
 	}
 
-	// init
-	for _, message := range file.Messages() {
-		// Don't generate for map entry messages.
-		if message.GetOptions().GetMapEntry() {
-			continue
-		}
-		p.P(`var global`, getMessageGoType(message), `MessagePool *`, p.memPkg.Use(), `.MessagePool`)
+	// object pools
+	p.P(`var (`)
+	p.In()
+	for _, message := range messages {
+		messageGoType := getMessageGoType(message)
+		p.P(`global`, messageGoType, `ObjectPool = `, p.memPkg.Use(), `.NewObjectPool(new`, messageGoType, `)`)
 	}
+	p.Out()
+	p.P(`)`)
+	p.P()
+
+	// init
 	p.P(`func init() {`)
 	p.In()
-	p.P(`RegisterToPool`, p.localName, `(`, p.memPkg.Use(), `.Global())`)
-	for _, message := range file.Messages() {
-		// Don't generate for map entry messages.
-		if message.GetOptions().GetMapEntry() {
-			continue
-		}
-		p.P(`global`, getMessageGoType(message), `MessagePool = `, p.memPkg.Use(), `.Global().GetMessagePool("`, getMessageType(file, message), `")`)
+	for _, message := range messages {
+		messageGoType := getMessageGoType(message)
+		p.P(p.memPkg.Use(), `.RegisterGlobalObjectPool(global`, messageGoType, `ObjectPool)`)
 	}
 	p.Out()
 	p.P(`}`)
 	p.P()
-}
-
-func getMessageType(file *generator.FileDescriptor, message *generator.Descriptor) string {
-	fullName := strings.Join(message.TypeName(), ".")
-	if file.Package != nil {
-		fullName = *file.Package + "." + fullName
-	}
-	return fullName
 }
 
 func getMessageGoType(message *generator.Descriptor) string {

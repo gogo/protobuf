@@ -28,69 +28,65 @@
 
 package mem
 
-import "sync"
-
-// MessagePool is a a pool for an individual message type.
+// Bytes represents a byte slice created from a BytesPool.
 //
-// These should only be created from a Pool.
-type MessagePool struct {
-	pool     *Pool
-	syncPool *sync.Pool
-	c        chan PooledMessage
+// Only create these from BytesPools.
+type Bytes struct {
+	segListPool *segListPool
+	value       []byte
+	valueLen    int
 }
 
-func newMessagePool(pool *Pool, constructor func(*Pool) PooledMessage) *MessagePool {
-	messagePool := &MessagePool{pool: pool}
-	messagePool.syncPool = &sync.Pool{
-		New: func() interface{} {
-			return constructor(pool)
-		},
-	}
-	if pool.channelSize > 0 {
-		messagePool.c = make(chan PooledMessage, pool.channelSize)
-	}
-	return messagePool
+// NewUnmanagedBytes creates a new Bytes unmanaged by any Pool.
+//
+// Users should generally not call this directly.
+func NewUnmanagedBytes(valueLen int) *Bytes {
+	return newBytes(nil, valueLen)
 }
 
-// Get returns a pooled message.
+// Value gets the value.
+func (b *Bytes) Value() []byte {
+	return b.value[:b.valueLen]
+}
+
+// Len gets the length.
 //
-// If the Pool that created this MessagePool is disabled, this will return nil.
-func (m *MessagePool) Get() PooledMessage {
-	if m.pool.isDisabled() {
-		return nil
-	}
-	if m.c == nil {
-		getMessage := m.syncPool.Get().(PooledMessage)
-		getMessage.Reset()
-		return getMessage
-	}
-	select {
-	case message := <-m.c:
-		message.Reset()
-		return message
-	default:
-		getMessage := m.syncPool.Get().(PooledMessage)
-		getMessage.Reset()
-		return getMessage
+// This is equivalent to len(b.Value()).
+func (b *Bytes) Len() int {
+	return b.valueLen
+}
+
+// Truncate truncates the value to the given length.
+func (b *Bytes) Truncate(valueLen int) {
+	b.valueLen = valueLen
+}
+
+// MemsetZero sets the data inside the value to zero.
+//
+// Optimized per https://golang.org/cl/137880043
+func (b *Bytes) MemsetZero() {
+	for i := range b.value {
+		b.value[i] = 0
 	}
 }
 
-// Put puts a pooled message back into the message pool.
+// Recycle recycles the Bytes.
 //
-// If the Pool that created this MessagePool is disabled, this will return nil.
-func (m *MessagePool) Put(message PooledMessage) {
-	if m.pool.isDisabled() {
+// If this is nil, this is a no-op.
+func (b *Bytes) Recycle() {
+	if b == nil {
 		return
 	}
-	if m.c == nil {
-		m.syncPool.Put(message)
+	if b.segListPool == nil {
 		return
 	}
-	select {
-	case m.c <- message:
-		return
-	default:
-		m.syncPool.Put(message)
-		return
+	b.segListPool.put(b)
+}
+
+func newBytes(segListPool *segListPool, valueLen int) *Bytes {
+	return &Bytes{
+		segListPool: segListPool,
+		value:       make([]byte, valueLen),
+		valueLen:    valueLen,
 	}
 }

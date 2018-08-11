@@ -1112,16 +1112,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 			} else {
 				p.P(`size := m.Size()`)
 			}
-			p.P(`var bytes *`, p.memPkg.Use(), `.Bytes`)
-			p.P(`if m.pool != nil {`)
-			p.In()
-			p.P(`bytes = m.pool.GetBytes(size)`)
-			p.Out()
-			p.P(`} else {`)
-			p.In()
-			p.P(`bytes = `, p.memPkg.Use(), `.NewUnmanagedBytes(size)`)
-			p.Out()
-			p.P(`}`)
+			p.P(`bytes := `, p.memPkg.Use(), `.GlobalBytesPool.Get(size)`)
 			p.P(`n, err := m.MarshalTo(bytes.Value())`)
 			p.P(`if err != nil {`)
 			p.In()

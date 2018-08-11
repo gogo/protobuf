@@ -34,24 +34,20 @@ import (
 )
 
 type segListPool struct {
-	pool        *Pool
 	allocateLen int
 	syncPool    *sync.Pool
 	c           chan *Bytes
 }
 
-func newSegListPool(pool *Pool, allocateLen int) *segListPool {
-	segListPool := &segListPool{pool: pool, allocateLen: allocateLen}
+func newSegListPool(channelSize uint16, allocateLen int) *segListPool {
+	segListPool := &segListPool{allocateLen: allocateLen}
 	segListPool.syncPool = &sync.Pool{
 		New: func() interface{} {
-			return &Bytes{
-				segListPool: segListPool,
-				value:       make([]byte, allocateLen),
-			}
+			return newBytes(segListPool, allocateLen)
 		},
 	}
-	if pool.channelSize > 0 {
-		segListPool.c = make(chan *Bytes, pool.channelSize)
+	if channelSize > 0 {
+		segListPool.c = make(chan *Bytes, channelSize)
 	}
 	return segListPool
 }
@@ -62,16 +58,16 @@ func (m *segListPool) get(valueLen int) *Bytes {
 	}
 	if m.c == nil {
 		getBytes := m.syncPool.Get().(*Bytes)
-		getBytes.valueLen = valueLen
+		getBytes.Truncate(valueLen)
 		return getBytes
 	}
 	select {
 	case bytes := <-m.c:
-		bytes.valueLen = valueLen
+		bytes.Truncate(valueLen)
 		return bytes
 	default:
 		getBytes := m.syncPool.Get().(*Bytes)
-		getBytes.valueLen = valueLen
+		getBytes.Truncate(valueLen)
 		return getBytes
 	}
 }
