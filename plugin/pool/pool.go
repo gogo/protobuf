@@ -163,44 +163,26 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 				if p.IsMap(field) {
 					valueField := p.GoMapType(nil, field).ValueField
 					if *valueField.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
+						if gogoproto.GeneratesPool(p.ObjectNamed(valueField.GetTypeName()).File().FileDescriptorProto) {
+							p.P(`for _, elem := range this.`, fieldName, ` {`)
+							p.In()
+							p.P(`elem.Recycle()`)
+							p.Out()
+							p.P(`}`)
+						}
+					}
+				} else if field.IsRepeated() {
+					if gogoproto.GeneratesPool(p.ObjectNamed(field.GetTypeName()).File().FileDescriptorProto) {
 						p.P(`for _, elem := range this.`, fieldName, ` {`)
 						p.In()
-						// TODO: If there is a way to go from FieldDescriptorProto to FileDescriptorProto,
-						// we can discover whether or not gogoproto.GeneratesPool returns true for the file
-						// that defines this message and we can skip this check and call Recycle directly.
-						p.P(`var iface interface{} = elem`)
-						p.P(`if pooledMessage, ok := iface.(`, p.memPkg.Use(), `.PooledMessage); ok {`)
-						p.In()
-						p.P(`pooledMessage.Recycle()`)
-						p.Out()
-						p.P(`}`)
+						p.P(`elem.Recycle()`)
 						p.Out()
 						p.P(`}`)
 					}
-				} else if field.IsRepeated() {
-					p.P(`for _, elem := range this.`, fieldName, ` {`)
-					p.In()
-					// TODO: If there is a way to go from FieldDescriptorProto to FileDescriptorProto,
-					// we can discover whether or not gogoproto.GeneratesPool returns true for the file
-					// that defines this message and we can skip this check and call Recycle directly.
-					p.P(`var iface interface{} = elem`)
-					p.P(`if pooledMessage, ok := iface.(`, p.memPkg.Use(), `.PooledMessage); ok {`)
-					p.In()
-					p.P(`pooledMessage.Recycle()`)
-					p.Out()
-					p.P(`}`)
-					p.Out()
-					p.P(`}`)
 				} else {
-					// TODO: If there is a way to go from FieldDescriptorProto to FileDescriptorProto,
-					// we can discover whether or not gogoproto.GeneratesPool returns true for the file
-					// that defines this message and we can skip this check and call Recycle directly.
-					p.P(`var iface interface{} = this.`, fieldName)
-					p.P(`if pooledMessage, ok := iface.(`, p.memPkg.Use(), `.PooledMessage); ok {`)
-					p.In()
-					p.P(`pooledMessage.Recycle()`)
-					p.Out()
-					p.P(`}`)
+					if gogoproto.GeneratesPool(p.ObjectNamed(field.GetTypeName()).File().FileDescriptorProto) {
+						p.P(`this.`, fieldName, `.Recycle()`)
+					}
 				}
 			}
 		}

@@ -33,8 +33,8 @@ all: regenerate bench
 
 .PHONY: regenerate
 regenerate:
-	protoc --proto_path=../../../../../:../../protobuf/:. --gogo_out=. poolfalse/poolfalse.proto
-	protoc --proto_path=../../../../../:../../protobuf/:. --gogo_out=. pooltrue/pooltrue.proto
+	protoc --proto_path=../../../../../:../../protobuf --proto_path . --gogo_out=. poolfalse/poolfalse.proto
+	protoc --proto_path=../../../../../:../../protobuf --proto_path . --gogo_out=Mpoolfalse/poolfalse.proto=github.com/gogo/protobuf/test/pool/poolfalse:. pooltrue/pooltrue.proto
 
 .PHONY: bench
 bench:
