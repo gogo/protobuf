@@ -58,7 +58,7 @@ var DefaultSegListSizes = []int{
 // It is generally preferable to create a Pool instance for your application and
 // pass it through to the places it is needed, however this will prove difficult for
 // existing applications wishing to migrate to the Pool API.
-var GlobalPool = NewPool()
+var GlobalPool = NewPool(WithNoLocking())
 
 // Bytes represents a byte slice created from a Pool.
 //
@@ -170,6 +170,17 @@ func WithSegListSizes(segListSizes ...int) PoolOption {
 	}
 }
 
+// WithNoLocking returns a PoolOption that turns off locking around message constructor
+// registration. If this option is turned on, you must make all RegisterConstructor calls
+// at initialization, and not call RegisterConstructor afterwards.
+//
+// This option is called for the Global Pool.
+func WithNoLocking() PoolOption {
+	return func(pool *Pool) {
+		pool.lock = nil
+	}
+}
+
 // NewPool creates a new Pool.
 func NewPool(options ...PoolOption) *Pool {
 	pool := &Pool{
@@ -195,14 +206,15 @@ func NewPool(options ...PoolOption) *Pool {
 // Users should not call this function directly, instead calling the generated functions
 // for each file.
 func (p *Pool) RegisterConstructor(messageType string, constructor func(*Pool) PooledMessage) {
-	// TODO: If we require all constructors to be registered at initialization, we can
-	// get rid of this locking. It's probably preferable to have the locking as this
-	// provides a cheap guarantee (the read locking below has very little overhead).
-	p.lock.Lock()
+	if p.lock != nil {
+		p.lock.Lock()
+	}
 	if _, ok := p.messageTypeToMessagePool[messageType]; !ok {
 		p.messageTypeToMessagePool[messageType] = newMessagePool(p, constructor)
 	}
-	p.lock.Unlock()
+	if p.lock != nil {
+		p.lock.Unlock()
+	}
 }
 
 // Get gets a reset PooledMessage for the given message type.
@@ -212,9 +224,13 @@ func (p *Pool) RegisterConstructor(messageType string, constructor func(*Pool) P
 // Users should not call this function directly, instead calling the generated functions
 // for each file.
 func (p *Pool) Get(messageType string) PooledMessage {
-	p.lock.RLock()
+	if p.lock != nil {
+		p.lock.RLock()
+	}
 	messagePool, ok := p.messageTypeToMessagePool[messageType]
-	p.lock.RUnlock()
+	if p.lock != nil {
+		p.lock.RUnlock()
+	}
 	if !ok {
 		return nil
 	}
@@ -227,9 +243,13 @@ func (p *Pool) Get(messageType string) PooledMessage {
 //
 // Users should call the generated Recycle function instead of calling this directly.
 func (p *Pool) Put(messageType string, message PooledMessage) {
-	p.lock.RLock()
+	if p.lock != nil {
+		p.lock.RLock()
+	}
 	messagePool, ok := p.messageTypeToMessagePool[messageType]
-	p.lock.RUnlock()
+	if p.lock != nil {
+		p.lock.RUnlock()
+	}
 	if !ok {
 		panic(fmt.Sprintf("message type %s was not registered with this Pool", messageType))
 	}
