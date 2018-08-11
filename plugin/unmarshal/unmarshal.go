@@ -253,7 +253,7 @@ func (p *unmarshal) decodeFixed64(varName string, typeName string) {
 	p.P(`iNdEx += 8`)
 }
 
-func (p *unmarshal) declareMapField(file *generator.FileDescriptor, varName string, nullable bool, customType bool, field *descriptor.FieldDescriptorProto) {
+func (p *unmarshal) declareMapField(varName string, nullable bool, customType bool, field *descriptor.FieldDescriptorProto) {
 	switch field.GetType() {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
 		p.P(`var `, varName, ` float64`)
@@ -321,7 +321,7 @@ func (p *unmarshal) declareMapField(file *generator.FileDescriptor, varName stri
 	}
 }
 
-func (p *unmarshal) mapField(file *generator.FileDescriptor, varName string, customType bool, field *descriptor.FieldDescriptorProto) {
+func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.FieldDescriptorProto) {
 	switch field.GetType() {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
 		p.P(`var `, varName, `temp uint64`)
@@ -704,8 +704,8 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			p.Out()
 			p.P(`}`)
 
-			p.declareMapField(file, "mapkey", false, false, m.KeyAliasField)
-			p.declareMapField(file, "mapvalue", nullable, gogoproto.IsCustomType(field), m.ValueAliasField)
+			p.declareMapField("mapkey", false, false, m.KeyAliasField)
+			p.declareMapField("mapvalue", nullable, gogoproto.IsCustomType(field), m.ValueAliasField)
 			p.P(`for iNdEx < postIndex {`)
 			p.In()
 
@@ -716,11 +716,11 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 
 			p.P(`if fieldNum == 1 {`)
 			p.In()
-			p.mapField(file, "mapkey", false, m.KeyAliasField)
+			p.mapField("mapkey", false, m.KeyAliasField)
 			p.Out()
 			p.P(`} else if fieldNum == 2 {`)
 			p.In()
-			p.mapField(file, "mapvalue", gogoproto.IsCustomType(field), m.ValueAliasField)
+			p.mapField("mapvalue", gogoproto.IsCustomType(field), m.ValueAliasField)
 			p.Out()
 			p.P(`} else {`)
 			p.In()
@@ -1382,14 +1382,6 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		ErrIntOverflow` + p.localName + ` = ` + fmtPkg.Use() + `.Errorf("proto: integer overflow")
 	)
 	`)
-}
-
-func getMessageType(file *generator.FileDescriptor, message generator.Object) string {
-	fullName := strings.Join(message.TypeName(), ".")
-	if file.Package != nil {
-		fullName = *file.Package + "." + fullName
-	}
-	return fullName
 }
 
 func init() {
