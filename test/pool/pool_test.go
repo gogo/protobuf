@@ -84,6 +84,7 @@ func BenchmarkPoolTrueEnabledWithSegListWithoutMapsChannelSize0(b *testing.B) {
 }
 
 func BenchmarkPoolTrueEnabledWithoutMapsChannelSize16(b *testing.B) {
+	b.Skip()
 	mem.SetBytesPoolChannelSize(16)
 	mem.SetObjectPoolChannelSize(16)
 	mem.EnablePooling()
@@ -96,6 +97,7 @@ func BenchmarkPoolTrueEnabledWithoutMapsChannelSize16(b *testing.B) {
 }
 
 func BenchmarkPoolTrueEnabledWithSegListWithoutMapsChannelSize16(b *testing.B) {
+	b.Skip()
 	mem.SetBytesPoolChannelSize(16)
 	mem.SetObjectPoolChannelSize(16)
 	mem.EnablePooling()
@@ -150,6 +152,7 @@ func BenchmarkPoolTrueEnabledWithSegListAndMapsChannelSize0(b *testing.B) {
 }
 
 func BenchmarkPoolTrueEnabledWithMapsChannelSize16(b *testing.B) {
+	b.Skip()
 	mem.SetBytesPoolChannelSize(16)
 	mem.SetObjectPoolChannelSize(16)
 	mem.EnablePooling()
@@ -162,6 +165,7 @@ func BenchmarkPoolTrueEnabledWithMapsChannelSize16(b *testing.B) {
 }
 
 func BenchmarkPoolTrueEnabledWithSegListAndMapsChannelSize16(b *testing.B) {
+	b.Skip()
 	mem.SetBytesPoolChannelSize(16)
 	mem.SetObjectPoolChannelSize(16)
 	mem.EnablePooling()
