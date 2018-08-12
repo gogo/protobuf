@@ -44,8 +44,6 @@ func init() {
 type pool struct {
 	*generator.Generator
 	generator.PluginImports
-
-	memPkg generator.Single
 }
 
 func newPool() *pool {
@@ -67,8 +65,6 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 		return
 	}
 
-	p.memPkg = p.NewImport("github.com/gogo/protobuf/mem")
-
 	var messages []*generator.Descriptor
 	for _, message := range file.Messages() {
 		// Don't generate for map entry messages.
@@ -86,14 +82,14 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 		p.P(`// Get`, messageGoType, ` gets a reset *`, messageGoType, `.`)
 		p.P(`func Get`, messageGoType, `() *`, messageGoType, `{ `)
 		p.In()
-		p.P(`if !`, p.memPkg.Use(), `.PoolingEnabled() {`)
+		p.P(`if !`, p.Pkg["mem"], `.PoolingEnabled() {`)
 		p.In()
 		p.P(`return &`, messageGoType, `{}`)
 		p.Out()
 		p.P(`}`)
 		p.P(`value := global`, messageGoType, `ObjectPool.Get().(*`, messageGoType, `)`)
 		// this has the effect of unsetting PoolMarkerRecycled as well
-		p.P(`value.poolMarker = `, p.memPkg.Use(), `.PoolMarkerAllocatedByPool`)
+		p.P(`value.poolMarker = `, p.Pkg["mem"], `.PoolMarkerAllocatedByPool`)
 		p.P(`return value`)
 		p.Out()
 		p.P(`}`)
@@ -110,7 +106,7 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 		p.P(`// If the message is nil, the message was not allocated from a Pool, or pooling is disabled, this is a no-op.`)
 		p.P(`func (m *`, messageGoType, `) Recycle() {`)
 		p.In()
-		p.P(`if !`, p.memPkg.Use(), `.PoolingEnabled() {`)
+		p.P(`if !`, p.Pkg["mem"], `.PoolingEnabled() {`)
 		p.In()
 		p.P(`return`)
 		p.Out()
@@ -120,14 +116,14 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 		p.P(`return`)
 		p.Out()
 		p.P(`}`)
-		p.P(`if m.poolMarker&`, p.memPkg.Use(), `.PoolMarkerAllocatedByPool != `, p.memPkg.Use(), `.PoolMarkerAllocatedByPool {`)
+		p.P(`if m.poolMarker&`, p.Pkg["mem"], `.PoolMarkerAllocatedByPool != `, p.Pkg["mem"], `.PoolMarkerAllocatedByPool {`)
 		p.In()
 		p.P(`return`)
 		p.Out()
 		p.P(`}`)
-		p.P(`if m.poolMarker&`, p.memPkg.Use(), `.PoolMarkerRecycled == `, p.memPkg.Use(), `.PoolMarkerRecycled {`)
+		p.P(`if m.poolMarker&`, p.Pkg["mem"], `.PoolMarkerRecycled == `, p.Pkg["mem"], `.PoolMarkerRecycled {`)
 		p.In()
-		p.P(`panic(`, p.memPkg.Use(), `.PanicDoubleRecycle)`)
+		p.P(`panic(`, p.Pkg["mem"], `.PanicDoubleRecycle)`)
 		p.Out()
 		p.P(`}`)
 		for _, field := range message.Field {
@@ -137,18 +133,29 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 					valueField := p.GoMapType(nil, field).ValueField
 					if *valueField.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
 						if gogoproto.HasPool(p.ObjectNamed(valueField.GetTypeName()).File().FileDescriptorProto) {
+							p.P(`if m.`, fieldName, ` != nil {`)
+							p.In()
 							p.P(`for _, elem := range m.`, fieldName, ` {`)
 							p.In()
 							p.P(`elem.Recycle()`)
+							p.Out()
+							p.P(`}`)
+							// make it so strings can be GC'ed
+							p.P(`m.`, fieldName, ` = nil`)
 							p.Out()
 							p.P(`}`)
 						}
 					}
 				} else if field.IsRepeated() {
 					if gogoproto.HasPool(p.ObjectNamed(field.GetTypeName()).File().FileDescriptorProto) {
+						p.P(`if m.`, fieldName, ` != nil {`)
+						p.In()
 						p.P(`for _, value := range m.`, fieldName, ` {`)
 						p.In()
 						p.P(`value.Recycle()`)
+						p.Out()
+						p.P(`}`)
+						p.P(`m.`, fieldName, ` = m.`, fieldName, `[:0]`)
 						p.Out()
 						p.P(`}`)
 					}
@@ -159,7 +166,7 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 				}
 			}
 		}
-		p.P(`m.poolMarker =`, p.memPkg.Use(), `.PoolMarkerRecycled`)
+		p.P(`m.poolMarker =`, p.Pkg["mem"], `.PoolMarkerRecycled`)
 		p.P(`global`, messageGoType, `ObjectPool.Put(m)`)
 		p.Out()
 		p.P(`}`)
@@ -179,9 +186,9 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 		p.P(`return`)
 		p.Out()
 		p.P(`}`)
-		p.P(`if m.poolMarker&`, p.memPkg.Use(), `.PoolMarkerRecycled == `, p.memPkg.Use(), `.PoolMarkerRecycled {`)
+		p.P(`if m.poolMarker&`, p.Pkg["mem"], `.PoolMarkerRecycled == `, p.Pkg["mem"], `.PoolMarkerRecycled {`)
 		p.In()
-		p.P(`panic(`, p.memPkg.Use(), `.PanicUseAfterRecycle)`)
+		p.P(`panic(`, p.Pkg["mem"], `.PanicUseAfterRecycle)`)
 		p.Out()
 		p.P(`}`)
 		p.Out()
@@ -192,7 +199,7 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 	// constructors
 	for _, message := range messages {
 		messageGoType := getMessageGoType(message)
-		p.P(`func new`, messageGoType, `() `, p.memPkg.Use(), `.Object {`)
+		p.P(`func new`, messageGoType, `() `, p.Pkg["mem"], `.Object {`)
 		p.In()
 		p.P(`return &`, messageGoType, `{}`)
 		p.Out()
@@ -205,7 +212,7 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 	p.In()
 	for _, message := range messages {
 		messageGoType := getMessageGoType(message)
-		p.P(`global`, messageGoType, `ObjectPool = `, p.memPkg.Use(), `.NewObjectPool(new`, messageGoType, `)`)
+		p.P(`global`, messageGoType, `ObjectPool = `, p.Pkg["mem"], `.NewObjectPool(new`, messageGoType, `)`)
 	}
 	p.Out()
 	p.P(`)`)
@@ -216,10 +223,10 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 	p.In()
 	for _, message := range messages {
 		messageGoType := getMessageGoType(message)
-		p.P(p.memPkg.Use(), `.RegisterGlobalObjectPool(`)
+		p.P(p.Pkg["mem"], `.RegisterGlobalObjectPool(`)
 		p.In()
-		p.P(`func() *`, p.memPkg.Use(), `.ObjectPool { return global`, messageGoType, `ObjectPool },`)
-		p.P(`func(options ...`, p.memPkg.Use(), `.ObjectPoolOption) { global`, messageGoType, `ObjectPool = `, p.memPkg.Use(), `.NewObjectPool(new`, messageGoType, `, options...) },`)
+		p.P(`func() *`, p.Pkg["mem"], `.ObjectPool { return global`, messageGoType, `ObjectPool },`)
+		p.P(`func(options ...`, p.Pkg["mem"], `.ObjectPoolOption) { global`, messageGoType, `ObjectPool = `, p.Pkg["mem"], `.NewObjectPool(new`, messageGoType, `, options...) },`)
 		p.Out()
 		p.P(`)`)
 	}

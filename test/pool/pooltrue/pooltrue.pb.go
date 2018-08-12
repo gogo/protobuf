@@ -448,21 +448,21 @@ func encodeVarintPooltrue(dAtA []byte, offset int, v uint64) int {
 
 // GetFoo gets a reset *Foo.
 func GetFoo() *Foo {
-	if !github_com_gogo_protobuf_mem.PoolingEnabled() {
+	if !mem.PoolingEnabled() {
 		return &Foo{}
 	}
 	value := globalFooObjectPool.Get().(*Foo)
-	value.poolMarker = github_com_gogo_protobuf_mem.PoolMarkerAllocatedByPool
+	value.poolMarker = mem.PoolMarkerAllocatedByPool
 	return value
 }
 
 // GetBar gets a reset *Bar.
 func GetBar() *Bar {
-	if !github_com_gogo_protobuf_mem.PoolingEnabled() {
+	if !mem.PoolingEnabled() {
 		return &Bar{}
 	}
 	value := globalBarObjectPool.Get().(*Bar)
-	value.poolMarker = github_com_gogo_protobuf_mem.PoolMarkerAllocatedByPool
+	value.poolMarker = mem.PoolMarkerAllocatedByPool
 	return value
 }
 
@@ -473,26 +473,32 @@ func GetBar() *Bar {
 //
 // If the message is nil, the message was not allocated from a Pool, or pooling is disabled, this is a no-op.
 func (m *Foo) Recycle() {
-	if !github_com_gogo_protobuf_mem.PoolingEnabled() {
+	if !mem.PoolingEnabled() {
 		return
 	}
 	if m == nil {
 		return
 	}
-	if m.poolMarker&github_com_gogo_protobuf_mem.PoolMarkerAllocatedByPool != github_com_gogo_protobuf_mem.PoolMarkerAllocatedByPool {
+	if m.poolMarker&mem.PoolMarkerAllocatedByPool != mem.PoolMarkerAllocatedByPool {
 		return
 	}
-	if m.poolMarker&github_com_gogo_protobuf_mem.PoolMarkerRecycled == github_com_gogo_protobuf_mem.PoolMarkerRecycled {
-		panic(github_com_gogo_protobuf_mem.PanicDoubleRecycle)
+	if m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicDoubleRecycle)
 	}
 	m.Bar.Recycle()
-	for _, value := range m.RepeatedBar {
-		value.Recycle()
+	if m.RepeatedBar != nil {
+		for _, value := range m.RepeatedBar {
+			value.Recycle()
+		}
+		m.RepeatedBar = m.RepeatedBar[:0]
 	}
-	for _, elem := range m.MapBar {
-		elem.Recycle()
+	if m.MapBar != nil {
+		for _, elem := range m.MapBar {
+			elem.Recycle()
+		}
+		m.MapBar = nil
 	}
-	m.poolMarker = github_com_gogo_protobuf_mem.PoolMarkerRecycled
+	m.poolMarker = mem.PoolMarkerRecycled
 	globalFooObjectPool.Put(m)
 }
 
@@ -503,19 +509,19 @@ func (m *Foo) Recycle() {
 //
 // If the message is nil, the message was not allocated from a Pool, or pooling is disabled, this is a no-op.
 func (m *Bar) Recycle() {
-	if !github_com_gogo_protobuf_mem.PoolingEnabled() {
+	if !mem.PoolingEnabled() {
 		return
 	}
 	if m == nil {
 		return
 	}
-	if m.poolMarker&github_com_gogo_protobuf_mem.PoolMarkerAllocatedByPool != github_com_gogo_protobuf_mem.PoolMarkerAllocatedByPool {
+	if m.poolMarker&mem.PoolMarkerAllocatedByPool != mem.PoolMarkerAllocatedByPool {
 		return
 	}
-	if m.poolMarker&github_com_gogo_protobuf_mem.PoolMarkerRecycled == github_com_gogo_protobuf_mem.PoolMarkerRecycled {
-		panic(github_com_gogo_protobuf_mem.PanicDoubleRecycle)
+	if m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicDoubleRecycle)
 	}
-	m.poolMarker = github_com_gogo_protobuf_mem.PoolMarkerRecycled
+	m.poolMarker = mem.PoolMarkerRecycled
 	globalBarObjectPool.Put(m)
 }
 
@@ -526,8 +532,8 @@ func (m *Foo) checkNotRecycled() {
 	if m == nil {
 		return
 	}
-	if m.poolMarker&github_com_gogo_protobuf_mem.PoolMarkerRecycled == github_com_gogo_protobuf_mem.PoolMarkerRecycled {
-		panic(github_com_gogo_protobuf_mem.PanicUseAfterRecycle)
+	if m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
 	}
 }
 
@@ -538,36 +544,32 @@ func (m *Bar) checkNotRecycled() {
 	if m == nil {
 		return
 	}
-	if m.poolMarker&github_com_gogo_protobuf_mem.PoolMarkerRecycled == github_com_gogo_protobuf_mem.PoolMarkerRecycled {
-		panic(github_com_gogo_protobuf_mem.PanicUseAfterRecycle)
+	if m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
 	}
 }
 
-func newFoo() github_com_gogo_protobuf_mem.Object {
+func newFoo() mem.Object {
 	return &Foo{}
 }
 
-func newBar() github_com_gogo_protobuf_mem.Object {
+func newBar() mem.Object {
 	return &Bar{}
 }
 
 var (
-	globalFooObjectPool = github_com_gogo_protobuf_mem.NewObjectPool(newFoo)
-	globalBarObjectPool = github_com_gogo_protobuf_mem.NewObjectPool(newBar)
+	globalFooObjectPool = mem.NewObjectPool(newFoo)
+	globalBarObjectPool = mem.NewObjectPool(newBar)
 )
 
 func init() {
-	github_com_gogo_protobuf_mem.RegisterGlobalObjectPool(
-		func() *github_com_gogo_protobuf_mem.ObjectPool { return globalFooObjectPool },
-		func(options ...github_com_gogo_protobuf_mem.ObjectPoolOption) {
-			globalFooObjectPool = github_com_gogo_protobuf_mem.NewObjectPool(newFoo, options...)
-		},
+	mem.RegisterGlobalObjectPool(
+		func() *mem.ObjectPool { return globalFooObjectPool },
+		func(options ...mem.ObjectPoolOption) { globalFooObjectPool = mem.NewObjectPool(newFoo, options...) },
 	)
-	github_com_gogo_protobuf_mem.RegisterGlobalObjectPool(
-		func() *github_com_gogo_protobuf_mem.ObjectPool { return globalBarObjectPool },
-		func(options ...github_com_gogo_protobuf_mem.ObjectPoolOption) {
-			globalBarObjectPool = github_com_gogo_protobuf_mem.NewObjectPool(newBar, options...)
-		},
+	mem.RegisterGlobalObjectPool(
+		func() *mem.ObjectPool { return globalBarObjectPool },
+		func(options ...mem.ObjectPoolOption) { globalBarObjectPool = mem.NewObjectPool(newBar, options...) },
 	)
 }
 

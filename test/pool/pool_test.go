@@ -36,7 +36,7 @@ import (
 	"github.com/gogo/protobuf/test/pool/pooltrue"
 )
 
-const numArrayMapElements = 10
+const numArrayMapElements = 100
 
 // The disabled functions should have the same performance as the
 // false functions, this is just as verification. If this is correct,
