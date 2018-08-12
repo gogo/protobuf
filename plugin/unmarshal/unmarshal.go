@@ -393,7 +393,7 @@ func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.
 			pkgname := p.DefaultPackageName(desc)
 			msgname := p.TypeName(desc)
 			if gogoproto.HasPool(desc.File().FileDescriptorProto) {
-				p.P(varName, ` := `, pkgname, `Get`, generator.CamelCaseSlice(desc.TypeName()), `()`)
+				p.P(varName, ` = `, pkgname, `Get`, generator.CamelCaseSlice(desc.TypeName()), `()`)
 			} else {
 				p.P(varName, ` = &`, msgname, `{}`)
 			}
