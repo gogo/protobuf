@@ -6,6 +6,7 @@ package pooltrue
 import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
+import mem "github.com/gogo/protobuf/mem"
 import _ "github.com/gogo/protobuf/gogoproto"
 
 import (
@@ -22,6 +23,7 @@ import io "io"
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+var _ = mem.PoolMarkerNone
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.
@@ -38,6 +40,10 @@ type Foo struct {
 	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
 	XXX_unrecognized     []byte          `json:"-"`
 	XXX_sizecache        int32           `json:"-"`
+
+	// poolMarker is used to provide safeguards for pooling functions.
+	// This variable should never be modified by users directly.
+	poolMarker mem.PoolMarker
 }
 
 func (m *Foo) Reset() {
@@ -122,6 +128,10 @@ type Bar struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
+
+	// poolMarker is used to provide safeguards for pooling functions.
+	// This variable should never be modified by users directly.
+	poolMarker mem.PoolMarker
 }
 
 func (m *Bar) Reset() {

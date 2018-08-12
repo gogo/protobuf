@@ -36,7 +36,7 @@ import (
 // DefaultBytesPoolChannelSize is the default BytesPool channel size.
 //
 // See the BytesPoolWithChannelSize function for more details.
-const DefaultBytesPoolChannelSize uint16 = 16
+const DefaultBytesPoolChannelSize uint16 = 0
 
 // DefaultBytesPoolSegListSizes are the default seg list sizes.
 //

@@ -35,10 +35,14 @@ type Bytes struct {
 	segListPool *segListPool
 	value       []byte
 	valueLen    int
+	// this is only used for recycled or not
+	// the existence of segListPool is used to denote whether this was allocated by a pool
+	poolMarker PoolMarker
 }
 
 // Value gets the value.
 func (b *Bytes) Value() []byte {
+	CheckNotRecycled(b.poolMarker)
 	return b.value[:b.valueLen]
 }
 
@@ -46,11 +50,13 @@ func (b *Bytes) Value() []byte {
 //
 // This is equivalent to len(b.Value()).
 func (b *Bytes) Len() int {
+	CheckNotRecycled(b.poolMarker)
 	return b.valueLen
 }
 
 // Truncate truncates the value to the given length.
 func (b *Bytes) Truncate(valueLen int) {
+	CheckNotRecycled(b.poolMarker)
 	b.valueLen = valueLen
 }
 
@@ -58,6 +64,7 @@ func (b *Bytes) Truncate(valueLen int) {
 //
 // Optimized per https://golang.org/cl/137880043
 func (b *Bytes) MemsetZero() {
+	CheckNotRecycled(b.poolMarker)
 	for i := range b.value {
 		b.value[i] = 0
 	}
@@ -70,7 +77,14 @@ func (b *Bytes) Recycle() {
 	if b == nil || !globalEnabled || b.segListPool == nil {
 		return
 	}
+	CheckNotDoubleRecycled(b.poolMarker)
+	b.poolMarker = PoolMarkerRecycled
 	b.segListPool.put(b)
+}
+
+func (b *Bytes) reset(valueLen int) {
+	b.valueLen = valueLen
+	b.poolMarker = PoolMarkerNone
 }
 
 func newBytes(segListPool *segListPool, valueLen int) *Bytes {

@@ -597,6 +597,7 @@ func (g *Generator) GoPackageName(importPath GoImportPath) GoPackageName {
 var globalPackageNames = map[GoPackageName]bool{
 	"fmt":   true,
 	"math":  true,
+	"mem":   true,
 	"proto": true,
 }
 
@@ -715,9 +716,9 @@ func (g *Generator) SetPackageNames() {
 	g.Pkg = map[string]string{
 		"fmt":          "fmt",
 		"math":         "math",
+		"mem":          "mem",
 		"proto":        "proto",
 		"golang_proto": "golang_proto",
-		"mem":          "mem",
 	}
 }
 
@@ -1387,6 +1388,9 @@ func (g *Generator) generateImports() {
 	}
 	g.PrintImport(GoPackageName(g.Pkg["fmt"]), "fmt")
 	g.PrintImport(GoPackageName(g.Pkg["math"]), "math")
+	if gogoproto.HasPool(g.file.FileDescriptorProto) {
+		g.PrintImport(GoPackageName(g.Pkg["mem"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/gogo/protobuf/mem"))
+	}
 
 	var (
 		imports       = make(map[GoImportPath]bool)
@@ -1450,6 +1454,9 @@ func (g *Generator) generateImports() {
 			g.P("var _ = time.Kitchen")
 			break
 		}
+	}
+	if gogoproto.HasPool(g.file.FileDescriptorProto) {
+		g.P("var _ = ", g.Pkg["mem"], ".PoolMarkerNone")
 	}
 	g.P()
 }
@@ -2213,6 +2220,12 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
 		}
 		g.P("XXX_sizecache\tint32 `json:\"-\"`")
+		if gogoproto.HasPool(g.file.FileDescriptorProto) {
+			g.P()
+			g.P(`// poolMarker is used to provide safeguards for pooling functions.`)
+			g.P(`// This variable should never be modified by users directly.`)
+			g.P(`poolMarker `, g.Pkg["mem"], `.PoolMarker`)
+		}
 		g.Out()
 		g.P("}")
 	} else {

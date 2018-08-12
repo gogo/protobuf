@@ -35,7 +35,7 @@ import (
 // DefaultObjectPoolChannelSize is the default ObjectPool channel size.
 //
 // See the ObjectPoolWithChannelSize function for more details.
-const DefaultObjectPoolChannelSize uint16 = 16
+const DefaultObjectPoolChannelSize uint16 = 0
 
 var globalObjectPool []ObjectPool
 

@@ -28,6 +28,20 @@
 
 package mem
 
+const (
+	// PoolMarkerNone denots no pool marker.
+	PoolMarkerNone PoolMarker = 0x0
+	// PoolMarkerAllocatedByPool says that a message was allocated by a pool.
+	PoolMarkerAllocatedByPool PoolMarker = 0x1
+	// PoolMarkerRecycled says that a message has been recycled but not reset.
+	PoolMarkerRecycled PoolMarker = 0x2
+
+	// PanicUseAfterRecycle is the panic message used if a message is used after Recycle has been called.
+	PanicUseAfterRecycle = "useAfterRecycle"
+	// PanicDoubleRecycle is the panic message used if a message is Recycled twice.
+	PanicDoubleRecycle = "doubleRecycle"
+)
+
 var (
 	// one of the big benefits of globals here is we can cut functions
 	// short without having to make a lot of function calls
@@ -40,6 +54,11 @@ var (
 	globalObjectPoolGetters []func() *ObjectPool
 	globalObjectPoolSetters []func(...ObjectPoolOption)
 )
+
+// PoolMarker is a pool marker.
+//
+// TODO: should this be a uint32 for better probability of word-alignment?
+type PoolMarker uint8
 
 // EnablePooling enables pooling.
 //
@@ -113,6 +132,26 @@ func RegisterGlobalObjectPool(getter func() *ObjectPool, setter func(...ObjectPo
 // This should not be called by users directly.
 func PoolingEnabled() bool {
 	return globalEnabled
+}
+
+// CheckNotRecycled checks if the poolMarker indicates that something has been recycled.
+// If it has, this panics with PanicUseAfterRecycle.
+//
+// This should not be called by users directly.
+func CheckNotRecycled(poolMarker PoolMarker) {
+	if poolMarker&PoolMarkerRecycled == PoolMarkerRecycled {
+		panic(PanicUseAfterRecycle)
+	}
+}
+
+// CheckNotDoubleRecycled checks if the poolMarker indicates that something has been recycled.
+// If it has, this panics with PanicDoubleRecycle. This is used inside Recycle functions.
+//
+// This should not be called by users directly.
+func CheckNotDoubleRecycled(poolMarker PoolMarker) {
+	if poolMarker&PoolMarkerRecycled == PoolMarkerRecycled {
+		panic(PanicDoubleRecycle)
+	}
 }
 
 func resetGlobalBytesPool() {

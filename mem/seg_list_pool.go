@@ -58,16 +58,16 @@ func (m *segListPool) get(valueLen int) *Bytes {
 	}
 	if m.c == nil {
 		getBytes := m.syncPool.Get().(*Bytes)
-		getBytes.Truncate(valueLen)
+		getBytes.reset(valueLen)
 		return getBytes
 	}
 	select {
 	case bytes := <-m.c:
-		bytes.Truncate(valueLen)
+		bytes.reset(valueLen)
 		return bytes
 	default:
 		getBytes := m.syncPool.Get().(*Bytes)
-		getBytes.Truncate(valueLen)
+		getBytes.reset(valueLen)
 		return getBytes
 	}
 }
