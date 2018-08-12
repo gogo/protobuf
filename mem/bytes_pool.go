@@ -58,6 +58,7 @@ var DefaultBytesPoolSegListSizes = []int{
 // relying on the generated functions to call BytesPools.
 type BytesPool struct {
 	channelSize              uint16
+	noSyncPool               bool
 	sortedSegListSizes       []int
 	segListSizeToSegListPool map[int]*segListPool
 }
@@ -94,6 +95,20 @@ func BytesPoolWithSegListSizes(segListSizes ...int) BytesPoolOption {
 	}
 }
 
+// BytesPoolWithNoSyncPool returns a BytesPoolOption that will not have a backing
+// sync.Pool, instead discarding elements that cannot be put back into the channel.
+//
+// By default, this is false.
+//
+// Note if you set this and your channel size is 0 (which is the default value),
+// you would not be doing any pooling at all, so the constructor will panic
+// if both are set.
+func BytesPoolWithNoSyncPool() BytesPoolOption {
+	return func(bytesPool *BytesPool) {
+		bytesPool.noSyncPool = true
+	}
+}
+
 // NewBytesPool creates a new BytesPool.
 func NewBytesPool(options ...BytesPoolOption) *BytesPool {
 	bytesPool := &BytesPool{
@@ -104,8 +119,11 @@ func NewBytesPool(options ...BytesPoolOption) *BytesPool {
 	for _, option := range options {
 		option(bytesPool)
 	}
+	if bytesPool.channelSize == 0 && bytesPool.noSyncPool {
+		panic("cannot have both a channel size of 0 and no sync pool")
+	}
 	for _, segListSize := range bytesPool.sortedSegListSizes {
-		bytesPool.segListSizeToSegListPool[segListSize] = newSegListPool(bytesPool.channelSize, segListSize)
+		bytesPool.segListSizeToSegListPool[segListSize] = newSegListPool(bytesPool.channelSize, bytesPool.noSyncPool, segListSize)
 	}
 	return bytesPool
 }

@@ -60,32 +60,20 @@ func (m *Foo) Reset() {
 	m.One = 0
 	m.Two = 0
 	m.Bar = nil
-	if m.RepeatedBar != nil {
+	if len(m.RepeatedBar) != 0 {
 		m.RepeatedBar = m.RepeatedBar[:0]
 	}
-	if m.MapBar != nil {
-		for key := range m.MapBar {
-			delete(m.MapBar, key)
-		}
-	}
+	m.MapBar = nil
 	m.PoolfalseBar = nil
-	if m.RepeatedPoolfalseBar != nil {
+	if len(m.RepeatedPoolfalseBar) != 0 {
 		m.RepeatedPoolfalseBar = m.RepeatedPoolfalseBar[:0]
 	}
-	if m.MapPoolfalseBar != nil {
-		for key := range m.MapPoolfalseBar {
-			delete(m.MapPoolfalseBar, key)
-		}
-	}
+	m.MapPoolfalseBar = nil
 	m.PooltrueBar = nil
-	if m.RepeatedPooltrueBar != nil {
+	if len(m.RepeatedPooltrueBar) != 0 {
 		m.RepeatedPooltrueBar = m.RepeatedPooltrueBar[:0]
 	}
-	if m.MapPooltrueBar != nil {
-		for key := range m.MapPooltrueBar {
-			delete(m.MapPooltrueBar, key)
-		}
-	}
+	m.MapPooltrueBar = nil
 }
 func (m *Foo) String() string {
 	m.checkNotRecycled()
@@ -668,30 +656,30 @@ func (m *Foo) Recycle() {
 		panic(mem.PanicDoubleRecycle)
 	}
 	m.Bar.Recycle()
-	if m.RepeatedBar != nil {
+	if len(m.RepeatedBar) != 0 {
 		for _, value := range m.RepeatedBar {
 			value.Recycle()
 		}
 		m.RepeatedBar = m.RepeatedBar[:0]
 	}
-	if m.MapBar != nil {
-		for key, value := range m.MapBar {
+	if len(m.MapBar) != 0 {
+		for _, value := range m.MapBar {
 			value.Recycle()
-			delete(m.MapBar, key)
 		}
+		m.MapBar = nil
 	}
 	m.PooltrueBar.Recycle()
-	if m.RepeatedPooltrueBar != nil {
+	if len(m.RepeatedPooltrueBar) != 0 {
 		for _, value := range m.RepeatedPooltrueBar {
 			value.Recycle()
 		}
 		m.RepeatedPooltrueBar = m.RepeatedPooltrueBar[:0]
 	}
-	if m.MapPooltrueBar != nil {
-		for key, value := range m.MapPooltrueBar {
+	if len(m.MapPooltrueBar) != 0 {
+		for _, value := range m.MapPooltrueBar {
 			value.Recycle()
-			delete(m.MapPooltrueBar, key)
 		}
+		m.MapPooltrueBar = nil
 	}
 	m.poolMarker = mem.PoolMarkerRecycled
 	globalFooObjectPool.Put(m)

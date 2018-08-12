@@ -133,23 +133,27 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 					valueField := p.GoMapType(nil, field).ValueField
 					if *valueField.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
 						if gogoproto.HasPool(p.ObjectNamed(valueField.GetTypeName()).File().FileDescriptorProto) {
-							p.P(`if m.`, fieldName, ` != nil {`)
+							//p.P(`if m.`, fieldName, ` != nil {`)
+							p.P(`if len(m.`, fieldName, `) != 0 {`)
 							p.In()
-							p.P(`for key, value := range m.`, fieldName, ` {`)
+							//p.P(`for key, value := range m.`, fieldName, ` {`)
+							p.P(`for _, value := range m.`, fieldName, ` {`)
 							p.In()
 							p.P(`value.Recycle()`)
 							// TODO: This is taking advantage of a go1.11+ only optimization
 							// https://go-review.googlesource.com/c/go/+/110055
-							p.P(`delete(m.`, fieldName, `, key)`)
+							//p.P(`delete(m.`, fieldName, `, key)`)
 							p.Out()
 							p.P(`}`)
+							p.P(`m.`, fieldName, ` = nil`)
 							p.Out()
 							p.P(`}`)
 						}
 					}
 				} else if field.IsRepeated() {
 					if gogoproto.HasPool(p.ObjectNamed(field.GetTypeName()).File().FileDescriptorProto) {
-						p.P(`if m.`, fieldName, ` != nil {`)
+						//p.P(`if m.`, fieldName, ` != nil {`)
+						p.P(`if len(m.`, fieldName, `) != 0 {`)
 						p.In()
 						p.P(`for _, value := range m.`, fieldName, ` {`)
 						p.In()

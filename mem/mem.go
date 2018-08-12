@@ -47,8 +47,10 @@ var (
 	// short without having to make a lot of function calls
 	globalEnabled               bool
 	globalBytesPoolChannelSize  = DefaultBytesPoolChannelSize
+	globalBytesPoolNoSyncPool   = false
 	globalBytesPoolSegListSizes = DefaultBytesPoolSegListSizes
 	globalObjectPoolChannelSize = DefaultObjectPoolChannelSize
+	globalObjectPoolNoSyncPool  = false
 
 	globalBytesPool         = NewBytesPool()
 	globalObjectPoolGetters []func() *ObjectPool
@@ -81,8 +83,25 @@ func DisablePooling() {
 // SetBytesPoolChannelSize results in the global BytesPool called by GetBytes
 // being set to a new BytesPool with the BytesPoolWithChannelSize option
 // set to the given value.
+// Note you need to set this before calling SetBytesPoolNoSyncPool.
 func SetBytesPoolChannelSize(channelSize uint16) {
 	globalBytesPoolChannelSize = channelSize
+	resetGlobalBytesPool()
+}
+
+// SetBytesPoolNoSyncPool results in the global BytesPools being set to a
+// new BytesPool with the BytesPoolWithNoSyncPool option set.
+func SetBytesPoolNoSyncPool() {
+	globalBytesPoolNoSyncPool = true
+	resetGlobalBytesPool()
+}
+
+// SetBytesPoolWithSyncPool results in the global BytesPools being set to a
+// new BytesPool with the BytesPoolWithNoSyncPool option unset.
+//
+// This is set by default.
+func SetBytesPoolWithSyncPool() {
+	globalBytesPoolNoSyncPool = false
 	resetGlobalBytesPool()
 }
 
@@ -96,8 +115,25 @@ func SetBytesPoolSegListSizes(seglistSizes ...int) {
 
 // SetObjectPoolChannelSize results in the global ObjectPools being set to a
 // new ObjectPool with the ObjectPoolWithChannelSize option set to the given value.
+// Note you need to set this before calling SetObjectPoolNoSyncPool.
 func SetObjectPoolChannelSize(channelSize uint16) {
 	globalObjectPoolChannelSize = channelSize
+	resetGlobalObjectPools()
+}
+
+// SetObjectPoolNoSyncPool results in the global ObjectPools being set to a
+// new ObjectPool with the ObjectPoolWithNoSyncPool option set.
+func SetObjectPoolNoSyncPool() {
+	globalObjectPoolNoSyncPool = true
+	resetGlobalObjectPools()
+}
+
+// SetObjectPoolWithSyncPool results in the global ObjectPools being set to a
+// new ObjectPool with the ObjectPoolWithNoSyncPool option unset.
+//
+// This is set by default.
+func SetObjectPoolWithSyncPool() {
+	globalObjectPoolNoSyncPool = false
 	resetGlobalObjectPools()
 }
 
@@ -135,16 +171,31 @@ func PoolingEnabled() bool {
 }
 
 func resetGlobalBytesPool() {
-	globalBytesPool = NewBytesPool(
-		BytesPoolWithChannelSize(globalBytesPoolChannelSize),
-		BytesPoolWithSegListSizes(globalBytesPoolSegListSizes...),
-	)
+	if globalBytesPoolNoSyncPool {
+		globalBytesPool = NewBytesPool(
+			BytesPoolWithChannelSize(globalBytesPoolChannelSize),
+			BytesPoolWithNoSyncPool(),
+			BytesPoolWithSegListSizes(globalBytesPoolSegListSizes...),
+		)
+	} else {
+		globalBytesPool = NewBytesPool(
+			BytesPoolWithChannelSize(globalBytesPoolChannelSize),
+			BytesPoolWithSegListSizes(globalBytesPoolSegListSizes...),
+		)
+	}
 }
 
 func resetGlobalObjectPools() {
 	for _, setter := range globalObjectPoolSetters {
-		setter(
-			ObjectPoolWithChannelSize(globalObjectPoolChannelSize),
-		)
+		if globalObjectPoolNoSyncPool {
+			setter(
+				ObjectPoolWithChannelSize(globalObjectPoolChannelSize),
+				ObjectPoolWithNoSyncPool(),
+			)
+		} else {
+			setter(
+				ObjectPoolWithChannelSize(globalObjectPoolChannelSize),
+			)
+		}
 	}
 }

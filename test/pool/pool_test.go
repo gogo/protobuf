@@ -36,7 +36,7 @@ import (
 	"github.com/gogo/protobuf/test/pool/pooltrue"
 )
 
-const numArrayMapElements = 100
+const numArrayMapElements = 10
 
 // The disabled functions should have the same performance as the
 // false functions, this is just as verification. If this is correct,
@@ -75,9 +75,7 @@ func BenchmarkPoolTrueDisabledWithSegListWithoutMaps(b *testing.B) {
 	b.StopTimer()
 }
 
-func BenchmarkPoolTrueEnabledWithoutMapsChannelSize0(b *testing.B) {
-	mem.SetBytesPoolChannelSize(0)
-	mem.SetObjectPoolChannelSize(0)
+func BenchmarkPoolTrueEnabledWithoutMapsSyncPool(b *testing.B) {
 	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
@@ -87,9 +85,7 @@ func BenchmarkPoolTrueEnabledWithoutMapsChannelSize0(b *testing.B) {
 	mem.DisablePooling()
 }
 
-func BenchmarkPoolTrueEnabledWithSegListWithoutMapsChannelSize0(b *testing.B) {
-	mem.SetBytesPoolChannelSize(0)
-	mem.SetObjectPoolChannelSize(0)
+func BenchmarkPoolTrueEnabledWithSegListWithoutMapsSyncPool(b *testing.B) {
 	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
@@ -99,10 +95,11 @@ func BenchmarkPoolTrueEnabledWithSegListWithoutMapsChannelSize0(b *testing.B) {
 	mem.DisablePooling()
 }
 
-func BenchmarkPoolTrueEnabledWithoutMapsChannelSize16(b *testing.B) {
-	b.Skip()
-	mem.SetBytesPoolChannelSize(16)
-	mem.SetObjectPoolChannelSize(16)
+func BenchmarkPoolTrueEnabledWithoutMapsBufferedChannels(b *testing.B) {
+	mem.SetBytesPoolChannelSize(256)
+	mem.SetObjectPoolChannelSize(256)
+	mem.SetBytesPoolNoSyncPool()
+	mem.SetObjectPoolNoSyncPool()
 	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
@@ -110,12 +107,17 @@ func BenchmarkPoolTrueEnabledWithoutMapsChannelSize16(b *testing.B) {
 	}
 	b.StopTimer()
 	mem.DisablePooling()
+	mem.SetBytesPoolWithSyncPool()
+	mem.SetObjectPoolWithSyncPool()
+	mem.SetBytesPoolChannelSize(0)
+	mem.SetObjectPoolChannelSize(0)
 }
 
-func BenchmarkPoolTrueEnabledWithSegListWithoutMapsChannelSize16(b *testing.B) {
-	b.Skip()
-	mem.SetBytesPoolChannelSize(16)
-	mem.SetObjectPoolChannelSize(16)
+func BenchmarkPoolTrueEnabledWithSegListWithoutMapsBufferedChannels(b *testing.B) {
+	mem.SetBytesPoolChannelSize(256)
+	mem.SetObjectPoolChannelSize(256)
+	mem.SetBytesPoolNoSyncPool()
+	mem.SetObjectPoolNoSyncPool()
 	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
@@ -123,6 +125,10 @@ func BenchmarkPoolTrueEnabledWithSegListWithoutMapsChannelSize16(b *testing.B) {
 	}
 	b.StopTimer()
 	mem.DisablePooling()
+	mem.SetBytesPoolWithSyncPool()
+	mem.SetObjectPoolWithSyncPool()
+	mem.SetBytesPoolChannelSize(0)
+	mem.SetObjectPoolChannelSize(0)
 }
 
 func BenchmarkPoolFalseWithMaps(b *testing.B) {
@@ -157,9 +163,7 @@ func BenchmarkPoolTrueDisabledWithSegListAndMaps(b *testing.B) {
 	b.StopTimer()
 }
 
-func BenchmarkPoolTrueEnabledWithMapsChannelSize0(b *testing.B) {
-	mem.SetBytesPoolChannelSize(0)
-	mem.SetObjectPoolChannelSize(0)
+func BenchmarkPoolTrueEnabledWithMapsSyncPool(b *testing.B) {
 	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
@@ -169,9 +173,7 @@ func BenchmarkPoolTrueEnabledWithMapsChannelSize0(b *testing.B) {
 	mem.DisablePooling()
 }
 
-func BenchmarkPoolTrueEnabledWithSegListAndMapsChannelSize0(b *testing.B) {
-	mem.SetBytesPoolChannelSize(0)
-	mem.SetObjectPoolChannelSize(0)
+func BenchmarkPoolTrueEnabledWithSegListAndMapsSyncPool(b *testing.B) {
 	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
@@ -181,10 +183,11 @@ func BenchmarkPoolTrueEnabledWithSegListAndMapsChannelSize0(b *testing.B) {
 	mem.DisablePooling()
 }
 
-func BenchmarkPoolTrueEnabledWithMapsChannelSize16(b *testing.B) {
-	b.Skip()
-	mem.SetBytesPoolChannelSize(16)
-	mem.SetObjectPoolChannelSize(16)
+func BenchmarkPoolTrueEnabledWithMapsBufferedChannels(b *testing.B) {
+	mem.SetBytesPoolChannelSize(256)
+	mem.SetObjectPoolChannelSize(256)
+	mem.SetBytesPoolNoSyncPool()
+	mem.SetObjectPoolNoSyncPool()
 	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
@@ -192,12 +195,17 @@ func BenchmarkPoolTrueEnabledWithMapsChannelSize16(b *testing.B) {
 	}
 	b.StopTimer()
 	mem.DisablePooling()
+	mem.SetBytesPoolWithSyncPool()
+	mem.SetObjectPoolWithSyncPool()
+	mem.SetBytesPoolChannelSize(0)
+	mem.SetObjectPoolChannelSize(0)
 }
 
-func BenchmarkPoolTrueEnabledWithSegListAndMapsChannelSize16(b *testing.B) {
-	b.Skip()
-	mem.SetBytesPoolChannelSize(16)
-	mem.SetObjectPoolChannelSize(16)
+func BenchmarkPoolTrueEnabledWithSegListAndMapsBufferedChannels(b *testing.B) {
+	mem.SetBytesPoolChannelSize(256)
+	mem.SetObjectPoolChannelSize(256)
+	mem.SetBytesPoolNoSyncPool()
+	mem.SetObjectPoolNoSyncPool()
 	mem.EnablePooling()
 	b.ResetTimer()
 	for iter := 0; iter < b.N; iter++ {
@@ -205,6 +213,10 @@ func BenchmarkPoolTrueEnabledWithSegListAndMapsChannelSize16(b *testing.B) {
 	}
 	b.StopTimer()
 	mem.DisablePooling()
+	mem.SetBytesPoolWithSyncPool()
+	mem.SetObjectPoolWithSyncPool()
+	mem.SetBytesPoolChannelSize(0)
+	mem.SetObjectPoolChannelSize(0)
 }
 
 func benchmarkPoolFalse(b *testing.B, withMaps bool) {
@@ -212,7 +224,7 @@ func benchmarkPoolFalse(b *testing.B, withMaps bool) {
 	foo.One = 1
 	foo.Two = 2
 	if withMaps {
-		foo.MapBar = make(map[uint32]*poolfalse.Bar)
+		foo.MapBar = make(map[uint32]*poolfalse.Bar, numArrayMapElements)
 	}
 	foo.Bar = &poolfalse.Bar{}
 	foo.Bar.OneBar = 10
@@ -248,7 +260,7 @@ func benchmarkPoolFalseWithHeap(b *testing.B, withMaps bool) (*poolfalse.Foo, *p
 	foo.One = 1
 	foo.Two = 2
 	if withMaps {
-		foo.MapBar = make(map[uint32]*poolfalse.Bar)
+		foo.MapBar = make(map[uint32]*poolfalse.Bar, numArrayMapElements)
 	}
 	foo.Bar = &poolfalse.Bar{}
 	foo.Bar.OneBar = 10
@@ -283,7 +295,7 @@ func benchmarkPoolTrue(b *testing.B, withMaps bool, withSegList bool) {
 	foo.One = 1
 	foo.Two = 2
 	if withMaps {
-		foo.MapBar = make(map[uint32]*pooltrue.Bar)
+		foo.MapBar = make(map[uint32]*pooltrue.Bar, numArrayMapElements)
 	}
 	foo.Bar = pooltrue.GetBar()
 	foo.Bar.OneBar = 10

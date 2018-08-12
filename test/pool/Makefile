@@ -26,6 +26,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+BENCH ?= .
+
 .DEFAULT_GOAL = all
 
 .PHONY: all
@@ -51,4 +53,4 @@ regenerate:
 
 .PHONY: bench
 bench:
-	go test -bench . -benchmem .
+	go test -bench $(BENCH) -benchmem .

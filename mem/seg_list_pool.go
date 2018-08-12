@@ -39,12 +39,16 @@ type segListPool struct {
 	c           chan *Bytes
 }
 
-func newSegListPool(channelSize uint16, allocateLen int) *segListPool {
+func newSegListPool(channelSize uint16, noSyncPool bool, allocateLen int) *segListPool {
 	segListPool := &segListPool{allocateLen: allocateLen}
-	segListPool.syncPool = &sync.Pool{
-		New: func() interface{} {
-			return newBytes(segListPool, allocateLen)
-		},
+	// we check that at most one of channelSize == 0 and noSyncPool are true
+	// so we do not have to check where both m.c == nil and m.syncPool == nil below
+	if !noSyncPool {
+		segListPool.syncPool = &sync.Pool{
+			New: func() interface{} {
+				return newBytes(segListPool, allocateLen)
+			},
+		}
 	}
 	if channelSize > 0 {
 		segListPool.c = make(chan *Bytes, channelSize)
@@ -64,6 +68,16 @@ func (m *segListPool) get(valueLen int) *Bytes {
 		getBytes.valueLen = 0
 		return getBytes
 	}
+	if m.syncPool == nil {
+		select {
+		case bytes := <-m.c:
+			bytes.poolMarker = PoolMarkerNone
+			bytes.valueLen = 0
+			return bytes
+		default:
+			return newBytes(m, m.allocateLen)
+		}
+	}
 	select {
 	case bytes := <-m.c:
 		bytes.poolMarker = PoolMarkerNone
@@ -81,6 +95,14 @@ func (m *segListPool) put(bytes *Bytes) {
 	if m.c == nil {
 		m.syncPool.Put(bytes)
 		return
+	}
+	if m.syncPool == nil {
+		select {
+		case m.c <- bytes:
+			return
+		default:
+			return
+		}
 	}
 	select {
 	case m.c <- bytes:

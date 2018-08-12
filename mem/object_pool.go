@@ -51,6 +51,8 @@ type Object interface {
 // relying on the generated functions to call ObjectPools.
 type ObjectPool struct {
 	channelSize uint16
+	noSyncPool  bool
+	constructor func() Object
 	syncPool    *sync.Pool
 	c           chan Object
 }
@@ -74,18 +76,38 @@ func ObjectPoolWithChannelSize(channelSize uint16) ObjectPoolOption {
 	}
 }
 
+// ObjectPoolWithNoSyncPool returns a ObjectPoolOption that will not have a backing
+// sync.Pool, instead discarding elements that cannot be put back into the channel.
+//
+// By default, this is false.
+//
+// Note if you set this and your channel size is 0 (which is the default value),
+// you would not be doing any pooling at all, so the constructor will panic
+// if both are set.
+func ObjectPoolWithNoSyncPool() ObjectPoolOption {
+	return func(objectPool *ObjectPool) {
+		objectPool.noSyncPool = true
+	}
+}
+
 // NewObjectPool creates a new ObjectPool for the given constructor and options.
 func NewObjectPool(constructor func() Object, options ...ObjectPoolOption) *ObjectPool {
 	objectPool := &ObjectPool{
 		channelSize: DefaultObjectPoolChannelSize,
+		constructor: constructor,
 	}
 	for _, option := range options {
 		option(objectPool)
 	}
-	objectPool.syncPool = &sync.Pool{
-		New: func() interface{} {
-			return constructor()
-		},
+	if objectPool.channelSize == 0 && objectPool.noSyncPool {
+		panic("cannot have both a channel size of 0 and no sync pool")
+	}
+	if !objectPool.noSyncPool {
+		objectPool.syncPool = &sync.Pool{
+			New: func() interface{} {
+				return constructor()
+			},
+		}
 	}
 	if objectPool.channelSize > 0 {
 		objectPool.c = make(chan Object, objectPool.channelSize)
@@ -99,6 +121,15 @@ func (m *ObjectPool) Get() Object {
 		getObject := m.syncPool.Get().(Object)
 		getObject.Reset()
 		return getObject
+	}
+	if m.syncPool == nil {
+		select {
+		case object := <-m.c:
+			object.Reset()
+			return object
+		default:
+			return m.constructor()
+		}
 	}
 	select {
 	case object := <-m.c:
@@ -116,6 +147,14 @@ func (m *ObjectPool) Put(object Object) {
 	if m.c == nil {
 		m.syncPool.Put(object)
 		return
+	}
+	if m.syncPool == nil {
+		select {
+		case m.c <- object:
+			return
+		default:
+			return
+		}
 	}
 	select {
 	case m.c <- object:

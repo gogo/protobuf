@@ -104,5 +104,7 @@ func newBytes(segListPool *segListPool, valueLen int) *Bytes {
 	return &Bytes{
 		segListPool: segListPool,
 		value:       make([]byte, valueLen),
+		valueLen:    0,
+		poolMarker:  PoolMarkerNone,
 	}
 }

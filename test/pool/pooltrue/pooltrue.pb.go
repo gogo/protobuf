@@ -50,14 +50,10 @@ func (m *Foo) Reset() {
 	m.One = 0
 	m.Two = 0
 	m.Bar = nil
-	if m.RepeatedBar != nil {
+	if len(m.RepeatedBar) != 0 {
 		m.RepeatedBar = m.RepeatedBar[:0]
 	}
-	if m.MapBar != nil {
-		for key := range m.MapBar {
-			delete(m.MapBar, key)
-		}
-	}
+	m.MapBar = nil
 }
 func (m *Foo) String() string {
 	m.checkNotRecycled()
@@ -492,17 +488,17 @@ func (m *Foo) Recycle() {
 		panic(mem.PanicDoubleRecycle)
 	}
 	m.Bar.Recycle()
-	if m.RepeatedBar != nil {
+	if len(m.RepeatedBar) != 0 {
 		for _, value := range m.RepeatedBar {
 			value.Recycle()
 		}
 		m.RepeatedBar = m.RepeatedBar[:0]
 	}
-	if m.MapBar != nil {
-		for key, value := range m.MapBar {
+	if len(m.MapBar) != 0 {
+		for _, value := range m.MapBar {
 			value.Recycle()
-			delete(m.MapBar, key)
 		}
+		m.MapBar = nil
 	}
 	m.poolMarker = mem.PoolMarkerRecycled
 	globalFooObjectPool.Put(m)
