@@ -3418,11 +3418,13 @@ func (g *Generator) generateResetField(message *Descriptor, field *descriptor.Fi
 	if g.IsMap(field) {
 		g.P(`if len(m.`, fieldName, `) != 0 {`)
 		g.In()
-		//// TODO: This is taking advantage of a go1.11+ only optimization
-		//// https://go-review.googlesource.com/c/go/+/110055
-		g.P(`for key := range m.`, fieldName, ` {`)
+		// TODO: This is taking advantage of a go1.11+ only optimization
+		// https://go-review.googlesource.com/c/go/+/110055
+		// need to have a temp variable or otherwise Golang will not recognize this as memclr
+		g.P(`tmp := m.`, fieldName)
+		g.P(`for key := range tmp {`)
 		g.In()
-		g.P(`delete(m.`, fieldName, `, key)`)
+		g.P(`delete(tmp, key)`)
 		g.Out()
 		g.P(`}`)
 		g.Out()

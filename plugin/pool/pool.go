@@ -135,16 +135,20 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 						if gogoproto.HasPool(p.ObjectNamed(valueField.GetTypeName()).File().FileDescriptorProto) {
 							p.P(`if len(m.`, fieldName, `) != 0 {`)
 							p.In()
-							p.P(`for key, value := range m.`, fieldName, ` {`)
-							//p.P(`for _, value := range m.`, fieldName, ` {`)
+							// need a temp variable or otherwise golang will not recognize this as memclr
+							p.P(`tmp := m.`, fieldName)
+							p.P(`for _, value := range tmp {`)
 							p.In()
 							p.P(`value.Recycle()`)
-							// TODO: This is taking advantage of a go1.11+ only optimization
-							// https://go-review.googlesource.com/c/go/+/110055
-							p.P(`delete(m.`, fieldName, `, key)`)
 							p.Out()
 							p.P(`}`)
-							//p.P(`m.`, fieldName, ` = nil`)
+							// TODO: This is taking advantage of a go1.11+ only optimization
+							// https://go-review.googlesource.com/c/go/+/110055
+							p.P(`for key := range tmp {`)
+							p.In()
+							p.P(`delete(tmp, key)`)
+							p.Out()
+							p.P(`}`)
 							p.Out()
 							p.P(`}`)
 						}

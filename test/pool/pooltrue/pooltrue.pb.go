@@ -54,8 +54,9 @@ func (m *Foo) Reset() {
 		m.RepeatedBar = m.RepeatedBar[:0]
 	}
 	if len(m.MapBar) != 0 {
-		for key := range m.MapBar {
-			delete(m.MapBar, key)
+		tmp := m.MapBar
+		for key := range tmp {
+			delete(tmp, key)
 		}
 	}
 }
@@ -557,9 +558,12 @@ func (m *Foo) Recycle() {
 		m.RepeatedBar = m.RepeatedBar[:0]
 	}
 	if len(m.MapBar) != 0 {
-		for key, value := range m.MapBar {
+		tmp := m.MapBar
+		for _, value := range tmp {
 			value.Recycle()
-			delete(m.MapBar, key)
+		}
+		for key := range tmp {
+			delete(tmp, key)
 		}
 	}
 	m.poolMarker = mem.PoolMarkerRecycled

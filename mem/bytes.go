@@ -81,7 +81,10 @@ func (b *Bytes) MemsetZero() {
 	if b.poolMarker&PoolMarkerRecycled == PoolMarkerRecycled {
 		panic(PanicUseAfterRecycle)
 	}
-	for i := range b.value {
+	// have to have a variable and not a field reference, otherwise
+	// Golang will not recognize this as memclr
+	tmp := b.value
+	for i := range tmp {
 		b.value[i] = 0
 	}
 }
