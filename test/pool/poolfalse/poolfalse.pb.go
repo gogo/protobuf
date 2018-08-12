@@ -39,10 +39,13 @@ type Foo struct {
 	XXX_sizecache        int32           `json:"-"`
 }
 
-func (m *Foo) Reset()         { *m = Foo{} }
-func (m *Foo) String() string { return proto.CompactTextString(m) }
-func (*Foo) ProtoMessage()    {}
-func (*Foo) Descriptor() ([]byte, []int) {
+func (m *Foo) Reset() { *m = Foo{} }
+func (m *Foo) String() string {
+	return proto.CompactTextString(m)
+}
+func (m *Foo) ProtoMessage() {
+}
+func (m *Foo) Descriptor() ([]byte, []int) {
 	return fileDescriptor_poolfalse_ce49c310ac8c1361, []int{0}
 }
 func (m *Foo) XXX_Unmarshal(b []byte) error {
@@ -115,10 +118,13 @@ type Bar struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Bar) Reset()         { *m = Bar{} }
-func (m *Bar) String() string { return proto.CompactTextString(m) }
-func (*Bar) ProtoMessage()    {}
-func (*Bar) Descriptor() ([]byte, []int) {
+func (m *Bar) Reset() { *m = Bar{} }
+func (m *Bar) String() string {
+	return proto.CompactTextString(m)
+}
+func (m *Bar) ProtoMessage() {
+}
+func (m *Bar) Descriptor() ([]byte, []int) {
 	return fileDescriptor_poolfalse_ce49c310ac8c1361, []int{1}
 }
 func (m *Bar) XXX_Unmarshal(b []byte) error {

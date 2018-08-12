@@ -55,15 +55,23 @@ func (m *Foo) Reset() {
 	}
 	m.MapBar = nil
 }
-func (m *Foo) String() string { return proto.CompactTextString(m) }
-func (*Foo) ProtoMessage()    {}
-func (*Foo) Descriptor() ([]byte, []int) {
+func (m *Foo) String() string {
+	m.checkNotRecycled()
+	return proto.CompactTextString(m)
+}
+func (m *Foo) ProtoMessage() {
+	m.checkNotRecycled()
+}
+func (m *Foo) Descriptor() ([]byte, []int) {
+	m.checkNotRecycled()
 	return fileDescriptor_pooltrue_604f4e50995047c1, []int{0}
 }
 func (m *Foo) XXX_Unmarshal(b []byte) error {
+	m.checkNotRecycled()
 	return m.Unmarshal(b)
 }
 func (m *Foo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	m.checkNotRecycled()
 	if deterministic {
 		return xxx_messageInfo_Foo.Marshal(b, m, deterministic)
 	} else {
@@ -76,18 +84,22 @@ func (m *Foo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	}
 }
 func (dst *Foo) XXX_Merge(src proto.Message) {
+	dst.checkNotRecycled()
 	xxx_messageInfo_Foo.Merge(dst, src)
 }
 func (m *Foo) XXX_Size() int {
+	m.checkNotRecycled()
 	return m.ProtoSize()
 }
 func (m *Foo) XXX_DiscardUnknown() {
+	m.checkNotRecycled()
 	xxx_messageInfo_Foo.DiscardUnknown(m)
 }
 
 var xxx_messageInfo_Foo proto.InternalMessageInfo
 
 func (m *Foo) GetOne() uint64 {
+	m.checkNotRecycled()
 	if m != nil {
 		return m.One
 	}
@@ -95,6 +107,7 @@ func (m *Foo) GetOne() uint64 {
 }
 
 func (m *Foo) GetTwo() uint32 {
+	m.checkNotRecycled()
 	if m != nil {
 		return m.Two
 	}
@@ -102,6 +115,7 @@ func (m *Foo) GetTwo() uint32 {
 }
 
 func (m *Foo) GetBar() *Bar {
+	m.checkNotRecycled()
 	if m != nil {
 		return m.Bar
 	}
@@ -109,6 +123,7 @@ func (m *Foo) GetBar() *Bar {
 }
 
 func (m *Foo) GetRepeatedBar() []*Bar {
+	m.checkNotRecycled()
 	if m != nil {
 		return m.RepeatedBar
 	}
@@ -116,6 +131,7 @@ func (m *Foo) GetRepeatedBar() []*Bar {
 }
 
 func (m *Foo) GetMapBar() map[uint32]*Bar {
+	m.checkNotRecycled()
 	if m != nil {
 		return m.MapBar
 	}
@@ -138,15 +154,23 @@ func (m *Bar) Reset() {
 	m.OneBar = 0
 	m.TwoBar = 0
 }
-func (m *Bar) String() string { return proto.CompactTextString(m) }
-func (*Bar) ProtoMessage()    {}
-func (*Bar) Descriptor() ([]byte, []int) {
+func (m *Bar) String() string {
+	m.checkNotRecycled()
+	return proto.CompactTextString(m)
+}
+func (m *Bar) ProtoMessage() {
+	m.checkNotRecycled()
+}
+func (m *Bar) Descriptor() ([]byte, []int) {
+	m.checkNotRecycled()
 	return fileDescriptor_pooltrue_604f4e50995047c1, []int{1}
 }
 func (m *Bar) XXX_Unmarshal(b []byte) error {
+	m.checkNotRecycled()
 	return m.Unmarshal(b)
 }
 func (m *Bar) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	m.checkNotRecycled()
 	if deterministic {
 		return xxx_messageInfo_Bar.Marshal(b, m, deterministic)
 	} else {
@@ -159,18 +183,22 @@ func (m *Bar) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	}
 }
 func (dst *Bar) XXX_Merge(src proto.Message) {
+	dst.checkNotRecycled()
 	xxx_messageInfo_Bar.Merge(dst, src)
 }
 func (m *Bar) XXX_Size() int {
+	m.checkNotRecycled()
 	return m.ProtoSize()
 }
 func (m *Bar) XXX_DiscardUnknown() {
+	m.checkNotRecycled()
 	xxx_messageInfo_Bar.DiscardUnknown(m)
 }
 
 var xxx_messageInfo_Bar proto.InternalMessageInfo
 
 func (m *Bar) GetOneBar() uint64 {
+	m.checkNotRecycled()
 	if m != nil {
 		return m.OneBar
 	}
@@ -178,6 +206,7 @@ func (m *Bar) GetOneBar() uint64 {
 }
 
 func (m *Bar) GetTwoBar() uint32 {
+	m.checkNotRecycled()
 	if m != nil {
 		return m.TwoBar
 	}
@@ -265,6 +294,7 @@ var _Baz_serviceDesc = grpc.ServiceDesc{
 }
 
 func (m *Foo) Marshal() (dAtA []byte, err error) {
+	m.checkNotRecycled()
 	size := m.ProtoSize()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalTo(dAtA)
@@ -275,6 +305,7 @@ func (m *Foo) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Foo) MarshalPool() (*github_com_gogo_protobuf_mem.Bytes, error) {
+	m.checkNotRecycled()
 	size := m.ProtoSize()
 	bytes := github_com_gogo_protobuf_mem.GetBytes(size)
 	n, err := m.MarshalTo(bytes.Value())
@@ -287,6 +318,7 @@ func (m *Foo) MarshalPool() (*github_com_gogo_protobuf_mem.Bytes, error) {
 }
 
 func (m *Foo) MarshalTo(dAtA []byte) (int, error) {
+	m.checkNotRecycled()
 	var i int
 	_ = i
 	var l int
@@ -358,6 +390,7 @@ func (m *Foo) MarshalTo(dAtA []byte) (int, error) {
 }
 
 func (m *Bar) Marshal() (dAtA []byte, err error) {
+	m.checkNotRecycled()
 	size := m.ProtoSize()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalTo(dAtA)
@@ -368,6 +401,7 @@ func (m *Bar) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Bar) MarshalPool() (*github_com_gogo_protobuf_mem.Bytes, error) {
+	m.checkNotRecycled()
 	size := m.ProtoSize()
 	bytes := github_com_gogo_protobuf_mem.GetBytes(size)
 	n, err := m.MarshalTo(bytes.Value())
@@ -380,6 +414,7 @@ func (m *Bar) MarshalPool() (*github_com_gogo_protobuf_mem.Bytes, error) {
 }
 
 func (m *Bar) MarshalTo(dAtA []byte) (int, error) {
+	m.checkNotRecycled()
 	var i int
 	_ = i
 	var l int
@@ -537,6 +572,7 @@ func init() {
 }
 
 func (m *Foo) ProtoSize() (n int) {
+	m.checkNotRecycled()
 	var l int
 	_ = l
 	if m.One != 0 {
@@ -575,6 +611,7 @@ func (m *Foo) ProtoSize() (n int) {
 }
 
 func (m *Bar) ProtoSize() (n int) {
+	m.checkNotRecycled()
 	var l int
 	_ = l
 	if m.OneBar != 0 {
@@ -603,6 +640,7 @@ func sozPooltrue(x uint64) (n int) {
 	return sovPooltrue(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
 func (m *Foo) Unmarshal(dAtA []byte) error {
+	m.checkNotRecycled()
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -859,6 +897,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 	return nil
 }
 func (m *Bar) Unmarshal(dAtA []byte) error {
+	m.checkNotRecycled()
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
