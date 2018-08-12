@@ -3397,7 +3397,7 @@ func (g *Generator) generateResetField(message *Descriptor, field *descriptor.Fi
 		return
 	}
 
-	if field.IsRequired() || gogoproto.NeedsNilCheck(message.proto3(), field) {
+	if gogoproto.NeedsNilCheck(message.proto3(), field) {
 		g.P(`m.`, fieldName, ` = nil`)
 		return
 	}

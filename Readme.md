@@ -61,7 +61,7 @@ Please let us know if you are using gogoprotobuf by posting on our <a href="http
   - <a href="https://jbrandhorst.com/post/gogoproto/">So you want to use GoGo Protobuf - Johan Brandhorst</a>
   - <a href="https://jbrandhorst.com/post/grpc-errors/">Advanced gRPC Error Usage - Johan Brandhorst</a>
   - <a href="https://www.udemy.com/grpc-golang/?couponCode=GITHUB10">gRPC Golang Course on Udemy - Stephane Maarek</a>
-  
+
 ## Getting Started
 
 There are several ways to use gogoprotobuf, but for all you need to install go and protoc.
@@ -73,7 +73,7 @@ After that you can choose:
 
 ### Installation
 
-To install it, you must first have Go (at least version 1.6.3 or 1.9 if you are using gRPC) installed (see [http://golang.org/doc/install](http://golang.org/doc/install)). 
+To install it, you must first have Go (at least version 1.6.3 or 1.9 if you are using gRPC) installed (see [http://golang.org/doc/install](http://golang.org/doc/install)).
 Latest patch versions of 1.9 and 1.10 are continuously tested.
 
 Next, install the standard protocol buffer implementation from [https://github.com/google/protobuf](https://github.com/google/protobuf).
@@ -101,6 +101,7 @@ Other binaries are also included:
     protoc-gen-gogofast (same as gofast, but imports gogoprotobuf)
     protoc-gen-gogofaster (same as gogofast, without XXX_unrecognized, less pointer fields)
     protoc-gen-gogoslick (same as gogofaster, but with generated string, gostring and equal methods)
+    protoc-gen-gogopool (same as gogoslick, but with generated memory pooling methods)
 
 Installing any of these binaries is easy.  Simply run:
 
@@ -150,4 +151,4 @@ Here is an example using gofast:
 See [https://github.com/gogo/grpc-example](https://github.com/gogo/grpc-example) for an example of using gRPC with gogoprotobuf and the wider grpc-ecosystem.
 
 
-  
+

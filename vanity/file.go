@@ -187,3 +187,7 @@ func TurnOnMessageNameAll(file *descriptor.FileDescriptorProto) {
 func TurnOnGoRegistration(file *descriptor.FileDescriptorProto) {
 	SetBoolFileOption(gogoproto.E_GoprotoRegistration, true)(file)
 }
+
+func TurnOnPool(file *descriptor.FileDescriptorProto) {
+	SetBoolFileOption(gogoproto.E_Pool, true)(file)
+}

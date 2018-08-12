@@ -8,6 +8,11 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 
+import strings "strings"
+import reflect "reflect"
+
+import github_com_gogo_protobuf_mem "github.com/gogo/protobuf/mem"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -23,18 +28,20 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type B struct {
 	String_              *string  `protobuf:"bytes,1,opt,name=String" json:"String,omitempty"`
-	Int64                *int64   `protobuf:"varint,2,opt,name=Int64" json:"Int64,omitempty"`
+	Int64                int64    `protobuf:"varint,2,opt,name=Int64" json:"Int64"`
 	Int32                *int32   `protobuf:"varint,3,opt,name=Int32,def=1234" json:"Int32,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *B) Reset()         { *m = B{} }
-func (m *B) String() string { return proto.CompactTextString(m) }
-func (*B) ProtoMessage()    {}
+func (m *B) Reset() {
+	m.String_ = nil
+	m.Int64 = 0
+	m.Int32 = nil
+}
+func (*B) ProtoMessage() {}
 func (*B) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gogovanity_61d6c37b892b96fc, []int{0}
+	return fileDescriptor_gogovanity_f03a3b302f99076c, []int{0}
 }
 func (m *B) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -73,8 +80,8 @@ func (m *B) GetString_() string {
 }
 
 func (m *B) GetInt64() int64 {
-	if m != nil && m.Int64 != nil {
-		return *m.Int64
+	if m != nil {
+		return m.Int64
 	}
 	return 0
 }
@@ -89,6 +96,72 @@ func (m *B) GetInt32() int32 {
 func init() {
 	proto.RegisterType((*B)(nil), "vanity.B")
 }
+func (this *B) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*B)
+	if !ok {
+		that2, ok := that.(B)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.String_ != nil && that1.String_ != nil {
+		if *this.String_ != *that1.String_ {
+			return false
+		}
+	} else if this.String_ != nil {
+		return false
+	} else if that1.String_ != nil {
+		return false
+	}
+	if this.Int64 != that1.Int64 {
+		return false
+	}
+	if this.Int32 != nil && that1.Int32 != nil {
+		if *this.Int32 != *that1.Int32 {
+			return false
+		}
+	} else if this.Int32 != nil {
+		return false
+	} else if that1.Int32 != nil {
+		return false
+	}
+	return true
+}
+func (this *B) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 7)
+	s = append(s, "&vanity.B{")
+	if this.String_ != nil {
+		s = append(s, "String_: "+valueToGoStringGogovanity(this.String_, "string")+",\n")
+	}
+	s = append(s, "Int64: "+fmt.Sprintf("%#v", this.Int64)+",\n")
+	if this.Int32 != nil {
+		s = append(s, "Int32: "+valueToGoStringGogovanity(this.Int32, "int32")+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func valueToGoStringGogovanity(v interface{}, typ string) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("func(v %v) *%v { return &v } ( %#v )", typ, typ, pv)
+}
 func (m *B) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -97,6 +170,18 @@ func (m *B) Marshal() (dAtA []byte, err error) {
 		return nil, err
 	}
 	return dAtA[:n], nil
+}
+
+func (m *B) MarshalPool() (*github_com_gogo_protobuf_mem.Bytes, error) {
+	size := m.Size()
+	bytes := github_com_gogo_protobuf_mem.GetBytes(size)
+	n, err := m.MarshalTo(bytes.Value())
+	if err != nil {
+		bytes.Recycle()
+		return nil, err
+	}
+	bytes.Truncate(n)
+	return bytes, nil
 }
 
 func (m *B) MarshalTo(dAtA []byte) (int, error) {
@@ -110,18 +195,13 @@ func (m *B) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintGogovanity(dAtA, i, uint64(len(*m.String_)))
 		i += copy(dAtA[i:], *m.String_)
 	}
-	if m.Int64 != nil {
-		dAtA[i] = 0x10
-		i++
-		i = encodeVarintGogovanity(dAtA, i, uint64(*m.Int64))
-	}
+	dAtA[i] = 0x10
+	i++
+	i = encodeVarintGogovanity(dAtA, i, uint64(m.Int64))
 	if m.Int32 != nil {
 		dAtA[i] = 0x18
 		i++
 		i = encodeVarintGogovanity(dAtA, i, uint64(*m.Int32))
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return i, nil
 }
@@ -135,6 +215,48 @@ func encodeVarintGogovanity(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return offset + 1
 }
+
+// GetB gets a reset *B.
+func GetB() *B {
+	if !github_com_gogo_protobuf_mem.PoolingEnabled() {
+		return &B{}
+	}
+	return globalBObjectPool.Get().(*B)
+}
+
+// Recycle puts the message back in the Pool that created it.
+//
+// Any non-nil fields that are messages will be recycled as well, including elements of repeated fields and values of map fields.
+// Once Recycle is called, the message should no longer be used.
+//
+// If the message is nil, the message was not allocated from a Pool, or pooling is disabled, this is a no-op.
+func (m *B) Recycle() {
+	if !github_com_gogo_protobuf_mem.PoolingEnabled() {
+		return
+	}
+	if m == nil {
+		return
+	}
+	globalBObjectPool.Put(m)
+}
+
+func newB() github_com_gogo_protobuf_mem.Object {
+	return &B{}
+}
+
+var (
+	globalBObjectPool = github_com_gogo_protobuf_mem.NewObjectPool(newB)
+)
+
+func init() {
+	github_com_gogo_protobuf_mem.RegisterGlobalObjectPool(
+		func() *github_com_gogo_protobuf_mem.ObjectPool { return globalBObjectPool },
+		func(options ...github_com_gogo_protobuf_mem.ObjectPoolOption) {
+			globalBObjectPool = github_com_gogo_protobuf_mem.NewObjectPool(newB, options...)
+		},
+	)
+}
+
 func (m *B) Size() (n int) {
 	var l int
 	_ = l
@@ -142,14 +264,9 @@ func (m *B) Size() (n int) {
 		l = len(*m.String_)
 		n += 1 + l + sovGogovanity(uint64(l))
 	}
-	if m.Int64 != nil {
-		n += 1 + sovGogovanity(uint64(*m.Int64))
-	}
+	n += 1 + sovGogovanity(uint64(m.Int64))
 	if m.Int32 != nil {
 		n += 1 + sovGogovanity(uint64(*m.Int32))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -166,6 +283,26 @@ func sovGogovanity(x uint64) (n int) {
 }
 func sozGogovanity(x uint64) (n int) {
 	return sovGogovanity(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func (this *B) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&B{`,
+		`String_:` + valueToStringGogovanity(this.String_) + `,`,
+		`Int64:` + fmt.Sprintf("%v", this.Int64) + `,`,
+		`Int32:` + valueToStringGogovanity(this.Int32) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func valueToStringGogovanity(v interface{}) string {
+	rv := reflect.ValueOf(v)
+	if rv.IsNil() {
+		return "nil"
+	}
+	pv := reflect.Indirect(rv).Interface()
+	return fmt.Sprintf("*%v", pv)
 }
 func (m *B) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
@@ -230,7 +367,7 @@ func (m *B) Unmarshal(dAtA []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Int64", wireType)
 			}
-			var v int64
+			m.Int64 = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowGogovanity
@@ -240,12 +377,11 @@ func (m *B) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				v |= (int64(b) & 0x7F) << shift
+				m.Int64 |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			m.Int64 = &v
 		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Int32", wireType)
@@ -278,7 +414,6 @@ func (m *B) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -393,18 +528,21 @@ var (
 	ErrIntOverflowGogovanity   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("gogovanity.proto", fileDescriptor_gogovanity_61d6c37b892b96fc) }
+func init() { proto.RegisterFile("gogovanity.proto", fileDescriptor_gogovanity_f03a3b302f99076c) }
 
-var fileDescriptor_gogovanity_61d6c37b892b96fc = []byte{
-	// 157 bytes of a gzipped FileDescriptorProto
+var fileDescriptor_gogovanity_f03a3b302f99076c = []byte{
+	// 196 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x48, 0xcf, 0x4f, 0xcf,
 	0x2f, 0x4b, 0xcc, 0xcb, 0x2c, 0xa9, 0xd4, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x83, 0xf0,
 	0xa4, 0x74, 0xd3, 0x33, 0x4b, 0x32, 0x4a, 0x93, 0xf4, 0x92, 0xf3, 0x73, 0xf5, 0x41, 0x8a, 0xf4,
-	0xc1, 0xd2, 0x49, 0xa5, 0x69, 0x60, 0x1e, 0x98, 0x03, 0x66, 0x41, 0xb4, 0x29, 0x05, 0x73, 0x31,
+	0xc1, 0xd2, 0x49, 0xa5, 0x69, 0x60, 0x1e, 0x98, 0x03, 0x66, 0x41, 0xb4, 0x29, 0x45, 0x72, 0x31,
 	0x3a, 0x09, 0xc9, 0x70, 0xb1, 0x05, 0x97, 0x14, 0x65, 0xe6, 0xa5, 0x4b, 0x30, 0x2a, 0x30, 0x6a,
-	0x70, 0x3a, 0xb1, 0x9c, 0xb8, 0x27, 0xcf, 0x18, 0x04, 0x15, 0x13, 0x12, 0xe1, 0x62, 0xf5, 0xcc,
-	0x2b, 0x31, 0x33, 0x91, 0x60, 0x52, 0x60, 0xd4, 0x60, 0x0e, 0x82, 0x70, 0x84, 0xa4, 0xc0, 0xa2,
-	0xc6, 0x46, 0x12, 0xcc, 0x0a, 0x8c, 0x1a, 0xac, 0x56, 0x2c, 0x86, 0x46, 0xc6, 0x26, 0x41, 0x10,
-	0x21, 0x27, 0x9e, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c, 0xf0, 0x48, 0x8e, 0x11,
-	0x10, 0x00, 0x00, 0xff, 0xff, 0x35, 0x73, 0x31, 0x4a, 0xac, 0x00, 0x00, 0x00,
+	0x70, 0x3a, 0xb1, 0x9c, 0xb8, 0x27, 0xcf, 0x18, 0x04, 0x15, 0x13, 0x92, 0xe2, 0x62, 0xf5, 0xcc,
+	0x2b, 0x31, 0x33, 0x91, 0x60, 0x52, 0x60, 0xd4, 0x60, 0x06, 0x4b, 0x32, 0x04, 0x41, 0x84, 0xa0,
+	0x72, 0xc6, 0x46, 0x12, 0xcc, 0x0a, 0x8c, 0x1a, 0xac, 0x56, 0x2c, 0x86, 0x46, 0xc6, 0x26, 0x41,
+	0x10, 0x21, 0x27, 0x83, 0x0b, 0x0f, 0xe5, 0x18, 0x6e, 0x3c, 0x94, 0x63, 0xf8, 0xf0, 0x50, 0x8e,
+	0xb1, 0xe1, 0x91, 0x1c, 0xe3, 0x8a, 0x47, 0x72, 0x8c, 0x27, 0x1e, 0xc9, 0x31, 0x5e, 0x78, 0x24,
+	0xc7, 0xf8, 0xe0, 0x91, 0x1c, 0xe3, 0x8b, 0x47, 0x72, 0x0c, 0x1f, 0x1e, 0xc9, 0x31, 0x4e, 0x78,
+	0x2c, 0xc7, 0x70, 0xe1, 0xb1, 0x1c, 0x23, 0x20, 0x00, 0x00, 0xff, 0xff, 0xb5, 0xe8, 0xc5, 0xc4,
+	0xd6, 0x00, 0x00, 0x00,
 }

@@ -48,6 +48,7 @@ install:
 	go install ./protoc-gen-gofast
 	go install ./protoc-gen-gogofast
 	go install ./protoc-gen-gogofaster
+	go install ./protoc-gen-gogopool
 	go install ./protoc-gen-gogoslick
 	go install ./protoc-gen-gostring
 	go install ./protoc-min-version

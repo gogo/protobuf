@@ -39,6 +39,10 @@ regenerate:
 	protoc --gogoslick_out=./slick/ vanity.proto
 	protoc --proto_path=../../:../../../../../:../../protobuf/:. --gogoslick_out=./slick/ gogovanity.proto
 	protoc-min-version -version="3.0.0" --proto_path=../../:../../../../../:../../protobuf/:. --gogoslick_out=./slick/ proto3.proto
+	go install github.com/gogo/protobuf/protoc-gen-gogopool
+	protoc --gogopool_out=./pool/ vanity.proto
+	protoc --proto_path=../../:../../../../../:../../protobuf/:. --gogopool_out=./pool/ gogovanity.proto
+	protoc-min-version -version="3.0.0" --proto_path=../../:../../../../../:../../protobuf/:. --gogopool_out=./pool/ proto3.proto
 
 test:
 	go install github.com/gogo/protobuf/protoc-gen-gofast
