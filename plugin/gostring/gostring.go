@@ -167,6 +167,7 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 		p.P(`return "nil"`)
 		p.Out()
 		p.P(`}`)
+		p.ConditionallyPrintCheckNotRecycled(file, "this")
 
 		p.P(`s := make([]string, 0, `, strconv.Itoa(len(message.Field)+4), `)`)
 		p.P(`s = append(s, "&`, packageName, ".", ccTypeName, `{")`)

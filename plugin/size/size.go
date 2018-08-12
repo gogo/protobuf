@@ -595,6 +595,7 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		p.P(`func (m *`, ccTypeName, `) `, sizeName, `() (n int) {`)
 		p.In()
+		p.ConditionallyPrintCheckNotRecycled(file, "m")
 		p.P(`var l int`)
 		p.P(`_ = l`)
 		oneofs := make(map[string]struct{})

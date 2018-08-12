@@ -1065,6 +1065,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 
 		p.P(`func (m *`, ccTypeName, `) Unmarshal(dAtA []byte) error {`)
 		p.In()
+		p.ConditionallyPrintCheckNotRecycled(file, "m")
 		if rfCount > 0 {
 			p.P(`var hasFields [`, strconv.Itoa(1+(rfCount-1)/64), `]uint64`)
 		}

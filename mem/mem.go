@@ -134,26 +134,6 @@ func PoolingEnabled() bool {
 	return globalEnabled
 }
 
-// CheckNotRecycled checks if the poolMarker indicates that something has been recycled.
-// If it has, this panics with PanicUseAfterRecycle.
-//
-// This should not be called by users directly.
-func CheckNotRecycled(poolMarker PoolMarker) {
-	if poolMarker&PoolMarkerRecycled == PoolMarkerRecycled {
-		panic(PanicUseAfterRecycle)
-	}
-}
-
-// CheckNotDoubleRecycled checks if the poolMarker indicates that something has been recycled.
-// If it has, this panics with PanicDoubleRecycle. This is used inside Recycle functions.
-//
-// This should not be called by users directly.
-func CheckNotDoubleRecycled(poolMarker PoolMarker) {
-	if poolMarker&PoolMarkerRecycled == PoolMarkerRecycled {
-		panic(PanicDoubleRecycle)
-	}
-}
-
 func resetGlobalBytesPool() {
 	globalBytesPool = NewBytesPool(
 		BytesPoolWithChannelSize(globalBytesPoolChannelSize),

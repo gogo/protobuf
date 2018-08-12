@@ -91,7 +91,10 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 		p.P(`return &`, messageGoType, `{}`)
 		p.Out()
 		p.P(`}`)
-		p.P(`return global`, messageGoType, `ObjectPool.Get().(*`, messageGoType, `)`)
+		p.P(`value := global`, messageGoType, `ObjectPool.Get().(*`, messageGoType, `)`)
+		// this has the effect of unsetting PoolMarkerRecycled as well
+		p.P(`value.poolMarker = `, p.memPkg.Use(), `.PoolMarkerAllocatedByPool`)
+		p.P(`return value`)
 		p.Out()
 		p.P(`}`)
 	}
@@ -115,6 +118,16 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 		p.P(`if m == nil {`)
 		p.In()
 		p.P(`return`)
+		p.Out()
+		p.P(`}`)
+		p.P(`if m.poolMarker&`, p.memPkg.Use(), `.PoolMarkerAllocatedByPool != `, p.memPkg.Use(), `.PoolMarkerAllocatedByPool {`)
+		p.In()
+		p.P(`return`)
+		p.Out()
+		p.P(`}`)
+		p.P(`if m.poolMarker&`, p.memPkg.Use(), `.PoolMarkerRecycled == `, p.memPkg.Use(), `.PoolMarkerRecycled {`)
+		p.In()
+		p.P(`panic(`, p.memPkg.Use(), `.PanicDoubleRecycle)`)
 		p.Out()
 		p.P(`}`)
 		for _, field := range message.Field {
@@ -146,7 +159,31 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 				}
 			}
 		}
+		p.P(`m.poolMarker =`, p.memPkg.Use(), `.PoolMarkerRecycled`)
 		p.P(`global`, messageGoType, `ObjectPool.Put(m)`)
+		p.Out()
+		p.P(`}`)
+		p.P()
+	}
+
+	// message.checkNotRecycled
+	for _, message := range messages {
+		messageGoType := getMessageGoType(message)
+		p.P(`// checkNotRecycled checks that the message has not been recycled, and if it has, panics.`)
+		p.P(`//`)
+		p.P(`// This is used by generated functions.`)
+		p.P(`func (m *`, messageGoType, `) checkNotRecycled() {`)
+		p.In()
+		p.P(`if m == nil {`)
+		p.In()
+		p.P(`return`)
+		p.Out()
+		p.P(`}`)
+		p.P(`if m.poolMarker&`, p.memPkg.Use(), `.PoolMarkerRecycled == `, p.memPkg.Use(), `.PoolMarkerRecycled {`)
+		p.In()
+		p.P(`panic(`, p.memPkg.Use(), `.PanicUseAfterRecycle)`)
+		p.Out()
+		p.P(`}`)
 		p.Out()
 		p.P(`}`)
 		p.P()

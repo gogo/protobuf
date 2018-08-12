@@ -401,6 +401,7 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 	ccTypeName := generator.CamelCaseSlice(message.TypeName())
 	p.P(`func (this *`, ccTypeName, `) Compare(that interface{}) int {`)
 	p.In()
+	p.ConditionallyPrintCheckNotRecycled(file, "this")
 	p.generateMsgNullAndTypeCheck(ccTypeName)
 	oneofs := make(map[string]struct{})
 

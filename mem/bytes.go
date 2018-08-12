@@ -42,7 +42,9 @@ type Bytes struct {
 
 // Value gets the value.
 func (b *Bytes) Value() []byte {
-	CheckNotRecycled(b.poolMarker)
+	if b.poolMarker&PoolMarkerRecycled == PoolMarkerRecycled {
+		panic(PanicUseAfterRecycle)
+	}
 	return b.value[:b.valueLen]
 }
 
@@ -50,13 +52,17 @@ func (b *Bytes) Value() []byte {
 //
 // This is equivalent to len(b.Value()).
 func (b *Bytes) Len() int {
-	CheckNotRecycled(b.poolMarker)
+	if b.poolMarker&PoolMarkerRecycled == PoolMarkerRecycled {
+		panic(PanicUseAfterRecycle)
+	}
 	return b.valueLen
 }
 
 // Truncate truncates the value to the given length.
 func (b *Bytes) Truncate(valueLen int) {
-	CheckNotRecycled(b.poolMarker)
+	if b.poolMarker&PoolMarkerRecycled == PoolMarkerRecycled {
+		panic(PanicUseAfterRecycle)
+	}
 	b.valueLen = valueLen
 }
 
@@ -64,7 +70,9 @@ func (b *Bytes) Truncate(valueLen int) {
 //
 // Optimized per https://golang.org/cl/137880043
 func (b *Bytes) MemsetZero() {
-	CheckNotRecycled(b.poolMarker)
+	if b.poolMarker&PoolMarkerRecycled == PoolMarkerRecycled {
+		panic(PanicUseAfterRecycle)
+	}
 	for i := range b.value {
 		b.value[i] = 0
 	}
@@ -77,14 +85,11 @@ func (b *Bytes) Recycle() {
 	if b == nil || !globalEnabled || b.segListPool == nil {
 		return
 	}
-	CheckNotDoubleRecycled(b.poolMarker)
+	if b.poolMarker&PoolMarkerRecycled == PoolMarkerRecycled {
+		panic(PanicDoubleRecycle)
+	}
 	b.poolMarker = PoolMarkerRecycled
 	b.segListPool.put(b)
-}
-
-func (b *Bytes) reset(valueLen int) {
-	b.valueLen = valueLen
-	b.poolMarker = PoolMarkerNone
 }
 
 func newBytes(segListPool *segListPool, valueLen int) *Bytes {

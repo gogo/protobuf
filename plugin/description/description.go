@@ -79,6 +79,7 @@ import (
 	"bytes"
 	"compress/gzip"
 	"fmt"
+
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
@@ -124,6 +125,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		p.P(`func (this *`, ccTypeName, `) Description() (desc *`, descriptorPkg.Use(), `.FileDescriptorSet) {`)
 		p.In()
+		p.ConditionallyPrintCheckNotRecycled(file, "this")
 		p.P(`return `, localName, `Description()`)
 		p.Out()
 		p.P(`}`)

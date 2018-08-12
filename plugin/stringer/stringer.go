@@ -93,9 +93,10 @@ not print their values, while the generated String method will always print all 
 package stringer
 
 import (
+	"strings"
+
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
-	"strings"
 )
 
 type stringer struct {
@@ -148,6 +149,7 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 		p.P(`return "nil"`)
 		p.Out()
 		p.P(`}`)
+		p.ConditionallyPrintCheckNotRecycled(file, "this")
 		for _, field := range message.Field {
 			if !p.IsMap(field) {
 				continue

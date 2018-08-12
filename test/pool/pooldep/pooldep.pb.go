@@ -578,7 +578,9 @@ func GetFoo() *Foo {
 	if !github_com_gogo_protobuf_mem.PoolingEnabled() {
 		return &Foo{}
 	}
-	return globalFooObjectPool.Get().(*Foo)
+	value := globalFooObjectPool.Get().(*Foo)
+	value.poolMarker = github_com_gogo_protobuf_mem.PoolMarkerAllocatedByPool
+	return value
 }
 
 // GetBar gets a reset *Bar.
@@ -586,7 +588,9 @@ func GetBar() *Bar {
 	if !github_com_gogo_protobuf_mem.PoolingEnabled() {
 		return &Bar{}
 	}
-	return globalBarObjectPool.Get().(*Bar)
+	value := globalBarObjectPool.Get().(*Bar)
+	value.poolMarker = github_com_gogo_protobuf_mem.PoolMarkerAllocatedByPool
+	return value
 }
 
 // Recycle puts the message back in the Pool that created it.
@@ -602,6 +606,12 @@ func (m *Foo) Recycle() {
 	if m == nil {
 		return
 	}
+	if m.poolMarker&github_com_gogo_protobuf_mem.PoolMarkerAllocatedByPool != github_com_gogo_protobuf_mem.PoolMarkerAllocatedByPool {
+		return
+	}
+	if m.poolMarker&github_com_gogo_protobuf_mem.PoolMarkerRecycled == github_com_gogo_protobuf_mem.PoolMarkerRecycled {
+		panic(github_com_gogo_protobuf_mem.PanicDoubleRecycle)
+	}
 	m.Bar.Recycle()
 	for _, value := range m.RepeatedBar {
 		value.Recycle()
@@ -616,6 +626,7 @@ func (m *Foo) Recycle() {
 	for _, elem := range m.MapPooltrueBar {
 		elem.Recycle()
 	}
+	m.poolMarker = github_com_gogo_protobuf_mem.PoolMarkerRecycled
 	globalFooObjectPool.Put(m)
 }
 
@@ -632,7 +643,38 @@ func (m *Bar) Recycle() {
 	if m == nil {
 		return
 	}
+	if m.poolMarker&github_com_gogo_protobuf_mem.PoolMarkerAllocatedByPool != github_com_gogo_protobuf_mem.PoolMarkerAllocatedByPool {
+		return
+	}
+	if m.poolMarker&github_com_gogo_protobuf_mem.PoolMarkerRecycled == github_com_gogo_protobuf_mem.PoolMarkerRecycled {
+		panic(github_com_gogo_protobuf_mem.PanicDoubleRecycle)
+	}
+	m.poolMarker = github_com_gogo_protobuf_mem.PoolMarkerRecycled
 	globalBarObjectPool.Put(m)
+}
+
+// checkNotRecycled checks that the message has not been recycled, and if it has, panics.
+//
+// This is used by generated functions.
+func (m *Foo) checkNotRecycled() {
+	if m == nil {
+		return
+	}
+	if m.poolMarker&github_com_gogo_protobuf_mem.PoolMarkerRecycled == github_com_gogo_protobuf_mem.PoolMarkerRecycled {
+		panic(github_com_gogo_protobuf_mem.PanicUseAfterRecycle)
+	}
+}
+
+// checkNotRecycled checks that the message has not been recycled, and if it has, panics.
+//
+// This is used by generated functions.
+func (m *Bar) checkNotRecycled() {
+	if m == nil {
+		return
+	}
+	if m.poolMarker&github_com_gogo_protobuf_mem.PoolMarkerRecycled == github_com_gogo_protobuf_mem.PoolMarkerRecycled {
+		panic(github_com_gogo_protobuf_mem.PanicUseAfterRecycle)
+	}
 }
 
 func newFoo() github_com_gogo_protobuf_mem.Object {

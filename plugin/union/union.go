@@ -149,6 +149,7 @@ func (p *union) Generate(file *generator.FileDescriptor) {
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		p.P(`func (this *`, ccTypeName, `) GetValue() interface{} {`)
 		p.In()
+		p.ConditionallyPrintCheckNotRecycled(file, "this")
 		for _, field := range message.Field {
 			fieldname := p.GetFieldName(message, field)
 			if fieldname == "Value" {
@@ -166,6 +167,7 @@ func (p *union) Generate(file *generator.FileDescriptor) {
 		p.P(``)
 		p.P(`func (this *`, ccTypeName, `) SetValue(value interface{}) bool {`)
 		p.In()
+		p.ConditionallyPrintCheckNotRecycled(file, "this")
 		p.P(`switch vt := value.(type) {`)
 		p.In()
 		for _, field := range message.Field {

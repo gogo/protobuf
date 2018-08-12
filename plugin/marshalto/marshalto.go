@@ -1087,6 +1087,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 
 		p.P(`func (m *`, ccTypeName, `) Marshal() (dAtA []byte, err error) {`)
 		p.In()
+		p.ConditionallyPrintCheckNotRecycled(file, "m")
 		if gogoproto.IsProtoSizer(file.FileDescriptorProto, message.DescriptorProto) {
 			p.P(`size := m.ProtoSize()`)
 		} else {
@@ -1107,6 +1108,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 		if gogoproto.HasPool(file.FileDescriptorProto) {
 			p.P(`func (m *`, ccTypeName, `) MarshalPool() (*`, p.memPkg.Use(), `.Bytes, error) {`)
 			p.In()
+			p.ConditionallyPrintCheckNotRecycled(file, "m")
 			if gogoproto.IsProtoSizer(file.FileDescriptorProto, message.DescriptorProto) {
 				p.P(`size := m.ProtoSize()`)
 			} else {
@@ -1129,6 +1131,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 
 		p.P(`func (m *`, ccTypeName, `) MarshalTo(dAtA []byte) (int, error) {`)
 		p.In()
+		p.ConditionallyPrintCheckNotRecycled(file, "m")
 		p.P(`var i int`)
 		p.P(`_ = i`)
 		p.P(`var l int`)

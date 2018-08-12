@@ -2220,7 +2220,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
 		}
 		g.P("XXX_sizecache\tint32 `json:\"-\"`")
-		if gogoproto.HasPool(g.file.FileDescriptorProto) {
+		if gogoproto.HasPool(message.file.FileDescriptorProto) {
 			g.P()
 			g.P(`// poolMarker is used to provide safeguards for pooling functions.`)
 			g.P(`// This variable should never be modified by users directly.`)
@@ -2270,7 +2270,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	}
 
 	// Reset, String and ProtoMessage methods.
-	if gogoproto.HasPool(g.file.FileDescriptorProto) {
+	if gogoproto.HasPool(message.file.FileDescriptorProto) {
 		g.P("func (m *", ccTypeName, ") Reset() {")
 		g.In()
 		for _, field := range message.Field {
@@ -2282,15 +2282,25 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		g.P("func (m *", ccTypeName, ") Reset() { *m = ", ccTypeName, "{} }")
 	}
 	if gogoproto.EnabledGoStringer(g.file.FileDescriptorProto, message.DescriptorProto) {
-		g.P("func (m *", ccTypeName, ") String() string { return ", g.Pkg["proto"], ".CompactTextString(m) }")
+		g.P("func (m *", ccTypeName, ") String() string {")
+		g.In()
+		g.ConditionallyPrintCheckNotRecycled(message.file, "m")
+		g.P("return ", g.Pkg["proto"], ".CompactTextString(m)")
+		g.Out()
+		g.P("}")
 	}
-	g.P("func (*", ccTypeName, ") ProtoMessage() {}")
+	g.P("func (m *", ccTypeName, ") ProtoMessage() {")
+	g.In()
+	g.ConditionallyPrintCheckNotRecycled(message.file, "m")
+	g.Out()
+	g.P("}")
 	var indexes []string
 	for m := message; m != nil; m = m.parent {
 		indexes = append([]string{strconv.Itoa(m.index)}, indexes...)
 	}
-	g.P("func (*", ccTypeName, ") Descriptor() ([]byte, []int) {")
+	g.P("func (m *", ccTypeName, ") Descriptor() ([]byte, []int) {")
 	g.In()
+	g.ConditionallyPrintCheckNotRecycled(message.file, "m")
 	g.P("return ", g.file.VarName(), ", []int{", strings.Join(indexes, ", "), "}")
 	g.Out()
 	g.P("}")
@@ -2309,11 +2319,13 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			g.P()
 			g.P("func (m *", ccTypeName, ") MarshalJSON() ([]byte, error) {")
 			g.In()
+			g.ConditionallyPrintCheckNotRecycled(message.file, "m")
 			g.P("return ", g.Pkg["proto"], ".MarshalMessageSetJSON(&m.XXX_InternalExtensions)")
 			g.Out()
 			g.P("}")
 			g.P("func (m *", ccTypeName, ") UnmarshalJSON(buf []byte) error {")
 			g.In()
+			g.ConditionallyPrintCheckNotRecycled(message.file, "m")
 			g.P("return ", g.Pkg["proto"], ".UnmarshalMessageSetJSON(buf, &m.XXX_InternalExtensions)")
 			g.Out()
 			g.P("}")
@@ -2328,14 +2340,16 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		}
 		g.Out()
 		g.P("}")
-		g.P("func (*", ccTypeName, ") ExtensionRangeArray() []", g.Pkg["proto"], ".ExtensionRange {")
+		g.P("func (m *", ccTypeName, ") ExtensionRangeArray() []", g.Pkg["proto"], ".ExtensionRange {")
 		g.In()
+		g.ConditionallyPrintCheckNotRecycled(message.file, "m")
 		g.P("return extRange_", ccTypeName)
 		g.Out()
 		g.P("}")
 		if !gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, message.DescriptorProto) {
 			g.P("func (m *", ccTypeName, ") GetExtensions() *[]byte {")
 			g.In()
+			g.ConditionallyPrintCheckNotRecycled(message.file, "m")
 			g.P("if m.XXX_extensions == nil {")
 			g.In()
 			g.P("m.XXX_extensions = make([]byte, 0)")
@@ -2356,6 +2370,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	// Wrapper for table-driven marshaling and unmarshaling.
 	g.P("func (m *", ccTypeName, ") XXX_Unmarshal(b []byte) error {")
 	g.In()
+	g.ConditionallyPrintCheckNotRecycled(message.file, "m")
 	if gogoproto.IsUnmarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
 		g.P("return m.Unmarshal(b)")
 	} else {
@@ -2366,6 +2381,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 
 	g.P("func (m *", ccTypeName, ") XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {")
 	g.In()
+	g.ConditionallyPrintCheckNotRecycled(message.file, "m")
 	if gogoproto.IsMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
 		gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
 		if gogoproto.IsStableMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
@@ -2402,6 +2418,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	g.P("}")
 
 	g.P("func (dst *", ccTypeName, ") XXX_Merge(src ", g.Pkg["proto"], ".Message) {")
+	g.ConditionallyPrintCheckNotRecycled(message.file, "dst")
 	g.In()
 	g.P("xxx_messageInfo_", ccTypeName, ".Merge(dst, src)")
 	g.Out()
@@ -2409,6 +2426,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 
 	g.P("func (m *", ccTypeName, ") XXX_Size() int {") // avoid name clash with "Size" field in some message
 	g.In()
+	g.ConditionallyPrintCheckNotRecycled(message.file, "m")
 	if (gogoproto.IsMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
 		gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto)) &&
 		gogoproto.IsSizer(g.file.FileDescriptorProto, message.DescriptorProto) {
@@ -2425,6 +2443,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 
 	g.P("func (m *", ccTypeName, ") XXX_DiscardUnknown() {")
 	g.In()
+	g.ConditionallyPrintCheckNotRecycled(message.file, "m")
 	g.P("xxx_messageInfo_", ccTypeName, ".DiscardUnknown(m)")
 	g.Out()
 	g.P("}")
@@ -2569,6 +2588,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	for oi := range message.OneofDecl {
 		fname := oneofFieldName[int32(oi)]
 		g.P("func (m *", ccTypeName, ") Get", fname, "() ", oneofDisc[int32(oi)], " {")
+		g.ConditionallyPrintCheckNotRecycled(message.file, "m")
 		g.P("if m != nil { return m.", fname, " }")
 		g.P("return nil")
 		g.P("}")
@@ -2605,6 +2625,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 
 		g.P("func (m *", ccTypeName, ") ", Annotate(message.file, fieldFullPath, mname), "() "+typename+" {")
 		g.In()
+		g.ConditionallyPrintCheckNotRecycled(message.file, "m")
 		def, hasDef := defNames[field]
 		typeDefaultIsNil := false // whether this field type's default value is a literal nil unless specified
 		switch *field.Type {
@@ -2744,7 +2765,8 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		sizeSig := "(msg " + g.Pkg["proto"] + ".Message) (n int)"
 
 		g.P("// XXX_OneofFuncs is for the internal use of the proto package.")
-		g.P("func (*", ccTypeName, ") XXX_OneofFuncs() (func", encSig, ", func", decSig, ", func", sizeSig, ", []interface{}) {")
+		g.P("func (m *", ccTypeName, ") XXX_OneofFuncs() (func", encSig, ", func", decSig, ", func", sizeSig, ", []interface{}) {")
+		g.ConditionallyPrintCheckNotRecycled(message.file, "m")
 		g.P("return ", enc, ", ", dec, ", ", size, ", []interface{}{")
 		for _, field := range message.Field {
 			if field.OneofIndex == nil {
@@ -3446,6 +3468,14 @@ func (g *Generator) generateResetField(message *Descriptor, field *descriptor.Fi
 		panic("not implemented")
 	}
 	g.P(`m.`, g.GetFieldName(message, field), ` = `, zeroValue)
+}
+
+// ConditionallyPrintCheckNotRecycled generated a checkNotRecycled call
+// if pooling is enabled for the file.
+func (g *Generator) ConditionallyPrintCheckNotRecycled(file *FileDescriptor, variableName string) {
+	if gogoproto.HasPool(file.FileDescriptorProto) {
+		g.P(variableName, `.checkNotRecycled()`)
+	}
 }
 
 // And now lots of helper functions.

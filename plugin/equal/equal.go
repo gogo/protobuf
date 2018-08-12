@@ -471,6 +471,7 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 		p.P(`func (this *`, ccTypeName, `) Equal(that interface{}) bool {`)
 	}
 	p.In()
+	p.ConditionallyPrintCheckNotRecycled(file, "this")
 	p.generateMsgNullAndTypeCheck(ccTypeName, verbose)
 	oneofs := make(map[string]struct{})
 
