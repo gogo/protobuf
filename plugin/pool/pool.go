@@ -135,13 +135,14 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 						if gogoproto.HasPool(p.ObjectNamed(valueField.GetTypeName()).File().FileDescriptorProto) {
 							p.P(`if m.`, fieldName, ` != nil {`)
 							p.In()
-							p.P(`for _, elem := range m.`, fieldName, ` {`)
+							p.P(`for key, value := range m.`, fieldName, ` {`)
 							p.In()
-							p.P(`elem.Recycle()`)
+							p.P(`value.Recycle()`)
+							// TODO: This is taking advantage of a go1.11+ only optimization
+							// https://go-review.googlesource.com/c/go/+/110055
+							p.P(`delete(m.`, fieldName, `, key)`)
 							p.Out()
 							p.P(`}`)
-							// make it so strings can be GC'ed
-							p.P(`m.`, fieldName, ` = nil`)
 							p.Out()
 							p.P(`}`)
 						}

@@ -3415,11 +3415,18 @@ func (g *Generator) generateExtensionRegistration(ext *ExtensionDescriptor) {
 func (g *Generator) generateResetField(message *Descriptor, field *descriptor.FieldDescriptorProto) {
 	fieldName := g.GetFieldName(message, field)
 
-	// You could do "for key := range m.fieldName { delete(m.fieldName) }" potentially
-	// But not even sure if this keeps the same map with the same capacity
-	// And it could be very slow
 	if g.IsMap(field) {
-		g.P(`m.`, fieldName, ` = nil`)
+		g.P(`if m.`, fieldName, ` != nil {`)
+		g.In()
+		// TODO: This is taking advantage of a go1.11+ only optimization
+		// https://go-review.googlesource.com/c/go/+/110055
+		g.P(`for key := range m.`, fieldName, ` {`)
+		g.In()
+		g.P(`delete(m.`, fieldName, `, key)`)
+		g.Out()
+		g.P(`}`)
+		g.Out()
+		g.P(`}`)
 		return
 	}
 
