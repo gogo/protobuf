@@ -188,6 +188,10 @@ func TurnOnGoRegistration(file *descriptor.FileDescriptorProto) {
 	SetBoolFileOption(gogoproto.E_GoprotoRegistration, true)(file)
 }
 
-func TurnOnPool(file *descriptor.FileDescriptorProto) {
-	SetBoolFileOption(gogoproto.E_Pool, true)(file)
+func TurnOnPoolAll(file *descriptor.FileDescriptorProto) {
+	SetBoolFileOption(gogoproto.E_PoolAll, true)(file)
+}
+
+func TurnOnPoolBytesFieldsAll(file *descriptor.FileDescriptorProto) {
+	SetBoolFileOption(gogoproto.E_PoolBytesFieldsAll, true)(file)
 }

@@ -1115,6 +1115,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 				p.P(`size := m.Size()`)
 			}
 			p.P(`bytes := `, p.memPkg.Use(), `.GetBytes(size)`)
+			p.P(`bytes.Truncate(size)`)
 			p.P(`n, err := m.MarshalTo(bytes.Value())`)
 			p.P(`if err != nil {`)
 			p.In()

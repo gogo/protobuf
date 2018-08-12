@@ -84,7 +84,8 @@ extend google.protobuf.FileOptions {
 
 	optional bool goproto_registration = 63032;
 	optional bool messagename_all = 63033;
-	optional bool pool = 63034;
+	optional bool pool_all = 63034;
+	optional bool pool_bytes_fields_all = 63035;
 }
 
 extend google.protobuf.MessageOptions {

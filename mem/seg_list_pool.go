@@ -61,18 +61,18 @@ func (m *segListPool) get(valueLen int) *Bytes {
 		// this is only used for recycled or not
 		// the existence of segListPool is used to denote whether this was allocated by a pool
 		getBytes.poolMarker = PoolMarkerNone
-		getBytes.Truncate(valueLen)
+		getBytes.valueLen = 0
 		return getBytes
 	}
 	select {
 	case bytes := <-m.c:
 		bytes.poolMarker = PoolMarkerNone
-		bytes.Truncate(valueLen)
+		bytes.valueLen = 0
 		return bytes
 	default:
 		getBytes := m.syncPool.Get().(*Bytes)
 		getBytes.poolMarker = PoolMarkerNone
-		getBytes.Truncate(valueLen)
+		getBytes.valueLen = 0
 		return getBytes
 	}
 }

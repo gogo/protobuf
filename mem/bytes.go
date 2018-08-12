@@ -28,6 +28,8 @@
 
 package mem
 
+import "io"
+
 // Bytes represents a byte slice created from a BytesPool.
 //
 // Only create these from BytePools or GetBytes.
@@ -48,6 +50,20 @@ func (b *Bytes) Value() []byte {
 	return b.value[:b.valueLen]
 }
 
+// ReadFrom implements io.ReaderFrom.
+//
+// This will read to the next unread location.
+//
+// If the number of bytes read from the reader is greater than the capacity,
+// this will panic.
+func (b *Bytes) ReadFrom(reader io.Reader) (int64, error) {
+	if b.poolMarker&PoolMarkerRecycled == PoolMarkerRecycled {
+		panic(PanicUseAfterRecycle)
+	}
+	panic("not implemented")
+	return 0, nil
+}
+
 // Len gets the length.
 //
 // This is equivalent to len(b.Value()).
@@ -59,9 +75,17 @@ func (b *Bytes) Len() int {
 }
 
 // Truncate truncates the value to the given length.
+//
+// This explicitly sets the backing buffer to this length and will make
+// any future writes start at this location. This is also useful
+// if you want to directly write to the backing buffer via accessing
+// Value().
 func (b *Bytes) Truncate(valueLen int) {
 	if b.poolMarker&PoolMarkerRecycled == PoolMarkerRecycled {
 		panic(PanicUseAfterRecycle)
+	}
+	if valueLen > len(b.value) {
+		panic("requested truncate length greater than capacity")
 	}
 	b.valueLen = valueLen
 }
@@ -96,6 +120,5 @@ func newBytes(segListPool *segListPool, valueLen int) *Bytes {
 	return &Bytes{
 		segListPool: segListPool,
 		value:       make([]byte, valueLen),
-		valueLen:    valueLen,
 	}
 }

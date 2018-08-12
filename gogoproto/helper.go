@@ -358,5 +358,9 @@ func HasMessageName(file *google_protobuf.FileDescriptorProto, message *google_p
 }
 
 func HasPool(file *google_protobuf.FileDescriptorProto) bool {
-	return proto.GetBoolExtension(file.Options, E_Pool, false)
+	return proto.GetBoolExtension(file.Options, E_PoolAll, false)
+}
+
+func HasPoolBytesFields(file *google_protobuf.FileDescriptorProto) bool {
+	return proto.GetBoolExtension(file.Options, E_PoolBytesFieldsAll, false)
 }

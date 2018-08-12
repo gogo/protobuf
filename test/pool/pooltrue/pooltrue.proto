@@ -35,7 +35,8 @@ import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 option (gogoproto.marshaler_all) = true;
 option (gogoproto.unmarshaler_all) = true;
 option (gogoproto.protosizer_all) = true;
-option (gogoproto.pool) = true;
+option (gogoproto.pool_all) = true;
+option (gogoproto.pool_bytes_fields_all) = true;
 
 message Foo {
   uint64 one = 1;

@@ -53,7 +53,8 @@ func main() {
 	vanity.ForEachFile(files, vanity.TurnOnGoStringAll)
 	vanity.ForEachFile(files, vanity.TurnOffGoStringerAll)
 	vanity.ForEachFile(files, vanity.TurnOnStringerAll)
-	vanity.ForEachFile(files, vanity.TurnOnPool)
+	vanity.ForEachFile(files, vanity.TurnOnPoolAll)
+	vanity.ForEachFile(files, vanity.TurnOnPoolBytesFieldsAll)
 
 	resp := command.Generate(req)
 	command.Write(resp)
