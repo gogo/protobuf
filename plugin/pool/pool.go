@@ -133,7 +133,6 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 					valueField := p.GoMapType(nil, field).ValueField
 					if *valueField.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
 						if gogoproto.HasPool(p.ObjectNamed(valueField.GetTypeName()).File().FileDescriptorProto) {
-							//p.P(`if m.`, fieldName, ` != nil {`)
 							p.P(`if len(m.`, fieldName, `) != 0 {`)
 							p.In()
 							//p.P(`for key, value := range m.`, fieldName, ` {`)
@@ -152,7 +151,6 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 					}
 				} else if field.IsRepeated() {
 					if gogoproto.HasPool(p.ObjectNamed(field.GetTypeName()).File().FileDescriptorProto) {
-						//p.P(`if m.`, fieldName, ` != nil {`)
 						p.P(`if len(m.`, fieldName, `) != 0 {`)
 						p.In()
 						p.P(`for _, value := range m.`, fieldName, ` {`)

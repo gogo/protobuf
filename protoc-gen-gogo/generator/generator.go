@@ -3432,7 +3432,6 @@ func (g *Generator) generateResetField(message *Descriptor, field *descriptor.Fi
 	}
 
 	if field.IsRepeated() {
-		//g.P(`if m.`, fieldName, ` != nil {`)
 		g.P(`if len(m.`, fieldName, `) != 0 {`)
 		g.In()
 		g.P(`m.`, fieldName, ` = m.`, fieldName, `[:0]`)
