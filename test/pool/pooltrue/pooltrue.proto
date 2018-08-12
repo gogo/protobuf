@@ -51,5 +51,20 @@ message Bar {
 }
 
 service Baz {
-  rpc Hello(Foo) returns (Bar);
+  rpc Hello(Foo) returns (Bar) {
+    option (gogoproto.create_pooled_server_requests) = true;
+    option (gogoproto.create_pooled_client_responses) = true;
+  }
+  rpc HelloClientStream(stream Foo) returns (Bar) {
+    option (gogoproto.create_pooled_server_requests) = true;
+    option (gogoproto.create_pooled_client_responses) = true;
+  }
+  rpc HelloServerStream(Foo) returns (stream Bar) {
+    option (gogoproto.create_pooled_server_requests) = true;
+    option (gogoproto.create_pooled_client_responses) = true;
+  }
+  rpc HelloBidiStream(stream Foo) returns (stream Bar) {
+    option (gogoproto.create_pooled_server_requests) = true;
+    option (gogoproto.create_pooled_client_responses) = true;
+  }
 }

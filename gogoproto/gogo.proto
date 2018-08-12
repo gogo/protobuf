@@ -135,3 +135,8 @@ extend google.protobuf.FieldOptions {
 	optional bool stdtime = 65010;
 	optional bool stdduration = 65011;
 }
+
+extend google.protobuf.MethodOptions {
+	optional bool create_pooled_server_requests = 66001;
+	optional bool create_pooled_client_responses = 66002;
+}

@@ -360,3 +360,11 @@ func HasMessageName(file *google_protobuf.FileDescriptorProto, message *google_p
 func HasPool(file *google_protobuf.FileDescriptorProto) bool {
 	return proto.GetBoolExtension(file.Options, E_PoolAll, false)
 }
+
+func HasCreatePooledServerRequests(method *google_protobuf.MethodDescriptorProto) bool {
+	return proto.GetBoolExtension(method.Options, E_CreatePooledServerRequests, false)
+}
+
+func HasCreatePooledClientResponses(method *google_protobuf.MethodDescriptorProto) bool {
+	return proto.GetBoolExtension(method.Options, E_CreatePooledClientResponses, false)
+}

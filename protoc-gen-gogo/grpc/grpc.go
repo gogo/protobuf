@@ -302,12 +302,20 @@ func (g *grpc) generateClientMethod(servName, fullServName, serviceDescVar strin
 	inType := g.typeName(method.GetInputType())
 	outType := g.typeName(method.GetOutputType())
 
+	outDesc := g.gen.ObjectNamed(method.GetOutputType())
+	outPkgname := g.gen.DefaultPackageName(outDesc)
+	outBasename := generator.CamelCaseSlice(outDesc.TypeName())
+
 	if method.GetOptions().GetDeprecated() {
 		g.P(deprecationComment)
 	}
 	g.P("func (c *", unexport(servName), "Client) ", g.generateClientSignature(servName, method), "{")
 	if !method.GetServerStreaming() && !method.GetClientStreaming() {
-		g.P("out := new(", outType, ")")
+		if gogoproto.HasPool(outDesc.File().FileDescriptorProto) && gogoproto.HasCreatePooledClientResponses(method) {
+			g.P(`out := `, outPkgname, `Get`, outBasename, `()`)
+		} else {
+			g.P("out := new(", outType, ")")
+		}
 		// TODO: Pass descExpr to Invoke.
 		g.P(`err := c.cc.Invoke(ctx, "`, sname, `", in, out, opts...)`)
 		g.P("if err != nil { return nil, err }")
@@ -360,7 +368,11 @@ func (g *grpc) generateClientMethod(servName, fullServName, serviceDescVar strin
 	}
 	if genRecv {
 		g.P("func (x *", streamType, ") Recv() (*", outType, ", error) {")
-		g.P("m := new(", outType, ")")
+		if gogoproto.HasPool(outDesc.File().FileDescriptorProto) && gogoproto.HasCreatePooledClientResponses(method) {
+			g.P(`m := `, outPkgname, `Get`, outBasename, `()`)
+		} else {
+			g.P("m := new(", outType, ")")
+		}
 		g.P("if err := x.ClientStream.RecvMsg(m); err != nil { return nil, err }")
 		g.P("return m, nil")
 		g.P("}")
@@ -369,7 +381,11 @@ func (g *grpc) generateClientMethod(servName, fullServName, serviceDescVar strin
 	if genCloseAndRecv {
 		g.P("func (x *", streamType, ") CloseAndRecv() (*", outType, ", error) {")
 		g.P("if err := x.ClientStream.CloseSend(); err != nil { return nil, err }")
-		g.P("m := new(", outType, ")")
+		if gogoproto.HasPool(outDesc.File().FileDescriptorProto) && gogoproto.HasCreatePooledClientResponses(method) {
+			g.P(`m := `, outPkgname, `Get`, outBasename, `()`)
+		} else {
+			g.P("m := new(", outType, ")")
+		}
 		g.P("if err := x.ClientStream.RecvMsg(m); err != nil { return nil, err }")
 		g.P("return m, nil")
 		g.P("}")
@@ -407,13 +423,14 @@ func (g *grpc) generateServerMethod(servName, fullServName string, method *pb.Me
 	inType := g.typeName(method.GetInputType())
 	outType := g.typeName(method.GetOutputType())
 
+	inDesc := g.gen.ObjectNamed(method.GetInputType())
+	inPkgname := g.gen.DefaultPackageName(inDesc)
+	inBasename := generator.CamelCaseSlice(inDesc.TypeName())
+
 	if !method.GetServerStreaming() && !method.GetClientStreaming() {
 		g.P("func ", hname, "(srv interface{}, ctx ", contextPkg, ".Context, dec func(interface{}) error, interceptor ", grpcPkg, ".UnaryServerInterceptor) (interface{}, error) {")
 
-		inDesc := g.gen.ObjectNamed(method.GetInputType())
-		inPkgname := g.gen.DefaultPackageName(inDesc)
-		inBasename := generator.CamelCaseSlice(inDesc.TypeName())
-		if gogoproto.HasPool(inDesc.File().FileDescriptorProto) {
+		if gogoproto.HasPool(inDesc.File().FileDescriptorProto) && gogoproto.HasCreatePooledServerRequests(method) {
 			g.P(`in := `, inPkgname, `Get`, inBasename, `()`)
 			g.P(`defer in.Recycle()`)
 		} else {
@@ -437,7 +454,12 @@ func (g *grpc) generateServerMethod(servName, fullServName string, method *pb.Me
 	streamType := unexport(servName) + methName + "Server"
 	g.P("func ", hname, "(srv interface{}, stream ", grpcPkg, ".ServerStream) error {")
 	if !method.GetClientStreaming() {
-		g.P("m := new(", inType, ")")
+		if gogoproto.HasPool(inDesc.File().FileDescriptorProto) && gogoproto.HasCreatePooledServerRequests(method) {
+			g.P(`m := `, inPkgname, `Get`, inBasename, `()`)
+			g.P(`defer m.Recycle()`)
+		} else {
+			g.P("m := new(", inType, ")")
+		}
 		g.P("if err := stream.RecvMsg(m); err != nil { return err }")
 		g.P("return srv.(", servName, "Server).", methName, "(m, &", streamType, "{stream})")
 	} else {
@@ -484,7 +506,11 @@ func (g *grpc) generateServerMethod(servName, fullServName string, method *pb.Me
 	}
 	if genRecv {
 		g.P("func (x *", streamType, ") Recv() (*", inType, ", error) {")
-		g.P("m := new(", inType, ")")
+		if gogoproto.HasPool(inDesc.File().FileDescriptorProto) && gogoproto.HasCreatePooledServerRequests(method) {
+			g.P(`m := `, inPkgname, `Get`, inBasename, `()`)
+		} else {
+			g.P("m := new(", inType, ")")
+		}
 		g.P("if err := x.ServerStream.RecvMsg(m); err != nil { return nil, err }")
 		g.P("return m, nil")
 		g.P("}")
