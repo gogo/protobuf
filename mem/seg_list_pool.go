@@ -31,6 +31,7 @@ package mem
 import (
 	"fmt"
 	"sync"
+	"sync/atomic"
 )
 
 type segListPool struct {
@@ -46,6 +47,7 @@ func newSegListPool(channelSize uint16, noSyncPool bool, allocateLen int) *segLi
 	if !noSyncPool {
 		segListPool.syncPool = &sync.Pool{
 			New: func() interface{} {
+				atomic.AddUint64(&globalNewCount, 1)
 				return newBytes(segListPool, allocateLen)
 			},
 		}
@@ -57,6 +59,7 @@ func newSegListPool(channelSize uint16, noSyncPool bool, allocateLen int) *segLi
 }
 
 func (m *segListPool) get(valueLen int) *Bytes {
+	atomic.AddUint64(&globalGetCount, 1)
 	if m.allocateLen < valueLen {
 		panic(fmt.Sprintf("segListPool got request for size %d but has size %d", valueLen, m.allocateLen))
 	}
@@ -75,6 +78,7 @@ func (m *segListPool) get(valueLen int) *Bytes {
 			bytes.valueLen = 0
 			return bytes
 		default:
+			atomic.AddUint64(&globalNewCount, 1)
 			return newBytes(m, m.allocateLen)
 		}
 	}
@@ -92,6 +96,7 @@ func (m *segListPool) get(valueLen int) *Bytes {
 }
 
 func (m *segListPool) put(bytes *Bytes) {
+	atomic.AddUint64(&globalRecycledCount, 1)
 	if m.c == nil {
 		m.syncPool.Put(bytes)
 		return

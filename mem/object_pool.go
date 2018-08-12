@@ -30,6 +30,7 @@ package mem
 
 import (
 	"sync"
+	"sync/atomic"
 )
 
 // DefaultObjectPoolChannelSize is the default ObjectPool channel size.
@@ -105,6 +106,7 @@ func NewObjectPool(constructor func() Object, options ...ObjectPoolOption) *Obje
 	if !objectPool.noSyncPool {
 		objectPool.syncPool = &sync.Pool{
 			New: func() interface{} {
+				atomic.AddUint64(&globalNewCount, 1)
 				return constructor()
 			},
 		}
@@ -117,6 +119,7 @@ func NewObjectPool(constructor func() Object, options ...ObjectPoolOption) *Obje
 
 // Get returns a pooled object.
 func (m *ObjectPool) Get() Object {
+	atomic.AddUint64(&globalGetCount, 1)
 	if m.c == nil {
 		getObject := m.syncPool.Get().(Object)
 		getObject.Reset()
@@ -128,6 +131,7 @@ func (m *ObjectPool) Get() Object {
 			object.Reset()
 			return object
 		default:
+			atomic.AddUint64(&globalNewCount, 1)
 			return m.constructor()
 		}
 	}
@@ -144,6 +148,7 @@ func (m *ObjectPool) Get() Object {
 
 // Put puts a pooled object back into the object pool.
 func (m *ObjectPool) Put(object Object) {
+	atomic.AddUint64(&globalRecycledCount, 1)
 	if m.c == nil {
 		m.syncPool.Put(object)
 		return

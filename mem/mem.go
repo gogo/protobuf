@@ -28,6 +28,8 @@
 
 package mem
 
+import "sync/atomic"
+
 const (
 	// PoolMarkerNone denots no pool marker.
 	PoolMarkerNone PoolMarker = 0x0
@@ -55,12 +57,25 @@ var (
 	globalBytesPool         = NewBytesPool()
 	globalObjectPoolGetters []func() *ObjectPool
 	globalObjectPoolSetters []func(...ObjectPoolOption)
+
+	globalNewCount      uint64
+	globalGetCount      uint64
+	globalRecycledCount uint64
 )
 
 // PoolMarker is a pool marker.
 //
 // TODO: should this be a uint32 for better probability of word-alignment?
 type PoolMarker uint8
+
+// GlobalReset resets all counts, and makes new pools.
+func GlobalReset() {
+	globalNewCount = 0
+	globalGetCount = 0
+	globalRecycledCount = 0
+	resetGlobalBytesPool()
+	resetGlobalObjectPools()
+}
 
 // EnablePooling enables pooling.
 //
@@ -78,6 +93,21 @@ func EnablePooling() {
 // This should only be called at initialization.
 func DisablePooling() {
 	globalEnabled = false
+}
+
+// NewCount returns the global number of Bytes and Objects created.
+func NewCount() uint64 {
+	return atomic.LoadUint64(&globalNewCount)
+}
+
+// GetCount returns the global number of Bytes and Objects gotten.
+func GetCount() uint64 {
+	return atomic.LoadUint64(&globalGetCount)
+}
+
+// UnrecycledCount returns the global number of Bytes and Objects unrecycled.
+func UnrecycledCount() uint64 {
+	return GetCount() - atomic.LoadUint64(&globalRecycledCount)
 }
 
 // SetBytesPoolChannelSize results in the global BytesPool called by GetBytes
