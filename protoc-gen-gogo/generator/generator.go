@@ -3416,18 +3416,18 @@ func (g *Generator) generateResetField(message *Descriptor, field *descriptor.Fi
 	fieldName := g.GetFieldName(message, field)
 
 	if g.IsMap(field) {
-		//g.P(`if m.`, fieldName, ` != nil {`)
-		//g.In()
+		g.P(`if len(m.`, fieldName, `) != 0 {`)
+		g.In()
 		//// TODO: This is taking advantage of a go1.11+ only optimization
 		//// https://go-review.googlesource.com/c/go/+/110055
-		//g.P(`for key := range m.`, fieldName, ` {`)
-		//g.In()
-		//g.P(`delete(m.`, fieldName, `, key)`)
-		//g.Out()
-		//g.P(`}`)
-		//g.Out()
-		//g.P(`}`)
-		g.P(`m.`, fieldName, ` = nil`)
+		g.P(`for key := range m.`, fieldName, ` {`)
+		g.In()
+		g.P(`delete(m.`, fieldName, `, key)`)
+		g.Out()
+		g.P(`}`)
+		g.Out()
+		g.P(`}`)
+		//g.P(`m.`, fieldName, ` = nil`)
 		return
 	}
 
@@ -3478,11 +3478,15 @@ func (g *Generator) generateResetField(message *Descriptor, field *descriptor.Fi
 	g.P(`m.`, g.GetFieldName(message, field), ` = `, zeroValue)
 }
 
-// ConditionallyPrintCheckNotRecycled generated a checkNotRecycled call
+// ConditionallyPrintCheckNotRecycled generates a checkNotRecycled call
 // if pooling is enabled for the file.
 func (g *Generator) ConditionallyPrintCheckNotRecycled(file *FileDescriptor, variableName string) {
 	if gogoproto.HasPool(file.FileDescriptorProto) {
-		g.P(variableName, `.checkNotRecycled()`)
+		g.P(`if `, variableName, ` != nil && `, variableName, `.poolMarker&`, g.Pkg["mem"], `.PoolMarkerRecycled == `, g.Pkg["mem"], `.PoolMarkerRecycled {`)
+		g.In()
+		g.P(`panic(`, g.Pkg["mem"], `.PanicUseAfterRecycle)`)
+		g.Out()
+		g.P(`}`)
 	}
 }
 

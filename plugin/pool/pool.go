@@ -135,16 +135,16 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 						if gogoproto.HasPool(p.ObjectNamed(valueField.GetTypeName()).File().FileDescriptorProto) {
 							p.P(`if len(m.`, fieldName, `) != 0 {`)
 							p.In()
-							//p.P(`for key, value := range m.`, fieldName, ` {`)
-							p.P(`for _, value := range m.`, fieldName, ` {`)
+							p.P(`for key, value := range m.`, fieldName, ` {`)
+							//p.P(`for _, value := range m.`, fieldName, ` {`)
 							p.In()
 							p.P(`value.Recycle()`)
 							// TODO: This is taking advantage of a go1.11+ only optimization
 							// https://go-review.googlesource.com/c/go/+/110055
-							//p.P(`delete(m.`, fieldName, `, key)`)
+							p.P(`delete(m.`, fieldName, `, key)`)
 							p.Out()
 							p.P(`}`)
-							p.P(`m.`, fieldName, ` = nil`)
+							//p.P(`m.`, fieldName, ` = nil`)
 							p.Out()
 							p.P(`}`)
 						}
@@ -171,29 +171,6 @@ func (p *pool) Generate(file *generator.FileDescriptor) {
 		}
 		p.P(`m.poolMarker =`, p.Pkg["mem"], `.PoolMarkerRecycled`)
 		p.P(`global`, messageGoType, `ObjectPool.Put(m)`)
-		p.Out()
-		p.P(`}`)
-		p.P()
-	}
-
-	// message.checkNotRecycled
-	for _, message := range messages {
-		messageGoType := getMessageGoType(message)
-		p.P(`// checkNotRecycled checks that the message has not been recycled, and if it has, panics.`)
-		p.P(`//`)
-		p.P(`// This is used by generated functions.`)
-		p.P(`func (m *`, messageGoType, `) checkNotRecycled() {`)
-		p.In()
-		p.P(`if m == nil {`)
-		p.In()
-		p.P(`return`)
-		p.Out()
-		p.P(`}`)
-		p.P(`if m.poolMarker&`, p.Pkg["mem"], `.PoolMarkerRecycled == `, p.Pkg["mem"], `.PoolMarkerRecycled {`)
-		p.In()
-		p.P(`panic(`, p.Pkg["mem"], `.PanicUseAfterRecycle)`)
-		p.Out()
-		p.P(`}`)
 		p.Out()
 		p.P(`}`)
 		p.P()

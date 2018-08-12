@@ -53,25 +53,39 @@ func (m *Foo) Reset() {
 	if len(m.RepeatedBar) != 0 {
 		m.RepeatedBar = m.RepeatedBar[:0]
 	}
-	m.MapBar = nil
+	if len(m.MapBar) != 0 {
+		for key := range m.MapBar {
+			delete(m.MapBar, key)
+		}
+	}
 }
 func (m *Foo) String() string {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	return proto.CompactTextString(m)
 }
 func (m *Foo) ProtoMessage() {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 }
 func (m *Foo) Descriptor() ([]byte, []int) {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	return fileDescriptor_pooltrue_fbd4e022f4ee01e5, []int{0}
 }
 func (m *Foo) XXX_Unmarshal(b []byte) error {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	return m.Unmarshal(b)
 }
 func (m *Foo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	if deterministic {
 		return xxx_messageInfo_Foo.Marshal(b, m, deterministic)
 	} else {
@@ -84,22 +98,30 @@ func (m *Foo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	}
 }
 func (dst *Foo) XXX_Merge(src proto.Message) {
-	dst.checkNotRecycled()
+	if dst != nil && dst.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	xxx_messageInfo_Foo.Merge(dst, src)
 }
 func (m *Foo) XXX_Size() int {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	return m.ProtoSize()
 }
 func (m *Foo) XXX_DiscardUnknown() {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	xxx_messageInfo_Foo.DiscardUnknown(m)
 }
 
 var xxx_messageInfo_Foo proto.InternalMessageInfo
 
 func (m *Foo) GetOne() uint64 {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	if m != nil {
 		return m.One
 	}
@@ -107,7 +129,9 @@ func (m *Foo) GetOne() uint64 {
 }
 
 func (m *Foo) GetTwo() uint32 {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	if m != nil {
 		return m.Two
 	}
@@ -115,7 +139,9 @@ func (m *Foo) GetTwo() uint32 {
 }
 
 func (m *Foo) GetBar() *Bar {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	if m != nil {
 		return m.Bar
 	}
@@ -123,7 +149,9 @@ func (m *Foo) GetBar() *Bar {
 }
 
 func (m *Foo) GetRepeatedBar() []*Bar {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	if m != nil {
 		return m.RepeatedBar
 	}
@@ -131,7 +159,9 @@ func (m *Foo) GetRepeatedBar() []*Bar {
 }
 
 func (m *Foo) GetMapBar() map[uint32]*Bar {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	if m != nil {
 		return m.MapBar
 	}
@@ -155,22 +185,32 @@ func (m *Bar) Reset() {
 	m.TwoBar = 0
 }
 func (m *Bar) String() string {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	return proto.CompactTextString(m)
 }
 func (m *Bar) ProtoMessage() {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 }
 func (m *Bar) Descriptor() ([]byte, []int) {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	return fileDescriptor_pooltrue_fbd4e022f4ee01e5, []int{1}
 }
 func (m *Bar) XXX_Unmarshal(b []byte) error {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	return m.Unmarshal(b)
 }
 func (m *Bar) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	if deterministic {
 		return xxx_messageInfo_Bar.Marshal(b, m, deterministic)
 	} else {
@@ -183,22 +223,30 @@ func (m *Bar) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	}
 }
 func (dst *Bar) XXX_Merge(src proto.Message) {
-	dst.checkNotRecycled()
+	if dst != nil && dst.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	xxx_messageInfo_Bar.Merge(dst, src)
 }
 func (m *Bar) XXX_Size() int {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	return m.ProtoSize()
 }
 func (m *Bar) XXX_DiscardUnknown() {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	xxx_messageInfo_Bar.DiscardUnknown(m)
 }
 
 var xxx_messageInfo_Bar proto.InternalMessageInfo
 
 func (m *Bar) GetOneBar() uint64 {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	if m != nil {
 		return m.OneBar
 	}
@@ -206,7 +254,9 @@ func (m *Bar) GetOneBar() uint64 {
 }
 
 func (m *Bar) GetTwoBar() uint32 {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	if m != nil {
 		return m.TwoBar
 	}
@@ -294,7 +344,9 @@ var _Baz_serviceDesc = grpc.ServiceDesc{
 }
 
 func (m *Foo) Marshal() (dAtA []byte, err error) {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	size := m.ProtoSize()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalTo(dAtA)
@@ -305,7 +357,9 @@ func (m *Foo) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Foo) MarshalPool() (*github_com_gogo_protobuf_mem.Bytes, error) {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	size := m.ProtoSize()
 	bytes := github_com_gogo_protobuf_mem.GetBytes(size)
 	bytes.Truncate(size)
@@ -319,7 +373,9 @@ func (m *Foo) MarshalPool() (*github_com_gogo_protobuf_mem.Bytes, error) {
 }
 
 func (m *Foo) MarshalTo(dAtA []byte) (int, error) {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	var i int
 	_ = i
 	var l int
@@ -391,7 +447,9 @@ func (m *Foo) MarshalTo(dAtA []byte) (int, error) {
 }
 
 func (m *Bar) Marshal() (dAtA []byte, err error) {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	size := m.ProtoSize()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalTo(dAtA)
@@ -402,7 +460,9 @@ func (m *Bar) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Bar) MarshalPool() (*github_com_gogo_protobuf_mem.Bytes, error) {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	size := m.ProtoSize()
 	bytes := github_com_gogo_protobuf_mem.GetBytes(size)
 	bytes.Truncate(size)
@@ -416,7 +476,9 @@ func (m *Bar) MarshalPool() (*github_com_gogo_protobuf_mem.Bytes, error) {
 }
 
 func (m *Bar) MarshalTo(dAtA []byte) (int, error) {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	var i int
 	_ = i
 	var l int
@@ -495,10 +557,10 @@ func (m *Foo) Recycle() {
 		m.RepeatedBar = m.RepeatedBar[:0]
 	}
 	if len(m.MapBar) != 0 {
-		for _, value := range m.MapBar {
+		for key, value := range m.MapBar {
 			value.Recycle()
+			delete(m.MapBar, key)
 		}
-		m.MapBar = nil
 	}
 	m.poolMarker = mem.PoolMarkerRecycled
 	globalFooObjectPool.Put(m)
@@ -527,30 +589,6 @@ func (m *Bar) Recycle() {
 	globalBarObjectPool.Put(m)
 }
 
-// checkNotRecycled checks that the message has not been recycled, and if it has, panics.
-//
-// This is used by generated functions.
-func (m *Foo) checkNotRecycled() {
-	if m == nil {
-		return
-	}
-	if m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
-		panic(mem.PanicUseAfterRecycle)
-	}
-}
-
-// checkNotRecycled checks that the message has not been recycled, and if it has, panics.
-//
-// This is used by generated functions.
-func (m *Bar) checkNotRecycled() {
-	if m == nil {
-		return
-	}
-	if m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
-		panic(mem.PanicUseAfterRecycle)
-	}
-}
-
 func newFoo() mem.Object {
 	return &Foo{}
 }
@@ -576,7 +614,9 @@ func init() {
 }
 
 func (m *Foo) ProtoSize() (n int) {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	var l int
 	_ = l
 	if m.One != 0 {
@@ -615,7 +655,9 @@ func (m *Foo) ProtoSize() (n int) {
 }
 
 func (m *Bar) ProtoSize() (n int) {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	var l int
 	_ = l
 	if m.OneBar != 0 {
@@ -644,7 +686,9 @@ func sozPooltrue(x uint64) (n int) {
 	return sovPooltrue(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
 func (m *Foo) Unmarshal(dAtA []byte) error {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -901,7 +945,9 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 	return nil
 }
 func (m *Bar) Unmarshal(dAtA []byte) error {
-	m.checkNotRecycled()
+	if m != nil && m.poolMarker&mem.PoolMarkerRecycled == mem.PoolMarkerRecycled {
+		panic(mem.PanicUseAfterRecycle)
+	}
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
