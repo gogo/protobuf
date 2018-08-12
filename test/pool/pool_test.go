@@ -37,8 +37,9 @@ import (
 )
 
 const (
-	numSliceElements = 1
-	numMapElements   = 3
+	numSliceElements = 10
+	numMapElements   = 20
+	printMemCounts   = false
 )
 
 // The disabled functions should have the same performance as the
@@ -252,7 +253,13 @@ func benchmarkPoolFalse(b *testing.B, withMaps bool) {
 		foo.RepeatedBar = append(foo.RepeatedBar, barElem)
 	}
 	if withMaps {
-		foo.MapBar = make(map[uint32]*poolfalse.Bar, numMapElements)
+		if foo.MapBar != nil {
+			if len(foo.MapBar) > 0 {
+				b.Fatalf("expected reset map to have length 0 but had length %d", len(foo.MapBar))
+			}
+		} else {
+			foo.MapBar = make(map[uint32]*poolfalse.Bar, numMapElements)
+		}
 		for i := 0; i < numMapElements; i++ {
 			barElem := &poolfalse.Bar{}
 			barElem.OneBar = 1000
@@ -288,7 +295,13 @@ func benchmarkPoolFalseWithHeap(b *testing.B, withMaps bool) (*poolfalse.Foo, *p
 		foo.RepeatedBar = append(foo.RepeatedBar, barElem)
 	}
 	if withMaps {
-		foo.MapBar = make(map[uint32]*poolfalse.Bar, numMapElements)
+		if foo.MapBar != nil {
+			if len(foo.MapBar) > 0 {
+				b.Fatalf("expected reset map to have length 0 but had length %d", len(foo.MapBar))
+			}
+		} else {
+			foo.MapBar = make(map[uint32]*poolfalse.Bar, numMapElements)
+		}
 		for i := 0; i < numMapElements; i++ {
 			barElem := &poolfalse.Bar{}
 			barElem.OneBar = 1000
@@ -323,7 +336,13 @@ func benchmarkPoolTrue(b *testing.B, withMaps bool, withSegList bool) {
 		foo.RepeatedBar = append(foo.RepeatedBar, barElem)
 	}
 	if withMaps {
-		foo.MapBar = make(map[uint32]*pooltrue.Bar, numMapElements)
+		if foo.MapBar != nil {
+			if len(foo.MapBar) > 0 {
+				b.Fatalf("expected reset map to have length 0 but had length %d", len(foo.MapBar))
+			}
+		} else {
+			foo.MapBar = make(map[uint32]*pooltrue.Bar, numMapElements)
+		}
 		for i := 0; i < numMapElements; i++ {
 			barElem := pooltrue.GetBar()
 			barElem.OneBar = 1000
@@ -362,7 +381,9 @@ func checkAndPrintMemCounts(tb testing.TB) {
 	newCount := mem.NewCount()
 	getCount := mem.GetCount()
 	unrecycledCount := mem.UnrecycledCount()
-	tb.Logf("MemNewCount: %d MemGetCount: %d MemUnrecycledCount: %d", newCount, getCount, unrecycledCount)
+	if printMemCounts {
+		tb.Logf("MemNewCount: %d MemGetCount: %d MemUnrecycledCount: %d", newCount, getCount, unrecycledCount)
+	}
 	if unrecycledCount != 0 {
 		tb.Fatalf("Expected all memory to be recycled but had %d unrecycled objects", unrecycledCount)
 	}
