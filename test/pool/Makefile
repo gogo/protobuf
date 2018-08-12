@@ -33,8 +33,12 @@ BENCH ?= .
 .PHONY: all
 all: regenerate bench
 
+.PHONY: install
+install:
+	go install ../../protoc-gen-gogo
+
 .PHONY: regenerate
-regenerate:
+regenerate: install
 	protoc \
 		--proto_path=../../../../../:../../protobuf \
 		--proto_path . \
