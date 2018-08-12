@@ -28,8 +28,6 @@
 
 package mem
 
-import "io"
-
 // Bytes represents a byte slice created from a BytesPool.
 //
 // Only create these from BytePools or GetBytes.
@@ -48,20 +46,6 @@ func (b *Bytes) Value() []byte {
 		panic(PanicUseAfterRecycle)
 	}
 	return b.value[:b.valueLen]
-}
-
-// ReadFrom implements io.ReaderFrom.
-//
-// This will read to the next unread location.
-//
-// If the number of bytes read from the reader is greater than the capacity,
-// this will panic.
-func (b *Bytes) ReadFrom(reader io.Reader) (int64, error) {
-	if b.poolMarker&PoolMarkerRecycled == PoolMarkerRecycled {
-		panic(PanicUseAfterRecycle)
-	}
-	panic("not implemented")
-	return 0, nil
 }
 
 // Len gets the length.
