@@ -795,7 +795,7 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 	if err != nil {
 		return err
 	}
-	needToQuote := false//string(b[0]) != `"` && (v.Kind() == reflect.Int64 || v.Kind() == reflect.Uint64)
+	needToQuote := false //string(b[0]) != `"` && (v.Kind() == reflect.Int64 || v.Kind() == reflect.Uint64)
 	if needToQuote {
 		out.write(`"`)
 	}
@@ -853,7 +853,8 @@ func Unmarshal(r io.Reader, pb proto.Message) error {
 	return new(Unmarshaler).Unmarshal(r, pb)
 }
 
-type TypeNotMatchError struct {}
+type TypeNotMatchError struct{}
+
 func (t *TypeNotMatchError) Error() string {
 	return "TypeNotMatch"
 }
@@ -1123,7 +1124,7 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 		vmap := proto.EnumValueMap(prop.Enum)
 		// Don't need to do unquoting; valid enum names
 		// are from a limited character set.
-		s := inputValue[1 : len(inputValue)-1]
+		s := inputValue[1: len(inputValue)-1]
 		n, ok := vmap[string(s)]
 		if !ok {
 			return fmt.Errorf("unknown value %q for enum %s", s, prop.Enum)
@@ -1192,6 +1193,26 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 			return true, tag
 		}
 
+
+		unionAliasFields := func() map[int]string {
+			aliasMap := make(map[int]string)
+			tag := ""
+			for i := 0; i < target.NumField(); i++ {
+				valueField := targetType.Field(i)
+
+				if strings.HasPrefix(valueField.Name, "XXX_") {
+					continue
+				}
+
+				tag = valueField.Tag.Get("union_alias")
+
+				if len(tag) > 0 {
+					aliasMap[i] = tag
+				}
+			}
+			return aliasMap
+		}
+
 		sprops := proto.GetProperties(targetType)
 		if result, tag := isUnionMessage(); result {
 			fieldValue, _ := unionTags(tag)
@@ -1216,11 +1237,56 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 			}
 		}
 
+		aliasFields := unionAliasFields()
+		var aliasMask []bool
+		if len(aliasFields) > 0 {
+			//fmt.Println(aliasFields)
+			alias := make(map[string][]int)
+			for key, value := range aliasFields {
+				alias[value] = append(alias[value], key)
+			}
+
+			//fmt.Println(alias)
+			aliasMask = make([]bool, target.NumField())
+
+			for key, indexes := range alias {
+				//fmt.Println("key", key, " indexes: ", indexes)
+
+				if jsonValue, ok := jsonFields[key]; ok {
+					//fmt.Println("found the json value", string(jsonValue))
+					parsed := false
+					var err error
+					for _, idx := range indexes {
+						if err = u.unmarshalValue(target.Field(idx), jsonValue, sprops.Prop[idx]); err == nil {
+							parsed = true
+							//fmt.Println("parse true with ", jsonValue)
+							delete(jsonFields, key)
+							break
+						}
+					}
+
+					if !parsed {
+						return err
+					} else {
+						for _, idx := range indexes {
+							aliasMask[idx] = true
+						}
+					}
+				}
+			}
+		}
+
+		//fmt.Println("alias mask ", aliasMask)
+
 		for i := 0; i < target.NumField(); i++ {
 			ft := target.Type().Field(i)
 			if strings.HasPrefix(ft.Name, "XXX_") {
 				continue
 			}
+			if len(aliasMask) > 0 && aliasMask[i] {
+				continue
+			}
+
 			valueForField, ok := consumeField(sprops.Prop[i])
 			if !ok {
 				continue
@@ -1400,7 +1466,7 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 	// the quotes and proceed as normal.
 	isNum := targetType.Kind() == reflect.Int64 || targetType.Kind() == reflect.Uint64
 	if isNum && strings.HasPrefix(string(inputValue), `"`) {
-		inputValue = inputValue[1 : len(inputValue)-1]
+		inputValue = inputValue[1: len(inputValue)-1]
 	}
 
 	// Non-finite numbers can be encoded as strings.
