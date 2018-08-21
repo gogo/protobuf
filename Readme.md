@@ -151,4 +151,8 @@ Here is an example using gofast:
 See [https://github.com/gogo/grpc-example](https://github.com/gogo/grpc-example) for an example of using gRPC with gogoprotobuf and the wider grpc-ecosystem.
 
 
+## License
+This software is licensed under the 3-Clause BSD License
+("BSD License 2.0", "Revised BSD License", "New BSD License", or "Modified BSD License").
+
   
