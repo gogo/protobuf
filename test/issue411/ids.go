@@ -5,8 +5,6 @@ import (
 	"encoding/binary"
 	"fmt"
 	"strconv"
-
-	"github.com/gogo/protobuf/jsonpb"
 )
 
 // TraceID is a random 128bit identifier for a trace
@@ -217,11 +215,3 @@ func (s *SpanID) UnmarshalJSON(data []byte) error {
 	return s.Unmarshal(b)
 }
 
-// UnmarshalJSONPB inflates span id from base64 string, possibly enclosed in quotes.
-// User by protobuf JSON serialization.
-//
-// TODO: can be removed once this ticket is fixed:
-//       https://github.com/gogo/protobuf/issues/411#issuecomment-393856837
-func (s *SpanID) UnmarshalJSONPB(_ *jsonpb.Unmarshaler, b []byte) error {
-	return s.UnmarshalJSON(b)
-}
