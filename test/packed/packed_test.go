@@ -39,44 +39,60 @@ import (
 	"unsafe"
 )
 
-func BenchmarkVarintIssue436(b *testing.B) {
-	n := 1 << 22 // Makes for 32 MiB
-
-	msgNormal := &NinRepNative{
-		Field8: make([]int64, n),
-	}
-	dataNormal, err := proto.Marshal(msgNormal)
-	if err != nil {
-		b.Fatal(err)
-	}
-
-	normalmsg := &NinRepNative{}
-
-	for i := 0; i < b.N; i++ {
-		err = proto.Unmarshal(dataNormal, normalmsg)
-		if err != nil {
-			b.Fatal(err)
-		}
-	}
-}
-
 func BenchmarkVarintIssue436withCount(b *testing.B) {
-	n := 1 << 22 // Makes for 32 MiB
-
-	msgPacked := &NinRepPackedNative{
-		Field8: make([]int64, n),
+	var arraySizes = []struct {
+		name string
+		value int64
+	}{
+		{"2^0_ints", 1 << 0},
+		{"2^1_ints", 1 << 1},
+		{"2^2_ints", 1 << 2},
+		{"2^3_ints", 1 << 3},
+		{"2^4_ints", 1 << 4},
+		{"2^8_ints", 1 << 8},
+		{"2^16_ints", 1 << 16},
+		{"2^20_ints", 1 << 20},
+		{"2^24_ints", 1 << 24},
 	}
-	dataPacked, err := proto.Marshal(msgPacked)
-	if err != nil {
-		b.Fatal(err)
+
+	var varintSizes = []struct {
+		name string
+		value int64
+	}{
+		{"max_int 2^7-4", 1 << 7 - 4},
+		{"max_int 2^15-4", 1 << 15 - 4},
+		{"max_int 2^31-4", 1 << 31 - 4},
+		{"max_int 2^63-4", 1 << 63 - 4},
 	}
 
-	packedmsg := &NinRepPackedNative{}
+	for _, arraySize := range arraySizes {
+		for _, varintSize := range varintSizes {
+			seed := time.Now().UnixNano()
+			rng := math_rand.New(math_rand.NewSource(seed))
+			buf := make([]int64, arraySize.value)
+			for j := range buf {
+				buf[j] = rng.Int63n(varintSize.value)
+			}
 
-	for i := 0; i < b.N; i++ {
-		err = proto.Unmarshal(dataPacked, packedmsg)
-		if err != nil {
-			b.Fatal(err)
+			b.Run(arraySize.name + ", " + varintSize.name, func(b *testing.B) {
+				msg := &NinRepNative{
+					Field8: buf,
+				}
+
+				data, err := proto.Marshal(msg)
+				if err != nil {
+					b.Fatal(err)
+				}
+
+				normalmsg := &NinRepNative{}
+
+				for i := 0; i < b.N; i++ {
+					err = proto.Unmarshal(data, normalmsg)
+					if err != nil {
+						b.Fatal(err)
+					}
+				}
+			})
 		}
 	}
 }
