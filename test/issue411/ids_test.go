@@ -9,6 +9,8 @@ import (
 	"github.com/gogo/protobuf/test/issue411"
 )
 
+// Thanks to @yurishkuro for reporting this issue (#411) and providing this test case
+
 // TraceID/SpanID fields are defined as bytes in proto, backed by custom types in Go.
 // Unfortunately, that means they require manual implementations of proto & json serialization.
 // To ensure that it's the same as the default protobuf serialization, file jaeger_test.proto
