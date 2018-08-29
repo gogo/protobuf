@@ -339,8 +339,15 @@ func (g *Generator) GeneratePlugin(p Plugin) {
 	}
 }
 
+func (g *Generator) SetFile(filename string) {
+	g.file = g.fileByName(filename)
+}
+
 func (g *Generator) generatePlugin(file *FileDescriptor, p Plugin) {
 	g.writtenImports = make(map[string]bool)
+	g.usedPackages = make(map[GoImportPath]bool)
+	g.packageNames = make(map[GoImportPath]GoPackageName)
+	g.usedPackageNames = make(map[GoPackageName]bool)
 	g.file = file
 
 	// Run the plugins before the imports so we know which imports are necessary.
