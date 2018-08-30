@@ -1,5 +1,10 @@
+Protocol Buffers for Go with Gadgets
+
 GoGoProtobuf http://github.com/gogo/protobuf extends 
 GoProtobuf http://github.com/golang/protobuf
+
+Copyright (c) 2013, The GoGo Authors. All rights reserved.
+
 
 # Go support for Protocol Buffers
 

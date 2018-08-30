@@ -47,6 +47,7 @@ These projects use gogoprotobuf:
   - <a href="https://github.com/zero-os/0-stor">zero-os/0-stor</a>
   - <a href="https://github.com/spacemeshos/go-spacemesh">go-spacemesh</a>
   - <a href="https://github.com/weaveworks/cortex">cortex</a> - <a href="https://github.com/weaveworks/cortex/blob/fee02a59729d3771ef888f7bf0fd050e1197c56e/pkg/ingester/client/cortex.proto">sample proto file</a>
+  - <a href="http://skywalking.apache.org/">Apache SkyWalking APM</a> - Istio telemetry receiver based on Mixer bypass protocol
 
 Please let us know if you are using gogoprotobuf by posting on our <a href="https://groups.google.com/forum/#!topic/gogoprotobuf/Brw76BxmFpQ">GoogleGroup</a>.
 
@@ -149,5 +150,9 @@ Here is an example using gofast:
 
 See [https://github.com/gogo/grpc-example](https://github.com/gogo/grpc-example) for an example of using gRPC with gogoprotobuf and the wider grpc-ecosystem.
 
+
+## License
+This software is licensed under the 3-Clause BSD License
+("BSD License 2.0", "Revised BSD License", "New BSD License", or "Modified BSD License").
 
   
