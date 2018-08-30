@@ -2469,6 +2469,9 @@ func encodeVarintPopulateOne(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 func (m *Subby) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.Sub)
@@ -2482,6 +2485,9 @@ func (m *Subby) Size() (n int) {
 }
 
 func (m *SampleOneOf) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.TestOneof != nil {
@@ -2494,84 +2500,126 @@ func (m *SampleOneOf) Size() (n int) {
 }
 
 func (m *SampleOneOf_Field1) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 9
 	return n
 }
 func (m *SampleOneOf_Field2) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 5
 	return n
 }
 func (m *SampleOneOf_Field3) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sovOne(uint64(m.Field3))
 	return n
 }
 func (m *SampleOneOf_Field4) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sovOne(uint64(m.Field4))
 	return n
 }
 func (m *SampleOneOf_Field5) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sovOne(uint64(m.Field5))
 	return n
 }
 func (m *SampleOneOf_Field6) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sovOne(uint64(m.Field6))
 	return n
 }
 func (m *SampleOneOf_Field7) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sozOne(uint64(m.Field7))
 	return n
 }
 func (m *SampleOneOf_Field8) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sozOne(uint64(m.Field8))
 	return n
 }
 func (m *SampleOneOf_Field9) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 5
 	return n
 }
 func (m *SampleOneOf_Field10) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 5
 	return n
 }
 func (m *SampleOneOf_Field11) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 9
 	return n
 }
 func (m *SampleOneOf_Field12) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 9
 	return n
 }
 func (m *SampleOneOf_Field13) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 2
 	return n
 }
 func (m *SampleOneOf_Field14) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.Field14)
@@ -2579,6 +2627,9 @@ func (m *SampleOneOf_Field14) Size() (n int) {
 	return n
 }
 func (m *SampleOneOf_Field15) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field15 != nil {
@@ -2588,6 +2639,9 @@ func (m *SampleOneOf_Field15) Size() (n int) {
 	return n
 }
 func (m *SampleOneOf_SubMessage) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.SubMessage != nil {

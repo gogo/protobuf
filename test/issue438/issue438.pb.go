@@ -294,6 +294,9 @@ func init() {
 	proto.RegisterType((*Types)(nil), "issue438.Types")
 }
 func (m *Types) ProtoSize() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Any != nil {

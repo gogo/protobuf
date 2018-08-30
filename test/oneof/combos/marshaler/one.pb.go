@@ -4084,6 +4084,9 @@ func encodeVarintPopulateOne(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 func (m *Subby) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Sub != nil {
@@ -4097,6 +4100,9 @@ func (m *Subby) Size() (n int) {
 }
 
 func (m *AllTypesOneOf) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.TestOneof != nil {
@@ -4109,84 +4115,126 @@ func (m *AllTypesOneOf) Size() (n int) {
 }
 
 func (m *AllTypesOneOf_Field1) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 9
 	return n
 }
 func (m *AllTypesOneOf_Field2) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 5
 	return n
 }
 func (m *AllTypesOneOf_Field3) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sovOne(uint64(m.Field3))
 	return n
 }
 func (m *AllTypesOneOf_Field4) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sovOne(uint64(m.Field4))
 	return n
 }
 func (m *AllTypesOneOf_Field5) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sovOne(uint64(m.Field5))
 	return n
 }
 func (m *AllTypesOneOf_Field6) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sovOne(uint64(m.Field6))
 	return n
 }
 func (m *AllTypesOneOf_Field7) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sozOne(uint64(m.Field7))
 	return n
 }
 func (m *AllTypesOneOf_Field8) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sozOne(uint64(m.Field8))
 	return n
 }
 func (m *AllTypesOneOf_Field9) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 5
 	return n
 }
 func (m *AllTypesOneOf_Field10) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 5
 	return n
 }
 func (m *AllTypesOneOf_Field11) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 9
 	return n
 }
 func (m *AllTypesOneOf_Field12) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 9
 	return n
 }
 func (m *AllTypesOneOf_Field13) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 2
 	return n
 }
 func (m *AllTypesOneOf_Field14) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.Field14)
@@ -4194,6 +4242,9 @@ func (m *AllTypesOneOf_Field14) Size() (n int) {
 	return n
 }
 func (m *AllTypesOneOf_Field15) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field15 != nil {
@@ -4203,6 +4254,9 @@ func (m *AllTypesOneOf_Field15) Size() (n int) {
 	return n
 }
 func (m *AllTypesOneOf_SubMessage) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.SubMessage != nil {
@@ -4212,6 +4266,9 @@ func (m *AllTypesOneOf_SubMessage) Size() (n int) {
 	return n
 }
 func (m *TwoOneofs) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.One != nil {
@@ -4227,24 +4284,36 @@ func (m *TwoOneofs) Size() (n int) {
 }
 
 func (m *TwoOneofs_Field1) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 9
 	return n
 }
 func (m *TwoOneofs_Field2) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 5
 	return n
 }
 func (m *TwoOneofs_Field3) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 1 + sovOne(uint64(m.Field3))
 	return n
 }
 func (m *TwoOneofs_Field34) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.Field34)
@@ -4252,6 +4321,9 @@ func (m *TwoOneofs_Field34) Size() (n int) {
 	return n
 }
 func (m *TwoOneofs_Field35) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field35 != nil {
@@ -4261,6 +4333,9 @@ func (m *TwoOneofs_Field35) Size() (n int) {
 	return n
 }
 func (m *TwoOneofs_SubMessage2) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.SubMessage2 != nil {
@@ -4270,6 +4345,9 @@ func (m *TwoOneofs_SubMessage2) Size() (n int) {
 	return n
 }
 func (m *CustomOneof) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Custom != nil {
@@ -4282,6 +4360,9 @@ func (m *CustomOneof) Size() (n int) {
 }
 
 func (m *CustomOneof_Stringy) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.Stringy)
@@ -4289,6 +4370,9 @@ func (m *CustomOneof_Stringy) Size() (n int) {
 	return n
 }
 func (m *CustomOneof_CustomType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = m.CustomType.Size()
@@ -4296,12 +4380,18 @@ func (m *CustomOneof_CustomType) Size() (n int) {
 	return n
 }
 func (m *CustomOneof_CastType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 2 + sovOne(uint64(m.CastType))
 	return n
 }
 func (m *CustomOneof_MyCustomName) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 2 + sovOne(uint64(m.MyCustomName))

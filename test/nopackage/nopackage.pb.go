@@ -121,6 +121,9 @@ func encodeVarintNopackage(dAtA []byte, offset int, v uint64) int {
 	return offset + 1
 }
 func (m *M) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.F) > 0 {

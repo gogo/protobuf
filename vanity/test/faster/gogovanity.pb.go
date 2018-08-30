@@ -128,6 +128,9 @@ func encodeVarintGogovanity(dAtA []byte, offset int, v uint64) int {
 	return offset + 1
 }
 func (m *B) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.String_ != nil {

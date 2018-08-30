@@ -1190,6 +1190,9 @@ func encodeVarintPopulateCasttype(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 func (m *Castaway) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Int32Ptr != nil {
@@ -1270,6 +1273,9 @@ func (m *Castaway) Size() (n int) {
 }
 
 func (m *Wilson) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Int64 != nil {

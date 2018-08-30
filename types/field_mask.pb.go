@@ -513,6 +513,9 @@ func encodeVarintPopulateFieldMask(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 func (m *FieldMask) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Paths) > 0 {
