@@ -144,7 +144,7 @@ func TestParameters(t *testing.T) {
 		wantPackageB: "test_beta",
 		wantImportsA: map[string]bool{
 			"github.com/gogo/protobuf/proto": true,
-			"beta": true,
+			"beta":                           true,
 		},
 	}, {
 		parameters: "import_prefix=prefix",
