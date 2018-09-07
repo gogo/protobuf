@@ -66,3 +66,4 @@ Issues with customtype include:
   * <a href="https://github.com/gogo/protobuf/issues/125">Using a proto message as a customtype is not allowed.</a>
   * <a href="https://github.com/gogo/protobuf/issues/200">cusomtype of type map can not UnmarshalText</a>
   * <a href="https://github.com/gogo/protobuf/issues/201">customtype of type struct cannot jsonpb unmarshal</a>
+  * <a href="https://github.com/gogo/protobuf/issues/477">customtype field does not get a generated 'getter' method</a>
