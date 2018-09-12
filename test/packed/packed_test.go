@@ -41,7 +41,7 @@ import (
 
 func BenchmarkVarintIssue436withCount(b *testing.B) {
 	var arraySizes = []struct {
-		name string
+		name  string
 		value int64
 	}{
 		{"2^0_ints", 1 << 0},
@@ -56,13 +56,13 @@ func BenchmarkVarintIssue436withCount(b *testing.B) {
 	}
 
 	var varintSizes = []struct {
-		name string
+		name  string
 		value int64
 	}{
-		{"max_int 2^7-4", 1 << 7 - 4},
-		{"max_int 2^15-4", 1 << 15 - 4},
-		{"max_int 2^31-4", 1 << 31 - 4},
-		{"max_int 2^63-4", 1 << 63 - 4},
+		{"max_int 2^7-4", 1<<7 - 4},
+		{"max_int 2^15-4", 1<<15 - 4},
+		{"max_int 2^31-4", 1<<31 - 4},
+		{"max_int 2^63-4", 1<<63 - 4},
 	}
 
 	for _, arraySize := range arraySizes {
@@ -74,7 +74,7 @@ func BenchmarkVarintIssue436withCount(b *testing.B) {
 				buf[j] = rng.Int63n(varintSize.value)
 			}
 
-			b.Run(arraySize.name + ", " + varintSize.name, func(b *testing.B) {
+			b.Run(arraySize.name+", "+varintSize.name, func(b *testing.B) {
 				msg := &NinRepNative{
 					Field8: buf,
 				}

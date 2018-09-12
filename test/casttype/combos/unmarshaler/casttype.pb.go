@@ -1641,6 +1641,17 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
+				var elementCount int
+				var count int
+				for _, integer := range dAtA {
+					if integer < 128 {
+						count++
+					}
+				}
+				elementCount = count
+				if elementCount != 0 && len(m.MyUint64S) == 0 {
+					m.MyUint64S = make([]github_com_gogo_protobuf_test_casttype.MyUint64Type, 0, elementCount)
+				}
 				for iNdEx < postIndex {
 					var v github_com_gogo_protobuf_test_casttype.MyUint64Type
 					for shift := uint(0); ; shift += 7 {
