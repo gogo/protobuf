@@ -41,6 +41,7 @@ signatures. Assuming the custom type is called `T`:
 func (t T) Marshal() ([]byte, error) {}
 func (t *T) MarshalTo(data []byte) (n int, err error) {}
 func (t *T) Unmarshal(data []byte) error {}
+func (t *T) Size() int {}
 
 func (t T) MarshalJSON() ([]byte, error) {}
 func (t *T) UnmarshalJSON(data []byte) error {}
