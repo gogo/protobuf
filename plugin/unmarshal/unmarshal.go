@@ -1100,20 +1100,32 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				p.Out()
 				p.P(`}`)
 
-				var fixedTypeSizeBytes int
+				p.P(`var elementCount int`)
 				switch *field.Type {
 				case descriptor.FieldDescriptorProto_TYPE_DOUBLE, descriptor.FieldDescriptorProto_TYPE_FIXED64, descriptor.FieldDescriptorProto_TYPE_SFIXED64:
-					fixedTypeSizeBytes = 8
+					p.P(`elementCount = packedLen/`, 8)
 				case descriptor.FieldDescriptorProto_TYPE_FLOAT, descriptor.FieldDescriptorProto_TYPE_FIXED32, descriptor.FieldDescriptorProto_TYPE_SFIXED32:
-					fixedTypeSizeBytes = 4
-				}
-				if fixedTypeSizeBytes != 0 {
-					p.P(`if len(m.`, fieldname, `) == 0 {`)
+					p.P(`elementCount = packedLen/`, 4)
+				case descriptor.FieldDescriptorProto_TYPE_INT64, descriptor.FieldDescriptorProto_TYPE_UINT64, descriptor.FieldDescriptorProto_TYPE_INT32, descriptor.FieldDescriptorProto_TYPE_UINT32, descriptor.FieldDescriptorProto_TYPE_SINT32, descriptor.FieldDescriptorProto_TYPE_SINT64:
+					p.P(`var count int`)
+					p.P(`for _, integer := range dAtA {`)
 					p.In()
-					p.P(`m.`, fieldname, ` = make([]`, p.noStarOrSliceType(message, field), `, 0, packedLen/`, fixedTypeSizeBytes, `)`)
+					p.P(`if integer < 128 {`)
+					p.In()
+					p.P(`count++`)
 					p.Out()
 					p.P(`}`)
+					p.Out()
+					p.P(`}`)
+					p.P(`elementCount = count`)
+				case descriptor.FieldDescriptorProto_TYPE_BOOL:
+					p.P(`elementCount = packedLen`)
 				}
+				p.P(`if elementCount != 0 && len(m.`, fieldname, `) == 0 {`)
+				p.In()
+				p.P(`m.`, fieldname, ` = make([]`, p.noStarOrSliceType(message, field), `, 0, elementCount)`)
+				p.Out()
+				p.P(`}`)
 
 				p.P(`for iNdEx < postIndex {`)
 				p.In()
