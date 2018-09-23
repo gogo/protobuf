@@ -222,6 +222,9 @@ func (this *Bar) Equal(that interface{}) bool {
 	return true
 }
 func (m *Foo) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -235,6 +238,9 @@ func (m *Foo) Size() (n int) {
 }
 
 func (m *Bar) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	n += 2

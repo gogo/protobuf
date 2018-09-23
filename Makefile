@@ -127,9 +127,12 @@ regenerate:
 	make -C test/cachedsize regenerate
 	make -C test/deterministic regenerate
 	make -C test/issue438 regenerate
+	make -C test/issue444 regenerate
 	make -C test/issue449 regenerate
+	make -C test/xxxfields regenerate
 	make -C test/issue435 regenerate
 	make -C test/issue411 regenerate
+
 	make gofmt
 
 tests:
@@ -167,7 +170,7 @@ contributors:
 	git log --format='%aN <%aE>' | sort -fu > CONTRIBUTORS
 
 js:
-ifeq (go1.10, $(findstring go1.10, $(GO_VERSION)))
+ifeq (go1.11, $(findstring go1.11, $(GO_VERSION)))
 	go get -u github.com/gopherjs/gopherjs
 	gopherjs build github.com/gogo/protobuf/protoc-gen-gogo
 endif

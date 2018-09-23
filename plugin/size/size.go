@@ -69,6 +69,9 @@ The following message:
 given to the size plugin, will generate the following code:
 
   func (m *B) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = m.A.Size()
@@ -595,6 +598,11 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		p.P(`func (m *`, ccTypeName, `) `, sizeName, `() (n int) {`)
 		p.In()
+		p.P(`if m == nil {`)
+		p.In()
+		p.P(`return 0`)
+		p.Out()
+		p.P(`}`)
 		p.P(`var l int`)
 		p.P(`_ = l`)
 		oneofs := make(map[string]struct{})
@@ -650,6 +658,11 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 			ccTypeName := p.OneOfTypeName(message, f)
 			p.P(`func (m *`, ccTypeName, `) `, sizeName, `() (n int) {`)
 			p.In()
+			p.P(`if m == nil {`)
+			p.In()
+			p.P(`return 0`)
+			p.Out()
+			p.P(`}`)
 			p.P(`var l int`)
 			p.P(`_ = l`)
 			vanity.TurnOffNullableForNativeTypes(f)

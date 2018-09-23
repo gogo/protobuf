@@ -217,6 +217,9 @@ func encodeVarintPopulateIssue330(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 func (m *Object) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Type != 0 {

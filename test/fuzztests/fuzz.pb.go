@@ -1093,6 +1093,9 @@ func encodeVarintFuzz(dAtA []byte, offset int, v uint64) int {
 	return offset + 1
 }
 func (m *Nil) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.XXX_unrecognized != nil {
@@ -1102,6 +1105,9 @@ func (m *Nil) Size() (n int) {
 }
 
 func (m *NinRepPackedNative) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Field1) > 0 {
@@ -1174,6 +1180,9 @@ func (m *NinRepPackedNative) Size() (n int) {
 }
 
 func (m *NinOptNative) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {
@@ -1230,6 +1239,9 @@ func (m *NinOptNative) Size() (n int) {
 }
 
 func (m *NinOptStruct) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Field1 != nil {

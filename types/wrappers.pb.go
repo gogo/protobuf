@@ -1643,6 +1643,9 @@ func encodeVarintPopulateWrappers(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 func (m *DoubleValue) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Value != 0 {
@@ -1655,6 +1658,9 @@ func (m *DoubleValue) Size() (n int) {
 }
 
 func (m *FloatValue) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Value != 0 {
@@ -1667,6 +1673,9 @@ func (m *FloatValue) Size() (n int) {
 }
 
 func (m *Int64Value) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Value != 0 {
@@ -1679,6 +1688,9 @@ func (m *Int64Value) Size() (n int) {
 }
 
 func (m *UInt64Value) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Value != 0 {
@@ -1691,6 +1703,9 @@ func (m *UInt64Value) Size() (n int) {
 }
 
 func (m *Int32Value) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Value != 0 {
@@ -1703,6 +1718,9 @@ func (m *Int32Value) Size() (n int) {
 }
 
 func (m *UInt32Value) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Value != 0 {
@@ -1715,6 +1733,9 @@ func (m *UInt32Value) Size() (n int) {
 }
 
 func (m *BoolValue) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Value {
@@ -1727,6 +1748,9 @@ func (m *BoolValue) Size() (n int) {
 }
 
 func (m *StringValue) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.Value)
@@ -1740,6 +1764,9 @@ func (m *StringValue) Size() (n int) {
 }
 
 func (m *BytesValue) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = len(m.Value)
