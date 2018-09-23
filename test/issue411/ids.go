@@ -214,4 +214,3 @@ func (s *SpanID) UnmarshalJSON(data []byte) error {
 	}
 	return s.Unmarshal(b)
 }
-
