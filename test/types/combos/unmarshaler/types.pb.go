@@ -29,17 +29,17 @@ var _ = time.Kitchen
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type KnownTypes struct {
-	Dur                  *types.Duration    `protobuf:"bytes,1,opt,name=dur" json:"dur,omitempty"`
-	Ts                   *types.Timestamp   `protobuf:"bytes,2,opt,name=ts" json:"ts,omitempty"`
-	Dbl                  *types.DoubleValue `protobuf:"bytes,3,opt,name=dbl" json:"dbl,omitempty"`
-	Flt                  *types.FloatValue  `protobuf:"bytes,4,opt,name=flt" json:"flt,omitempty"`
-	I64                  *types.Int64Value  `protobuf:"bytes,5,opt,name=i64" json:"i64,omitempty"`
-	U64                  *types.UInt64Value `protobuf:"bytes,6,opt,name=u64" json:"u64,omitempty"`
-	I32                  *types.Int32Value  `protobuf:"bytes,7,opt,name=i32" json:"i32,omitempty"`
-	U32                  *types.UInt32Value `protobuf:"bytes,8,opt,name=u32" json:"u32,omitempty"`
-	Bool                 *types.BoolValue   `protobuf:"bytes,9,opt,name=bool" json:"bool,omitempty"`
-	Str                  *types.StringValue `protobuf:"bytes,10,opt,name=str" json:"str,omitempty"`
-	Bytes                *types.BytesValue  `protobuf:"bytes,11,opt,name=bytes" json:"bytes,omitempty"`
+	Dur                  *types.Duration    `protobuf:"bytes,1,opt,name=dur,proto3" json:"dur,omitempty"`
+	Ts                   *types.Timestamp   `protobuf:"bytes,2,opt,name=ts,proto3" json:"ts,omitempty"`
+	Dbl                  *types.DoubleValue `protobuf:"bytes,3,opt,name=dbl,proto3" json:"dbl,omitempty"`
+	Flt                  *types.FloatValue  `protobuf:"bytes,4,opt,name=flt,proto3" json:"flt,omitempty"`
+	I64                  *types.Int64Value  `protobuf:"bytes,5,opt,name=i64,proto3" json:"i64,omitempty"`
+	U64                  *types.UInt64Value `protobuf:"bytes,6,opt,name=u64,proto3" json:"u64,omitempty"`
+	I32                  *types.Int32Value  `protobuf:"bytes,7,opt,name=i32,proto3" json:"i32,omitempty"`
+	U32                  *types.UInt32Value `protobuf:"bytes,8,opt,name=u32,proto3" json:"u32,omitempty"`
+	Bool                 *types.BoolValue   `protobuf:"bytes,9,opt,name=bool,proto3" json:"bool,omitempty"`
+	Str                  *types.StringValue `protobuf:"bytes,10,opt,name=str,proto3" json:"str,omitempty"`
+	Bytes                *types.BytesValue  `protobuf:"bytes,11,opt,name=bytes,proto3" json:"bytes,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
 	XXX_unrecognized     []byte             `json:"-"`
 	XXX_sizecache        int32              `json:"-"`
@@ -147,10 +147,10 @@ func (m *KnownTypes) GetBytes() *types.BytesValue {
 }
 
 type ProtoTypes struct {
-	NullableTimestamp    *types.Timestamp `protobuf:"bytes,1,opt,name=nullableTimestamp" json:"nullableTimestamp,omitempty"`
-	NullableDuration     *types.Duration  `protobuf:"bytes,2,opt,name=nullableDuration" json:"nullableDuration,omitempty"`
-	Timestamp            types.Timestamp  `protobuf:"bytes,3,opt,name=timestamp" json:"timestamp"`
-	Duration             types.Duration   `protobuf:"bytes,4,opt,name=duration" json:"duration"`
+	NullableTimestamp    *types.Timestamp `protobuf:"bytes,1,opt,name=nullableTimestamp,proto3" json:"nullableTimestamp,omitempty"`
+	NullableDuration     *types.Duration  `protobuf:"bytes,2,opt,name=nullableDuration,proto3" json:"nullableDuration,omitempty"`
+	Timestamp            types.Timestamp  `protobuf:"bytes,3,opt,name=timestamp,proto3" json:"timestamp"`
+	Duration             types.Duration   `protobuf:"bytes,4,opt,name=duration,proto3" json:"duration"`
 	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
 	XXX_unrecognized     []byte           `json:"-"`
 	XXX_sizecache        int32            `json:"-"`
@@ -209,10 +209,10 @@ func (m *ProtoTypes) GetDuration() types.Duration {
 }
 
 type StdTypes struct {
-	NullableTimestamp    *time.Time     `protobuf:"bytes,1,opt,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty"`
-	NullableDuration     *time.Duration `protobuf:"bytes,2,opt,name=nullableDuration,stdduration" json:"nullableDuration,omitempty"`
-	Timestamp            time.Time      `protobuf:"bytes,3,opt,name=timestamp,stdtime" json:"timestamp"`
-	Duration             time.Duration  `protobuf:"bytes,4,opt,name=duration,stdduration" json:"duration"`
+	NullableTimestamp    *time.Time     `protobuf:"bytes,1,opt,name=nullableTimestamp,proto3,stdtime" json:"nullableTimestamp,omitempty"`
+	NullableDuration     *time.Duration `protobuf:"bytes,2,opt,name=nullableDuration,proto3,stdduration" json:"nullableDuration,omitempty"`
+	Timestamp            time.Time      `protobuf:"bytes,3,opt,name=timestamp,proto3,stdtime" json:"timestamp"`
+	Duration             time.Duration  `protobuf:"bytes,4,opt,name=duration,proto3,stdduration" json:"duration"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -271,10 +271,10 @@ func (m *StdTypes) GetDuration() time.Duration {
 }
 
 type RepProtoTypes struct {
-	NullableTimestamps   []*types.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamps" json:"nullableTimestamps,omitempty"`
-	NullableDurations    []*types.Duration  `protobuf:"bytes,2,rep,name=nullableDurations" json:"nullableDurations,omitempty"`
-	Timestamps           []types.Timestamp  `protobuf:"bytes,3,rep,name=timestamps" json:"timestamps"`
-	Durations            []types.Duration   `protobuf:"bytes,4,rep,name=durations" json:"durations"`
+	NullableTimestamps   []*types.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamps,proto3" json:"nullableTimestamps,omitempty"`
+	NullableDurations    []*types.Duration  `protobuf:"bytes,2,rep,name=nullableDurations,proto3" json:"nullableDurations,omitempty"`
+	Timestamps           []types.Timestamp  `protobuf:"bytes,3,rep,name=timestamps,proto3" json:"timestamps"`
+	Durations            []types.Duration   `protobuf:"bytes,4,rep,name=durations,proto3" json:"durations"`
 	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
 	XXX_unrecognized     []byte             `json:"-"`
 	XXX_sizecache        int32              `json:"-"`
@@ -333,10 +333,10 @@ func (m *RepProtoTypes) GetDurations() []types.Duration {
 }
 
 type RepStdTypes struct {
-	NullableTimestamps   []*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamps,stdtime" json:"nullableTimestamps,omitempty"`
-	NullableDurations    []*time.Duration `protobuf:"bytes,2,rep,name=nullableDurations,stdduration" json:"nullableDurations,omitempty"`
-	Timestamps           []time.Time      `protobuf:"bytes,3,rep,name=timestamps,stdtime" json:"timestamps"`
-	Durations            []time.Duration  `protobuf:"bytes,4,rep,name=durations,stdduration" json:"durations"`
+	NullableTimestamps   []*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamps,proto3,stdtime" json:"nullableTimestamps,omitempty"`
+	NullableDurations    []*time.Duration `protobuf:"bytes,2,rep,name=nullableDurations,proto3,stdduration" json:"nullableDurations,omitempty"`
+	Timestamps           []time.Time      `protobuf:"bytes,3,rep,name=timestamps,proto3,stdtime" json:"timestamps"`
+	Durations            []time.Duration  `protobuf:"bytes,4,rep,name=durations,proto3,stdduration" json:"durations"`
 	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
 	XXX_unrecognized     []byte           `json:"-"`
 	XXX_sizecache        int32            `json:"-"`
@@ -395,10 +395,10 @@ func (m *RepStdTypes) GetDurations() []time.Duration {
 }
 
 type MapProtoTypes struct {
-	NullableTimestamp    map[int32]*types.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamp" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Timestamp            map[int32]types.Timestamp  `protobuf:"bytes,2,rep,name=timestamp" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableDuration     map[int32]*types.Duration  `protobuf:"bytes,3,rep,name=nullableDuration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Duration             map[int32]types.Duration   `protobuf:"bytes,4,rep,name=duration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableTimestamp    map[int32]*types.Timestamp `protobuf:"bytes,1,rep,name=nullableTimestamp,proto3" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Timestamp            map[int32]types.Timestamp  `protobuf:"bytes,2,rep,name=timestamp,proto3" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableDuration     map[int32]*types.Duration  `protobuf:"bytes,3,rep,name=nullableDuration,proto3" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Duration             map[int32]types.Duration   `protobuf:"bytes,4,rep,name=duration,proto3" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}                   `json:"-"`
 	XXX_unrecognized     []byte                     `json:"-"`
 	XXX_sizecache        int32                      `json:"-"`
@@ -457,10 +457,10 @@ func (m *MapProtoTypes) GetDuration() map[int32]types.Duration {
 }
 
 type MapStdTypes struct {
-	NullableTimestamp    map[int32]*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Timestamp            map[int32]time.Time      `protobuf:"bytes,2,rep,name=timestamp,stdtime" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableDuration     map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Duration             map[int32]time.Duration  `protobuf:"bytes,4,rep,name=duration,stdduration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableTimestamp    map[int32]*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamp,proto3,stdtime" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Timestamp            map[int32]time.Time      `protobuf:"bytes,2,rep,name=timestamp,proto3,stdtime" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableDuration     map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,proto3,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Duration             map[int32]time.Duration  `protobuf:"bytes,4,rep,name=duration,proto3,stdduration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
 	XXX_unrecognized     []byte                   `json:"-"`
 	XXX_sizecache        int32                    `json:"-"`
@@ -560,10 +560,10 @@ type isOneofProtoTypes_OneOfProtoTimes interface {
 }
 
 type OneofProtoTypes_Timestamp struct {
-	Timestamp *types.Timestamp `protobuf:"bytes,1,opt,name=timestamp,oneof"`
+	Timestamp *types.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3,oneof"`
 }
 type OneofProtoTypes_Duration struct {
-	Duration *types.Duration `protobuf:"bytes,2,opt,name=duration,oneof"`
+	Duration *types.Duration `protobuf:"bytes,2,opt,name=duration,proto3,oneof"`
 }
 
 func (*OneofProtoTypes_Timestamp) isOneofProtoTypes_OneOfProtoTimes() {}
@@ -706,10 +706,10 @@ type isOneofStdTypes_OneOfStdTimes interface {
 }
 
 type OneofStdTypes_Timestamp struct {
-	Timestamp *time.Time `protobuf:"bytes,1,opt,name=timestamp,oneof,stdtime"`
+	Timestamp *time.Time `protobuf:"bytes,1,opt,name=timestamp,proto3,oneof,stdtime"`
 }
 type OneofStdTypes_Duration struct {
-	Duration *time.Duration `protobuf:"bytes,2,opt,name=duration,oneof,stdduration"`
+	Duration *time.Duration `protobuf:"bytes,2,opt,name=duration,proto3,oneof,stdduration"`
 }
 
 func (*OneofStdTypes_Timestamp) isOneofStdTypes_OneOfStdTimes() {}

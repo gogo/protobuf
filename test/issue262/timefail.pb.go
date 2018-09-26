@@ -31,7 +31,7 @@ var _ = time.Kitchen
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type TimeFail struct {
-	TimeTest *time.Time `protobuf:"bytes,1,opt,name=time_test,json=timeTest,stdtime" json:"time_test,omitempty"`
+	TimeTest *time.Time `protobuf:"bytes,1,opt,name=time_test,json=timeTest,proto3,stdtime" json:"time_test,omitempty"`
 }
 
 func (m *TimeFail) Reset()      { *m = TimeFail{} }

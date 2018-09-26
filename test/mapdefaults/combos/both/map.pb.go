@@ -32,7 +32,7 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type MapTest struct {
-	StrStr               map[string]string `protobuf:"bytes,1,rep,name=str_str,json=strStr" json:"str_str,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	StrStr               map[string]string `protobuf:"bytes,1,rep,name=str_str,json=strStr,proto3" json:"str_str,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -71,7 +71,7 @@ func (m *MapTest) XXX_DiscardUnknown() {
 var xxx_messageInfo_MapTest proto.InternalMessageInfo
 
 type FakeMap struct {
-	Entries              []*FakeMapEntry `protobuf:"bytes,1,rep,name=entries" json:"entries,omitempty"`
+	Entries              []*FakeMapEntry `protobuf:"bytes,1,rep,name=entries,proto3" json:"entries,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
 	XXX_unrecognized     []byte          `json:"-"`
 	XXX_sizecache        int32           `json:"-"`

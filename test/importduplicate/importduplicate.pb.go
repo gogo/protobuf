@@ -28,9 +28,9 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type MapAndSortKeys struct {
-	Key                  *sortkeys.Object `protobuf:"bytes,1,opt,name=key" json:"key,omitempty"`
-	KeyValue             map[int32]string `protobuf:"bytes,2,rep,name=keyValue" json:"keyValue,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Value                *proto1.Subject  `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
+	Key                  *sortkeys.Object `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	KeyValue             map[int32]string `protobuf:"bytes,2,rep,name=keyValue,proto3" json:"keyValue,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Value                *proto1.Subject  `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
 	XXX_unrecognized     []byte           `json:"-"`
 	XXX_sizecache        int32            `json:"-"`

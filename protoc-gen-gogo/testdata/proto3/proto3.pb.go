@@ -49,10 +49,10 @@ func (Request_Flavour) EnumDescriptor() ([]byte, []int) {
 
 type Request struct {
 	Name                 string          `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Key                  []int64         `protobuf:"varint,2,rep,packed,name=key" json:"key,omitempty"`
+	Key                  []int64         `protobuf:"varint,2,rep,packed,name=key,proto3" json:"key,omitempty"`
 	Taste                Request_Flavour `protobuf:"varint,3,opt,name=taste,proto3,enum=proto3.Request_Flavour" json:"taste,omitempty"`
-	Book                 *Book           `protobuf:"bytes,4,opt,name=book" json:"book,omitempty"`
-	Unpacked             []int64         `protobuf:"varint,5,rep,name=unpacked" json:"unpacked,omitempty"`
+	Book                 *Book           `protobuf:"bytes,4,opt,name=book,proto3" json:"book,omitempty"`
+	Unpacked             []int64         `protobuf:"varint,5,rep,name=unpacked,proto3" json:"unpacked,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
 	XXX_unrecognized     []byte          `json:"-"`
 	XXX_sizecache        int32           `json:"-"`
