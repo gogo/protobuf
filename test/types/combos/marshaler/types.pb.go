@@ -27,17 +27,17 @@ var _ = time.Kitchen
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type KnownTypes struct {
-	Dur                  *types.Duration    `protobuf:"bytes,1,opt,name=dur" json:"dur,omitempty"`
-	Ts                   *types.Timestamp   `protobuf:"bytes,2,opt,name=ts" json:"ts,omitempty"`
-	Dbl                  *types.DoubleValue `protobuf:"bytes,3,opt,name=dbl" json:"dbl,omitempty"`
-	Flt                  *types.FloatValue  `protobuf:"bytes,4,opt,name=flt" json:"flt,omitempty"`
-	I64                  *types.Int64Value  `protobuf:"bytes,5,opt,name=i64" json:"i64,omitempty"`
-	U64                  *types.UInt64Value `protobuf:"bytes,6,opt,name=u64" json:"u64,omitempty"`
-	I32                  *types.Int32Value  `protobuf:"bytes,7,opt,name=i32" json:"i32,omitempty"`
-	U32                  *types.UInt32Value `protobuf:"bytes,8,opt,name=u32" json:"u32,omitempty"`
-	Bool                 *types.BoolValue   `protobuf:"bytes,9,opt,name=bool" json:"bool,omitempty"`
-	Str                  *types.StringValue `protobuf:"bytes,10,opt,name=str" json:"str,omitempty"`
-	Bytes                *types.BytesValue  `protobuf:"bytes,11,opt,name=bytes" json:"bytes,omitempty"`
+	Dur                  *types.Duration    `protobuf:"bytes,1,opt,name=dur,proto3" json:"dur,omitempty"`
+	Ts                   *types.Timestamp   `protobuf:"bytes,2,opt,name=ts,proto3" json:"ts,omitempty"`
+	Dbl                  *types.DoubleValue `protobuf:"bytes,3,opt,name=dbl,proto3" json:"dbl,omitempty"`
+	Flt                  *types.FloatValue  `protobuf:"bytes,4,opt,name=flt,proto3" json:"flt,omitempty"`
+	I64                  *types.Int64Value  `protobuf:"bytes,5,opt,name=i64,proto3" json:"i64,omitempty"`
+	U64                  *types.UInt64Value `protobuf:"bytes,6,opt,name=u64,proto3" json:"u64,omitempty"`
+	I32                  *types.Int32Value  `protobuf:"bytes,7,opt,name=i32,proto3" json:"i32,omitempty"`
+	U32                  *types.UInt32Value `protobuf:"bytes,8,opt,name=u32,proto3" json:"u32,omitempty"`
+	Bool                 *types.BoolValue   `protobuf:"bytes,9,opt,name=bool,proto3" json:"bool,omitempty"`
+	Str                  *types.StringValue `protobuf:"bytes,10,opt,name=str,proto3" json:"str,omitempty"`
+	Bytes                *types.BytesValue  `protobuf:"bytes,11,opt,name=bytes,proto3" json:"bytes,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
 	XXX_unrecognized     []byte             `json:"-"`
 	XXX_sizecache        int32              `json:"-"`
@@ -154,28 +154,28 @@ func (m *KnownTypes) GetBytes() *types.BytesValue {
 }
 
 type ProtoTypes struct {
-	NullableTimestamp    *types.Timestamp   `protobuf:"bytes,1,opt,name=nullableTimestamp" json:"nullableTimestamp,omitempty"`
-	NullableDuration     *types.Duration    `protobuf:"bytes,2,opt,name=nullableDuration" json:"nullableDuration,omitempty"`
-	NullableDouble       *types.DoubleValue `protobuf:"bytes,3,opt,name=nullableDouble" json:"nullableDouble,omitempty"`
-	NullableFloat        *types.FloatValue  `protobuf:"bytes,4,opt,name=nullableFloat" json:"nullableFloat,omitempty"`
-	NullableInt64        *types.Int64Value  `protobuf:"bytes,5,opt,name=nullableInt64" json:"nullableInt64,omitempty"`
-	NullableUInt64       *types.UInt64Value `protobuf:"bytes,6,opt,name=nullableUInt64" json:"nullableUInt64,omitempty"`
-	NullableInt32        *types.Int32Value  `protobuf:"bytes,7,opt,name=nullableInt32" json:"nullableInt32,omitempty"`
-	NullableUInt32       *types.UInt32Value `protobuf:"bytes,8,opt,name=nullableUInt32" json:"nullableUInt32,omitempty"`
-	NullableBool         *types.BoolValue   `protobuf:"bytes,9,opt,name=nullableBool" json:"nullableBool,omitempty"`
-	NullableString       *types.StringValue `protobuf:"bytes,10,opt,name=nullableString" json:"nullableString,omitempty"`
-	NullableBytes        *types.BytesValue  `protobuf:"bytes,11,opt,name=nullableBytes" json:"nullableBytes,omitempty"`
-	Timestamp            types.Timestamp    `protobuf:"bytes,12,opt,name=timestamp" json:"timestamp"`
-	Duration             types.Duration     `protobuf:"bytes,13,opt,name=duration" json:"duration"`
-	NonnullDouble        types.DoubleValue  `protobuf:"bytes,14,opt,name=nonnullDouble" json:"nonnullDouble"`
-	NonnullFloat         types.FloatValue   `protobuf:"bytes,15,opt,name=nonnullFloat" json:"nonnullFloat"`
-	NonnullInt64         types.Int64Value   `protobuf:"bytes,16,opt,name=nonnullInt64" json:"nonnullInt64"`
-	NonnullUInt64        types.UInt64Value  `protobuf:"bytes,17,opt,name=nonnullUInt64" json:"nonnullUInt64"`
-	NonnullInt32         types.Int32Value   `protobuf:"bytes,18,opt,name=nonnullInt32" json:"nonnullInt32"`
-	NonnullUInt32        types.UInt32Value  `protobuf:"bytes,19,opt,name=nonnullUInt32" json:"nonnullUInt32"`
-	NonnullBool          types.BoolValue    `protobuf:"bytes,20,opt,name=nonnullBool" json:"nonnullBool"`
-	NonnullString        types.StringValue  `protobuf:"bytes,21,opt,name=nonnullString" json:"nonnullString"`
-	NonnullBytes         types.BytesValue   `protobuf:"bytes,22,opt,name=nonnullBytes" json:"nonnullBytes"`
+	NullableTimestamp    *types.Timestamp   `protobuf:"bytes,1,opt,name=nullableTimestamp,proto3" json:"nullableTimestamp,omitempty"`
+	NullableDuration     *types.Duration    `protobuf:"bytes,2,opt,name=nullableDuration,proto3" json:"nullableDuration,omitempty"`
+	NullableDouble       *types.DoubleValue `protobuf:"bytes,3,opt,name=nullableDouble,proto3" json:"nullableDouble,omitempty"`
+	NullableFloat        *types.FloatValue  `protobuf:"bytes,4,opt,name=nullableFloat,proto3" json:"nullableFloat,omitempty"`
+	NullableInt64        *types.Int64Value  `protobuf:"bytes,5,opt,name=nullableInt64,proto3" json:"nullableInt64,omitempty"`
+	NullableUInt64       *types.UInt64Value `protobuf:"bytes,6,opt,name=nullableUInt64,proto3" json:"nullableUInt64,omitempty"`
+	NullableInt32        *types.Int32Value  `protobuf:"bytes,7,opt,name=nullableInt32,proto3" json:"nullableInt32,omitempty"`
+	NullableUInt32       *types.UInt32Value `protobuf:"bytes,8,opt,name=nullableUInt32,proto3" json:"nullableUInt32,omitempty"`
+	NullableBool         *types.BoolValue   `protobuf:"bytes,9,opt,name=nullableBool,proto3" json:"nullableBool,omitempty"`
+	NullableString       *types.StringValue `protobuf:"bytes,10,opt,name=nullableString,proto3" json:"nullableString,omitempty"`
+	NullableBytes        *types.BytesValue  `protobuf:"bytes,11,opt,name=nullableBytes,proto3" json:"nullableBytes,omitempty"`
+	Timestamp            types.Timestamp    `protobuf:"bytes,12,opt,name=timestamp,proto3" json:"timestamp"`
+	Duration             types.Duration     `protobuf:"bytes,13,opt,name=duration,proto3" json:"duration"`
+	NonnullDouble        types.DoubleValue  `protobuf:"bytes,14,opt,name=nonnullDouble,proto3" json:"nonnullDouble"`
+	NonnullFloat         types.FloatValue   `protobuf:"bytes,15,opt,name=nonnullFloat,proto3" json:"nonnullFloat"`
+	NonnullInt64         types.Int64Value   `protobuf:"bytes,16,opt,name=nonnullInt64,proto3" json:"nonnullInt64"`
+	NonnullUInt64        types.UInt64Value  `protobuf:"bytes,17,opt,name=nonnullUInt64,proto3" json:"nonnullUInt64"`
+	NonnullInt32         types.Int32Value   `protobuf:"bytes,18,opt,name=nonnullInt32,proto3" json:"nonnullInt32"`
+	NonnullUInt32        types.UInt32Value  `protobuf:"bytes,19,opt,name=nonnullUInt32,proto3" json:"nonnullUInt32"`
+	NonnullBool          types.BoolValue    `protobuf:"bytes,20,opt,name=nonnullBool,proto3" json:"nonnullBool"`
+	NonnullString        types.StringValue  `protobuf:"bytes,21,opt,name=nonnullString,proto3" json:"nonnullString"`
+	NonnullBytes         types.BytesValue   `protobuf:"bytes,22,opt,name=nonnullBytes,proto3" json:"nonnullBytes"`
 	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
 	XXX_unrecognized     []byte             `json:"-"`
 	XXX_sizecache        int32              `json:"-"`
@@ -369,28 +369,28 @@ func (m *ProtoTypes) GetNonnullBytes() types.BytesValue {
 }
 
 type StdTypes struct {
-	NullableTimestamp    *time.Time     `protobuf:"bytes,1,opt,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty"`
-	NullableDuration     *time.Duration `protobuf:"bytes,2,opt,name=nullableDuration,stdduration" json:"nullableDuration,omitempty"`
-	NullableDouble       *float64       `protobuf:"bytes,3,opt,name=nullableDouble,wktptr" json:"nullableDouble,omitempty"`
-	NullableFloat        *float32       `protobuf:"bytes,4,opt,name=nullableFloat,wktptr" json:"nullableFloat,omitempty"`
-	NullableInt64        *int64         `protobuf:"bytes,5,opt,name=nullableInt64,wktptr" json:"nullableInt64,omitempty"`
-	NullableUInt64       *uint64        `protobuf:"bytes,6,opt,name=nullableUInt64,wktptr" json:"nullableUInt64,omitempty"`
-	NullableInt32        *int32         `protobuf:"bytes,7,opt,name=nullableInt32,wktptr" json:"nullableInt32,omitempty"`
-	NullableUInt32       *uint32        `protobuf:"bytes,8,opt,name=nullableUInt32,wktptr" json:"nullableUInt32,omitempty"`
-	NullableBool         *bool          `protobuf:"bytes,9,opt,name=nullableBool,wktptr" json:"nullableBool,omitempty"`
-	NullableString       *string        `protobuf:"bytes,10,opt,name=nullableString,wktptr" json:"nullableString,omitempty"`
-	NullableBytes        *[]byte        `protobuf:"bytes,11,opt,name=nullableBytes,wktptr" json:"nullableBytes,omitempty"`
-	Timestamp            time.Time      `protobuf:"bytes,12,opt,name=timestamp,stdtime" json:"timestamp"`
-	Duration             time.Duration  `protobuf:"bytes,13,opt,name=duration,stdduration" json:"duration"`
-	NonnullDouble        float64        `protobuf:"bytes,14,opt,name=nonnullDouble,wktptr" json:"nonnullDouble"`
-	NonnullFloat         float32        `protobuf:"bytes,15,opt,name=nonnullFloat,wktptr" json:"nonnullFloat"`
-	NonnullInt64         int64          `protobuf:"bytes,16,opt,name=nonnullInt64,wktptr" json:"nonnullInt64"`
-	NonnullUInt64        uint64         `protobuf:"bytes,17,opt,name=nonnullUInt64,wktptr" json:"nonnullUInt64"`
-	NonnullInt32         int32          `protobuf:"bytes,18,opt,name=nonnullInt32,wktptr" json:"nonnullInt32"`
-	NonnullUInt32        uint32         `protobuf:"bytes,19,opt,name=nonnullUInt32,wktptr" json:"nonnullUInt32"`
-	NonnullBool          bool           `protobuf:"bytes,20,opt,name=nonnullBool,wktptr" json:"nonnullBool"`
-	NonnullString        string         `protobuf:"bytes,21,opt,name=nonnullString,wktptr" json:"nonnullString"`
-	NonnullBytes         []byte         `protobuf:"bytes,22,opt,name=nonnullBytes,wktptr" json:"nonnullBytes"`
+	NullableTimestamp    *time.Time     `protobuf:"bytes,1,opt,name=nullableTimestamp,proto3,stdtime" json:"nullableTimestamp,omitempty"`
+	NullableDuration     *time.Duration `protobuf:"bytes,2,opt,name=nullableDuration,proto3,stdduration" json:"nullableDuration,omitempty"`
+	NullableDouble       *float64       `protobuf:"bytes,3,opt,name=nullableDouble,proto3,wktptr" json:"nullableDouble,omitempty"`
+	NullableFloat        *float32       `protobuf:"bytes,4,opt,name=nullableFloat,proto3,wktptr" json:"nullableFloat,omitempty"`
+	NullableInt64        *int64         `protobuf:"bytes,5,opt,name=nullableInt64,proto3,wktptr" json:"nullableInt64,omitempty"`
+	NullableUInt64       *uint64        `protobuf:"bytes,6,opt,name=nullableUInt64,proto3,wktptr" json:"nullableUInt64,omitempty"`
+	NullableInt32        *int32         `protobuf:"bytes,7,opt,name=nullableInt32,proto3,wktptr" json:"nullableInt32,omitempty"`
+	NullableUInt32       *uint32        `protobuf:"bytes,8,opt,name=nullableUInt32,proto3,wktptr" json:"nullableUInt32,omitempty"`
+	NullableBool         *bool          `protobuf:"bytes,9,opt,name=nullableBool,proto3,wktptr" json:"nullableBool,omitempty"`
+	NullableString       *string        `protobuf:"bytes,10,opt,name=nullableString,proto3,wktptr" json:"nullableString,omitempty"`
+	NullableBytes        *[]byte        `protobuf:"bytes,11,opt,name=nullableBytes,proto3,wktptr" json:"nullableBytes,omitempty"`
+	Timestamp            time.Time      `protobuf:"bytes,12,opt,name=timestamp,proto3,stdtime" json:"timestamp"`
+	Duration             time.Duration  `protobuf:"bytes,13,opt,name=duration,proto3,stdduration" json:"duration"`
+	NonnullDouble        float64        `protobuf:"bytes,14,opt,name=nonnullDouble,proto3,wktptr" json:"nonnullDouble"`
+	NonnullFloat         float32        `protobuf:"bytes,15,opt,name=nonnullFloat,proto3,wktptr" json:"nonnullFloat"`
+	NonnullInt64         int64          `protobuf:"bytes,16,opt,name=nonnullInt64,proto3,wktptr" json:"nonnullInt64"`
+	NonnullUInt64        uint64         `protobuf:"bytes,17,opt,name=nonnullUInt64,proto3,wktptr" json:"nonnullUInt64"`
+	NonnullInt32         int32          `protobuf:"bytes,18,opt,name=nonnullInt32,proto3,wktptr" json:"nonnullInt32"`
+	NonnullUInt32        uint32         `protobuf:"bytes,19,opt,name=nonnullUInt32,proto3,wktptr" json:"nonnullUInt32"`
+	NonnullBool          bool           `protobuf:"bytes,20,opt,name=nonnullBool,proto3,wktptr" json:"nonnullBool"`
+	NonnullString        string         `protobuf:"bytes,21,opt,name=nonnullString,proto3,wktptr" json:"nonnullString"`
+	NonnullBytes         []byte         `protobuf:"bytes,22,opt,name=nonnullBytes,proto3,wktptr" json:"nonnullBytes"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -584,28 +584,28 @@ func (m *StdTypes) GetNonnullBytes() []byte {
 }
 
 type RepProtoTypes struct {
-	NullableTimestamps   []*types.Timestamp   `protobuf:"bytes,1,rep,name=nullableTimestamps" json:"nullableTimestamps,omitempty"`
-	NullableDurations    []*types.Duration    `protobuf:"bytes,2,rep,name=nullableDurations" json:"nullableDurations,omitempty"`
-	Timestamps           []types.Timestamp    `protobuf:"bytes,3,rep,name=timestamps" json:"timestamps"`
-	Durations            []types.Duration     `protobuf:"bytes,4,rep,name=durations" json:"durations"`
-	NullableDouble       []*types.DoubleValue `protobuf:"bytes,5,rep,name=nullableDouble" json:"nullableDouble,omitempty"`
-	NonnullDouble        []types.DoubleValue  `protobuf:"bytes,6,rep,name=nonnullDouble" json:"nonnullDouble"`
-	NullableFloat        []*types.FloatValue  `protobuf:"bytes,7,rep,name=nullableFloat" json:"nullableFloat,omitempty"`
-	NonnullFloat         []types.FloatValue   `protobuf:"bytes,8,rep,name=nonnullFloat" json:"nonnullFloat"`
-	NullableInt64        []*types.Int64Value  `protobuf:"bytes,9,rep,name=nullableInt64" json:"nullableInt64,omitempty"`
-	NonnullInt64         []types.Int64Value   `protobuf:"bytes,10,rep,name=nonnullInt64" json:"nonnullInt64"`
-	NullableUInt64       []*types.UInt64Value `protobuf:"bytes,11,rep,name=nullableUInt64" json:"nullableUInt64,omitempty"`
-	NonnullUInt64        []types.UInt64Value  `protobuf:"bytes,12,rep,name=nonnullUInt64" json:"nonnullUInt64"`
-	NullableInt32        []*types.Int32Value  `protobuf:"bytes,13,rep,name=nullableInt32" json:"nullableInt32,omitempty"`
-	NonnullInt32         []types.Int32Value   `protobuf:"bytes,14,rep,name=nonnullInt32" json:"nonnullInt32"`
-	NullableUInt32       []*types.UInt32Value `protobuf:"bytes,15,rep,name=nullableUInt32" json:"nullableUInt32,omitempty"`
-	NonnullUInt32        []types.UInt32Value  `protobuf:"bytes,16,rep,name=nonnullUInt32" json:"nonnullUInt32"`
-	NullableBool         []*types.BoolValue   `protobuf:"bytes,17,rep,name=nullableBool" json:"nullableBool,omitempty"`
-	NonnullBool          []types.BoolValue    `protobuf:"bytes,18,rep,name=nonnullBool" json:"nonnullBool"`
-	NullableString       []*types.StringValue `protobuf:"bytes,19,rep,name=nullableString" json:"nullableString,omitempty"`
-	NonnullString        []types.StringValue  `protobuf:"bytes,20,rep,name=nonnullString" json:"nonnullString"`
-	NullableBytes        []*types.BytesValue  `protobuf:"bytes,21,rep,name=nullableBytes" json:"nullableBytes,omitempty"`
-	NonnullBytes         []types.BytesValue   `protobuf:"bytes,22,rep,name=nonnullBytes" json:"nonnullBytes"`
+	NullableTimestamps   []*types.Timestamp   `protobuf:"bytes,1,rep,name=nullableTimestamps,proto3" json:"nullableTimestamps,omitempty"`
+	NullableDurations    []*types.Duration    `protobuf:"bytes,2,rep,name=nullableDurations,proto3" json:"nullableDurations,omitempty"`
+	Timestamps           []types.Timestamp    `protobuf:"bytes,3,rep,name=timestamps,proto3" json:"timestamps"`
+	Durations            []types.Duration     `protobuf:"bytes,4,rep,name=durations,proto3" json:"durations"`
+	NullableDouble       []*types.DoubleValue `protobuf:"bytes,5,rep,name=nullableDouble,proto3" json:"nullableDouble,omitempty"`
+	NonnullDouble        []types.DoubleValue  `protobuf:"bytes,6,rep,name=nonnullDouble,proto3" json:"nonnullDouble"`
+	NullableFloat        []*types.FloatValue  `protobuf:"bytes,7,rep,name=nullableFloat,proto3" json:"nullableFloat,omitempty"`
+	NonnullFloat         []types.FloatValue   `protobuf:"bytes,8,rep,name=nonnullFloat,proto3" json:"nonnullFloat"`
+	NullableInt64        []*types.Int64Value  `protobuf:"bytes,9,rep,name=nullableInt64,proto3" json:"nullableInt64,omitempty"`
+	NonnullInt64         []types.Int64Value   `protobuf:"bytes,10,rep,name=nonnullInt64,proto3" json:"nonnullInt64"`
+	NullableUInt64       []*types.UInt64Value `protobuf:"bytes,11,rep,name=nullableUInt64,proto3" json:"nullableUInt64,omitempty"`
+	NonnullUInt64        []types.UInt64Value  `protobuf:"bytes,12,rep,name=nonnullUInt64,proto3" json:"nonnullUInt64"`
+	NullableInt32        []*types.Int32Value  `protobuf:"bytes,13,rep,name=nullableInt32,proto3" json:"nullableInt32,omitempty"`
+	NonnullInt32         []types.Int32Value   `protobuf:"bytes,14,rep,name=nonnullInt32,proto3" json:"nonnullInt32"`
+	NullableUInt32       []*types.UInt32Value `protobuf:"bytes,15,rep,name=nullableUInt32,proto3" json:"nullableUInt32,omitempty"`
+	NonnullUInt32        []types.UInt32Value  `protobuf:"bytes,16,rep,name=nonnullUInt32,proto3" json:"nonnullUInt32"`
+	NullableBool         []*types.BoolValue   `protobuf:"bytes,17,rep,name=nullableBool,proto3" json:"nullableBool,omitempty"`
+	NonnullBool          []types.BoolValue    `protobuf:"bytes,18,rep,name=nonnullBool,proto3" json:"nonnullBool"`
+	NullableString       []*types.StringValue `protobuf:"bytes,19,rep,name=nullableString,proto3" json:"nullableString,omitempty"`
+	NonnullString        []types.StringValue  `protobuf:"bytes,20,rep,name=nonnullString,proto3" json:"nonnullString"`
+	NullableBytes        []*types.BytesValue  `protobuf:"bytes,21,rep,name=nullableBytes,proto3" json:"nullableBytes,omitempty"`
+	NonnullBytes         []types.BytesValue   `protobuf:"bytes,22,rep,name=nonnullBytes,proto3" json:"nonnullBytes"`
 	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
 	XXX_unrecognized     []byte               `json:"-"`
 	XXX_sizecache        int32                `json:"-"`
@@ -799,28 +799,28 @@ func (m *RepProtoTypes) GetNonnullBytes() []types.BytesValue {
 }
 
 type RepStdTypes struct {
-	NullableTimestamps   []*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamps,stdtime" json:"nullableTimestamps,omitempty"`
-	NullableDurations    []*time.Duration `protobuf:"bytes,2,rep,name=nullableDurations,stdduration" json:"nullableDurations,omitempty"`
-	Timestamps           []time.Time      `protobuf:"bytes,3,rep,name=timestamps,stdtime" json:"timestamps"`
-	Durations            []time.Duration  `protobuf:"bytes,4,rep,name=durations,stdduration" json:"durations"`
-	NullableDouble       []*float64       `protobuf:"bytes,5,rep,name=nullableDouble,wktptr" json:"nullableDouble,omitempty"`
-	NonnullDouble        []float64        `protobuf:"bytes,6,rep,name=nonnullDouble,wktptr" json:"nonnullDouble"`
-	NullableFloat        []*float32       `protobuf:"bytes,7,rep,name=nullableFloat,wktptr" json:"nullableFloat,omitempty"`
-	NonnullFloat         []float32        `protobuf:"bytes,8,rep,name=nonnullFloat,wktptr" json:"nonnullFloat"`
-	NullableInt64        []*int64         `protobuf:"bytes,9,rep,name=nullableInt64,wktptr" json:"nullableInt64,omitempty"`
-	NonnullInt64         []int64          `protobuf:"bytes,10,rep,name=nonnullInt64,wktptr" json:"nonnullInt64"`
-	NullableUInt64       []*uint64        `protobuf:"bytes,11,rep,name=nullableUInt64,wktptr" json:"nullableUInt64,omitempty"`
-	NonnullUInt64        []uint64         `protobuf:"bytes,12,rep,name=nonnullUInt64,wktptr" json:"nonnullUInt64"`
-	NullableInt32        []*int32         `protobuf:"bytes,13,rep,name=nullableInt32,wktptr" json:"nullableInt32,omitempty"`
-	NonnullInt32         []int32          `protobuf:"bytes,14,rep,name=nonnullInt32,wktptr" json:"nonnullInt32"`
-	NullableUInt32       []*uint32        `protobuf:"bytes,15,rep,name=nullableUInt32,wktptr" json:"nullableUInt32,omitempty"`
-	NonnullUInt32        []uint32         `protobuf:"bytes,16,rep,name=nonnullUInt32,wktptr" json:"nonnullUInt32"`
-	NullableBool         []*bool          `protobuf:"bytes,17,rep,name=nullableBool,wktptr" json:"nullableBool,omitempty"`
-	NonnullBool          []bool           `protobuf:"bytes,18,rep,name=nonnullBool,wktptr" json:"nonnullBool"`
-	NullableString       []*string        `protobuf:"bytes,19,rep,name=nullableString,wktptr" json:"nullableString,omitempty"`
-	NonnullString        []string         `protobuf:"bytes,20,rep,name=nonnullString,wktptr" json:"nonnullString"`
-	NullableBytes        []*[]byte        `protobuf:"bytes,21,rep,name=nullableBytes,wktptr" json:"nullableBytes,omitempty"`
-	NonnullBytes         [][]byte         `protobuf:"bytes,22,rep,name=nonnullBytes,wktptr" json:"nonnullBytes"`
+	NullableTimestamps   []*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamps,proto3,stdtime" json:"nullableTimestamps,omitempty"`
+	NullableDurations    []*time.Duration `protobuf:"bytes,2,rep,name=nullableDurations,proto3,stdduration" json:"nullableDurations,omitempty"`
+	Timestamps           []time.Time      `protobuf:"bytes,3,rep,name=timestamps,proto3,stdtime" json:"timestamps"`
+	Durations            []time.Duration  `protobuf:"bytes,4,rep,name=durations,proto3,stdduration" json:"durations"`
+	NullableDouble       []*float64       `protobuf:"bytes,5,rep,name=nullableDouble,proto3,wktptr" json:"nullableDouble,omitempty"`
+	NonnullDouble        []float64        `protobuf:"bytes,6,rep,name=nonnullDouble,proto3,wktptr" json:"nonnullDouble"`
+	NullableFloat        []*float32       `protobuf:"bytes,7,rep,name=nullableFloat,proto3,wktptr" json:"nullableFloat,omitempty"`
+	NonnullFloat         []float32        `protobuf:"bytes,8,rep,name=nonnullFloat,proto3,wktptr" json:"nonnullFloat"`
+	NullableInt64        []*int64         `protobuf:"bytes,9,rep,name=nullableInt64,proto3,wktptr" json:"nullableInt64,omitempty"`
+	NonnullInt64         []int64          `protobuf:"bytes,10,rep,name=nonnullInt64,proto3,wktptr" json:"nonnullInt64"`
+	NullableUInt64       []*uint64        `protobuf:"bytes,11,rep,name=nullableUInt64,proto3,wktptr" json:"nullableUInt64,omitempty"`
+	NonnullUInt64        []uint64         `protobuf:"bytes,12,rep,name=nonnullUInt64,proto3,wktptr" json:"nonnullUInt64"`
+	NullableInt32        []*int32         `protobuf:"bytes,13,rep,name=nullableInt32,proto3,wktptr" json:"nullableInt32,omitempty"`
+	NonnullInt32         []int32          `protobuf:"bytes,14,rep,name=nonnullInt32,proto3,wktptr" json:"nonnullInt32"`
+	NullableUInt32       []*uint32        `protobuf:"bytes,15,rep,name=nullableUInt32,proto3,wktptr" json:"nullableUInt32,omitempty"`
+	NonnullUInt32        []uint32         `protobuf:"bytes,16,rep,name=nonnullUInt32,proto3,wktptr" json:"nonnullUInt32"`
+	NullableBool         []*bool          `protobuf:"bytes,17,rep,name=nullableBool,proto3,wktptr" json:"nullableBool,omitempty"`
+	NonnullBool          []bool           `protobuf:"bytes,18,rep,name=nonnullBool,proto3,wktptr" json:"nonnullBool"`
+	NullableString       []*string        `protobuf:"bytes,19,rep,name=nullableString,proto3,wktptr" json:"nullableString,omitempty"`
+	NonnullString        []string         `protobuf:"bytes,20,rep,name=nonnullString,proto3,wktptr" json:"nonnullString"`
+	NullableBytes        []*[]byte        `protobuf:"bytes,21,rep,name=nullableBytes,proto3,wktptr" json:"nullableBytes,omitempty"`
+	NonnullBytes         [][]byte         `protobuf:"bytes,22,rep,name=nonnullBytes,proto3,wktptr" json:"nonnullBytes"`
 	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
 	XXX_unrecognized     []byte           `json:"-"`
 	XXX_sizecache        int32            `json:"-"`
@@ -1014,28 +1014,28 @@ func (m *RepStdTypes) GetNonnullBytes() [][]byte {
 }
 
 type MapProtoTypes struct {
-	NullableTimestamp    map[int32]*types.Timestamp   `protobuf:"bytes,1,rep,name=nullableTimestamp" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Timestamp            map[int32]types.Timestamp    `protobuf:"bytes,2,rep,name=timestamp" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableDuration     map[int32]*types.Duration    `protobuf:"bytes,3,rep,name=nullableDuration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Duration             map[int32]types.Duration     `protobuf:"bytes,4,rep,name=duration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableDouble       map[int32]*types.DoubleValue `protobuf:"bytes,5,rep,name=nullableDouble" json:"nullableDouble,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullDouble        map[int32]types.DoubleValue  `protobuf:"bytes,6,rep,name=nonnullDouble" json:"nonnullDouble" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableFloat        map[int32]*types.FloatValue  `protobuf:"bytes,7,rep,name=nullableFloat" json:"nullableFloat,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullFloat         map[int32]types.FloatValue   `protobuf:"bytes,8,rep,name=nonnullFloat" json:"nonnullFloat" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableInt64        map[int32]*types.Int64Value  `protobuf:"bytes,9,rep,name=nullableInt64" json:"nullableInt64,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullInt64         map[int32]types.Int64Value   `protobuf:"bytes,10,rep,name=nonnullInt64" json:"nonnullInt64" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableUInt64       map[int32]*types.UInt64Value `protobuf:"bytes,11,rep,name=nullableUInt64" json:"nullableUInt64,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullUInt64        map[int32]types.UInt64Value  `protobuf:"bytes,12,rep,name=nonnullUInt64" json:"nonnullUInt64" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableInt32        map[int32]*types.Int32Value  `protobuf:"bytes,13,rep,name=nullableInt32" json:"nullableInt32,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullInt32         map[int32]types.Int32Value   `protobuf:"bytes,14,rep,name=nonnullInt32" json:"nonnullInt32" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableUInt32       map[int32]*types.UInt32Value `protobuf:"bytes,15,rep,name=nullableUInt32" json:"nullableUInt32,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullUInt32        map[int32]types.UInt32Value  `protobuf:"bytes,16,rep,name=nonnullUInt32" json:"nonnullUInt32" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableBool         map[int32]*types.BoolValue   `protobuf:"bytes,17,rep,name=nullableBool" json:"nullableBool,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullBool          map[int32]types.BoolValue    `protobuf:"bytes,18,rep,name=nonnullBool" json:"nonnullBool" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableString       map[int32]*types.StringValue `protobuf:"bytes,19,rep,name=nullableString" json:"nullableString,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullString        map[int32]types.StringValue  `protobuf:"bytes,20,rep,name=nonnullString" json:"nonnullString" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableBytes        map[int32]*types.BytesValue  `protobuf:"bytes,21,rep,name=nullableBytes" json:"nullableBytes,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullBytes         map[int32]types.BytesValue   `protobuf:"bytes,22,rep,name=nonnullBytes" json:"nonnullBytes" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableTimestamp    map[int32]*types.Timestamp   `protobuf:"bytes,1,rep,name=nullableTimestamp,proto3" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Timestamp            map[int32]types.Timestamp    `protobuf:"bytes,2,rep,name=timestamp,proto3" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableDuration     map[int32]*types.Duration    `protobuf:"bytes,3,rep,name=nullableDuration,proto3" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Duration             map[int32]types.Duration     `protobuf:"bytes,4,rep,name=duration,proto3" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableDouble       map[int32]*types.DoubleValue `protobuf:"bytes,5,rep,name=nullableDouble,proto3" json:"nullableDouble,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullDouble        map[int32]types.DoubleValue  `protobuf:"bytes,6,rep,name=nonnullDouble,proto3" json:"nonnullDouble" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableFloat        map[int32]*types.FloatValue  `protobuf:"bytes,7,rep,name=nullableFloat,proto3" json:"nullableFloat,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullFloat         map[int32]types.FloatValue   `protobuf:"bytes,8,rep,name=nonnullFloat,proto3" json:"nonnullFloat" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableInt64        map[int32]*types.Int64Value  `protobuf:"bytes,9,rep,name=nullableInt64,proto3" json:"nullableInt64,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullInt64         map[int32]types.Int64Value   `protobuf:"bytes,10,rep,name=nonnullInt64,proto3" json:"nonnullInt64" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableUInt64       map[int32]*types.UInt64Value `protobuf:"bytes,11,rep,name=nullableUInt64,proto3" json:"nullableUInt64,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullUInt64        map[int32]types.UInt64Value  `protobuf:"bytes,12,rep,name=nonnullUInt64,proto3" json:"nonnullUInt64" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableInt32        map[int32]*types.Int32Value  `protobuf:"bytes,13,rep,name=nullableInt32,proto3" json:"nullableInt32,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullInt32         map[int32]types.Int32Value   `protobuf:"bytes,14,rep,name=nonnullInt32,proto3" json:"nonnullInt32" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableUInt32       map[int32]*types.UInt32Value `protobuf:"bytes,15,rep,name=nullableUInt32,proto3" json:"nullableUInt32,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullUInt32        map[int32]types.UInt32Value  `protobuf:"bytes,16,rep,name=nonnullUInt32,proto3" json:"nonnullUInt32" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableBool         map[int32]*types.BoolValue   `protobuf:"bytes,17,rep,name=nullableBool,proto3" json:"nullableBool,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullBool          map[int32]types.BoolValue    `protobuf:"bytes,18,rep,name=nonnullBool,proto3" json:"nonnullBool" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableString       map[int32]*types.StringValue `protobuf:"bytes,19,rep,name=nullableString,proto3" json:"nullableString,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullString        map[int32]types.StringValue  `protobuf:"bytes,20,rep,name=nonnullString,proto3" json:"nonnullString" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableBytes        map[int32]*types.BytesValue  `protobuf:"bytes,21,rep,name=nullableBytes,proto3" json:"nullableBytes,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullBytes         map[int32]types.BytesValue   `protobuf:"bytes,22,rep,name=nonnullBytes,proto3" json:"nonnullBytes" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}                     `json:"-"`
 	XXX_unrecognized     []byte                       `json:"-"`
 	XXX_sizecache        int32                        `json:"-"`
@@ -1229,28 +1229,28 @@ func (m *MapProtoTypes) GetNonnullBytes() map[int32]types.BytesValue {
 }
 
 type MapStdTypes struct {
-	NullableTimestamp    map[int32]*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Timestamp            map[int32]time.Time      `protobuf:"bytes,2,rep,name=timestamp,stdtime" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableDuration     map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Duration             map[int32]time.Duration  `protobuf:"bytes,4,rep,name=duration,stdduration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableDouble       map[int32]*float64       `protobuf:"bytes,5,rep,name=nullableDouble,wktptr" json:"nullableDouble,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullDouble        map[int32]float64        `protobuf:"bytes,6,rep,name=nonnullDouble,wktptr" json:"nonnullDouble" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableFloat        map[int32]*float32       `protobuf:"bytes,7,rep,name=nullableFloat,wktptr" json:"nullableFloat,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullFloat         map[int32]float32        `protobuf:"bytes,8,rep,name=nonnullFloat,wktptr" json:"nonnullFloat" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableInt64        map[int32]*int64         `protobuf:"bytes,9,rep,name=nullableInt64,wktptr" json:"nullableInt64,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullInt64         map[int32]int64          `protobuf:"bytes,10,rep,name=nonnullInt64,wktptr" json:"nonnullInt64" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableUInt64       map[int32]*uint64        `protobuf:"bytes,11,rep,name=nullableUInt64,wktptr" json:"nullableUInt64,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullUInt64        map[int32]uint64         `protobuf:"bytes,12,rep,name=nonnullUInt64,wktptr" json:"nonnullUInt64" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableInt32        map[int32]*int32         `protobuf:"bytes,13,rep,name=nullableInt32,wktptr" json:"nullableInt32,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullInt32         map[int32]int32          `protobuf:"bytes,14,rep,name=nonnullInt32,wktptr" json:"nonnullInt32" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableUInt32       map[int32]*uint32        `protobuf:"bytes,15,rep,name=nullableUInt32,wktptr" json:"nullableUInt32,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullUInt32        map[int32]uint32         `protobuf:"bytes,16,rep,name=nonnullUInt32,wktptr" json:"nonnullUInt32" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableBool         map[int32]*bool          `protobuf:"bytes,17,rep,name=nullableBool,wktptr" json:"nullableBool,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullBool          map[int32]bool           `protobuf:"bytes,18,rep,name=nonnullBool,wktptr" json:"nonnullBool" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableString       map[int32]*string        `protobuf:"bytes,19,rep,name=nullableString,wktptr" json:"nullableString,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullString        map[int32]string         `protobuf:"bytes,20,rep,name=nonnullString,wktptr" json:"nonnullString" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableBytes        map[int32]*[]byte        `protobuf:"bytes,21,rep,name=nullableBytes,wktptr" json:"nullableBytes,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullBytes         map[int32][]byte         `protobuf:"bytes,22,rep,name=nonnullBytes,wktptr" json:"nonnullBytes" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableTimestamp    map[int32]*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamp,proto3,stdtime" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Timestamp            map[int32]time.Time      `protobuf:"bytes,2,rep,name=timestamp,proto3,stdtime" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableDuration     map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,proto3,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Duration             map[int32]time.Duration  `protobuf:"bytes,4,rep,name=duration,proto3,stdduration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableDouble       map[int32]*float64       `protobuf:"bytes,5,rep,name=nullableDouble,proto3,wktptr" json:"nullableDouble,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullDouble        map[int32]float64        `protobuf:"bytes,6,rep,name=nonnullDouble,proto3,wktptr" json:"nonnullDouble" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableFloat        map[int32]*float32       `protobuf:"bytes,7,rep,name=nullableFloat,proto3,wktptr" json:"nullableFloat,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullFloat         map[int32]float32        `protobuf:"bytes,8,rep,name=nonnullFloat,proto3,wktptr" json:"nonnullFloat" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableInt64        map[int32]*int64         `protobuf:"bytes,9,rep,name=nullableInt64,proto3,wktptr" json:"nullableInt64,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullInt64         map[int32]int64          `protobuf:"bytes,10,rep,name=nonnullInt64,proto3,wktptr" json:"nonnullInt64" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableUInt64       map[int32]*uint64        `protobuf:"bytes,11,rep,name=nullableUInt64,proto3,wktptr" json:"nullableUInt64,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullUInt64        map[int32]uint64         `protobuf:"bytes,12,rep,name=nonnullUInt64,proto3,wktptr" json:"nonnullUInt64" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableInt32        map[int32]*int32         `protobuf:"bytes,13,rep,name=nullableInt32,proto3,wktptr" json:"nullableInt32,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullInt32         map[int32]int32          `protobuf:"bytes,14,rep,name=nonnullInt32,proto3,wktptr" json:"nonnullInt32" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableUInt32       map[int32]*uint32        `protobuf:"bytes,15,rep,name=nullableUInt32,proto3,wktptr" json:"nullableUInt32,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullUInt32        map[int32]uint32         `protobuf:"bytes,16,rep,name=nonnullUInt32,proto3,wktptr" json:"nonnullUInt32" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableBool         map[int32]*bool          `protobuf:"bytes,17,rep,name=nullableBool,proto3,wktptr" json:"nullableBool,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullBool          map[int32]bool           `protobuf:"bytes,18,rep,name=nonnullBool,proto3,wktptr" json:"nonnullBool" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableString       map[int32]*string        `protobuf:"bytes,19,rep,name=nullableString,proto3,wktptr" json:"nullableString,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullString        map[int32]string         `protobuf:"bytes,20,rep,name=nonnullString,proto3,wktptr" json:"nonnullString" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableBytes        map[int32]*[]byte        `protobuf:"bytes,21,rep,name=nullableBytes,proto3,wktptr" json:"nullableBytes,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullBytes         map[int32][]byte         `protobuf:"bytes,22,rep,name=nonnullBytes,proto3,wktptr" json:"nonnullBytes" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
 	XXX_unrecognized     []byte                   `json:"-"`
 	XXX_sizecache        int32                    `json:"-"`
@@ -1504,37 +1504,37 @@ type isOneofProtoTypes_OneOfProtoTimes interface {
 }
 
 type OneofProtoTypes_Timestamp struct {
-	Timestamp *types.Timestamp `protobuf:"bytes,1,opt,name=timestamp,oneof"`
+	Timestamp *types.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3,oneof"`
 }
 type OneofProtoTypes_Duration struct {
-	Duration *types.Duration `protobuf:"bytes,2,opt,name=duration,oneof"`
+	Duration *types.Duration `protobuf:"bytes,2,opt,name=duration,proto3,oneof"`
 }
 type OneofProtoTypes_RepDouble struct {
-	RepDouble *types.DoubleValue `protobuf:"bytes,3,opt,name=repDouble,oneof"`
+	RepDouble *types.DoubleValue `protobuf:"bytes,3,opt,name=repDouble,proto3,oneof"`
 }
 type OneofProtoTypes_RepFloat struct {
-	RepFloat *types.FloatValue `protobuf:"bytes,4,opt,name=repFloat,oneof"`
+	RepFloat *types.FloatValue `protobuf:"bytes,4,opt,name=repFloat,proto3,oneof"`
 }
 type OneofProtoTypes_RepInt64 struct {
-	RepInt64 *types.Int64Value `protobuf:"bytes,5,opt,name=repInt64,oneof"`
+	RepInt64 *types.Int64Value `protobuf:"bytes,5,opt,name=repInt64,proto3,oneof"`
 }
 type OneofProtoTypes_RepUInt64 struct {
-	RepUInt64 *types.UInt64Value `protobuf:"bytes,6,opt,name=repUInt64,oneof"`
+	RepUInt64 *types.UInt64Value `protobuf:"bytes,6,opt,name=repUInt64,proto3,oneof"`
 }
 type OneofProtoTypes_RepInt32 struct {
-	RepInt32 *types.Int32Value `protobuf:"bytes,7,opt,name=repInt32,oneof"`
+	RepInt32 *types.Int32Value `protobuf:"bytes,7,opt,name=repInt32,proto3,oneof"`
 }
 type OneofProtoTypes_RepUInt32 struct {
-	RepUInt32 *types.UInt32Value `protobuf:"bytes,8,opt,name=repUInt32,oneof"`
+	RepUInt32 *types.UInt32Value `protobuf:"bytes,8,opt,name=repUInt32,proto3,oneof"`
 }
 type OneofProtoTypes_RepBool struct {
-	RepBool *types.BoolValue `protobuf:"bytes,9,opt,name=repBool,oneof"`
+	RepBool *types.BoolValue `protobuf:"bytes,9,opt,name=repBool,proto3,oneof"`
 }
 type OneofProtoTypes_RepString struct {
-	RepString *types.StringValue `protobuf:"bytes,10,opt,name=repString,oneof"`
+	RepString *types.StringValue `protobuf:"bytes,10,opt,name=repString,proto3,oneof"`
 }
 type OneofProtoTypes_RepBytes struct {
-	RepBytes *types.BytesValue `protobuf:"bytes,11,opt,name=repBytes,oneof"`
+	RepBytes *types.BytesValue `protobuf:"bytes,11,opt,name=repBytes,proto3,oneof"`
 }
 
 func (*OneofProtoTypes_Timestamp) isOneofProtoTypes_OneOfProtoTimes() {}
@@ -1939,37 +1939,37 @@ type isOneofStdTypes_OneOfStdTimes interface {
 }
 
 type OneofStdTypes_Timestamp struct {
-	Timestamp *time.Time `protobuf:"bytes,1,opt,name=timestamp,oneof,stdtime"`
+	Timestamp *time.Time `protobuf:"bytes,1,opt,name=timestamp,proto3,oneof,stdtime"`
 }
 type OneofStdTypes_Duration struct {
-	Duration *time.Duration `protobuf:"bytes,2,opt,name=duration,oneof,stdduration"`
+	Duration *time.Duration `protobuf:"bytes,2,opt,name=duration,proto3,oneof,stdduration"`
 }
 type OneofStdTypes_RepDouble struct {
-	RepDouble *float64 `protobuf:"bytes,3,opt,name=repDouble,oneof,wktptr"`
+	RepDouble *float64 `protobuf:"bytes,3,opt,name=repDouble,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepFloat struct {
-	RepFloat *float32 `protobuf:"bytes,4,opt,name=repFloat,oneof,wktptr"`
+	RepFloat *float32 `protobuf:"bytes,4,opt,name=repFloat,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepInt64 struct {
-	RepInt64 *int64 `protobuf:"bytes,5,opt,name=repInt64,oneof,wktptr"`
+	RepInt64 *int64 `protobuf:"bytes,5,opt,name=repInt64,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepUInt64 struct {
-	RepUInt64 *uint64 `protobuf:"bytes,6,opt,name=repUInt64,oneof,wktptr"`
+	RepUInt64 *uint64 `protobuf:"bytes,6,opt,name=repUInt64,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepInt32 struct {
-	RepInt32 *int32 `protobuf:"bytes,7,opt,name=repInt32,oneof,wktptr"`
+	RepInt32 *int32 `protobuf:"bytes,7,opt,name=repInt32,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepUInt32 struct {
-	RepUInt32 *uint32 `protobuf:"bytes,8,opt,name=repUInt32,oneof,wktptr"`
+	RepUInt32 *uint32 `protobuf:"bytes,8,opt,name=repUInt32,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepBool struct {
-	RepBool *bool `protobuf:"bytes,9,opt,name=repBool,oneof,wktptr"`
+	RepBool *bool `protobuf:"bytes,9,opt,name=repBool,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepString struct {
-	RepString *string `protobuf:"bytes,10,opt,name=repString,oneof,wktptr"`
+	RepString *string `protobuf:"bytes,10,opt,name=repString,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepBytes struct {
-	RepBytes *[]byte `protobuf:"bytes,11,opt,name=repBytes,oneof,wktptr"`
+	RepBytes *[]byte `protobuf:"bytes,11,opt,name=repBytes,proto3,oneof,wktptr"`
 }
 
 func (*OneofStdTypes_Timestamp) isOneofStdTypes_OneOfStdTimes() {}

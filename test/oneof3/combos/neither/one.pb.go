@@ -158,7 +158,7 @@ type SampleOneOf_Field15 struct {
 	Field15 []byte `protobuf:"bytes,15,opt,name=Field15,proto3,oneof"`
 }
 type SampleOneOf_SubMessage struct {
-	SubMessage *Subby `protobuf:"bytes,16,opt,name=sub_message,json=subMessage,oneof"`
+	SubMessage *Subby `protobuf:"bytes,16,opt,name=sub_message,json=subMessage,proto3,oneof"`
 }
 
 func (*SampleOneOf_Field1) isSampleOneOf_TestOneof()     {}

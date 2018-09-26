@@ -584,6 +584,7 @@ func typeMarshaler(t reflect.Type, tags []string, nozero, oneof bool) (sizer, ma
 	isTime := false
 	isDuration := false
 	isWktPointer := false
+	validateUTF8 := true
 	for i := 2; i < len(tags); i++ {
 		if tags[i] == "packed" {
 			packed = true
@@ -604,6 +605,7 @@ func typeMarshaler(t reflect.Type, tags []string, nozero, oneof bool) (sizer, ma
 			isWktPointer = true
 		}
 	}
+	validateUTF8 = validateUTF8 && proto3
 	if !proto3 && !pointer && !slice {
 		nozero = false
 	}
@@ -950,6 +952,18 @@ func typeMarshaler(t reflect.Type, tags []string, nozero, oneof bool) (sizer, ma
 		}
 		return sizeFloat64Value, appendFloat64Value
 	case reflect.String:
+		if validateUTF8 {
+			if pointer {
+				return sizeStringPtr, appendUTF8StringPtr
+			}
+			if slice {
+				return sizeStringSlice, appendUTF8StringSlice
+			}
+			if nozero {
+				return sizeStringValueNoZero, appendUTF8StringValueNoZero
+			}
+			return sizeStringValue, appendUTF8StringValue
+		}
 		if pointer {
 			return sizeStringPtr, appendStringPtr
 		}
@@ -2206,6 +2220,43 @@ func appendBoolPackedSlice(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byt
 }
 func appendStringValue(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
 	v := *ptr.toString()
+	b = appendVarint(b, wiretag)
+	b = appendVarint(b, uint64(len(v)))
+	b = append(b, v...)
+	return b, nil
+}
+func appendStringValueNoZero(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
+	v := *ptr.toString()
+	if v == "" {
+		return b, nil
+	}
+	b = appendVarint(b, wiretag)
+	b = appendVarint(b, uint64(len(v)))
+	b = append(b, v...)
+	return b, nil
+}
+func appendStringPtr(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
+	p := *ptr.toStringPtr()
+	if p == nil {
+		return b, nil
+	}
+	v := *p
+	b = appendVarint(b, wiretag)
+	b = appendVarint(b, uint64(len(v)))
+	b = append(b, v...)
+	return b, nil
+}
+func appendStringSlice(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
+	s := *ptr.toStringSlice()
+	for _, v := range s {
+		b = appendVarint(b, wiretag)
+		b = appendVarint(b, uint64(len(v)))
+		b = append(b, v...)
+	}
+	return b, nil
+}
+func appendUTF8StringValue(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
+	v := *ptr.toString()
 	if !utf8.ValidString(v) {
 		return nil, errInvalidUTF8
 	}
@@ -2214,7 +2265,7 @@ func appendStringValue(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, e
 	b = append(b, v...)
 	return b, nil
 }
-func appendStringValueNoZero(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
+func appendUTF8StringValueNoZero(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
 	v := *ptr.toString()
 	if v == "" {
 		return b, nil
@@ -2227,7 +2278,7 @@ func appendStringValueNoZero(b []byte, ptr pointer, wiretag uint64, _ bool) ([]b
 	b = append(b, v...)
 	return b, nil
 }
-func appendStringPtr(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
+func appendUTF8StringPtr(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
 	p := *ptr.toStringPtr()
 	if p == nil {
 		return b, nil
@@ -2241,7 +2292,7 @@ func appendStringPtr(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, err
 	b = append(b, v...)
 	return b, nil
 }
-func appendStringSlice(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
+func appendUTF8StringSlice(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
 	s := *ptr.toStringSlice()
 	for _, v := range s {
 		if !utf8.ValidString(v) {
