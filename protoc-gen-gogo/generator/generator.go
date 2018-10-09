@@ -1335,14 +1335,26 @@ func (g *Generator) PrintComments(path string) bool {
 	if !g.writeOutput {
 		return false
 	}
-	if loc, ok := g.file.comments[path]; ok {
-		text := strings.TrimSuffix(loc.GetLeadingComments(), "\n")
-		for _, line := range strings.Split(text, "\n") {
-			g.P("// ", strings.TrimPrefix(line, " "))
-		}
+	if c, ok := g.makeComments(path); ok {
+		g.P(c)
 		return true
 	}
 	return false
+}
+
+// makeComments generates the comment string for the field, no "\n" at the end
+func (g *Generator) makeComments(path string) (string, bool) {
+	loc, ok := g.file.comments[path]
+	if !ok {
+		return "", false
+	}
+	w := new(bytes.Buffer)
+	nl := ""
+	for _, line := range strings.Split(strings.TrimSuffix(loc.GetLeadingComments(), "\n"), "\n") {
+		fmt.Fprintf(w, "%s// %s", nl, strings.TrimPrefix(line, " "))
+		nl = "\n"
+	}
+	return w.String(), true
 }
 
 // Comments returns any comments from the source .proto file and empty string if comments not found.
@@ -2013,6 +2025,212 @@ var wellKnownTypes = map[string]bool{
 	"BytesValue":  true,
 }
 
+// getterDefault finds the default value for the field to return from a getter,
+// regardless of if it's a built in default or explicit from the source. Returns e.g. "nil", `""`, "Default_MessageType_FieldName"
+func (g *Generator) getterDefault(field *descriptor.FieldDescriptorProto, goMessageType string) string {
+	return ""
+}
+
+// defaultConstantName builds the name of the default constant from the message
+// type name and the untouched field name, e.g. "Default_MessageType_FieldName"
+func (g *Generator) defaultConstantName(goMessageType, protoFieldName string) string {
+	return "Default_" + goMessageType + "_" + CamelCase(protoFieldName)
+}
+
+// The different types of fields in a message and how to actually print them
+// Most of the logic for generateMessage is in the methods of these types.
+//
+// Note that the content of the field is irrelevant, a simpleField can contain
+// anything from a scalar to a group (which is just a message).
+//
+// Extension fields (and message sets) are however handled separately.
+//
+// simpleField - a field that is neiter weak nor oneof, possibly repeated
+// oneofField - field containing list of subfields:
+// - oneofSubField - a field within the oneof
+
+// msgCtx contais the context for the generator functions.
+type msgCtx struct {
+	goName  string      // Go struct name of the message, e.g. MessageName
+	message *Descriptor // The descriptor for the message
+}
+
+// fieldCommon contains data common to all types of fields.
+type fieldCommon struct {
+	goName     string // Go name of field, e.g. "FieldName" or "Descriptor_"
+	protoName  string // Name of field in proto language, e.g. "field_name" or "descriptor"
+	getterName string // Name of the getter, e.g. "GetFieldName" or "GetDescriptor_"
+	goType     string // The Go type as a string, e.g. "*int32" or "*OtherMessage"
+	tags       string // The tag string/annotation for the type, e.g. `protobuf:"varint,8,opt,name=region_id,json=regionId"`
+	fullPath   string // The full path of the field as used by Annotate etc, e.g. "4,0,2,0"
+}
+
+// getProtoName gets the proto name of a field, e.g. "field_name" or "descriptor".
+func (f *fieldCommon) getProtoName() string {
+	return f.protoName
+}
+
+// getGoType returns the go type of the field  as a string, e.g. "*int32".
+func (f *fieldCommon) getGoType() string {
+	return f.goType
+}
+
+// simpleField is not weak, not a oneof, not an extension. Can be required, optional or repeated.
+type simpleField struct {
+	fieldCommon
+	protoTypeName string                               // Proto type name, empty if primitive, e.g. ".google.protobuf.Duration"
+	protoType     descriptor.FieldDescriptorProto_Type // Actual type enum value, e.g. descriptor.FieldDescriptorProto_TYPE_FIXED64
+	deprecated    string                               // Deprecation comment, if any, e.g. "// Deprecated: Do not use."
+	getterDef     string                               // Default for getters, e.g. "nil", `""` or "Default_MessageType_FieldName"
+	protoDef      string                               // Default value as defined in the proto file, e.g "yoshi" or "5"
+	comment       string                               // The full comment for the field, e.g. "// Useful information"
+}
+
+// decl prints the declaration of the field in the struct (if any).
+func (f *simpleField) decl(g *Generator, mc *msgCtx) {
+	g.P(f.comment, Annotate(mc.message.file, f.fullPath, f.goName), "\t", f.goType, "\t`", f.tags, "`", f.deprecated)
+}
+
+// getter prints the getter for the field.
+func (f *simpleField) getter(g *Generator, mc *msgCtx) {
+}
+
+// setter prints the setter method of the field.
+func (f *simpleField) setter(g *Generator, mc *msgCtx) {
+	// No setter for regular fields yet
+}
+
+// getProtoDef returns the default value explicitly stated in the proto file, e.g "yoshi" or "5".
+func (f *simpleField) getProtoDef() string {
+	return f.protoDef
+}
+
+// getProtoTypeName returns the protobuf type name for the field as returned by field.GetTypeName(), e.g. ".google.protobuf.Duration".
+func (f *simpleField) getProtoTypeName() string {
+	return f.protoTypeName
+}
+
+// getProtoType returns the *field.Type value, e.g. descriptor.FieldDescriptorProto_TYPE_FIXED64.
+func (f *simpleField) getProtoType() descriptor.FieldDescriptorProto_Type {
+	return f.protoType
+}
+
+// oneofSubFields are kept slize held by each oneofField. They do not appear in the top level slize of fields for the message.
+type oneofSubField struct {
+	fieldCommon
+	protoTypeName string                               // Proto type name, empty if primitive, e.g. ".google.protobuf.Duration"
+	protoType     descriptor.FieldDescriptorProto_Type // Actual type enum value, e.g. descriptor.FieldDescriptorProto_TYPE_FIXED64
+	oneofTypeName string                               // Type name of the enclosing struct, e.g. "MessageName_FieldName"
+	fieldNumber   int                                  // Actual field number, as defined in proto, e.g. 12
+	getterDef     string                               // Default for getters, e.g. "nil", `""` or "Default_MessageType_FieldName"
+	protoDef      string                               // Default value as defined in the proto file, e.g "yoshi" or "5"
+}
+
+// wireTypeName returns a textual wire type, needed for oneof sub fields in generated code.
+func (f *oneofSubField) wireTypeName() string {
+	return ""
+}
+
+// typedNil prints a nil casted to the pointer to this field.
+// - for XXX_OneofFuncs
+func (f *oneofSubField) typedNil(g *Generator) {
+	g.P("(*", f.oneofTypeName, ")(nil),")
+}
+
+// marshalCase prints the case matching this oneof subfield in the marshalling code.
+func (f *oneofSubField) marshalCase(g *Generator) {
+}
+
+// unmarshalCase prints the case matching this oneof subfield in the unmarshalling code.
+func (f *oneofSubField) unmarshalCase(g *Generator, origOneofName string, oneofName string) {
+}
+
+// sizerCase prints the case matching this oneof subfield in the sizer code.
+func (f *oneofSubField) sizerCase(g *Generator) {
+}
+
+// getProtoDef returns the default value explicitly stated in the proto file, e.g "yoshi" or "5".
+func (f *oneofSubField) getProtoDef() string {
+	return f.protoDef
+}
+
+// getProtoTypeName returns the protobuf type name for the field as returned by field.GetTypeName(), e.g. ".google.protobuf.Duration".
+func (f *oneofSubField) getProtoTypeName() string {
+	return f.protoTypeName
+}
+
+// getProtoType returns the *field.Type value, e.g. descriptor.FieldDescriptorProto_TYPE_FIXED64.
+func (f *oneofSubField) getProtoType() descriptor.FieldDescriptorProto_Type {
+	return f.protoType
+}
+
+// oneofField represents the oneof on top level.
+// The alternative fields within the oneof are represented by oneofSubField.
+type oneofField struct {
+	fieldCommon
+	subFields []*oneofSubField // All the possible oneof fields
+	comment   string           // The full comment for the field, e.g. "// Types that are valid to be assigned to MyOneof:\n\\"
+}
+
+// decl prints the declaration of the field in the struct (if any).
+func (f *oneofField) decl(g *Generator, mc *msgCtx) {
+}
+
+// getter for a oneof field will print additional discriminators and interfaces for the oneof,
+// also it prints all the getters for the sub fields.
+func (f *oneofField) getter(g *Generator, mc *msgCtx) {
+}
+
+// setter prints the setter method of the field.
+func (f *oneofField) setter(g *Generator, mc *msgCtx) {
+	// No setters for oneof yet
+}
+
+// topLevelField interface implemented by all types of fields on the top level (not oneofSubField).
+type topLevelField interface {
+	decl(g *Generator, mc *msgCtx)   // print declaration within the struct
+	getter(g *Generator, mc *msgCtx) // print getter
+	setter(g *Generator, mc *msgCtx) // print setter if applicable
+}
+
+// defField interface implemented by all types of fields that can have defaults (not oneofField, but instead oneofSubField).
+type defField interface {
+	getProtoDef() string                                // default value explicitly stated in the proto file, e.g "yoshi" or "5"
+	getProtoName() string                               // proto name of a field, e.g. "field_name" or "descriptor"
+	getGoType() string                                  // go type of the field  as a string, e.g. "*int32"
+	getProtoTypeName() string                           // protobuf type name for the field, e.g. ".google.protobuf.Duration"
+	getProtoType() descriptor.FieldDescriptorProto_Type // *field.Type value, e.g. descriptor.FieldDescriptorProto_TYPE_FIXED64
+}
+
+// generateDefaultConstants adds constants for default values if needed, which is only if the default value is.
+// explicit in the proto.
+func (g *Generator) generateDefaultConstants(mc *msgCtx, topLevelFields []topLevelField) {
+}
+
+// generateInternalStructFields just adds the XXX_<something> fields to the message struct.
+func (g *Generator) generateInternalStructFields(mc *msgCtx, topLevelFields []topLevelField) {
+}
+
+// generateOneofFuncs adds all the utility functions for oneof, including marshalling, unmarshalling and sizer.
+func (g *Generator) generateOneofFuncs(mc *msgCtx, topLevelFields []topLevelField) {
+}
+
+// generateMessageStruct adds the actual struct with it's members (but not methods) to the output.
+func (g *Generator) generateMessageStruct(mc *msgCtx, topLevelFields []topLevelField) {
+}
+
+// generateGetters adds getters for all fields, including oneofs and weak fields when applicable.
+func (g *Generator) generateGetters(mc *msgCtx, topLevelFields []topLevelField) {
+}
+
+// generateSetters add setters for all fields, including oneofs and weak fields when applicable.
+func (g *Generator) generateSetters(mc *msgCtx, topLevelFields []topLevelField) {
+}
+
+// generateCommonMethods adds methods to the message that are not on a per field basis.
+func (g *Generator) generateCommonMethods(mc *msgCtx) {
+}
+
 // Generate the type and default constant definitions for this Descriptor.
 func (g *Generator) generateMessage(message *Descriptor) {
 	topLevelFields := []topLevelField{}
@@ -2029,15 +2247,6 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	if !gogoproto.IsProtoSizer(message.file.FileDescriptorProto, message.DescriptorProto) {
 		usedNames["Size"] = true
 	}
-	// fieldNames := make(map[*descriptor.FieldDescriptorProto]string)
-	// fieldGetterNames := make(map[*descriptor.FieldDescriptorProto]string)
-	// fieldTypes := make(map[*descriptor.FieldDescriptorProto]string)
-	// mapFieldTypes := make(map[*descriptor.FieldDescriptorProto]string)
-
-	// oneofFieldName := make(map[int32]string)                           // indexed by oneof_index field of FieldDescriptorProto
-	// oneofDisc := make(map[int32]string)                                // name of discriminator method
-	// oneofTypeName := make(map[*descriptor.FieldDescriptorProto]string) // without star
-	// oneofInsertPoints := make(map[int32]int)                           // oneof_index => offset of g.Buffer
 
 	// allocNames finds a conflict-free variation of the given strings,
 	// consistently mutating their suffixes.
