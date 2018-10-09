@@ -2129,8 +2129,178 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			topLevelFields = append(topLevelFields, &of)
 			oFields[*field.OneofIndex] = &of
 		}
+
+		if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
+			desc := g.ObjectNamed(field.GetTypeName())
+			if d, ok := desc.(*Descriptor); ok && d.GetOptions().GetMapEntry() {
+				m := g.GoMapType(d, field)
+				typename = m.GoType
+				mapFieldTypes[field] = typename // record for the getter generation
+
+				tag += fmt.Sprintf(" protobuf_key:%s protobuf_val:%s", m.KeyTag, m.ValueTag)
+			}
+		}
+
+		dvalue := g.getterDefault(field, goTypeName)
+		if oneof {
+			tname := goTypeName + "_" + fieldName
+			// It is possible for this to collide with a message or enum
+			// nested in this message. Check for collisions.
+			for {
+				ok := true
+				for _, desc := range message.nested {
+					if CamelCaseSlice(desc.TypeName()) == tname {
+						ok = false
+						break
+					}
+				}
+				for _, enum := range message.enums {
+					if CamelCaseSlice(enum.TypeName()) == tname {
+						ok = false
+						break
+					}
+				}
+				if !ok {
+					tname += "_"
+					continue
+				}
+				break
+			}
+
+			oneofField := oFields[*field.OneofIndex]
+			tag := "protobuf:" + g.goTag(message, field, wiretype)
+			sf := oneofSubField{
+				fieldCommon: fieldCommon{
+					goName:     fieldName,
+					getterName: fieldGetterName,
+					goType:     typename,
+					tags:       tag,
+					protoName:  field.GetName(),
+					fullPath:   fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i),
+				},
+				protoTypeName: field.GetTypeName(),
+				fieldNumber:   int(*field.Number),
+				protoType:     *field.Type,
+				getterDef:     dvalue,
+				protoDef:      field.GetDefaultValue(),
+				oneofTypeName: tname,
+			}
+			oneofField.subFields = append(oneofField.subFields, &sf)
+			g.RecordTypeUse(field.GetTypeName())
+			continue
+		}
+
+		fieldDeprecated := ""
+		if field.GetOptions().GetDeprecated() {
+			fieldDeprecated = deprecationComment
+		}
+
+		fieldFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i)
+		c, ok := g.makeComments(fieldFullPath)
+		if ok {
+			c += "\n"
+		}
+		rf := simpleField{
+			fieldCommon: fieldCommon{
+				goName:     fieldName,
+				getterName: fieldGetterName,
+				goType:     typename,
+				tags:       tag,
+				protoName:  field.GetName(),
+				fullPath:   fieldFullPath,
+			},
+			protoTypeName: field.GetTypeName(),
+			protoType:     *field.Type,
+			deprecated:    fieldDeprecated,
+			getterDef:     dvalue,
+			protoDef:      field.GetDefaultValue(),
+			comment:       c,
+		}
+		var pf topLevelField = &rf
+
+		topLevelFields = append(topLevelFields, pf)
+		if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
+			g.RecordTypeUse(field.GetTypeName())
+		}
 	}
 
+	mc := &msgCtx{
+		goName:  goTypeName,
+		message: message,
+	}
+
+	g.generateMessageStruct(mc, topLevelFields)
+	g.P()
+	g.generateCommonMethods(mc)
+	g.P()
+	g.generateDefaultConstants(mc, topLevelFields)
+	g.P()
+	g.generateGetters(mc, topLevelFields)
+	g.P()
+	g.generateSetters(mc, topLevelFields)
+	g.P()
+	g.generateOneofFuncs(mc, topLevelFields)
+	g.P()
+
+	if !message.group {
+		var oneofTypes []string
+		for _, f := range topLevelFields {
+			if of, ok := f.(*oneofField); ok {
+				for _, osf := range of.subFields {
+					oneofTypes = append(oneofTypes, osf.oneofTypeName)
+				}
+			}
+		}
+
+		opts := message.Options
+		// #NOTE 4 Make sure all of the new values are the same as:
+		// sym:           goTypeName,
+		// hasExtensions: hasExtensions,
+		// isMessageSet:  isMessageSet,
+		// oneofTypes:    oneofTypes,
+		ms := &messageSymbol{
+			sym:           goTypeName,
+			hasExtensions: len(message.ExtensionRange) > 0,
+			isMessageSet:  opts != nil && opts.GetMessageSetWireFormat(),
+			oneofTypes:    oneofTypes,
+		}
+		g.file.addExport(message, ms)
+	}
+
+	for _, ext := range message.ext {
+		g.generateExtension(ext)
+	}
+
+	fullName := strings.Join(message.TypeName(), ".")
+	if g.file.Package != nil {
+		fullName = *g.file.Package + "." + fullName
+	}
+
+	g.addInitf("%s.RegisterType((*%s)(nil), %q)", g.Pkg["proto"], ccTypeName, fullName)
+	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
+		g.addInitf("%s.RegisterType((*%s)(nil), %q)", g.Pkg["golang_proto"], ccTypeName, fullName)
+	}
+	if gogoproto.HasMessageName(g.file.FileDescriptorProto, message.DescriptorProto) {
+		g.P("func (*", ccTypeName, ") XXX_MessageName() string {")
+		g.In()
+		g.P("return ", strconv.Quote(fullName))
+		g.Out()
+		g.P("}")
+	}
+	// Register types for native map types.
+	for _, k := range mapFieldKeys(mapFieldTypes) {
+		fullName := strings.TrimPrefix(*k.TypeName, ".")
+		g.addInitf("%s.RegisterMapType((%s)(nil), %q)", g.Pkg["proto"], mapFieldTypes[k], fullName)
+		if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
+			g.addInitf("%s.RegisterMapType((%s)(nil), %q)", g.Pkg["golang_proto"], mapFieldTypes[k], fullName)
+		}
+	}
+}
+
+// stub func old code
+func (g *Generator) fakegenerateMessage(message *Descriptor) {
+
+	// #NOTE 2 Do we need this if anymore?
 	if gogoproto.HasTypeDecl(message.file.FileDescriptorProto, message.DescriptorProto) {
 		comments := g.PrintComments(message.path)
 
@@ -2144,109 +2314,111 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			g.P(deprecationComment)
 		}
 		g.P("type ", Annotate(message.file, message.path, goTypeName), " struct {")
-		g.In()
+		// g.In()
 
 		for i, field := range message.Field {
-			fieldName := fieldNames[field]
-			typename, wiretype := g.GoType(message, field)
-			jsonName := *field.Name
-			jsonTag := jsonName + ",omitempty"
-			repeatedNativeType := (!field.IsMessage() && !gogoproto.IsCustomType(field) && field.IsRepeated())
-			if !gogoproto.IsNullable(field) && !repeatedNativeType {
-				jsonTag = jsonName
-			}
-			gogoJsonTag := gogoproto.GetJsonTag(field)
-			if gogoJsonTag != nil {
-				jsonTag = *gogoJsonTag
-			}
-			gogoMoreTags := gogoproto.GetMoreTags(field)
-			moreTags := ""
-			if gogoMoreTags != nil {
-				moreTags = " " + *gogoMoreTags
-			}
-			tag := fmt.Sprintf("protobuf:%s json:%q%s", g.goTag(message, field, wiretype), jsonTag, moreTags)
-			if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && gogoproto.IsEmbed(field) {
-				fieldName = ""
-			}
+			// 	fieldName := fieldNames[field]
+			// 	typename, wiretype := g.GoType(message, field)
+			// 	jsonName := *field.Name
+			// 	jsonTag := jsonName + ",omitempty"
+			// 	repeatedNativeType := (!field.IsMessage() && !gogoproto.IsCustomType(field) && field.IsRepeated())
+			// 	if !gogoproto.IsNullable(field) && !repeatedNativeType {
+			// 		jsonTag = jsonName
+			// 	}
+			// 	gogoJsonTag := gogoproto.GetJsonTag(field)
+			// 	if gogoJsonTag != nil {
+			// 		jsonTag = *gogoJsonTag
+			// 	}
+			// 	gogoMoreTags := gogoproto.GetMoreTags(field)
+			// 	moreTags := ""
+			// 	if gogoMoreTags != nil {
+			// 		moreTags = " " + *gogoMoreTags
+			// 	}
+			// 	tag := fmt.Sprintf("protobuf:%s json:%q%s", g.goTag(message, field, wiretype), jsonTag, moreTags)
+			// 	if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && gogoproto.IsEmbed(field) {
+			// 		fieldName = ""
+			// 	}
 
-			oneof := field.OneofIndex != nil && message.allowOneof()
-			if oneof && oneofFieldName[*field.OneofIndex] == "" {
-				odp := message.OneofDecl[int(*field.OneofIndex)]
-				fname := allocNames(CamelCase(odp.GetName()))[0]
+			// 	oneof := field.OneofIndex != nil && message.allowOneof()
+			// 	if oneof && oneofFieldName[*field.OneofIndex] == "" {
+			// 		odp := message.OneofDecl[int(*field.OneofIndex)]
+			// 		fname := allocNames(CamelCase(odp.GetName()))[0]
 
-				// This is the first field of a oneof we haven't seen before.
-				// Generate the union field.
-				oneofFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageOneofPath, *field.OneofIndex)
-				com := g.PrintComments(oneofFullPath)
-				if com {
-					g.P("//")
-				}
-				g.P("// Types that are valid to be assigned to ", fname, ":")
-				// Generate the rest of this comment later,
-				// when we've computed any disambiguation.
-				oneofInsertPoints[*field.OneofIndex] = g.Buffer.Len()
+			// 		// This is the first field of a oneof we haven't seen before.
+			// 		// Generate the union field.
+			// 		oneofFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageOneofPath, *field.OneofIndex)
+			// 		com := g.PrintComments(oneofFullPath)
+			// 		if com {
+			// 			g.P("//")
+			// 		}
+			// 		g.P("// Types that are valid to be assigned to ", fname, ":")
+			// 		// Generate the rest of this comment later,
+			// 		// when we've computed any disambiguation.
+			// 		oneofInsertPoints[*field.OneofIndex] = g.Buffer.Len()
 
-				dname := "is" + goTypeName + "_" + fname
-				oneofFieldName[*field.OneofIndex] = fname
-				oneofDisc[*field.OneofIndex] = dname
-				otag := `protobuf_oneof:"` + odp.GetName() + `"`
-				g.P(Annotate(message.file, oneofFullPath, fname), " ", dname, " `", otag, "`")
-			}
+			// 		dname := "is" + goTypeName + "_" + fname
+			// 		oneofFieldName[*field.OneofIndex] = fname
+			// 		oneofDisc[*field.OneofIndex] = dname
+			// 		otag := `protobuf_oneof:"` + odp.GetName() + `"`
+			// 		g.P(Annotate(message.file, oneofFullPath, fname), " ", dname, " `", otag, "`")
+			// 	}
 
-			if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
-				desc := g.ObjectNamed(field.GetTypeName())
-				if d, ok := desc.(*Descriptor); ok && d.GetOptions().GetMapEntry() {
-					m := g.GoMapType(d, field)
-					typename = m.GoType
-					mapFieldTypes[field] = typename // record for the getter generation
+			// 	if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
+			// 		desc := g.ObjectNamed(field.GetTypeName())
+			// 		if d, ok := desc.(*Descriptor); ok && d.GetOptions().GetMapEntry() {
+			// 			m := g.GoMapType(d, field)
+			// 			typename = m.GoType
+			// 			mapFieldTypes[field] = typename // record for the getter generation
 
-					tag += fmt.Sprintf(" protobuf_key:%s protobuf_val:%s", m.KeyTag, m.ValueTag)
-				}
-			}
+			// 			tag += fmt.Sprintf(" protobuf_key:%s protobuf_val:%s", m.KeyTag, m.ValueTag)
+			// 		}
+			// 	}
 
-			fieldTypes[field] = typename
+			// 	fieldTypes[field] = typename
 
-			if oneof {
-				tname := goTypeName + "_" + fieldName
-				// It is possible for this to collide with a message or enum
-				// nested in this message. Check for collisions.
-				for {
-					ok := true
-					for _, desc := range message.nested {
-						if CamelCaseSlice(desc.TypeName()) == tname {
-							ok = false
-							break
-						}
-					}
-					for _, enum := range message.enums {
-						if CamelCaseSlice(enum.TypeName()) == tname {
-							ok = false
-							break
-						}
-					}
-					if !ok {
-						tname += "_"
-						continue
-					}
-					break
-				}
+			// 	if oneof {
+			// 		tname := goTypeName + "_" + fieldName
+			// 		// It is possible for this to collide with a message or enum
+			// 		// nested in this message. Check for collisions.
+			// 		for {
+			// 			ok := true
+			// 			for _, desc := range message.nested {
+			// 				if CamelCaseSlice(desc.TypeName()) == tname {
+			// 					ok = false
+			// 					break
+			// 				}
+			// 			}
+			// 			for _, enum := range message.enums {
+			// 				if CamelCaseSlice(enum.TypeName()) == tname {
+			// 					ok = false
+			// 					break
+			// 				}
+			// 			}
+			// 			if !ok {
+			// 				tname += "_"
+			// 				continue
+			// 			}
+			// 			break
+			// 		}
 
-				oneofTypeName[field] = tname
-				continue
-			}
+			// 		oneofTypeName[field] = tname
+			// 		continue
+			// 	}
 
-			fieldDeprecated := ""
-			if field.GetOptions().GetDeprecated() {
-				fieldDeprecated = deprecationComment
-			}
+			// 	fieldDeprecated := ""
+			// 	if field.GetOptions().GetDeprecated() {
+			// 		fieldDeprecated = deprecationComment
+			// 	}
 
-			fieldFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i)
-			g.PrintComments(fieldFullPath)
+			// 	fieldFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i)
+			// 	g.PrintComments(fieldFullPath)
 			g.P(Annotate(message.file, fieldFullPath, fieldName), "\t", typename, "\t`", tag, "`", fieldDeprecated)
-			if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
-				g.RecordTypeUse(field.GetTypeName())
-			}
+			// 	if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
+			// 		g.RecordTypeUse(field.GetTypeName())
+			// 	}
 		}
+
+		// #NOTE 1 Need to find where to generate
 		if gogoproto.HasUnkeyed(g.file.FileDescriptorProto, message.DescriptorProto) {
 			g.P("XXX_NoUnkeyedLiteral\tstruct{} `json:\"-\"`") // prevent unkeyed struct literals
 		}
@@ -2267,8 +2439,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		if gogoproto.HasSizecache(g.file.FileDescriptorProto, message.DescriptorProto) {
 			g.P("XXX_sizecache\tint32 `json:\"-\"`")
 		}
-		g.Out()
-		g.P("}")
+		// g.Out()
+		// g.P("}")
+
 	} else {
 		// Even if the type does not need to be generated, we need to iterate
 		// over all its fields to be able to mark as used any imported types
@@ -2280,35 +2453,36 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		}
 	}
 
-	// Update g.Buffer to list valid oneof types.
-	// We do this down here, after we've disambiguated the oneof type names.
-	// We go in reverse order of insertion point to avoid invalidating offsets.
-	for oi := int32(len(message.OneofDecl)); oi >= 0; oi-- {
-		ip := oneofInsertPoints[oi]
-		all := g.Buffer.Bytes()
-		rem := all[ip:]
-		g.Buffer = bytes.NewBuffer(all[:ip:ip]) // set cap so we don't scribble on rem
-		oldLen := g.Buffer.Len()
-		for _, field := range message.Field {
-			if field.OneofIndex == nil || *field.OneofIndex != oi {
-				continue
-			}
-			g.P("//\t*", oneofTypeName[field])
-		}
-		// If we've inserted text, we also need to fix up affected annotations (as
-		// they contain offsets that may need to be changed).
-		offset := int32(g.Buffer.Len() - oldLen)
-		ip32 := int32(ip)
-		for _, anno := range g.annotations {
-			if *anno.Begin >= ip32 {
-				*anno.Begin += offset
-			}
-			if *anno.End >= ip32 {
-				*anno.End += offset
-			}
-		}
-		g.Buffer.Write(rem)
-	}
+	// #NOTE 3 Cant find this anywhere in refactor
+	// // Update g.Buffer to list valid oneof types.
+	// // We do this down here, after we've disambiguated the oneof type names.
+	// // We go in reverse order of insertion point to avoid invalidating offsets.
+	// for oi := int32(len(message.OneofDecl)); oi >= 0; oi-- {
+	// 	ip := oneofInsertPoints[oi]
+	// 	all := g.Buffer.Bytes()
+	// 	rem := all[ip:]
+	// 	g.Buffer = bytes.NewBuffer(all[:ip:ip]) // set cap so we don't scribble on rem
+	// 	oldLen := g.Buffer.Len()
+	// 	for _, field := range message.Field {
+	// 		if field.OneofIndex == nil || *field.OneofIndex != oi {
+	// 			continue
+	// 		}
+	// 		g.P("//\t*", oneofTypeName[field])
+	// 	}
+	// 	// If we've inserted text, we also need to fix up affected annotations (as
+	// 	// they contain offsets that may need to be changed).
+	// 	offset := int32(g.Buffer.Len() - oldLen)
+	// 	ip32 := int32(ip)
+	// 	for _, anno := range g.annotations {
+	// 		if *anno.Begin >= ip32 {
+	// 			*anno.Begin += offset
+	// 		}
+	// 		if *anno.End >= ip32 {
+	// 			*anno.End += offset
+	// 		}
+	// 	}
+	// 	g.Buffer.Write(rem)
+	// }
 
 	// Reset, String and ProtoMessage methods.
 	g.P("func (m *", goTypeName, ") Reset() { *m = ", goTypeName, "{} }")
@@ -2752,15 +2926,15 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		g.P()
 	}
 
-	if !message.group {
-		ms := &messageSymbol{
-			sym:           goTypeName,
-			hasExtensions: hasExtensions,
-			isMessageSet:  isMessageSet,
-			oneofTypes:    oneofTypes,
-		}
-		g.file.addExport(message, ms)
-	}
+	// if !message.group {
+	// 	ms := &messageSymbol{
+	// 		sym:           goTypeName,
+	// 		hasExtensions: hasExtensions,
+	// 		isMessageSet:  isMessageSet,
+	// 		oneofTypes:    oneofTypes,
+	// 	}
+	// 	g.file.addExport(message, ms)
+	// }
 
 	// Oneof functions
 	if len(message.OneofDecl) > 0 && message.allowOneof() {
@@ -3153,34 +3327,34 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		g.P()
 	}
 
-	for _, ext := range message.ext {
-		g.generateExtension(ext)
-	}
+	// for _, ext := range message.ext {
+	// 	g.generateExtension(ext)
+	// }
 
-	fullName := strings.Join(message.TypeName(), ".")
-	if g.file.Package != nil {
-		fullName = *g.file.Package + "." + fullName
-	}
+	// fullName := strings.Join(message.TypeName(), ".")
+	// if g.file.Package != nil {
+	// 	fullName = *g.file.Package + "." + fullName
+	// }
 
-	g.addInitf("%s.RegisterType((*%s)(nil), %q)", g.Pkg["proto"], goTypeName, fullName)
-	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
-		g.addInitf("%s.RegisterType((*%s)(nil), %q)", g.Pkg["golang_proto"], goTypeName, fullName)
-	}
-	if gogoproto.HasMessageName(g.file.FileDescriptorProto, message.DescriptorProto) {
-		g.P("func (*", goTypeName, ") XXX_MessageName() string {")
-		g.In()
-		g.P("return ", strconv.Quote(fullName))
-		g.Out()
-		g.P("}")
-	}
-	// Register types for native map types.
-	for _, k := range mapFieldKeys(mapFieldTypes) {
-		fullName := strings.TrimPrefix(*k.TypeName, ".")
-		g.addInitf("%s.RegisterMapType((%s)(nil), %q)", g.Pkg["proto"], mapFieldTypes[k], fullName)
-		if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
-			g.addInitf("%s.RegisterMapType((%s)(nil), %q)", g.Pkg["golang_proto"], mapFieldTypes[k], fullName)
-		}
-	}
+	// g.addInitf("%s.RegisterType((*%s)(nil), %q)", g.Pkg["proto"], goTypeName, fullName)
+	// if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
+	// 	g.addInitf("%s.RegisterType((*%s)(nil), %q)", g.Pkg["golang_proto"], goTypeName, fullName)
+	// }
+	// if gogoproto.HasMessageName(g.file.FileDescriptorProto, message.DescriptorProto) {
+	// 	g.P("func (*", goTypeName, ") XXX_MessageName() string {")
+	// 	g.In()
+	// 	g.P("return ", strconv.Quote(fullName))
+	// 	g.Out()
+	// 	g.P("}")
+	// }
+	// // Register types for native map types.
+	// for _, k := range mapFieldKeys(mapFieldTypes) {
+	// 	fullName := strings.TrimPrefix(*k.TypeName, ".")
+	// 	g.addInitf("%s.RegisterMapType((%s)(nil), %q)", g.Pkg["proto"], mapFieldTypes[k], fullName)
+	// 	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
+	// 		g.addInitf("%s.RegisterMapType((%s)(nil), %q)", g.Pkg["golang_proto"], mapFieldTypes[k], fullName)
+	// 	}
+	// }
 }
 
 type byTypeName []*descriptor.FieldDescriptorProto
