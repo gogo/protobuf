@@ -2051,9 +2051,10 @@ func (g *Generator) defaultConstantName(goMessageType, protoFieldName string) st
 
 // msgCtx contais the context for the generator functions.
 type msgCtx struct {
-	goName   string      // Go struct name of the message, e.g. MessageName
-	message  *Descriptor // The descriptor for the message
-	defNames map[*descriptor.FieldDescriptorProto]string
+	goName    string                                      // Go struct name of the message, e.g. MessageName
+	message   *Descriptor                                 // The descriptor for the message
+	defNames  map[*descriptor.FieldDescriptorProto]string // NOTE 9 defNames map added to the msgCtx for the getters method
+	fieldWire map[*descriptor.FieldDescriptorProto]string // NOTE 12 Added fieldwire map to messge context for oneofmethods
 }
 
 // fieldCommon contains data common to all types of fields.
@@ -2276,19 +2277,342 @@ func (f *oneofSubField) wireTypeName() string {
 // typedNil prints a nil casted to the pointer to this field.
 // - for XXX_OneofFuncs
 func (f *oneofSubField) typedNil(g *Generator) {
+	// if field.OneofIndex == nil {
+	// continue
+	// }
 	g.P("(*", f.oneofTypeName, ")(nil),")
 }
 
 // marshalCase prints the case matching this oneof subfield in the marshalling code.
-func (f *oneofSubField) marshalCase(g *Generator) {
+func (f *oneofSubField) marshalCase(g *Generator, mc *msgCtx) {
+	// if field.OneofIndex == nil || int(*field.OneofIndex) != oi {
+	// continue
+	// }
+	g.P("case *", f.oneofTypeName, ":")
+	// NOTE 13 They added a separate method (f.wireTypeName()) with another switch case to return the correct wire name, do we want this?
+	// we made a map and added the wire names there for future use. maybe the method is better here?
+	var wire, pre, post string
+	val := "x." + f.goName // overridden for TYPE_BOOL
+	canFail := false       // only TYPE_MESSAGE and TYPE_GROUP can fail
+	switch f.protoType {
+	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
+		wire = "WireFixed64"
+		pre = "b.EncodeFixed64(" + g.Pkg["math"] + ".Float64bits("
+		post = "))"
+	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
+		wire = "WireFixed32"
+		pre = "b.EncodeFixed32(uint64(" + g.Pkg["math"] + ".Float32bits("
+		post = ")))"
+	case descriptor.FieldDescriptorProto_TYPE_INT64,
+		descriptor.FieldDescriptorProto_TYPE_UINT64:
+		wire = "WireVarint"
+		pre, post = "b.EncodeVarint(uint64(", "))"
+	case descriptor.FieldDescriptorProto_TYPE_INT32,
+		descriptor.FieldDescriptorProto_TYPE_UINT32,
+		descriptor.FieldDescriptorProto_TYPE_ENUM:
+		wire = "WireVarint"
+		pre, post = "b.EncodeVarint(uint64(", "))"
+	case descriptor.FieldDescriptorProto_TYPE_FIXED64,
+		descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+		wire = "WireFixed64"
+		pre, post = "b.EncodeFixed64(uint64(", "))"
+	case descriptor.FieldDescriptorProto_TYPE_FIXED32,
+		descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+		wire = "WireFixed32"
+		pre, post = "b.EncodeFixed32(uint64(", "))"
+	case descriptor.FieldDescriptorProto_TYPE_BOOL:
+		// bool needs special handling.
+		g.P("t := uint64(0)")
+		g.P("if ", val, " { t = 1 }")
+		val = "t"
+		wire = "WireVarint"
+		pre, post = "b.EncodeVarint(", ")"
+	case descriptor.FieldDescriptorProto_TYPE_STRING:
+		wire = "WireBytes"
+		pre, post = "b.EncodeStringBytes(", ")"
+	case descriptor.FieldDescriptorProto_TYPE_GROUP:
+		wire = "WireStartGroup"
+		pre, post = "b.Marshal(", ")"
+		canFail = true
+	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+		wire = "WireBytes"
+		pre, post = "b.EncodeMessage(", ")"
+		canFail = true
+	case descriptor.FieldDescriptorProto_TYPE_BYTES:
+		wire = "WireBytes"
+		pre, post = "b.EncodeRawBytes(", ")"
+	case descriptor.FieldDescriptorProto_TYPE_SINT32:
+		wire = "WireVarint"
+		pre, post = "b.EncodeZigzag32(uint64(", "))"
+	case descriptor.FieldDescriptorProto_TYPE_SINT64:
+		wire = "WireVarint"
+		pre, post = "b.EncodeZigzag64(uint64(", "))"
+	default:
+		g.Fail("unhandled oneof field type ", f.protoType.String())
+	}
+	mc.fieldWire[f.protoField] = wire
+	g.P("_ = b.EncodeVarint(", f.fieldNumber, "<<3|", g.Pkg["proto"], ".", wire, ")")
+	if f.protoType == descriptor.FieldDescriptorProto_TYPE_BYTES && gogoproto.IsCustomType(f.protoField) {
+		g.P(`dAtA, err := `, val, `.Marshal()`)
+		g.P(`if err != nil {`)
+		g.In()
+		g.P(`return err`)
+		g.Out()
+		g.P(`}`)
+		val = "dAtA"
+	} else if gogoproto.IsStdTime(f.protoField) {
+		pkg := g.useTypes()
+		if gogoproto.IsNullable(f.protoField) {
+			g.P(`dAtA, err := `, pkg, `.StdTimeMarshal(*`, val, `)`)
+		} else {
+			g.P(`dAtA, err := `, pkg, `.StdTimeMarshal(`, val, `)`)
+		}
+		g.P(`if err != nil {`)
+		g.In()
+		g.P(`return err`)
+		g.Out()
+		g.P(`}`)
+		val = "dAtA"
+		pre, post = "b.EncodeRawBytes(", ")"
+	} else if gogoproto.IsStdDuration(f.protoField) {
+		pkg := g.useTypes()
+		if gogoproto.IsNullable(f.protoField) {
+			g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(*`, val, `)`)
+		} else {
+			g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(`, val, `)`)
+		}
+		g.P(`if err != nil {`)
+		g.In()
+		g.P(`return err`)
+		g.Out()
+		g.P(`}`)
+		val = "dAtA"
+		pre, post = "b.EncodeRawBytes(", ")"
+	}
+	if !canFail {
+		g.P("_ = ", pre, val, post)
+	} else {
+		g.P("if err := ", pre, val, post, "; err != nil {")
+		g.In()
+		g.P("return err")
+		g.Out()
+		g.P("}")
+	}
+	if f.protoType == descriptor.FieldDescriptorProto_TYPE_GROUP {
+		g.P("_ = b.EncodeVarint(", f.fieldNumber, "<<3|", g.Pkg["proto"], ".WireEndGroup)")
+	}
 }
 
 // unmarshalCase prints the case matching this oneof subfield in the unmarshalling code.
-func (f *oneofSubField) unmarshalCase(g *Generator, origOneofName string, oneofName string) {
+func (f *oneofSubField) unmarshalCase(g *Generator, origOneofName string, oneofName string, mc *msgCtx) {
+	// if field.OneofIndex == nil {
+	// continue
+	// }
+	g.P("case ", f.fieldNumber, ": // ", origOneofName, ".", f.getProtoName())
+	g.P("if wire != ", g.Pkg["proto"], ".", mc.fieldWire[f.protoField], " {")
+	g.P("return true, ", g.Pkg["proto"], ".ErrInternalBadWireType")
+	g.P("}")
+	lhs := "x, err" // overridden for TYPE_MESSAGE and TYPE_GROUP
+	var dec, cast, cast2 string
+	switch f.protoType {
+	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
+		dec, cast = "b.DecodeFixed64()", g.Pkg["math"]+".Float64frombits"
+	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
+		dec, cast, cast2 = "b.DecodeFixed32()", "uint32", g.Pkg["math"]+".Float32frombits"
+	case descriptor.FieldDescriptorProto_TYPE_INT64:
+		dec, cast = "b.DecodeVarint()", "int64"
+	case descriptor.FieldDescriptorProto_TYPE_UINT64:
+		dec = "b.DecodeVarint()"
+	case descriptor.FieldDescriptorProto_TYPE_INT32:
+		dec, cast = "b.DecodeVarint()", "int32"
+	case descriptor.FieldDescriptorProto_TYPE_FIXED64:
+		dec = "b.DecodeFixed64()"
+	case descriptor.FieldDescriptorProto_TYPE_FIXED32:
+		dec, cast = "b.DecodeFixed32()", "uint32"
+	case descriptor.FieldDescriptorProto_TYPE_BOOL:
+		dec = "b.DecodeVarint()"
+		// handled specially below
+	case descriptor.FieldDescriptorProto_TYPE_STRING:
+		dec = "b.DecodeStringBytes()"
+	case descriptor.FieldDescriptorProto_TYPE_GROUP:
+		g.P("msg := new(", f.goType[1:], ")") // drop star
+		lhs = "err"
+		dec = "b.DecodeGroup(msg)"
+		// handled specially below
+	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+		if gogoproto.IsStdTime(f.protoField) || gogoproto.IsStdDuration(f.protoField) {
+			dec = "b.DecodeRawBytes(true)"
+		} else {
+			g.P("msg := new(", f.goType[1:], ")") // drop star
+			lhs = "err"
+			dec = "b.DecodeMessage(msg)"
+		}
+		// handled specially below
+	case descriptor.FieldDescriptorProto_TYPE_BYTES:
+		dec = "b.DecodeRawBytes(true)"
+	case descriptor.FieldDescriptorProto_TYPE_UINT32:
+		dec, cast = "b.DecodeVarint()", "uint32"
+	case descriptor.FieldDescriptorProto_TYPE_ENUM:
+		dec, cast = "b.DecodeVarint()", f.goType
+	case descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+		dec, cast = "b.DecodeFixed32()", "int32"
+	case descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+		dec, cast = "b.DecodeFixed64()", "int64"
+	case descriptor.FieldDescriptorProto_TYPE_SINT32:
+		dec, cast = "b.DecodeZigzag32()", "int32"
+	case descriptor.FieldDescriptorProto_TYPE_SINT64:
+		dec, cast = "b.DecodeZigzag64()", "int64"
+	default:
+		g.Fail("unhandled oneof field type ", f.protoType.String())
+	}
+	g.P(lhs, " := ", dec)
+	val := "x"
+	if f.protoType == descriptor.FieldDescriptorProto_TYPE_BYTES && gogoproto.IsCustomType(f.protoField) {
+		g.P(`if err != nil {`)
+		g.In()
+		g.P(`return true, err`)
+		g.Out()
+		g.P(`}`)
+		_, ctyp, err := GetCustomType(f.protoField)
+		if err != nil {
+			panic(err)
+		}
+		g.P(`var cc `, ctyp)
+		g.P(`c := &cc`)
+		g.P(`err = c.Unmarshal(`, val, `)`)
+		val = "*c"
+	} else if gogoproto.IsStdTime(f.protoField) {
+		pkg := g.useTypes()
+		g.P(`if err != nil {`)
+		g.In()
+		g.P(`return true, err`)
+		g.Out()
+		g.P(`}`)
+		g.P(`c := new(time.Time)`)
+		g.P(`if err2 := `, pkg, `.StdTimeUnmarshal(c, `, val, `); err2 != nil {`)
+		g.In()
+		g.P(`return true, err`)
+		g.Out()
+		g.P(`}`)
+		val = "c"
+	} else if gogoproto.IsStdDuration(f.protoField) {
+		pkg := g.useTypes()
+		g.P(`if err != nil {`)
+		g.In()
+		g.P(`return true, err`)
+		g.Out()
+		g.P(`}`)
+		g.P(`c := new(time.Duration)`)
+		g.P(`if err2 := `, pkg, `.StdDurationUnmarshal(c, `, val, `); err2 != nil {`)
+		g.In()
+		g.P(`return true, err`)
+		g.Out()
+		g.P(`}`)
+		val = "c"
+	}
+	if cast != "" {
+		val = cast + "(" + val + ")"
+	}
+	if cast2 != "" {
+		val = cast2 + "(" + val + ")"
+	}
+	switch f.protoType {
+	case descriptor.FieldDescriptorProto_TYPE_BOOL:
+		val += " != 0"
+	case descriptor.FieldDescriptorProto_TYPE_GROUP,
+		descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+		if !gogoproto.IsStdTime(f.protoField) && !gogoproto.IsStdDuration(f.protoField) {
+			val = "msg"
+		}
+	}
+	if gogoproto.IsCastType(f.protoField) {
+		_, typ, err := getCastType(f.protoField)
+		if err != nil {
+			g.Fail(err.Error())
+		}
+		val = typ + "(" + val + ")"
+	}
+	g.P("m.", oneofName, " = &", f.oneofTypeName, "{", val, "}")
+	g.P("return true, err")
 }
 
 // sizerCase prints the case matching this oneof subfield in the sizer code.
 func (f *oneofSubField) sizerCase(g *Generator) {
+	// if field.OneofIndex == nil || int(*field.OneofIndex) != oi {
+	// 	continue
+	// }
+	g.P("case *", f.oneofTypeName, ":")
+	val := "x." + f.goName
+	var varint, fixed string
+	switch f.protoType {
+	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
+		fixed = "8"
+	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
+		fixed = "4"
+	case descriptor.FieldDescriptorProto_TYPE_INT64,
+		descriptor.FieldDescriptorProto_TYPE_UINT64,
+		descriptor.FieldDescriptorProto_TYPE_INT32,
+		descriptor.FieldDescriptorProto_TYPE_UINT32,
+		descriptor.FieldDescriptorProto_TYPE_ENUM:
+		varint = val
+	case descriptor.FieldDescriptorProto_TYPE_FIXED64,
+		descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+		fixed = "8"
+	case descriptor.FieldDescriptorProto_TYPE_FIXED32,
+		descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+		fixed = "4"
+	case descriptor.FieldDescriptorProto_TYPE_BOOL:
+		fixed = "1"
+	case descriptor.FieldDescriptorProto_TYPE_STRING:
+		fixed = "len(" + val + ")"
+		varint = fixed
+	case descriptor.FieldDescriptorProto_TYPE_GROUP:
+		fixed = g.Pkg["proto"] + ".Size(" + val + ")"
+	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+		if gogoproto.IsStdTime(f.protoField) {
+			if gogoproto.IsNullable(f.protoField) {
+				val = "*" + val
+			}
+			pkg := g.useTypes()
+			g.P("s := ", pkg, ".SizeOfStdTime(", val, ")")
+		} else if gogoproto.IsStdDuration(f.protoField) {
+			if gogoproto.IsNullable(f.protoField) {
+				val = "*" + val
+			}
+			pkg := g.useTypes()
+			g.P("s := ", pkg, ".SizeOfStdDuration(", val, ")")
+		} else {
+			g.P("s := ", g.Pkg["proto"], ".Size(", val, ")")
+		}
+		fixed = "s"
+		varint = fixed
+	case descriptor.FieldDescriptorProto_TYPE_BYTES:
+		if gogoproto.IsCustomType(f.protoField) {
+			fixed = val + ".Size()"
+		} else {
+			fixed = "len(" + val + ")"
+		}
+		varint = fixed
+	case descriptor.FieldDescriptorProto_TYPE_SINT32:
+		varint = "(uint32(" + val + ") << 1) ^ uint32((int32(" + val + ") >> 31))"
+	case descriptor.FieldDescriptorProto_TYPE_SINT64:
+		varint = "uint64(" + val + " << 1) ^ uint64((int64(" + val + ") >> 63))"
+	default:
+		g.Fail("unhandled oneof field type ", f.protoType.String())
+	}
+	// Tag and wire varint is known statically,
+	// so don't generate code for that part of the size computation.
+	tagAndWireSize := proto.SizeVarint(uint64(f.fieldNumber << 3)) // wire doesn't affect varint size
+	g.P("n += ", tagAndWireSize, " // tag and wire")
+	if varint != "" {
+		g.P("n += ", g.Pkg["proto"], ".SizeVarint(uint64(", varint, "))")
+	}
+	if fixed != "" {
+		g.P("n += ", fixed)
+	}
+	if f.protoType == descriptor.FieldDescriptorProto_TYPE_GROUP {
+		g.P("n += ", tagAndWireSize, " // tag and wire")
+	}
 }
 
 // getProtoDef returns the default value explicitly stated in the proto file, e.g "yoshi" or "5".
@@ -2612,6 +2936,85 @@ func (g *Generator) generateInternalStructFields(mc *msgCtx, topLevelFields []to
 
 // generateOneofFuncs adds all the utility functions for oneof, including marshalling, unmarshalling and sizer.
 func (g *Generator) generateOneofFuncs(mc *msgCtx, topLevelFields []topLevelField) {
+	ofields := []*oneofField{}
+	for _, f := range topLevelFields {
+		if o, ok := f.(*oneofField); ok {
+			ofields = append(ofields, o)
+		}
+	}
+	if len(ofields) == 0 {
+		return
+	}
+	enc := "_" + mc.goName + "_OneofMarshaler"
+	dec := "_" + mc.goName + "_OneofUnmarshaler"
+	size := "_" + mc.goName + "_OneofSizer"
+	encSig := "(msg " + g.Pkg["proto"] + ".Message, b *" + g.Pkg["proto"] + ".Buffer) error"
+	decSig := "(msg " + g.Pkg["proto"] + ".Message, tag, wire int, b *" + g.Pkg["proto"] + ".Buffer) (bool, error)"
+	sizeSig := "(msg " + g.Pkg["proto"] + ".Message) (n int)"
+
+	// OneofFuncs
+	g.P("// XXX_OneofFuncs is for the internal use of the proto package.")
+	g.P("func (*", mc.goName, ") XXX_OneofFuncs() (func", encSig, ", func", decSig, ", func", sizeSig, ", []interface{}) {")
+	g.P("return ", enc, ", ", dec, ", ", size, ", []interface{}{")
+	for _, of := range ofields {
+		for _, sf := range of.subFields {
+			sf.typedNil(g)
+		}
+	}
+	g.P("}")
+	g.P("}")
+	g.P()
+
+	// marshaler
+	g.P("func ", enc, encSig, " {")
+	g.P("m := msg.(*", mc.goName, ")")
+	for _, of := range ofields {
+		g.P("// ", of.getProtoName())
+		g.P("switch x := m.", of.goName, ".(type) {")
+		for _, sf := range of.subFields {
+			// also fills in field.wire and mc.fieldWire map
+			sf.marshalCase(g, mc)
+		}
+		g.P("case nil:")
+		g.P("default: return ", g.Pkg["fmt"], `.Errorf("`, mc.goName, ".", of.goName, ` has unexpected type %T", x)`)
+		g.P("}")
+	}
+	g.P("return nil")
+	g.P("}")
+	g.P()
+
+	// unmarshaler
+	g.P("func ", dec, decSig, " {")
+	g.P("m := msg.(*", mc.goName, ")")
+	g.P("switch tag {")
+	for _, of := range ofields {
+		for _, sf := range of.subFields {
+			sf.unmarshalCase(g, of.getProtoName(), of.goName, mc)
+		}
+	}
+	g.P("default: return false, nil")
+	g.P("}")
+	g.P("}")
+	g.P()
+
+	// sizer
+	g.P("func ", size, sizeSig, " {")
+	g.P("m := msg.(*", mc.goName, ")")
+	for _, of := range ofields {
+		g.P("// ", of.getProtoName())
+		g.P("switch x := m.", of.goName, ".(type) {")
+		for _, sf := range of.subFields {
+			// also fills in field.wire
+			sf.sizerCase(g)
+		}
+		g.P("case nil:")
+		g.P("default:")
+		g.P("panic(", g.Pkg["fmt"], ".Sprintf(\"proto: unexpected type %T in oneof\", x))")
+		g.P("}")
+	}
+	g.P("return n")
+	g.P("}")
+	g.P()
 }
 
 // generateMessageStruct adds the actual struct with it's members (but not methods) to the output.
@@ -2645,6 +3048,9 @@ func (g *Generator) generateGetters(mc *msgCtx, topLevelFields []topLevelField) 
 
 // generateSetters add setters for all fields, including oneofs and weak fields when applicable.
 func (g *Generator) generateSetters(mc *msgCtx, topLevelFields []topLevelField) {
+	for _, pf := range topLevelFields {
+		pf.setter(g, mc)
+	}
 }
 
 // generateCommonMethods adds methods to the message that are not on a per field basis.
@@ -3009,9 +3415,10 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	}
 
 	mc := &msgCtx{
-		goName:   goTypeName,
-		message:  message,
-		defNames: make(map[*descriptor.FieldDescriptorProto]string),
+		goName:    goTypeName,
+		message:   message,
+		defNames:  make(map[*descriptor.FieldDescriptorProto]string),
+		fieldWire: make(map[*descriptor.FieldDescriptorProto]string),
 	}
 
 	g.generateMessageStruct(mc, topLevelFields)
@@ -3723,395 +4130,395 @@ func (g *Generator) generateMessage(message *Descriptor) {
 // 	// }
 
 // 	// Oneof functions
-// 	if len(message.OneofDecl) > 0 && message.allowOneof() {
-// 		fieldWire := make(map[*descriptor.FieldDescriptorProto]string)
+// 	// if len(message.OneofDecl) > 0 && message.allowOneof() {
+// 	// fieldWire := make(map[*descriptor.FieldDescriptorProto]string)
 
-// 		// method
-// 		enc := "_" + goTypeName + "_OneofMarshaler"
-// 		dec := "_" + goTypeName + "_OneofUnmarshaler"
-// 		size := "_" + goTypeName + "_OneofSizer"
-// 		encSig := "(msg " + g.Pkg["proto"] + ".Message, b *" + g.Pkg["proto"] + ".Buffer) error"
-// 		decSig := "(msg " + g.Pkg["proto"] + ".Message, tag, wire int, b *" + g.Pkg["proto"] + ".Buffer) (bool, error)"
-// 		sizeSig := "(msg " + g.Pkg["proto"] + ".Message) (n int)"
+// 	// // method
+// 	// enc := "_" + goTypeName + "_OneofMarshaler"
+// 	// dec := "_" + goTypeName + "_OneofUnmarshaler"
+// 	// size := "_" + goTypeName + "_OneofSizer"
+// 	// encSig := "(msg " + g.Pkg["proto"] + ".Message, b *" + g.Pkg["proto"] + ".Buffer) error"
+// 	// decSig := "(msg " + g.Pkg["proto"] + ".Message, tag, wire int, b *" + g.Pkg["proto"] + ".Buffer) (bool, error)"
+// 	// sizeSig := "(msg " + g.Pkg["proto"] + ".Message) (n int)"
 
-// 		g.P("// XXX_OneofFuncs is for the internal use of the proto package.")
-// 		g.P("func (*", goTypeName, ") XXX_OneofFuncs() (func", encSig, ", func", decSig, ", func", sizeSig, ", []interface{}) {")
-// 		g.P("return ", enc, ", ", dec, ", ", size, ", []interface{}{")
-// 		for _, field := range message.Field {
-// 			if field.OneofIndex == nil {
-// 				continue
-// 			}
-// 			g.P("(*", oneofTypeName[field], ")(nil),")
-// 		}
-// 		g.P("}")
-// 		g.P("}")
-// 		g.P()
+// 	// g.P("// XXX_OneofFuncs is for the internal use of the proto package.")
+// 	// g.P("func (*", goTypeName, ") XXX_OneofFuncs() (func", encSig, ", func", decSig, ", func", sizeSig, ", []interface{}) {")
+// 	// g.P("return ", enc, ", ", dec, ", ", size, ", []interface{}{")
+// 	// for _, field := range message.Field {
+// 	// 	if field.OneofIndex == nil {
+// 	// 		continue
+// 	// 	}
+// 	// 	g.P("(*", oneofTypeName[field], ")(nil),")
+// 	// }
+// 	// g.P("}")
+// 	// g.P("}")
+// 	// g.P()
 
-// 		// marshaler
-// 		g.P("func ", enc, encSig, " {")
-// 		g.P("m := msg.(*", goTypeName, ")")
-// 		for oi, odp := range message.OneofDecl {
-// 			g.P("// ", odp.GetName())
-// 			fname := oneofFieldName[int32(oi)]
-// 			g.P("switch x := m.", fname, ".(type) {")
-// 			for _, field := range message.Field {
-// 				if field.OneofIndex == nil || int(*field.OneofIndex) != oi {
-// 					continue
-// 				}
-// 				g.P("case *", oneofTypeName[field], ":")
-// 				var wire, pre, post string
-// 				val := "x." + fieldNames[field] // overridden for TYPE_BOOL
-// 				canFail := false                // only TYPE_MESSAGE and TYPE_GROUP can fail
-// 				switch *field.Type {
-// 				case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
-// 					wire = "WireFixed64"
-// 					pre = "b.EncodeFixed64(" + g.Pkg["math"] + ".Float64bits("
-// 					post = "))"
-// 				case descriptor.FieldDescriptorProto_TYPE_FLOAT:
-// 					wire = "WireFixed32"
-// 					pre = "b.EncodeFixed32(uint64(" + g.Pkg["math"] + ".Float32bits("
-// 					post = ")))"
-// 				case descriptor.FieldDescriptorProto_TYPE_INT64,
-// 					descriptor.FieldDescriptorProto_TYPE_UINT64:
-// 					wire = "WireVarint"
-// 					pre, post = "b.EncodeVarint(uint64(", "))"
-// 				case descriptor.FieldDescriptorProto_TYPE_INT32,
-// 					descriptor.FieldDescriptorProto_TYPE_UINT32,
-// 					descriptor.FieldDescriptorProto_TYPE_ENUM:
-// 					wire = "WireVarint"
-// 					pre, post = "b.EncodeVarint(uint64(", "))"
-// 				case descriptor.FieldDescriptorProto_TYPE_FIXED64,
-// 					descriptor.FieldDescriptorProto_TYPE_SFIXED64:
-// 					wire = "WireFixed64"
-// 					pre, post = "b.EncodeFixed64(uint64(", "))"
-// 				case descriptor.FieldDescriptorProto_TYPE_FIXED32,
-// 					descriptor.FieldDescriptorProto_TYPE_SFIXED32:
-// 					wire = "WireFixed32"
-// 					pre, post = "b.EncodeFixed32(uint64(", "))"
-// 				case descriptor.FieldDescriptorProto_TYPE_BOOL:
-// 					// bool needs special handling.
-// 					g.P("t := uint64(0)")
-// 					g.P("if ", val, " { t = 1 }")
-// 					val = "t"
-// 					wire = "WireVarint"
-// 					pre, post = "b.EncodeVarint(", ")"
-// 				case descriptor.FieldDescriptorProto_TYPE_STRING:
-// 					wire = "WireBytes"
-// 					pre, post = "b.EncodeStringBytes(", ")"
-// 				case descriptor.FieldDescriptorProto_TYPE_GROUP:
-// 					wire = "WireStartGroup"
-// 					pre, post = "b.Marshal(", ")"
-// 					canFail = true
-// 				case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-// 					wire = "WireBytes"
-// 					pre, post = "b.EncodeMessage(", ")"
-// 					canFail = true
-// 				case descriptor.FieldDescriptorProto_TYPE_BYTES:
-// 					wire = "WireBytes"
-// 					pre, post = "b.EncodeRawBytes(", ")"
-// 				case descriptor.FieldDescriptorProto_TYPE_SINT32:
-// 					wire = "WireVarint"
-// 					pre, post = "b.EncodeZigzag32(uint64(", "))"
-// 				case descriptor.FieldDescriptorProto_TYPE_SINT64:
-// 					wire = "WireVarint"
-// 					pre, post = "b.EncodeZigzag64(uint64(", "))"
-// 				default:
-// 					g.Fail("unhandled oneof field type ", field.Type.String())
-// 				}
-// 				fieldWire[field] = wire
-// 				g.P("_ = b.EncodeVarint(", field.Number, "<<3|", g.Pkg["proto"], ".", wire, ")")
-// 				if *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && gogoproto.IsCustomType(field) {
-// 					g.P(`dAtA, err := `, val, `.Marshal()`)
-// 					g.P(`if err != nil {`)
-// 					g.In()
-// 					g.P(`return err`)
-// 					g.Out()
-// 					g.P(`}`)
-// 					val = "dAtA"
-// 				} else if gogoproto.IsStdTime(field) {
-// 					pkg := g.useTypes()
-// 					if gogoproto.IsNullable(field) {
-// 						g.P(`dAtA, err := `, pkg, `.StdTimeMarshal(*`, val, `)`)
-// 					} else {
-// 						g.P(`dAtA, err := `, pkg, `.StdTimeMarshal(`, val, `)`)
-// 					}
-// 					g.P(`if err != nil {`)
-// 					g.In()
-// 					g.P(`return err`)
-// 					g.Out()
-// 					g.P(`}`)
-// 					val = "dAtA"
-// 					pre, post = "b.EncodeRawBytes(", ")"
-// 				} else if gogoproto.IsStdDuration(field) {
-// 					pkg := g.useTypes()
-// 					if gogoproto.IsNullable(field) {
-// 						g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(*`, val, `)`)
-// 					} else {
-// 						g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(`, val, `)`)
-// 					}
-// 					g.P(`if err != nil {`)
-// 					g.In()
-// 					g.P(`return err`)
-// 					g.Out()
-// 					g.P(`}`)
-// 					val = "dAtA"
-// 					pre, post = "b.EncodeRawBytes(", ")"
-// 				}
-// 				if !canFail {
-// 					g.P("_ = ", pre, val, post)
-// 				} else {
-// 					g.P("if err := ", pre, val, post, "; err != nil {")
-// 					g.In()
-// 					g.P("return err")
-// 					g.Out()
-// 					g.P("}")
-// 				}
-// 				if *field.Type == descriptor.FieldDescriptorProto_TYPE_GROUP {
-// 					g.P("_ = b.EncodeVarint(", field.Number, "<<3|", g.Pkg["proto"], ".WireEndGroup)")
-// 				}
-// 			}
-// 			g.P("case nil:")
-// 			g.P("default: return ", g.Pkg["fmt"], `.Errorf("`, goTypeName, ".", fname, ` has unexpected type %T", x)`)
-// 			g.P("}")
-// 		}
-// 		g.P("return nil")
-// 		g.P("}")
-// 		g.P()
+// 	// // marshaler
+// 	// g.P("func ", enc, encSig, " {")
+// 	// g.P("m := msg.(*", goTypeName, ")")
+// 	// for oi, odp := range message.OneofDecl {
+// 	// 	g.P("// ", odp.GetName())
+// 	// 	fname := oneofFieldName[int32(oi)]
+// 	// 	g.P("switch x := m.", fname, ".(type) {")
+// 	// 	for _, field := range message.Field {
+// 	// 		if field.OneofIndex == nil || int(*field.OneofIndex) != oi {
+// 	// 			continue
+// 	// 		}
+// 	// 		g.P("case *", oneofTypeName[field], ":")
+// 	// 		var wire, pre, post string
+// 	// 		val := "x." + fieldNames[field] // overridden for TYPE_BOOL
+// 	// 		canFail := false                // only TYPE_MESSAGE and TYPE_GROUP can fail
+// 	// 		switch *field.Type {
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
+// 	// 			wire = "WireFixed64"
+// 	// 			pre = "b.EncodeFixed64(" + g.Pkg["math"] + ".Float64bits("
+// 	// 			post = "))"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_FLOAT:
+// 	// 			wire = "WireFixed32"
+// 	// 			pre = "b.EncodeFixed32(uint64(" + g.Pkg["math"] + ".Float32bits("
+// 	// 			post = ")))"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_INT64,
+// 	// 			descriptor.FieldDescriptorProto_TYPE_UINT64:
+// 	// 			wire = "WireVarint"
+// 	// 			pre, post = "b.EncodeVarint(uint64(", "))"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_INT32,
+// 	// 			descriptor.FieldDescriptorProto_TYPE_UINT32,
+// 	// 			descriptor.FieldDescriptorProto_TYPE_ENUM:
+// 	// 			wire = "WireVarint"
+// 	// 			pre, post = "b.EncodeVarint(uint64(", "))"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_FIXED64,
+// 	// 			descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+// 	// 			wire = "WireFixed64"
+// 	// 			pre, post = "b.EncodeFixed64(uint64(", "))"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_FIXED32,
+// 	// 			descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+// 	// 			wire = "WireFixed32"
+// 	// 			pre, post = "b.EncodeFixed32(uint64(", "))"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_BOOL:
+// 	// 			// bool needs special handling.
+// 	// 			g.P("t := uint64(0)")
+// 	// 			g.P("if ", val, " { t = 1 }")
+// 	// 			val = "t"
+// 	// 			wire = "WireVarint"
+// 	// 			pre, post = "b.EncodeVarint(", ")"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_STRING:
+// 	// 			wire = "WireBytes"
+// 	// 			pre, post = "b.EncodeStringBytes(", ")"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_GROUP:
+// 	// 			wire = "WireStartGroup"
+// 	// 			pre, post = "b.Marshal(", ")"
+// 	// 			canFail = true
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+// 	// 			wire = "WireBytes"
+// 	// 			pre, post = "b.EncodeMessage(", ")"
+// 	// 			canFail = true
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_BYTES:
+// 	// 			wire = "WireBytes"
+// 	// 			pre, post = "b.EncodeRawBytes(", ")"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_SINT32:
+// 	// 			wire = "WireVarint"
+// 	// 			pre, post = "b.EncodeZigzag32(uint64(", "))"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_SINT64:
+// 	// 			wire = "WireVarint"
+// 	// 			pre, post = "b.EncodeZigzag64(uint64(", "))"
+// 	// 		default:
+// 	// 			g.Fail("unhandled oneof field type ", field.Type.String())
+// 	// 		}
+// 	// 		fieldWire[field] = wire
+// 	// 		g.P("_ = b.EncodeVarint(", field.Number, "<<3|", g.Pkg["proto"], ".", wire, ")")
+// 	// 		if *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && gogoproto.IsCustomType(field) {
+// 	// 			g.P(`dAtA, err := `, val, `.Marshal()`)
+// 	// 			g.P(`if err != nil {`)
+// 	// 			g.In()
+// 	// 			g.P(`return err`)
+// 	// 			g.Out()
+// 	// 			g.P(`}`)
+// 	// 			val = "dAtA"
+// 	// 		} else if gogoproto.IsStdTime(field) {
+// 	// 			pkg := g.useTypes()
+// 	// 			if gogoproto.IsNullable(field) {
+// 	// 				g.P(`dAtA, err := `, pkg, `.StdTimeMarshal(*`, val, `)`)
+// 	// 			} else {
+// 	// 				g.P(`dAtA, err := `, pkg, `.StdTimeMarshal(`, val, `)`)
+// 	// 			}
+// 	// 			g.P(`if err != nil {`)
+// 	// 			g.In()
+// 	// 			g.P(`return err`)
+// 	// 			g.Out()
+// 	// 			g.P(`}`)
+// 	// 			val = "dAtA"
+// 	// 			pre, post = "b.EncodeRawBytes(", ")"
+// 	// 		} else if gogoproto.IsStdDuration(field) {
+// 	// 			pkg := g.useTypes()
+// 	// 			if gogoproto.IsNullable(field) {
+// 	// 				g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(*`, val, `)`)
+// 	// 			} else {
+// 	// 				g.P(`dAtA, err := `, pkg, `.StdDurationMarshal(`, val, `)`)
+// 	// 			}
+// 	// 			g.P(`if err != nil {`)
+// 	// 			g.In()
+// 	// 			g.P(`return err`)
+// 	// 			g.Out()
+// 	// 			g.P(`}`)
+// 	// 			val = "dAtA"
+// 	// 			pre, post = "b.EncodeRawBytes(", ")"
+// 	// 		}
+// 	// 		if !canFail {
+// 	// 			g.P("_ = ", pre, val, post)
+// 	// 		} else {
+// 	// 			g.P("if err := ", pre, val, post, "; err != nil {")
+// 	// 			g.In()
+// 	// 			g.P("return err")
+// 	// 			g.Out()
+// 	// 			g.P("}")
+// 	// 		}
+// 	// 		if *field.Type == descriptor.FieldDescriptorProto_TYPE_GROUP {
+// 	// 			g.P("_ = b.EncodeVarint(", field.Number, "<<3|", g.Pkg["proto"], ".WireEndGroup)")
+// 	// 		}
+// 	// 	}
+// 	// 	g.P("case nil:")
+// 	// 	g.P("default: return ", g.Pkg["fmt"], `.Errorf("`, goTypeName, ".", fname, ` has unexpected type %T", x)`)
+// 	// 	g.P("}")
+// 	// }
+// 	// g.P("return nil")
+// 	// g.P("}")
+// 	// g.P()
 
-// 		// unmarshaler
-// 		g.P("func ", dec, decSig, " {")
-// 		g.P("m := msg.(*", goTypeName, ")")
-// 		g.P("switch tag {")
-// 		for _, field := range message.Field {
-// 			if field.OneofIndex == nil {
-// 				continue
-// 			}
-// 			odp := message.OneofDecl[int(*field.OneofIndex)]
-// 			g.P("case ", field.Number, ": // ", odp.GetName(), ".", *field.Name)
-// 			g.P("if wire != ", g.Pkg["proto"], ".", fieldWire[field], " {")
-// 			g.P("return true, ", g.Pkg["proto"], ".ErrInternalBadWireType")
-// 			g.P("}")
-// 			lhs := "x, err" // overridden for TYPE_MESSAGE and TYPE_GROUP
-// 			var dec, cast, cast2 string
-// 			switch *field.Type {
-// 			case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
-// 				dec, cast = "b.DecodeFixed64()", g.Pkg["math"]+".Float64frombits"
-// 			case descriptor.FieldDescriptorProto_TYPE_FLOAT:
-// 				dec, cast, cast2 = "b.DecodeFixed32()", "uint32", g.Pkg["math"]+".Float32frombits"
-// 			case descriptor.FieldDescriptorProto_TYPE_INT64:
-// 				dec, cast = "b.DecodeVarint()", "int64"
-// 			case descriptor.FieldDescriptorProto_TYPE_UINT64:
-// 				dec = "b.DecodeVarint()"
-// 			case descriptor.FieldDescriptorProto_TYPE_INT32:
-// 				dec, cast = "b.DecodeVarint()", "int32"
-// 			case descriptor.FieldDescriptorProto_TYPE_FIXED64:
-// 				dec = "b.DecodeFixed64()"
-// 			case descriptor.FieldDescriptorProto_TYPE_FIXED32:
-// 				dec, cast = "b.DecodeFixed32()", "uint32"
-// 			case descriptor.FieldDescriptorProto_TYPE_BOOL:
-// 				dec = "b.DecodeVarint()"
-// 				// handled specially below
-// 			case descriptor.FieldDescriptorProto_TYPE_STRING:
-// 				dec = "b.DecodeStringBytes()"
-// 			case descriptor.FieldDescriptorProto_TYPE_GROUP:
-// 				g.P("msg := new(", fieldTypes[field][1:], ")") // drop star
-// 				lhs = "err"
-// 				dec = "b.DecodeGroup(msg)"
-// 				// handled specially below
-// 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-// 				if gogoproto.IsStdTime(field) || gogoproto.IsStdDuration(field) {
-// 					dec = "b.DecodeRawBytes(true)"
-// 				} else {
-// 					g.P("msg := new(", fieldTypes[field][1:], ")") // drop star
-// 					lhs = "err"
-// 					dec = "b.DecodeMessage(msg)"
-// 				}
-// 				// handled specially below
-// 			case descriptor.FieldDescriptorProto_TYPE_BYTES:
-// 				dec = "b.DecodeRawBytes(true)"
-// 			case descriptor.FieldDescriptorProto_TYPE_UINT32:
-// 				dec, cast = "b.DecodeVarint()", "uint32"
-// 			case descriptor.FieldDescriptorProto_TYPE_ENUM:
-// 				dec, cast = "b.DecodeVarint()", fieldTypes[field]
-// 			case descriptor.FieldDescriptorProto_TYPE_SFIXED32:
-// 				dec, cast = "b.DecodeFixed32()", "int32"
-// 			case descriptor.FieldDescriptorProto_TYPE_SFIXED64:
-// 				dec, cast = "b.DecodeFixed64()", "int64"
-// 			case descriptor.FieldDescriptorProto_TYPE_SINT32:
-// 				dec, cast = "b.DecodeZigzag32()", "int32"
-// 			case descriptor.FieldDescriptorProto_TYPE_SINT64:
-// 				dec, cast = "b.DecodeZigzag64()", "int64"
-// 			default:
-// 				g.Fail("unhandled oneof field type ", field.Type.String())
-// 			}
-// 			g.P(lhs, " := ", dec)
-// 			val := "x"
-// 			if *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && gogoproto.IsCustomType(field) {
-// 				g.P(`if err != nil {`)
-// 				g.In()
-// 				g.P(`return true, err`)
-// 				g.Out()
-// 				g.P(`}`)
-// 				_, ctyp, err := GetCustomType(field)
-// 				if err != nil {
-// 					panic(err)
-// 				}
-// 				g.P(`var cc `, ctyp)
-// 				g.P(`c := &cc`)
-// 				g.P(`err = c.Unmarshal(`, val, `)`)
-// 				val = "*c"
-// 			} else if gogoproto.IsStdTime(field) {
-// 				pkg := g.useTypes()
-// 				g.P(`if err != nil {`)
-// 				g.In()
-// 				g.P(`return true, err`)
-// 				g.Out()
-// 				g.P(`}`)
-// 				g.P(`c := new(time.Time)`)
-// 				g.P(`if err2 := `, pkg, `.StdTimeUnmarshal(c, `, val, `); err2 != nil {`)
-// 				g.In()
-// 				g.P(`return true, err`)
-// 				g.Out()
-// 				g.P(`}`)
-// 				val = "c"
-// 			} else if gogoproto.IsStdDuration(field) {
-// 				pkg := g.useTypes()
-// 				g.P(`if err != nil {`)
-// 				g.In()
-// 				g.P(`return true, err`)
-// 				g.Out()
-// 				g.P(`}`)
-// 				g.P(`c := new(time.Duration)`)
-// 				g.P(`if err2 := `, pkg, `.StdDurationUnmarshal(c, `, val, `); err2 != nil {`)
-// 				g.In()
-// 				g.P(`return true, err`)
-// 				g.Out()
-// 				g.P(`}`)
-// 				val = "c"
-// 			}
-// 			if cast != "" {
-// 				val = cast + "(" + val + ")"
-// 			}
-// 			if cast2 != "" {
-// 				val = cast2 + "(" + val + ")"
-// 			}
-// 			switch *field.Type {
-// 			case descriptor.FieldDescriptorProto_TYPE_BOOL:
-// 				val += " != 0"
-// 			case descriptor.FieldDescriptorProto_TYPE_GROUP,
-// 				descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-// 				if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) {
-// 					val = "msg"
-// 				}
-// 			}
-// 			if gogoproto.IsCastType(field) {
-// 				_, typ, err := getCastType(field)
-// 				if err != nil {
-// 					g.Fail(err.Error())
-// 				}
-// 				val = typ + "(" + val + ")"
-// 			}
-// 			g.P("m.", oneofFieldName[*field.OneofIndex], " = &", oneofTypeName[field], "{", val, "}")
-// 			g.P("return true, err")
-// 		}
-// 		g.P("default: return false, nil")
-// 		g.P("}")
-// 		g.P("}")
-// 		g.P()
+// 	// // unmarshaler
+// 	// g.P("func ", dec, decSig, " {")
+// 	// g.P("m := msg.(*", goTypeName, ")")
+// 	// g.P("switch tag {")
+// 	// for _, field := range message.Field {
+// 	// 	if field.OneofIndex == nil {
+// 	// 		continue
+// 	// 	}
+// 	// 	odp := message.OneofDecl[int(*field.OneofIndex)]
+// 	// 	g.P("case ", field.Number, ": // ", odp.GetName(), ".", *field.Name)
+// 	// 	g.P("if wire != ", g.Pkg["proto"], ".", fieldWire[field], " {")
+// 	// 	g.P("return true, ", g.Pkg["proto"], ".ErrInternalBadWireType")
+// 	// 	g.P("}")
+// 	// 	lhs := "x, err" // overridden for TYPE_MESSAGE and TYPE_GROUP
+// 	// 	var dec, cast, cast2 string
+// 	// 	switch *field.Type {
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
+// 	// 		dec, cast = "b.DecodeFixed64()", g.Pkg["math"]+".Float64frombits"
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
+// 	// 		dec, cast, cast2 = "b.DecodeFixed32()", "uint32", g.Pkg["math"]+".Float32frombits"
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_INT64:
+// 	// 		dec, cast = "b.DecodeVarint()", "int64"
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_UINT64:
+// 	// 		dec = "b.DecodeVarint()"
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_INT32:
+// 	// 		dec, cast = "b.DecodeVarint()", "int32"
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_FIXED64:
+// 	// 		dec = "b.DecodeFixed64()"
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_FIXED32:
+// 	// 		dec, cast = "b.DecodeFixed32()", "uint32"
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_BOOL:
+// 	// 		dec = "b.DecodeVarint()"
+// 	// 		// handled specially below
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_STRING:
+// 	// 		dec = "b.DecodeStringBytes()"
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_GROUP:
+// 	// 		g.P("msg := new(", fieldTypes[field][1:], ")") // drop star
+// 	// 		lhs = "err"
+// 	// 		dec = "b.DecodeGroup(msg)"
+// 	// 		// handled specially below
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+// 	// 		if gogoproto.IsStdTime(field) || gogoproto.IsStdDuration(field) {
+// 	// 			dec = "b.DecodeRawBytes(true)"
+// 	// 		} else {
+// 	// 			g.P("msg := new(", fieldTypes[field][1:], ")") // drop star
+// 	// 			lhs = "err"
+// 	// 			dec = "b.DecodeMessage(msg)"
+// 	// 		}
+// 	// 		// handled specially below
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
+// 	// 		dec = "b.DecodeRawBytes(true)"
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_UINT32:
+// 	// 		dec, cast = "b.DecodeVarint()", "uint32"
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_ENUM:
+// 	// 		dec, cast = "b.DecodeVarint()", fieldTypes[field]
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+// 	// 		dec, cast = "b.DecodeFixed32()", "int32"
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+// 	// 		dec, cast = "b.DecodeFixed64()", "int64"
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_SINT32:
+// 	// 		dec, cast = "b.DecodeZigzag32()", "int32"
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_SINT64:
+// 	// 		dec, cast = "b.DecodeZigzag64()", "int64"
+// 	// 	default:
+// 	// 		g.Fail("unhandled oneof field type ", field.Type.String())
+// 	// 	}
+// 	// 	g.P(lhs, " := ", dec)
+// 	// 	val := "x"
+// 	// 	if *field.Type == descriptor.FieldDescriptorProto_TYPE_BYTES && gogoproto.IsCustomType(field) {
+// 	// 		g.P(`if err != nil {`)
+// 	// 		g.In()
+// 	// 		g.P(`return true, err`)
+// 	// 		g.Out()
+// 	// 		g.P(`}`)
+// 	// 		_, ctyp, err := GetCustomType(field)
+// 	// 		if err != nil {
+// 	// 			panic(err)
+// 	// 		}
+// 	// 		g.P(`var cc `, ctyp)
+// 	// 		g.P(`c := &cc`)
+// 	// 		g.P(`err = c.Unmarshal(`, val, `)`)
+// 	// 		val = "*c"
+// 	// 	} else if gogoproto.IsStdTime(field) {
+// 	// 		pkg := g.useTypes()
+// 	// 		g.P(`if err != nil {`)
+// 	// 		g.In()
+// 	// 		g.P(`return true, err`)
+// 	// 		g.Out()
+// 	// 		g.P(`}`)
+// 	// 		g.P(`c := new(time.Time)`)
+// 	// 		g.P(`if err2 := `, pkg, `.StdTimeUnmarshal(c, `, val, `); err2 != nil {`)
+// 	// 		g.In()
+// 	// 		g.P(`return true, err`)
+// 	// 		g.Out()
+// 	// 		g.P(`}`)
+// 	// 		val = "c"
+// 	// 	} else if gogoproto.IsStdDuration(field) {
+// 	// 		pkg := g.useTypes()
+// 	// 		g.P(`if err != nil {`)
+// 	// 		g.In()
+// 	// 		g.P(`return true, err`)
+// 	// 		g.Out()
+// 	// 		g.P(`}`)
+// 	// 		g.P(`c := new(time.Duration)`)
+// 	// 		g.P(`if err2 := `, pkg, `.StdDurationUnmarshal(c, `, val, `); err2 != nil {`)
+// 	// 		g.In()
+// 	// 		g.P(`return true, err`)
+// 	// 		g.Out()
+// 	// 		g.P(`}`)
+// 	// 		val = "c"
+// 	// 	}
+// 	// 	if cast != "" {
+// 	// 		val = cast + "(" + val + ")"
+// 	// 	}
+// 	// 	if cast2 != "" {
+// 	// 		val = cast2 + "(" + val + ")"
+// 	// 	}
+// 	// 	switch *field.Type {
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_BOOL:
+// 	// 		val += " != 0"
+// 	// 	case descriptor.FieldDescriptorProto_TYPE_GROUP,
+// 	// 		descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+// 	// 		if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) {
+// 	// 			val = "msg"
+// 	// 		}
+// 	// 	}
+// 	// 	if gogoproto.IsCastType(field) {
+// 	// 		_, typ, err := getCastType(field)
+// 	// 		if err != nil {
+// 	// 			g.Fail(err.Error())
+// 	// 		}
+// 	// 		val = typ + "(" + val + ")"
+// 	// 	}
+// 	// 	g.P("m.", oneofFieldName[*field.OneofIndex], " = &", oneofTypeName[field], "{", val, "}")
+// 	// 	g.P("return true, err")
+// 	// }
+// 	// g.P("default: return false, nil")
+// 	// g.P("}")
+// 	// g.P("}")
+// 	// g.P()
 
-// 		// sizer
-// 		g.P("func ", size, sizeSig, " {")
-// 		g.P("m := msg.(*", goTypeName, ")")
-// 		for oi, odp := range message.OneofDecl {
-// 			g.P("// ", odp.GetName())
-// 			fname := oneofFieldName[int32(oi)]
-// 			g.P("switch x := m.", fname, ".(type) {")
-// 			for _, field := range message.Field {
-// 				if field.OneofIndex == nil || int(*field.OneofIndex) != oi {
-// 					continue
-// 				}
-// 				g.P("case *", oneofTypeName[field], ":")
-// 				val := "x." + fieldNames[field]
-// 				var varint, fixed string
-// 				switch *field.Type {
-// 				case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
-// 					fixed = "8"
-// 				case descriptor.FieldDescriptorProto_TYPE_FLOAT:
-// 					fixed = "4"
-// 				case descriptor.FieldDescriptorProto_TYPE_INT64,
-// 					descriptor.FieldDescriptorProto_TYPE_UINT64,
-// 					descriptor.FieldDescriptorProto_TYPE_INT32,
-// 					descriptor.FieldDescriptorProto_TYPE_UINT32,
-// 					descriptor.FieldDescriptorProto_TYPE_ENUM:
-// 					varint = val
-// 				case descriptor.FieldDescriptorProto_TYPE_FIXED64,
-// 					descriptor.FieldDescriptorProto_TYPE_SFIXED64:
-// 					fixed = "8"
-// 				case descriptor.FieldDescriptorProto_TYPE_FIXED32,
-// 					descriptor.FieldDescriptorProto_TYPE_SFIXED32:
-// 					fixed = "4"
-// 				case descriptor.FieldDescriptorProto_TYPE_BOOL:
-// 					fixed = "1"
-// 				case descriptor.FieldDescriptorProto_TYPE_STRING:
-// 					fixed = "len(" + val + ")"
-// 					varint = fixed
-// 				case descriptor.FieldDescriptorProto_TYPE_GROUP:
-// 					fixed = g.Pkg["proto"] + ".Size(" + val + ")"
-// 				case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-// 					if gogoproto.IsStdTime(field) {
-// 						if gogoproto.IsNullable(field) {
-// 							val = "*" + val
-// 						}
-// 						pkg := g.useTypes()
-// 						g.P("s := ", pkg, ".SizeOfStdTime(", val, ")")
-// 					} else if gogoproto.IsStdDuration(field) {
-// 						if gogoproto.IsNullable(field) {
-// 							val = "*" + val
-// 						}
-// 						pkg := g.useTypes()
-// 						g.P("s := ", pkg, ".SizeOfStdDuration(", val, ")")
-// 					} else {
-// 						g.P("s := ", g.Pkg["proto"], ".Size(", val, ")")
-// 					}
-// 					fixed = "s"
-// 					varint = fixed
-// 				case descriptor.FieldDescriptorProto_TYPE_BYTES:
-// 					if gogoproto.IsCustomType(field) {
-// 						fixed = val + ".Size()"
-// 					} else {
-// 						fixed = "len(" + val + ")"
-// 					}
-// 					varint = fixed
-// 				case descriptor.FieldDescriptorProto_TYPE_SINT32:
-// 					varint = "(uint32(" + val + ") << 1) ^ uint32((int32(" + val + ") >> 31))"
-// 				case descriptor.FieldDescriptorProto_TYPE_SINT64:
-// 					varint = "uint64(" + val + " << 1) ^ uint64((int64(" + val + ") >> 63))"
-// 				default:
-// 					g.Fail("unhandled oneof field type ", field.Type.String())
-// 				}
-// 				// Tag and wire varint is known statically,
-// 				// so don't generate code for that part of the size computation.
-// 				tagAndWireSize := proto.SizeVarint(uint64(*field.Number << 3)) // wire doesn't affect varint size
-// 				g.P("n += ", tagAndWireSize, " // tag and wire")
-// 				if varint != "" {
-// 					g.P("n += ", g.Pkg["proto"], ".SizeVarint(uint64(", varint, "))")
-// 				}
-// 				if fixed != "" {
-// 					g.P("n += ", fixed)
-// 				}
-// 				if *field.Type == descriptor.FieldDescriptorProto_TYPE_GROUP {
-// 					g.P("n += ", tagAndWireSize, " // tag and wire")
-// 				}
-// 			}
-// 			g.P("case nil:")
-// 			g.P("default:")
-// 			g.P("panic(", g.Pkg["fmt"], ".Sprintf(\"proto: unexpected type %T in oneof\", x))")
-// 			g.P("}")
-// 		}
-// 		g.P("return n")
-// 		g.P("}")
-// 		g.P()
-// 	}
+// 	// // sizer
+// 	// g.P("func ", size, sizeSig, " {")
+// 	// g.P("m := msg.(*", goTypeName, ")")
+// 	// for oi, odp := range message.OneofDecl {
+// 	// 	g.P("// ", odp.GetName())
+// 	// 	fname := oneofFieldName[int32(oi)]
+// 	// 	g.P("switch x := m.", fname, ".(type) {")
+// 	// 	for _, field := range message.Field {
+// 	// 		if field.OneofIndex == nil || int(*field.OneofIndex) != oi {
+// 	// 			continue
+// 	// 		}
+// 	// 		g.P("case *", oneofTypeName[field], ":")
+// 	// 		val := "x." + fieldNames[field]
+// 	// 		var varint, fixed string
+// 	// 		switch *field.Type {
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
+// 	// 			fixed = "8"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_FLOAT:
+// 	// 			fixed = "4"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_INT64,
+// 	// 			descriptor.FieldDescriptorProto_TYPE_UINT64,
+// 	// 			descriptor.FieldDescriptorProto_TYPE_INT32,
+// 	// 			descriptor.FieldDescriptorProto_TYPE_UINT32,
+// 	// 			descriptor.FieldDescriptorProto_TYPE_ENUM:
+// 	// 			varint = val
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_FIXED64,
+// 	// 			descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+// 	// 			fixed = "8"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_FIXED32,
+// 	// 			descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+// 	// 			fixed = "4"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_BOOL:
+// 	// 			fixed = "1"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_STRING:
+// 	// 			fixed = "len(" + val + ")"
+// 	// 			varint = fixed
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_GROUP:
+// 	// 			fixed = g.Pkg["proto"] + ".Size(" + val + ")"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+// 	// 			if gogoproto.IsStdTime(field) {
+// 	// 				if gogoproto.IsNullable(field) {
+// 	// 					val = "*" + val
+// 	// 				}
+// 	// 				pkg := g.useTypes()
+// 	// 				g.P("s := ", pkg, ".SizeOfStdTime(", val, ")")
+// 	// 			} else if gogoproto.IsStdDuration(field) {
+// 	// 				if gogoproto.IsNullable(field) {
+// 	// 					val = "*" + val
+// 	// 				}
+// 	// 				pkg := g.useTypes()
+// 	// 				g.P("s := ", pkg, ".SizeOfStdDuration(", val, ")")
+// 	// 			} else {
+// 	// 				g.P("s := ", g.Pkg["proto"], ".Size(", val, ")")
+// 	// 			}
+// 	// 			fixed = "s"
+// 	// 			varint = fixed
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_BYTES:
+// 	// 			if gogoproto.IsCustomType(field) {
+// 	// 				fixed = val + ".Size()"
+// 	// 			} else {
+// 	// 				fixed = "len(" + val + ")"
+// 	// 			}
+// 	// 			varint = fixed
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_SINT32:
+// 	// 			varint = "(uint32(" + val + ") << 1) ^ uint32((int32(" + val + ") >> 31))"
+// 	// 		case descriptor.FieldDescriptorProto_TYPE_SINT64:
+// 	// 			varint = "uint64(" + val + " << 1) ^ uint64((int64(" + val + ") >> 63))"
+// 	// 		default:
+// 	// 			g.Fail("unhandled oneof field type ", field.Type.String())
+// 	// 		}
+// 	// 		// Tag and wire varint is known statically,
+// 	// 		// so don't generate code for that part of the size computation.
+// 	// 		tagAndWireSize := proto.SizeVarint(uint64(*field.Number << 3)) // wire doesn't affect varint size
+// 	// 		g.P("n += ", tagAndWireSize, " // tag and wire")
+// 	// 		if varint != "" {
+// 	// 			g.P("n += ", g.Pkg["proto"], ".SizeVarint(uint64(", varint, "))")
+// 	// 		}
+// 	// 		if fixed != "" {
+// 	// 			g.P("n += ", fixed)
+// 	// 		}
+// 	// 		if *field.Type == descriptor.FieldDescriptorProto_TYPE_GROUP {
+// 	// 			g.P("n += ", tagAndWireSize, " // tag and wire")
+// 	// 		}
+// 	// 	}
+// 	// 	g.P("case nil:")
+// 	// 	g.P("default:")
+// 	// 	g.P("panic(", g.Pkg["fmt"], ".Sprintf(\"proto: unexpected type %T in oneof\", x))")
+// 	// 	g.P("}")
+// 	// }
+// 	// g.P("return n")
+// 	// g.P("}")
+// 	// g.P()
+// 	// }
 
 // 	// for _, ext := range message.ext {
 // 	// 	g.generateExtension(ext)
