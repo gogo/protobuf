@@ -2655,142 +2655,149 @@ func (f *oneofField) decl(g *Generator, mc *msgCtx) {
 // also it prints all the getters for the sub fields.
 func (f *oneofField) getter(g *Generator, mc *msgCtx) {
 	// NOTE 11 Rework oneof getter. I think I need to do something else since we might need to loop over the subFields of the oneoffield
-	// oneof := true
-	// if !oneof && !gogoproto.HasGoGetters(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
-	// 	return
-	// }
-	// if gogoproto.IsEmbed(f.protoField) || gogoproto.IsCustomType(f.protoField) {
-	// 	return
-	// }
-	// fname := f.goName
-	// tname := f.goType
-	// star := ""
-	// if (f.protoType != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
-	// 	(f.protoType != descriptor.FieldDescriptorProto_TYPE_GROUP) &&
-	// 	needsStar(f.protoField, g.file.proto3, mc.message != nil && mc.message.allowOneof()) && tname[0] == '*' {
-	// 	tname = tname[1:]
-	// 	star = "*"
-	// }
-	// if f.deprecated != "" {
-	// 	g.P(f.deprecated)
-	// }
+	// NOTE 15 I see now that generateOneofDecls code in golang's case is just added at the top of their oneofField.getter method.
+	//	I can move ours to there as well
+	oneof := true
+	if !oneof && !gogoproto.HasGoGetters(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
+		return
+	}
 
-	// g.P("func (m *", mc.goName, ") ", Annotate(mc.message.file, f.fullPath, f.getterName), "() "+tname+" {")
-	// def, hasDef := mc.defNames[f.protoField]
-	// typeDefaultIsNil := false // whether this field type's default value is a literal nil unless specified
-	// switch f.protoType {
-	// case descriptor.FieldDescriptorProto_TYPE_BYTES:
-	// 	typeDefaultIsNil = !hasDef
-	// case descriptor.FieldDescriptorProto_TYPE_GROUP, descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-	// 	typeDefaultIsNil = gogoproto.IsNullable(f.protoField)
-	// }
-	// if isRepeated(f.protoField) {
-	// 	typeDefaultIsNil = true
-	// }
-	// if !oneof && typeDefaultIsNil {
-	// 	// A bytes field with no explicit default needs less generated code,
-	// 	// as does a message or group field, or a repeated field.
-	// 	g.P("if m != nil {")
-	// 	g.In()
-	// 	g.P("return m." + fname)
-	// 	g.Out()
-	// 	g.P("}")
-	// 	g.P("return nil")
-	// 	g.Out()
-	// 	g.P("}")
-	// 	g.P()
-	// 	return
-	// }
-	// if !gogoproto.IsNullable(f.protoField) {
-	// 	g.P("if m != nil {")
-	// 	g.In()
-	// 	g.P("return m." + fname)
-	// 	g.Out()
-	// 	g.P("}")
-	// } else if !oneof {
-	// 	if mc.message.proto3() {
-	// 		g.P("if m != nil {")
-	// 	} else {
-	// 		g.P("if m != nil && m." + fname + " != nil {")
-	// 	}
-	// 	g.In()
-	// 	g.P("return " + star + "m." + fname)
-	// 	g.Out()
-	// 	g.P("}")
-	// } else {
-	// 	// NOTE 10 Check getterName for oneofsubfields.
-	// 	uname := f.goName
-	// 	tname := f.oneofTypeName
-	// 	g.P("if x, ok := m.Get", uname, "().(*", tname, "); ok {")
-	// 	g.P("return x.", fname)
-	// 	g.P("}")
-	// }
-	// if hasDef {
-	// 	if f.protoType != descriptor.FieldDescriptorProto_TYPE_BYTES {
-	// 		g.P("return " + def)
-	// 	} else {
-	// 		// The default is a []byte var.
-	// 		// Make a copy when returning it to be safe.
-	// 		g.P("return append([]byte(nil), ", def, "...)")
-	// 	}
-	// } else {
-	// 	switch f.protoType {
-	// 	case descriptor.FieldDescriptorProto_TYPE_GROUP,
-	// 		descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-	// 		if f.protoField.OneofIndex != nil {
-	// 			g.P(`return nil`)
-	// 		} else {
-	// 			goTyp, _ := g.GoType(mc.message, f.protoField)
-	// 			goTypName := GoTypeToName(goTyp)
-	// 			if !gogoproto.IsNullable(f.protoField) && gogoproto.IsStdDuration(f.protoField) {
-	// 				g.P("return 0")
-	// 			} else {
-	// 				g.P("return ", goTypName, "{}")
-	// 			}
-	// 		}
-	// 	case descriptor.FieldDescriptorProto_TYPE_BOOL:
-	// 		g.P("return false")
-	// 	case descriptor.FieldDescriptorProto_TYPE_STRING:
-	// 		g.P(`return ""`)
-	// 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
-	// 		// This is only possible for oneof fields.
-	// 		g.P("return nil")
-	// 	case descriptor.FieldDescriptorProto_TYPE_ENUM:
-	// 		// The default default for an enum is the first value in the enum,
-	// 		// not zero.
-	// 		obj := g.ObjectNamed(f.protoTypeName)
-	// 		var enum *EnumDescriptor
-	// 		if id, ok := obj.(*ImportedDescriptor); ok {
-	// 			// The enum type has been publicly imported.
-	// 			enum, _ = id.o.(*EnumDescriptor)
-	// 		} else {
-	// 			enum, _ = obj.(*EnumDescriptor)
-	// 		}
-	// 		if enum == nil {
-	// 			log.Printf("don't know how to generate getter for %s", f.protoName)
-	// 			return
-	// 		}
-	// 		if len(enum.Value) == 0 {
-	// 			g.P("return 0 // empty enum")
-	// 		} else {
-	// 			first := enum.Value[0].GetName()
-	// 			if gogoproto.IsEnumValueCustomName(enum.Value[0]) {
-	// 				first = gogoproto.GetEnumValueCustomName(enum.Value[0])
-	// 			}
+	for _, of := range f.subFields {
+		if gogoproto.IsEmbed(of.protoField) || gogoproto.IsCustomType(of.protoField) {
+			continue
+		}
+		fname := of.goName
+		tname := of.goType
+		star := ""
+		if (of.protoType != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
+			(of.protoType != descriptor.FieldDescriptorProto_TYPE_GROUP) &&
+			needsStar(of.protoField, g.file.proto3, mc.message != nil && mc.message.allowOneof()) && tname[0] == '*' {
+			tname = tname[1:]
+			star = "*"
+		}
+		// Dont have this for oneofsubfields
+		// if f.deprecated != "" {
+		// 	g.P(of.deprecated)
+		// }
 
-	// 			if gogoproto.EnabledGoEnumPrefix(enum.file.FileDescriptorProto, enum.EnumDescriptorProto) {
-	// 				g.P("return ", g.DefaultPackageName(obj)+enum.prefix()+first)
-	// 			} else {
-	// 				g.P("return ", g.DefaultPackageName(obj)+first)
-	// 			}
-	// 		}
-	// 	default:
-	// 		g.P("return 0")
-	// 	}
-	// }
-	// g.Out()
-	// g.P("}")
-	// g.P()
+		g.P("func (m *", mc.goName, ") ", Annotate(mc.message.file, of.fullPath, of.getterName), "() "+tname+" {")
+		def, hasDef := mc.defNames[of.protoField]
+		typeDefaultIsNil := false // whether this field type's default value is a literal nil unless specified
+		switch of.protoType {
+		case descriptor.FieldDescriptorProto_TYPE_BYTES:
+			typeDefaultIsNil = !hasDef
+		case descriptor.FieldDescriptorProto_TYPE_GROUP, descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+			typeDefaultIsNil = gogoproto.IsNullable(of.protoField)
+		}
+		if isRepeated(of.protoField) {
+			typeDefaultIsNil = true
+		}
+		if !oneof && typeDefaultIsNil {
+			// A bytes field with no explicit default needs less generated code,
+			// as does a message or group field, or a repeated field.
+			g.P("if m != nil {")
+			g.In()
+			g.P("return m." + fname)
+			g.Out()
+			g.P("}")
+			g.P("return nil")
+			g.Out()
+			g.P("}")
+			g.P()
+			return
+		}
+		if !gogoproto.IsNullable(of.protoField) {
+			g.P("if m != nil {")
+			g.In()
+			g.P("return m." + fname)
+			g.Out()
+			g.P("}")
+		} else if !oneof {
+			if mc.message.proto3() {
+				g.P("if m != nil {")
+			} else {
+				g.P("if m != nil && m." + fname + " != nil {")
+			}
+			g.In()
+			g.P("return " + star + "m." + fname)
+			g.Out()
+			g.P("}")
+		} else {
+			// NOTE 10 Check getterName for oneofsubfields.
+			uname := f.goName
+			tname := of.oneofTypeName
+			g.P("if x, ok := m.Get", uname, "().(*", tname, "); ok {")
+			g.P("return x.", fname)
+			g.P("}")
+		}
+		if hasDef {
+			if of.protoType != descriptor.FieldDescriptorProto_TYPE_BYTES {
+				g.P("return " + def)
+			} else {
+				// The default is a []byte var.
+				// Make a copy when returning it to be safe.
+				g.P("return append([]byte(nil), ", def, "...)")
+			}
+		} else {
+			switch of.protoType {
+			case descriptor.FieldDescriptorProto_TYPE_GROUP,
+				descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+				if of.protoField.OneofIndex != nil {
+					g.P(`return nil`)
+				} else {
+					goTyp, _ := g.GoType(mc.message, of.protoField)
+					goTypName := GoTypeToName(goTyp)
+					if !gogoproto.IsNullable(of.protoField) && gogoproto.IsStdDuration(of.protoField) {
+						g.P("return 0")
+					} else {
+						g.P("return ", goTypName, "{}")
+					}
+				}
+			case descriptor.FieldDescriptorProto_TYPE_BOOL:
+				g.P("return false")
+			case descriptor.FieldDescriptorProto_TYPE_STRING:
+				g.P(`return ""`)
+			case descriptor.FieldDescriptorProto_TYPE_BYTES:
+				// This is only possible for oneof fields.
+				g.P("return nil")
+			case descriptor.FieldDescriptorProto_TYPE_ENUM:
+				// The default default for an enum is the first value in the enum,
+				// not zero.
+				obj := g.ObjectNamed(of.protoTypeName)
+				var enum *EnumDescriptor
+				if id, ok := obj.(*ImportedDescriptor); ok {
+					// The enum type has been publicly imported.
+					enum, _ = id.o.(*EnumDescriptor)
+				} else {
+					enum, _ = obj.(*EnumDescriptor)
+				}
+				if enum == nil {
+					log.Printf("don't know how to generate getter for %s", of.protoName)
+					return
+				}
+				if len(enum.Value) == 0 {
+					g.P("return 0 // empty enum")
+				} else {
+					first := enum.Value[0].GetName()
+					if gogoproto.IsEnumValueCustomName(enum.Value[0]) {
+						first = gogoproto.GetEnumValueCustomName(enum.Value[0])
+					}
+
+					if gogoproto.EnabledGoEnumPrefix(enum.file.FileDescriptorProto, enum.EnumDescriptorProto) {
+						g.P("return ", g.DefaultPackageName(obj)+enum.prefix()+first)
+					} else {
+						g.P("return ", g.DefaultPackageName(obj)+first)
+					}
+				}
+			default:
+				g.P("return 0")
+			}
+		}
+		g.Out()
+		g.P("}")
+		g.P()
+	}
+
 }
 
 // setter prints the setter method of the field.
@@ -3017,7 +3024,7 @@ func (g *Generator) generateOneofFuncs(mc *msgCtx, topLevelFields []topLevelFiel
 	g.P()
 }
 
-func (g *Generator) generateOneofInterfaceDecls(mc *msgCtx, topLevelFields []topLevelField) {
+func (g *Generator) generateOneofDecls(mc *msgCtx, topLevelFields []topLevelField) {
 	ofields := []*oneofField{}
 	for _, f := range topLevelFields {
 		if o, ok := f.(*oneofField); ok {
@@ -3027,6 +3034,8 @@ func (g *Generator) generateOneofInterfaceDecls(mc *msgCtx, topLevelFields []top
 	if len(ofields) == 0 {
 		return
 	}
+	// NOTE 15 I see now that generateOneofDecls code in golang's case is just added at the top of their oneofField.getter method.
+	//	I can move ours to there as well
 	// NOTE 7 ONEOF type interface generation.
 	// Oneof per-field types, discriminants and getters.
 	// Generate unexported named types for the discriminant interfaces.
@@ -3506,7 +3515,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	g.P()
 	g.generateDefaultConstants(mc, topLevelFields)
 	g.P()
-	g.generateOneofInterfaceDecls(mc, topLevelFields)
+	g.generateOneofDecls(mc, topLevelFields)
 	g.P()
 	g.generateGetters(mc, topLevelFields)
 	g.P()
