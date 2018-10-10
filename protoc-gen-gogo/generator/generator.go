@@ -3348,6 +3348,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		}
 		ns := allocNames(base, "Get"+base)
 		fieldName, fieldGetterName := ns[0], ns[1]
+
 		typename, wiretype := g.GoType(message, field)
 		jsonName := *field.Name
 		jsonTag := jsonName + ",omitempty"
@@ -3463,7 +3464,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			}
 
 			oneofField.subFields = append(oneofField.subFields, &sf)
-			g.RecordTypeUse(field.GetTypeName())
+			if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
+				g.RecordTypeUse(field.GetTypeName())
+			}
 			continue
 		}
 
@@ -3497,8 +3500,20 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		var pf topLevelField = &rf
 
 		topLevelFields = append(topLevelFields, pf)
-		if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
-			g.RecordTypeUse(field.GetTypeName())
+
+		if gogoproto.HasTypeDecl(message.file.FileDescriptorProto, message.DescriptorProto) {
+			if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
+				g.RecordTypeUse(field.GetTypeName())
+			}
+		} else {
+			// Even if the type does not need to be generated, we need to iterate
+			// over all its fields to be able to mark as used any imported types
+			// used by those fields.
+			for _, mfield := range message.Field {
+				if !gogoproto.IsStdTime(mfield) && !gogoproto.IsStdDuration(mfield) && !gogoproto.IsCustomType(mfield) && !gogoproto.IsCastType(mfield) {
+					g.RecordTypeUse(mfield.GetTypeName())
+				}
+			}
 		}
 	}
 
@@ -3509,8 +3524,10 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		fieldWire: make(map[*descriptor.FieldDescriptorProto]string),
 	}
 
-	g.generateMessageStruct(mc, topLevelFields)
-	g.P()
+	if gogoproto.HasTypeDecl(message.file.FileDescriptorProto, message.DescriptorProto) {
+		g.generateMessageStruct(mc, topLevelFields)
+		g.P()
+	}
 	g.generateCommonMethods(mc)
 	g.P()
 	g.generateDefaultConstants(mc, topLevelFields)
