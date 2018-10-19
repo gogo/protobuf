@@ -3163,10 +3163,7 @@ func (g *Generator) generateCommonMethods(mc *msgCtx) {
 	}
 
 	// Extension support methods
-	// NOTE 5 Consider adding this to the msgCtx? golangproto dont use these vars
-	// var hasExtensions, isMessageSet bool
 	if len(mc.message.ExtensionRange) > 0 {
-		// hasExtensions = true
 		// message_set_wire_format only makes sense when extensions are defined.
 		if opts := mc.message.Options; opts != nil && opts.GetMessageSetWireFormat() {
 			// isMessageSet = true
@@ -3552,11 +3549,6 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		}
 
 		opts := message.Options
-		// #NOTE 4 Make sure all of the new values are the same as:
-		// sym:           goTypeName,
-		// hasExtensions: hasExtensions,
-		// isMessageSet:  isMessageSet,
-		// oneofTypes:    oneofTypes,
 		ms := &messageSymbol{
 			sym:           goTypeName,
 			hasExtensions: len(message.ExtensionRange) > 0,
@@ -3595,163 +3587,6 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		}
 	}
 }
-
-// stub func old code
-// func (g *Generator) fakegenerateMessage(message *Descriptor) {
-
-// #NOTE 2 Do we need this if anymore?
-// if gogoproto.HasTypeDecl(message.file.FileDescriptorProto, message.DescriptorProto) {
-// comments := g.PrintComments(message.path)
-
-// // Guarantee deprecation comments appear after user-provided comments.
-// if message.GetOptions().GetDeprecated() {
-// 	if comments {
-// 		// Convention: Separate deprecation comments from original
-// 		// comments with an empty line.
-// 		g.P("//")
-// 	}
-// 	g.P(deprecationComment)
-// }
-// g.P("type ", Annotate(message.file, message.path, goTypeName), " struct {")
-// g.In()
-
-// for i, field := range message.Field {
-// 	fieldName := fieldNames[field]
-// 	typename, wiretype := g.GoType(message, field)
-// 	jsonName := *field.Name
-// 	jsonTag := jsonName + ",omitempty"
-// 	repeatedNativeType := (!field.IsMessage() && !gogoproto.IsCustomType(field) && field.IsRepeated())
-// 	if !gogoproto.IsNullable(field) && !repeatedNativeType {
-// 		jsonTag = jsonName
-// 	}
-// 	gogoJsonTag := gogoproto.GetJsonTag(field)
-// 	if gogoJsonTag != nil {
-// 		jsonTag = *gogoJsonTag
-// 	}
-// 	gogoMoreTags := gogoproto.GetMoreTags(field)
-// 	moreTags := ""
-// 	if gogoMoreTags != nil {
-// 		moreTags = " " + *gogoMoreTags
-// 	}
-// 	tag := fmt.Sprintf("protobuf:%s json:%q%s", g.goTag(message, field, wiretype), jsonTag, moreTags)
-// 	if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && gogoproto.IsEmbed(field) {
-// 		fieldName = ""
-// 	}
-
-// 	oneof := field.OneofIndex != nil && message.allowOneof()
-// 	if oneof && oneofFieldName[*field.OneofIndex] == "" {
-// 		odp := message.OneofDecl[int(*field.OneofIndex)]
-// 		fname := allocNames(CamelCase(odp.GetName()))[0]
-
-// 		// This is the first field of a oneof we haven't seen before.
-// 		// Generate the union field.
-// 		oneofFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageOneofPath, *field.OneofIndex)
-// 		com := g.PrintComments(oneofFullPath)
-// 		if com {
-// 			g.P("//")
-// 		}
-// 		g.P("// Types that are valid to be assigned to ", fname, ":")
-// 		// Generate the rest of this comment later,
-// 		// when we've computed any disambiguation.
-// 		oneofInsertPoints[*field.OneofIndex] = g.Buffer.Len()
-
-// 		dname := "is" + goTypeName + "_" + fname
-// 		oneofFieldName[*field.OneofIndex] = fname
-// 		oneofDisc[*field.OneofIndex] = dname
-// 		otag := `protobuf_oneof:"` + odp.GetName() + `"`
-// 		g.P(Annotate(message.file, oneofFullPath, fname), " ", dname, " `", otag, "`")
-// 	}
-
-// 	if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
-// 		desc := g.ObjectNamed(field.GetTypeName())
-// 		if d, ok := desc.(*Descriptor); ok && d.GetOptions().GetMapEntry() {
-// 			m := g.GoMapType(d, field)
-// 			typename = m.GoType
-// 			mapFieldTypes[field] = typename // record for the getter generation
-
-// 			tag += fmt.Sprintf(" protobuf_key:%s protobuf_val:%s", m.KeyTag, m.ValueTag)
-// 		}
-// 	}
-
-// 	fieldTypes[field] = typename
-
-// 	if oneof {
-// 		tname := goTypeName + "_" + fieldName
-// 		// It is possible for this to collide with a message or enum
-// 		// nested in this message. Check for collisions.
-// 		for {
-// 			ok := true
-// 			for _, desc := range message.nested {
-// 				if CamelCaseSlice(desc.TypeName()) == tname {
-// 					ok = false
-// 					break
-// 				}
-// 			}
-// 			for _, enum := range message.enums {
-// 				if CamelCaseSlice(enum.TypeName()) == tname {
-// 					ok = false
-// 					break
-// 				}
-// 			}
-// 			if !ok {
-// 				tname += "_"
-// 				continue
-// 			}
-// 			break
-// 		}
-
-// 		oneofTypeName[field] = tname
-// 		continue
-// 	}
-
-// 	fieldDeprecated := ""
-// 	if field.GetOptions().GetDeprecated() {
-// 		fieldDeprecated = deprecationComment
-// 	}
-
-// 	fieldFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i)
-// 	g.PrintComments(fieldFullPath)
-// g.P(Annotate(message.file, fieldFullPath, fieldName), "\t", typename, "\t`", tag, "`", fieldDeprecated)
-// 	if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
-// 		g.RecordTypeUse(field.GetTypeName())
-// 	}
-// }
-
-// // #NOTE 1 Need to find where to generate
-// if gogoproto.HasUnkeyed(g.file.FileDescriptorProto, message.DescriptorProto) {
-// 	g.P("XXX_NoUnkeyedLiteral\tstruct{} `json:\"-\"`") // prevent unkeyed struct literals
-// }
-// if len(message.ExtensionRange) > 0 {
-// 	if gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, message.DescriptorProto) {
-// 		messageset := ""
-// 		if opts := message.Options; opts != nil && opts.GetMessageSetWireFormat() {
-// 			messageset = "protobuf_messageset:\"1\" "
-// 		}
-// 		g.P(g.Pkg["proto"], ".XXX_InternalExtensions `", messageset, "json:\"-\"`")
-// 	} else {
-// 		g.P("XXX_extensions\t\t[]byte `protobuf:\"bytes,0,opt\" json:\"-\"`")
-// 	}
-// }
-// if gogoproto.HasUnrecognized(g.file.FileDescriptorProto, message.DescriptorProto) {
-// 	g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
-// }
-// if gogoproto.HasSizecache(g.file.FileDescriptorProto, message.DescriptorProto) {
-// 	g.P("XXX_sizecache\tint32 `json:\"-\"`")
-// }
-// g.Out()
-// g.P("}")
-
-// #NOTE 2 Do we need this if anymore?
-// 	} else {
-// 		// Even if the type does not need to be generated, we need to iterate
-// 		// over all its fields to be able to mark as used any imported types
-// 		// used by those fields.
-// 		for _, field := range message.Field {
-// 			if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
-// 				g.RecordTypeUse(field.GetTypeName())
-// 			}
-// 		}
-// 	}
 
 // #NOTE 3 Cant find this anywhere in refactor
 // // Update g.Buffer to list valid oneof types.
