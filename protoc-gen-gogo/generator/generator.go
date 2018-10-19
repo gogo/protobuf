@@ -3441,7 +3441,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			}
 
 			oneofField := oFields[*field.OneofIndex]
-			tag := "protobuf:" + g.goTag(message, field, wiretype)
+			tag = "protobuf:" + g.goTag(message, field, wiretype)
 			sf := oneofSubField{
 				fieldCommon: fieldCommon{
 					goName:     fieldName,

@@ -2266,8 +2266,8 @@ func TestInvalidUTF8(t *testing.T) {
 		proto3: &pb3.TestUTF8{Vector: []string{invalidUTF8}},
 	}, {
 		label:  "Oneof",
-		proto2: &TestUTF8{Oneof: &TestUTF8_Field{invalidUTF8}},
-		proto3: &pb3.TestUTF8{Oneof: &pb3.TestUTF8_Field{invalidUTF8}},
+		proto2: &TestUTF8{Oneof: &TestUTF8_Field{Field: invalidUTF8}},
+		proto3: &pb3.TestUTF8{Oneof: &pb3.TestUTF8_Field{Field: invalidUTF8}},
 	}, {
 		label:  "MapKey",
 		proto2: &TestUTF8{MapKey: map[string]int64{invalidUTF8: 0}},
