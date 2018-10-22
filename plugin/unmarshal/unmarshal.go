@@ -1152,7 +1152,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				if !ok {
 					panic("field is required, but no bit registered")
 				}
-				p.P(`hasFields[`, strconv.Itoa(int(fieldBit/64)), `] |= uint64(`, fmt.Sprintf("0x%08x", 1<<(fieldBit%64)), `)`)
+				p.P(`hasFields[`, strconv.Itoa(int(fieldBit/64)), `] |= uint64(`, fmt.Sprintf("0x%08x", uint64(1)<<(fieldBit%64)), `)`)
 			}
 		}
 		p.Out()
@@ -1241,7 +1241,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				panic("field is required, but no bit registered")
 			}
 
-			p.P(`if hasFields[`, strconv.Itoa(int(fieldBit/64)), `] & uint64(`, fmt.Sprintf("0x%08x", 1<<(fieldBit%64)), `) == 0 {`)
+			p.P(`if hasFields[`, strconv.Itoa(int(fieldBit/64)), `] & uint64(`, fmt.Sprintf("0x%08x", uint64(1)<<(fieldBit%64)), `) == 0 {`)
 			p.In()
 			if !gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
 				p.P(`return new(`, protoPkg.Use(), `.RequiredNotSetError)`)
