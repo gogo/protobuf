@@ -262,6 +262,13 @@ func (g *Generator) GetMapValueField(field, valField *descriptor.FieldDescriptor
 		}
 	}
 
+	wktptr := gogoproto.IsWktPtr(field)
+	if wktptr {
+		if err := proto.SetExtension(valField.Options, gogoproto.E_Wktpointer, &wktptr); err != nil {
+			g.Fail(err.Error())
+		}
+	}
+
 	if valType := gogoproto.GetCastValue(field); len(valType) > 0 {
 		if err := proto.SetExtension(valField.Options, gogoproto.E_Casttype, &valType); err != nil {
 			g.Fail(err.Error())
