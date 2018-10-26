@@ -923,6 +923,16 @@ func (p *textParser) readAny(v reflect.Value, props *Properties) error {
 			fv.SetFloat(f)
 			return nil
 		}
+	case reflect.Int8:
+		if x, err := strconv.ParseInt(tok.value, 0, 8); err == nil {
+			fv.SetInt(x)
+			return nil
+		}
+	case reflect.Int16:
+		if x, err := strconv.ParseInt(tok.value, 0, 16); err == nil {
+			fv.SetInt(x)
+			return nil
+		}
 	case reflect.Int32:
 		if x, err := strconv.ParseInt(tok.value, 0, 32); err == nil {
 			fv.SetInt(x)
@@ -970,6 +980,16 @@ func (p *textParser) readAny(v reflect.Value, props *Properties) error {
 		}
 		// TODO: Handle nested messages which implement encoding.TextUnmarshaler.
 		return p.readStruct(fv, terminator)
+	case reflect.Uint8:
+		if x, err := strconv.ParseUint(tok.value, 0, 8); err == nil {
+			fv.SetUint(x)
+			return nil
+		}
+	case reflect.Uint16:
+		if x, err := strconv.ParseUint(tok.value, 0, 16); err == nil {
+			fv.SetUint(x)
+			return nil
+		}
 	case reflect.Uint32:
 		if x, err := strconv.ParseUint(tok.value, 0, 32); err == nil {
 			fv.SetUint(uint64(x))
