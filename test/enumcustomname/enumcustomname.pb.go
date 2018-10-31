@@ -4,8 +4,8 @@
 package enumcustomname
 
 /*
-	Package enumcustomname tests the behavior of enum_customname and
-	enumvalue_customname extensions.
+Package enumcustomname tests the behavior of enum_customname and
+enumvalue_customname extensions.
 */
 
 import proto "github.com/gogo/protobuf/proto"

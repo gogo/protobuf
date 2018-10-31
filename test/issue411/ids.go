@@ -106,7 +106,7 @@ func (t TraceID) MarshalJSON() ([]byte, error) {
 	var b [16]byte
 	_, err := t.MarshalTo(b[:]) // can only error on incorrect buffer size
 	if err != nil {
-		return []byte{}, err
+		return []byte{}, nil
 	}
 	s := make([]byte, 24+2)
 	base64.StdEncoding.Encode(s[1:25], b[:])
@@ -196,7 +196,7 @@ func (s SpanID) MarshalJSON() ([]byte, error) {
 	var b [8]byte
 	_, err := s.MarshalTo(b[:]) // can only error on incorrect buffer size
 	if err != nil {
-		return []byte{}, err
+		return []byte{}, nil
 	}
 	v := make([]byte, 12+2)
 	base64.StdEncoding.Encode(v[1:13], b[:])

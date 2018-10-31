@@ -466,9 +466,14 @@ func typeUnmarshaler(t reflect.Type, tags string) unmarshaler {
 	isTime := false
 	isDuration := false
 	isWktPointer := false
+	proto3 := false
+	validateUTF8 := true
 	for _, tag := range tagArray[3:] {
 		if strings.HasPrefix(tag, "name=") {
 			name = tag[5:]
+		}
+		if tag == "proto3" {
+			proto3 = true
 		}
 		if strings.HasPrefix(tag, "customtype=") {
 			ctype = true
@@ -483,6 +488,7 @@ func typeUnmarshaler(t reflect.Type, tags string) unmarshaler {
 			isWktPointer = true
 		}
 	}
+	validateUTF8 = validateUTF8 && proto3
 
 	// Figure out packaging (pointer, slice, or both)
 	slice := false
@@ -776,6 +782,15 @@ func typeUnmarshaler(t reflect.Type, tags string) unmarshaler {
 		}
 		return unmarshalBytesValue
 	case reflect.String:
+		if validateUTF8 {
+			if pointer {
+				return unmarshalUTF8StringPtr
+			}
+			if slice {
+				return unmarshalUTF8StringSlice
+			}
+			return unmarshalUTF8StringValue
+		}
 		if pointer {
 			return unmarshalStringPtr
 		}
@@ -1636,6 +1651,58 @@ func unmarshalStringValue(b []byte, f pointer, w int) ([]byte, error) {
 		return nil, io.ErrUnexpectedEOF
 	}
 	v := string(b[:x])
+	*f.toString() = v
+	return b[x:], nil
+}
+
+func unmarshalStringPtr(b []byte, f pointer, w int) ([]byte, error) {
+	if w != WireBytes {
+		return b, errInternalBadWireType
+	}
+	x, n := decodeVarint(b)
+	if n == 0 {
+		return nil, io.ErrUnexpectedEOF
+	}
+	b = b[n:]
+	if x > uint64(len(b)) {
+		return nil, io.ErrUnexpectedEOF
+	}
+	v := string(b[:x])
+	*f.toStringPtr() = &v
+	return b[x:], nil
+}
+
+func unmarshalStringSlice(b []byte, f pointer, w int) ([]byte, error) {
+	if w != WireBytes {
+		return b, errInternalBadWireType
+	}
+	x, n := decodeVarint(b)
+	if n == 0 {
+		return nil, io.ErrUnexpectedEOF
+	}
+	b = b[n:]
+	if x > uint64(len(b)) {
+		return nil, io.ErrUnexpectedEOF
+	}
+	v := string(b[:x])
+	s := f.toStringSlice()
+	*s = append(*s, v)
+	return b[x:], nil
+}
+
+func unmarshalUTF8StringValue(b []byte, f pointer, w int) ([]byte, error) {
+	if w != WireBytes {
+		return b, errInternalBadWireType
+	}
+	x, n := decodeVarint(b)
+	if n == 0 {
+		return nil, io.ErrUnexpectedEOF
+	}
+	b = b[n:]
+	if x > uint64(len(b)) {
+		return nil, io.ErrUnexpectedEOF
+	}
+	v := string(b[:x])
 	if !utf8.ValidString(v) {
 		return nil, errInvalidUTF8
 	}
@@ -1643,7 +1710,7 @@ func unmarshalStringValue(b []byte, f pointer, w int) ([]byte, error) {
 	return b[x:], nil
 }
 
-func unmarshalStringPtr(b []byte, f pointer, w int) ([]byte, error) {
+func unmarshalUTF8StringPtr(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireBytes {
 		return b, errInternalBadWireType
 	}
@@ -1663,7 +1730,7 @@ func unmarshalStringPtr(b []byte, f pointer, w int) ([]byte, error) {
 	return b[x:], nil
 }
 
-func unmarshalStringSlice(b []byte, f pointer, w int) ([]byte, error) {
+func unmarshalUTF8StringSlice(b []byte, f pointer, w int) ([]byte, error) {
 	if w != WireBytes {
 		return b, errInternalBadWireType
 	}
