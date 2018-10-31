@@ -499,63 +499,63 @@ func (m *StdTypes) GetNonnullDouble() float64 {
 	if m != nil {
 		return m.NonnullDouble
 	}
-	return float64{}
+	return 0
 }
 
 func (m *StdTypes) GetNonnullFloat() float32 {
 	if m != nil {
 		return m.NonnullFloat
 	}
-	return float32{}
+	return 0
 }
 
 func (m *StdTypes) GetNonnullInt64() int64 {
 	if m != nil {
 		return m.NonnullInt64
 	}
-	return int64{}
+	return 0
 }
 
 func (m *StdTypes) GetNonnullUInt64() uint64 {
 	if m != nil {
 		return m.NonnullUInt64
 	}
-	return uint64{}
+	return 0
 }
 
 func (m *StdTypes) GetNonnullInt32() int32 {
 	if m != nil {
 		return m.NonnullInt32
 	}
-	return int32{}
+	return 0
 }
 
 func (m *StdTypes) GetNonnullUInt32() uint32 {
 	if m != nil {
 		return m.NonnullUInt32
 	}
-	return uint32{}
+	return 0
 }
 
 func (m *StdTypes) GetNonnullBool() bool {
 	if m != nil {
 		return m.NonnullBool
 	}
-	return bool{}
+	return false
 }
 
 func (m *StdTypes) GetNonnullString() string {
 	if m != nil {
 		return m.NonnullString
 	}
-	return string{}
+	return ""
 }
 
 func (m *StdTypes) GetNonnullBytes() []byte {
 	if m != nil {
 		return m.NonnullBytes
 	}
-	return byte{}
+	return []byte{}
 }
 
 type RepProtoTypes struct {

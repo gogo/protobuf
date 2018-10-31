@@ -2208,8 +2208,17 @@ func (f *simpleField) getter(g *Generator, mc *msgCtx) {
 			} else {
 				goTyp, _ := g.GoType(mc.message, f.protoField)
 				goTypName := GoTypeToName(goTyp)
-				if !gogoproto.IsNullable(f.protoField) && gogoproto.IsStdDuration(f.protoField) {
+				if !gogoproto.IsNullable(f.protoField) && (gogoproto.IsStdDuration(f.protoField) ||
+					gogoproto.IsStdDouble(f.protoField) || gogoproto.IsStdFloat(f.protoField) ||
+					gogoproto.IsStdInt64(f.protoField) || gogoproto.IsStdUInt64(f.protoField) ||
+					gogoproto.IsStdInt32(f.protoField) || gogoproto.IsStdUInt32(f.protoField)) {
 					g.P("return 0")
+				} else if !gogoproto.IsNullable(f.protoField) && gogoproto.IsStdBool(f.protoField) {
+					g.P("return false")
+				} else if !gogoproto.IsNullable(f.protoField) && gogoproto.IsStdString(f.protoField) {
+					g.P("return \"\"")
+				} else if !gogoproto.IsNullable(f.protoField) && gogoproto.IsStdBytes(f.protoField) {
+					g.P("return []byte{}")
 				} else {
 					g.P("return ", goTypName, "{}")
 				}
