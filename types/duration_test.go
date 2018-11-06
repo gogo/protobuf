@@ -32,6 +32,7 @@
 package types
 
 import (
+	"fmt"
 	"math"
 	"testing"
 	"time"
@@ -115,6 +116,64 @@ func TestDurationProto(t *testing.T) {
 			if !proto.Equal(got, test.proto) {
 				t.Errorf("DurationProto(%v) = %v, want %v", test.dur, got, test.proto)
 			}
+		}
+	}
+}
+
+func TestSizeOfStdDurationAllocs(t *testing.T) {
+	for _, test := range durationTests {
+		nSizeOfAllocs := testing.AllocsPerRun(1, func() {
+			SizeOfStdDuration(test.dur)
+		})
+
+		if nSizeOfAllocs > 0 {
+			t.Fatalf("unexpected %v allocs during SizeOf for %v", nSizeOfAllocs, test.dur)
+		}
+	}
+}
+
+func TestStdDurationMarshalToAllocs(t *testing.T) {
+	for _, test := range durationTests {
+		size := SizeOfStdDuration(test.dur)
+		buf := make([]byte, size)
+		nMarshalAllocs := testing.AllocsPerRun(1, func() {
+			if _, err := StdDurationMarshalTo(test.dur, buf); err != nil {
+				t.Fatal(err)
+			}
+		})
+
+		if nMarshalAllocs > 0 {
+			t.Fatalf("unexpected %v allocs during MarshalTo for %v", nMarshalAllocs, test.dur)
+		}
+	}
+}
+
+func TestStdDurationUnmarshalAllocs(t *testing.T) {
+	for _, test := range durationTests {
+		data, err := StdDurationMarshal(test.dur)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		var d time.Duration
+		nUnmarshalAllocs := testing.AllocsPerRun(1, func() {
+			if err := StdDurationUnmarshal(&d, data); err != nil {
+				t.Fatal(err)
+			}
+		})
+
+		if nUnmarshalAllocs > 0 {
+			t.Fatalf("unexpected %v allocs during Unmarshal for %v", nUnmarshalAllocs, test.dur)
+		}
+	}
+}
+
+func TestFormatDuration(t *testing.T) {
+	for _, s := range durationTests {
+		expected := fmt.Sprintf("%#v", s.proto)
+		got := formatDuration(s.proto)
+		if got != expected {
+			t.Errorf("got %v expected %v", got, expected)
 		}
 	}
 }

@@ -36,6 +36,7 @@ package types
 import (
 	"errors"
 	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -63,15 +64,28 @@ func validateTimestamp(ts *Timestamp) error {
 		return errors.New("timestamp: nil Timestamp")
 	}
 	if ts.Seconds < minValidSeconds {
-		return fmt.Errorf("timestamp: %#v before 0001-01-01", ts)
+		return errors.New("timestamp: " + formatTimestamp(ts) + " before 0001-01-01")
 	}
 	if ts.Seconds >= maxValidSeconds {
-		return fmt.Errorf("timestamp: %#v after 10000-01-01", ts)
+		return errors.New("timestamp: " + formatTimestamp(ts) + " after 10000-01-01")
 	}
 	if ts.Nanos < 0 || ts.Nanos >= 1e9 {
-		return fmt.Errorf("timestamp: %#v: nanos not in range [0, 1e9)", ts)
+		return errors.New("timestamp: " + formatTimestamp(ts) + ": nanos not in range [0, 1e9)")
 	}
 	return nil
+}
+
+// formatTimestamp is equivalent to fmt.Sprintf("%#v", ts)
+// but avoids the escape incurred by using fmt.Sprintf, eliminating
+// unnecessary heap allocations.
+func formatTimestamp(ts *Timestamp) string {
+	if ts == nil {
+		return "nil"
+	}
+
+	seconds := strconv.FormatInt(ts.Seconds, 10)
+	nanos := strconv.FormatInt(int64(ts.Nanos), 10)
+	return "&types.Timestamp{Seconds: " + seconds + ",\nNanos: " + nanos + ",\n}"
 }
 
 // TimestampFromProto converts a google.protobuf.Timestamp proto to a time.Time.
@@ -109,16 +123,21 @@ func TimestampNow() *Timestamp {
 // TimestampProto converts the time.Time to a google.protobuf.Timestamp proto.
 // It returns an error if the resulting Timestamp is invalid.
 func TimestampProto(t time.Time) (*Timestamp, error) {
+	ts, err := timestampProto(t)
+	if err != nil {
+		return nil, err
+	}
+	return &ts, nil
+}
+
+func timestampProto(t time.Time) (Timestamp, error) {
 	seconds := t.Unix()
 	nanos := int32(t.Sub(time.Unix(seconds, 0)))
-	ts := &Timestamp{
+	ts := Timestamp{
 		Seconds: seconds,
 		Nanos:   nanos,
 	}
-	if err := validateTimestamp(ts); err != nil {
-		return nil, err
-	}
-	return ts, nil
+	return ts, validateTimestamp(&ts)
 }
 
 // TimestampString returns the RFC 3339 string for valid Timestamps. For invalid
