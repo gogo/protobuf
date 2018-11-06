@@ -36,7 +36,7 @@ package types
 
 import (
 	"errors"
-	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -56,16 +56,29 @@ func validateDuration(d *Duration) error {
 		return errors.New("duration: nil Duration")
 	}
 	if d.Seconds < minSeconds || d.Seconds > maxSeconds {
-		return fmt.Errorf("duration: %#v: seconds out of range", d)
+		return errors.New("duration: " + formatDuration(d) + ": seconds out of range")
 	}
 	if d.Nanos <= -1e9 || d.Nanos >= 1e9 {
-		return fmt.Errorf("duration: %#v: nanos out of range", d)
+		return errors.New("duration: " + formatDuration(d) + ": nanos out of range")
 	}
 	// Seconds and Nanos must have the same sign, unless d.Nanos is zero.
 	if (d.Seconds < 0 && d.Nanos > 0) || (d.Seconds > 0 && d.Nanos < 0) {
-		return fmt.Errorf("duration: %#v: seconds and nanos have different signs", d)
+		return errors.New("duration: " + formatDuration(d) + ": seconds and nanos have different signs")
 	}
 	return nil
+}
+
+// formatDuration is equivalent to fmt.Sprintf("%#v", d)
+// but avoids the escape incurred by using fmt.Sprintf, eliminating
+// unnecessary heap allocations.
+func formatDuration(d *Duration) string {
+	if d == nil {
+		return "nil"
+	}
+
+	seconds := strconv.FormatInt(d.Seconds, 10)
+	nanos := strconv.FormatInt(int64(d.Nanos), 10)
+	return "&types.Duration{Seconds: " + seconds + ",\nNanos: " + nanos + ",\n}"
 }
 
 // DurationFromProto converts a Duration to a time.Duration. DurationFromProto
@@ -77,12 +90,12 @@ func DurationFromProto(p *Duration) (time.Duration, error) {
 	}
 	d := time.Duration(p.Seconds) * time.Second
 	if int64(d/time.Second) != p.Seconds {
-		return 0, fmt.Errorf("duration: %#v is out of range for time.Duration", p)
+		return 0, errors.New("duration: " + formatDuration(p) + " is out of range for time.Duration")
 	}
 	if p.Nanos != 0 {
 		d += time.Duration(p.Nanos)
 		if (d < 0) != (p.Nanos < 0) {
-			return 0, fmt.Errorf("duration: %#v is out of range for time.Duration", p)
+			return 0, errors.New("duration: " + formatDuration(p) + " is out of range for time.Duration")
 		}
 	}
 	return d, nil
