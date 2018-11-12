@@ -275,6 +275,19 @@ func GetJsonTag(field *google_protobuf.FieldDescriptorProto) *string {
 	return nil
 }
 
+func GetCustomProtoName(field *google_protobuf.FieldDescriptorProto) *string {
+	if field == nil {
+		return nil
+	}
+	if field.Options != nil {
+		v, err := proto.GetExtension(field.Options, E_Customprotoname)
+		if err == nil && v.(*string) != nil {
+			return (v.(*string))
+		}
+	}
+	return nil
+}
+
 func GetMoreTags(field *google_protobuf.FieldDescriptorProto) *string {
 	if field == nil {
 		return nil

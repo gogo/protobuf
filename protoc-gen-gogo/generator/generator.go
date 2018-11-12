@@ -1696,6 +1696,10 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		// perhaps this should be in its own "json" tag.
 		name += ",json=" + json
 	}
+	gogoProtoName := gogoproto.GetCustomProtoName(field)
+	if gogoProtoName != nil {
+		name = *gogoProtoName
+	}
 	name = ",name=" + name
 
 	embed := ""
