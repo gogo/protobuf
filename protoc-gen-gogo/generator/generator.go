@@ -2146,7 +2146,6 @@ func (g *Generator) defaultConstantName(goMessageType, protoFieldName string) st
 type msgCtx struct {
 	goName    string                                      // Go struct name of the message, e.g. MessageName
 	message   *Descriptor                                 // The descriptor for the message
-	defNames  map[*descriptor.FieldDescriptorProto]string // NOTE 9 defNames map added to the msgCtx for the getters method
 	fieldWire map[*descriptor.FieldDescriptorProto]string // NOTE 12 Added fieldwire map to messge context for oneofmethods
 }
 
@@ -2196,73 +2195,10 @@ func (f *simpleField) getter(g *Generator, mc *msgCtx) {
 	if gogoproto.IsEmbed(f.protoField) || gogoproto.IsCustomType(f.protoField) {
 		return
 	}
-	fname := f.goName
-	tname := f.goType
-	star := ""
-	if (f.protoType != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
-		(f.protoType != descriptor.FieldDescriptorProto_TYPE_GROUP) &&
-		needsStar(f.protoField, g.file.proto3, mc.message != nil && mc.message.allowOneof()) && tname[0] == '*' {
-		tname = tname[1:]
-		star = "*"
-	}
 	if f.deprecated != "" {
 		g.P(f.deprecated)
 	}
-
-	g.P("func (m *", mc.goName, ") ", Annotate(mc.message.file, f.fullPath, f.getterName), "() "+tname+" {")
-	// _, hasDef := mc.defNames[f.protoField]
-	typeDefaultIsNil := false // whether this field type's default value is a literal nil unless specified
-	switch f.protoType {
-	case descriptor.FieldDescriptorProto_TYPE_BYTES:
-		typeDefaultIsNil = f.getterDef == "nil"
-	case descriptor.FieldDescriptorProto_TYPE_GROUP, descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-		typeDefaultIsNil = gogoproto.IsNullable(f.protoField)
-	}
-	if isRepeated(f.protoField) {
-		typeDefaultIsNil = true
-	}
-	if !oneof && typeDefaultIsNil {
-		// A bytes field with no explicit default needs less generated code,
-		// as does a message or group field, or a repeated field.
-		g.P("if m != nil {")
-		g.In()
-		g.P("return m." + fname)
-		g.Out()
-		g.P("}")
-		g.P("return nil")
-		g.Out()
-		g.P("}")
-		g.P()
-		return
-	}
-	if !gogoproto.IsNullable(f.protoField) {
-		g.P("if m != nil {")
-		g.In()
-		g.P("return m." + fname)
-		g.Out()
-		g.P("}")
-	} else if !oneof {
-		if mc.message.proto3() {
-			g.P("if m != nil {")
-		} else {
-			g.P("if m != nil && m." + fname + " != nil {")
-		}
-		g.In()
-		g.P("return " + star + "m." + fname)
-		g.Out()
-		g.P("}")
-	} else {
-		// NOTE 10 Check getterName for oneofsubfields.
-		uname := f.goName
-		// tname := f.oneofTypeName
-		g.P("if x, ok := m.Get", uname, "().(*", tname, "); ok {")
-		g.P("return x.", fname)
-		g.P("}")
-	}
-	g.P("return ", f.getterDef)
-	g.Out()
-	g.P("}")
-	g.P()
+	g.generateGet(mc, f.protoField, f.protoType, false, f.goName, f.goType, "", "", f.fullPath, f.getterName, f.getterDef)
 }
 
 // setter prints the setter method of the field.
@@ -2752,74 +2688,7 @@ func (f *oneofField) getter(g *Generator, mc *msgCtx) {
 		if gogoproto.IsEmbed(of.protoField) || gogoproto.IsCustomType(of.protoField) {
 			continue
 		}
-		fname := of.goName
-		tname := of.goType
-		star := ""
-		if (of.protoType != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
-			(of.protoType != descriptor.FieldDescriptorProto_TYPE_GROUP) &&
-			needsStar(of.protoField, g.file.proto3, mc.message != nil && mc.message.allowOneof()) && tname[0] == '*' {
-			tname = tname[1:]
-			star = "*"
-		}
-		// Dont have this for oneofsubfields
-		// if f.deprecated != "" {
-		// 	g.P(of.deprecated)
-		// }
-
-		g.P("func (m *", mc.goName, ") ", Annotate(mc.message.file, of.fullPath, of.getterName), "() "+tname+" {")
-		// def, hasDef := mc.defNames[of.protoField]
-		typeDefaultIsNil := false // whether this field type's default value is a literal nil unless specified
-		switch of.protoType {
-		case descriptor.FieldDescriptorProto_TYPE_BYTES:
-			typeDefaultIsNil = of.getterDef == "nil"
-		case descriptor.FieldDescriptorProto_TYPE_GROUP, descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-			typeDefaultIsNil = gogoproto.IsNullable(of.protoField)
-		}
-		if isRepeated(of.protoField) {
-			typeDefaultIsNil = true
-		}
-		if !oneof && typeDefaultIsNil {
-			// A bytes field with no explicit default needs less generated code,
-			// as does a message or group field, or a repeated field.
-			g.P("if m != nil {")
-			g.In()
-			g.P("return m." + fname)
-			g.Out()
-			g.P("}")
-			g.P("return nil")
-			g.Out()
-			g.P("}")
-			g.P()
-			return
-		}
-		if !gogoproto.IsNullable(of.protoField) {
-			g.P("if m != nil {")
-			g.In()
-			g.P("return m." + fname)
-			g.Out()
-			g.P("}")
-		} else if !oneof {
-			if mc.message.proto3() {
-				g.P("if m != nil {")
-			} else {
-				g.P("if m != nil && m." + fname + " != nil {")
-			}
-			g.In()
-			g.P("return " + star + "m." + fname)
-			g.Out()
-			g.P("}")
-		} else {
-			// NOTE 10 Check getterName for oneofsubfields.
-			uname := f.goName
-			tname := of.oneofTypeName
-			g.P("if x, ok := m.Get", uname, "().(*", tname, "); ok {")
-			g.P("return x.", fname)
-			g.P("}")
-		}
-		g.P("return ", of.getterDef)
-		g.Out()
-		g.P("}")
-		g.P()
+		g.generateGet(mc, of.protoField, of.protoType, true, of.goName, of.goType, f.goName, of.oneofTypeName, of.fullPath, of.getterName, of.getterDef)
 	}
 }
 
@@ -2869,7 +2738,6 @@ func (g *Generator) generateDefaultConstants(mc *msgCtx, topLevelFields []topLev
 			g.Fail("illegal default value: ", df.getProtoName(), " in ", mc.message.GetName(), " is not nullable and is thus not allowed to have a default value")
 		}
 		fieldname := g.defaultConstantName(mc.goName, df.getProtoName())
-		mc.defNames[df.getProto()] = fieldname
 		typename := df.getGoType()
 		if typename[0] == '*' {
 			typename = typename[1:]
@@ -2936,6 +2804,70 @@ func (g *Generator) generateDefaultConstants(mc *msgCtx, topLevelFields []topLev
 		g.P(kind, fieldname, " ", typename, " = ", def)
 		g.file.addExport(mc.message, constOrVarSymbol{fieldname, kind, ""})
 	}
+	g.P()
+}
+
+func (g *Generator) generateGet(mc *msgCtx, protoField *descriptor.FieldDescriptorProto, protoType descriptor.FieldDescriptorProto_Type,
+	oneof bool, fname, tname, uname, oneoftname, fullpath, gname, def string) {
+	star := ""
+	if (protoType != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
+		(protoType != descriptor.FieldDescriptorProto_TYPE_GROUP) &&
+		needsStar(protoField, g.file.proto3, mc.message != nil && mc.message.allowOneof()) && tname[0] == '*' {
+		tname = tname[1:]
+		star = "*"
+	}
+	typeDefaultIsNil := false // whether this field type's default value is a literal nil unless specified
+	switch protoType {
+	case descriptor.FieldDescriptorProto_TYPE_BYTES:
+		typeDefaultIsNil = def == "nil"
+	case descriptor.FieldDescriptorProto_TYPE_GROUP, descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+		typeDefaultIsNil = gogoproto.IsNullable(protoField)
+	}
+	if isRepeated(protoField) {
+		typeDefaultIsNil = true
+	}
+	g.P("func (m *", mc.goName, ") ", Annotate(mc.message.file, fullpath, gname), "() "+tname+" {")
+	if !oneof && typeDefaultIsNil {
+		// A bytes field with no explicit default needs less generated code,
+		// as does a message or group field, or a repeated field.
+		g.P("if m != nil {")
+		g.In()
+		g.P("return m." + fname)
+		g.Out()
+		g.P("}")
+		g.P("return nil")
+		g.Out()
+		g.P("}")
+		g.P()
+		return
+	}
+	if !gogoproto.IsNullable(protoField) {
+		g.P("if m != nil {")
+		g.In()
+		g.P("return m." + fname)
+		g.Out()
+		g.P("}")
+	} else if !oneof {
+		if mc.message.proto3() {
+			g.P("if m != nil {")
+		} else {
+			g.P("if m != nil && m." + fname + " != nil {")
+		}
+		g.In()
+		g.P("return " + star + "m." + fname)
+		g.Out()
+		g.P("}")
+	} else {
+		// NOTE 10 Check getterName for oneofsubfields.
+		uname := uname
+		tname := oneoftname
+		g.P("if x, ok := m.Get", uname, "().(*", tname, "); ok {")
+		g.P("return x.", fname)
+		g.P("}")
+	}
+	g.P("return ", def)
+	g.Out()
+	g.P("}")
 	g.P()
 }
 
@@ -3536,7 +3468,6 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	mc := &msgCtx{
 		goName:    goTypeName,
 		message:   message,
-		defNames:  make(map[*descriptor.FieldDescriptorProto]string),
 		fieldWire: make(map[*descriptor.FieldDescriptorProto]string),
 	}
 
