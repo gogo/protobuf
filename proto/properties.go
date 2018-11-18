@@ -153,6 +153,7 @@ type Properties struct {
 	CastType    string
 	StdTime     bool
 	StdDuration bool
+	WktPointer  bool
 
 	stype reflect.Type      // set for struct types only
 	ctype reflect.Type      // set for custom types only
@@ -274,6 +275,8 @@ outer:
 			p.StdTime = true
 		case f == "stdduration":
 			p.StdDuration = true
+		case f == "wktptr":
+			p.WktPointer = true
 		}
 	}
 }
@@ -293,6 +296,10 @@ func (p *Properties) setFieldProps(typ reflect.Type, f *reflect.StructField, loc
 		return
 	}
 	if p.StdDuration && !isMap {
+		p.setTag(lockGetProp)
+		return
+	}
+	if p.WktPointer && !isMap {
 		p.setTag(lockGetProp)
 		return
 	}
@@ -330,6 +337,7 @@ func (p *Properties) setFieldProps(typ reflect.Type, f *reflect.StructField, loc
 		p.MapValProp.CustomType = p.CustomType
 		p.MapValProp.StdDuration = p.StdDuration
 		p.MapValProp.StdTime = p.StdTime
+		p.MapValProp.WktPointer = p.WktPointer
 		p.MapValProp.init(vtype, "Value", f.Tag.Get("protobuf_val"), nil, lockGetProp)
 	}
 	p.setTag(lockGetProp)

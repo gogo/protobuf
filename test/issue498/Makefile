@@ -1,6 +1,6 @@
 # Protocol Buffers for Go with Gadgets
 #
-# Copyright (c) 2016, The GoGo Authors. All rights reserved.
+# Copyright (c) 2018, The GoGo Authors. All rights reserved.
 # http://github.com/gogo/protobuf
 #
 # Redistribution and use in source and binary forms, with or without
@@ -28,13 +28,6 @@
 
 regenerate:
 	go install github.com/gogo/protobuf/protoc-min-version
-	go install github.com/gogo/protobuf/protoc-gen-gogo
-	protoc-min-version --version="3.0.0" --gogo_out=\
-	Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,\
-	Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,\
-	Mgoogle/protobuf/wrappers.proto=github.com/gogo/protobuf/types\
-	:. \
-	--proto_path=../../../../../:../../protobuf/:. stdtypes.proto
-
-test:
-	go test -race -run=TestConcurrentTextMarshal .
+	protoc-min-version --version="3.0.0" --proto_path=\
+	.:$(GOPATH)/src/:$(GOPATH)/src/github.com/gogo/protobuf/protobuf/ \
+	--gogofast_out=. issue498.proto
