@@ -1,6 +1,6 @@
 # Protocol Buffers for Go with Gadgets
 #
-# Copyright (c) 2013, The GoGo Authors. All rights reserved.
+# Copyright (c) 2018, The GoGo Authors. All rights reserved.
 # http://github.com/gogo/protobuf
 #
 # Redistribution and use in source and binary forms, with or without
@@ -27,6 +27,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	go install github.com/gogo/protobuf/protoc-gen-combo
-	go install github.com/gogo/protobuf/protoc-gen-gogo
-	protoc-gen-combo --version="2.6.0" --gogo_out=. --proto_path=../../protobuf/:../../../../../:. one.proto
+	go install github.com/gogo/protobuf/protoc-min-version
+	protoc-min-version --version="3.0.0" --proto_path=\
+	.:$(GOPATH)/src/:$(GOPATH)/src/github.com/gogo/protobuf/protobuf/ \
+	--gogofast_out=. issue498.proto

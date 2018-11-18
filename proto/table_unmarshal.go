@@ -465,6 +465,7 @@ func typeUnmarshaler(t reflect.Type, tags string) unmarshaler {
 	ctype := false
 	isTime := false
 	isDuration := false
+	isWktPointer := false
 	proto3 := false
 	validateUTF8 := true
 	for _, tag := range tagArray[3:] {
@@ -482,6 +483,9 @@ func typeUnmarshaler(t reflect.Type, tags string) unmarshaler {
 		}
 		if tag == "stdduration" {
 			isDuration = true
+		}
+		if tag == "wktptr" {
+			isWktPointer = true
 		}
 	}
 	validateUTF8 = validateUTF8 && proto3
@@ -536,6 +540,112 @@ func typeUnmarshaler(t reflect.Type, tags string) unmarshaler {
 			return makeUnmarshalDurationSlice(getUnmarshalInfo(t), name)
 		}
 		return makeUnmarshalDuration(getUnmarshalInfo(t), name)
+	}
+
+	if isWktPointer {
+		switch t.Kind() {
+		case reflect.Float64:
+			if pointer {
+				if slice {
+					return makeStdDoubleValuePtrSliceUnmarshaler(getUnmarshalInfo(t), name)
+				}
+				return makeStdDoubleValuePtrUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			if slice {
+				return makeStdDoubleValueSliceUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			return makeStdDoubleValueUnmarshaler(getUnmarshalInfo(t), name)
+		case reflect.Float32:
+			if pointer {
+				if slice {
+					return makeStdFloatValuePtrSliceUnmarshaler(getUnmarshalInfo(t), name)
+				}
+				return makeStdFloatValuePtrUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			if slice {
+				return makeStdFloatValueSliceUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			return makeStdFloatValueUnmarshaler(getUnmarshalInfo(t), name)
+		case reflect.Int64:
+			if pointer {
+				if slice {
+					return makeStdInt64ValuePtrSliceUnmarshaler(getUnmarshalInfo(t), name)
+				}
+				return makeStdInt64ValuePtrUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			if slice {
+				return makeStdInt64ValueSliceUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			return makeStdInt64ValueUnmarshaler(getUnmarshalInfo(t), name)
+		case reflect.Uint64:
+			if pointer {
+				if slice {
+					return makeStdUInt64ValuePtrSliceUnmarshaler(getUnmarshalInfo(t), name)
+				}
+				return makeStdUInt64ValuePtrUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			if slice {
+				return makeStdUInt64ValueSliceUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			return makeStdUInt64ValueUnmarshaler(getUnmarshalInfo(t), name)
+		case reflect.Int32:
+			if pointer {
+				if slice {
+					return makeStdInt32ValuePtrSliceUnmarshaler(getUnmarshalInfo(t), name)
+				}
+				return makeStdInt32ValuePtrUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			if slice {
+				return makeStdInt32ValueSliceUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			return makeStdInt32ValueUnmarshaler(getUnmarshalInfo(t), name)
+		case reflect.Uint32:
+			if pointer {
+				if slice {
+					return makeStdUInt32ValuePtrSliceUnmarshaler(getUnmarshalInfo(t), name)
+				}
+				return makeStdUInt32ValuePtrUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			if slice {
+				return makeStdUInt32ValueSliceUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			return makeStdUInt32ValueUnmarshaler(getUnmarshalInfo(t), name)
+		case reflect.Bool:
+			if pointer {
+				if slice {
+					return makeStdBoolValuePtrSliceUnmarshaler(getUnmarshalInfo(t), name)
+				}
+				return makeStdBoolValuePtrUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			if slice {
+				return makeStdBoolValueSliceUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			return makeStdBoolValueUnmarshaler(getUnmarshalInfo(t), name)
+		case reflect.String:
+			if pointer {
+				if slice {
+					return makeStdStringValuePtrSliceUnmarshaler(getUnmarshalInfo(t), name)
+				}
+				return makeStdStringValuePtrUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			if slice {
+				return makeStdStringValueSliceUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			return makeStdStringValueUnmarshaler(getUnmarshalInfo(t), name)
+		case uint8SliceType:
+			if pointer {
+				if slice {
+					return makeStdBytesValuePtrSliceUnmarshaler(getUnmarshalInfo(t), name)
+				}
+				return makeStdBytesValuePtrUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			if slice {
+				return makeStdBytesValueSliceUnmarshaler(getUnmarshalInfo(t), name)
+			}
+			return makeStdBytesValueUnmarshaler(getUnmarshalInfo(t), name)
+		default:
+			panic(fmt.Sprintf("unknown wktpointer type %#v", t))
+		}
 	}
 
 	// We'll never have both pointer and slice for basic types.
@@ -1806,6 +1916,9 @@ func makeUnmarshalMap(f *reflect.StructField) unmarshaler {
 			valTags = append(valTags, t)
 		}
 		if t == "stdduration" {
+			valTags = append(valTags, t)
+		}
+		if t == "wktptr" {
 			valTags = append(valTags, t)
 		}
 	}
