@@ -22,16 +22,16 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type Outside struct {
 	*Inside              `protobuf:"bytes,1,opt,name=Inside,embedded=Inside" json:""`
 	Field2               *string  `protobuf:"bytes,2,opt,name=Field2" json:"MyField2" xml:",comment"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-" xml:"-"`
+	XXX_unrecognized     []byte   `json:"-" xml:"-"`
+	XXX_sizecache        int32    `json:"-" xml:"-"`
 }
 
 func (m *Outside) Reset()         { *m = Outside{} }
 func (m *Outside) String() string { return proto.CompactTextString(m) }
 func (*Outside) ProtoMessage()    {}
 func (*Outside) Descriptor() ([]byte, []int) {
-	return fileDescriptor_tags_156838d323721841, []int{0}
+	return fileDescriptor_tags_973928adf976f291, []int{0}
 }
 func (m *Outside) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Outside.Unmarshal(m, b)
@@ -60,16 +60,16 @@ func (m *Outside) GetField2() string {
 
 type Inside struct {
 	Field1               *string  `protobuf:"bytes,1,opt,name=Field1" json:"MyField1" xml:",chardata"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-" xml:"-"`
+	XXX_unrecognized     []byte   `json:"-" xml:"-"`
+	XXX_sizecache        int32    `json:"-" xml:"-"`
 }
 
 func (m *Inside) Reset()         { *m = Inside{} }
 func (m *Inside) String() string { return proto.CompactTextString(m) }
 func (*Inside) ProtoMessage()    {}
 func (*Inside) Descriptor() ([]byte, []int) {
-	return fileDescriptor_tags_156838d323721841, []int{1}
+	return fileDescriptor_tags_973928adf976f291, []int{1}
 }
 func (m *Inside) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Inside.Unmarshal(m, b)
@@ -200,10 +200,10 @@ func encodeVarintPopulateTags(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 
-func init() { proto.RegisterFile("tags.proto", fileDescriptor_tags_156838d323721841) }
+func init() { proto.RegisterFile("tags.proto", fileDescriptor_tags_973928adf976f291) }
 
-var fileDescriptor_tags_156838d323721841 = []byte{
-	// 203 bytes of a gzipped FileDescriptorProto
+var fileDescriptor_tags_973928adf976f291 = []byte{
+	// 211 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2a, 0x49, 0x4c, 0x2f,
 	0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x01, 0xb1, 0xa5, 0x74, 0xd3, 0x33, 0x4b, 0x32,
 	0x4a, 0x93, 0xf4, 0x92, 0xf3, 0x73, 0xf5, 0xd3, 0xf3, 0xd3, 0xf3, 0xf5, 0xc1, 0x92, 0x49, 0xa5,
@@ -215,6 +215,7 @@ var fileDescriptor_tags_156838d323721841 = []byte{
 	0xd3, 0x3d, 0x79, 0xbe, 0x8a, 0xdc, 0x1c, 0x2b, 0x25, 0x9d, 0xe4, 0xfc, 0xdc, 0xdc, 0xd4, 0xbc,
 	0x12, 0xa5, 0x20, 0xa8, 0x6a, 0x25, 0x47, 0x98, 0x3d, 0x42, 0xe6, 0x50, 0x13, 0x0c, 0xc1, 0x36,
 	0x72, 0x3a, 0xc9, 0x23, 0x99, 0x60, 0xf8, 0xe9, 0x9e, 0x3c, 0x3f, 0xd4, 0x84, 0x8c, 0xc4, 0xa2,
-	0x94, 0xc4, 0x92, 0x44, 0x98, 0x11, 0x86, 0x4e, 0x2c, 0x3f, 0x1e, 0xca, 0x31, 0x02, 0x02, 0x00,
-	0x00, 0xff, 0xff, 0x57, 0x12, 0x09, 0x10, 0xfd, 0x00, 0x00, 0x00,
+	0x94, 0xc4, 0x92, 0x44, 0x98, 0x11, 0x86, 0x4e, 0xfc, 0x3f, 0x1e, 0xca, 0x31, 0x3e, 0x7a, 0x2c,
+	0xc7, 0x0e, 0x56, 0xa0, 0xab, 0x04, 0x08, 0x00, 0x00, 0xff, 0xff, 0x79, 0x31, 0xeb, 0x38, 0x08,
+	0x01, 0x00, 0x00,
 }
