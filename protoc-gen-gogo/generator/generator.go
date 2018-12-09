@@ -2144,9 +2144,8 @@ func (g *Generator) defaultConstantName(goMessageType, protoFieldName string) st
 
 // msgCtx contais the context for the generator functions.
 type msgCtx struct {
-	goName    string                                      // Go struct name of the message, e.g. MessageName
-	message   *Descriptor                                 // The descriptor for the message
-	fieldWire map[*descriptor.FieldDescriptorProto]string // NOTE 12 Added fieldwire map to messge context for oneofmethods
+	goName  string      // Go struct name of the message, e.g. MessageName
+	message *Descriptor // The descriptor for the message
 }
 
 // fieldCommon contains data common to all types of fields.
@@ -2234,11 +2233,12 @@ type oneofSubField struct {
 	fieldNumber   int                                  // Actual field number, as defined in proto, e.g. 12
 	getterDef     string                               // Default for getters, e.g. "nil", `""` or "Default_MessageType_FieldName"
 	protoDef      string                               // Default value as defined in the proto file, e.g "yoshi" or "5"
+	wireType      string                               // gogo. We can set this on creation, instead of using a function
 }
 
 // wireTypeName returns a textual wire type, needed for oneof sub fields in generated code.
 func (f *oneofSubField) wireTypeName() string {
-	return ""
+	return f.wireType
 }
 
 // typedNil prints a nil casted to the pointer to this field.
@@ -2256,69 +2256,53 @@ func (f *oneofSubField) marshalCase(g *Generator, mc *msgCtx) {
 	// continue
 	// }
 	g.P("case *", f.oneofTypeName, ":")
-	// NOTE 13 They added a separate method (f.wireTypeName()) with another switch case to return the correct wire name, do we want this?
-	// we made a map and added the wire names there for future use. maybe the method is better here?
-	var wire, pre, post string
+	var pre, post string
 	val := "x." + f.goName // overridden for TYPE_BOOL
 	canFail := false       // only TYPE_MESSAGE and TYPE_GROUP can fail
 	switch f.protoType {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
-		wire = "WireFixed64"
 		pre = "b.EncodeFixed64(" + g.Pkg["math"] + ".Float64bits("
 		post = "))"
 	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
-		wire = "WireFixed32"
 		pre = "b.EncodeFixed32(uint64(" + g.Pkg["math"] + ".Float32bits("
 		post = ")))"
 	case descriptor.FieldDescriptorProto_TYPE_INT64,
 		descriptor.FieldDescriptorProto_TYPE_UINT64:
-		wire = "WireVarint"
 		pre, post = "b.EncodeVarint(uint64(", "))"
 	case descriptor.FieldDescriptorProto_TYPE_INT32,
 		descriptor.FieldDescriptorProto_TYPE_UINT32,
 		descriptor.FieldDescriptorProto_TYPE_ENUM:
-		wire = "WireVarint"
 		pre, post = "b.EncodeVarint(uint64(", "))"
 	case descriptor.FieldDescriptorProto_TYPE_FIXED64,
 		descriptor.FieldDescriptorProto_TYPE_SFIXED64:
-		wire = "WireFixed64"
 		pre, post = "b.EncodeFixed64(uint64(", "))"
 	case descriptor.FieldDescriptorProto_TYPE_FIXED32,
 		descriptor.FieldDescriptorProto_TYPE_SFIXED32:
-		wire = "WireFixed32"
 		pre, post = "b.EncodeFixed32(uint64(", "))"
 	case descriptor.FieldDescriptorProto_TYPE_BOOL:
 		// bool needs special handling.
 		g.P("t := uint64(0)")
 		g.P("if ", val, " { t = 1 }")
 		val = "t"
-		wire = "WireVarint"
 		pre, post = "b.EncodeVarint(", ")"
 	case descriptor.FieldDescriptorProto_TYPE_STRING:
-		wire = "WireBytes"
 		pre, post = "b.EncodeStringBytes(", ")"
 	case descriptor.FieldDescriptorProto_TYPE_GROUP:
-		wire = "WireStartGroup"
 		pre, post = "b.Marshal(", ")"
 		canFail = true
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-		wire = "WireBytes"
 		pre, post = "b.EncodeMessage(", ")"
 		canFail = true
 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
-		wire = "WireBytes"
 		pre, post = "b.EncodeRawBytes(", ")"
 	case descriptor.FieldDescriptorProto_TYPE_SINT32:
-		wire = "WireVarint"
 		pre, post = "b.EncodeZigzag32(uint64(", "))"
 	case descriptor.FieldDescriptorProto_TYPE_SINT64:
-		wire = "WireVarint"
 		pre, post = "b.EncodeZigzag64(uint64(", "))"
 	default:
 		g.Fail("unhandled oneof field type ", f.protoType.String())
 	}
-	mc.fieldWire[f.protoField] = wire
-	g.P("_ = b.EncodeVarint(", f.fieldNumber, "<<3|", g.Pkg["proto"], ".", wire, ")")
+	g.P("_ = b.EncodeVarint(", f.fieldNumber, "<<3|", g.Pkg["proto"], ".", f.wireTypeName(), ")")
 	if f.protoType == descriptor.FieldDescriptorProto_TYPE_BYTES && gogoproto.IsCustomType(f.protoField) {
 		g.P(`dAtA, err := `, val, `.Marshal()`)
 		g.P(`if err != nil {`)
@@ -2388,7 +2372,7 @@ func (f *oneofSubField) unmarshalCase(g *Generator, origOneofName string, oneofN
 	// continue
 	// }
 	g.P("case ", f.fieldNumber, ": // ", origOneofName, ".", f.getProtoName())
-	g.P("if wire != ", g.Pkg["proto"], ".", mc.fieldWire[f.protoField], " {")
+	g.P("if wire != ", g.Pkg["proto"], ".", f.wireTypeName(), " {")
 	g.P("return true, ", g.Pkg["proto"], ".ErrInternalBadWireType")
 	g.P("}")
 	lhs := "x, err" // overridden for TYPE_MESSAGE and TYPE_GROUP
@@ -2933,7 +2917,6 @@ func (g *Generator) generateOneofFuncs(mc *msgCtx, topLevelFields []topLevelFiel
 		g.P("// ", of.getProtoName())
 		g.P("switch x := m.", of.goName, ".(type) {")
 		for _, sf := range of.subFields {
-			// also fills in field.wire and mc.fieldWire map
 			sf.marshalCase(g, mc)
 		}
 		g.P("case nil:")
@@ -3409,6 +3392,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				getterDef:     dvalue,
 				protoDef:      field.GetDefaultValue(),
 				oneofTypeName: tname,
+				wireType:      wireTypeName(field),
 			}
 
 			oneofField.subFields = append(oneofField.subFields, &sf)
@@ -3466,9 +3450,8 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	}
 
 	mc := &msgCtx{
-		goName:    goTypeName,
-		message:   message,
-		fieldWire: make(map[*descriptor.FieldDescriptorProto]string),
+		goName:  goTypeName,
+		message: message,
 	}
 
 	if gogoproto.HasTypeDecl(message.file.FileDescriptorProto, message.DescriptorProto) {
@@ -4089,6 +4072,44 @@ func IsScalar(field *descriptor.FieldDescriptorProto) bool {
 		return true
 	default:
 		return false
+	}
+}
+
+func wireTypeName(field *descriptor.FieldDescriptorProto) string {
+	switch *field.Type {
+	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
+		return "WireFixed64"
+	case descriptor.FieldDescriptorProto_TYPE_FLOAT:
+		return "WireFixed32"
+	case descriptor.FieldDescriptorProto_TYPE_INT64,
+		descriptor.FieldDescriptorProto_TYPE_UINT64:
+		return "WireVarint"
+	case descriptor.FieldDescriptorProto_TYPE_INT32,
+		descriptor.FieldDescriptorProto_TYPE_UINT32,
+		descriptor.FieldDescriptorProto_TYPE_ENUM:
+		return "WireVarint"
+	case descriptor.FieldDescriptorProto_TYPE_FIXED64,
+		descriptor.FieldDescriptorProto_TYPE_SFIXED64:
+		return "WireFixed64"
+	case descriptor.FieldDescriptorProto_TYPE_FIXED32,
+		descriptor.FieldDescriptorProto_TYPE_SFIXED32:
+		return "WireFixed32"
+	case descriptor.FieldDescriptorProto_TYPE_BOOL:
+		return "WireVarint"
+	case descriptor.FieldDescriptorProto_TYPE_STRING:
+		return "WireBytes"
+	case descriptor.FieldDescriptorProto_TYPE_GROUP:
+		return "WireStartGroup"
+	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+		return "WireBytes"
+	case descriptor.FieldDescriptorProto_TYPE_BYTES:
+		return "WireBytes"
+	case descriptor.FieldDescriptorProto_TYPE_SINT32:
+		return "WireVarint"
+	case descriptor.FieldDescriptorProto_TYPE_SINT64:
+		return "WireVarint"
+	default:
+		return "WireVarint"
 	}
 }
 
