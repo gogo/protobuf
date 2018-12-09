@@ -2156,7 +2156,7 @@ type fieldCommon struct {
 	goType     string                           // The Go type as a string, e.g. "*int32" or "*OtherMessage"
 	tags       string                           // The tag string/annotation for the type, e.g. `protobuf:"varint,8,opt,name=region_id,json=regionId"`
 	fullPath   string                           // The full path of the field as used by Annotate etc, e.g. "4,0,2,0"
-	protoField *descriptor.FieldDescriptorProto // NOTE 8 Passing in the fieldDescriptor in for gogo
+	protoField *descriptor.FieldDescriptorProto // gogo. Passing in the fieldDescriptor in for gogo options. TODO rethink this, we might need a better way of getting options.
 }
 
 // getProtoName gets the proto name of a field, e.g. "field_name" or "descriptor".
@@ -2244,9 +2244,6 @@ func (f *oneofSubField) wireTypeName() string {
 // typedNil prints a nil casted to the pointer to this field.
 // - for XXX_OneofFuncs
 func (f *oneofSubField) typedNil(g *Generator) {
-	// if field.OneofIndex == nil {
-	// continue
-	// }
 	g.P("(*", f.oneofTypeName, ")(nil),")
 }
 
@@ -2660,9 +2657,6 @@ func (f *oneofField) decl(g *Generator, mc *msgCtx) {
 // getter for a oneof field will print additional discriminators and interfaces for the oneof,
 // also it prints all the getters for the sub fields.
 func (f *oneofField) getter(g *Generator, mc *msgCtx) {
-	// NOTE 11 Rework oneof getter. I think I need to do something else since we might need to loop over the subFields of the oneoffield
-	// NOTE 15 I see now that generateOneofDecls code in golang's case is just added at the top of their oneofField.getter method.
-	//	I can move ours to there as well
 	oneof := true
 	if !oneof && !gogoproto.HasGoGetters(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
 		return
@@ -2702,7 +2696,6 @@ type defField interface {
 // explicit in the proto.
 func (g *Generator) generateDefaultConstants(mc *msgCtx, topLevelFields []topLevelField) {
 	// Collect fields that can have defaults
-	// NOTE 6 Might have to check which fields are valid defaults for gogo
 	dFields := []defField{}
 	for _, pf := range topLevelFields {
 		if f, ok := pf.(*oneofField); ok {
@@ -2791,6 +2784,9 @@ func (g *Generator) generateDefaultConstants(mc *msgCtx, topLevelFields []topLev
 	g.P()
 }
 
+// generateGet generates the getter for both the simpleField and oneofSubField.
+// We did not want to duplicate the code since it is quite intricate so we came
+// up with this ugly method. At least the logic is in one place. This can be reworked.
 func (g *Generator) generateGet(mc *msgCtx, protoField *descriptor.FieldDescriptorProto, protoType descriptor.FieldDescriptorProto_Type,
 	oneof bool, fname, tname, uname, oneoftname, fullpath, gname, def string) {
 	star := ""
@@ -2842,7 +2838,6 @@ func (g *Generator) generateGet(mc *msgCtx, protoField *descriptor.FieldDescript
 		g.Out()
 		g.P("}")
 	} else {
-		// NOTE 10 Check getterName for oneofsubfields.
 		uname := uname
 		tname := oneoftname
 		g.P("if x, ok := m.Get", uname, "().(*", tname, "); ok {")
@@ -3004,9 +2999,6 @@ func (g *Generator) generateOneofDecls(mc *msgCtx, topLevelFields []topLevelFiel
 	}
 	g.P()
 	for _, of := range ofields {
-		// if field.OneofIndex == nil {
-		// continue
-		// }
 		for i, sf := range of.subFields {
 			_, wiretype := g.GoType(mc.message, sf.protoField)
 			tag := "protobuf:" + g.goTag(mc.message, sf.protoField, wiretype)
@@ -3019,12 +3011,7 @@ func (g *Generator) generateOneofDecls(mc *msgCtx, topLevelFields []topLevelFiel
 	}
 	g.P()
 	for _, of := range ofields {
-		// if field.OneofIndex == nil {
-		// continue
-		// }
 		for _, sf := range of.subFields {
-			// NOTE 14 either of.goType or sf.goType
-			// was oneofDisc[*field.OneofIndex]
 			g.P("func (*", sf.oneofTypeName, ") ", of.goType, "() {}")
 		}
 	}
@@ -3520,215 +3507,6 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		}
 	}
 }
-
-// // NOTE 7 ONEOF type interface generation.
-// // Oneof per-field types, discriminants and getters.
-// // Generate unexported named types for the discriminant interfaces.
-// // We shouldn't have to do this, but there was (~19 Aug 2015) a compiler/linker bug
-// // that was triggered by using anonymous interfaces here.
-// // TODO: Revisit this and consider reverting back to anonymous interfaces.
-// for oi := range message.OneofDecl {
-// 	dname := oneofDisc[int32(oi)]
-// 	g.P("type ", dname, " interface {")
-// 	g.In()
-// 	g.P(dname, "()")
-// 	if gogoproto.HasEqual(g.file.FileDescriptorProto, message.DescriptorProto) {
-// 		g.P(`Equal(interface{}) bool`)
-// 	}
-// 	if gogoproto.HasVerboseEqual(g.file.FileDescriptorProto, message.DescriptorProto) {
-// 		g.P(`VerboseEqual(interface{}) error`)
-// 	}
-// 	if gogoproto.IsMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
-// 		gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) ||
-// 		gogoproto.IsStableMarshaler(g.file.FileDescriptorProto, message.DescriptorProto) {
-// 		g.P(`MarshalTo([]byte) (int, error)`)
-// 	}
-// 	if gogoproto.IsSizer(g.file.FileDescriptorProto, message.DescriptorProto) {
-// 		g.P(`Size() int`)
-// 	}
-// 	if gogoproto.IsProtoSizer(g.file.FileDescriptorProto, message.DescriptorProto) {
-// 		g.P(`ProtoSize() int`)
-// 	}
-// 	g.Out()
-// 	g.P("}")
-// }
-// g.P()
-// var oneofTypes []string
-// for i, field := range message.Field {
-// 	if field.OneofIndex == nil {
-// 		continue
-// 	}
-// 	_, wiretype := g.GoType(message, field)
-// 	tag := "protobuf:" + g.goTag(message, field, wiretype)
-// 	fieldFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i)
-// 	g.P("type ", Annotate(message.file, fieldFullPath, oneofTypeName[field]), " struct{ ", Annotate(message.file, fieldFullPath, fieldNames[field]), " ", fieldTypes[field], " `", tag, "` }")
-// 	if !gogoproto.IsStdTime(field) && !gogoproto.IsStdDuration(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
-// 		g.RecordTypeUse(field.GetTypeName())
-// 	}
-// 	oneofTypes = append(oneofTypes, oneofTypeName[field])
-// }
-// g.P()
-// for _, field := range message.Field {
-// 	if field.OneofIndex == nil {
-// 		continue
-// 	}
-// 	g.P("func (*", oneofTypeName[field], ") ", oneofDisc[*field.OneofIndex], "() {}")
-// }
-// g.P()
-// for oi := range message.OneofDecl {
-// 	fname := oneofFieldName[int32(oi)]
-// 	g.P("func (m *", goTypeName, ") Get", fname, "() ", oneofDisc[int32(oi)], " {")
-// 	g.P("if m != nil { return m.", fname, " }")
-// 	g.P("return nil")
-// 	g.P("}")
-// }
-// g.P()
-
-// // Field getters
-// for i, field := range message.Field {
-// 	oneof := field.OneofIndex != nil && message.allowOneof()
-// 	if !oneof && !gogoproto.HasGoGetters(g.file.FileDescriptorProto, message.DescriptorProto) {
-// 		continue
-// 	}
-// 	if gogoproto.IsEmbed(field) || gogoproto.IsCustomType(field) {
-// 		continue
-// 	}
-// 	fname := fieldNames[field]
-// 	typename, _ := g.GoType(message, field)
-// 	if t, ok := mapFieldTypes[field]; ok {
-// 		typename = t
-// 	}
-// 	mname := fieldGetterNames[field]
-// 	star := ""
-// 	if (*field.Type != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
-// 		(*field.Type != descriptor.FieldDescriptorProto_TYPE_GROUP) &&
-// 		needsStar(field, g.file.proto3, message != nil && message.allowOneof()) && typename[0] == '*' {
-// 		typename = typename[1:]
-// 		star = "*"
-// 	}
-// 	fieldFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i)
-
-// 	if field.GetOptions().GetDeprecated() {
-// 		g.P(deprecationComment)
-// 	}
-
-// 	g.P("func (m *", goTypeName, ") ", Annotate(message.file, fieldFullPath, mname), "() "+typename+" {")
-// 	g.In()
-// 	def, hasDef := defNames[field]
-// 	typeDefaultIsNil := false // whether this field type's default value is a literal nil unless specified
-// 	switch *field.Type {
-// 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
-// 		typeDefaultIsNil = !hasDef
-// 	case descriptor.FieldDescriptorProto_TYPE_GROUP, descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-// 		typeDefaultIsNil = gogoproto.IsNullable(field)
-// 	}
-// 	if isRepeated(field) {
-// 		typeDefaultIsNil = true
-// 	}
-// 	if typeDefaultIsNil && !oneof {
-// 		// A bytes field with no explicit default needs less generated code,
-// 		// as does a message or group field, or a repeated field.
-// 		g.P("if m != nil {")
-// 		g.In()
-// 		g.P("return m." + fname)
-// 		g.Out()
-// 		g.P("}")
-// 		g.P("return nil")
-// 		g.Out()
-// 		g.P("}")
-// 		g.P()
-// 		continue
-// 	}
-// 	if !gogoproto.IsNullable(field) {
-// 		g.P("if m != nil {")
-// 		g.In()
-// 		g.P("return m." + fname)
-// 		g.Out()
-// 		g.P("}")
-// 	} else if !oneof {
-// 		if message.proto3() {
-// 			g.P("if m != nil {")
-// 		} else {
-// 			g.P("if m != nil && m." + fname + " != nil {")
-// 		}
-// 		g.In()
-// 		g.P("return " + star + "m." + fname)
-// 		g.Out()
-// 		g.P("}")
-// 	} else {
-// 		uname := oneofFieldName[*field.OneofIndex]
-// 		tname := oneofTypeName[field]
-// 		g.P("if x, ok := m.Get", uname, "().(*", tname, "); ok {")
-// 		g.P("return x.", fname)
-// 		g.P("}")
-// 	}
-// 	if hasDef {
-// 		if *field.Type != descriptor.FieldDescriptorProto_TYPE_BYTES {
-// 			g.P("return " + def)
-// 		} else {
-// 			// The default is a []byte var.
-// 			// Make a copy when returning it to be safe.
-// 			g.P("return append([]byte(nil), ", def, "...)")
-// 		}
-// 	} else {
-// 		switch *field.Type {
-// 		case descriptor.FieldDescriptorProto_TYPE_GROUP,
-// 			descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-// 			if field.OneofIndex != nil {
-// 				g.P(`return nil`)
-// 			} else {
-// 				goTyp, _ := g.GoType(message, field)
-// 				goTypName := GoTypeToName(goTyp)
-// 				if !gogoproto.IsNullable(field) && gogoproto.IsStdDuration(field) {
-// 					g.P("return 0")
-// 				} else {
-// 					g.P("return ", goTypName, "{}")
-// 				}
-// 			}
-// 		case descriptor.FieldDescriptorProto_TYPE_BOOL:
-// 			g.P("return false")
-// 		case descriptor.FieldDescriptorProto_TYPE_STRING:
-// 			g.P(`return ""`)
-// 		case descriptor.FieldDescriptorProto_TYPE_BYTES:
-// 			// This is only possible for oneof fields.
-// 			g.P("return nil")
-// 		case descriptor.FieldDescriptorProto_TYPE_ENUM:
-// 			// The default default for an enum is the first value in the enum,
-// 			// not zero.
-// 			obj := g.ObjectNamed(field.GetTypeName())
-// 			var enum *EnumDescriptor
-// 			if id, ok := obj.(*ImportedDescriptor); ok {
-// 				// The enum type has been publicly imported.
-// 				enum, _ = id.o.(*EnumDescriptor)
-// 			} else {
-// 				enum, _ = obj.(*EnumDescriptor)
-// 			}
-// 			if enum == nil {
-// 				log.Printf("don't know how to generate getter for %s", field.GetName())
-// 				continue
-// 			}
-// 			if len(enum.Value) == 0 {
-// 				g.P("return 0 // empty enum")
-// 			} else {
-// 				first := enum.Value[0].GetName()
-// 				if gogoproto.IsEnumValueCustomName(enum.Value[0]) {
-// 					first = gogoproto.GetEnumValueCustomName(enum.Value[0])
-// 				}
-
-// 				if gogoproto.EnabledGoEnumPrefix(enum.file.FileDescriptorProto, enum.EnumDescriptorProto) {
-// 					g.P("return ", g.DefaultPackageName(obj)+enum.prefix()+first)
-// 				} else {
-// 					g.P("return ", g.DefaultPackageName(obj)+first)
-// 				}
-// 			}
-// 		default:
-// 			g.P("return 0")
-// 		}
-// 	}
-// 	g.Out()
-// 	g.P("}")
-// 	g.P()
-// }
 
 type byTypeName []*descriptor.FieldDescriptorProto
 
