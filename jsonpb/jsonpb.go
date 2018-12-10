@@ -329,9 +329,9 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 			m.writeSep(out)
 		}
 		// If the map value is a cast type, it may not implement proto.Message, therefore
-		// allow the struct tag to declare the underlying message type. Instead of changing
-		// the signatures of the child types (and because prop.mvalue is not public), use
-		// CustomType as a passer.
+		// allow the struct tag to declare the underlying message type. Change the property
+		// of the child types, use CustomType as a passer. CastType currently property is
+		// not used in json encoding.
 		if value.Kind() == reflect.Map {
 			if tag := valueField.Tag.Get("protobuf"); tag != "" {
 				for _, v := range strings.Split(tag, ",") {
@@ -339,7 +339,7 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 						continue
 					}
 					v = strings.TrimPrefix(v, "castvaluetype=")
-					prop.CustomType = v
+					prop.MapValProp.CustomType = v
 					break
 				}
 			}
@@ -649,6 +649,7 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 				out.write(m.Indent)
 			}
 
+			// TODO handle map key prop properly
 			b, err := json.Marshal(k.Interface())
 			if err != nil {
 				return err
@@ -670,7 +671,11 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 				out.write(` `)
 			}
 
-			if err := m.marshalValue(out, prop, v.MapIndex(k), indent+m.Indent); err != nil {
+			vprop := prop
+			if prop != nil && prop.MapValProp != nil {
+				vprop = prop.MapValProp
+			}
+			if err := m.marshalValue(out, vprop, v.MapIndex(k), indent+m.Indent); err != nil {
 				return err
 			}
 		}
@@ -987,6 +992,9 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 			target.Set(reflect.New(targetType.Elem()))
 			target = target.Elem()
 		}
+		if targetType.Kind() != reflect.Int32 {
+			return fmt.Errorf("invalid target %q for enum %s", targetType.Kind(), prop.Enum)
+		}
 		target.SetInt(int64(n))
 		return nil
 	}
@@ -1148,8 +1156,11 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 					k = reflect.ValueOf(ks)
 				} else {
 					k = reflect.New(targetType.Key()).Elem()
-					// TODO: pass the correct Properties if needed.
-					if err := u.unmarshalValue(k, json.RawMessage(ks), nil); err != nil {
+					var kprop *proto.Properties
+					if prop != nil && prop.MapKeyProp != nil {
+						kprop = prop.MapKeyProp
+					}
+					if err := u.unmarshalValue(k, json.RawMessage(ks), kprop); err != nil {
 						return err
 					}
 				}
@@ -1160,21 +1171,17 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 
 				// Unmarshal map value.
 				v := reflect.New(targetType.Elem()).Elem()
-				// TODO: pass the correct Properties if needed.
-				if err := u.unmarshalValue(v, raw, nil); err != nil {
+				var vprop *proto.Properties
+				if prop != nil && prop.MapValProp != nil {
+					vprop = prop.MapValProp
+				}
+				if err := u.unmarshalValue(v, raw, vprop); err != nil {
 					return err
 				}
 				target.SetMapIndex(k, v)
 			}
 		}
 		return nil
-	}
-
-	// 64-bit integers can be encoded as strings. In this case we drop
-	// the quotes and proceed as normal.
-	isNum := targetType.Kind() == reflect.Int64 || targetType.Kind() == reflect.Uint64
-	if isNum && strings.HasPrefix(string(inputValue), `"`) {
-		inputValue = inputValue[1 : len(inputValue)-1]
 	}
 
 	// Non-finite numbers can be encoded as strings.
@@ -1184,6 +1191,15 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 			target.SetFloat(num)
 			return nil
 		}
+	}
+
+	// integers & floats can be encoded as strings. In this case we drop
+	// the quotes and proceed as normal.
+	isNum := targetType.Kind() == reflect.Int64 || targetType.Kind() == reflect.Uint64 ||
+		targetType.Kind() == reflect.Int32 || targetType.Kind() == reflect.Uint32 ||
+		targetType.Kind() == reflect.Float32 || targetType.Kind() == reflect.Float64
+	if isNum && strings.HasPrefix(string(inputValue), `"`) {
+		inputValue = inputValue[1 : len(inputValue)-1]
 	}
 
 	// Use the encoding/json for parsing other value types.
@@ -1245,6 +1261,8 @@ func (s mapKeys) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 func (s mapKeys) Less(i, j int) bool {
 	if k := s[i].Kind(); k == s[j].Kind() {
 		switch k {
+		case reflect.String:
+			return s[i].String() < s[j].String()
 		case reflect.Int32, reflect.Int64:
 			return s[i].Int() < s[j].Int()
 		case reflect.Uint32, reflect.Uint64:

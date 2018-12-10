@@ -22,7 +22,7 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Foo struct {
-	*Bar                 `protobuf:"bytes,1,opt,name=bar,embedded=bar" json:"bar,omitempty"`
+	*Bar                 `protobuf:"bytes,1,opt,name=bar,proto3,embedded=bar" json:"bar,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`

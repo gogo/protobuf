@@ -177,13 +177,13 @@ type Type struct {
 	// The fully qualified message name.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// The list of fields.
-	Fields []*Field `protobuf:"bytes,2,rep,name=fields" json:"fields,omitempty"`
+	Fields []*Field `protobuf:"bytes,2,rep,name=fields,proto3" json:"fields,omitempty"`
 	// The list of types appearing in `oneof` definitions in this type.
-	Oneofs []string `protobuf:"bytes,3,rep,name=oneofs" json:"oneofs,omitempty"`
+	Oneofs []string `protobuf:"bytes,3,rep,name=oneofs,proto3" json:"oneofs,omitempty"`
 	// The protocol buffer options.
-	Options []*Option `protobuf:"bytes,4,rep,name=options" json:"options,omitempty"`
+	Options []*Option `protobuf:"bytes,4,rep,name=options,proto3" json:"options,omitempty"`
 	// The source context.
-	SourceContext *SourceContext `protobuf:"bytes,5,opt,name=source_context,json=sourceContext" json:"source_context,omitempty"`
+	SourceContext *SourceContext `protobuf:"bytes,5,opt,name=source_context,json=sourceContext,proto3" json:"source_context,omitempty"`
 	// The source syntax.
 	Syntax               Syntax   `protobuf:"varint,6,opt,name=syntax,proto3,enum=google.protobuf.Syntax" json:"syntax,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -288,7 +288,7 @@ type Field struct {
 	// Whether to use alternative packed wire representation.
 	Packed bool `protobuf:"varint,8,opt,name=packed,proto3" json:"packed,omitempty"`
 	// The protocol buffer options.
-	Options []*Option `protobuf:"bytes,9,rep,name=options" json:"options,omitempty"`
+	Options []*Option `protobuf:"bytes,9,rep,name=options,proto3" json:"options,omitempty"`
 	// The field JSON name.
 	JsonName string `protobuf:"bytes,10,opt,name=json_name,json=jsonName,proto3" json:"json_name,omitempty"`
 	// The string value of the default value of this field. Proto2 syntax only.
@@ -409,11 +409,11 @@ type Enum struct {
 	// Enum type name.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Enum value definitions.
-	Enumvalue []*EnumValue `protobuf:"bytes,2,rep,name=enumvalue" json:"enumvalue,omitempty"`
+	Enumvalue []*EnumValue `protobuf:"bytes,2,rep,name=enumvalue,proto3" json:"enumvalue,omitempty"`
 	// Protocol buffer options.
-	Options []*Option `protobuf:"bytes,3,rep,name=options" json:"options,omitempty"`
+	Options []*Option `protobuf:"bytes,3,rep,name=options,proto3" json:"options,omitempty"`
 	// The source context.
-	SourceContext *SourceContext `protobuf:"bytes,4,opt,name=source_context,json=sourceContext" json:"source_context,omitempty"`
+	SourceContext *SourceContext `protobuf:"bytes,4,opt,name=source_context,json=sourceContext,proto3" json:"source_context,omitempty"`
 	// The source syntax.
 	Syntax               Syntax   `protobuf:"varint,5,opt,name=syntax,proto3,enum=google.protobuf.Syntax" json:"syntax,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -499,7 +499,7 @@ type EnumValue struct {
 	// Enum value number.
 	Number int32 `protobuf:"varint,2,opt,name=number,proto3" json:"number,omitempty"`
 	// Protocol buffer options.
-	Options              []*Option `protobuf:"bytes,3,rep,name=options" json:"options,omitempty"`
+	Options              []*Option `protobuf:"bytes,3,rep,name=options,proto3" json:"options,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
 	XXX_sizecache        int32     `json:"-"`
@@ -574,7 +574,7 @@ type Option struct {
 	// the corresponding wrapper type defined in google/protobuf/wrappers.proto
 	// should be used. If the value is an enum, it should be stored as an int32
 	// value using the google.protobuf.Int32Value type.
-	Value                *Any     `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
+	Value                *Any     `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
