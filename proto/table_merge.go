@@ -530,6 +530,27 @@ func (mi *mergeInfo) computeMergeInfo() {
 			}
 		case reflect.Struct:
 			switch {
+			case !isPointer && isSlice:
+				// This case is for the gogoproto nullable extension, specifically when
+				// we have a repeated struct with nullable=false.
+				mergeInfo := getMergeInfo(tf)
+				mfi.merge = func(dst, src pointer) {
+					dstSlice := dst.getSlice(tf)
+					srcSlice := src.getSlice(tf)
+
+					numExisting := dstSlice.Len()
+					numNew := srcSlice.Len()
+					newSlice := reflect.MakeSlice(reflect.SliceOf(tf), numExisting+numNew, numExisting+numNew)
+					reflect.Copy(newSlice, dstSlice)
+					// Clone each element from src.
+					for i := 0; i < numNew; i++ {
+						mergeInfo.merge(
+							valToPointer(newSlice.Index(numExisting+i).Addr()),
+							valToPointer(srcSlice.Index(i).Addr()),
+						)
+					}
+					dstSlice.Set(newSlice)
+				}
 			case !isPointer:
 				mergeInfo := getMergeInfo(tf)
 				mfi.merge = func(dst, src pointer) {

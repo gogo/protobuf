@@ -1,12 +1,73 @@
+// Protocol Buffers for Go with Gadgets
+//
+// Copyright (c) 2015, The GoGo Authors. All rights reserved.
+// http://github.com/gogo/protobuf
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+//     * Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above
+// copyright notice, this list of conditions and the following disclaimer
+// in the documentation and/or other materials provided with the
+// distribution.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 syntax = "proto3";
 package merge;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
-message A {
-  B B = 1 [(gogoproto.nullable) = false];
+// Test messages with non-nullable fields. These mirror the ones in
+// proto/clone_test.go.
+
+message InnerMessage {
+  string host = 1;
+  int32 port = 2;
+  bool connected = 3;
 }
 
-message B {
-  int64 c = 1;
+message OtherMessage {
+  int64 key = 1;
+  bytes value = 2;
+  float weight = 3;
+  InnerMessage inner = 4;
+}
+
+message RequiredInnerMessageNonNull {
+  InnerMessage leo_finally_won_an_oscar = 1 [(gogoproto.nullable) = false];
+}
+
+message MyMessageNonNull {
+  int32 count = 1;
+  string name = 2;
+  string quote = 3;
+  repeated string pet = 4;
+  InnerMessage inner = 5 [(gogoproto.nullable) = false];
+  repeated OtherMessage others = 6 [(gogoproto.nullable) = false];
+  RequiredInnerMessageNonNull we_must_go_deeper = 13 [(gogoproto.nullable) = false];
+  repeated InnerMessage rep_inner = 12 [(gogoproto.nullable) = false];
+
+  enum Color {
+    RED = 0;
+    GREEN = 1;
+    BLUE = 2;
+  };
+  Color bikeshed = 7;
+
+  // This field becomes [][]byte in the generated code.
+  repeated bytes rep_bytes = 10;
 }
