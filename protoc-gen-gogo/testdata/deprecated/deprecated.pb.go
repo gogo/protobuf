@@ -143,6 +143,7 @@ func (m *DeprecatedResponse) GetDeprecatedField() DeprecatedEnum {
 	return DeprecatedEnum_DEPRECATED
 }
 
+// Deprecated: Do not use.
 func (m *DeprecatedResponse) GetDeprecatedOneofField() string {
 	if x, ok := m.GetDeprecatedOneof().(*DeprecatedResponse_DeprecatedOneofField); ok {
 		return x.DeprecatedOneofField

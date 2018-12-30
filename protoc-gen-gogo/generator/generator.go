@@ -2247,6 +2247,7 @@ type oneofSubField struct {
 	fieldNumber   int                                  // Actual field number, as defined in proto, e.g. 12
 	getterDef     string                               // Default for getters, e.g. "nil", `""` or "Default_MessageType_FieldName"
 	protoDef      string                               // Default value as defined in the proto file, e.g "yoshi" or "5"
+	deprecated    string                               // Deprecation comment, if any.
 	wireType      string                               // gogo. We can set this on creation, instead of using a function
 }
 
@@ -2676,11 +2677,14 @@ func (f *oneofField) getter(g *Generator, mc *msgCtx) {
 		return
 	}
 
-	for _, of := range f.subFields {
-		if gogoproto.IsEmbed(of.protoField) || gogoproto.IsCustomType(of.protoField) {
+	for _, sf := range f.subFields {
+		if gogoproto.IsEmbed(sf.protoField) || gogoproto.IsCustomType(sf.protoField) {
 			continue
 		}
-		g.generateGet(mc, of.protoField, of.protoType, true, of.goName, of.goType, f.goName, of.oneofTypeName, of.fullPath, of.getterName, of.getterDef)
+		if sf.deprecated != "" {
+			g.P(sf.deprecated)
+		}
+		g.generateGet(mc, sf.protoField, sf.protoType, true, sf.goName, sf.goType, f.goName, sf.oneofTypeName, sf.fullPath, sf.getterName, sf.getterDef)
 	}
 }
 
@@ -3350,6 +3354,10 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			}
 		}
 		goTyp, _ := g.GoType(message, field)
+		fieldDeprecated := ""
+		if field.GetOptions().GetDeprecated() {
+			fieldDeprecated = deprecationComment
+		}
 		dvalue := g.getterDefault(field, goTypeName, GoTypeToName(goTyp))
 		if oneof {
 			tname := goTypeName + "_" + fieldName
@@ -3394,6 +3402,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				getterDef:     dvalue,
 				protoDef:      field.GetDefaultValue(),
 				oneofTypeName: tname,
+				deprecated:    fieldDeprecated,
 				wireType:      wireTypeName(field),
 			}
 
@@ -3402,11 +3411,6 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				g.RecordTypeUse(field.GetTypeName())
 			}
 			continue
-		}
-
-		fieldDeprecated := ""
-		if field.GetOptions().GetDeprecated() {
-			fieldDeprecated = deprecationComment
 		}
 
 		fieldFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i)
