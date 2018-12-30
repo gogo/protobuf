@@ -3,10 +3,12 @@
 
 package issue411
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
+import (
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -31,7 +33,7 @@ func (m *Span) Reset()         { *m = Span{} }
 func (m *Span) String() string { return proto.CompactTextString(m) }
 func (*Span) ProtoMessage()    {}
 func (*Span) Descriptor() ([]byte, []int) {
-	return fileDescriptor_issue411_3de9ea40a93d370b, []int{0}
+	return fileDescriptor_7e1ed5cde895f96f, []int{0}
 }
 func (m *Span) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Span.Unmarshal(m, b)
@@ -39,8 +41,8 @@ func (m *Span) XXX_Unmarshal(b []byte) error {
 func (m *Span) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Span.Marshal(b, m, deterministic)
 }
-func (dst *Span) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Span.Merge(dst, src)
+func (m *Span) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Span.Merge(m, src)
 }
 func (m *Span) XXX_Size() int {
 	return xxx_messageInfo_Span.Size(m)
@@ -55,9 +57,9 @@ func init() {
 	proto.RegisterType((*Span)(nil), "issue411.Span")
 }
 
-func init() { proto.RegisterFile("issue411.proto", fileDescriptor_issue411_3de9ea40a93d370b) }
+func init() { proto.RegisterFile("issue411.proto", fileDescriptor_7e1ed5cde895f96f) }
 
-var fileDescriptor_issue411_3de9ea40a93d370b = []byte{
+var fileDescriptor_7e1ed5cde895f96f = []byte{
 	// 158 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0x2c, 0x2e, 0x2e,
 	0x4d, 0x35, 0x31, 0x34, 0xd4, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x80, 0xf1, 0xa5, 0x74,

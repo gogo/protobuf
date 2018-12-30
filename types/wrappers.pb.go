@@ -3,18 +3,20 @@
 
 package types
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/gogo/protobuf/proto"
+	math "math"
 
-import bytes "bytes"
+	bytes "bytes"
 
-import strings "strings"
-import reflect "reflect"
+	reflect "reflect"
+	strings "strings"
 
-import encoding_binary "encoding/binary"
+	encoding_binary "encoding/binary"
 
-import io "io"
+	io "io"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -41,7 +43,7 @@ type DoubleValue struct {
 func (m *DoubleValue) Reset()      { *m = DoubleValue{} }
 func (*DoubleValue) ProtoMessage() {}
 func (*DoubleValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{0}
+	return fileDescriptor_5377b62bda767935, []int{0}
 }
 func (*DoubleValue) XXX_WellKnownType() string { return "DoubleValue" }
 func (m *DoubleValue) XXX_Unmarshal(b []byte) error {
@@ -59,8 +61,8 @@ func (m *DoubleValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (dst *DoubleValue) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DoubleValue.Merge(dst, src)
+func (m *DoubleValue) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DoubleValue.Merge(m, src)
 }
 func (m *DoubleValue) XXX_Size() int {
 	return m.Size()
@@ -96,7 +98,7 @@ type FloatValue struct {
 func (m *FloatValue) Reset()      { *m = FloatValue{} }
 func (*FloatValue) ProtoMessage() {}
 func (*FloatValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{1}
+	return fileDescriptor_5377b62bda767935, []int{1}
 }
 func (*FloatValue) XXX_WellKnownType() string { return "FloatValue" }
 func (m *FloatValue) XXX_Unmarshal(b []byte) error {
@@ -114,8 +116,8 @@ func (m *FloatValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *FloatValue) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_FloatValue.Merge(dst, src)
+func (m *FloatValue) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FloatValue.Merge(m, src)
 }
 func (m *FloatValue) XXX_Size() int {
 	return m.Size()
@@ -151,7 +153,7 @@ type Int64Value struct {
 func (m *Int64Value) Reset()      { *m = Int64Value{} }
 func (*Int64Value) ProtoMessage() {}
 func (*Int64Value) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{2}
+	return fileDescriptor_5377b62bda767935, []int{2}
 }
 func (*Int64Value) XXX_WellKnownType() string { return "Int64Value" }
 func (m *Int64Value) XXX_Unmarshal(b []byte) error {
@@ -169,8 +171,8 @@ func (m *Int64Value) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Int64Value) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Int64Value.Merge(dst, src)
+func (m *Int64Value) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Int64Value.Merge(m, src)
 }
 func (m *Int64Value) XXX_Size() int {
 	return m.Size()
@@ -206,7 +208,7 @@ type UInt64Value struct {
 func (m *UInt64Value) Reset()      { *m = UInt64Value{} }
 func (*UInt64Value) ProtoMessage() {}
 func (*UInt64Value) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{3}
+	return fileDescriptor_5377b62bda767935, []int{3}
 }
 func (*UInt64Value) XXX_WellKnownType() string { return "UInt64Value" }
 func (m *UInt64Value) XXX_Unmarshal(b []byte) error {
@@ -224,8 +226,8 @@ func (m *UInt64Value) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (dst *UInt64Value) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UInt64Value.Merge(dst, src)
+func (m *UInt64Value) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UInt64Value.Merge(m, src)
 }
 func (m *UInt64Value) XXX_Size() int {
 	return m.Size()
@@ -261,7 +263,7 @@ type Int32Value struct {
 func (m *Int32Value) Reset()      { *m = Int32Value{} }
 func (*Int32Value) ProtoMessage() {}
 func (*Int32Value) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{4}
+	return fileDescriptor_5377b62bda767935, []int{4}
 }
 func (*Int32Value) XXX_WellKnownType() string { return "Int32Value" }
 func (m *Int32Value) XXX_Unmarshal(b []byte) error {
@@ -279,8 +281,8 @@ func (m *Int32Value) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Int32Value) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Int32Value.Merge(dst, src)
+func (m *Int32Value) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Int32Value.Merge(m, src)
 }
 func (m *Int32Value) XXX_Size() int {
 	return m.Size()
@@ -316,7 +318,7 @@ type UInt32Value struct {
 func (m *UInt32Value) Reset()      { *m = UInt32Value{} }
 func (*UInt32Value) ProtoMessage() {}
 func (*UInt32Value) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{5}
+	return fileDescriptor_5377b62bda767935, []int{5}
 }
 func (*UInt32Value) XXX_WellKnownType() string { return "UInt32Value" }
 func (m *UInt32Value) XXX_Unmarshal(b []byte) error {
@@ -334,8 +336,8 @@ func (m *UInt32Value) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (dst *UInt32Value) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UInt32Value.Merge(dst, src)
+func (m *UInt32Value) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UInt32Value.Merge(m, src)
 }
 func (m *UInt32Value) XXX_Size() int {
 	return m.Size()
@@ -371,7 +373,7 @@ type BoolValue struct {
 func (m *BoolValue) Reset()      { *m = BoolValue{} }
 func (*BoolValue) ProtoMessage() {}
 func (*BoolValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{6}
+	return fileDescriptor_5377b62bda767935, []int{6}
 }
 func (*BoolValue) XXX_WellKnownType() string { return "BoolValue" }
 func (m *BoolValue) XXX_Unmarshal(b []byte) error {
@@ -389,8 +391,8 @@ func (m *BoolValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *BoolValue) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BoolValue.Merge(dst, src)
+func (m *BoolValue) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BoolValue.Merge(m, src)
 }
 func (m *BoolValue) XXX_Size() int {
 	return m.Size()
@@ -426,7 +428,7 @@ type StringValue struct {
 func (m *StringValue) Reset()      { *m = StringValue{} }
 func (*StringValue) ProtoMessage() {}
 func (*StringValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{7}
+	return fileDescriptor_5377b62bda767935, []int{7}
 }
 func (*StringValue) XXX_WellKnownType() string { return "StringValue" }
 func (m *StringValue) XXX_Unmarshal(b []byte) error {
@@ -444,8 +446,8 @@ func (m *StringValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (dst *StringValue) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_StringValue.Merge(dst, src)
+func (m *StringValue) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StringValue.Merge(m, src)
 }
 func (m *StringValue) XXX_Size() int {
 	return m.Size()
@@ -481,7 +483,7 @@ type BytesValue struct {
 func (m *BytesValue) Reset()      { *m = BytesValue{} }
 func (*BytesValue) ProtoMessage() {}
 func (*BytesValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{8}
+	return fileDescriptor_5377b62bda767935, []int{8}
 }
 func (*BytesValue) XXX_WellKnownType() string { return "BytesValue" }
 func (m *BytesValue) XXX_Unmarshal(b []byte) error {
@@ -499,8 +501,8 @@ func (m *BytesValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *BytesValue) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_BytesValue.Merge(dst, src)
+func (m *BytesValue) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BytesValue.Merge(m, src)
 }
 func (m *BytesValue) XXX_Size() int {
 	return m.Size()
@@ -532,6 +534,31 @@ func init() {
 	proto.RegisterType((*StringValue)(nil), "google.protobuf.StringValue")
 	proto.RegisterType((*BytesValue)(nil), "google.protobuf.BytesValue")
 }
+
+func init() { proto.RegisterFile("google/protobuf/wrappers.proto", fileDescriptor_5377b62bda767935) }
+
+var fileDescriptor_5377b62bda767935 = []byte{
+	// 285 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4b, 0xcf, 0xcf, 0x4f,
+	0xcf, 0x49, 0xd5, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0x4f, 0x2a, 0x4d, 0xd3, 0x2f, 0x2f, 0x4a, 0x2c,
+	0x28, 0x48, 0x2d, 0x2a, 0xd6, 0x03, 0x8b, 0x08, 0xf1, 0x43, 0xe4, 0xf5, 0x60, 0xf2, 0x4a, 0xca,
+	0x5c, 0xdc, 0x2e, 0xf9, 0xa5, 0x49, 0x39, 0xa9, 0x61, 0x89, 0x39, 0xa5, 0xa9, 0x42, 0x22, 0x5c,
+	0xac, 0x65, 0x20, 0x86, 0x04, 0xa3, 0x02, 0xa3, 0x06, 0x63, 0x10, 0x84, 0xa3, 0xa4, 0xc4, 0xc5,
+	0xe5, 0x96, 0x93, 0x9f, 0x58, 0x82, 0x45, 0x0d, 0x13, 0x92, 0x1a, 0xcf, 0xbc, 0x12, 0x33, 0x13,
+	0x2c, 0x6a, 0x98, 0x61, 0x6a, 0x94, 0xb9, 0xb8, 0x43, 0x71, 0x29, 0x62, 0x41, 0x35, 0xc8, 0xd8,
+	0x08, 0x8b, 0x1a, 0x56, 0x34, 0x83, 0xb0, 0x2a, 0xe2, 0x85, 0x29, 0x52, 0xe4, 0xe2, 0x74, 0xca,
+	0xcf, 0xcf, 0xc1, 0xa2, 0x84, 0x03, 0xc9, 0x9c, 0xe0, 0x92, 0xa2, 0xcc, 0xbc, 0x74, 0x2c, 0x8a,
+	0x38, 0x91, 0x1c, 0xe4, 0x54, 0x59, 0x92, 0x5a, 0x8c, 0x45, 0x0d, 0x0f, 0x54, 0x8d, 0x53, 0x3b,
+	0xe3, 0x8d, 0x87, 0x72, 0x0c, 0x1f, 0x1e, 0xca, 0x31, 0xfe, 0x78, 0x28, 0xc7, 0xd8, 0xf0, 0x48,
+	0x8e, 0x71, 0xc5, 0x23, 0x39, 0xc6, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c, 0xf0,
+	0x48, 0x8e, 0xf1, 0xc5, 0x23, 0x39, 0x86, 0x0f, 0x20, 0xf1, 0xc7, 0x72, 0x8c, 0x27, 0x1e, 0xcb,
+	0x31, 0x72, 0x09, 0x27, 0xe7, 0xe7, 0xea, 0xa1, 0x45, 0x87, 0x13, 0x6f, 0x38, 0x34, 0xbe, 0x02,
+	0x40, 0x22, 0x01, 0x8c, 0x51, 0xac, 0x25, 0x95, 0x05, 0xa9, 0xc5, 0x3f, 0x18, 0x19, 0x17, 0x31,
+	0x31, 0xbb, 0x07, 0x38, 0xad, 0x62, 0x92, 0x73, 0x87, 0x68, 0x09, 0x80, 0x6a, 0xd1, 0x0b, 0x4f,
+	0xcd, 0xc9, 0xf1, 0xce, 0xcb, 0x2f, 0xcf, 0x0b, 0x01, 0xa9, 0x4c, 0x62, 0x03, 0x9b, 0x65, 0x0c,
+	0x08, 0x00, 0x00, 0xff, 0xff, 0x31, 0x55, 0x64, 0x90, 0x0a, 0x02, 0x00, 0x00,
+}
+
 func (this *DoubleValue) Compare(that interface{}) int {
 	if that == nil {
 		if this == nil {
@@ -2640,29 +2667,3 @@ var (
 	ErrInvalidLengthWrappers = fmt.Errorf("proto: negative length found during unmarshaling")
 	ErrIntOverflowWrappers   = fmt.Errorf("proto: integer overflow")
 )
-
-func init() {
-	proto.RegisterFile("google/protobuf/wrappers.proto", fileDescriptor_wrappers_c5239a825c7dfb53)
-}
-
-var fileDescriptor_wrappers_c5239a825c7dfb53 = []byte{
-	// 285 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4b, 0xcf, 0xcf, 0x4f,
-	0xcf, 0x49, 0xd5, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0x4f, 0x2a, 0x4d, 0xd3, 0x2f, 0x2f, 0x4a, 0x2c,
-	0x28, 0x48, 0x2d, 0x2a, 0xd6, 0x03, 0x8b, 0x08, 0xf1, 0x43, 0xe4, 0xf5, 0x60, 0xf2, 0x4a, 0xca,
-	0x5c, 0xdc, 0x2e, 0xf9, 0xa5, 0x49, 0x39, 0xa9, 0x61, 0x89, 0x39, 0xa5, 0xa9, 0x42, 0x22, 0x5c,
-	0xac, 0x65, 0x20, 0x86, 0x04, 0xa3, 0x02, 0xa3, 0x06, 0x63, 0x10, 0x84, 0xa3, 0xa4, 0xc4, 0xc5,
-	0xe5, 0x96, 0x93, 0x9f, 0x58, 0x82, 0x45, 0x0d, 0x13, 0x92, 0x1a, 0xcf, 0xbc, 0x12, 0x33, 0x13,
-	0x2c, 0x6a, 0x98, 0x61, 0x6a, 0x94, 0xb9, 0xb8, 0x43, 0x71, 0x29, 0x62, 0x41, 0x35, 0xc8, 0xd8,
-	0x08, 0x8b, 0x1a, 0x56, 0x34, 0x83, 0xb0, 0x2a, 0xe2, 0x85, 0x29, 0x52, 0xe4, 0xe2, 0x74, 0xca,
-	0xcf, 0xcf, 0xc1, 0xa2, 0x84, 0x03, 0xc9, 0x9c, 0xe0, 0x92, 0xa2, 0xcc, 0xbc, 0x74, 0x2c, 0x8a,
-	0x38, 0x91, 0x1c, 0xe4, 0x54, 0x59, 0x92, 0x5a, 0x8c, 0x45, 0x0d, 0x0f, 0x54, 0x8d, 0x53, 0x3b,
-	0xe3, 0x8d, 0x87, 0x72, 0x0c, 0x1f, 0x1e, 0xca, 0x31, 0xfe, 0x78, 0x28, 0xc7, 0xd8, 0xf0, 0x48,
-	0x8e, 0x71, 0xc5, 0x23, 0x39, 0xc6, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c, 0xf0,
-	0x48, 0x8e, 0xf1, 0xc5, 0x23, 0x39, 0x86, 0x0f, 0x20, 0xf1, 0xc7, 0x72, 0x8c, 0x27, 0x1e, 0xcb,
-	0x31, 0x72, 0x09, 0x27, 0xe7, 0xe7, 0xea, 0xa1, 0x45, 0x87, 0x13, 0x6f, 0x38, 0x34, 0xbe, 0x02,
-	0x40, 0x22, 0x01, 0x8c, 0x51, 0xac, 0x25, 0x95, 0x05, 0xa9, 0xc5, 0x3f, 0x18, 0x19, 0x17, 0x31,
-	0x31, 0xbb, 0x07, 0x38, 0xad, 0x62, 0x92, 0x73, 0x87, 0x68, 0x09, 0x80, 0x6a, 0xd1, 0x0b, 0x4f,
-	0xcd, 0xc9, 0xf1, 0xce, 0xcb, 0x2f, 0xcf, 0x0b, 0x01, 0xa9, 0x4c, 0x62, 0x03, 0x9b, 0x65, 0x0c,
-	0x08, 0x00, 0x00, 0xff, 0xff, 0x31, 0x55, 0x64, 0x90, 0x0a, 0x02, 0x00, 0x00,
-}

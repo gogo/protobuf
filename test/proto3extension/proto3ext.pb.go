@@ -3,10 +3,12 @@
 
 package proto3extension
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import (
+	fmt "fmt"
+	proto "github.com/gogo/protobuf/proto"
+	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -42,9 +44,9 @@ func init() {
 	proto.RegisterExtension(E_Index)
 }
 
-func init() { proto.RegisterFile("proto3ext.proto", fileDescriptor_proto3ext_326ff12b79dc1085) }
+func init() { proto.RegisterFile("proto3ext.proto", fileDescriptor_a399cd792699f40f) }
 
-var fileDescriptor_proto3ext_326ff12b79dc1085 = []byte{
+var fileDescriptor_a399cd792699f40f = []byte{
 	// 137 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2f, 0x28, 0xca, 0x2f,
 	0xc9, 0x37, 0x4e, 0xad, 0x28, 0xd1, 0x03, 0xb3, 0x84, 0x10, 0x02, 0xa9, 0x79, 0xc5, 0x99, 0xf9,

@@ -3,10 +3,12 @@
 
 package merge
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
+import (
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -30,7 +32,7 @@ func (m *A) Reset()         { *m = A{} }
 func (m *A) String() string { return proto.CompactTextString(m) }
 func (*A) ProtoMessage()    {}
 func (*A) Descriptor() ([]byte, []int) {
-	return fileDescriptor_merge_7440dca413742023, []int{0}
+	return fileDescriptor_82caea6f5430298b, []int{0}
 }
 func (m *A) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_A.Unmarshal(m, b)
@@ -38,8 +40,8 @@ func (m *A) XXX_Unmarshal(b []byte) error {
 func (m *A) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_A.Marshal(b, m, deterministic)
 }
-func (dst *A) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_A.Merge(dst, src)
+func (m *A) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_A.Merge(m, src)
 }
 func (m *A) XXX_Size() int {
 	return xxx_messageInfo_A.Size(m)
@@ -68,7 +70,7 @@ func (m *B) Reset()         { *m = B{} }
 func (m *B) String() string { return proto.CompactTextString(m) }
 func (*B) ProtoMessage()    {}
 func (*B) Descriptor() ([]byte, []int) {
-	return fileDescriptor_merge_7440dca413742023, []int{1}
+	return fileDescriptor_82caea6f5430298b, []int{1}
 }
 func (m *B) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_B.Unmarshal(m, b)
@@ -76,8 +78,8 @@ func (m *B) XXX_Unmarshal(b []byte) error {
 func (m *B) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_B.Marshal(b, m, deterministic)
 }
-func (dst *B) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_B.Merge(dst, src)
+func (m *B) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_B.Merge(m, src)
 }
 func (m *B) XXX_Size() int {
 	return xxx_messageInfo_B.Size(m)
@@ -100,9 +102,9 @@ func init() {
 	proto.RegisterType((*B)(nil), "merge.B")
 }
 
-func init() { proto.RegisterFile("merge.proto", fileDescriptor_merge_7440dca413742023) }
+func init() { proto.RegisterFile("merge.proto", fileDescriptor_82caea6f5430298b) }
 
-var fileDescriptor_merge_7440dca413742023 = []byte{
+var fileDescriptor_82caea6f5430298b = []byte{
 	// 123 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xce, 0x4d, 0x2d, 0x4a,
 	0x4f, 0xd5, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x05, 0x73, 0xa4, 0x74, 0xd3, 0x33, 0x4b,

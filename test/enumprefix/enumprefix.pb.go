@@ -3,11 +3,13 @@
 
 package enumprefix
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-import test "github.com/gogo/protobuf/test"
+import (
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	test "github.com/gogo/protobuf/test"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -31,7 +33,7 @@ func (m *MyMessage) Reset()         { *m = MyMessage{} }
 func (m *MyMessage) String() string { return proto.CompactTextString(m) }
 func (*MyMessage) ProtoMessage()    {}
 func (*MyMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_enumprefix_6ff751a3ee38216f, []int{0}
+	return fileDescriptor_d0d23e6cb4323eb3, []int{0}
 }
 func (m *MyMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MyMessage.Unmarshal(m, b)
@@ -39,8 +41,8 @@ func (m *MyMessage) XXX_Unmarshal(b []byte) error {
 func (m *MyMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MyMessage.Marshal(b, m, deterministic)
 }
-func (dst *MyMessage) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MyMessage.Merge(dst, src)
+func (m *MyMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MyMessage.Merge(m, src)
 }
 func (m *MyMessage) XXX_Size() int {
 	return xxx_messageInfo_MyMessage.Size(m)
@@ -62,9 +64,9 @@ func init() {
 	proto.RegisterType((*MyMessage)(nil), "enumprefix.MyMessage")
 }
 
-func init() { proto.RegisterFile("enumprefix.proto", fileDescriptor_enumprefix_6ff751a3ee38216f) }
+func init() { proto.RegisterFile("enumprefix.proto", fileDescriptor_d0d23e6cb4323eb3) }
 
-var fileDescriptor_enumprefix_6ff751a3ee38216f = []byte{
+var fileDescriptor_d0d23e6cb4323eb3 = []byte{
 	// 149 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x48, 0xcd, 0x2b, 0xcd,
 	0x2d, 0x28, 0x4a, 0x4d, 0xcb, 0xac, 0xd0, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x42, 0x88,

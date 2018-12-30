@@ -48,6 +48,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
+	"go/ast"
 	"go/build"
 	"go/parser"
 	"go/printer"
@@ -306,7 +307,6 @@ type FileDescriptor struct {
 	// This is used for supporting public imports.
 	exported map[Object][]symbol
 
-	fingerprint string        // Fingerprint of this file's contents.
 	importPath  GoImportPath  // Import path of this file's package.
 	packageName GoPackageName // Name of this file's Go package.
 
@@ -317,8 +317,8 @@ type FileDescriptor struct {
 // to the compressed bytes of this descriptor. It is not exported, so
 // it is only valid inside the generated package.
 func (d *FileDescriptor) VarName() string {
-	name := strings.Map(badToUnderscore, baseName(d.GetName()))
-	return fmt.Sprintf("fileDescriptor_%s_%s", name, d.fingerprint)
+	h := sha256.Sum256([]byte(d.GetName()))
+	return fmt.Sprintf("fileDescriptor_%s", hex.EncodeToString(h[:8]))
 }
 
 // goPackageOption interprets the file's go_package option.
@@ -375,7 +375,7 @@ func (d *FileDescriptor) addExport(obj Object, sym symbol) {
 type symbol interface {
 	// GenerateAlias should generate an appropriate alias
 	// for the symbol from the named package.
-	GenerateAlias(g *Generator, pkg GoPackageName)
+	GenerateAlias(g *Generator, filename string, pkg GoPackageName)
 }
 
 type messageSymbol struct {
@@ -391,7 +391,8 @@ type getterSymbol struct {
 	genType  bool   // whether typ contains a generated type (message/group/enum)
 }
 
-func (ms *messageSymbol) GenerateAlias(g *Generator, pkg GoPackageName) {
+func (ms *messageSymbol) GenerateAlias(g *Generator, filename string, pkg GoPackageName) {
+	g.P("// ", ms.sym, " from public import ", filename)
 	g.P("type ", ms.sym, " = ", pkg, ".", ms.sym)
 	for _, name := range ms.oneofTypes {
 		g.P("type ", name, " = ", pkg, ".", name)
@@ -403,8 +404,9 @@ type enumSymbol struct {
 	proto3 bool // Whether this came from a proto3 file.
 }
 
-func (es enumSymbol) GenerateAlias(g *Generator, pkg GoPackageName) {
+func (es enumSymbol) GenerateAlias(g *Generator, filename string, pkg GoPackageName) {
 	s := es.name
+	g.P("// ", s, " from public import ", filename)
 	g.P("type ", s, " = ", pkg, ".", s)
 	g.P("var ", s, "_name = ", pkg, ".", s, "_name")
 	g.P("var ", s, "_value = ", pkg, ".", s, "_value")
@@ -416,7 +418,7 @@ type constOrVarSymbol struct {
 	cast string // if non-empty, a type cast is required (used for enums)
 }
 
-func (cs constOrVarSymbol) GenerateAlias(g *Generator, pkg GoPackageName) {
+func (cs constOrVarSymbol) GenerateAlias(g *Generator, filename string, pkg GoPackageName) {
 	v := string(pkg) + "." + cs.sym
 	if cs.cast != "" {
 		v = cs.cast + "(" + v + ")"
@@ -779,25 +781,8 @@ func (g *Generator) WrapTypes() {
 		if fd == nil {
 			g.Fail("could not find file named", fileName)
 		}
-		fingerprint, err := fingerprintProto(fd.FileDescriptorProto)
-		if err != nil {
-			g.Error(err)
-		}
-		fd.fingerprint = fingerprint
 		g.genFiles = append(g.genFiles, fd)
 	}
-}
-
-// fingerprintProto returns a fingerprint for a message.
-// The fingerprint is intended to prevent conflicts between generated fileds,
-// not to provide cryptographic security.
-func fingerprintProto(m proto.Message) (string, error) {
-	b, err := proto.Marshal(m)
-	if err != nil {
-		return "", err
-	}
-	h := sha256.Sum256(b)
-	return hex.EncodeToString(h[:8]), nil
 }
 
 // Scan the descriptors in this file.  For each one, build the slice of nested descriptors
@@ -1119,7 +1104,7 @@ func (g *Generator) addInitf(stmt string, a ...interface{}) {
 }
 
 func (g *Generator) PrintImport(alias GoPackageName, pkg GoImportPath) {
-	statement := "import " + string(alias) + " " + strconv.Quote(string(pkg))
+	statement := string(alias) + " " + strconv.Quote(string(pkg))
 	if g.writtenImports[statement] {
 		return
 	}
@@ -1222,11 +1207,10 @@ func (g *Generator) generate(file *FileDescriptor) {
 		g.generateExtension(ext)
 	}
 	g.generateInitFunction()
+	g.generateFileDescriptor(file)
 
 	// Run the plugins before the imports so we know which imports are necessary.
 	g.runPlugins(file)
-
-	g.generateFileDescriptor(file)
 
 	// Generate header and imports last, though they appear first in the output.
 	rem := g.Buffer
@@ -1253,7 +1237,7 @@ func (g *Generator) generate(file *FileDescriptor) {
 		// make a copy independent of g; we'll need it after Reset.
 		original = append([]byte(nil), original...)
 	}
-	ast, err := parser.ParseFile(fset, "", original, parser.ParseComments)
+	fileAST, err := parser.ParseFile(fset, "", original, parser.ParseComments)
 	if err != nil {
 		// Print out the bad code with line numbers.
 		// This should never happen in practice, but it can while changing generated code,
@@ -1269,8 +1253,9 @@ func (g *Generator) generate(file *FileDescriptor) {
 			g.Fail("bad Go source code was generated:", err.Error(), "\n"+src.String())
 		}
 	}
+	ast.SortImports(fset, fileAST)
 	g.Reset()
-	err = (&printer.Config{Mode: printer.TabIndent | printer.UseSpaces, Tabwidth: 8}).Fprint(g, fset, ast)
+	err = (&printer.Config{Mode: printer.TabIndent | printer.UseSpaces, Tabwidth: 8}).Fprint(g, fset, fileAST)
 	if err != nil {
 		g.Fail("generated Go source code could not be reformatted:", err.Error())
 	}
@@ -1299,28 +1284,10 @@ func (g *Generator) generateHeader() {
 		g.P("// source: ", *g.file.Name)
 	}
 	g.P()
-
-	importPath, _, _ := g.file.goPackageOption()
-	if importPath == "" {
-		g.P("package ", g.file.packageName)
-	} else {
-		g.P("package ", g.file.packageName, " // import ", GoImportPath(g.ImportPrefix)+importPath)
-	}
+	g.PrintComments(strconv.Itoa(packagePath))
 	g.P()
-
-	if loc, ok := g.file.comments[strconv.Itoa(packagePath)]; ok {
-		g.P("/*")
-		// not using g.PrintComments because this is a /* */ comment block.
-		text := strings.TrimSuffix(loc.GetLeadingComments(), "\n")
-		for _, line := range strings.Split(text, "\n") {
-			line = strings.TrimPrefix(line, " ")
-			// ensure we don't escape from the block comment
-			line = strings.Replace(line, "*/", "* /", -1)
-			g.P(line)
-		}
-		g.P("*/")
-		g.P()
-	}
+	g.P("package ", g.file.packageName)
+	g.P()
 }
 
 // deprecationComment is the standard comment added to deprecated
@@ -1385,6 +1352,7 @@ func (g *Generator) weak(i int32) bool {
 
 // Generate the imports
 func (g *Generator) generateImports() {
+	g.P("import (")
 	// We almost always need a proto import.  Rather than computing when we
 	// do, which is tricky when there's a plugin, just import it and
 	// reference it later. The same argument applies to the fmt and math packages.
@@ -1399,11 +1367,7 @@ func (g *Generator) generateImports() {
 	g.PrintImport(GoPackageName(g.Pkg["fmt"]), "fmt")
 	g.PrintImport(GoPackageName(g.Pkg["math"]), "math")
 
-	var (
-		imports       = make(map[GoImportPath]bool)
-		strongImports = make(map[GoImportPath]bool)
-		importPaths   []string
-	)
+	imports := make(map[GoImportPath]bool)
 	for i, s := range g.file.Dependency {
 		fd := g.fileByName(s)
 		importPath := fd.importPath
@@ -1411,31 +1375,23 @@ func (g *Generator) generateImports() {
 		if importPath == g.file.importPath {
 			continue
 		}
-		if !imports[importPath] {
-			importPaths = append(importPaths, string(importPath))
-		}
-		imports[importPath] = true
-		if !g.weak(int32(i)) {
-			strongImports[importPath] = true
-		}
-	}
-	sort.Strings(importPaths)
-	for i := range importPaths {
-		importPath := GoImportPath(importPaths[i])
-		packageName := g.GoPackageName(importPath)
-		fullPath := GoImportPath(g.ImportPrefix) + importPath
-		// Skip weak imports.
-		if !strongImports[importPath] {
-			g.P("// skipping weak import ", packageName, " ", fullPath)
+		// Do not import weak imports.
+		if g.weak(int32(i)) {
 			continue
 		}
+		// Do not import a package twice.
+		if imports[importPath] {
+			continue
+		}
+		imports[importPath] = true
 		// We need to import all the dependencies, even if we don't reference them,
 		// because other code and tools depend on having the full transitive closure
 		// of protocol buffer types in the binary.
+		packageName := g.GoPackageName(importPath)
 		if _, ok := g.usedPackages[importPath]; ok {
-			g.PrintImport(packageName, fullPath)
+			g.PrintImport(packageName, GoImportPath(g.ImportPrefix)+importPath)
 		} else {
-			g.P("import _ ", fullPath)
+			g.P("_ ", GoImportPath(g.ImportPrefix)+importPath)
 		}
 	}
 	g.P()
@@ -1449,6 +1405,8 @@ func (g *Generator) generateImports() {
 		p.GenerateImports(g.file)
 		g.P()
 	}
+	g.P(")")
+
 	g.P("// Reference imports to suppress errors if they are not otherwise used.")
 	g.P("var _ = ", g.Pkg["proto"], ".Marshal")
 	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
@@ -1466,26 +1424,20 @@ func (g *Generator) generateImports() {
 }
 
 func (g *Generator) generateImported(id *ImportedDescriptor) {
-	tn := id.TypeName()
-	sn := tn[len(tn)-1]
 	df := id.o.File()
 	filename := *df.Name
 	if df.importPath == g.file.importPath {
 		// Don't generate type aliases for files in the same Go package as this one.
-		g.P("// Ignoring public import of ", sn, " from ", filename)
-		g.P()
 		return
 	}
 	if !supportTypeAliases {
 		g.Fail(fmt.Sprintf("%s: public imports require at least go1.9", filename))
 	}
-	g.P("// ", sn, " from public import ", filename)
 	g.usedPackages[df.importPath] = true
 
 	for _, sym := range df.exported[id.o] {
-		sym.GenerateAlias(g, g.GoPackageName(df.importPath))
+		sym.GenerateAlias(g, filename, g.GoPackageName(df.importPath))
 	}
-
 	g.P()
 }
 
@@ -1532,7 +1484,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.Out()
 		g.P(")")
 	}
-
+	g.P()
 	g.P("var ", ccTypeName, "_name = map[int32]string{")
 	g.In()
 	generated := make(map[int32]bool) // avoid duplicate values
@@ -1546,6 +1498,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	}
 	g.Out()
 	g.P("}")
+	g.P()
 	g.P("var ", ccTypeName, "_value = map[string]int32{")
 	g.In()
 	for _, e := range enum.Value {
@@ -1553,6 +1506,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	}
 	g.Out()
 	g.P("}")
+	g.P()
 
 	if !enum.proto3() {
 		g.P("func (x ", ccTypeName, ") Enum() *", ccTypeName, " {")
@@ -1562,6 +1516,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.P("return p")
 		g.Out()
 		g.P("}")
+		g.P()
 	}
 
 	if gogoproto.IsGoEnumStringer(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
@@ -1570,6 +1525,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.P("return ", g.Pkg["proto"], ".EnumName(", ccTypeName, "_name, int32(x))")
 		g.Out()
 		g.P("}")
+		g.P()
 	}
 
 	if !enum.proto3() && !gogoproto.IsGoEnumStringer(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
@@ -1578,6 +1534,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.P("return ", g.Pkg["proto"], ".MarshalJSONEnum(", ccTypeName, "_name, int32(x))")
 		g.Out()
 		g.P("}")
+		g.P()
 	}
 	if !enum.proto3() {
 		g.P("func (x *", ccTypeName, ") UnmarshalJSON(data []byte) error {")
@@ -1592,6 +1549,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.P("return nil")
 		g.Out()
 		g.P("}")
+		g.P()
 	}
 
 	var indexes []string
@@ -1605,11 +1563,13 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	g.P("return ", g.file.VarName(), ", []int{", strings.Join(indexes, ", "), "}")
 	g.Out()
 	g.P("}")
+	g.P()
 	if enum.file.GetPackage() == "google.protobuf" && enum.GetName() == "NullValue" {
 		g.P("func (", ccTypeName, `) XXX_WellKnownType() string { return "`, enum.GetName(), `" }`)
+		g.P()
 	}
 
-	g.P()
+	g.generateEnumRegistration(enum)
 }
 
 // The tag is a string like "varint,2,opt,name=fieldname,def=7" that
@@ -1703,7 +1663,7 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 			name = name[i+1:]
 		}
 	}
-	if json := field.GetJsonName(); json != "" && json != name {
+	if json := field.GetJsonName(); field.Extendee == nil && json != "" && json != name {
 		// TODO: escaping might be needed, in which case
 		// perhaps this should be in its own "json" tag.
 		name += ",json=" + json
@@ -3115,6 +3075,7 @@ func (g *Generator) generateCommonMethods(mc *msgCtx) {
 		g.P("return extRange_", mc.goName)
 		g.Out()
 		g.P("}")
+		g.P()
 		if !gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
 			g.P("func (m *", mc.goName, ") GetExtensions() *[]byte {")
 			g.In()
@@ -3183,9 +3144,9 @@ func (g *Generator) generateCommonMethods(mc *msgCtx) {
 	g.Out()
 	g.P("}")
 
-	g.P("func (dst *", mc.goName, ") XXX_Merge(src ", g.Pkg["proto"], ".Message) {")
+	g.P("func (m *", mc.goName, ") XXX_Merge(src ", g.Pkg["proto"], ".Message) {")
 	g.In()
-	g.P("xxx_messageInfo_", mc.goName, ".Merge(dst, src)")
+	g.P("xxx_messageInfo_", mc.goName, ".Merge(m, src)")
 	g.Out()
 	g.P("}")
 
@@ -3643,6 +3604,7 @@ func (g *Generator) generateExtension(ext *ExtensionDescriptor) {
 	g.P("}")
 	g.P()
 
+	g.addInitf("%s.RegisterExtension(%s)", g.Pkg["proto"], ext.DescName())
 	if mset {
 		// Generate a bit more code to register with message_set.go.
 		g.addInitf("%s.RegisterMessageSetType((%s)(nil), %d, %q)", g.Pkg["proto"], fieldType, *field.Number, extName)
@@ -3655,17 +3617,6 @@ func (g *Generator) generateExtension(ext *ExtensionDescriptor) {
 }
 
 func (g *Generator) generateInitFunction() {
-	for _, enum := range g.file.enum {
-		g.generateEnumRegistration(enum)
-	}
-	for _, d := range g.file.desc {
-		for _, ext := range d.ext {
-			g.generateExtensionRegistration(ext)
-		}
-	}
-	for _, ext := range g.file.ext {
-		g.generateExtensionRegistration(ext)
-	}
 	if len(g.init) == 0 {
 		return
 	}
@@ -3736,13 +3687,6 @@ func (g *Generator) generateEnumRegistration(enum *EnumDescriptor) {
 	g.addInitf("%s.RegisterEnum(%q, %[3]s_name, %[3]s_value)", g.Pkg["proto"], pkg+ccTypeName, ccTypeName)
 	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
 		g.addInitf("%s.RegisterEnum(%q, %[3]s_name, %[3]s_value)", g.Pkg["golang_proto"], pkg+ccTypeName, ccTypeName)
-	}
-}
-
-func (g *Generator) generateExtensionRegistration(ext *ExtensionDescriptor) {
-	g.addInitf("%s.RegisterExtension(%s)", g.Pkg["proto"], ext.DescName())
-	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
-		g.addInitf("%s.RegisterExtension(%s)", g.Pkg["golang_proto"], ext.DescName())
 	}
 }
 
