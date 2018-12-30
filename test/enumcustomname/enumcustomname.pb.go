@@ -179,8 +179,8 @@ func (m *OnlyEnums) XXX_Unmarshal(b []byte) error {
 func (m *OnlyEnums) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OnlyEnums.Marshal(b, m, deterministic)
 }
-func (dst *OnlyEnums) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_OnlyEnums.Merge(dst, src)
+func (m *OnlyEnums) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OnlyEnums.Merge(m, src)
 }
 func (m *OnlyEnums) XXX_Size() int {
 	return xxx_messageInfo_OnlyEnums.Size(m)

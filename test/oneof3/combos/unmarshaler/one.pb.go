@@ -49,8 +49,8 @@ func (m *Subby) XXX_Unmarshal(b []byte) error {
 func (m *Subby) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Subby.Marshal(b, m, deterministic)
 }
-func (dst *Subby) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Subby.Merge(dst, src)
+func (m *Subby) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Subby.Merge(m, src)
 }
 func (m *Subby) XXX_Size() int {
 	return xxx_messageInfo_Subby.Size(m)
@@ -96,8 +96,8 @@ func (m *SampleOneOf) XXX_Unmarshal(b []byte) error {
 func (m *SampleOneOf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SampleOneOf.Marshal(b, m, deterministic)
 }
-func (dst *SampleOneOf) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SampleOneOf.Merge(dst, src)
+func (m *SampleOneOf) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SampleOneOf.Merge(m, src)
 }
 func (m *SampleOneOf) XXX_Size() int {
 	return xxx_messageInfo_SampleOneOf.Size(m)

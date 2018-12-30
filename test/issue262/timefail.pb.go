@@ -54,8 +54,8 @@ func (m *TimeFail) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *TimeFail) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TimeFail.Merge(dst, src)
+func (m *TimeFail) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TimeFail.Merge(m, src)
 }
 func (m *TimeFail) XXX_Size() int {
 	return m.Size()

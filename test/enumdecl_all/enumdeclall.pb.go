@@ -95,8 +95,8 @@ func (m *Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Message) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Message.Merge(dst, src)
+func (m *Message) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Message.Merge(m, src)
 }
 func (m *Message) XXX_Size() int {
 	return m.Size()

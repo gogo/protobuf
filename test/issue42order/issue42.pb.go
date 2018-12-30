@@ -52,8 +52,8 @@ func (m *UnorderedFields) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 		return b[:n], nil
 	}
 }
-func (dst *UnorderedFields) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UnorderedFields.Merge(dst, src)
+func (m *UnorderedFields) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UnorderedFields.Merge(m, src)
 }
 func (m *UnorderedFields) XXX_Size() int {
 	return m.Size()
@@ -107,8 +107,8 @@ func (m *OrderedFields) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return b[:n], nil
 	}
 }
-func (dst *OrderedFields) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_OrderedFields.Merge(dst, src)
+func (m *OrderedFields) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OrderedFields.Merge(m, src)
 }
 func (m *OrderedFields) XXX_Size() int {
 	return m.Size()

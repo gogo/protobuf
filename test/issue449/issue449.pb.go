@@ -56,8 +56,8 @@ func (m *CodeGenMsg) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *CodeGenMsg) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CodeGenMsg.Merge(dst, src)
+func (m *CodeGenMsg) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CodeGenMsg.Merge(m, src)
 }
 func (m *CodeGenMsg) XXX_Size() int {
 	return m.Size()
@@ -118,8 +118,8 @@ func (m *NonCodeGenMsg) XXX_Unmarshal(b []byte) error {
 func (m *NonCodeGenMsg) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NonCodeGenMsg.Marshal(b, m, deterministic)
 }
-func (dst *NonCodeGenMsg) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NonCodeGenMsg.Merge(dst, src)
+func (m *NonCodeGenMsg) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NonCodeGenMsg.Merge(m, src)
 }
 func (m *NonCodeGenMsg) XXX_Size() int {
 	return xxx_messageInfo_NonCodeGenMsg.Size(m)

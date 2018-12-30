@@ -52,8 +52,8 @@ func (m *IndexQuery) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *IndexQuery) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_IndexQuery.Merge(dst, src)
+func (m *IndexQuery) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IndexQuery.Merge(m, src)
 }
 func (m *IndexQuery) XXX_Size() int {
 	return m.Size()

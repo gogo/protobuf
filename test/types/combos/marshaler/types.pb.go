@@ -64,8 +64,8 @@ func (m *KnownTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *KnownTypes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_KnownTypes.Merge(dst, src)
+func (m *KnownTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_KnownTypes.Merge(m, src)
 }
 func (m *KnownTypes) XXX_Size() int {
 	return m.Size()
@@ -202,8 +202,8 @@ func (m *ProtoTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *ProtoTypes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ProtoTypes.Merge(dst, src)
+func (m *ProtoTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ProtoTypes.Merge(m, src)
 }
 func (m *ProtoTypes) XXX_Size() int {
 	return m.Size()
@@ -417,8 +417,8 @@ func (m *StdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *StdTypes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_StdTypes.Merge(dst, src)
+func (m *StdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StdTypes.Merge(m, src)
 }
 func (m *StdTypes) XXX_Size() int {
 	return m.Size()
@@ -632,8 +632,8 @@ func (m *RepProtoTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return b[:n], nil
 	}
 }
-func (dst *RepProtoTypes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_RepProtoTypes.Merge(dst, src)
+func (m *RepProtoTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RepProtoTypes.Merge(m, src)
 }
 func (m *RepProtoTypes) XXX_Size() int {
 	return m.Size()
@@ -847,8 +847,8 @@ func (m *RepStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (dst *RepStdTypes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_RepStdTypes.Merge(dst, src)
+func (m *RepStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RepStdTypes.Merge(m, src)
 }
 func (m *RepStdTypes) XXX_Size() int {
 	return m.Size()
@@ -1062,8 +1062,8 @@ func (m *MapProtoTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return b[:n], nil
 	}
 }
-func (dst *MapProtoTypes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MapProtoTypes.Merge(dst, src)
+func (m *MapProtoTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MapProtoTypes.Merge(m, src)
 }
 func (m *MapProtoTypes) XXX_Size() int {
 	return m.Size()
@@ -1277,8 +1277,8 @@ func (m *MapStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (dst *MapStdTypes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MapStdTypes.Merge(dst, src)
+func (m *MapStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MapStdTypes.Merge(m, src)
 }
 func (m *MapStdTypes) XXX_Size() int {
 	return m.Size()
@@ -1483,8 +1483,8 @@ func (m *OneofProtoTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 		return b[:n], nil
 	}
 }
-func (dst *OneofProtoTypes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_OneofProtoTypes.Merge(dst, src)
+func (m *OneofProtoTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OneofProtoTypes.Merge(m, src)
 }
 func (m *OneofProtoTypes) XXX_Size() int {
 	return m.Size()
@@ -1918,8 +1918,8 @@ func (m *OneofStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return b[:n], nil
 	}
 }
-func (dst *OneofStdTypes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_OneofStdTypes.Merge(dst, src)
+func (m *OneofStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OneofStdTypes.Merge(m, src)
 }
 func (m *OneofStdTypes) XXX_Size() int {
 	return m.Size()

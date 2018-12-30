@@ -39,8 +39,8 @@ func (m *Message) XXX_Unmarshal(b []byte) error {
 func (m *Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Message.Marshal(b, m, deterministic)
 }
-func (dst *Message) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Message.Merge(dst, src)
+func (m *Message) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Message.Merge(m, src)
 }
 func (m *Message) XXX_Size() int {
 	return xxx_messageInfo_Message.Size(m)
@@ -84,8 +84,8 @@ func (m *SubMessage) XXX_Unmarshal(b []byte) error {
 func (m *SubMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SubMessage.Marshal(b, m, deterministic)
 }
-func (dst *SubMessage) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SubMessage.Merge(dst, src)
+func (m *SubMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SubMessage.Merge(m, src)
 }
 func (m *SubMessage) XXX_Size() int {
 	return xxx_messageInfo_SubMessage.Size(m)

@@ -141,8 +141,8 @@ func (m *Timestamp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Timestamp) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Timestamp.Merge(dst, src)
+func (m *Timestamp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Timestamp.Merge(m, src)
 }
 func (m *Timestamp) XXX_Size() int {
 	return m.Size()

@@ -53,8 +53,8 @@ func (m *SizeMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (dst *SizeMessage) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SizeMessage.Merge(dst, src)
+func (m *SizeMessage) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SizeMessage.Merge(m, src)
 }
 func (m *SizeMessage) XXX_Size() int {
 	return m.Size()

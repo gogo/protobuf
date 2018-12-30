@@ -83,8 +83,8 @@ func (m *NidOptEnum) XXX_Unmarshal(b []byte) error {
 func (m *NidOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidOptEnum.Marshal(b, m, deterministic)
 }
-func (dst *NidOptEnum) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NidOptEnum.Merge(dst, src)
+func (m *NidOptEnum) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidOptEnum.Merge(m, src)
 }
 func (m *NidOptEnum) XXX_Size() int {
 	return xxx_messageInfo_NidOptEnum.Size(m)
@@ -121,8 +121,8 @@ func (m *NinOptEnum) XXX_Unmarshal(b []byte) error {
 func (m *NinOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinOptEnum.Marshal(b, m, deterministic)
 }
-func (dst *NinOptEnum) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NinOptEnum.Merge(dst, src)
+func (m *NinOptEnum) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinOptEnum.Merge(m, src)
 }
 func (m *NinOptEnum) XXX_Size() int {
 	return xxx_messageInfo_NinOptEnum.Size(m)
@@ -159,8 +159,8 @@ func (m *NidRepEnum) XXX_Unmarshal(b []byte) error {
 func (m *NidRepEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NidRepEnum.Marshal(b, m, deterministic)
 }
-func (dst *NidRepEnum) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NidRepEnum.Merge(dst, src)
+func (m *NidRepEnum) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NidRepEnum.Merge(m, src)
 }
 func (m *NidRepEnum) XXX_Size() int {
 	return xxx_messageInfo_NidRepEnum.Size(m)
@@ -197,8 +197,8 @@ func (m *NinRepEnum) XXX_Unmarshal(b []byte) error {
 func (m *NinRepEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepEnum.Marshal(b, m, deterministic)
 }
-func (dst *NinRepEnum) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NinRepEnum.Merge(dst, src)
+func (m *NinRepEnum) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepEnum.Merge(m, src)
 }
 func (m *NinRepEnum) XXX_Size() int {
 	return xxx_messageInfo_NinRepEnum.Size(m)

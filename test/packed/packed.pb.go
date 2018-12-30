@@ -53,8 +53,8 @@ func (m *NinRepNative) XXX_Unmarshal(b []byte) error {
 func (m *NinRepNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepNative.Marshal(b, m, deterministic)
 }
-func (dst *NinRepNative) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NinRepNative.Merge(dst, src)
+func (m *NinRepNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepNative.Merge(m, src)
 }
 func (m *NinRepNative) XXX_Size() int {
 	return xxx_messageInfo_NinRepNative.Size(m)
@@ -187,8 +187,8 @@ func (m *NinRepPackedNative) XXX_Unmarshal(b []byte) error {
 func (m *NinRepPackedNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepPackedNative.Marshal(b, m, deterministic)
 }
-func (dst *NinRepPackedNative) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NinRepPackedNative.Merge(dst, src)
+func (m *NinRepPackedNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepPackedNative.Merge(m, src)
 }
 func (m *NinRepPackedNative) XXX_Size() int {
 	return xxx_messageInfo_NinRepPackedNative.Size(m)
@@ -321,8 +321,8 @@ func (m *NinRepNativeUnsafe) XXX_Unmarshal(b []byte) error {
 func (m *NinRepNativeUnsafe) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepNativeUnsafe.Marshal(b, m, deterministic)
 }
-func (dst *NinRepNativeUnsafe) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NinRepNativeUnsafe.Merge(dst, src)
+func (m *NinRepNativeUnsafe) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepNativeUnsafe.Merge(m, src)
 }
 func (m *NinRepNativeUnsafe) XXX_Size() int {
 	return xxx_messageInfo_NinRepNativeUnsafe.Size(m)
@@ -455,8 +455,8 @@ func (m *NinRepPackedNativeUnsafe) XXX_Unmarshal(b []byte) error {
 func (m *NinRepPackedNativeUnsafe) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NinRepPackedNativeUnsafe.Marshal(b, m, deterministic)
 }
-func (dst *NinRepPackedNativeUnsafe) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NinRepPackedNativeUnsafe.Merge(dst, src)
+func (m *NinRepPackedNativeUnsafe) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepPackedNativeUnsafe.Merge(m, src)
 }
 func (m *NinRepPackedNativeUnsafe) XXX_Size() int {
 	return xxx_messageInfo_NinRepPackedNativeUnsafe.Size(m)

@@ -3171,9 +3171,9 @@ func (g *Generator) generateCommonMethods(mc *msgCtx) {
 	g.Out()
 	g.P("}")
 
-	g.P("func (dst *", mc.goName, ") XXX_Merge(src ", g.Pkg["proto"], ".Message) {")
+	g.P("func (m *", mc.goName, ") XXX_Merge(src ", g.Pkg["proto"], ".Message) {")
 	g.In()
-	g.P("xxx_messageInfo_", mc.goName, ".Merge(dst, src)")
+	g.P("xxx_messageInfo_", mc.goName, ".Merge(m, src)")
 	g.Out()
 	g.P("}")
 

@@ -214,8 +214,8 @@ func (m *Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Type) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Type.Merge(dst, src)
+func (m *Type) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Type.Merge(m, src)
 }
 func (m *Type) XXX_Size() int {
 	return m.Size()
@@ -321,8 +321,8 @@ func (m *Field) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Field) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Field.Merge(dst, src)
+func (m *Field) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Field.Merge(m, src)
 }
 func (m *Field) XXX_Size() int {
 	return m.Size()
@@ -444,8 +444,8 @@ func (m *Enum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Enum) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Enum.Merge(dst, src)
+func (m *Enum) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Enum.Merge(m, src)
 }
 func (m *Enum) XXX_Size() int {
 	return m.Size()
@@ -528,8 +528,8 @@ func (m *EnumValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *EnumValue) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_EnumValue.Merge(dst, src)
+func (m *EnumValue) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_EnumValue.Merge(m, src)
 }
 func (m *EnumValue) XXX_Size() int {
 	return m.Size()
@@ -603,8 +603,8 @@ func (m *Option) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Option) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Option.Merge(dst, src)
+func (m *Option) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Option.Merge(m, src)
 }
 func (m *Option) XXX_Size() int {
 	return m.Size()

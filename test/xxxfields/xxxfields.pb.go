@@ -45,8 +45,8 @@ func (m *NativeWithSizeCache) XXX_Unmarshal(b []byte) error {
 func (m *NativeWithSizeCache) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NativeWithSizeCache.Marshal(b, m, deterministic)
 }
-func (dst *NativeWithSizeCache) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NativeWithSizeCache.Merge(dst, src)
+func (m *NativeWithSizeCache) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NativeWithSizeCache.Merge(m, src)
 }
 func (m *NativeWithSizeCache) XXX_Size() int {
 	return xxx_messageInfo_NativeWithSizeCache.Size(m)
@@ -138,8 +138,8 @@ func (m *StructWithSizeCache) XXX_Unmarshal(b []byte) error {
 func (m *StructWithSizeCache) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_StructWithSizeCache.Marshal(b, m, deterministic)
 }
-func (dst *StructWithSizeCache) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_StructWithSizeCache.Merge(dst, src)
+func (m *StructWithSizeCache) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StructWithSizeCache.Merge(m, src)
 }
 func (m *StructWithSizeCache) XXX_Size() int {
 	return xxx_messageInfo_StructWithSizeCache.Size(m)
@@ -236,8 +236,8 @@ func (m *NativeWithoutSizeCache) XXX_Unmarshal(b []byte) error {
 func (m *NativeWithoutSizeCache) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_NativeWithoutSizeCache.Marshal(b, m, deterministic)
 }
-func (dst *NativeWithoutSizeCache) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NativeWithoutSizeCache.Merge(dst, src)
+func (m *NativeWithoutSizeCache) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NativeWithoutSizeCache.Merge(m, src)
 }
 func (m *NativeWithoutSizeCache) XXX_Size() int {
 	return xxx_messageInfo_NativeWithoutSizeCache.Size(m)
@@ -328,8 +328,8 @@ func (m *StructWithoutSizeCache) XXX_Unmarshal(b []byte) error {
 func (m *StructWithoutSizeCache) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_StructWithoutSizeCache.Marshal(b, m, deterministic)
 }
-func (dst *StructWithoutSizeCache) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_StructWithoutSizeCache.Merge(dst, src)
+func (m *StructWithoutSizeCache) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StructWithoutSizeCache.Merge(m, src)
 }
 func (m *StructWithoutSizeCache) XXX_Size() int {
 	return xxx_messageInfo_StructWithoutSizeCache.Size(m)

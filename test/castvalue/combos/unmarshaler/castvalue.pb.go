@@ -50,8 +50,8 @@ func (m *Castaway) XXX_Unmarshal(b []byte) error {
 func (m *Castaway) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Castaway.Marshal(b, m, deterministic)
 }
-func (dst *Castaway) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Castaway.Merge(dst, src)
+func (m *Castaway) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Castaway.Merge(m, src)
 }
 func (m *Castaway) XXX_Size() int {
 	return xxx_messageInfo_Castaway.Size(m)
@@ -80,8 +80,8 @@ func (m *Wilson) XXX_Unmarshal(b []byte) error {
 func (m *Wilson) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Wilson.Marshal(b, m, deterministic)
 }
-func (dst *Wilson) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Wilson.Merge(dst, src)
+func (m *Wilson) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Wilson.Merge(m, src)
 }
 func (m *Wilson) XXX_Size() int {
 	return xxx_messageInfo_Wilson.Size(m)

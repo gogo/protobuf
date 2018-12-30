@@ -162,8 +162,8 @@ func (m *Any) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Any) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Any.Merge(dst, src)
+func (m *Any) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Any.Merge(m, src)
 }
 func (m *Any) XXX_Size() int {
 	return m.Size()

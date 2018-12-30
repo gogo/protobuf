@@ -44,8 +44,8 @@ func (m *Version) XXX_Unmarshal(b []byte) error {
 func (m *Version) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Version.Marshal(b, m, deterministic)
 }
-func (dst *Version) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Version.Merge(dst, src)
+func (m *Version) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Version.Merge(m, src)
 }
 func (m *Version) XXX_Size() int {
 	return xxx_messageInfo_Version.Size(m)
@@ -126,8 +126,8 @@ func (m *CodeGeneratorRequest) XXX_Unmarshal(b []byte) error {
 func (m *CodeGeneratorRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CodeGeneratorRequest.Marshal(b, m, deterministic)
 }
-func (dst *CodeGeneratorRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CodeGeneratorRequest.Merge(dst, src)
+func (m *CodeGeneratorRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CodeGeneratorRequest.Merge(m, src)
 }
 func (m *CodeGeneratorRequest) XXX_Size() int {
 	return xxx_messageInfo_CodeGeneratorRequest.Size(m)
@@ -195,8 +195,8 @@ func (m *CodeGeneratorResponse) XXX_Unmarshal(b []byte) error {
 func (m *CodeGeneratorResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CodeGeneratorResponse.Marshal(b, m, deterministic)
 }
-func (dst *CodeGeneratorResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CodeGeneratorResponse.Merge(dst, src)
+func (m *CodeGeneratorResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CodeGeneratorResponse.Merge(m, src)
 }
 func (m *CodeGeneratorResponse) XXX_Size() int {
 	return xxx_messageInfo_CodeGeneratorResponse.Size(m)
@@ -292,8 +292,8 @@ func (m *CodeGeneratorResponse_File) XXX_Unmarshal(b []byte) error {
 func (m *CodeGeneratorResponse_File) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CodeGeneratorResponse_File.Marshal(b, m, deterministic)
 }
-func (dst *CodeGeneratorResponse_File) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CodeGeneratorResponse_File.Merge(dst, src)
+func (m *CodeGeneratorResponse_File) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CodeGeneratorResponse_File.Merge(m, src)
 }
 func (m *CodeGeneratorResponse_File) XXX_Size() int {
 	return xxx_messageInfo_CodeGeneratorResponse_File.Size(m)

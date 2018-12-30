@@ -39,8 +39,8 @@ func (m *TestRequest) XXX_Unmarshal(b []byte) error {
 func (m *TestRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_TestRequest.Marshal(b, m, deterministic)
 }
-func (dst *TestRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TestRequest.Merge(dst, src)
+func (m *TestRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TestRequest.Merge(m, src)
 }
 func (m *TestRequest) XXX_Size() int {
 	return xxx_messageInfo_TestRequest.Size(m)

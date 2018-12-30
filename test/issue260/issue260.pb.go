@@ -48,8 +48,8 @@ func (m *Dropped) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Dropped) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Dropped.Merge(dst, src)
+func (m *Dropped) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Dropped.Merge(m, src)
 }
 func (m *Dropped) XXX_Size() int {
 	return m.Size()
@@ -95,8 +95,8 @@ func (m *DroppedWithoutGetters) XXX_Marshal(b []byte, deterministic bool) ([]byt
 		return b[:n], nil
 	}
 }
-func (dst *DroppedWithoutGetters) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DroppedWithoutGetters.Merge(dst, src)
+func (m *DroppedWithoutGetters) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DroppedWithoutGetters.Merge(m, src)
 }
 func (m *DroppedWithoutGetters) XXX_Size() int {
 	return m.Size()
@@ -135,8 +135,8 @@ func (m *Kept) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Kept) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Kept.Merge(dst, src)
+func (m *Kept) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Kept.Merge(m, src)
 }
 func (m *Kept) XXX_Size() int {
 	return m.Size()

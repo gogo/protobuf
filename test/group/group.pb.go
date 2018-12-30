@@ -46,8 +46,8 @@ func (m *Groups1) XXX_Unmarshal(b []byte) error {
 func (m *Groups1) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Groups1.Marshal(b, m, deterministic)
 }
-func (dst *Groups1) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Groups1.Merge(dst, src)
+func (m *Groups1) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Groups1.Merge(m, src)
 }
 func (m *Groups1) XXX_Size() int {
 	return xxx_messageInfo_Groups1.Size(m)
@@ -77,8 +77,8 @@ func (m *Groups1_G) XXX_Unmarshal(b []byte) error {
 func (m *Groups1_G) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Groups1_G.Marshal(b, m, deterministic)
 }
-func (dst *Groups1_G) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Groups1_G.Merge(dst, src)
+func (m *Groups1_G) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Groups1_G.Merge(m, src)
 }
 func (m *Groups1_G) XXX_Size() int {
 	return xxx_messageInfo_Groups1_G.Size(m)
@@ -107,8 +107,8 @@ func (m *Groups2) XXX_Unmarshal(b []byte) error {
 func (m *Groups2) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Groups2.Marshal(b, m, deterministic)
 }
-func (dst *Groups2) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Groups2.Merge(dst, src)
+func (m *Groups2) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Groups2.Merge(m, src)
 }
 func (m *Groups2) XXX_Size() int {
 	return xxx_messageInfo_Groups2.Size(m)
@@ -138,8 +138,8 @@ func (m *Groups2_G) XXX_Unmarshal(b []byte) error {
 func (m *Groups2_G) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Groups2_G.Marshal(b, m, deterministic)
 }
-func (dst *Groups2_G) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Groups2_G.Merge(dst, src)
+func (m *Groups2_G) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Groups2_G.Merge(m, src)
 }
 func (m *Groups2_G) XXX_Size() int {
 	return xxx_messageInfo_Groups2_G.Size(m)

@@ -53,8 +53,8 @@ func (m *Nil) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Nil) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Nil.Merge(dst, src)
+func (m *Nil) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Nil.Merge(m, src)
 }
 func (m *Nil) XXX_Size() int {
 	return m.Size()
@@ -105,8 +105,8 @@ func (m *NinRepPackedNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 		return b[:n], nil
 	}
 }
-func (dst *NinRepPackedNative) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NinRepPackedNative.Merge(dst, src)
+func (m *NinRepPackedNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinRepPackedNative.Merge(m, src)
 }
 func (m *NinRepPackedNative) XXX_Size() int {
 	return m.Size()
@@ -250,8 +250,8 @@ func (m *NinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 		return b[:n], nil
 	}
 }
-func (dst *NinOptNative) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NinOptNative.Merge(dst, src)
+func (m *NinOptNative) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinOptNative.Merge(m, src)
 }
 func (m *NinOptNative) XXX_Size() int {
 	return m.Size()
@@ -404,8 +404,8 @@ func (m *NinOptStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 		return b[:n], nil
 	}
 }
-func (dst *NinOptStruct) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NinOptStruct.Merge(dst, src)
+func (m *NinOptStruct) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NinOptStruct.Merge(m, src)
 }
 func (m *NinOptStruct) XXX_Size() int {
 	return m.Size()

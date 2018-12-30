@@ -62,8 +62,8 @@ func (m *A) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *A) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_A.Merge(dst, src)
+func (m *A) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_A.Merge(m, src)
 }
 func (m *A) XXX_Size() int {
 	return m.Size()
@@ -102,8 +102,8 @@ func (m *B) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *B) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_B.Merge(dst, src)
+func (m *B) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_B.Merge(m, src)
 }
 func (m *B) XXX_Size() int {
 	return m.Size()
@@ -141,8 +141,8 @@ func (m *C) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *C) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_C.Merge(dst, src)
+func (m *C) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_C.Merge(m, src)
 }
 func (m *C) XXX_Size() int {
 	return m.Size()
@@ -188,8 +188,8 @@ func (m *U) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *U) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_U.Merge(dst, src)
+func (m *U) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_U.Merge(m, src)
 }
 func (m *U) XXX_Size() int {
 	return m.Size()
@@ -255,8 +255,8 @@ func (m *E) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *E) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_E.Merge(dst, src)
+func (m *E) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_E.Merge(m, src)
 }
 func (m *E) XXX_Size() int {
 	return m.Size()
@@ -293,8 +293,8 @@ func (m *R) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *R) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_R.Merge(dst, src)
+func (m *R) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_R.Merge(m, src)
 }
 func (m *R) XXX_Size() int {
 	return m.Size()
@@ -339,8 +339,8 @@ func (m *CastType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *CastType) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CastType.Merge(dst, src)
+func (m *CastType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CastType.Merge(m, src)
 }
 func (m *CastType) XXX_Size() int {
 	return m.Size()

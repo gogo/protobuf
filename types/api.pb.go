@@ -96,8 +96,8 @@ func (m *Api) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Api) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Api.Merge(dst, src)
+func (m *Api) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Api.Merge(m, src)
 }
 func (m *Api) XXX_Size() int {
 	return m.Size()
@@ -202,8 +202,8 @@ func (m *Method) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Method) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Method.Merge(dst, src)
+func (m *Method) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Method.Merge(m, src)
 }
 func (m *Method) XXX_Size() int {
 	return m.Size()
@@ -376,8 +376,8 @@ func (m *Mixin) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Mixin) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Mixin.Merge(dst, src)
+func (m *Mixin) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Mixin.Merge(m, src)
 }
 func (m *Mixin) XXX_Size() int {
 	return m.Size()

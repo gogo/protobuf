@@ -44,8 +44,8 @@ func (m *Subtype) XXX_Unmarshal(b []byte) error {
 func (m *Subtype) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Subtype.Marshal(b, m, deterministic)
 }
-func (dst *Subtype) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Subtype.Merge(dst, src)
+func (m *Subtype) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Subtype.Merge(m, src)
 }
 func (m *Subtype) XXX_Size() int {
 	return xxx_messageInfo_Subtype.Size(m)

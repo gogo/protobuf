@@ -56,8 +56,8 @@ func (m *MapTest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *MapTest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MapTest.Merge(dst, src)
+func (m *MapTest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MapTest.Merge(m, src)
 }
 func (m *MapTest) XXX_Size() int {
 	return m.Size()
@@ -95,8 +95,8 @@ func (m *FakeMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *FakeMap) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_FakeMap.Merge(dst, src)
+func (m *FakeMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FakeMap.Merge(m, src)
 }
 func (m *FakeMap) XXX_Size() int {
 	return m.Size()
@@ -136,8 +136,8 @@ func (m *FakeMapEntry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 		return b[:n], nil
 	}
 }
-func (dst *FakeMapEntry) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_FakeMapEntry.Merge(dst, src)
+func (m *FakeMapEntry) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FakeMapEntry.Merge(m, src)
 }
 func (m *FakeMapEntry) XXX_Size() int {
 	return m.Size()

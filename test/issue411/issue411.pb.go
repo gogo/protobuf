@@ -39,8 +39,8 @@ func (m *Span) XXX_Unmarshal(b []byte) error {
 func (m *Span) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Span.Marshal(b, m, deterministic)
 }
-func (dst *Span) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Span.Merge(dst, src)
+func (m *Span) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Span.Merge(m, src)
 }
 func (m *Span) XXX_Size() int {
 	return xxx_messageInfo_Span.Size(m)

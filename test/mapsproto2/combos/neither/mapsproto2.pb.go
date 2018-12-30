@@ -95,8 +95,8 @@ func (m *FloatingPoint) XXX_Unmarshal(b []byte) error {
 func (m *FloatingPoint) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_FloatingPoint.Marshal(b, m, deterministic)
 }
-func (dst *FloatingPoint) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_FloatingPoint.Merge(dst, src)
+func (m *FloatingPoint) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FloatingPoint.Merge(m, src)
 }
 func (m *FloatingPoint) XXX_Size() int {
 	return xxx_messageInfo_FloatingPoint.Size(m)
@@ -128,8 +128,8 @@ func (m *CustomMap) XXX_Unmarshal(b []byte) error {
 func (m *CustomMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomMap.Marshal(b, m, deterministic)
 }
-func (dst *CustomMap) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CustomMap.Merge(dst, src)
+func (m *CustomMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomMap.Merge(m, src)
 }
 func (m *CustomMap) XXX_Size() int {
 	return xxx_messageInfo_CustomMap.Size(m)
@@ -174,8 +174,8 @@ func (m *AllMaps) XXX_Unmarshal(b []byte) error {
 func (m *AllMaps) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_AllMaps.Marshal(b, m, deterministic)
 }
-func (dst *AllMaps) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AllMaps.Merge(dst, src)
+func (m *AllMaps) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AllMaps.Merge(m, src)
 }
 func (m *AllMaps) XXX_Size() int {
 	return xxx_messageInfo_AllMaps.Size(m)
@@ -220,8 +220,8 @@ func (m *AllMapsOrdered) XXX_Unmarshal(b []byte) error {
 func (m *AllMapsOrdered) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_AllMapsOrdered.Marshal(b, m, deterministic)
 }
-func (dst *AllMapsOrdered) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AllMapsOrdered.Merge(dst, src)
+func (m *AllMapsOrdered) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AllMapsOrdered.Merge(m, src)
 }
 func (m *AllMapsOrdered) XXX_Size() int {
 	return xxx_messageInfo_AllMapsOrdered.Size(m)

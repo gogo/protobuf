@@ -37,8 +37,8 @@ func (m *SubObject) XXX_Unmarshal(b []byte) error {
 func (m *SubObject) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SubObject.Marshal(b, m, deterministic)
 }
-func (dst *SubObject) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SubObject.Merge(dst, src)
+func (m *SubObject) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SubObject.Merge(m, src)
 }
 func (m *SubObject) XXX_Size() int {
 	return xxx_messageInfo_SubObject.Size(m)

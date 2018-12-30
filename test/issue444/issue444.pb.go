@@ -38,8 +38,8 @@ func (m *SizeMe) XXX_Unmarshal(b []byte) error {
 func (m *SizeMe) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SizeMe.Marshal(b, m, deterministic)
 }
-func (dst *SizeMe) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SizeMe.Merge(dst, src)
+func (m *SizeMe) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SizeMe.Merge(m, src)
 }
 func (m *SizeMe) XXX_Size() int {
 	return xxx_messageInfo_SizeMe.Size(m)

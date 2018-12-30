@@ -260,8 +260,8 @@ func (m *FieldMask) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *FieldMask) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_FieldMask.Merge(dst, src)
+func (m *FieldMask) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FieldMask.Merge(m, src)
 }
 func (m *FieldMask) XXX_Size() int {
 	return m.Size()

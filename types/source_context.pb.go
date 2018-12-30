@@ -56,8 +56,8 @@ func (m *SourceContext) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return b[:n], nil
 	}
 }
-func (dst *SourceContext) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SourceContext.Merge(dst, src)
+func (m *SourceContext) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SourceContext.Merge(m, src)
 }
 func (m *SourceContext) XXX_Size() int {
 	return m.Size()

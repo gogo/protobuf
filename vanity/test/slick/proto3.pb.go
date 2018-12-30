@@ -47,8 +47,8 @@ func (m *Aproto3) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Aproto3) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Aproto3.Merge(dst, src)
+func (m *Aproto3) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Aproto3.Merge(m, src)
 }
 func (m *Aproto3) XXX_Size() int {
 	return m.Size()

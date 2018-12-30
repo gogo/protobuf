@@ -52,8 +52,8 @@ func (m *Subby) XXX_Unmarshal(b []byte) error {
 func (m *Subby) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Subby.Marshal(b, m, deterministic)
 }
-func (dst *Subby) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Subby.Merge(dst, src)
+func (m *Subby) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Subby.Merge(m, src)
 }
 func (m *Subby) XXX_Size() int {
 	return xxx_messageInfo_Subby.Size(m)
@@ -99,8 +99,8 @@ func (m *AllTypesOneOf) XXX_Unmarshal(b []byte) error {
 func (m *AllTypesOneOf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_AllTypesOneOf.Marshal(b, m, deterministic)
 }
-func (dst *AllTypesOneOf) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AllTypesOneOf.Merge(dst, src)
+func (m *AllTypesOneOf) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AllTypesOneOf.Merge(m, src)
 }
 func (m *AllTypesOneOf) XXX_Size() int {
 	return xxx_messageInfo_AllTypesOneOf.Size(m)
@@ -601,8 +601,8 @@ func (m *TwoOneofs) XXX_Unmarshal(b []byte) error {
 func (m *TwoOneofs) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_TwoOneofs.Marshal(b, m, deterministic)
 }
-func (dst *TwoOneofs) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TwoOneofs.Merge(dst, src)
+func (m *TwoOneofs) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TwoOneofs.Merge(m, src)
 }
 func (m *TwoOneofs) XXX_Size() int {
 	return xxx_messageInfo_TwoOneofs.Size(m)
@@ -869,8 +869,8 @@ func (m *CustomOneof) XXX_Unmarshal(b []byte) error {
 func (m *CustomOneof) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_CustomOneof.Marshal(b, m, deterministic)
 }
-func (dst *CustomOneof) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CustomOneof.Merge(dst, src)
+func (m *CustomOneof) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomOneof.Merge(m, src)
 }
 func (m *CustomOneof) XXX_Size() int {
 	return xxx_messageInfo_CustomOneof.Size(m)

@@ -55,8 +55,8 @@ func (m *MapStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (dst *MapStdTypes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MapStdTypes.Merge(dst, src)
+func (m *MapStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MapStdTypes.Merge(m, src)
 }
 func (m *MapStdTypes) XXX_Size() int {
 	return m.Size()

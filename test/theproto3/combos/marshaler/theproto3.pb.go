@@ -125,8 +125,8 @@ func (m *Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Message) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Message.Merge(dst, src)
+func (m *Message) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Message.Merge(m, src)
 }
 func (m *Message) XXX_Size() int {
 	return m.Size()
@@ -164,8 +164,8 @@ func (m *Nested) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *Nested) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Nested.Merge(dst, src)
+func (m *Nested) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Nested.Merge(m, src)
 }
 func (m *Nested) XXX_Size() int {
 	return m.Size()
@@ -219,8 +219,8 @@ func (m *AllMaps) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *AllMaps) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AllMaps.Merge(dst, src)
+func (m *AllMaps) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AllMaps.Merge(m, src)
 }
 func (m *AllMaps) XXX_Size() int {
 	return m.Size()
@@ -270,8 +270,8 @@ func (m *AllMapsOrdered) XXX_Marshal(b []byte, deterministic bool) ([]byte, erro
 	}
 	return b[:n], nil
 }
-func (dst *AllMapsOrdered) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AllMapsOrdered.Merge(dst, src)
+func (m *AllMapsOrdered) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AllMapsOrdered.Merge(m, src)
 }
 func (m *AllMapsOrdered) XXX_Size() int {
 	return m.Size()
@@ -311,8 +311,8 @@ func (m *MessageWithMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, erro
 		return b[:n], nil
 	}
 }
-func (dst *MessageWithMap) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MessageWithMap.Merge(dst, src)
+func (m *MessageWithMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MessageWithMap.Merge(m, src)
 }
 func (m *MessageWithMap) XXX_Size() int {
 	return m.Size()
@@ -350,8 +350,8 @@ func (m *FloatingPoint) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return b[:n], nil
 	}
 }
-func (dst *FloatingPoint) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_FloatingPoint.Merge(dst, src)
+func (m *FloatingPoint) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FloatingPoint.Merge(m, src)
 }
 func (m *FloatingPoint) XXX_Size() int {
 	return m.Size()
@@ -390,8 +390,8 @@ func (m *Uint128Pair) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (dst *Uint128Pair) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Uint128Pair.Merge(dst, src)
+func (m *Uint128Pair) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Uint128Pair.Merge(m, src)
 }
 func (m *Uint128Pair) XXX_Size() int {
 	return m.Size()
@@ -428,8 +428,8 @@ func (m *ContainsNestedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, e
 		return b[:n], nil
 	}
 }
-func (dst *ContainsNestedMap) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ContainsNestedMap.Merge(dst, src)
+func (m *ContainsNestedMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ContainsNestedMap.Merge(m, src)
 }
 func (m *ContainsNestedMap) XXX_Size() int {
 	return m.Size()
@@ -467,8 +467,8 @@ func (m *ContainsNestedMap_NestedMap) XXX_Marshal(b []byte, deterministic bool) 
 		return b[:n], nil
 	}
 }
-func (dst *ContainsNestedMap_NestedMap) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ContainsNestedMap_NestedMap.Merge(dst, src)
+func (m *ContainsNestedMap_NestedMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ContainsNestedMap_NestedMap.Merge(m, src)
 }
 func (m *ContainsNestedMap_NestedMap) XXX_Size() int {
 	return m.Size()
@@ -506,8 +506,8 @@ func (m *NotPacked) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (dst *NotPacked) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NotPacked.Merge(dst, src)
+func (m *NotPacked) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NotPacked.Merge(m, src)
 }
 func (m *NotPacked) XXX_Size() int {
 	return m.Size()
