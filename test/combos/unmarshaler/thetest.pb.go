@@ -2813,6 +2813,11 @@ var E_FieldC1 = &proto.ExtensionDesc{
 }
 
 func init() {
+	proto.RegisterEnum("test.TheTestEnum", TheTestEnum_name, TheTestEnum_value)
+	proto.RegisterEnum("test.AnotherTestEnum", AnotherTestEnum_name, AnotherTestEnum_value)
+	proto.RegisterEnum("test.YetAnotherTestEnum", YetAnotherTestEnum_name, YetAnotherTestEnum_value)
+	proto.RegisterEnum("test.YetYetAnotherTestEnum", YetYetAnotherTestEnum_name, YetYetAnotherTestEnum_value)
+	proto.RegisterEnum("test.NestedDefinition_NestedEnum", NestedDefinition_NestedEnum_name, NestedDefinition_NestedEnum_value)
 	proto.RegisterType((*NidOptNative)(nil), "test.NidOptNative")
 	proto.RegisterType((*NinOptNative)(nil), "test.NinOptNative")
 	proto.RegisterType((*NidRepNative)(nil), "test.NidRepNative")
@@ -2881,11 +2886,6 @@ func init() {
 	proto.RegisterType((*NidRepNonByteCustomType)(nil), "test.NidRepNonByteCustomType")
 	proto.RegisterType((*NinRepNonByteCustomType)(nil), "test.NinRepNonByteCustomType")
 	proto.RegisterType((*ProtoType)(nil), "test.ProtoType")
-	proto.RegisterEnum("test.TheTestEnum", TheTestEnum_name, TheTestEnum_value)
-	proto.RegisterEnum("test.AnotherTestEnum", AnotherTestEnum_name, AnotherTestEnum_value)
-	proto.RegisterEnum("test.YetAnotherTestEnum", YetAnotherTestEnum_name, YetAnotherTestEnum_value)
-	proto.RegisterEnum("test.YetYetAnotherTestEnum", YetYetAnotherTestEnum_name, YetYetAnotherTestEnum_value)
-	proto.RegisterEnum("test.NestedDefinition_NestedEnum", NestedDefinition_NestedEnum_name, NestedDefinition_NestedEnum_value)
 	proto.RegisterExtension(E_FieldA)
 	proto.RegisterExtension(E_FieldB)
 	proto.RegisterExtension(E_FieldC)

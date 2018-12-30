@@ -235,6 +235,7 @@ func (m *AllMapsOrdered) XXX_DiscardUnknown() {
 var xxx_messageInfo_AllMapsOrdered proto.InternalMessageInfo
 
 func init() {
+	proto.RegisterEnum("proto2.maps.MapEnum", MapEnum_name, MapEnum_value)
 	proto.RegisterType((*FloatingPoint)(nil), "proto2.maps.FloatingPoint")
 	proto.RegisterType((*CustomMap)(nil), "proto2.maps.CustomMap")
 	proto.RegisterMapType((map[string]github_com_gogo_protobuf_test.Uuid)(nil), "proto2.maps.CustomMap.IdsEntry")
@@ -277,7 +278,6 @@ func init() {
 	proto.RegisterMapType((map[string]*FloatingPoint)(nil), "proto2.maps.AllMapsOrdered.StringToMsgMapEntry")
 	proto.RegisterMapType((map[uint32]uint32)(nil), "proto2.maps.AllMapsOrdered.Uint32MapEntry")
 	proto.RegisterMapType((map[uint64]uint64)(nil), "proto2.maps.AllMapsOrdered.Uint64MapEntry")
-	proto.RegisterEnum("proto2.maps.MapEnum", MapEnum_name, MapEnum_value)
 }
 func (this *FloatingPoint) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return Mapsproto2Description()

@@ -124,9 +124,9 @@ func (m *Message) GetOtherenumeratedField() MyOtherEnum {
 }
 
 func init() {
-	proto.RegisterType((*Message)(nil), "enumdeclall.Message")
 	proto.RegisterEnum("enumdeclall.MyEnum", MyEnum_name, MyEnum_value)
 	proto.RegisterEnum("enumdeclall.MyOtherEnum", MyOtherEnum_name, MyOtherEnum_value)
+	proto.RegisterType((*Message)(nil), "enumdeclall.Message")
 }
 func (this *Message) VerboseEqual(that interface{}) error {
 	if that == nil {

@@ -448,11 +448,11 @@ func (*ListValue) XXX_MessageName() string {
 	return "google.protobuf.ListValue"
 }
 func init() {
+	proto.RegisterEnum("google.protobuf.NullValue", NullValue_name, NullValue_value)
 	proto.RegisterType((*Struct)(nil), "google.protobuf.Struct")
 	proto.RegisterMapType((map[string]*Value)(nil), "google.protobuf.Struct.FieldsEntry")
 	proto.RegisterType((*Value)(nil), "google.protobuf.Value")
 	proto.RegisterType((*ListValue)(nil), "google.protobuf.ListValue")
-	proto.RegisterEnum("google.protobuf.NullValue", NullValue_name, NullValue_value)
 }
 func (x NullValue) String() string {
 	s, ok := NullValue_name[int32(x)]

@@ -1569,6 +1569,8 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.P("func (", ccTypeName, `) XXX_WellKnownType() string { return "`, enum.GetName(), `" }`)
 		g.P()
 	}
+
+	g.generateEnumRegistration(enum)
 }
 
 // The tag is a string like "varint,2,opt,name=fieldname,def=7" that
@@ -3603,6 +3605,7 @@ func (g *Generator) generateExtension(ext *ExtensionDescriptor) {
 	g.P("}")
 	g.P()
 
+	g.addInitf("%s.RegisterExtension(%s)", g.Pkg["proto"], ext.DescName())
 	if mset {
 		// Generate a bit more code to register with message_set.go.
 		g.addInitf("%s.RegisterMessageSetType((%s)(nil), %d, %q)", g.Pkg["proto"], fieldType, *field.Number, extName)
@@ -3615,17 +3618,6 @@ func (g *Generator) generateExtension(ext *ExtensionDescriptor) {
 }
 
 func (g *Generator) generateInitFunction() {
-	for _, enum := range g.file.enum {
-		g.generateEnumRegistration(enum)
-	}
-	for _, d := range g.file.desc {
-		for _, ext := range d.ext {
-			g.generateExtensionRegistration(ext)
-		}
-	}
-	for _, ext := range g.file.ext {
-		g.generateExtensionRegistration(ext)
-	}
 	if len(g.init) == 0 {
 		return
 	}
@@ -3696,13 +3688,6 @@ func (g *Generator) generateEnumRegistration(enum *EnumDescriptor) {
 	g.addInitf("%s.RegisterEnum(%q, %[3]s_name, %[3]s_value)", g.Pkg["proto"], pkg+ccTypeName, ccTypeName)
 	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
 		g.addInitf("%s.RegisterEnum(%q, %[3]s_name, %[3]s_value)", g.Pkg["golang_proto"], pkg+ccTypeName, ccTypeName)
-	}
-}
-
-func (g *Generator) generateExtensionRegistration(ext *ExtensionDescriptor) {
-	g.addInitf("%s.RegisterExtension(%s)", g.Pkg["proto"], ext.DescName())
-	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
-		g.addInitf("%s.RegisterExtension(%s)", g.Pkg["golang_proto"], ext.DescName())
 	}
 }
 

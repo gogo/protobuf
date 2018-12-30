@@ -285,10 +285,10 @@ func (m *OnlyEnums) GetYetYetAnotherTestEnumDefaultDd() test.YetYetAnotherTestEn
 }
 
 func init() {
-	proto.RegisterType((*OnlyEnums)(nil), "enumcustomname.OnlyEnums")
 	proto.RegisterEnum("enumcustomname.MyCustomEnum", MyCustomEnum_name, MyCustomEnum_value)
 	proto.RegisterEnum("enumcustomname.MyCustomUnprefixedEnum", MyCustomUnprefixedEnum_name, MyCustomUnprefixedEnum_value)
 	proto.RegisterEnum("enumcustomname.MyEnumWithEnumStringer", MyEnumWithEnumStringer_name, MyEnumWithEnumStringer_value)
+	proto.RegisterType((*OnlyEnums)(nil), "enumcustomname.OnlyEnums")
 }
 func (x MyEnumWithEnumStringer) String() string {
 	s, ok := MyEnumWithEnumStringer_name[int32(x)]

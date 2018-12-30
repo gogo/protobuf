@@ -521,6 +521,8 @@ func (m *NotPacked) XXX_DiscardUnknown() {
 var xxx_messageInfo_NotPacked proto.InternalMessageInfo
 
 func init() {
+	proto.RegisterEnum("theproto3.MapEnum", MapEnum_name, MapEnum_value)
+	proto.RegisterEnum("theproto3.Message_Humour", Message_Humour_name, Message_Humour_value)
 	proto.RegisterType((*Message)(nil), "theproto3.Message")
 	proto.RegisterMapType((map[int64]*both.NinOptEnum)(nil), "theproto3.Message.Proto2ValueEntry")
 	proto.RegisterMapType((map[int64]*Nested)(nil), "theproto3.Message.TerrainEntry")
@@ -571,8 +573,6 @@ func init() {
 	proto.RegisterType((*ContainsNestedMap_NestedMap)(nil), "theproto3.ContainsNestedMap.NestedMap")
 	proto.RegisterMapType((map[string]float64)(nil), "theproto3.ContainsNestedMap.NestedMap.NestedMapFieldEntry")
 	proto.RegisterType((*NotPacked)(nil), "theproto3.NotPacked")
-	proto.RegisterEnum("theproto3.MapEnum", MapEnum_name, MapEnum_value)
-	proto.RegisterEnum("theproto3.Message_Humour", Message_Humour_name, Message_Humour_value)
 }
 func (this *Message) Description() (desc *github_com_gogo_protobuf_protoc_gen_gogo_descriptor.FileDescriptorSet) {
 	return Theproto3Description()
