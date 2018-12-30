@@ -5,10 +5,11 @@ package events
 
 import (
 	fmt "fmt"
+	math "math"
+
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	issue312 "github.com/gogo/protobuf/test/issue312"
-	math "math"
 
 	bytes "bytes"
 

@@ -455,6 +455,7 @@ type Generator struct {
 	packageNames     map[GoImportPath]GoPackageName // Imported package names in the current file.
 	usedPackages     map[GoImportPath]bool          // Packages used in current file.
 	usedPackageNames map[GoPackageName]bool         // Package names used in the current file.
+	addedImports     map[GoImportPath]bool          // Additional imports to emit.`
 	typeNameToObject map[string]Object              // Key is a fully-qualified name in input syntax.
 	init             []string                       // Lines to emit in the init function.
 	indent           string
@@ -594,6 +595,13 @@ func (g *Generator) GoPackageName(importPath GoImportPath) GoPackageName {
 	}
 	g.usedPackageNames[name] = true
 	return name
+}
+
+// AddImport adds a package to the generated file's import section.
+// It returns the name used for the package.
+func (g *Generator) AddImport(importPath GoImportPath) GoPackageName {
+	g.addedImports[importPath] = true
+	return g.GoPackageName(importPath)
 }
 
 var globalPackageNames = map[GoPackageName]bool{
@@ -1174,6 +1182,7 @@ func (g *Generator) generate(file *FileDescriptor) {
 	g.usedPackages = make(map[GoImportPath]bool)
 	g.packageNames = make(map[GoImportPath]GoPackageName)
 	g.usedPackageNames = make(map[GoPackageName]bool)
+	g.addedImports = make(map[GoImportPath]bool)
 	for name := range globalPackageNames {
 		g.usedPackageNames[name] = true
 	}
@@ -1352,22 +1361,7 @@ func (g *Generator) weak(i int32) bool {
 
 // Generate the imports
 func (g *Generator) generateImports() {
-	g.P("import (")
-	// We almost always need a proto import.  Rather than computing when we
-	// do, which is tricky when there's a plugin, just import it and
-	// reference it later. The same argument applies to the fmt and math packages.
-	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) {
-		g.PrintImport(GoPackageName(g.Pkg["proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/gogo/protobuf/proto"))
-		if gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
-			g.PrintImport(GoPackageName(g.Pkg["golang_proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/golang/protobuf/proto"))
-		}
-	} else {
-		g.PrintImport(GoPackageName(g.Pkg["proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/golang/protobuf/proto"))
-	}
-	g.PrintImport(GoPackageName(g.Pkg["fmt"]), "fmt")
-	g.PrintImport(GoPackageName(g.Pkg["math"]), "math")
-
-	imports := make(map[GoImportPath]bool)
+	imports := make(map[GoImportPath]GoPackageName)
 	for i, s := range g.file.Dependency {
 		fd := g.fileByName(s)
 		importPath := fd.importPath
@@ -1380,27 +1374,58 @@ func (g *Generator) generateImports() {
 			continue
 		}
 		// Do not import a package twice.
-		if imports[importPath] {
+		if _, ok := imports[importPath]; ok {
 			continue
 		}
-		imports[importPath] = true
 		// We need to import all the dependencies, even if we don't reference them,
 		// because other code and tools depend on having the full transitive closure
 		// of protocol buffer types in the binary.
 		packageName := g.GoPackageName(importPath)
-		if _, ok := g.usedPackages[importPath]; ok {
-			g.PrintImport(packageName, GoImportPath(g.ImportPrefix)+importPath)
-		} else {
-			g.P("_ ", GoImportPath(g.ImportPrefix)+importPath)
+		if _, ok := g.usedPackages[importPath]; !ok {
+			packageName = "_"
+		}
+		imports[importPath] = packageName
+	}
+	for importPath := range g.addedImports {
+		imports[importPath] = g.GoPackageName(importPath)
+	}
+
+	g.P("import (")
+	// Standard library imports.
+	g.PrintImport(GoPackageName(g.Pkg["fmt"]), "fmt")
+	g.PrintImport(GoPackageName(g.Pkg["math"]), "math")
+	for importPath, packageName := range imports {
+		if !strings.Contains(string(importPath), ".") {
+			g.P(packageName, " ", GoImportPath(g.ImportPrefix)+importPath)
 		}
 	}
 	g.P()
+	// We almost always need a proto import.  Rather than computing when we
+	// do, which is tricky when there's a plugin, just import it and
+	// reference it later. The same argument applies to the fmt and math packages.
+	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) {
+		g.PrintImport(GoPackageName(g.Pkg["proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/gogo/protobuf/proto"))
+		if gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
+			g.PrintImport(GoPackageName(g.Pkg["golang_proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/golang/protobuf/proto"))
+		}
+	} else {
+		g.PrintImport(GoPackageName(g.Pkg["proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/golang/protobuf/proto"))
+	}
+	for importPath, packageName := range imports {
+		if strings.Contains(string(importPath), ".") {
+			g.P(packageName, " ", GoImportPath(g.ImportPrefix)+importPath)
+		}
+	}
+	g.P()
+	// Custom gogo imports
 	for _, s := range g.customImports {
 		s1 := strings.Map(badToUnderscore, s)
 		g.PrintImport(GoPackageName(s1), GoImportPath(s))
 	}
 	g.P()
-	// TODO: may need to worry about uniqueness across plugins
+	// gogo plugin imports
+	// TODO: may need to worry about uniqueness across plugins and could change this
+	// to use the `addedImports` technique
 	for _, p := range plugins {
 		p.GenerateImports(g.file)
 		g.P()

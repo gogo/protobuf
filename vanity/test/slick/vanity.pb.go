@@ -5,8 +5,9 @@ package vanity
 
 import (
 	fmt "fmt"
-	proto "github.com/gogo/protobuf/proto"
 	math "math"
+
+	proto "github.com/gogo/protobuf/proto"
 
 	reflect "reflect"
 	strings "strings"

@@ -5,10 +5,11 @@ package importdedup
 
 import (
 	fmt "fmt"
+	math "math"
+
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	subpkg "github.com/gogo/protobuf/test/importdedup/subpkg"
-	math "math"
 
 	github_com_gogo_protobuf_test_importdedup_subpkg "github.com/gogo/protobuf/test/importdedup/subpkg"
 )

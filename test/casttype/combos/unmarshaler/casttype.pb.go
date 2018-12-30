@@ -5,9 +5,10 @@ package casttype
 
 import (
 	fmt "fmt"
+	math "math"
+
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-	math "math"
 
 	github_com_gogo_protobuf_test_casttype "github.com/gogo/protobuf/test/casttype"
 

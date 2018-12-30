@@ -5,9 +5,10 @@ package mapdefaults
 
 import (
 	fmt "fmt"
+	math "math"
+
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-	math "math"
 
 	bytes "bytes"
 	compress_gzip "compress/gzip"

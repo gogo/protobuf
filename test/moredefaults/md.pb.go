@@ -5,10 +5,11 @@ package moredefaults
 
 import (
 	fmt "fmt"
+	math "math"
+
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	example "github.com/gogo/protobuf/test/example"
-	math "math"
 
 	bytes "bytes"
 )

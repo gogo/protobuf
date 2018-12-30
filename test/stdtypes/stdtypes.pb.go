@@ -5,10 +5,11 @@ package stdtypes
 
 import (
 	fmt "fmt"
+	math "math"
+
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	_ "github.com/gogo/protobuf/types"
-	math "math"
 
 	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 	time "time"

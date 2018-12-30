@@ -5,11 +5,12 @@ package importduplicate
 
 import (
 	fmt "fmt"
+	math "math"
+
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	proto1 "github.com/gogo/protobuf/test/importduplicate/proto"
 	sortkeys "github.com/gogo/protobuf/test/importduplicate/sortkeys"
-	math "math"
 
 	bytes "bytes"
 

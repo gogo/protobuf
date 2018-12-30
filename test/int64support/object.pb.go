@@ -5,9 +5,10 @@ package int64support
 
 import (
 	fmt "fmt"
+	math "math"
+
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-	math "math"
 
 	reflect "reflect"
 	strings "strings"

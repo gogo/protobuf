@@ -5,9 +5,10 @@ package import_public
 
 import (
 	fmt "fmt"
+	math "math"
+
 	proto "github.com/gogo/protobuf/proto"
 	sub "github.com/gogo/protobuf/protoc-gen-gogo/testdata/import_public/sub"
-	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

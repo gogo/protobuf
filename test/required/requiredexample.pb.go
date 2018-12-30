@@ -5,9 +5,10 @@ package required
 
 import (
 	fmt "fmt"
+	math "math"
+
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-	math "math"
 
 	encoding_binary "encoding/binary"
 	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"

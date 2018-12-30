@@ -5,10 +5,11 @@ package indeximport
 
 import (
 	fmt "fmt"
+	math "math"
+
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	index "github.com/gogo/protobuf/test/indeximport-issue72/index"
-	math "math"
 
 	bytes "bytes"
 

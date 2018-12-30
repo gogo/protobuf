@@ -5,9 +5,10 @@ package issue42
 
 import (
 	fmt "fmt"
+	math "math"
+
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-	math "math"
 
 	encoding_binary "encoding/binary"
 

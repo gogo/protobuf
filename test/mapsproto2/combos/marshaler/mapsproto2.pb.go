@@ -5,9 +5,10 @@ package proto2_maps
 
 import (
 	fmt "fmt"
+	math "math"
+
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-	math "math"
 
 	github_com_gogo_protobuf_test "github.com/gogo/protobuf/test"
 	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"

@@ -5,10 +5,11 @@ package theproto3
 
 import (
 	fmt "fmt"
+	math "math"
+
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	both "github.com/gogo/protobuf/test/combos/both"
-	math "math"
 
 	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
 

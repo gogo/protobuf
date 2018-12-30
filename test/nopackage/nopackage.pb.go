@@ -5,8 +5,9 @@ package nopackage
 
 import (
 	fmt "fmt"
-	proto "github.com/gogo/protobuf/proto"
 	math "math"
+
+	proto "github.com/gogo/protobuf/proto"
 
 	encoding_binary "encoding/binary"
 
