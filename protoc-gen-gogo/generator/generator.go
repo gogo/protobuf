@@ -3091,6 +3091,7 @@ func (g *Generator) generateCommonMethods(mc *msgCtx) {
 		g.P("return extRange_", mc.goName)
 		g.Out()
 		g.P("}")
+		g.P()
 		if !gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
 			g.P("func (m *", mc.goName, ") GetExtensions() *[]byte {")
 			g.In()

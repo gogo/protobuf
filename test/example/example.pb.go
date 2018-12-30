@@ -236,6 +236,7 @@ var extRange_E = []proto.ExtensionRange{
 func (*E) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_E
 }
+
 func (m *E) GetExtensions() *[]byte {
 	if m.XXX_extensions == nil {
 		m.XXX_extensions = make([]byte, 0)

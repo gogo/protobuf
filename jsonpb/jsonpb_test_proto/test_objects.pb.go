@@ -819,6 +819,7 @@ var extRange_Real = []proto.ExtensionRange{
 func (*Real) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_Real
 }
+
 func (m *Real) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Real.Unmarshal(m, b)
 }
@@ -866,6 +867,7 @@ var extRange_Complex = []proto.ExtensionRange{
 func (*Complex) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_Complex
 }
+
 func (m *Complex) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Complex.Unmarshal(m, b)
 }

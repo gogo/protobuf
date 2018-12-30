@@ -2044,6 +2044,7 @@ var extRange_MyExtendable = []proto.ExtensionRange{
 func (*MyExtendable) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_MyExtendable
 }
+
 func (m *MyExtendable) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
@@ -2095,6 +2096,7 @@ var extRange_OtherExtenable = []proto.ExtensionRange{
 func (*OtherExtenable) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_OtherExtenable
 }
+
 func (m *OtherExtenable) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
@@ -2849,6 +2851,7 @@ var extRange_NoExtensionsMap = []proto.ExtensionRange{
 func (*NoExtensionsMap) ExtensionRangeArray() []proto.ExtensionRange {
 	return extRange_NoExtensionsMap
 }
+
 func (m *NoExtensionsMap) GetExtensions() *[]byte {
 	if m.XXX_extensions == nil {
 		m.XXX_extensions = make([]byte, 0)
