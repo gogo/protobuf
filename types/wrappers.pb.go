@@ -41,7 +41,7 @@ type DoubleValue struct {
 func (m *DoubleValue) Reset()      { *m = DoubleValue{} }
 func (*DoubleValue) ProtoMessage() {}
 func (*DoubleValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{0}
+	return fileDescriptor_5377b62bda767935, []int{0}
 }
 func (*DoubleValue) XXX_WellKnownType() string { return "DoubleValue" }
 func (m *DoubleValue) XXX_Unmarshal(b []byte) error {
@@ -96,7 +96,7 @@ type FloatValue struct {
 func (m *FloatValue) Reset()      { *m = FloatValue{} }
 func (*FloatValue) ProtoMessage() {}
 func (*FloatValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{1}
+	return fileDescriptor_5377b62bda767935, []int{1}
 }
 func (*FloatValue) XXX_WellKnownType() string { return "FloatValue" }
 func (m *FloatValue) XXX_Unmarshal(b []byte) error {
@@ -151,7 +151,7 @@ type Int64Value struct {
 func (m *Int64Value) Reset()      { *m = Int64Value{} }
 func (*Int64Value) ProtoMessage() {}
 func (*Int64Value) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{2}
+	return fileDescriptor_5377b62bda767935, []int{2}
 }
 func (*Int64Value) XXX_WellKnownType() string { return "Int64Value" }
 func (m *Int64Value) XXX_Unmarshal(b []byte) error {
@@ -206,7 +206,7 @@ type UInt64Value struct {
 func (m *UInt64Value) Reset()      { *m = UInt64Value{} }
 func (*UInt64Value) ProtoMessage() {}
 func (*UInt64Value) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{3}
+	return fileDescriptor_5377b62bda767935, []int{3}
 }
 func (*UInt64Value) XXX_WellKnownType() string { return "UInt64Value" }
 func (m *UInt64Value) XXX_Unmarshal(b []byte) error {
@@ -261,7 +261,7 @@ type Int32Value struct {
 func (m *Int32Value) Reset()      { *m = Int32Value{} }
 func (*Int32Value) ProtoMessage() {}
 func (*Int32Value) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{4}
+	return fileDescriptor_5377b62bda767935, []int{4}
 }
 func (*Int32Value) XXX_WellKnownType() string { return "Int32Value" }
 func (m *Int32Value) XXX_Unmarshal(b []byte) error {
@@ -316,7 +316,7 @@ type UInt32Value struct {
 func (m *UInt32Value) Reset()      { *m = UInt32Value{} }
 func (*UInt32Value) ProtoMessage() {}
 func (*UInt32Value) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{5}
+	return fileDescriptor_5377b62bda767935, []int{5}
 }
 func (*UInt32Value) XXX_WellKnownType() string { return "UInt32Value" }
 func (m *UInt32Value) XXX_Unmarshal(b []byte) error {
@@ -371,7 +371,7 @@ type BoolValue struct {
 func (m *BoolValue) Reset()      { *m = BoolValue{} }
 func (*BoolValue) ProtoMessage() {}
 func (*BoolValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{6}
+	return fileDescriptor_5377b62bda767935, []int{6}
 }
 func (*BoolValue) XXX_WellKnownType() string { return "BoolValue" }
 func (m *BoolValue) XXX_Unmarshal(b []byte) error {
@@ -426,7 +426,7 @@ type StringValue struct {
 func (m *StringValue) Reset()      { *m = StringValue{} }
 func (*StringValue) ProtoMessage() {}
 func (*StringValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{7}
+	return fileDescriptor_5377b62bda767935, []int{7}
 }
 func (*StringValue) XXX_WellKnownType() string { return "StringValue" }
 func (m *StringValue) XXX_Unmarshal(b []byte) error {
@@ -481,7 +481,7 @@ type BytesValue struct {
 func (m *BytesValue) Reset()      { *m = BytesValue{} }
 func (*BytesValue) ProtoMessage() {}
 func (*BytesValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wrappers_c5239a825c7dfb53, []int{8}
+	return fileDescriptor_5377b62bda767935, []int{8}
 }
 func (*BytesValue) XXX_WellKnownType() string { return "BytesValue" }
 func (m *BytesValue) XXX_Unmarshal(b []byte) error {
@@ -2641,11 +2641,9 @@ var (
 	ErrIntOverflowWrappers   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() {
-	proto.RegisterFile("google/protobuf/wrappers.proto", fileDescriptor_wrappers_c5239a825c7dfb53)
-}
+func init() { proto.RegisterFile("google/protobuf/wrappers.proto", fileDescriptor_5377b62bda767935) }
 
-var fileDescriptor_wrappers_c5239a825c7dfb53 = []byte{
+var fileDescriptor_5377b62bda767935 = []byte{
 	// 285 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4b, 0xcf, 0xcf, 0x4f,
 	0xcf, 0x49, 0xd5, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0x4f, 0x2a, 0x4d, 0xd3, 0x2f, 0x2f, 0x4a, 0x2c,

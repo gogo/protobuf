@@ -70,7 +70,7 @@ func (x *MapEnum) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (MapEnum) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_mapsproto2_62fb8c1076af60e4, []int{0}
+	return fileDescriptor_8fa67a1e07543f1e, []int{0}
 }
 
 type FloatingPoint struct {
@@ -83,7 +83,7 @@ type FloatingPoint struct {
 func (m *FloatingPoint) Reset()      { *m = FloatingPoint{} }
 func (*FloatingPoint) ProtoMessage() {}
 func (*FloatingPoint) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mapsproto2_62fb8c1076af60e4, []int{0}
+	return fileDescriptor_8fa67a1e07543f1e, []int{0}
 }
 func (m *FloatingPoint) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FloatingPoint.Unmarshal(m, b)
@@ -116,7 +116,7 @@ type CustomMap struct {
 func (m *CustomMap) Reset()      { *m = CustomMap{} }
 func (*CustomMap) ProtoMessage() {}
 func (*CustomMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mapsproto2_62fb8c1076af60e4, []int{1}
+	return fileDescriptor_8fa67a1e07543f1e, []int{1}
 }
 func (m *CustomMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomMap.Unmarshal(m, b)
@@ -162,7 +162,7 @@ type AllMaps struct {
 func (m *AllMaps) Reset()      { *m = AllMaps{} }
 func (*AllMaps) ProtoMessage() {}
 func (*AllMaps) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mapsproto2_62fb8c1076af60e4, []int{2}
+	return fileDescriptor_8fa67a1e07543f1e, []int{2}
 }
 func (m *AllMaps) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AllMaps.Unmarshal(m, b)
@@ -208,7 +208,7 @@ type AllMapsOrdered struct {
 func (m *AllMapsOrdered) Reset()      { *m = AllMapsOrdered{} }
 func (*AllMapsOrdered) ProtoMessage() {}
 func (*AllMapsOrdered) Descriptor() ([]byte, []int) {
-	return fileDescriptor_mapsproto2_62fb8c1076af60e4, []int{3}
+	return fileDescriptor_8fa67a1e07543f1e, []int{3}
 }
 func (m *AllMapsOrdered) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AllMapsOrdered.Unmarshal(m, b)
@@ -3640,11 +3640,9 @@ func valueToStringMapsproto2(v interface{}) string {
 	return fmt.Sprintf("*%v", pv)
 }
 
-func init() {
-	proto.RegisterFile("combos/neither/mapsproto2.proto", fileDescriptor_mapsproto2_62fb8c1076af60e4)
-}
+func init() { proto.RegisterFile("combos/neither/mapsproto2.proto", fileDescriptor_8fa67a1e07543f1e) }
 
-var fileDescriptor_mapsproto2_62fb8c1076af60e4 = []byte{
+var fileDescriptor_8fa67a1e07543f1e = []byte{
 	// 1148 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x97, 0xcd, 0x6f, 0x1a, 0xc7,
 	0x1b, 0xc7, 0x77, 0xc0, 0x36, 0x30, 0xbc, 0x4f, 0xfc, 0xfb, 0x09, 0x21, 0x75, 0x70, 0xe8, 0x1b,

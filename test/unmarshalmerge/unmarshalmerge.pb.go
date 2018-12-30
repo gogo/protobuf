@@ -39,7 +39,7 @@ type Big struct {
 func (m *Big) Reset()      { *m = Big{} }
 func (*Big) ProtoMessage() {}
 func (*Big) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unmarshalmerge_5567ee50c42503cc, []int{0}
+	return fileDescriptor_701a7743bfe9c603, []int{0}
 }
 func (m *Big) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -84,7 +84,7 @@ type BigUnsafe struct {
 func (m *BigUnsafe) Reset()      { *m = BigUnsafe{} }
 func (*BigUnsafe) ProtoMessage() {}
 func (*BigUnsafe) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unmarshalmerge_5567ee50c42503cc, []int{1}
+	return fileDescriptor_701a7743bfe9c603, []int{1}
 }
 func (m *BigUnsafe) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BigUnsafe.Unmarshal(m, b)
@@ -128,7 +128,7 @@ type Sub struct {
 func (m *Sub) Reset()      { *m = Sub{} }
 func (*Sub) ProtoMessage() {}
 func (*Sub) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unmarshalmerge_5567ee50c42503cc, []int{2}
+	return fileDescriptor_701a7743bfe9c603, []int{2}
 }
 func (m *Sub) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -175,7 +175,7 @@ type IntMerge struct {
 func (m *IntMerge) Reset()      { *m = IntMerge{} }
 func (*IntMerge) ProtoMessage() {}
 func (*IntMerge) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unmarshalmerge_5567ee50c42503cc, []int{3}
+	return fileDescriptor_701a7743bfe9c603, []int{3}
 }
 func (m *IntMerge) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1562,11 +1562,9 @@ var (
 	ErrIntOverflowUnmarshalmerge   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() {
-	proto.RegisterFile("unmarshalmerge.proto", fileDescriptor_unmarshalmerge_5567ee50c42503cc)
-}
+func init() { proto.RegisterFile("unmarshalmerge.proto", fileDescriptor_701a7743bfe9c603) }
 
-var fileDescriptor_unmarshalmerge_5567ee50c42503cc = []byte{
+var fileDescriptor_701a7743bfe9c603 = []byte{
 	// 386 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0xd0, 0xcd, 0x8a, 0x9b, 0x50,
 	0x14, 0x07, 0xf0, 0x1c, 0x35, 0xc6, 0xdc, 0xd0, 0xaf, 0xdb, 0x52, 0x2e, 0x21, 0xdc, 0x5c, 0x02,

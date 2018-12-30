@@ -123,7 +123,7 @@ type Timestamp struct {
 func (m *Timestamp) Reset()      { *m = Timestamp{} }
 func (*Timestamp) ProtoMessage() {}
 func (*Timestamp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_timestamp_820f61227bd8f1e8, []int{0}
+	return fileDescriptor_292007bbfe81227e, []int{0}
 }
 func (*Timestamp) XXX_WellKnownType() string { return "Timestamp" }
 func (m *Timestamp) XXX_Unmarshal(b []byte) error {
@@ -532,11 +532,9 @@ var (
 	ErrIntOverflowTimestamp   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() {
-	proto.RegisterFile("google/protobuf/timestamp.proto", fileDescriptor_timestamp_820f61227bd8f1e8)
-}
+func init() { proto.RegisterFile("google/protobuf/timestamp.proto", fileDescriptor_292007bbfe81227e) }
 
-var fileDescriptor_timestamp_820f61227bd8f1e8 = []byte{
+var fileDescriptor_292007bbfe81227e = []byte{
 	// 212 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4f, 0xcf, 0xcf, 0x4f,
 	0xcf, 0x49, 0xd5, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0x4f, 0x2a, 0x4d, 0xd3, 0x2f, 0xc9, 0xcc, 0x4d,

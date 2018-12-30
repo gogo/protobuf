@@ -37,7 +37,7 @@ func (m *NativeWithSizeCache) Reset()         { *m = NativeWithSizeCache{} }
 func (m *NativeWithSizeCache) String() string { return proto.CompactTextString(m) }
 func (*NativeWithSizeCache) ProtoMessage()    {}
 func (*NativeWithSizeCache) Descriptor() ([]byte, []int) {
-	return fileDescriptor_xxxfields_2cd53c16cfe389cd, []int{0}
+	return fileDescriptor_ba18cdebbd18dc5d, []int{0}
 }
 func (m *NativeWithSizeCache) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NativeWithSizeCache.Unmarshal(m, b)
@@ -130,7 +130,7 @@ func (m *StructWithSizeCache) Reset()         { *m = StructWithSizeCache{} }
 func (m *StructWithSizeCache) String() string { return proto.CompactTextString(m) }
 func (*StructWithSizeCache) ProtoMessage()    {}
 func (*StructWithSizeCache) Descriptor() ([]byte, []int) {
-	return fileDescriptor_xxxfields_2cd53c16cfe389cd, []int{1}
+	return fileDescriptor_ba18cdebbd18dc5d, []int{1}
 }
 func (m *StructWithSizeCache) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StructWithSizeCache.Unmarshal(m, b)
@@ -228,7 +228,7 @@ func (m *NativeWithoutSizeCache) Reset()         { *m = NativeWithoutSizeCache{}
 func (m *NativeWithoutSizeCache) String() string { return proto.CompactTextString(m) }
 func (*NativeWithoutSizeCache) ProtoMessage()    {}
 func (*NativeWithoutSizeCache) Descriptor() ([]byte, []int) {
-	return fileDescriptor_xxxfields_2cd53c16cfe389cd, []int{2}
+	return fileDescriptor_ba18cdebbd18dc5d, []int{2}
 }
 func (m *NativeWithoutSizeCache) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NativeWithoutSizeCache.Unmarshal(m, b)
@@ -320,7 +320,7 @@ func (m *StructWithoutSizeCache) Reset()         { *m = StructWithoutSizeCache{}
 func (m *StructWithoutSizeCache) String() string { return proto.CompactTextString(m) }
 func (*StructWithoutSizeCache) ProtoMessage()    {}
 func (*StructWithoutSizeCache) Descriptor() ([]byte, []int) {
-	return fileDescriptor_xxxfields_2cd53c16cfe389cd, []int{3}
+	return fileDescriptor_ba18cdebbd18dc5d, []int{3}
 }
 func (m *StructWithoutSizeCache) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StructWithoutSizeCache.Unmarshal(m, b)
@@ -962,9 +962,9 @@ func encodeVarintPopulateXxxfields(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 
-func init() { proto.RegisterFile("xxxfields.proto", fileDescriptor_xxxfields_2cd53c16cfe389cd) }
+func init() { proto.RegisterFile("xxxfields.proto", fileDescriptor_ba18cdebbd18dc5d) }
 
-var fileDescriptor_xxxfields_2cd53c16cfe389cd = []byte{
+var fileDescriptor_ba18cdebbd18dc5d = []byte{
 	// 375 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xaf, 0xa8, 0xa8, 0x48,
 	0xcb, 0x4c, 0xcd, 0x49, 0x29, 0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x29, 0x49, 0x2d,

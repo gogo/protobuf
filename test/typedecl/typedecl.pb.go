@@ -25,7 +25,7 @@ func (m *Dropped) Reset()         { *m = Dropped{} }
 func (m *Dropped) String() string { return proto.CompactTextString(m) }
 func (*Dropped) ProtoMessage()    {}
 func (*Dropped) Descriptor() ([]byte, []int) {
-	return fileDescriptor_typedecl_3980e2f1b7c625af, []int{0}
+	return fileDescriptor_d070f1c0d5954996, []int{0}
 }
 func (m *Dropped) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -72,7 +72,7 @@ func (m *DroppedWithoutGetters) Reset()         { *m = DroppedWithoutGetters{} }
 func (m *DroppedWithoutGetters) String() string { return proto.CompactTextString(m) }
 func (*DroppedWithoutGetters) ProtoMessage()    {}
 func (*DroppedWithoutGetters) Descriptor() ([]byte, []int) {
-	return fileDescriptor_typedecl_3980e2f1b7c625af, []int{1}
+	return fileDescriptor_d070f1c0d5954996, []int{1}
 }
 func (m *DroppedWithoutGetters) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -112,7 +112,7 @@ func (m *Kept) Reset()         { *m = Kept{} }
 func (m *Kept) String() string { return proto.CompactTextString(m) }
 func (*Kept) ProtoMessage()    {}
 func (*Kept) Descriptor() ([]byte, []int) {
-	return fileDescriptor_typedecl_3980e2f1b7c625af, []int{2}
+	return fileDescriptor_d070f1c0d5954996, []int{2}
 }
 func (m *Kept) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -995,9 +995,9 @@ var (
 	ErrIntOverflowTypedecl   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("typedecl.proto", fileDescriptor_typedecl_3980e2f1b7c625af) }
+func init() { proto.RegisterFile("typedecl.proto", fileDescriptor_d070f1c0d5954996) }
 
-var fileDescriptor_typedecl_3980e2f1b7c625af = []byte{
+var fileDescriptor_d070f1c0d5954996 = []byte{
 	// 246 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2b, 0xa9, 0x2c, 0x48,
 	0x4d, 0x49, 0x4d, 0xce, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x80, 0xf1, 0xa5, 0x74,

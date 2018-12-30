@@ -32,7 +32,7 @@ func (m *Foo) Reset()         { *m = Foo{} }
 func (m *Foo) String() string { return proto.CompactTextString(m) }
 func (*Foo) ProtoMessage()    {}
 func (*Foo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_oneofembed_d85d6690bc6cfd92, []int{0}
+	return fileDescriptor_70b95aca3b5d76ed, []int{0}
 }
 func (m *Foo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Foo.Unmarshal(m, b)
@@ -66,7 +66,7 @@ func (m *Bar) Reset()         { *m = Bar{} }
 func (m *Bar) String() string { return proto.CompactTextString(m) }
 func (*Bar) ProtoMessage()    {}
 func (*Bar) Descriptor() ([]byte, []int) {
-	return fileDescriptor_oneofembed_d85d6690bc6cfd92, []int{1}
+	return fileDescriptor_70b95aca3b5d76ed, []int{1}
 }
 func (m *Bar) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Bar.Unmarshal(m, b)
@@ -416,9 +416,9 @@ func encodeVarintPopulateOneofembed(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 
-func init() { proto.RegisterFile("oneofembed.proto", fileDescriptor_oneofembed_d85d6690bc6cfd92) }
+func init() { proto.RegisterFile("oneofembed.proto", fileDescriptor_70b95aca3b5d76ed) }
 
-var fileDescriptor_oneofembed_d85d6690bc6cfd92 = []byte{
+var fileDescriptor_70b95aca3b5d76ed = []byte{
 	// 171 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0xc8, 0xcf, 0x4b, 0xcd,
 	0x4f, 0x4b, 0xcd, 0x4d, 0x4a, 0x4d, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x05, 0x53,

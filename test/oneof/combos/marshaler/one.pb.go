@@ -43,7 +43,7 @@ type Subby struct {
 func (m *Subby) Reset()      { *m = Subby{} }
 func (*Subby) ProtoMessage() {}
 func (*Subby) Descriptor() ([]byte, []int) {
-	return fileDescriptor_one_2f6d76776b72edfd, []int{0}
+	return fileDescriptor_f8ef4705d619eecc, []int{0}
 }
 func (m *Subby) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Subby.Unmarshal(m, b)
@@ -99,7 +99,7 @@ type AllTypesOneOf struct {
 func (m *AllTypesOneOf) Reset()      { *m = AllTypesOneOf{} }
 func (*AllTypesOneOf) ProtoMessage() {}
 func (*AllTypesOneOf) Descriptor() ([]byte, []int) {
-	return fileDescriptor_one_2f6d76776b72edfd, []int{1}
+	return fileDescriptor_f8ef4705d619eecc, []int{1}
 }
 func (m *AllTypesOneOf) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AllTypesOneOf.Unmarshal(m, b)
@@ -611,7 +611,7 @@ type TwoOneofs struct {
 func (m *TwoOneofs) Reset()      { *m = TwoOneofs{} }
 func (*TwoOneofs) ProtoMessage() {}
 func (*TwoOneofs) Descriptor() ([]byte, []int) {
-	return fileDescriptor_one_2f6d76776b72edfd, []int{2}
+	return fileDescriptor_f8ef4705d619eecc, []int{2}
 }
 func (m *TwoOneofs) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TwoOneofs.Unmarshal(m, b)
@@ -890,7 +890,7 @@ type CustomOneof struct {
 func (m *CustomOneof) Reset()      { *m = CustomOneof{} }
 func (*CustomOneof) ProtoMessage() {}
 func (*CustomOneof) Descriptor() ([]byte, []int) {
-	return fileDescriptor_one_2f6d76776b72edfd, []int{3}
+	return fileDescriptor_f8ef4705d619eecc, []int{3}
 }
 func (m *CustomOneof) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomOneof.Unmarshal(m, b)
@@ -4726,9 +4726,9 @@ func valueToStringOne(v interface{}) string {
 	return fmt.Sprintf("*%v", pv)
 }
 
-func init() { proto.RegisterFile("combos/marshaler/one.proto", fileDescriptor_one_2f6d76776b72edfd) }
+func init() { proto.RegisterFile("combos/marshaler/one.proto", fileDescriptor_f8ef4705d619eecc) }
 
-var fileDescriptor_one_2f6d76776b72edfd = []byte{
+var fileDescriptor_f8ef4705d619eecc = []byte{
 	// 601 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0xd3, 0xbf, 0x4f, 0xdb, 0x4e,
 	0x14, 0x00, 0xf0, 0x7b, 0x84, 0x84, 0x70, 0x09, 0x5f, 0xf2, 0xf5, 0x74, 0x65, 0x38, 0x4e, 0x69,

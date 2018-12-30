@@ -36,7 +36,7 @@ func (x MyEnum) String() string {
 	return proto.EnumName(MyEnum_name, int32(x))
 }
 func (MyEnum) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_enumdecl_b298d32d6f1455f8, []int{0}
+	return fileDescriptor_869e4edba7b1e4e3, []int{0}
 }
 
 type Message struct {
@@ -50,7 +50,7 @@ func (m *Message) Reset()         { *m = Message{} }
 func (m *Message) String() string { return proto.CompactTextString(m) }
 func (*Message) ProtoMessage()    {}
 func (*Message) Descriptor() ([]byte, []int) {
-	return fileDescriptor_enumdecl_b298d32d6f1455f8, []int{0}
+	return fileDescriptor_869e4edba7b1e4e3, []int{0}
 }
 func (m *Message) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -469,9 +469,9 @@ var (
 	ErrIntOverflowEnumdecl   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("enumdecl.proto", fileDescriptor_enumdecl_b298d32d6f1455f8) }
+func init() { proto.RegisterFile("enumdecl.proto", fileDescriptor_869e4edba7b1e4e3) }
 
-var fileDescriptor_enumdecl_b298d32d6f1455f8 = []byte{
+var fileDescriptor_869e4edba7b1e4e3 = []byte{
 	// 205 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4b, 0xcd, 0x2b, 0xcd,
 	0x4d, 0x49, 0x4d, 0xce, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x80, 0xf1, 0xa5, 0x74,

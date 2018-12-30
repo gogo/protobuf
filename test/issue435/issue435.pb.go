@@ -31,7 +31,7 @@ func (m *Message) Reset()         { *m = Message{} }
 func (m *Message) String() string { return proto.CompactTextString(m) }
 func (*Message) ProtoMessage()    {}
 func (*Message) Descriptor() ([]byte, []int) {
-	return fileDescriptor_issue435_f2d026e765e48290, []int{0}
+	return fileDescriptor_dba67e55f800df0d, []int{0}
 }
 func (m *Message) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Message.Unmarshal(m, b)
@@ -76,7 +76,7 @@ func (m *SubMessage) Reset()         { *m = SubMessage{} }
 func (m *SubMessage) String() string { return proto.CompactTextString(m) }
 func (*SubMessage) ProtoMessage()    {}
 func (*SubMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_issue435_f2d026e765e48290, []int{1}
+	return fileDescriptor_dba67e55f800df0d, []int{1}
 }
 func (m *SubMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SubMessage.Unmarshal(m, b)
@@ -110,9 +110,9 @@ func init() {
 	proto.RegisterType((*SubMessage)(nil), "issue435.SubMessage")
 }
 
-func init() { proto.RegisterFile("issue435.proto", fileDescriptor_issue435_f2d026e765e48290) }
+func init() { proto.RegisterFile("issue435.proto", fileDescriptor_dba67e55f800df0d) }
 
-var fileDescriptor_issue435_f2d026e765e48290 = []byte{
+var fileDescriptor_dba67e55f800df0d = []byte{
 	// 189 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0x2c, 0x2e, 0x2e,
 	0x4d, 0x35, 0x31, 0x36, 0xd5, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x80, 0xf1, 0xa5, 0x74,

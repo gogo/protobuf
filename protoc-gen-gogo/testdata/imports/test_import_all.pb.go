@@ -39,7 +39,7 @@ func (m *All) Reset()         { *m = All{} }
 func (m *All) String() string { return proto.CompactTextString(m) }
 func (*All) ProtoMessage()    {}
 func (*All) Descriptor() ([]byte, []int) {
-	return fileDescriptor_test_import_all_a07d58de416f602a, []int{0}
+	return fileDescriptor_324466f0afc16f77, []int{0}
 }
 func (m *All) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_All.Unmarshal(m, b)
@@ -112,11 +112,9 @@ func init() {
 	proto.RegisterType((*All)(nil), "test.All")
 }
 
-func init() {
-	proto.RegisterFile("imports/test_import_all.proto", fileDescriptor_test_import_all_a07d58de416f602a)
-}
+func init() { proto.RegisterFile("imports/test_import_all.proto", fileDescriptor_324466f0afc16f77) }
 
-var fileDescriptor_test_import_all_a07d58de416f602a = []byte{
+var fileDescriptor_324466f0afc16f77 = []byte{
 	// 258 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0xd0, 0x31, 0x4f, 0xf3, 0x30,
 	0x10, 0x06, 0x60, 0xe5, 0x73, 0xbf, 0x20, 0x99, 0x05, 0x85, 0xc5, 0x20, 0x90, 0x50, 0x27, 0x96,

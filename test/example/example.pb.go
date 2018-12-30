@@ -45,7 +45,7 @@ type A struct {
 func (m *A) Reset()      { *m = A{} }
 func (*A) ProtoMessage() {}
 func (*A) Descriptor() ([]byte, []int) {
-	return fileDescriptor_example_32f420a2a58e4270, []int{0}
+	return fileDescriptor_15a1dc8d40dadaa6, []int{0}
 }
 func (m *A) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -85,7 +85,7 @@ type B struct {
 func (m *B) Reset()      { *m = B{} }
 func (*B) ProtoMessage() {}
 func (*B) Descriptor() ([]byte, []int) {
-	return fileDescriptor_example_32f420a2a58e4270, []int{1}
+	return fileDescriptor_15a1dc8d40dadaa6, []int{1}
 }
 func (m *B) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -124,7 +124,7 @@ type C struct {
 func (m *C) Reset()      { *m = C{} }
 func (*C) ProtoMessage() {}
 func (*C) Descriptor() ([]byte, []int) {
-	return fileDescriptor_example_32f420a2a58e4270, []int{2}
+	return fileDescriptor_15a1dc8d40dadaa6, []int{2}
 }
 func (m *C) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -171,7 +171,7 @@ type U struct {
 func (m *U) Reset()      { *m = U{} }
 func (*U) ProtoMessage() {}
 func (*U) Descriptor() ([]byte, []int) {
-	return fileDescriptor_example_32f420a2a58e4270, []int{3}
+	return fileDescriptor_15a1dc8d40dadaa6, []int{3}
 }
 func (m *U) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -224,7 +224,7 @@ type E struct {
 func (m *E) Reset()      { *m = E{} }
 func (*E) ProtoMessage() {}
 func (*E) Descriptor() ([]byte, []int) {
-	return fileDescriptor_example_32f420a2a58e4270, []int{4}
+	return fileDescriptor_15a1dc8d40dadaa6, []int{4}
 }
 
 var extRange_E = []proto.ExtensionRange{
@@ -276,7 +276,7 @@ type R struct {
 func (m *R) Reset()      { *m = R{} }
 func (*R) ProtoMessage() {}
 func (*R) Descriptor() ([]byte, []int) {
-	return fileDescriptor_example_32f420a2a58e4270, []int{5}
+	return fileDescriptor_15a1dc8d40dadaa6, []int{5}
 }
 func (m *R) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -322,7 +322,7 @@ type CastType struct {
 func (m *CastType) Reset()      { *m = CastType{} }
 func (*CastType) ProtoMessage() {}
 func (*CastType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_example_32f420a2a58e4270, []int{6}
+	return fileDescriptor_15a1dc8d40dadaa6, []int{6}
 }
 func (m *CastType) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2666,9 +2666,9 @@ var (
 	ErrIntOverflowExample   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("example.proto", fileDescriptor_example_32f420a2a58e4270) }
+func init() { proto.RegisterFile("example.proto", fileDescriptor_15a1dc8d40dadaa6) }
 
-var fileDescriptor_example_32f420a2a58e4270 = []byte{
+var fileDescriptor_15a1dc8d40dadaa6 = []byte{
 	// 425 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x90, 0x41, 0x6b, 0x13, 0x41,
 	0x14, 0xc7, 0xf3, 0x36, 0xdb, 0xba, 0x7d, 0x6d, 0x41, 0x46, 0x0a, 0x41, 0x64, 0x26, 0xac, 0x20,

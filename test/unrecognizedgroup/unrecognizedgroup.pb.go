@@ -44,7 +44,7 @@ type NewNoGroup struct {
 func (m *NewNoGroup) Reset()      { *m = NewNoGroup{} }
 func (*NewNoGroup) ProtoMessage() {}
 func (*NewNoGroup) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognizedgroup_ad1c77f6b1c6f338, []int{0}
+	return fileDescriptor_1dcb9b01ad4951dd, []int{0}
 }
 func (m *NewNoGroup) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -83,7 +83,7 @@ type A struct {
 func (m *A) Reset()      { *m = A{} }
 func (*A) ProtoMessage() {}
 func (*A) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognizedgroup_ad1c77f6b1c6f338, []int{1}
+	return fileDescriptor_1dcb9b01ad4951dd, []int{1}
 }
 func (m *A) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -125,7 +125,7 @@ type OldWithGroup struct {
 func (m *OldWithGroup) Reset()      { *m = OldWithGroup{} }
 func (*OldWithGroup) ProtoMessage() {}
 func (*OldWithGroup) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognizedgroup_ad1c77f6b1c6f338, []int{2}
+	return fileDescriptor_1dcb9b01ad4951dd, []int{2}
 }
 func (m *OldWithGroup) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OldWithGroup.Unmarshal(m, b)
@@ -157,7 +157,7 @@ type OldWithGroup_Group1 struct {
 func (m *OldWithGroup_Group1) Reset()      { *m = OldWithGroup_Group1{} }
 func (*OldWithGroup_Group1) ProtoMessage() {}
 func (*OldWithGroup_Group1) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognizedgroup_ad1c77f6b1c6f338, []int{2, 0}
+	return fileDescriptor_1dcb9b01ad4951dd, []int{2, 0}
 }
 func (m *OldWithGroup_Group1) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OldWithGroup_Group1.Unmarshal(m, b)
@@ -188,7 +188,7 @@ type OldWithGroup_Group2 struct {
 func (m *OldWithGroup_Group2) Reset()      { *m = OldWithGroup_Group2{} }
 func (*OldWithGroup_Group2) ProtoMessage() {}
 func (*OldWithGroup_Group2) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognizedgroup_ad1c77f6b1c6f338, []int{2, 1}
+	return fileDescriptor_1dcb9b01ad4951dd, []int{2, 1}
 }
 func (m *OldWithGroup_Group2) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OldWithGroup_Group2.Unmarshal(m, b)
@@ -1800,11 +1800,9 @@ var (
 	ErrIntOverflowUnrecognizedgroup   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() {
-	proto.RegisterFile("unrecognizedgroup.proto", fileDescriptor_unrecognizedgroup_ad1c77f6b1c6f338)
-}
+func init() { proto.RegisterFile("unrecognizedgroup.proto", fileDescriptor_1dcb9b01ad4951dd) }
 
-var fileDescriptor_unrecognizedgroup_ad1c77f6b1c6f338 = []byte{
+var fileDescriptor_1dcb9b01ad4951dd = []byte{
 	// 305 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2f, 0xcd, 0x2b, 0x4a,
 	0x4d, 0xce, 0x4f, 0xcf, 0xcb, 0xac, 0x4a, 0x4d, 0x49, 0x2f, 0xca, 0x2f, 0x2d, 0xd0, 0x2b, 0x28,

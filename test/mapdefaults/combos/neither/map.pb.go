@@ -39,7 +39,7 @@ type MapTest struct {
 func (m *MapTest) Reset()      { *m = MapTest{} }
 func (*MapTest) ProtoMessage() {}
 func (*MapTest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_map_f8afe0c559a577e0, []int{0}
+	return fileDescriptor_8cd5e5326d33da91, []int{0}
 }
 func (m *MapTest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MapTest.Unmarshal(m, b)
@@ -69,7 +69,7 @@ type FakeMap struct {
 func (m *FakeMap) Reset()      { *m = FakeMap{} }
 func (*FakeMap) ProtoMessage() {}
 func (*FakeMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_map_f8afe0c559a577e0, []int{1}
+	return fileDescriptor_8cd5e5326d33da91, []int{1}
 }
 func (m *FakeMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FakeMap.Unmarshal(m, b)
@@ -101,7 +101,7 @@ type FakeMapEntry struct {
 func (m *FakeMapEntry) Reset()      { *m = FakeMapEntry{} }
 func (*FakeMapEntry) ProtoMessage() {}
 func (*FakeMapEntry) Descriptor() ([]byte, []int) {
-	return fileDescriptor_map_f8afe0c559a577e0, []int{2}
+	return fileDescriptor_8cd5e5326d33da91, []int{2}
 }
 func (m *FakeMapEntry) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FakeMapEntry.Unmarshal(m, b)
@@ -921,9 +921,9 @@ func valueToStringMap(v interface{}) string {
 	return fmt.Sprintf("*%v", pv)
 }
 
-func init() { proto.RegisterFile("combos/neither/map.proto", fileDescriptor_map_f8afe0c559a577e0) }
+func init() { proto.RegisterFile("combos/neither/map.proto", fileDescriptor_8cd5e5326d33da91) }
 
-var fileDescriptor_map_f8afe0c559a577e0 = []byte{
+var fileDescriptor_8cd5e5326d33da91 = []byte{
 	// 313 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x90, 0x3f, 0x4f, 0x32, 0x41,
 	0x10, 0x87, 0x77, 0x20, 0x2f, 0x97, 0x77, 0xb1, 0x30, 0x17, 0x8b, 0x93, 0x62, 0x42, 0xa8, 0x68,

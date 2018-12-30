@@ -32,7 +32,7 @@ func (m *Foo) Reset()         { *m = Foo{} }
 func (m *Foo) String() string { return proto.CompactTextString(m) }
 func (*Foo) ProtoMessage()    {}
 func (*Foo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cachedsize_3c7c595320e5882b, []int{0}
+	return fileDescriptor_dd0d29d364e4fbd8, []int{0}
 }
 func (m *Foo) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Foo.Unmarshal(m, b)
@@ -70,7 +70,7 @@ func (m *Bar) Reset()         { *m = Bar{} }
 func (m *Bar) String() string { return proto.CompactTextString(m) }
 func (*Bar) ProtoMessage()    {}
 func (*Bar) Descriptor() ([]byte, []int) {
-	return fileDescriptor_cachedsize_3c7c595320e5882b, []int{1}
+	return fileDescriptor_dd0d29d364e4fbd8, []int{1}
 }
 func (m *Bar) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Bar.Unmarshal(m, b)
@@ -264,9 +264,9 @@ func sozCachedsize(x uint64) (n int) {
 	return sovCachedsize(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
 
-func init() { proto.RegisterFile("cachedsize.proto", fileDescriptor_cachedsize_3c7c595320e5882b) }
+func init() { proto.RegisterFile("cachedsize.proto", fileDescriptor_dd0d29d364e4fbd8) }
 
-var fileDescriptor_cachedsize_3c7c595320e5882b = []byte{
+var fileDescriptor_dd0d29d364e4fbd8 = []byte{
 	// 162 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x48, 0x4e, 0x4c, 0xce,
 	0x48, 0x4d, 0x29, 0xce, 0xac, 0x4a, 0xd5, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x42, 0x88,

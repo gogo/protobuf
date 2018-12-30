@@ -39,7 +39,7 @@ type SourceContext struct {
 func (m *SourceContext) Reset()      { *m = SourceContext{} }
 func (*SourceContext) ProtoMessage() {}
 func (*SourceContext) Descriptor() ([]byte, []int) {
-	return fileDescriptor_source_context_b387e69fb08d10e5, []int{0}
+	return fileDescriptor_b686cdb126d509db, []int{0}
 }
 func (m *SourceContext) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -516,10 +516,10 @@ var (
 )
 
 func init() {
-	proto.RegisterFile("google/protobuf/source_context.proto", fileDescriptor_source_context_b387e69fb08d10e5)
+	proto.RegisterFile("google/protobuf/source_context.proto", fileDescriptor_b686cdb126d509db)
 }
 
-var fileDescriptor_source_context_b387e69fb08d10e5 = []byte{
+var fileDescriptor_b686cdb126d509db = []byte{
 	// 212 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0x49, 0xcf, 0xcf, 0x4f,
 	0xcf, 0x49, 0xd5, 0x2f, 0x28, 0xca, 0x2f, 0xc9, 0x4f, 0x2a, 0x4d, 0xd3, 0x2f, 0xce, 0x2f, 0x2d,

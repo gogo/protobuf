@@ -31,7 +31,7 @@ func (m *Outside) Reset()         { *m = Outside{} }
 func (m *Outside) String() string { return proto.CompactTextString(m) }
 func (*Outside) ProtoMessage()    {}
 func (*Outside) Descriptor() ([]byte, []int) {
-	return fileDescriptor_tags_156838d323721841, []int{0}
+	return fileDescriptor_e7d9cbcae1e528f6, []int{0}
 }
 func (m *Outside) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Outside.Unmarshal(m, b)
@@ -69,7 +69,7 @@ func (m *Inside) Reset()         { *m = Inside{} }
 func (m *Inside) String() string { return proto.CompactTextString(m) }
 func (*Inside) ProtoMessage()    {}
 func (*Inside) Descriptor() ([]byte, []int) {
-	return fileDescriptor_tags_156838d323721841, []int{1}
+	return fileDescriptor_e7d9cbcae1e528f6, []int{1}
 }
 func (m *Inside) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Inside.Unmarshal(m, b)
@@ -200,9 +200,9 @@ func encodeVarintPopulateTags(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 
-func init() { proto.RegisterFile("tags.proto", fileDescriptor_tags_156838d323721841) }
+func init() { proto.RegisterFile("tags.proto", fileDescriptor_e7d9cbcae1e528f6) }
 
-var fileDescriptor_tags_156838d323721841 = []byte{
+var fileDescriptor_e7d9cbcae1e528f6 = []byte{
 	// 203 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2a, 0x49, 0x4c, 0x2f,
 	0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x01, 0xb1, 0xa5, 0x74, 0xd3, 0x33, 0x4b, 0x32,

@@ -38,7 +38,7 @@ type Groups1 struct {
 func (m *Groups1) Reset()      { *m = Groups1{} }
 func (*Groups1) ProtoMessage() {}
 func (*Groups1) Descriptor() ([]byte, []int) {
-	return fileDescriptor_group_3742ba72ecbfc017, []int{0}
+	return fileDescriptor_e10f4c9b19ad8eee, []int{0}
 }
 func (m *Groups1) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Groups1.Unmarshal(m, b)
@@ -69,7 +69,7 @@ type Groups1_G struct {
 func (m *Groups1_G) Reset()      { *m = Groups1_G{} }
 func (*Groups1_G) ProtoMessage() {}
 func (*Groups1_G) Descriptor() ([]byte, []int) {
-	return fileDescriptor_group_3742ba72ecbfc017, []int{0, 0}
+	return fileDescriptor_e10f4c9b19ad8eee, []int{0, 0}
 }
 func (m *Groups1_G) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Groups1_G.Unmarshal(m, b)
@@ -99,7 +99,7 @@ type Groups2 struct {
 func (m *Groups2) Reset()      { *m = Groups2{} }
 func (*Groups2) ProtoMessage() {}
 func (*Groups2) Descriptor() ([]byte, []int) {
-	return fileDescriptor_group_3742ba72ecbfc017, []int{1}
+	return fileDescriptor_e10f4c9b19ad8eee, []int{1}
 }
 func (m *Groups2) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Groups2.Unmarshal(m, b)
@@ -130,7 +130,7 @@ type Groups2_G struct {
 func (m *Groups2_G) Reset()      { *m = Groups2_G{} }
 func (*Groups2_G) ProtoMessage() {}
 func (*Groups2_G) Descriptor() ([]byte, []int) {
-	return fileDescriptor_group_3742ba72ecbfc017, []int{1, 0}
+	return fileDescriptor_e10f4c9b19ad8eee, []int{1, 0}
 }
 func (m *Groups2_G) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Groups2_G.Unmarshal(m, b)
@@ -1013,9 +1013,9 @@ func valueToStringGroup(v interface{}) string {
 	return fmt.Sprintf("*%v", pv)
 }
 
-func init() { proto.RegisterFile("group.proto", fileDescriptor_group_3742ba72ecbfc017) }
+func init() { proto.RegisterFile("group.proto", fileDescriptor_e10f4c9b19ad8eee) }
 
-var fileDescriptor_group_3742ba72ecbfc017 = []byte{
+var fileDescriptor_e10f4c9b19ad8eee = []byte{
 	// 211 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4e, 0x2f, 0xca, 0x2f,
 	0x2d, 0xd0, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x05, 0x73, 0xa4, 0x74, 0xd3, 0x33, 0x4b,

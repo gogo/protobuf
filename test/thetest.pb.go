@@ -72,7 +72,7 @@ func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (TheTestEnum) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{0}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{0}
 }
 
 type AnotherTestEnum int32
@@ -108,7 +108,7 @@ func (x *AnotherTestEnum) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (AnotherTestEnum) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{1}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{1}
 }
 
 // YetAnotherTestEnum is used to test cross-package import of custom name
@@ -146,7 +146,7 @@ func (x *YetAnotherTestEnum) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (YetAnotherTestEnum) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{2}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{2}
 }
 
 // YetAnotherTestEnum is used to test cross-package import of custom name
@@ -184,7 +184,7 @@ func (x *YetYetAnotherTestEnum) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (YetYetAnotherTestEnum) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{3}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{3}
 }
 
 type NestedDefinition_NestedEnum int32
@@ -217,7 +217,7 @@ func (x *NestedDefinition_NestedEnum) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (NestedDefinition_NestedEnum) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{42, 0}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{42, 0}
 }
 
 type NidOptNative struct {
@@ -244,7 +244,7 @@ type NidOptNative struct {
 func (m *NidOptNative) Reset()      { *m = NidOptNative{} }
 func (*NidOptNative) ProtoMessage() {}
 func (*NidOptNative) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{0}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{0}
 }
 func (m *NidOptNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptNative.Unmarshal(m, b)
@@ -288,7 +288,7 @@ type NinOptNative struct {
 func (m *NinOptNative) Reset()      { *m = NinOptNative{} }
 func (*NinOptNative) ProtoMessage() {}
 func (*NinOptNative) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{1}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{1}
 }
 func (m *NinOptNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptNative.Unmarshal(m, b)
@@ -332,7 +332,7 @@ type NidRepNative struct {
 func (m *NidRepNative) Reset()      { *m = NidRepNative{} }
 func (*NidRepNative) ProtoMessage() {}
 func (*NidRepNative) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{2}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{2}
 }
 func (m *NidRepNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepNative.Unmarshal(m, b)
@@ -376,7 +376,7 @@ type NinRepNative struct {
 func (m *NinRepNative) Reset()      { *m = NinRepNative{} }
 func (*NinRepNative) ProtoMessage() {}
 func (*NinRepNative) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{3}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{3}
 }
 func (m *NinRepNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepNative.Unmarshal(m, b)
@@ -418,7 +418,7 @@ type NidRepPackedNative struct {
 func (m *NidRepPackedNative) Reset()      { *m = NidRepPackedNative{} }
 func (*NidRepPackedNative) ProtoMessage() {}
 func (*NidRepPackedNative) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{4}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{4}
 }
 func (m *NidRepPackedNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepPackedNative.Unmarshal(m, b)
@@ -460,7 +460,7 @@ type NinRepPackedNative struct {
 func (m *NinRepPackedNative) Reset()      { *m = NinRepPackedNative{} }
 func (*NinRepPackedNative) ProtoMessage() {}
 func (*NinRepPackedNative) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{5}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{5}
 }
 func (m *NinRepPackedNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepPackedNative.Unmarshal(m, b)
@@ -499,7 +499,7 @@ type NidOptStruct struct {
 func (m *NidOptStruct) Reset()      { *m = NidOptStruct{} }
 func (*NidOptStruct) ProtoMessage() {}
 func (*NidOptStruct) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{6}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{6}
 }
 func (m *NidOptStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptStruct.Unmarshal(m, b)
@@ -538,7 +538,7 @@ type NinOptStruct struct {
 func (m *NinOptStruct) Reset()      { *m = NinOptStruct{} }
 func (*NinOptStruct) ProtoMessage() {}
 func (*NinOptStruct) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{7}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{7}
 }
 func (m *NinOptStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptStruct.Unmarshal(m, b)
@@ -577,7 +577,7 @@ type NidRepStruct struct {
 func (m *NidRepStruct) Reset()      { *m = NidRepStruct{} }
 func (*NidRepStruct) ProtoMessage() {}
 func (*NidRepStruct) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{8}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{8}
 }
 func (m *NidRepStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepStruct.Unmarshal(m, b)
@@ -616,7 +616,7 @@ type NinRepStruct struct {
 func (m *NinRepStruct) Reset()      { *m = NinRepStruct{} }
 func (*NinRepStruct) ProtoMessage() {}
 func (*NinRepStruct) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{9}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{9}
 }
 func (m *NinRepStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepStruct.Unmarshal(m, b)
@@ -648,7 +648,7 @@ type NidEmbeddedStruct struct {
 func (m *NidEmbeddedStruct) Reset()      { *m = NidEmbeddedStruct{} }
 func (*NidEmbeddedStruct) ProtoMessage() {}
 func (*NidEmbeddedStruct) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{10}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{10}
 }
 func (m *NidEmbeddedStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidEmbeddedStruct.Unmarshal(m, b)
@@ -680,7 +680,7 @@ type NinEmbeddedStruct struct {
 func (m *NinEmbeddedStruct) Reset()      { *m = NinEmbeddedStruct{} }
 func (*NinEmbeddedStruct) ProtoMessage() {}
 func (*NinEmbeddedStruct) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{11}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{11}
 }
 func (m *NinEmbeddedStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinEmbeddedStruct.Unmarshal(m, b)
@@ -711,7 +711,7 @@ type NidNestedStruct struct {
 func (m *NidNestedStruct) Reset()      { *m = NidNestedStruct{} }
 func (*NidNestedStruct) ProtoMessage() {}
 func (*NidNestedStruct) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{12}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{12}
 }
 func (m *NidNestedStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidNestedStruct.Unmarshal(m, b)
@@ -742,7 +742,7 @@ type NinNestedStruct struct {
 func (m *NinNestedStruct) Reset()      { *m = NinNestedStruct{} }
 func (*NinNestedStruct) ProtoMessage() {}
 func (*NinNestedStruct) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{13}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{13}
 }
 func (m *NinNestedStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinNestedStruct.Unmarshal(m, b)
@@ -773,7 +773,7 @@ type NidOptCustom struct {
 func (m *NidOptCustom) Reset()      { *m = NidOptCustom{} }
 func (*NidOptCustom) ProtoMessage() {}
 func (*NidOptCustom) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{14}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{14}
 }
 func (m *NidOptCustom) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptCustom.Unmarshal(m, b)
@@ -803,7 +803,7 @@ type CustomDash struct {
 func (m *CustomDash) Reset()      { *m = CustomDash{} }
 func (*CustomDash) ProtoMessage() {}
 func (*CustomDash) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{15}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{15}
 }
 func (m *CustomDash) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomDash.Unmarshal(m, b)
@@ -834,7 +834,7 @@ type NinOptCustom struct {
 func (m *NinOptCustom) Reset()      { *m = NinOptCustom{} }
 func (*NinOptCustom) ProtoMessage() {}
 func (*NinOptCustom) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{16}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{16}
 }
 func (m *NinOptCustom) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptCustom.Unmarshal(m, b)
@@ -865,7 +865,7 @@ type NidRepCustom struct {
 func (m *NidRepCustom) Reset()      { *m = NidRepCustom{} }
 func (*NidRepCustom) ProtoMessage() {}
 func (*NidRepCustom) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{17}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{17}
 }
 func (m *NidRepCustom) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepCustom.Unmarshal(m, b)
@@ -896,7 +896,7 @@ type NinRepCustom struct {
 func (m *NinRepCustom) Reset()      { *m = NinRepCustom{} }
 func (*NinRepCustom) ProtoMessage() {}
 func (*NinRepCustom) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{18}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{18}
 }
 func (m *NinRepCustom) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepCustom.Unmarshal(m, b)
@@ -934,7 +934,7 @@ type NinOptNativeUnion struct {
 func (m *NinOptNativeUnion) Reset()      { *m = NinOptNativeUnion{} }
 func (*NinOptNativeUnion) ProtoMessage() {}
 func (*NinOptNativeUnion) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{19}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{19}
 }
 func (m *NinOptNativeUnion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptNativeUnion.Unmarshal(m, b)
@@ -972,7 +972,7 @@ type NinOptStructUnion struct {
 func (m *NinOptStructUnion) Reset()      { *m = NinOptStructUnion{} }
 func (*NinOptStructUnion) ProtoMessage() {}
 func (*NinOptStructUnion) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{20}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{20}
 }
 func (m *NinOptStructUnion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptStructUnion.Unmarshal(m, b)
@@ -1004,7 +1004,7 @@ type NinEmbeddedStructUnion struct {
 func (m *NinEmbeddedStructUnion) Reset()      { *m = NinEmbeddedStructUnion{} }
 func (*NinEmbeddedStructUnion) ProtoMessage() {}
 func (*NinEmbeddedStructUnion) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{21}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{21}
 }
 func (m *NinEmbeddedStructUnion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinEmbeddedStructUnion.Unmarshal(m, b)
@@ -1036,7 +1036,7 @@ type NinNestedStructUnion struct {
 func (m *NinNestedStructUnion) Reset()      { *m = NinNestedStructUnion{} }
 func (*NinNestedStructUnion) ProtoMessage() {}
 func (*NinNestedStructUnion) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{22}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{22}
 }
 func (m *NinNestedStructUnion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinNestedStructUnion.Unmarshal(m, b)
@@ -1068,7 +1068,7 @@ type Tree struct {
 func (m *Tree) Reset()      { *m = Tree{} }
 func (*Tree) ProtoMessage() {}
 func (*Tree) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{23}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{23}
 }
 func (m *Tree) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Tree.Unmarshal(m, b)
@@ -1099,7 +1099,7 @@ type OrBranch struct {
 func (m *OrBranch) Reset()      { *m = OrBranch{} }
 func (*OrBranch) ProtoMessage() {}
 func (*OrBranch) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{24}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{24}
 }
 func (m *OrBranch) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OrBranch.Unmarshal(m, b)
@@ -1130,7 +1130,7 @@ type AndBranch struct {
 func (m *AndBranch) Reset()      { *m = AndBranch{} }
 func (*AndBranch) ProtoMessage() {}
 func (*AndBranch) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{25}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{25}
 }
 func (m *AndBranch) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AndBranch.Unmarshal(m, b)
@@ -1161,7 +1161,7 @@ type Leaf struct {
 func (m *Leaf) Reset()      { *m = Leaf{} }
 func (*Leaf) ProtoMessage() {}
 func (*Leaf) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{26}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{26}
 }
 func (m *Leaf) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Leaf.Unmarshal(m, b)
@@ -1193,7 +1193,7 @@ type DeepTree struct {
 func (m *DeepTree) Reset()      { *m = DeepTree{} }
 func (*DeepTree) ProtoMessage() {}
 func (*DeepTree) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{27}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{27}
 }
 func (m *DeepTree) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeepTree.Unmarshal(m, b)
@@ -1223,7 +1223,7 @@ type ADeepBranch struct {
 func (m *ADeepBranch) Reset()      { *m = ADeepBranch{} }
 func (*ADeepBranch) ProtoMessage() {}
 func (*ADeepBranch) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{28}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{28}
 }
 func (m *ADeepBranch) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ADeepBranch.Unmarshal(m, b)
@@ -1254,7 +1254,7 @@ type AndDeepBranch struct {
 func (m *AndDeepBranch) Reset()      { *m = AndDeepBranch{} }
 func (*AndDeepBranch) ProtoMessage() {}
 func (*AndDeepBranch) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{29}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{29}
 }
 func (m *AndDeepBranch) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AndDeepBranch.Unmarshal(m, b)
@@ -1284,7 +1284,7 @@ type DeepLeaf struct {
 func (m *DeepLeaf) Reset()      { *m = DeepLeaf{} }
 func (*DeepLeaf) ProtoMessage() {}
 func (*DeepLeaf) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{30}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{30}
 }
 func (m *DeepLeaf) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeepLeaf.Unmarshal(m, b)
@@ -1313,7 +1313,7 @@ type Nil struct {
 func (m *Nil) Reset()      { *m = Nil{} }
 func (*Nil) ProtoMessage() {}
 func (*Nil) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{31}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{31}
 }
 func (m *Nil) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Nil.Unmarshal(m, b)
@@ -1343,7 +1343,7 @@ type NidOptEnum struct {
 func (m *NidOptEnum) Reset()      { *m = NidOptEnum{} }
 func (*NidOptEnum) ProtoMessage() {}
 func (*NidOptEnum) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{32}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{32}
 }
 func (m *NidOptEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptEnum.Unmarshal(m, b)
@@ -1375,7 +1375,7 @@ type NinOptEnum struct {
 func (m *NinOptEnum) Reset()      { *m = NinOptEnum{} }
 func (*NinOptEnum) ProtoMessage() {}
 func (*NinOptEnum) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{33}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{33}
 }
 func (m *NinOptEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptEnum.Unmarshal(m, b)
@@ -1407,7 +1407,7 @@ type NidRepEnum struct {
 func (m *NidRepEnum) Reset()      { *m = NidRepEnum{} }
 func (*NidRepEnum) ProtoMessage() {}
 func (*NidRepEnum) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{34}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{34}
 }
 func (m *NidRepEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepEnum.Unmarshal(m, b)
@@ -1439,7 +1439,7 @@ type NinRepEnum struct {
 func (m *NinRepEnum) Reset()      { *m = NinRepEnum{} }
 func (*NinRepEnum) ProtoMessage() {}
 func (*NinRepEnum) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{35}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{35}
 }
 func (m *NinRepEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepEnum.Unmarshal(m, b)
@@ -1471,7 +1471,7 @@ type NinOptEnumDefault struct {
 func (m *NinOptEnumDefault) Reset()      { *m = NinOptEnumDefault{} }
 func (*NinOptEnumDefault) ProtoMessage() {}
 func (*NinOptEnumDefault) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{36}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{36}
 }
 func (m *NinOptEnumDefault) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptEnumDefault.Unmarshal(m, b)
@@ -1528,7 +1528,7 @@ type AnotherNinOptEnum struct {
 func (m *AnotherNinOptEnum) Reset()      { *m = AnotherNinOptEnum{} }
 func (*AnotherNinOptEnum) ProtoMessage() {}
 func (*AnotherNinOptEnum) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{37}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{37}
 }
 func (m *AnotherNinOptEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AnotherNinOptEnum.Unmarshal(m, b)
@@ -1560,7 +1560,7 @@ type AnotherNinOptEnumDefault struct {
 func (m *AnotherNinOptEnumDefault) Reset()      { *m = AnotherNinOptEnumDefault{} }
 func (*AnotherNinOptEnumDefault) ProtoMessage() {}
 func (*AnotherNinOptEnumDefault) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{38}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{38}
 }
 func (m *AnotherNinOptEnumDefault) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AnotherNinOptEnumDefault.Unmarshal(m, b)
@@ -1617,7 +1617,7 @@ type Timer struct {
 func (m *Timer) Reset()      { *m = Timer{} }
 func (*Timer) ProtoMessage() {}
 func (*Timer) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{39}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{39}
 }
 func (m *Timer) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Timer.Unmarshal(m, b)
@@ -1648,7 +1648,7 @@ type MyExtendable struct {
 func (m *MyExtendable) Reset()      { *m = MyExtendable{} }
 func (*MyExtendable) ProtoMessage() {}
 func (*MyExtendable) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{40}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{40}
 }
 
 var extRange_MyExtendable = []proto.ExtensionRange{
@@ -1689,7 +1689,7 @@ type OtherExtenable struct {
 func (m *OtherExtenable) Reset()      { *m = OtherExtenable{} }
 func (*OtherExtenable) ProtoMessage() {}
 func (*OtherExtenable) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{41}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{41}
 }
 
 var extRange_OtherExtenable = []proto.ExtensionRange{
@@ -1731,7 +1731,7 @@ type NestedDefinition struct {
 func (m *NestedDefinition) Reset()      { *m = NestedDefinition{} }
 func (*NestedDefinition) ProtoMessage() {}
 func (*NestedDefinition) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{42}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{42}
 }
 func (m *NestedDefinition) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedDefinition.Unmarshal(m, b)
@@ -1762,7 +1762,7 @@ type NestedDefinition_NestedMessage struct {
 func (m *NestedDefinition_NestedMessage) Reset()      { *m = NestedDefinition_NestedMessage{} }
 func (*NestedDefinition_NestedMessage) ProtoMessage() {}
 func (*NestedDefinition_NestedMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{42, 0}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{42, 0}
 }
 func (m *NestedDefinition_NestedMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedDefinition_NestedMessage.Unmarshal(m, b)
@@ -1794,7 +1794,7 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) Reset() {
 }
 func (*NestedDefinition_NestedMessage_NestedNestedMsg) ProtoMessage() {}
 func (*NestedDefinition_NestedMessage_NestedNestedMsg) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{42, 0, 0}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{42, 0, 0}
 }
 func (m *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.Unmarshal(m, b)
@@ -1826,7 +1826,7 @@ type NestedScope struct {
 func (m *NestedScope) Reset()      { *m = NestedScope{} }
 func (*NestedScope) ProtoMessage() {}
 func (*NestedScope) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{43}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{43}
 }
 func (m *NestedScope) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedScope.Unmarshal(m, b)
@@ -1870,7 +1870,7 @@ type NinOptNativeDefault struct {
 func (m *NinOptNativeDefault) Reset()      { *m = NinOptNativeDefault{} }
 func (*NinOptNativeDefault) ProtoMessage() {}
 func (*NinOptNativeDefault) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{44}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{44}
 }
 func (m *NinOptNativeDefault) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptNativeDefault.Unmarshal(m, b)
@@ -2020,7 +2020,7 @@ type CustomContainer struct {
 func (m *CustomContainer) Reset()      { *m = CustomContainer{} }
 func (*CustomContainer) ProtoMessage() {}
 func (*CustomContainer) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{45}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{45}
 }
 func (m *CustomContainer) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomContainer.Unmarshal(m, b)
@@ -2064,7 +2064,7 @@ type CustomNameNidOptNative struct {
 func (m *CustomNameNidOptNative) Reset()      { *m = CustomNameNidOptNative{} }
 func (*CustomNameNidOptNative) ProtoMessage() {}
 func (*CustomNameNidOptNative) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{46}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{46}
 }
 func (m *CustomNameNidOptNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameNidOptNative.Unmarshal(m, b)
@@ -2108,7 +2108,7 @@ type CustomNameNinOptNative struct {
 func (m *CustomNameNinOptNative) Reset()      { *m = CustomNameNinOptNative{} }
 func (*CustomNameNinOptNative) ProtoMessage() {}
 func (*CustomNameNinOptNative) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{47}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{47}
 }
 func (m *CustomNameNinOptNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameNinOptNative.Unmarshal(m, b)
@@ -2152,7 +2152,7 @@ type CustomNameNinRepNative struct {
 func (m *CustomNameNinRepNative) Reset()      { *m = CustomNameNinRepNative{} }
 func (*CustomNameNinRepNative) ProtoMessage() {}
 func (*CustomNameNinRepNative) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{48}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{48}
 }
 func (m *CustomNameNinRepNative) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameNinRepNative.Unmarshal(m, b)
@@ -2191,7 +2191,7 @@ type CustomNameNinStruct struct {
 func (m *CustomNameNinStruct) Reset()      { *m = CustomNameNinStruct{} }
 func (*CustomNameNinStruct) ProtoMessage() {}
 func (*CustomNameNinStruct) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{49}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{49}
 }
 func (m *CustomNameNinStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameNinStruct.Unmarshal(m, b)
@@ -2224,7 +2224,7 @@ type CustomNameCustomType struct {
 func (m *CustomNameCustomType) Reset()      { *m = CustomNameCustomType{} }
 func (*CustomNameCustomType) ProtoMessage() {}
 func (*CustomNameCustomType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{50}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{50}
 }
 func (m *CustomNameCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameCustomType.Unmarshal(m, b)
@@ -2256,7 +2256,7 @@ type CustomNameNinEmbeddedStructUnion struct {
 func (m *CustomNameNinEmbeddedStructUnion) Reset()      { *m = CustomNameNinEmbeddedStructUnion{} }
 func (*CustomNameNinEmbeddedStructUnion) ProtoMessage() {}
 func (*CustomNameNinEmbeddedStructUnion) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{51}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{51}
 }
 func (m *CustomNameNinEmbeddedStructUnion) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameNinEmbeddedStructUnion.Unmarshal(m, b)
@@ -2287,7 +2287,7 @@ type CustomNameEnum struct {
 func (m *CustomNameEnum) Reset()      { *m = CustomNameEnum{} }
 func (*CustomNameEnum) ProtoMessage() {}
 func (*CustomNameEnum) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{52}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{52}
 }
 func (m *CustomNameEnum) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CustomNameEnum.Unmarshal(m, b)
@@ -2318,7 +2318,7 @@ type NoExtensionsMap struct {
 func (m *NoExtensionsMap) Reset()      { *m = NoExtensionsMap{} }
 func (*NoExtensionsMap) ProtoMessage() {}
 func (*NoExtensionsMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{53}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{53}
 }
 
 var extRange_NoExtensionsMap = []proto.ExtensionRange{
@@ -2361,7 +2361,7 @@ type Unrecognized struct {
 func (m *Unrecognized) Reset()      { *m = Unrecognized{} }
 func (*Unrecognized) ProtoMessage() {}
 func (*Unrecognized) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{54}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{54}
 }
 func (m *Unrecognized) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Unrecognized.Unmarshal(m, b)
@@ -2392,7 +2392,7 @@ type UnrecognizedWithInner struct {
 func (m *UnrecognizedWithInner) Reset()      { *m = UnrecognizedWithInner{} }
 func (*UnrecognizedWithInner) ProtoMessage() {}
 func (*UnrecognizedWithInner) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{55}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{55}
 }
 func (m *UnrecognizedWithInner) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnrecognizedWithInner.Unmarshal(m, b)
@@ -2421,7 +2421,7 @@ type UnrecognizedWithInner_Inner struct {
 func (m *UnrecognizedWithInner_Inner) Reset()      { *m = UnrecognizedWithInner_Inner{} }
 func (*UnrecognizedWithInner_Inner) ProtoMessage() {}
 func (*UnrecognizedWithInner_Inner) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{55, 0}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{55, 0}
 }
 func (m *UnrecognizedWithInner_Inner) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnrecognizedWithInner_Inner.Unmarshal(m, b)
@@ -2452,7 +2452,7 @@ type UnrecognizedWithEmbed struct {
 func (m *UnrecognizedWithEmbed) Reset()      { *m = UnrecognizedWithEmbed{} }
 func (*UnrecognizedWithEmbed) ProtoMessage() {}
 func (*UnrecognizedWithEmbed) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{56}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{56}
 }
 func (m *UnrecognizedWithEmbed) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnrecognizedWithEmbed.Unmarshal(m, b)
@@ -2481,7 +2481,7 @@ type UnrecognizedWithEmbed_Embedded struct {
 func (m *UnrecognizedWithEmbed_Embedded) Reset()      { *m = UnrecognizedWithEmbed_Embedded{} }
 func (*UnrecognizedWithEmbed_Embedded) ProtoMessage() {}
 func (*UnrecognizedWithEmbed_Embedded) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{56, 0}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{56, 0}
 }
 func (m *UnrecognizedWithEmbed_Embedded) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnrecognizedWithEmbed_Embedded.Unmarshal(m, b)
@@ -2512,7 +2512,7 @@ type Node struct {
 func (m *Node) Reset()      { *m = Node{} }
 func (*Node) ProtoMessage() {}
 func (*Node) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{57}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{57}
 }
 func (m *Node) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Node.Unmarshal(m, b)
@@ -2542,7 +2542,7 @@ type NonByteCustomType struct {
 func (m *NonByteCustomType) Reset()      { *m = NonByteCustomType{} }
 func (*NonByteCustomType) ProtoMessage() {}
 func (*NonByteCustomType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{58}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{58}
 }
 func (m *NonByteCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NonByteCustomType.Unmarshal(m, b)
@@ -2572,7 +2572,7 @@ type NidOptNonByteCustomType struct {
 func (m *NidOptNonByteCustomType) Reset()      { *m = NidOptNonByteCustomType{} }
 func (*NidOptNonByteCustomType) ProtoMessage() {}
 func (*NidOptNonByteCustomType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{59}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{59}
 }
 func (m *NidOptNonByteCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidOptNonByteCustomType.Unmarshal(m, b)
@@ -2602,7 +2602,7 @@ type NinOptNonByteCustomType struct {
 func (m *NinOptNonByteCustomType) Reset()      { *m = NinOptNonByteCustomType{} }
 func (*NinOptNonByteCustomType) ProtoMessage() {}
 func (*NinOptNonByteCustomType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{60}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{60}
 }
 func (m *NinOptNonByteCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinOptNonByteCustomType.Unmarshal(m, b)
@@ -2632,7 +2632,7 @@ type NidRepNonByteCustomType struct {
 func (m *NidRepNonByteCustomType) Reset()      { *m = NidRepNonByteCustomType{} }
 func (*NidRepNonByteCustomType) ProtoMessage() {}
 func (*NidRepNonByteCustomType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{61}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{61}
 }
 func (m *NidRepNonByteCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NidRepNonByteCustomType.Unmarshal(m, b)
@@ -2662,7 +2662,7 @@ type NinRepNonByteCustomType struct {
 func (m *NinRepNonByteCustomType) Reset()      { *m = NinRepNonByteCustomType{} }
 func (*NinRepNonByteCustomType) ProtoMessage() {}
 func (*NinRepNonByteCustomType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{62}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{62}
 }
 func (m *NinRepNonByteCustomType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepNonByteCustomType.Unmarshal(m, b)
@@ -2692,7 +2692,7 @@ type ProtoType struct {
 func (m *ProtoType) Reset()      { *m = ProtoType{} }
 func (*ProtoType) ProtoMessage() {}
 func (*ProtoType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_thetest_14aea7c379120fb7, []int{63}
+	return fileDescriptor_9b8e0e81a01d0a18, []int{63}
 }
 func (m *ProtoType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ProtoType.Unmarshal(m, b)
@@ -26882,9 +26882,9 @@ func (this *CustomNameNinEmbeddedStructUnion) SetValue(value interface{}) bool {
 	return true
 }
 
-func init() { proto.RegisterFile("thetest.proto", fileDescriptor_thetest_14aea7c379120fb7) }
+func init() { proto.RegisterFile("thetest.proto", fileDescriptor_9b8e0e81a01d0a18) }
 
-var fileDescriptor_thetest_14aea7c379120fb7 = []byte{
+var fileDescriptor_9b8e0e81a01d0a18 = []byte{
 	// 3070 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x5a, 0x4d, 0x6c, 0x1b, 0xc7,
 	0xf5, 0xe7, 0xec, 0x50, 0x0a, 0xf5, 0xf4, 0x45, 0x6f, 0x62, 0x65, 0xc1, 0xe8, 0xbf, 0xa2, 0x37,

@@ -42,7 +42,7 @@ func (x WireFormat) String() string {
 	return proto.EnumName(WireFormat_name, int32(x))
 }
 func (WireFormat) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_conformance_64c26947649a56a9, []int{0}
+	return fileDescriptor_13eb9ce388d56238, []int{0}
 }
 
 type ForeignEnum int32
@@ -68,7 +68,7 @@ func (x ForeignEnum) String() string {
 	return proto.EnumName(ForeignEnum_name, int32(x))
 }
 func (ForeignEnum) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_conformance_64c26947649a56a9, []int{1}
+	return fileDescriptor_13eb9ce388d56238, []int{1}
 }
 
 type TestAllTypes_NestedEnum int32
@@ -97,7 +97,7 @@ func (x TestAllTypes_NestedEnum) String() string {
 	return proto.EnumName(TestAllTypes_NestedEnum_name, int32(x))
 }
 func (TestAllTypes_NestedEnum) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_conformance_64c26947649a56a9, []int{2, 0}
+	return fileDescriptor_13eb9ce388d56238, []int{2, 0}
 }
 
 // Represents a single test case's input.  The testee should:
@@ -124,7 +124,7 @@ func (m *ConformanceRequest) Reset()         { *m = ConformanceRequest{} }
 func (m *ConformanceRequest) String() string { return proto.CompactTextString(m) }
 func (*ConformanceRequest) ProtoMessage()    {}
 func (*ConformanceRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_conformance_64c26947649a56a9, []int{0}
+	return fileDescriptor_13eb9ce388d56238, []int{0}
 }
 func (m *ConformanceRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ConformanceRequest.Unmarshal(m, b)
@@ -271,7 +271,7 @@ func (m *ConformanceResponse) Reset()         { *m = ConformanceResponse{} }
 func (m *ConformanceResponse) String() string { return proto.CompactTextString(m) }
 func (*ConformanceResponse) ProtoMessage()    {}
 func (*ConformanceResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_conformance_64c26947649a56a9, []int{1}
+	return fileDescriptor_13eb9ce388d56238, []int{1}
 }
 func (m *ConformanceResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ConformanceResponse.Unmarshal(m, b)
@@ -623,7 +623,7 @@ func (m *TestAllTypes) Reset()         { *m = TestAllTypes{} }
 func (m *TestAllTypes) String() string { return proto.CompactTextString(m) }
 func (*TestAllTypes) ProtoMessage()    {}
 func (*TestAllTypes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_conformance_64c26947649a56a9, []int{2}
+	return fileDescriptor_13eb9ce388d56238, []int{2}
 }
 func (m *TestAllTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TestAllTypes.Unmarshal(m, b)
@@ -1539,7 +1539,7 @@ func (m *TestAllTypes_NestedMessage) Reset()         { *m = TestAllTypes_NestedM
 func (m *TestAllTypes_NestedMessage) String() string { return proto.CompactTextString(m) }
 func (*TestAllTypes_NestedMessage) ProtoMessage()    {}
 func (*TestAllTypes_NestedMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_conformance_64c26947649a56a9, []int{2, 0}
+	return fileDescriptor_13eb9ce388d56238, []int{2, 0}
 }
 func (m *TestAllTypes_NestedMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TestAllTypes_NestedMessage.Unmarshal(m, b)
@@ -1584,7 +1584,7 @@ func (m *ForeignMessage) Reset()         { *m = ForeignMessage{} }
 func (m *ForeignMessage) String() string { return proto.CompactTextString(m) }
 func (*ForeignMessage) ProtoMessage()    {}
 func (*ForeignMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_conformance_64c26947649a56a9, []int{3}
+	return fileDescriptor_13eb9ce388d56238, []int{3}
 }
 func (m *ForeignMessage) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ForeignMessage.Unmarshal(m, b)
@@ -1642,10 +1642,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("internal/conformance_proto/conformance.proto", fileDescriptor_conformance_64c26947649a56a9)
+	proto.RegisterFile("internal/conformance_proto/conformance.proto", fileDescriptor_13eb9ce388d56238)
 }
 
-var fileDescriptor_conformance_64c26947649a56a9 = []byte{
+var fileDescriptor_13eb9ce388d56238 = []byte{
 	// 2611 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x5a, 0x59, 0x73, 0xdb, 0xc8,
 	0x11, 0x16, 0x08, 0x5b, 0x92, 0x87, 0x94, 0x44, 0x8d, 0xae, 0xb1, 0xec, 0x5a, 0xc3, 0xf2, 0x3a,

@@ -44,7 +44,7 @@ func (x Request_Flavour) String() string {
 	return proto.EnumName(Request_Flavour_name, int32(x))
 }
 func (Request_Flavour) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_proto3_1eff755e13e61017, []int{0, 0}
+	return fileDescriptor_ab04eb4084a521db, []int{0, 0}
 }
 
 type Request struct {
@@ -62,7 +62,7 @@ func (m *Request) Reset()         { *m = Request{} }
 func (m *Request) String() string { return proto.CompactTextString(m) }
 func (*Request) ProtoMessage()    {}
 func (*Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_proto3_1eff755e13e61017, []int{0}
+	return fileDescriptor_ab04eb4084a521db, []int{0}
 }
 func (m *Request) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Request.Unmarshal(m, b)
@@ -129,7 +129,7 @@ func (m *Book) Reset()         { *m = Book{} }
 func (m *Book) String() string { return proto.CompactTextString(m) }
 func (*Book) ProtoMessage()    {}
 func (*Book) Descriptor() ([]byte, []int) {
-	return fileDescriptor_proto3_1eff755e13e61017, []int{1}
+	return fileDescriptor_ab04eb4084a521db, []int{1}
 }
 func (m *Book) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Book.Unmarshal(m, b)
@@ -169,9 +169,9 @@ func init() {
 	proto.RegisterEnum("proto3.Request_Flavour", Request_Flavour_name, Request_Flavour_value)
 }
 
-func init() { proto.RegisterFile("proto3/proto3.proto", fileDescriptor_proto3_1eff755e13e61017) }
+func init() { proto.RegisterFile("proto3/proto3.proto", fileDescriptor_ab04eb4084a521db) }
 
-var fileDescriptor_proto3_1eff755e13e61017 = []byte{
+var fileDescriptor_ab04eb4084a521db = []byte{
 	// 303 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x3c, 0x90, 0x4d, 0x4f, 0xf2, 0x40,
 	0x14, 0x85, 0x99, 0x7e, 0xbc, 0xc0, 0x7d, 0xd1, 0x8c, 0x57, 0x13, 0xc7, 0x8d, 0x99, 0xb0, 0xea,

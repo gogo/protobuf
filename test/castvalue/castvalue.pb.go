@@ -40,7 +40,7 @@ type Castaway struct {
 func (m *Castaway) Reset()      { *m = Castaway{} }
 func (*Castaway) ProtoMessage() {}
 func (*Castaway) Descriptor() ([]byte, []int) {
-	return fileDescriptor_castvalue_87404b9a479f5489, []int{0}
+	return fileDescriptor_42465c49d5c9d654, []int{0}
 }
 func (m *Castaway) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Castaway.Unmarshal(m, b)
@@ -70,7 +70,7 @@ type Wilson struct {
 func (m *Wilson) Reset()      { *m = Wilson{} }
 func (*Wilson) ProtoMessage() {}
 func (*Wilson) Descriptor() ([]byte, []int) {
-	return fileDescriptor_castvalue_87404b9a479f5489, []int{1}
+	return fileDescriptor_42465c49d5c9d654, []int{1}
 }
 func (m *Wilson) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Wilson.Unmarshal(m, b)
@@ -875,9 +875,9 @@ func valueToStringCastvalue(v interface{}) string {
 	return fmt.Sprintf("*%v", pv)
 }
 
-func init() { proto.RegisterFile("castvalue.proto", fileDescriptor_castvalue_87404b9a479f5489) }
+func init() { proto.RegisterFile("castvalue.proto", fileDescriptor_42465c49d5c9d654) }
 
-var fileDescriptor_castvalue_87404b9a479f5489 = []byte{
+var fileDescriptor_42465c49d5c9d654 = []byte{
 	// 342 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4f, 0x4e, 0x2c, 0x2e,
 	0x29, 0x4b, 0xcc, 0x29, 0x4d, 0xd5, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x84, 0x0b, 0x48,

@@ -34,7 +34,7 @@ func (m *Object) Reset()         { *m = Object{} }
 func (m *Object) String() string { return proto.CompactTextString(m) }
 func (*Object) ProtoMessage()    {}
 func (*Object) Descriptor() ([]byte, []int) {
-	return fileDescriptor_sortable_d1adc3e2593f24f3, []int{0}
+	return fileDescriptor_facf4ffffcc1013f, []int{0}
 }
 func (m *Object) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Object.Unmarshal(m, b)
@@ -182,9 +182,9 @@ func encodeVarintPopulateSortable(dAtA []byte, v uint64) []byte {
 	return dAtA
 }
 
-func init() { proto.RegisterFile("sortkeys/sortable.proto", fileDescriptor_sortable_d1adc3e2593f24f3) }
+func init() { proto.RegisterFile("sortkeys/sortable.proto", fileDescriptor_facf4ffffcc1013f) }
 
-var fileDescriptor_sortable_d1adc3e2593f24f3 = []byte{
+var fileDescriptor_facf4ffffcc1013f = []byte{
 	// 115 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2f, 0xce, 0x2f, 0x2a,
 	0xc9, 0x4e, 0xad, 0x2c, 0xd6, 0x07, 0x31, 0x12, 0x93, 0x72, 0x52, 0xf5, 0x0a, 0x8a, 0xf2, 0x4b,

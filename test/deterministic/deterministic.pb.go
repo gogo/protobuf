@@ -34,7 +34,7 @@ func (m *OrderedMap) Reset()         { *m = OrderedMap{} }
 func (m *OrderedMap) String() string { return proto.CompactTextString(m) }
 func (*OrderedMap) ProtoMessage()    {}
 func (*OrderedMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_f6340fb8decdd007, []int{0}
+	return fileDescriptor_c4c11acb40b6bc2e, []int{0}
 }
 func (m *OrderedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OrderedMap.Unmarshal(m, b)
@@ -77,7 +77,7 @@ func (m *UnorderedMap) Reset()         { *m = UnorderedMap{} }
 func (m *UnorderedMap) String() string { return proto.CompactTextString(m) }
 func (*UnorderedMap) ProtoMessage()    {}
 func (*UnorderedMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_f6340fb8decdd007, []int{1}
+	return fileDescriptor_c4c11acb40b6bc2e, []int{1}
 }
 func (m *UnorderedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnorderedMap.Unmarshal(m, b)
@@ -124,7 +124,7 @@ func (m *MapNoMarshaler) Reset()         { *m = MapNoMarshaler{} }
 func (m *MapNoMarshaler) String() string { return proto.CompactTextString(m) }
 func (*MapNoMarshaler) ProtoMessage()    {}
 func (*MapNoMarshaler) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_f6340fb8decdd007, []int{2}
+	return fileDescriptor_c4c11acb40b6bc2e, []int{2}
 }
 func (m *MapNoMarshaler) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MapNoMarshaler.Unmarshal(m, b)
@@ -163,7 +163,7 @@ func (m *NestedOrderedMap) Reset()         { *m = NestedOrderedMap{} }
 func (m *NestedOrderedMap) String() string { return proto.CompactTextString(m) }
 func (*NestedOrderedMap) ProtoMessage()    {}
 func (*NestedOrderedMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_f6340fb8decdd007, []int{3}
+	return fileDescriptor_c4c11acb40b6bc2e, []int{3}
 }
 func (m *NestedOrderedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedOrderedMap.Unmarshal(m, b)
@@ -213,7 +213,7 @@ func (m *NestedMap1) Reset()         { *m = NestedMap1{} }
 func (m *NestedMap1) String() string { return proto.CompactTextString(m) }
 func (*NestedMap1) ProtoMessage()    {}
 func (*NestedMap1) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_f6340fb8decdd007, []int{4}
+	return fileDescriptor_c4c11acb40b6bc2e, []int{4}
 }
 func (m *NestedMap1) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedMap1.Unmarshal(m, b)
@@ -257,7 +257,7 @@ func (m *NestedUnorderedMap) Reset()         { *m = NestedUnorderedMap{} }
 func (m *NestedUnorderedMap) String() string { return proto.CompactTextString(m) }
 func (*NestedUnorderedMap) ProtoMessage()    {}
 func (*NestedUnorderedMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_f6340fb8decdd007, []int{5}
+	return fileDescriptor_c4c11acb40b6bc2e, []int{5}
 }
 func (m *NestedUnorderedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedUnorderedMap.Unmarshal(m, b)
@@ -311,7 +311,7 @@ func (m *NestedMap2) Reset()         { *m = NestedMap2{} }
 func (m *NestedMap2) String() string { return proto.CompactTextString(m) }
 func (*NestedMap2) ProtoMessage()    {}
 func (*NestedMap2) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_f6340fb8decdd007, []int{6}
+	return fileDescriptor_c4c11acb40b6bc2e, []int{6}
 }
 func (m *NestedMap2) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedMap2.Unmarshal(m, b)
@@ -1299,9 +1299,9 @@ func sozDeterministic(x uint64) (n int) {
 	return sovDeterministic(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
 
-func init() { proto.RegisterFile("deterministic.proto", fileDescriptor_deterministic_f6340fb8decdd007) }
+func init() { proto.RegisterFile("deterministic.proto", fileDescriptor_c4c11acb40b6bc2e) }
 
-var fileDescriptor_deterministic_f6340fb8decdd007 = []byte{
+var fileDescriptor_c4c11acb40b6bc2e = []byte{
 	// 385 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x4e, 0x49, 0x2d, 0x49,
 	0x2d, 0xca, 0xcd, 0xcc, 0xcb, 0x2c, 0x2e, 0xc9, 0x4c, 0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17,

@@ -31,7 +31,7 @@ func (m *B) Reset()         { *m = B{} }
 func (m *B) String() string { return proto.CompactTextString(m) }
 func (*B) ProtoMessage()    {}
 func (*B) Descriptor() ([]byte, []int) {
-	return fileDescriptor_gogovanity_5ec1359daac061c2, []int{0}
+	return fileDescriptor_f8c9b51615339d8e, []int{0}
 }
 func (m *B) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -381,9 +381,9 @@ var (
 	ErrIntOverflowGogovanity   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("gogovanity.proto", fileDescriptor_gogovanity_5ec1359daac061c2) }
+func init() { proto.RegisterFile("gogovanity.proto", fileDescriptor_f8c9b51615339d8e) }
 
-var fileDescriptor_gogovanity_5ec1359daac061c2 = []byte{
+var fileDescriptor_f8c9b51615339d8e = []byte{
 	// 171 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x48, 0xcf, 0x4f, 0xcf,
 	0x2f, 0x4b, 0xcc, 0xcb, 0x2c, 0xa9, 0xd4, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x83, 0xf0,

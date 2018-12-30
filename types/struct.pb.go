@@ -49,7 +49,7 @@ var NullValue_value = map[string]int32{
 }
 
 func (NullValue) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_struct_7f9d36853146434f, []int{0}
+	return fileDescriptor_df322afd6c9fb402, []int{0}
 }
 func (NullValue) XXX_WellKnownType() string { return "NullValue" }
 
@@ -72,7 +72,7 @@ type Struct struct {
 func (m *Struct) Reset()      { *m = Struct{} }
 func (*Struct) ProtoMessage() {}
 func (*Struct) Descriptor() ([]byte, []int) {
-	return fileDescriptor_struct_7f9d36853146434f, []int{0}
+	return fileDescriptor_df322afd6c9fb402, []int{0}
 }
 func (*Struct) XXX_WellKnownType() string { return "Struct" }
 func (m *Struct) XXX_Unmarshal(b []byte) error {
@@ -138,7 +138,7 @@ type Value struct {
 func (m *Value) Reset()      { *m = Value{} }
 func (*Value) ProtoMessage() {}
 func (*Value) Descriptor() ([]byte, []int) {
-	return fileDescriptor_struct_7f9d36853146434f, []int{1}
+	return fileDescriptor_df322afd6c9fb402, []int{1}
 }
 func (*Value) XXX_WellKnownType() string { return "Value" }
 func (m *Value) XXX_Unmarshal(b []byte) error {
@@ -403,7 +403,7 @@ type ListValue struct {
 func (m *ListValue) Reset()      { *m = ListValue{} }
 func (*ListValue) ProtoMessage() {}
 func (*ListValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_struct_7f9d36853146434f, []int{2}
+	return fileDescriptor_df322afd6c9fb402, []int{2}
 }
 func (*ListValue) XXX_WellKnownType() string { return "ListValue" }
 func (m *ListValue) XXX_Unmarshal(b []byte) error {
@@ -1949,11 +1949,9 @@ var (
 	ErrIntOverflowStruct   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() {
-	proto.RegisterFile("google/protobuf/struct.proto", fileDescriptor_struct_7f9d36853146434f)
-}
+func init() { proto.RegisterFile("google/protobuf/struct.proto", fileDescriptor_df322afd6c9fb402) }
 
-var fileDescriptor_struct_7f9d36853146434f = []byte{
+var fileDescriptor_df322afd6c9fb402 = []byte{
 	// 439 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x91, 0xc1, 0x6b, 0xd4, 0x40,
 	0x14, 0xc6, 0xf3, 0xb2, 0xdd, 0xe0, 0xbe, 0x48, 0x2d, 0x23, 0xe8, 0x52, 0x65, 0x5c, 0xb6, 0x97,

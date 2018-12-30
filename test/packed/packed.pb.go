@@ -45,7 +45,7 @@ func (m *NinRepNative) Reset()         { *m = NinRepNative{} }
 func (m *NinRepNative) String() string { return proto.CompactTextString(m) }
 func (*NinRepNative) ProtoMessage()    {}
 func (*NinRepNative) Descriptor() ([]byte, []int) {
-	return fileDescriptor_packed_0c54be3753617b96, []int{0}
+	return fileDescriptor_2c9922eb15f14bbb, []int{0}
 }
 func (m *NinRepNative) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -179,7 +179,7 @@ func (m *NinRepPackedNative) Reset()         { *m = NinRepPackedNative{} }
 func (m *NinRepPackedNative) String() string { return proto.CompactTextString(m) }
 func (*NinRepPackedNative) ProtoMessage()    {}
 func (*NinRepPackedNative) Descriptor() ([]byte, []int) {
-	return fileDescriptor_packed_0c54be3753617b96, []int{1}
+	return fileDescriptor_2c9922eb15f14bbb, []int{1}
 }
 func (m *NinRepPackedNative) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -313,7 +313,7 @@ func (m *NinRepNativeUnsafe) Reset()         { *m = NinRepNativeUnsafe{} }
 func (m *NinRepNativeUnsafe) String() string { return proto.CompactTextString(m) }
 func (*NinRepNativeUnsafe) ProtoMessage()    {}
 func (*NinRepNativeUnsafe) Descriptor() ([]byte, []int) {
-	return fileDescriptor_packed_0c54be3753617b96, []int{2}
+	return fileDescriptor_2c9922eb15f14bbb, []int{2}
 }
 func (m *NinRepNativeUnsafe) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepNativeUnsafe.Unmarshal(m, b)
@@ -447,7 +447,7 @@ func (m *NinRepPackedNativeUnsafe) Reset()         { *m = NinRepPackedNativeUnsa
 func (m *NinRepPackedNativeUnsafe) String() string { return proto.CompactTextString(m) }
 func (*NinRepPackedNativeUnsafe) ProtoMessage()    {}
 func (*NinRepPackedNativeUnsafe) Descriptor() ([]byte, []int) {
-	return fileDescriptor_packed_0c54be3753617b96, []int{3}
+	return fileDescriptor_2c9922eb15f14bbb, []int{3}
 }
 func (m *NinRepPackedNativeUnsafe) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NinRepPackedNativeUnsafe.Unmarshal(m, b)
@@ -4665,9 +4665,9 @@ var (
 	ErrIntOverflowPacked   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("packed.proto", fileDescriptor_packed_0c54be3753617b96) }
+func init() { proto.RegisterFile("packed.proto", fileDescriptor_2c9922eb15f14bbb) }
 
-var fileDescriptor_packed_0c54be3753617b96 = []byte{
+var fileDescriptor_2c9922eb15f14bbb = []byte{
 	// 388 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x92, 0xbf, 0x4e, 0xfa, 0x50,
 	0x14, 0xc7, 0xd3, 0x9e, 0x52, 0xf8, 0xdd, 0x1f, 0x44, 0xec, 0x60, 0x4e, 0x08, 0xd1, 0x1b, 0xa6,

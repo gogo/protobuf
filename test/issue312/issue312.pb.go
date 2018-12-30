@@ -55,16 +55,16 @@ func (x *TaskState) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (TaskState) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_issue312_ffe23d3d41bbbf36, []int{0}
+	return fileDescriptor_8a64932ccacef062, []int{0}
 }
 
 func init() {
 	proto.RegisterEnum("issue312.TaskState", TaskState_name, TaskState_value)
 }
 
-func init() { proto.RegisterFile("issue312.proto", fileDescriptor_issue312_ffe23d3d41bbbf36) }
+func init() { proto.RegisterFile("issue312.proto", fileDescriptor_8a64932ccacef062) }
 
-var fileDescriptor_issue312_ffe23d3d41bbbf36 = []byte{
+var fileDescriptor_8a64932ccacef062 = []byte{
 	// 147 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0x2c, 0x2e, 0x2e,
 	0x4d, 0x35, 0x36, 0x34, 0xd2, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x80, 0xf1, 0xa5, 0x74,

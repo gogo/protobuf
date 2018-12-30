@@ -42,7 +42,7 @@ type A struct {
 func (m *A) Reset()      { *m = A{} }
 func (*A) ProtoMessage() {}
 func (*A) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{0}
+	return fileDescriptor_5318ad6f723bf9f6, []int{0}
 }
 func (m *A) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -83,7 +83,7 @@ type B struct {
 func (m *B) Reset()      { *m = B{} }
 func (*B) ProtoMessage() {}
 func (*B) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{1}
+	return fileDescriptor_5318ad6f723bf9f6, []int{1}
 }
 func (m *B) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -122,7 +122,7 @@ type D struct {
 func (m *D) Reset()      { *m = D{} }
 func (*D) ProtoMessage() {}
 func (*D) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{2}
+	return fileDescriptor_5318ad6f723bf9f6, []int{2}
 }
 func (m *D) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -166,7 +166,7 @@ type C struct {
 func (m *C) Reset()      { *m = C{} }
 func (*C) ProtoMessage() {}
 func (*C) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{3}
+	return fileDescriptor_5318ad6f723bf9f6, []int{3}
 }
 func (m *C) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -205,7 +205,7 @@ type U struct {
 func (m *U) Reset()      { *m = U{} }
 func (*U) ProtoMessage() {}
 func (*U) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{4}
+	return fileDescriptor_5318ad6f723bf9f6, []int{4}
 }
 func (m *U) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -244,7 +244,7 @@ type UnoM struct {
 func (m *UnoM) Reset()      { *m = UnoM{} }
 func (*UnoM) ProtoMessage() {}
 func (*UnoM) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{5}
+	return fileDescriptor_5318ad6f723bf9f6, []int{5}
 }
 func (m *UnoM) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnoM.Unmarshal(m, b)
@@ -274,7 +274,7 @@ type OldA struct {
 func (m *OldA) Reset()      { *m = OldA{} }
 func (*OldA) ProtoMessage() {}
 func (*OldA) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{6}
+	return fileDescriptor_5318ad6f723bf9f6, []int{6}
 }
 func (m *OldA) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -314,7 +314,7 @@ type OldB struct {
 func (m *OldB) Reset()      { *m = OldB{} }
 func (*OldB) ProtoMessage() {}
 func (*OldB) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{7}
+	return fileDescriptor_5318ad6f723bf9f6, []int{7}
 }
 func (m *OldB) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -357,7 +357,7 @@ type OldC struct {
 func (m *OldC) Reset()      { *m = OldC{} }
 func (*OldC) ProtoMessage() {}
 func (*OldC) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{8}
+	return fileDescriptor_5318ad6f723bf9f6, []int{8}
 }
 func (m *OldC) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -397,7 +397,7 @@ type OldU struct {
 func (m *OldU) Reset()      { *m = OldU{} }
 func (*OldU) ProtoMessage() {}
 func (*OldU) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{9}
+	return fileDescriptor_5318ad6f723bf9f6, []int{9}
 }
 func (m *OldU) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -437,7 +437,7 @@ type OldUnoM struct {
 func (m *OldUnoM) Reset()      { *m = OldUnoM{} }
 func (*OldUnoM) ProtoMessage() {}
 func (*OldUnoM) Descriptor() ([]byte, []int) {
-	return fileDescriptor_unrecognized_05a73f113b0c8d63, []int{10}
+	return fileDescriptor_5318ad6f723bf9f6, []int{10}
 }
 func (m *OldUnoM) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OldUnoM.Unmarshal(m, b)
@@ -4362,9 +4362,9 @@ var (
 	ErrIntOverflowUnrecognized   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("unrecognized.proto", fileDescriptor_unrecognized_05a73f113b0c8d63) }
+func init() { proto.RegisterFile("unrecognized.proto", fileDescriptor_5318ad6f723bf9f6) }
 
-var fileDescriptor_unrecognized_05a73f113b0c8d63 = []byte{
+var fileDescriptor_5318ad6f723bf9f6 = []byte{
 	// 414 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x51, 0xbd, 0x4e, 0xc2, 0x50,
 	0x18, 0xed, 0x47, 0x0b, 0x84, 0x2b, 0x46, 0xd3, 0xc1, 0xdc, 0x68, 0xbc, 0x6d, 0x3a, 0x75, 0x11,

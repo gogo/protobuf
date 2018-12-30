@@ -79,7 +79,7 @@ type Api struct {
 func (m *Api) Reset()      { *m = Api{} }
 func (*Api) ProtoMessage() {}
 func (*Api) Descriptor() ([]byte, []int) {
-	return fileDescriptor_api_a4406062c749da1f, []int{0}
+	return fileDescriptor_a2ec32096296c143, []int{0}
 }
 func (m *Api) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -185,7 +185,7 @@ type Method struct {
 func (m *Method) Reset()      { *m = Method{} }
 func (*Method) ProtoMessage() {}
 func (*Method) Descriptor() ([]byte, []int) {
-	return fileDescriptor_api_a4406062c749da1f, []int{1}
+	return fileDescriptor_a2ec32096296c143, []int{1}
 }
 func (m *Method) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -359,7 +359,7 @@ type Mixin struct {
 func (m *Mixin) Reset()      { *m = Mixin{} }
 func (*Mixin) ProtoMessage() {}
 func (*Mixin) Descriptor() ([]byte, []int) {
-	return fileDescriptor_api_a4406062c749da1f, []int{2}
+	return fileDescriptor_a2ec32096296c143, []int{2}
 }
 func (m *Mixin) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2030,9 +2030,9 @@ var (
 	ErrIntOverflowApi   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("google/protobuf/api.proto", fileDescriptor_api_a4406062c749da1f) }
+func init() { proto.RegisterFile("google/protobuf/api.proto", fileDescriptor_a2ec32096296c143) }
 
-var fileDescriptor_api_a4406062c749da1f = []byte{
+var fileDescriptor_a2ec32096296c143 = []byte{
 	// 467 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x91, 0x31, 0x6f, 0x13, 0x31,
 	0x14, 0xc7, 0xeb, 0xbb, 0xe4, 0x52, 0x5c, 0x91, 0x82, 0x91, 0xc0, 0x64, 0xb0, 0x4e, 0x15, 0xc3,

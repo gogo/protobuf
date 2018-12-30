@@ -39,7 +39,7 @@ func (m *CodeGenMsg) Reset()         { *m = CodeGenMsg{} }
 func (m *CodeGenMsg) String() string { return proto.CompactTextString(m) }
 func (*CodeGenMsg) ProtoMessage()    {}
 func (*CodeGenMsg) Descriptor() ([]byte, []int) {
-	return fileDescriptor_issue449_65778f0ef21a6515, []int{0}
+	return fileDescriptor_dece653619274e1d, []int{0}
 }
 func (m *CodeGenMsg) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -110,7 +110,7 @@ func (m *NonCodeGenMsg) Reset()         { *m = NonCodeGenMsg{} }
 func (m *NonCodeGenMsg) String() string { return proto.CompactTextString(m) }
 func (*NonCodeGenMsg) ProtoMessage()    {}
 func (*NonCodeGenMsg) Descriptor() ([]byte, []int) {
-	return fileDescriptor_issue449_65778f0ef21a6515, []int{1}
+	return fileDescriptor_dece653619274e1d, []int{1}
 }
 func (m *NonCodeGenMsg) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NonCodeGenMsg.Unmarshal(m, b)
@@ -582,9 +582,9 @@ var (
 	ErrIntOverflowIssue449   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("issue449.proto", fileDescriptor_issue449_65778f0ef21a6515) }
+func init() { proto.RegisterFile("issue449.proto", fileDescriptor_dece653619274e1d) }
 
-var fileDescriptor_issue449_65778f0ef21a6515 = []byte{
+var fileDescriptor_dece653619274e1d = []byte{
 	// 203 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0x2c, 0x2e, 0x2e,
 	0x4d, 0x35, 0x31, 0xb1, 0xd4, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x80, 0xf1, 0xa5, 0x74,

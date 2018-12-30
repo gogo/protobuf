@@ -41,7 +41,7 @@ type MapTest struct {
 func (m *MapTest) Reset()      { *m = MapTest{} }
 func (*MapTest) ProtoMessage() {}
 func (*MapTest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_map_746b24fd53d0701f, []int{0}
+	return fileDescriptor_b8f2a09ffeba7c12, []int{0}
 }
 func (m *MapTest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -80,7 +80,7 @@ type FakeMap struct {
 func (m *FakeMap) Reset()      { *m = FakeMap{} }
 func (*FakeMap) ProtoMessage() {}
 func (*FakeMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_map_746b24fd53d0701f, []int{1}
+	return fileDescriptor_b8f2a09ffeba7c12, []int{1}
 }
 func (m *FakeMap) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -121,7 +121,7 @@ type FakeMapEntry struct {
 func (m *FakeMapEntry) Reset()      { *m = FakeMapEntry{} }
 func (*FakeMapEntry) ProtoMessage() {}
 func (*FakeMapEntry) Descriptor() ([]byte, []int) {
-	return fileDescriptor_map_746b24fd53d0701f, []int{2}
+	return fileDescriptor_b8f2a09ffeba7c12, []int{2}
 }
 func (m *FakeMapEntry) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1562,9 +1562,9 @@ var (
 	ErrIntOverflowMap   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("combos/both/map.proto", fileDescriptor_map_746b24fd53d0701f) }
+func init() { proto.RegisterFile("combos/both/map.proto", fileDescriptor_b8f2a09ffeba7c12) }
 
-var fileDescriptor_map_746b24fd53d0701f = []byte{
+var fileDescriptor_b8f2a09ffeba7c12 = []byte{
 	// 310 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x90, 0xbf, 0x4f, 0xc2, 0x40,
 	0x14, 0xc7, 0xfb, 0x20, 0xd2, 0x78, 0x38, 0x98, 0x46, 0x93, 0xca, 0xf0, 0x42, 0x98, 0x58, 0x6c,
