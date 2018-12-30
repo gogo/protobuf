@@ -49,6 +49,7 @@ var TheTestEnum_name = map[int32]string{
 	1: "B",
 	2: "C",
 }
+
 var TheTestEnum_value = map[string]int32{
 	"A": 0,
 	"B": 1,
@@ -60,9 +61,11 @@ func (x TheTestEnum) Enum() *TheTestEnum {
 	*p = x
 	return p
 }
+
 func (x TheTestEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(TheTestEnum_name, int32(x))
 }
+
 func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(TheTestEnum_value, data, "TheTestEnum")
 	if err != nil {
@@ -71,6 +74,7 @@ func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
 	*x = TheTestEnum(value)
 	return nil
 }
+
 func (TheTestEnum) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_9b8e0e81a01d0a18, []int{0}
 }
@@ -86,6 +90,7 @@ var AnotherTestEnum_name = map[int32]string{
 	10: "D",
 	11: "E",
 }
+
 var AnotherTestEnum_value = map[string]int32{
 	"D": 10,
 	"E": 11,
@@ -96,9 +101,11 @@ func (x AnotherTestEnum) Enum() *AnotherTestEnum {
 	*p = x
 	return p
 }
+
 func (x AnotherTestEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(AnotherTestEnum_name, int32(x))
 }
+
 func (x *AnotherTestEnum) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(AnotherTestEnum_value, data, "AnotherTestEnum")
 	if err != nil {
@@ -107,6 +114,7 @@ func (x *AnotherTestEnum) UnmarshalJSON(data []byte) error {
 	*x = AnotherTestEnum(value)
 	return nil
 }
+
 func (AnotherTestEnum) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_9b8e0e81a01d0a18, []int{1}
 }
@@ -124,6 +132,7 @@ var YetAnotherTestEnum_name = map[int32]string{
 	0: "AA",
 	1: "BB",
 }
+
 var YetAnotherTestEnum_value = map[string]int32{
 	"AA": 0,
 	"BB": 1,
@@ -134,9 +143,11 @@ func (x YetAnotherTestEnum) Enum() *YetAnotherTestEnum {
 	*p = x
 	return p
 }
+
 func (x YetAnotherTestEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(YetAnotherTestEnum_name, int32(x))
 }
+
 func (x *YetAnotherTestEnum) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(YetAnotherTestEnum_value, data, "YetAnotherTestEnum")
 	if err != nil {
@@ -145,6 +156,7 @@ func (x *YetAnotherTestEnum) UnmarshalJSON(data []byte) error {
 	*x = YetAnotherTestEnum(value)
 	return nil
 }
+
 func (YetAnotherTestEnum) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_9b8e0e81a01d0a18, []int{2}
 }
@@ -162,6 +174,7 @@ var YetYetAnotherTestEnum_name = map[int32]string{
 	0: "CC",
 	1: "DD",
 }
+
 var YetYetAnotherTestEnum_value = map[string]int32{
 	"CC": 0,
 	"DD": 1,
@@ -172,9 +185,11 @@ func (x YetYetAnotherTestEnum) Enum() *YetYetAnotherTestEnum {
 	*p = x
 	return p
 }
+
 func (x YetYetAnotherTestEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(YetYetAnotherTestEnum_name, int32(x))
 }
+
 func (x *YetYetAnotherTestEnum) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(YetYetAnotherTestEnum_value, data, "YetYetAnotherTestEnum")
 	if err != nil {
@@ -183,6 +198,7 @@ func (x *YetYetAnotherTestEnum) UnmarshalJSON(data []byte) error {
 	*x = YetYetAnotherTestEnum(value)
 	return nil
 }
+
 func (YetYetAnotherTestEnum) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_9b8e0e81a01d0a18, []int{3}
 }
@@ -196,6 +212,7 @@ const (
 var NestedDefinition_NestedEnum_name = map[int32]string{
 	1: "TYPE_NESTED",
 }
+
 var NestedDefinition_NestedEnum_value = map[string]int32{
 	"TYPE_NESTED": 1,
 }
@@ -205,9 +222,11 @@ func (x NestedDefinition_NestedEnum) Enum() *NestedDefinition_NestedEnum {
 	*p = x
 	return p
 }
+
 func (x NestedDefinition_NestedEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(NestedDefinition_NestedEnum_name, int32(x))
 }
+
 func (x *NestedDefinition_NestedEnum) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(NestedDefinition_NestedEnum_value, data, "NestedDefinition_NestedEnum")
 	if err != nil {
@@ -216,6 +235,7 @@ func (x *NestedDefinition_NestedEnum) UnmarshalJSON(data []byte) error {
 	*x = NestedDefinition_NestedEnum(value)
 	return nil
 }
+
 func (NestedDefinition_NestedEnum) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_9b8e0e81a01d0a18, []int{42, 0}
 }

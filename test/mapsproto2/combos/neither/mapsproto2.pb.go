@@ -47,6 +47,7 @@ var MapEnum_name = map[int32]string{
 	1: "MB",
 	2: "MC",
 }
+
 var MapEnum_value = map[string]int32{
 	"MA": 0,
 	"MB": 1,
@@ -58,9 +59,11 @@ func (x MapEnum) Enum() *MapEnum {
 	*p = x
 	return p
 }
+
 func (x MapEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(MapEnum_name, int32(x))
 }
+
 func (x *MapEnum) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(MapEnum_value, data, "MapEnum")
 	if err != nil {
@@ -69,6 +72,7 @@ func (x *MapEnum) UnmarshalJSON(data []byte) error {
 	*x = MapEnum(value)
 	return nil
 }
+
 func (MapEnum) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_8fa67a1e07543f1e, []int{0}
 }

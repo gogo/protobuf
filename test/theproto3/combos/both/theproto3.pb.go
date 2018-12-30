@@ -51,6 +51,7 @@ var MapEnum_name = map[int32]string{
 	1: "MB",
 	2: "MC",
 }
+
 var MapEnum_value = map[string]int32{
 	"MA": 0,
 	"MB": 1,
@@ -76,6 +77,7 @@ var Message_Humour_name = map[int32]string{
 	2: "SLAPSTICK",
 	3: "BILL_BAILEY",
 }
+
 var Message_Humour_value = map[string]int32{
 	"UNKNOWN":     0,
 	"PUNS":        1,

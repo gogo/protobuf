@@ -1514,7 +1514,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.Out()
 		g.P(")")
 	}
-
+	g.P()
 	g.P("var ", ccTypeName, "_name = map[int32]string{")
 	g.In()
 	generated := make(map[int32]bool) // avoid duplicate values
@@ -1528,6 +1528,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	}
 	g.Out()
 	g.P("}")
+	g.P()
 	g.P("var ", ccTypeName, "_value = map[string]int32{")
 	g.In()
 	for _, e := range enum.Value {
@@ -1535,6 +1536,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	}
 	g.Out()
 	g.P("}")
+	g.P()
 
 	if !enum.proto3() {
 		g.P("func (x ", ccTypeName, ") Enum() *", ccTypeName, " {")
@@ -1544,6 +1546,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.P("return p")
 		g.Out()
 		g.P("}")
+		g.P()
 	}
 
 	if gogoproto.IsGoEnumStringer(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
@@ -1552,6 +1555,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.P("return ", g.Pkg["proto"], ".EnumName(", ccTypeName, "_name, int32(x))")
 		g.Out()
 		g.P("}")
+		g.P()
 	}
 
 	if !enum.proto3() && !gogoproto.IsGoEnumStringer(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
@@ -1560,6 +1564,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.P("return ", g.Pkg["proto"], ".MarshalJSONEnum(", ccTypeName, "_name, int32(x))")
 		g.Out()
 		g.P("}")
+		g.P()
 	}
 	if !enum.proto3() {
 		g.P("func (x *", ccTypeName, ") UnmarshalJSON(data []byte) error {")
@@ -1574,6 +1579,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.P("return nil")
 		g.Out()
 		g.P("}")
+		g.P()
 	}
 
 	var indexes []string
@@ -1587,11 +1593,11 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	g.P("return ", g.file.VarName(), ", []int{", strings.Join(indexes, ", "), "}")
 	g.Out()
 	g.P("}")
+	g.P()
 	if enum.file.GetPackage() == "google.protobuf" && enum.GetName() == "NullValue" {
 		g.P("func (", ccTypeName, `) XXX_WellKnownType() string { return "`, enum.GetName(), `" }`)
+		g.P()
 	}
-
-	g.P()
 }
 
 // The tag is a string like "varint,2,opt,name=fieldname,def=7" that

@@ -40,6 +40,7 @@ var MyCustomEnum_name = map[int32]string{
 	0: "A",
 	1: "B",
 }
+
 var MyCustomEnum_value = map[string]int32{
 	"A": 0,
 	"B": 1,
@@ -50,9 +51,11 @@ func (x MyCustomEnum) Enum() *MyCustomEnum {
 	*p = x
 	return p
 }
+
 func (x MyCustomEnum) String() string {
 	return proto.EnumName(MyCustomEnum_name, int32(x))
 }
+
 func (x *MyCustomEnum) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(MyCustomEnum_value, data, "MyCustomEnum")
 	if err != nil {
@@ -61,6 +64,7 @@ func (x *MyCustomEnum) UnmarshalJSON(data []byte) error {
 	*x = MyCustomEnum(value)
 	return nil
 }
+
 func (MyCustomEnum) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_49eed3c955d68b51, []int{0}
 }
@@ -76,6 +80,7 @@ var MyCustomUnprefixedEnum_name = map[int32]string{
 	0: "UNPREFIXED_A",
 	1: "UNPREFIXED_B",
 }
+
 var MyCustomUnprefixedEnum_value = map[string]int32{
 	"UNPREFIXED_A": 0,
 	"UNPREFIXED_B": 1,
@@ -86,9 +91,11 @@ func (x MyCustomUnprefixedEnum) Enum() *MyCustomUnprefixedEnum {
 	*p = x
 	return p
 }
+
 func (x MyCustomUnprefixedEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(MyCustomUnprefixedEnum_name, int32(x))
 }
+
 func (x *MyCustomUnprefixedEnum) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(MyCustomUnprefixedEnum_value, data, "MyCustomUnprefixedEnum")
 	if err != nil {
@@ -97,6 +104,7 @@ func (x *MyCustomUnprefixedEnum) UnmarshalJSON(data []byte) error {
 	*x = MyCustomUnprefixedEnum(value)
 	return nil
 }
+
 func (MyCustomUnprefixedEnum) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_49eed3c955d68b51, []int{1}
 }
@@ -112,6 +120,7 @@ var MyEnumWithEnumStringer_name = map[int32]string{
 	0: "STRINGER_A",
 	1: "STRINGER_B",
 }
+
 var MyEnumWithEnumStringer_value = map[string]int32{
 	"STRINGER_A": 0,
 	"STRINGER_B": 1,
@@ -122,9 +131,11 @@ func (x MyEnumWithEnumStringer) Enum() *MyEnumWithEnumStringer {
 	*p = x
 	return p
 }
+
 func (x MyEnumWithEnumStringer) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(MyEnumWithEnumStringer_name, int32(x))
 }
+
 func (x *MyEnumWithEnumStringer) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(MyEnumWithEnumStringer_value, data, "MyEnumWithEnumStringer")
 	if err != nil {
@@ -133,6 +144,7 @@ func (x *MyEnumWithEnumStringer) UnmarshalJSON(data []byte) error {
 	*x = MyEnumWithEnumStringer(value)
 	return nil
 }
+
 func (MyEnumWithEnumStringer) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_49eed3c955d68b51, []int{2}
 }

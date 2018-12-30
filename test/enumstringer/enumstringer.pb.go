@@ -34,6 +34,7 @@ var TheTestEnum_name = map[int32]string{
 	1: "B",
 	2: "C",
 }
+
 var TheTestEnum_value = map[string]int32{
 	"A": 0,
 	"B": 1,
@@ -45,9 +46,11 @@ func (x TheTestEnum) Enum() *TheTestEnum {
 	*p = x
 	return p
 }
+
 func (x TheTestEnum) MarshalJSON() ([]byte, error) {
 	return proto.MarshalJSONEnum(TheTestEnum_name, int32(x))
 }
+
 func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(TheTestEnum_value, data, "TheTestEnum")
 	if err != nil {
@@ -56,6 +59,7 @@ func (x *TheTestEnum) UnmarshalJSON(data []byte) error {
 	*x = TheTestEnum(value)
 	return nil
 }
+
 func (TheTestEnum) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_59d933db60b09d07, []int{0}
 }

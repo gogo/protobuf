@@ -44,6 +44,7 @@ const (
 var NullValue_name = map[int32]string{
 	0: "NULL_VALUE",
 }
+
 var NullValue_value = map[string]int32{
 	"NULL_VALUE": 0,
 }
@@ -51,6 +52,7 @@ var NullValue_value = map[string]int32{
 func (NullValue) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_df322afd6c9fb402, []int{0}
 }
+
 func (NullValue) XXX_WellKnownType() string { return "NullValue" }
 
 // `Struct` represents a structured data value, consisting of fields

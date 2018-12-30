@@ -35,6 +35,7 @@ var Message_Humour_name = map[int32]string{
 	2: "SLAPSTICK",
 	3: "BILL_BAILEY",
 }
+
 var Message_Humour_value = map[string]int32{
 	"UNKNOWN":     0,
 	"PUNS":        1,
@@ -45,6 +46,7 @@ var Message_Humour_value = map[string]int32{
 func (x Message_Humour) String() string {
 	return proto.EnumName(Message_Humour_name, int32(x))
 }
+
 func (Message_Humour) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_4fee6d65e34a64b6, []int{0, 0}
 }

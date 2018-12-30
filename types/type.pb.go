@@ -41,6 +41,7 @@ var Syntax_name = map[int32]string{
 	0: "SYNTAX_PROTO2",
 	1: "SYNTAX_PROTO3",
 }
+
 var Syntax_value = map[string]int32{
 	"SYNTAX_PROTO2": 0,
 	"SYNTAX_PROTO3": 1,
@@ -115,6 +116,7 @@ var Field_Kind_name = map[int32]string{
 	17: "TYPE_SINT32",
 	18: "TYPE_SINT64",
 }
+
 var Field_Kind_value = map[string]int32{
 	"TYPE_UNKNOWN":  0,
 	"TYPE_DOUBLE":   1,
@@ -161,6 +163,7 @@ var Field_Cardinality_name = map[int32]string{
 	2: "CARDINALITY_REQUIRED",
 	3: "CARDINALITY_REPEATED",
 }
+
 var Field_Cardinality_value = map[string]int32{
 	"CARDINALITY_UNKNOWN":  0,
 	"CARDINALITY_OPTIONAL": 1,

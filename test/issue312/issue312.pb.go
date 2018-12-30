@@ -32,6 +32,7 @@ var TaskState_name = map[int32]string{
 	0: "TASK_STARTING",
 	1: "TASK_RUNNING",
 }
+
 var TaskState_value = map[string]int32{
 	"TASK_STAGING":  6,
 	"TASK_STARTING": 0,
@@ -43,9 +44,11 @@ func (x TaskState) Enum() *TaskState {
 	*p = x
 	return p
 }
+
 func (x TaskState) String() string {
 	return proto.EnumName(TaskState_name, int32(x))
 }
+
 func (x *TaskState) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(TaskState_value, data, "TaskState")
 	if err != nil {
@@ -54,6 +57,7 @@ func (x *TaskState) UnmarshalJSON(data []byte) error {
 	*x = TaskState(value)
 	return nil
 }
+
 func (TaskState) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_8a64932ccacef062, []int{0}
 }
