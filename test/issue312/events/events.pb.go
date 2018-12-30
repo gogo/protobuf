@@ -3,16 +3,18 @@
 
 package events
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-import issue312 "github.com/gogo/protobuf/test/issue312"
+import (
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	issue312 "github.com/gogo/protobuf/test/issue312"
+	math "math"
 
-import bytes "bytes"
+	bytes "bytes"
 
-import strings "strings"
-import reflect "reflect"
+	reflect "reflect"
+	strings "strings"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

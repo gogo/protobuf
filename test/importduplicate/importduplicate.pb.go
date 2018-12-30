@@ -3,18 +3,20 @@
 
 package importduplicate
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-import proto1 "github.com/gogo/protobuf/test/importduplicate/proto"
-import sortkeys "github.com/gogo/protobuf/test/importduplicate/sortkeys"
+import (
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	proto1 "github.com/gogo/protobuf/test/importduplicate/proto"
+	sortkeys "github.com/gogo/protobuf/test/importduplicate/sortkeys"
+	math "math"
 
-import bytes "bytes"
+	bytes "bytes"
 
-import strings "strings"
-import reflect "reflect"
-import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+	reflect "reflect"
+	strings "strings"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

@@ -3,13 +3,15 @@
 
 package importdedup
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-import subpkg "github.com/gogo/protobuf/test/importdedup/subpkg"
+import (
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	subpkg "github.com/gogo/protobuf/test/importdedup/subpkg"
+	math "math"
 
-import github_com_gogo_protobuf_test_importdedup_subpkg "github.com/gogo/protobuf/test/importdedup/subpkg"
+	github_com_gogo_protobuf_test_importdedup_subpkg "github.com/gogo/protobuf/test/importdedup/subpkg"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

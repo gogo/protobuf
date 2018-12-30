@@ -3,17 +3,19 @@
 
 package importing
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-import _ "github.com/gogo/protobuf/test/importcustom-issue389/imported"
+import (
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	_ "github.com/gogo/protobuf/test/importcustom-issue389/imported"
+	math "math"
 
-import github_com_gogo_protobuf_test_importcustom_issue389_imported "github.com/gogo/protobuf/test/importcustom-issue389/imported"
+	github_com_gogo_protobuf_test_importcustom_issue389_imported "github.com/gogo/protobuf/test/importcustom-issue389/imported"
 
-import bytes "bytes"
+	bytes "bytes"
 
-import io "io"
+	io "io"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

@@ -3,31 +3,33 @@
 
 package test
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
+import (
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	math "math"
 
-import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
-import github_com_gogo_protobuf_test_custom_dash_type "github.com/gogo/protobuf/test/custom-dash-type"
+	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
+	github_com_gogo_protobuf_test_custom_dash_type "github.com/gogo/protobuf/test/custom-dash-type"
 
-import bytes "bytes"
-import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+	bytes "bytes"
+	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 
-import github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-import compress_gzip "compress/gzip"
-import io_ioutil "io/ioutil"
+	compress_gzip "compress/gzip"
+	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	io_ioutil "io/ioutil"
 
-import strconv "strconv"
+	strconv "strconv"
 
-import strings "strings"
-import sort "sort"
-import reflect "reflect"
+	reflect "reflect"
+	sort "sort"
+	strings "strings"
 
-import encoding_binary "encoding/binary"
+	encoding_binary "encoding/binary"
 
-import io "io"
+	io "io"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

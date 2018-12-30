@@ -3,11 +3,13 @@
 
 package vanity
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/gogo/protobuf/proto"
+	math "math"
 
-import io "io"
+	io "io"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

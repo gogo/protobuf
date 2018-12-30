@@ -3,21 +3,23 @@
 
 package types
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/gogo/protobuf/proto"
+	math "math"
 
-import strconv "strconv"
+	strconv "strconv"
 
-import bytes "bytes"
+	bytes "bytes"
 
-import strings "strings"
-import reflect "reflect"
-import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+	reflect "reflect"
+	strings "strings"
 
-import encoding_binary "encoding/binary"
+	encoding_binary "encoding/binary"
 
-import io "io"
+	io "io"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

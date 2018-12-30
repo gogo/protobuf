@@ -3,15 +3,17 @@
 
 package indeximport
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-import index "github.com/gogo/protobuf/test/indeximport-issue72/index"
+import (
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	index "github.com/gogo/protobuf/test/indeximport-issue72/index"
+	math "math"
 
-import bytes "bytes"
+	bytes "bytes"
 
-import io "io"
+	io "io"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

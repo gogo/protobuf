@@ -3,10 +3,12 @@
 
 package gogoproto
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import (
+	fmt "fmt"
+	proto "github.com/gogo/protobuf/proto"
+	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

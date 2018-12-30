@@ -3,11 +3,13 @@
 
 package extension_user
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import extension_base "github.com/gogo/protobuf/protoc-gen-gogo/testdata/extension_base"
-import extension_extra "github.com/gogo/protobuf/protoc-gen-gogo/testdata/extension_extra"
+import (
+	fmt "fmt"
+	proto "github.com/gogo/protobuf/proto"
+	extension_base "github.com/gogo/protobuf/protoc-gen-gogo/testdata/extension_base"
+	extension_extra "github.com/gogo/protobuf/protoc-gen-gogo/testdata/extension_extra"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

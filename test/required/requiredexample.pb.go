@@ -3,15 +3,17 @@
 
 package required
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
+import (
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	math "math"
 
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-import encoding_binary "encoding/binary"
+	encoding_binary "encoding/binary"
+	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
-import io "io"
+	io "io"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

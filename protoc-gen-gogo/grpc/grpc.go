@@ -129,10 +129,10 @@ func (g *grpc) GenerateImports(file *generator.FileDescriptor) {
 	if len(file.FileDescriptorProto.Service) == 0 {
 		return
 	}
-	g.P("import (")
+	// g.P("import (")
 	g.P(contextPkg, " ", generator.GoImportPath(path.Join(string(g.gen.ImportPrefix), contextPkgPath)))
 	g.P(grpcPkg, " ", generator.GoImportPath(path.Join(string(g.gen.ImportPrefix), grpcPkgPath)))
-	g.P(")")
+	// g.P(")")
 	g.P()
 }
 

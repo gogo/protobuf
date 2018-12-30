@@ -3,25 +3,27 @@
 
 package theproto3
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-import both "github.com/gogo/protobuf/test/combos/both"
+import (
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	both "github.com/gogo/protobuf/test/combos/both"
+	math "math"
 
-import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
+	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
 
-import github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-import compress_gzip "compress/gzip"
-import bytes "bytes"
-import io_ioutil "io/ioutil"
+	bytes "bytes"
+	compress_gzip "compress/gzip"
+	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	io_ioutil "io/ioutil"
 
-import strconv "strconv"
+	strconv "strconv"
 
-import strings "strings"
-import reflect "reflect"
-import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+	reflect "reflect"
+	strings "strings"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

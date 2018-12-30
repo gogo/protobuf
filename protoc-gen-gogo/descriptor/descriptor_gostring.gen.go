@@ -3,14 +3,17 @@
 
 package descriptor
 
-import fmt "fmt"
-import strings "strings"
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-import sort "sort"
-import strconv "strconv"
-import reflect "reflect"
-import proto "github.com/gogo/protobuf/proto"
-import math "math"
+import (
+	fmt "fmt"
+	proto "github.com/gogo/protobuf/proto"
+	math "math"
+
+	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+	reflect "reflect"
+	sort "sort"
+	strconv "strconv"
+	strings "strings"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
