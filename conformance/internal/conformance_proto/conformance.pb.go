@@ -5,10 +5,9 @@ package conformance
 
 import (
 	fmt "fmt"
-	math "math"
-
 	proto "github.com/gogo/protobuf/proto"
 	types "github.com/gogo/protobuf/types"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

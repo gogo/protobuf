@@ -4,17 +4,14 @@
 package types
 
 import (
+	bytes "bytes"
 	fmt "fmt"
-	math "math"
-
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-	types "github.com/gogo/protobuf/types"
-
 	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+	types "github.com/gogo/protobuf/types"
+	math "math"
 	time "time"
-
-	bytes "bytes"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

@@ -5,15 +5,12 @@ package vanity
 
 import (
 	fmt "fmt"
-	math "math"
-
+	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 	proto "github.com/gogo/protobuf/proto"
-
+	io "io"
+	math "math"
 	reflect "reflect"
 	strings "strings"
-
-	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-	io "io"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

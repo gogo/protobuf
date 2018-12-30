@@ -5,14 +5,12 @@ package importing
 
 import (
 	fmt "fmt"
-	math "math"
-
 	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/gogo/protobuf/proto"
-	_ "github.com/gogo/protobuf/test/importcustom-issue389/imported"
-
 	github_com_gogo_protobuf_jsonpb "github.com/gogo/protobuf/jsonpb"
 	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+	proto "github.com/gogo/protobuf/proto"
+	_ "github.com/gogo/protobuf/test/importcustom-issue389/imported"
+	math "math"
 	math_rand "math/rand"
 	testing "testing"
 	time "time"

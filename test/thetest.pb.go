@@ -4,27 +4,21 @@
 package test
 
 import (
+	bytes "bytes"
+	compress_gzip "compress/gzip"
 	fmt "fmt"
-	math "math"
-
 	_ "github.com/gogo/protobuf/gogoproto"
+	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 	proto "github.com/gogo/protobuf/proto"
-
+	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
 	github_com_gogo_protobuf_test_custom_dash_type "github.com/gogo/protobuf/test/custom-dash-type"
-
-	bytes "bytes"
-	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
-
-	compress_gzip "compress/gzip"
-	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	io_ioutil "io/ioutil"
-
-	strconv "strconv"
-
+	math "math"
 	reflect "reflect"
 	sort "sort"
+	strconv "strconv"
 	strings "strings"
 )
 

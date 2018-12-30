@@ -4,13 +4,11 @@
 package cachedsize
 
 import (
+	bytes "bytes"
 	fmt "fmt"
-	math "math"
-
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-
-	bytes "bytes"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

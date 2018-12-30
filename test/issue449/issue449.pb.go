@@ -4,17 +4,13 @@
 package issue449
 
 import (
-	fmt "fmt"
-	math "math"
-
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/gogo/protobuf/proto"
-
 	bytes "bytes"
-
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
 	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-
+	proto "github.com/gogo/protobuf/proto"
 	io "io"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

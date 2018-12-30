@@ -4,21 +4,17 @@
 package stdtypes
 
 import (
+	bytes "bytes"
 	fmt "fmt"
-	math "math"
-
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-	_ "github.com/gogo/protobuf/types"
-
-	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
-	time "time"
-
-	bytes "bytes"
-
 	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+	_ "github.com/gogo/protobuf/types"
+	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+	math "math"
 	reflect "reflect"
 	strings "strings"
+	time "time"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

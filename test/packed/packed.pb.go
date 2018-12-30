@@ -4,14 +4,12 @@
 package packed
 
 import (
+	encoding_binary "encoding/binary"
 	fmt "fmt"
-	math "math"
-
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-
-	encoding_binary "encoding/binary"
 	io "io"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

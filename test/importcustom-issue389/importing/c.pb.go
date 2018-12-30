@@ -4,18 +4,14 @@
 package importing
 
 import (
+	bytes "bytes"
 	fmt "fmt"
-	math "math"
-
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	_ "github.com/gogo/protobuf/test/importcustom-issue389/imported"
-
 	github_com_gogo_protobuf_test_importcustom_issue389_imported "github.com/gogo/protobuf/test/importcustom-issue389/imported"
-
-	bytes "bytes"
-
 	io "io"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

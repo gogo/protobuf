@@ -4,19 +4,14 @@
 package types
 
 import (
-	fmt "fmt"
-	math "math"
-
-	proto "github.com/gogo/protobuf/proto"
-
 	bytes "bytes"
-
-	strconv "strconv"
-
-	reflect "reflect"
-	strings "strings"
-
+	fmt "fmt"
+	proto "github.com/gogo/protobuf/proto"
 	io "io"
+	math "math"
+	reflect "reflect"
+	strconv "strconv"
+	strings "strings"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

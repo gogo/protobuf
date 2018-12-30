@@ -4,18 +4,15 @@
 package one
 
 import (
-	fmt "fmt"
-	math "math"
-
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/gogo/protobuf/proto"
-
 	bytes "bytes"
 	compress_gzip "compress/gzip"
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
 	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	io_ioutil "io/ioutil"
-
+	math "math"
 	reflect "reflect"
 	strings "strings"
 )
