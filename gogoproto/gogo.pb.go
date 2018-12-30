@@ -26,7 +26,7 @@ var E_GoprotoEnumPrefix = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         62001,
 	Name:          "gogoproto.goproto_enum_prefix",
-	Tag:           "varint,62001,opt,name=goproto_enum_prefix,json=goprotoEnumPrefix",
+	Tag:           "varint,62001,opt,name=goproto_enum_prefix",
 	Filename:      "gogo.proto",
 }
 
@@ -35,7 +35,7 @@ var E_GoprotoEnumStringer = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         62021,
 	Name:          "gogoproto.goproto_enum_stringer",
-	Tag:           "varint,62021,opt,name=goproto_enum_stringer,json=goprotoEnumStringer",
+	Tag:           "varint,62021,opt,name=goproto_enum_stringer",
 	Filename:      "gogo.proto",
 }
 
@@ -44,7 +44,7 @@ var E_EnumStringer = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         62022,
 	Name:          "gogoproto.enum_stringer",
-	Tag:           "varint,62022,opt,name=enum_stringer,json=enumStringer",
+	Tag:           "varint,62022,opt,name=enum_stringer",
 	Filename:      "gogo.proto",
 }
 
@@ -53,7 +53,7 @@ var E_EnumCustomname = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         62023,
 	Name:          "gogoproto.enum_customname",
-	Tag:           "bytes,62023,opt,name=enum_customname,json=enumCustomname",
+	Tag:           "bytes,62023,opt,name=enum_customname",
 	Filename:      "gogo.proto",
 }
 
@@ -71,7 +71,7 @@ var E_EnumvalueCustomname = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         66001,
 	Name:          "gogoproto.enumvalue_customname",
-	Tag:           "bytes,66001,opt,name=enumvalue_customname,json=enumvalueCustomname",
+	Tag:           "bytes,66001,opt,name=enumvalue_customname",
 	Filename:      "gogo.proto",
 }
 
@@ -80,7 +80,7 @@ var E_GoprotoGettersAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63001,
 	Name:          "gogoproto.goproto_getters_all",
-	Tag:           "varint,63001,opt,name=goproto_getters_all,json=goprotoGettersAll",
+	Tag:           "varint,63001,opt,name=goproto_getters_all",
 	Filename:      "gogo.proto",
 }
 
@@ -89,7 +89,7 @@ var E_GoprotoEnumPrefixAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63002,
 	Name:          "gogoproto.goproto_enum_prefix_all",
-	Tag:           "varint,63002,opt,name=goproto_enum_prefix_all,json=goprotoEnumPrefixAll",
+	Tag:           "varint,63002,opt,name=goproto_enum_prefix_all",
 	Filename:      "gogo.proto",
 }
 
@@ -98,7 +98,7 @@ var E_GoprotoStringerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63003,
 	Name:          "gogoproto.goproto_stringer_all",
-	Tag:           "varint,63003,opt,name=goproto_stringer_all,json=goprotoStringerAll",
+	Tag:           "varint,63003,opt,name=goproto_stringer_all",
 	Filename:      "gogo.proto",
 }
 
@@ -107,7 +107,7 @@ var E_VerboseEqualAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63004,
 	Name:          "gogoproto.verbose_equal_all",
-	Tag:           "varint,63004,opt,name=verbose_equal_all,json=verboseEqualAll",
+	Tag:           "varint,63004,opt,name=verbose_equal_all",
 	Filename:      "gogo.proto",
 }
 
@@ -116,7 +116,7 @@ var E_FaceAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63005,
 	Name:          "gogoproto.face_all",
-	Tag:           "varint,63005,opt,name=face_all,json=faceAll",
+	Tag:           "varint,63005,opt,name=face_all",
 	Filename:      "gogo.proto",
 }
 
@@ -125,7 +125,7 @@ var E_GostringAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63006,
 	Name:          "gogoproto.gostring_all",
-	Tag:           "varint,63006,opt,name=gostring_all,json=gostringAll",
+	Tag:           "varint,63006,opt,name=gostring_all",
 	Filename:      "gogo.proto",
 }
 
@@ -134,7 +134,7 @@ var E_PopulateAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63007,
 	Name:          "gogoproto.populate_all",
-	Tag:           "varint,63007,opt,name=populate_all,json=populateAll",
+	Tag:           "varint,63007,opt,name=populate_all",
 	Filename:      "gogo.proto",
 }
 
@@ -143,7 +143,7 @@ var E_StringerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63008,
 	Name:          "gogoproto.stringer_all",
-	Tag:           "varint,63008,opt,name=stringer_all,json=stringerAll",
+	Tag:           "varint,63008,opt,name=stringer_all",
 	Filename:      "gogo.proto",
 }
 
@@ -152,7 +152,7 @@ var E_OnlyoneAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63009,
 	Name:          "gogoproto.onlyone_all",
-	Tag:           "varint,63009,opt,name=onlyone_all,json=onlyoneAll",
+	Tag:           "varint,63009,opt,name=onlyone_all",
 	Filename:      "gogo.proto",
 }
 
@@ -161,7 +161,7 @@ var E_EqualAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63013,
 	Name:          "gogoproto.equal_all",
-	Tag:           "varint,63013,opt,name=equal_all,json=equalAll",
+	Tag:           "varint,63013,opt,name=equal_all",
 	Filename:      "gogo.proto",
 }
 
@@ -170,7 +170,7 @@ var E_DescriptionAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63014,
 	Name:          "gogoproto.description_all",
-	Tag:           "varint,63014,opt,name=description_all,json=descriptionAll",
+	Tag:           "varint,63014,opt,name=description_all",
 	Filename:      "gogo.proto",
 }
 
@@ -179,7 +179,7 @@ var E_TestgenAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63015,
 	Name:          "gogoproto.testgen_all",
-	Tag:           "varint,63015,opt,name=testgen_all,json=testgenAll",
+	Tag:           "varint,63015,opt,name=testgen_all",
 	Filename:      "gogo.proto",
 }
 
@@ -188,7 +188,7 @@ var E_BenchgenAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63016,
 	Name:          "gogoproto.benchgen_all",
-	Tag:           "varint,63016,opt,name=benchgen_all,json=benchgenAll",
+	Tag:           "varint,63016,opt,name=benchgen_all",
 	Filename:      "gogo.proto",
 }
 
@@ -197,7 +197,7 @@ var E_MarshalerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63017,
 	Name:          "gogoproto.marshaler_all",
-	Tag:           "varint,63017,opt,name=marshaler_all,json=marshalerAll",
+	Tag:           "varint,63017,opt,name=marshaler_all",
 	Filename:      "gogo.proto",
 }
 
@@ -206,7 +206,7 @@ var E_UnmarshalerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63018,
 	Name:          "gogoproto.unmarshaler_all",
-	Tag:           "varint,63018,opt,name=unmarshaler_all,json=unmarshalerAll",
+	Tag:           "varint,63018,opt,name=unmarshaler_all",
 	Filename:      "gogo.proto",
 }
 
@@ -215,7 +215,7 @@ var E_StableMarshalerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63019,
 	Name:          "gogoproto.stable_marshaler_all",
-	Tag:           "varint,63019,opt,name=stable_marshaler_all,json=stableMarshalerAll",
+	Tag:           "varint,63019,opt,name=stable_marshaler_all",
 	Filename:      "gogo.proto",
 }
 
@@ -224,7 +224,7 @@ var E_SizerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63020,
 	Name:          "gogoproto.sizer_all",
-	Tag:           "varint,63020,opt,name=sizer_all,json=sizerAll",
+	Tag:           "varint,63020,opt,name=sizer_all",
 	Filename:      "gogo.proto",
 }
 
@@ -233,7 +233,7 @@ var E_GoprotoEnumStringerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63021,
 	Name:          "gogoproto.goproto_enum_stringer_all",
-	Tag:           "varint,63021,opt,name=goproto_enum_stringer_all,json=goprotoEnumStringerAll",
+	Tag:           "varint,63021,opt,name=goproto_enum_stringer_all",
 	Filename:      "gogo.proto",
 }
 
@@ -242,7 +242,7 @@ var E_EnumStringerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63022,
 	Name:          "gogoproto.enum_stringer_all",
-	Tag:           "varint,63022,opt,name=enum_stringer_all,json=enumStringerAll",
+	Tag:           "varint,63022,opt,name=enum_stringer_all",
 	Filename:      "gogo.proto",
 }
 
@@ -251,7 +251,7 @@ var E_UnsafeMarshalerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63023,
 	Name:          "gogoproto.unsafe_marshaler_all",
-	Tag:           "varint,63023,opt,name=unsafe_marshaler_all,json=unsafeMarshalerAll",
+	Tag:           "varint,63023,opt,name=unsafe_marshaler_all",
 	Filename:      "gogo.proto",
 }
 
@@ -260,7 +260,7 @@ var E_UnsafeUnmarshalerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63024,
 	Name:          "gogoproto.unsafe_unmarshaler_all",
-	Tag:           "varint,63024,opt,name=unsafe_unmarshaler_all,json=unsafeUnmarshalerAll",
+	Tag:           "varint,63024,opt,name=unsafe_unmarshaler_all",
 	Filename:      "gogo.proto",
 }
 
@@ -269,7 +269,7 @@ var E_GoprotoExtensionsMapAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63025,
 	Name:          "gogoproto.goproto_extensions_map_all",
-	Tag:           "varint,63025,opt,name=goproto_extensions_map_all,json=goprotoExtensionsMapAll",
+	Tag:           "varint,63025,opt,name=goproto_extensions_map_all",
 	Filename:      "gogo.proto",
 }
 
@@ -278,7 +278,7 @@ var E_GoprotoUnrecognizedAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63026,
 	Name:          "gogoproto.goproto_unrecognized_all",
-	Tag:           "varint,63026,opt,name=goproto_unrecognized_all,json=goprotoUnrecognizedAll",
+	Tag:           "varint,63026,opt,name=goproto_unrecognized_all",
 	Filename:      "gogo.proto",
 }
 
@@ -287,7 +287,7 @@ var E_GogoprotoImport = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63027,
 	Name:          "gogoproto.gogoproto_import",
-	Tag:           "varint,63027,opt,name=gogoproto_import,json=gogoprotoImport",
+	Tag:           "varint,63027,opt,name=gogoproto_import",
 	Filename:      "gogo.proto",
 }
 
@@ -296,7 +296,7 @@ var E_ProtosizerAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63028,
 	Name:          "gogoproto.protosizer_all",
-	Tag:           "varint,63028,opt,name=protosizer_all,json=protosizerAll",
+	Tag:           "varint,63028,opt,name=protosizer_all",
 	Filename:      "gogo.proto",
 }
 
@@ -305,7 +305,7 @@ var E_CompareAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63029,
 	Name:          "gogoproto.compare_all",
-	Tag:           "varint,63029,opt,name=compare_all,json=compareAll",
+	Tag:           "varint,63029,opt,name=compare_all",
 	Filename:      "gogo.proto",
 }
 
@@ -314,7 +314,7 @@ var E_TypedeclAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63030,
 	Name:          "gogoproto.typedecl_all",
-	Tag:           "varint,63030,opt,name=typedecl_all,json=typedeclAll",
+	Tag:           "varint,63030,opt,name=typedecl_all",
 	Filename:      "gogo.proto",
 }
 
@@ -323,7 +323,7 @@ var E_EnumdeclAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63031,
 	Name:          "gogoproto.enumdecl_all",
-	Tag:           "varint,63031,opt,name=enumdecl_all,json=enumdeclAll",
+	Tag:           "varint,63031,opt,name=enumdecl_all",
 	Filename:      "gogo.proto",
 }
 
@@ -332,7 +332,7 @@ var E_GoprotoRegistration = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63032,
 	Name:          "gogoproto.goproto_registration",
-	Tag:           "varint,63032,opt,name=goproto_registration,json=goprotoRegistration",
+	Tag:           "varint,63032,opt,name=goproto_registration",
 	Filename:      "gogo.proto",
 }
 
@@ -341,7 +341,7 @@ var E_MessagenameAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63033,
 	Name:          "gogoproto.messagename_all",
-	Tag:           "varint,63033,opt,name=messagename_all,json=messagenameAll",
+	Tag:           "varint,63033,opt,name=messagename_all",
 	Filename:      "gogo.proto",
 }
 
@@ -350,7 +350,7 @@ var E_GoprotoSizecacheAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63034,
 	Name:          "gogoproto.goproto_sizecache_all",
-	Tag:           "varint,63034,opt,name=goproto_sizecache_all,json=goprotoSizecacheAll",
+	Tag:           "varint,63034,opt,name=goproto_sizecache_all",
 	Filename:      "gogo.proto",
 }
 
@@ -359,7 +359,7 @@ var E_GoprotoUnkeyedAll = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         63035,
 	Name:          "gogoproto.goproto_unkeyed_all",
-	Tag:           "varint,63035,opt,name=goproto_unkeyed_all,json=goprotoUnkeyedAll",
+	Tag:           "varint,63035,opt,name=goproto_unkeyed_all",
 	Filename:      "gogo.proto",
 }
 
@@ -368,7 +368,7 @@ var E_GoprotoGetters = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64001,
 	Name:          "gogoproto.goproto_getters",
-	Tag:           "varint,64001,opt,name=goproto_getters,json=goprotoGetters",
+	Tag:           "varint,64001,opt,name=goproto_getters",
 	Filename:      "gogo.proto",
 }
 
@@ -377,7 +377,7 @@ var E_GoprotoStringer = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64003,
 	Name:          "gogoproto.goproto_stringer",
-	Tag:           "varint,64003,opt,name=goproto_stringer,json=goprotoStringer",
+	Tag:           "varint,64003,opt,name=goproto_stringer",
 	Filename:      "gogo.proto",
 }
 
@@ -386,7 +386,7 @@ var E_VerboseEqual = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64004,
 	Name:          "gogoproto.verbose_equal",
-	Tag:           "varint,64004,opt,name=verbose_equal,json=verboseEqual",
+	Tag:           "varint,64004,opt,name=verbose_equal",
 	Filename:      "gogo.proto",
 }
 
@@ -494,7 +494,7 @@ var E_StableMarshaler = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64019,
 	Name:          "gogoproto.stable_marshaler",
-	Tag:           "varint,64019,opt,name=stable_marshaler,json=stableMarshaler",
+	Tag:           "varint,64019,opt,name=stable_marshaler",
 	Filename:      "gogo.proto",
 }
 
@@ -512,7 +512,7 @@ var E_UnsafeMarshaler = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64023,
 	Name:          "gogoproto.unsafe_marshaler",
-	Tag:           "varint,64023,opt,name=unsafe_marshaler,json=unsafeMarshaler",
+	Tag:           "varint,64023,opt,name=unsafe_marshaler",
 	Filename:      "gogo.proto",
 }
 
@@ -521,7 +521,7 @@ var E_UnsafeUnmarshaler = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64024,
 	Name:          "gogoproto.unsafe_unmarshaler",
-	Tag:           "varint,64024,opt,name=unsafe_unmarshaler,json=unsafeUnmarshaler",
+	Tag:           "varint,64024,opt,name=unsafe_unmarshaler",
 	Filename:      "gogo.proto",
 }
 
@@ -530,7 +530,7 @@ var E_GoprotoExtensionsMap = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64025,
 	Name:          "gogoproto.goproto_extensions_map",
-	Tag:           "varint,64025,opt,name=goproto_extensions_map,json=goprotoExtensionsMap",
+	Tag:           "varint,64025,opt,name=goproto_extensions_map",
 	Filename:      "gogo.proto",
 }
 
@@ -539,7 +539,7 @@ var E_GoprotoUnrecognized = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64026,
 	Name:          "gogoproto.goproto_unrecognized",
-	Tag:           "varint,64026,opt,name=goproto_unrecognized,json=goprotoUnrecognized",
+	Tag:           "varint,64026,opt,name=goproto_unrecognized",
 	Filename:      "gogo.proto",
 }
 
@@ -584,7 +584,7 @@ var E_GoprotoSizecache = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64034,
 	Name:          "gogoproto.goproto_sizecache",
-	Tag:           "varint,64034,opt,name=goproto_sizecache,json=goprotoSizecache",
+	Tag:           "varint,64034,opt,name=goproto_sizecache",
 	Filename:      "gogo.proto",
 }
 
@@ -593,7 +593,7 @@ var E_GoprotoUnkeyed = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         64035,
 	Name:          "gogoproto.goproto_unkeyed",
-	Tag:           "varint,64035,opt,name=goproto_unkeyed,json=goprotoUnkeyed",
+	Tag:           "varint,64035,opt,name=goproto_unkeyed",
 	Filename:      "gogo.proto",
 }
 

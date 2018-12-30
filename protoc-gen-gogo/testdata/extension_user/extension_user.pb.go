@@ -154,7 +154,7 @@ var E_LoginMessage_UserMessage = &proto.ExtensionDesc{
 	ExtensionType: (*UserMessage)(nil),
 	Field:         16,
 	Name:          "extension_user.LoginMessage.user_message",
-	Tag:           "bytes,16,opt,name=user_message,json=userMessage",
+	Tag:           "bytes,16,opt,name=user_message",
 	Filename:      "extension_user/extension_user.proto",
 }
 
@@ -240,7 +240,7 @@ var E_Announcement_LoudExt = &proto.ExtensionDesc{
 	ExtensionType: (*Announcement)(nil),
 	Field:         100,
 	Name:          "extension_user.Announcement.loud_ext",
-	Tag:           "bytes,100,opt,name=loud_ext,json=loudExt",
+	Tag:           "bytes,100,opt,name=loud_ext",
 	Filename:      "extension_user/extension_user.proto",
 }
 
@@ -296,7 +296,7 @@ var E_OldStyleParcel_MessageSetExtension = &proto.ExtensionDesc{
 	ExtensionType: (*OldStyleParcel)(nil),
 	Field:         2001,
 	Name:          "extension_user.OldStyleParcel",
-	Tag:           "bytes,2001,opt,name=message_set_extension,json=messageSetExtension",
+	Tag:           "bytes,2001,opt,name=message_set_extension",
 	Filename:      "extension_user/extension_user.proto",
 }
 
@@ -305,7 +305,7 @@ var E_UserMessage = &proto.ExtensionDesc{
 	ExtensionType: (*UserMessage)(nil),
 	Field:         5,
 	Name:          "extension_user.user_message",
-	Tag:           "bytes,5,opt,name=user_message,json=userMessage",
+	Tag:           "bytes,5,opt,name=user_message",
 	Filename:      "extension_user/extension_user.proto",
 }
 
@@ -314,7 +314,7 @@ var E_ExtraMessage = &proto.ExtensionDesc{
 	ExtensionType: (*extension_extra.ExtraMessage)(nil),
 	Field:         9,
 	Name:          "extension_user.extra_message",
-	Tag:           "bytes,9,opt,name=extra_message,json=extraMessage",
+	Tag:           "bytes,9,opt,name=extra_message",
 	Filename:      "extension_user/extension_user.proto",
 }
 

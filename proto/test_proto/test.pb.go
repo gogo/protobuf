@@ -4101,7 +4101,7 @@ var E_RComplex = &proto.ExtensionDesc{
 	ExtensionType: ([]*ComplexExtension)(nil),
 	Field:         201,
 	Name:          "test_proto.r_complex",
-	Tag:           "bytes,201,rep,name=r_complex,json=rComplex",
+	Tag:           "bytes,201,rep,name=r_complex",
 	Filename:      "test.proto",
 }
 
@@ -4110,7 +4110,7 @@ var E_NoDefaultDouble = &proto.ExtensionDesc{
 	ExtensionType: (*float64)(nil),
 	Field:         101,
 	Name:          "test_proto.no_default_double",
-	Tag:           "fixed64,101,opt,name=no_default_double,json=noDefaultDouble",
+	Tag:           "fixed64,101,opt,name=no_default_double",
 	Filename:      "test.proto",
 }
 
@@ -4119,7 +4119,7 @@ var E_NoDefaultFloat = &proto.ExtensionDesc{
 	ExtensionType: (*float32)(nil),
 	Field:         102,
 	Name:          "test_proto.no_default_float",
-	Tag:           "fixed32,102,opt,name=no_default_float,json=noDefaultFloat",
+	Tag:           "fixed32,102,opt,name=no_default_float",
 	Filename:      "test.proto",
 }
 
@@ -4128,7 +4128,7 @@ var E_NoDefaultInt32 = &proto.ExtensionDesc{
 	ExtensionType: (*int32)(nil),
 	Field:         103,
 	Name:          "test_proto.no_default_int32",
-	Tag:           "varint,103,opt,name=no_default_int32,json=noDefaultInt32",
+	Tag:           "varint,103,opt,name=no_default_int32",
 	Filename:      "test.proto",
 }
 
@@ -4137,7 +4137,7 @@ var E_NoDefaultInt64 = &proto.ExtensionDesc{
 	ExtensionType: (*int64)(nil),
 	Field:         104,
 	Name:          "test_proto.no_default_int64",
-	Tag:           "varint,104,opt,name=no_default_int64,json=noDefaultInt64",
+	Tag:           "varint,104,opt,name=no_default_int64",
 	Filename:      "test.proto",
 }
 
@@ -4146,7 +4146,7 @@ var E_NoDefaultUint32 = &proto.ExtensionDesc{
 	ExtensionType: (*uint32)(nil),
 	Field:         105,
 	Name:          "test_proto.no_default_uint32",
-	Tag:           "varint,105,opt,name=no_default_uint32,json=noDefaultUint32",
+	Tag:           "varint,105,opt,name=no_default_uint32",
 	Filename:      "test.proto",
 }
 
@@ -4155,7 +4155,7 @@ var E_NoDefaultUint64 = &proto.ExtensionDesc{
 	ExtensionType: (*uint64)(nil),
 	Field:         106,
 	Name:          "test_proto.no_default_uint64",
-	Tag:           "varint,106,opt,name=no_default_uint64,json=noDefaultUint64",
+	Tag:           "varint,106,opt,name=no_default_uint64",
 	Filename:      "test.proto",
 }
 
@@ -4164,7 +4164,7 @@ var E_NoDefaultSint32 = &proto.ExtensionDesc{
 	ExtensionType: (*int32)(nil),
 	Field:         107,
 	Name:          "test_proto.no_default_sint32",
-	Tag:           "zigzag32,107,opt,name=no_default_sint32,json=noDefaultSint32",
+	Tag:           "zigzag32,107,opt,name=no_default_sint32",
 	Filename:      "test.proto",
 }
 
@@ -4173,7 +4173,7 @@ var E_NoDefaultSint64 = &proto.ExtensionDesc{
 	ExtensionType: (*int64)(nil),
 	Field:         108,
 	Name:          "test_proto.no_default_sint64",
-	Tag:           "zigzag64,108,opt,name=no_default_sint64,json=noDefaultSint64",
+	Tag:           "zigzag64,108,opt,name=no_default_sint64",
 	Filename:      "test.proto",
 }
 
@@ -4182,7 +4182,7 @@ var E_NoDefaultFixed32 = &proto.ExtensionDesc{
 	ExtensionType: (*uint32)(nil),
 	Field:         109,
 	Name:          "test_proto.no_default_fixed32",
-	Tag:           "fixed32,109,opt,name=no_default_fixed32,json=noDefaultFixed32",
+	Tag:           "fixed32,109,opt,name=no_default_fixed32",
 	Filename:      "test.proto",
 }
 
@@ -4191,7 +4191,7 @@ var E_NoDefaultFixed64 = &proto.ExtensionDesc{
 	ExtensionType: (*uint64)(nil),
 	Field:         110,
 	Name:          "test_proto.no_default_fixed64",
-	Tag:           "fixed64,110,opt,name=no_default_fixed64,json=noDefaultFixed64",
+	Tag:           "fixed64,110,opt,name=no_default_fixed64",
 	Filename:      "test.proto",
 }
 
@@ -4200,7 +4200,7 @@ var E_NoDefaultSfixed32 = &proto.ExtensionDesc{
 	ExtensionType: (*int32)(nil),
 	Field:         111,
 	Name:          "test_proto.no_default_sfixed32",
-	Tag:           "fixed32,111,opt,name=no_default_sfixed32,json=noDefaultSfixed32",
+	Tag:           "fixed32,111,opt,name=no_default_sfixed32",
 	Filename:      "test.proto",
 }
 
@@ -4209,7 +4209,7 @@ var E_NoDefaultSfixed64 = &proto.ExtensionDesc{
 	ExtensionType: (*int64)(nil),
 	Field:         112,
 	Name:          "test_proto.no_default_sfixed64",
-	Tag:           "fixed64,112,opt,name=no_default_sfixed64,json=noDefaultSfixed64",
+	Tag:           "fixed64,112,opt,name=no_default_sfixed64",
 	Filename:      "test.proto",
 }
 
@@ -4218,7 +4218,7 @@ var E_NoDefaultBool = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         113,
 	Name:          "test_proto.no_default_bool",
-	Tag:           "varint,113,opt,name=no_default_bool,json=noDefaultBool",
+	Tag:           "varint,113,opt,name=no_default_bool",
 	Filename:      "test.proto",
 }
 
@@ -4227,7 +4227,7 @@ var E_NoDefaultString = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         114,
 	Name:          "test_proto.no_default_string",
-	Tag:           "bytes,114,opt,name=no_default_string,json=noDefaultString",
+	Tag:           "bytes,114,opt,name=no_default_string",
 	Filename:      "test.proto",
 }
 
@@ -4236,7 +4236,7 @@ var E_NoDefaultBytes = &proto.ExtensionDesc{
 	ExtensionType: ([]byte)(nil),
 	Field:         115,
 	Name:          "test_proto.no_default_bytes",
-	Tag:           "bytes,115,opt,name=no_default_bytes,json=noDefaultBytes",
+	Tag:           "bytes,115,opt,name=no_default_bytes",
 	Filename:      "test.proto",
 }
 
@@ -4245,7 +4245,7 @@ var E_NoDefaultEnum = &proto.ExtensionDesc{
 	ExtensionType: (*DefaultsMessage_DefaultsEnum)(nil),
 	Field:         116,
 	Name:          "test_proto.no_default_enum",
-	Tag:           "varint,116,opt,name=no_default_enum,json=noDefaultEnum,enum=test_proto.DefaultsMessage_DefaultsEnum",
+	Tag:           "varint,116,opt,name=no_default_enum,enum=test_proto.DefaultsMessage_DefaultsEnum",
 	Filename:      "test.proto",
 }
 
@@ -4254,7 +4254,7 @@ var E_DefaultDouble = &proto.ExtensionDesc{
 	ExtensionType: (*float64)(nil),
 	Field:         201,
 	Name:          "test_proto.default_double",
-	Tag:           "fixed64,201,opt,name=default_double,json=defaultDouble,def=3.1415",
+	Tag:           "fixed64,201,opt,name=default_double,def=3.1415",
 	Filename:      "test.proto",
 }
 
@@ -4263,7 +4263,7 @@ var E_DefaultFloat = &proto.ExtensionDesc{
 	ExtensionType: (*float32)(nil),
 	Field:         202,
 	Name:          "test_proto.default_float",
-	Tag:           "fixed32,202,opt,name=default_float,json=defaultFloat,def=3.14",
+	Tag:           "fixed32,202,opt,name=default_float,def=3.14",
 	Filename:      "test.proto",
 }
 
@@ -4272,7 +4272,7 @@ var E_DefaultInt32 = &proto.ExtensionDesc{
 	ExtensionType: (*int32)(nil),
 	Field:         203,
 	Name:          "test_proto.default_int32",
-	Tag:           "varint,203,opt,name=default_int32,json=defaultInt32,def=42",
+	Tag:           "varint,203,opt,name=default_int32,def=42",
 	Filename:      "test.proto",
 }
 
@@ -4281,7 +4281,7 @@ var E_DefaultInt64 = &proto.ExtensionDesc{
 	ExtensionType: (*int64)(nil),
 	Field:         204,
 	Name:          "test_proto.default_int64",
-	Tag:           "varint,204,opt,name=default_int64,json=defaultInt64,def=43",
+	Tag:           "varint,204,opt,name=default_int64,def=43",
 	Filename:      "test.proto",
 }
 
@@ -4290,7 +4290,7 @@ var E_DefaultUint32 = &proto.ExtensionDesc{
 	ExtensionType: (*uint32)(nil),
 	Field:         205,
 	Name:          "test_proto.default_uint32",
-	Tag:           "varint,205,opt,name=default_uint32,json=defaultUint32,def=44",
+	Tag:           "varint,205,opt,name=default_uint32,def=44",
 	Filename:      "test.proto",
 }
 
@@ -4299,7 +4299,7 @@ var E_DefaultUint64 = &proto.ExtensionDesc{
 	ExtensionType: (*uint64)(nil),
 	Field:         206,
 	Name:          "test_proto.default_uint64",
-	Tag:           "varint,206,opt,name=default_uint64,json=defaultUint64,def=45",
+	Tag:           "varint,206,opt,name=default_uint64,def=45",
 	Filename:      "test.proto",
 }
 
@@ -4308,7 +4308,7 @@ var E_DefaultSint32 = &proto.ExtensionDesc{
 	ExtensionType: (*int32)(nil),
 	Field:         207,
 	Name:          "test_proto.default_sint32",
-	Tag:           "zigzag32,207,opt,name=default_sint32,json=defaultSint32,def=46",
+	Tag:           "zigzag32,207,opt,name=default_sint32,def=46",
 	Filename:      "test.proto",
 }
 
@@ -4317,7 +4317,7 @@ var E_DefaultSint64 = &proto.ExtensionDesc{
 	ExtensionType: (*int64)(nil),
 	Field:         208,
 	Name:          "test_proto.default_sint64",
-	Tag:           "zigzag64,208,opt,name=default_sint64,json=defaultSint64,def=47",
+	Tag:           "zigzag64,208,opt,name=default_sint64,def=47",
 	Filename:      "test.proto",
 }
 
@@ -4326,7 +4326,7 @@ var E_DefaultFixed32 = &proto.ExtensionDesc{
 	ExtensionType: (*uint32)(nil),
 	Field:         209,
 	Name:          "test_proto.default_fixed32",
-	Tag:           "fixed32,209,opt,name=default_fixed32,json=defaultFixed32,def=48",
+	Tag:           "fixed32,209,opt,name=default_fixed32,def=48",
 	Filename:      "test.proto",
 }
 
@@ -4335,7 +4335,7 @@ var E_DefaultFixed64 = &proto.ExtensionDesc{
 	ExtensionType: (*uint64)(nil),
 	Field:         210,
 	Name:          "test_proto.default_fixed64",
-	Tag:           "fixed64,210,opt,name=default_fixed64,json=defaultFixed64,def=49",
+	Tag:           "fixed64,210,opt,name=default_fixed64,def=49",
 	Filename:      "test.proto",
 }
 
@@ -4344,7 +4344,7 @@ var E_DefaultSfixed32 = &proto.ExtensionDesc{
 	ExtensionType: (*int32)(nil),
 	Field:         211,
 	Name:          "test_proto.default_sfixed32",
-	Tag:           "fixed32,211,opt,name=default_sfixed32,json=defaultSfixed32,def=50",
+	Tag:           "fixed32,211,opt,name=default_sfixed32,def=50",
 	Filename:      "test.proto",
 }
 
@@ -4353,7 +4353,7 @@ var E_DefaultSfixed64 = &proto.ExtensionDesc{
 	ExtensionType: (*int64)(nil),
 	Field:         212,
 	Name:          "test_proto.default_sfixed64",
-	Tag:           "fixed64,212,opt,name=default_sfixed64,json=defaultSfixed64,def=51",
+	Tag:           "fixed64,212,opt,name=default_sfixed64,def=51",
 	Filename:      "test.proto",
 }
 
@@ -4362,7 +4362,7 @@ var E_DefaultBool = &proto.ExtensionDesc{
 	ExtensionType: (*bool)(nil),
 	Field:         213,
 	Name:          "test_proto.default_bool",
-	Tag:           "varint,213,opt,name=default_bool,json=defaultBool,def=1",
+	Tag:           "varint,213,opt,name=default_bool,def=1",
 	Filename:      "test.proto",
 }
 
@@ -4371,7 +4371,7 @@ var E_DefaultString = &proto.ExtensionDesc{
 	ExtensionType: (*string)(nil),
 	Field:         214,
 	Name:          "test_proto.default_string",
-	Tag:           "bytes,214,opt,name=default_string,json=defaultString,def=Hello, string,def=foo",
+	Tag:           "bytes,214,opt,name=default_string,def=Hello, string,def=foo",
 	Filename:      "test.proto",
 }
 
@@ -4380,7 +4380,7 @@ var E_DefaultBytes = &proto.ExtensionDesc{
 	ExtensionType: ([]byte)(nil),
 	Field:         215,
 	Name:          "test_proto.default_bytes",
-	Tag:           "bytes,215,opt,name=default_bytes,json=defaultBytes,def=Hello, bytes",
+	Tag:           "bytes,215,opt,name=default_bytes,def=Hello, bytes",
 	Filename:      "test.proto",
 }
 
@@ -4389,7 +4389,7 @@ var E_DefaultEnum = &proto.ExtensionDesc{
 	ExtensionType: (*DefaultsMessage_DefaultsEnum)(nil),
 	Field:         216,
 	Name:          "test_proto.default_enum",
-	Tag:           "varint,216,opt,name=default_enum,json=defaultEnum,enum=test_proto.DefaultsMessage_DefaultsEnum,def=1",
+	Tag:           "varint,216,opt,name=default_enum,enum=test_proto.DefaultsMessage_DefaultsEnum,def=1",
 	Filename:      "test.proto",
 }
 
