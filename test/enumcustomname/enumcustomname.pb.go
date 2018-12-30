@@ -290,13 +290,6 @@ func init() {
 	proto.RegisterEnum("enumcustomname.MyEnumWithEnumStringer", MyEnumWithEnumStringer_name, MyEnumWithEnumStringer_value)
 	proto.RegisterType((*OnlyEnums)(nil), "enumcustomname.OnlyEnums")
 }
-func (x MyEnumWithEnumStringer) String() string {
-	s, ok := MyEnumWithEnumStringer_name[int32(x)]
-	if ok {
-		return s
-	}
-	return strconv.Itoa(int(x))
-}
 
 func init() { proto.RegisterFile("enumcustomname.proto", fileDescriptor_49eed3c955d68b51) }
 
@@ -337,4 +330,12 @@ var fileDescriptor_49eed3c955d68b51 = []byte{
 	0x10, 0xf0, 0xca, 0x7c, 0xa1, 0x42, 0xae, 0xf8, 0x64, 0x4d, 0x03, 0xb2, 0x92, 0x61, 0x58, 0xde,
 	0xd0, 0x71, 0x6a, 0x91, 0x13, 0xff, 0x2c, 0x15, 0xe9, 0x5f, 0x00, 0x00, 0x00, 0xff, 0xff, 0xbe,
 	0x65, 0x55, 0xe7, 0xdb, 0x05, 0x00, 0x00,
+}
+
+func (x MyEnumWithEnumStringer) String() string {
+	s, ok := MyEnumWithEnumStringer_name[int32(x)]
+	if ok {
+		return s
+	}
+	return strconv.Itoa(int(x))
 }
