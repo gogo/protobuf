@@ -6,7 +6,8 @@ package importing
 import (
 	fmt "fmt"
 	proto "github.com/gogo/protobuf/proto"
-	import_public "github.com/gogo/protobuf/protoc-gen-gogo/testdata/import_public"
+	_ "github.com/gogo/protobuf/protoc-gen-gogo/testdata/import_public"
+	sub "github.com/gogo/protobuf/protoc-gen-gogo/testdata/import_public/sub"
 	math "math"
 )
 
@@ -23,10 +24,10 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type M struct {
 	// Message type defined in a file publicly imported by a file we import.
-	M                    *import_public.M `protobuf:"bytes,1,opt,name=m" json:"m,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
-	XXX_unrecognized     []byte           `json:"-"`
-	XXX_sizecache        int32            `json:"-"`
+	M                    *sub.M   `protobuf:"bytes,1,opt,name=m" json:"m,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *M) Reset()         { *m = M{} }
@@ -53,7 +54,7 @@ func (m *M) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_M proto.InternalMessageInfo
 
-func (m *M) GetM() *import_public.M {
+func (m *M) GetM() *sub.M {
 	if m != nil {
 		return m.M
 	}
