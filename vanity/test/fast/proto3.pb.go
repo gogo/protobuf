@@ -6,9 +6,8 @@ package vanity
 import (
 	fmt "fmt"
 	proto "github.com/gogo/protobuf/proto"
-	math "math"
-
 	io "io"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

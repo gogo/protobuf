@@ -4,28 +4,23 @@
 package proto2_maps
 
 import (
-	fmt "fmt"
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/gogo/protobuf/proto"
-	math "math"
-
-	github_com_gogo_protobuf_test "github.com/gogo/protobuf/test"
-	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
-
 	bytes "bytes"
 	compress_gzip "compress/gzip"
-	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-	io_ioutil "io/ioutil"
-
-	strconv "strconv"
-
-	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
-	reflect "reflect"
-	strings "strings"
-
 	encoding_binary "encoding/binary"
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+	proto "github.com/gogo/protobuf/proto"
+	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+	github_com_gogo_protobuf_test "github.com/gogo/protobuf/test"
+	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
 	io "io"
+	io_ioutil "io/ioutil"
+	math "math"
+	reflect "reflect"
+	strconv "strconv"
+	strings "strings"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

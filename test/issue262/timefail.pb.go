@@ -8,16 +8,12 @@ import (
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	_ "github.com/gogo/protobuf/types"
+	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+	io "io"
 	math "math"
-
-	time "time"
-
 	reflect "reflect"
 	strings "strings"
-
-	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
-
-	io "io"
+	time "time"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

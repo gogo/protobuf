@@ -455,6 +455,7 @@ type Generator struct {
 	packageNames     map[GoImportPath]GoPackageName // Imported package names in the current file.
 	usedPackages     map[GoImportPath]bool          // Packages used in current file.
 	usedPackageNames map[GoPackageName]bool         // Package names used in the current file.
+	addedImports     map[GoImportPath]bool          // Additional imports to emit.`
 	typeNameToObject map[string]Object              // Key is a fully-qualified name in input syntax.
 	init             []string                       // Lines to emit in the init function.
 	indent           string
@@ -582,7 +583,7 @@ func (g *Generator) GoPackageName(importPath GoImportPath) GoPackageName {
 		return name
 	}
 	name := cleanPackageName(baseName(string(importPath)))
-	for i, orig := 1, name; g.usedPackageNames[name]; i++ {
+	for i, orig := 1, name; g.usedPackageNames[name] || isGoPredeclaredIdentifier[string(name)]; i++ {
 		name = orig + GoPackageName(strconv.Itoa(i))
 	}
 	if g.packageNames == nil {
@@ -594,6 +595,13 @@ func (g *Generator) GoPackageName(importPath GoImportPath) GoPackageName {
 	}
 	g.usedPackageNames[name] = true
 	return name
+}
+
+// AddImport adds a package to the generated file's import section.
+// It returns the name used for the package.
+func (g *Generator) AddImport(importPath GoImportPath) GoPackageName {
+	g.addedImports[importPath] = true
+	return g.GoPackageName(importPath)
 }
 
 var globalPackageNames = map[GoPackageName]bool{
@@ -639,6 +647,48 @@ var isGoKeyword = map[string]bool{
 	"switch":      true,
 	"type":        true,
 	"var":         true,
+}
+
+var isGoPredeclaredIdentifier = map[string]bool{
+	"append":     true,
+	"bool":       true,
+	"byte":       true,
+	"cap":        true,
+	"close":      true,
+	"complex":    true,
+	"complex128": true,
+	"complex64":  true,
+	"copy":       true,
+	"delete":     true,
+	"error":      true,
+	"false":      true,
+	"float32":    true,
+	"float64":    true,
+	"imag":       true,
+	"int":        true,
+	"int16":      true,
+	"int32":      true,
+	"int64":      true,
+	"int8":       true,
+	"iota":       true,
+	"len":        true,
+	"make":       true,
+	"new":        true,
+	"nil":        true,
+	"panic":      true,
+	"print":      true,
+	"println":    true,
+	"real":       true,
+	"recover":    true,
+	"rune":       true,
+	"string":     true,
+	"true":       true,
+	"uint":       true,
+	"uint16":     true,
+	"uint32":     true,
+	"uint64":     true,
+	"uint8":      true,
+	"uintptr":    true,
 }
 
 func cleanPackageName(name string) GoPackageName {
@@ -978,39 +1028,6 @@ func (g *Generator) ObjectNamed(typeName string) Object {
 	if !ok {
 		g.Fail("can't find object with type", typeName)
 	}
-
-	// If the file of this object isn't a direct dependency of the current file,
-	// or in the current file, then this object has been publicly imported into
-	// a dependency of the current file.
-	// We should return the ImportedDescriptor object for it instead.
-	direct := *o.File().Name == *g.file.Name
-	if !direct {
-		for _, dep := range g.file.Dependency {
-			if *g.fileByName(dep).Name == *o.File().Name {
-				direct = true
-				break
-			}
-		}
-	}
-	if !direct {
-		found := false
-	Loop:
-		for _, dep := range g.file.Dependency {
-			df := g.fileByName(*g.fileByName(dep).Name)
-			for _, td := range df.imp {
-				if td.o == o {
-					// Found it!
-					o = td
-					found = true
-					break Loop
-				}
-			}
-		}
-		if !found {
-			log.Printf("protoc-gen-gogo: WARNING: failed finding publicly imported dependency for %v, used in %v", typeName, *g.file.Name)
-		}
-	}
-
 	return o
 }
 
@@ -1174,6 +1191,7 @@ func (g *Generator) generate(file *FileDescriptor) {
 	g.usedPackages = make(map[GoImportPath]bool)
 	g.packageNames = make(map[GoImportPath]GoPackageName)
 	g.usedPackageNames = make(map[GoPackageName]bool)
+	g.addedImports = make(map[GoImportPath]bool)
 	for name := range globalPackageNames {
 		g.usedPackageNames[name] = true
 	}
@@ -1318,7 +1336,7 @@ func (g *Generator) makeComments(path string) (string, bool) {
 	w := new(bytes.Buffer)
 	nl := ""
 	for _, line := range strings.Split(strings.TrimSuffix(loc.GetLeadingComments(), "\n"), "\n") {
-		fmt.Fprintf(w, "%s// %s", nl, strings.TrimPrefix(line, " "))
+		fmt.Fprintf(w, "%s//%s", nl, line)
 		nl = "\n"
 	}
 	return w.String(), true
@@ -1352,22 +1370,7 @@ func (g *Generator) weak(i int32) bool {
 
 // Generate the imports
 func (g *Generator) generateImports() {
-	g.P("import (")
-	// We almost always need a proto import.  Rather than computing when we
-	// do, which is tricky when there's a plugin, just import it and
-	// reference it later. The same argument applies to the fmt and math packages.
-	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) {
-		g.PrintImport(GoPackageName(g.Pkg["proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/gogo/protobuf/proto"))
-		if gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
-			g.PrintImport(GoPackageName(g.Pkg["golang_proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/golang/protobuf/proto"))
-		}
-	} else {
-		g.PrintImport(GoPackageName(g.Pkg["proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/golang/protobuf/proto"))
-	}
-	g.PrintImport(GoPackageName(g.Pkg["fmt"]), "fmt")
-	g.PrintImport(GoPackageName(g.Pkg["math"]), "math")
-
-	imports := make(map[GoImportPath]bool)
+	imports := make(map[GoImportPath]GoPackageName)
 	for i, s := range g.file.Dependency {
 		fd := g.fileByName(s)
 		importPath := fd.importPath
@@ -1380,30 +1383,48 @@ func (g *Generator) generateImports() {
 			continue
 		}
 		// Do not import a package twice.
-		if imports[importPath] {
+		if _, ok := imports[importPath]; ok {
 			continue
 		}
-		imports[importPath] = true
 		// We need to import all the dependencies, even if we don't reference them,
 		// because other code and tools depend on having the full transitive closure
 		// of protocol buffer types in the binary.
 		packageName := g.GoPackageName(importPath)
-		if _, ok := g.usedPackages[importPath]; ok {
-			g.PrintImport(packageName, GoImportPath(g.ImportPrefix)+importPath)
-		} else {
-			g.P("_ ", GoImportPath(g.ImportPrefix)+importPath)
+		if _, ok := g.usedPackages[importPath]; !ok {
+			packageName = "_"
 		}
+		imports[importPath] = packageName
 	}
-	g.P()
+	for importPath := range g.addedImports {
+		imports[importPath] = g.GoPackageName(importPath)
+	}
+	// We almost always need a proto import.  Rather than computing when we
+	// do, which is tricky when there's a plugin, just import it and
+	// reference it later. The same argument applies to the fmt and math packages.
+	g.P("import (")
+	g.PrintImport(GoPackageName(g.Pkg["fmt"]), "fmt")
+	g.PrintImport(GoPackageName(g.Pkg["math"]), "math")
+	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) {
+		g.PrintImport(GoPackageName(g.Pkg["proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/gogo/protobuf/proto"))
+		if gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
+			g.PrintImport(GoPackageName(g.Pkg["golang_proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/golang/protobuf/proto"))
+		}
+	} else {
+		g.PrintImport(GoPackageName(g.Pkg["proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/golang/protobuf/proto"))
+	}
+	for importPath, packageName := range imports {
+		g.P(packageName, " ", GoImportPath(g.ImportPrefix)+importPath)
+	}
+	// Custom gogo imports
 	for _, s := range g.customImports {
 		s1 := strings.Map(badToUnderscore, s)
 		g.PrintImport(GoPackageName(s1), GoImportPath(s))
 	}
-	g.P()
-	// TODO: may need to worry about uniqueness across plugins
+	// gogo plugin imports
+	// TODO: may need to worry about uniqueness across plugins and could change this
+	// to use the `addedImports` technique
 	for _, p := range plugins {
 		p.GenerateImports(g.file)
-		g.P()
 	}
 	g.P(")")
 
@@ -1626,6 +1647,18 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 				g.Fail("unknown enum type", CamelCaseSlice(obj.TypeName()))
 			}
 			defaultValue = enum.integerValueAsString(defaultValue)
+		case descriptor.FieldDescriptorProto_TYPE_FLOAT:
+			if def := defaultValue; def != "inf" && def != "-inf" && def != "nan" {
+				if f, err := strconv.ParseFloat(defaultValue, 32); err == nil {
+					defaultValue = fmt.Sprint(float32(f))
+				}
+			}
+		case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
+			if def := defaultValue; def != "inf" && def != "-inf" && def != "nan" {
+				if f, err := strconv.ParseFloat(defaultValue, 64); err == nil {
+					defaultValue = fmt.Sprint(f)
+				}
+			}
 		}
 		defaultValue = ",def=" + defaultValue
 	}
@@ -1962,11 +1995,16 @@ func (g *Generator) GoMapType(d *Descriptor, field *descriptor.FieldDescriptorPr
 }
 
 func (g *Generator) RecordTypeUse(t string) {
-	if _, ok := g.typeNameToObject[t]; ok {
-		// Call ObjectNamed to get the true object to record the use.
-		obj := g.ObjectNamed(t)
-		g.usedPackages[obj.GoImportPath()] = true
+	if _, ok := g.typeNameToObject[t]; !ok {
+		return
 	}
+	importPath := g.ObjectNamed(t).GoImportPath()
+	if importPath == g.outputImportPath {
+		// Don't record use of objects in our package.
+		return
+	}
+	g.AddImport(importPath)
+	g.usedPackages[importPath] = true
 }
 
 // Method names that may be generated.  Fields with these names get an
@@ -2102,7 +2140,7 @@ func (g *Generator) defaultConstantName(goMessageType, protoFieldName string) st
 // oneofField - field containing list of subfields:
 // - oneofSubField - a field within the oneof
 
-// msgCtx contais the context for the generator functions.
+// msgCtx contains the context for the generator functions.
 type msgCtx struct {
 	goName  string      // Go struct name of the message, e.g. MessageName
 	message *Descriptor // The descriptor for the message
@@ -2193,6 +2231,7 @@ type oneofSubField struct {
 	fieldNumber   int                                  // Actual field number, as defined in proto, e.g. 12
 	getterDef     string                               // Default for getters, e.g. "nil", `""` or "Default_MessageType_FieldName"
 	protoDef      string                               // Default value as defined in the proto file, e.g "yoshi" or "5"
+	deprecated    string                               // Deprecation comment, if any.
 	wireType      string                               // gogo. We can set this on creation, instead of using a function
 }
 
@@ -2622,11 +2661,14 @@ func (f *oneofField) getter(g *Generator, mc *msgCtx) {
 		return
 	}
 
-	for _, of := range f.subFields {
-		if gogoproto.IsEmbed(of.protoField) || gogoproto.IsCustomType(of.protoField) {
+	for _, sf := range f.subFields {
+		if gogoproto.IsEmbed(sf.protoField) || gogoproto.IsCustomType(sf.protoField) {
 			continue
 		}
-		g.generateGet(mc, of.protoField, of.protoType, true, of.goName, of.goType, f.goName, of.oneofTypeName, of.fullPath, of.getterName, of.getterDef)
+		if sf.deprecated != "" {
+			g.P(sf.deprecated)
+		}
+		g.generateGet(mc, sf.protoField, sf.protoType, true, sf.goName, sf.goType, f.goName, sf.oneofTypeName, sf.fullPath, sf.getterName, sf.getterDef)
 	}
 }
 
@@ -2701,6 +2743,14 @@ func (g *Generator) generateDefaultConstants(mc *msgCtx, topLevelFields []topLev
 				def = "float32(" + def + ")"
 			}
 			kind = "var "
+		case df.getProtoType() == descriptor.FieldDescriptorProto_TYPE_FLOAT:
+			if f, err := strconv.ParseFloat(def, 32); err == nil {
+				def = fmt.Sprint(float32(f))
+			}
+		case df.getProtoType() == descriptor.FieldDescriptorProto_TYPE_DOUBLE:
+			if f, err := strconv.ParseFloat(def, 64); err == nil {
+				def = fmt.Sprint(f)
+			}
 		case df.getProtoType() == descriptor.FieldDescriptorProto_TYPE_ENUM:
 			// Must be an enum.  Need to construct the prefixed name.
 			obj := g.ObjectNamed(df.getProtoTypeName())
@@ -3045,22 +3095,6 @@ func (g *Generator) generateCommonMethods(mc *msgCtx) {
 
 	// Extension support methods
 	if len(mc.message.ExtensionRange) > 0 {
-		// message_set_wire_format only makes sense when extensions are defined.
-		if opts := mc.message.Options; opts != nil && opts.GetMessageSetWireFormat() {
-			// isMessageSet = true
-			g.P()
-			g.P("func (m *", mc.goName, ") MarshalJSON() ([]byte, error) {")
-			g.In()
-			g.P("return ", g.Pkg["proto"], ".MarshalMessageSetJSON(&m.XXX_InternalExtensions)")
-			g.Out()
-			g.P("}")
-			g.P("func (m *", mc.goName, ") UnmarshalJSON(buf []byte) error {")
-			g.In()
-			g.P("return ", g.Pkg["proto"], ".UnmarshalMessageSetJSON(buf, &m.XXX_InternalExtensions)")
-			g.Out()
-			g.P("}")
-		}
-
 		g.P()
 		g.P("var extRange_", mc.goName, " = []", g.Pkg["proto"], ".ExtensionRange{")
 		g.In()
@@ -3296,6 +3330,10 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			}
 		}
 		goTyp, _ := g.GoType(message, field)
+		fieldDeprecated := ""
+		if field.GetOptions().GetDeprecated() {
+			fieldDeprecated = deprecationComment
+		}
 		dvalue := g.getterDefault(field, goTypeName, GoTypeToName(goTyp))
 		if oneof {
 			tname := goTypeName + "_" + fieldName
@@ -3340,6 +3378,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				getterDef:     dvalue,
 				protoDef:      field.GetDefaultValue(),
 				oneofTypeName: tname,
+				deprecated:    fieldDeprecated,
 				wireType:      wireTypeName(field),
 			}
 
@@ -3348,11 +3387,6 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				g.RecordTypeUse(field.GetTypeName())
 			}
 			continue
-		}
-
-		fieldDeprecated := ""
-		if field.GetOptions().GetDeprecated() {
-			fieldDeprecated = deprecationComment
 		}
 
 		fieldFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i)
@@ -3419,25 +3453,23 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	g.generateOneofFuncs(mc, topLevelFields)
 	g.P()
 
-	if !message.group {
-		var oneofTypes []string
-		for _, f := range topLevelFields {
-			if of, ok := f.(*oneofField); ok {
-				for _, osf := range of.subFields {
-					oneofTypes = append(oneofTypes, osf.oneofTypeName)
-				}
+	var oneofTypes []string
+	for _, f := range topLevelFields {
+		if of, ok := f.(*oneofField); ok {
+			for _, osf := range of.subFields {
+				oneofTypes = append(oneofTypes, osf.oneofTypeName)
 			}
 		}
-
-		opts := message.Options
-		ms := &messageSymbol{
-			sym:           goTypeName,
-			hasExtensions: len(message.ExtensionRange) > 0,
-			isMessageSet:  opts != nil && opts.GetMessageSetWireFormat(),
-			oneofTypes:    oneofTypes,
-		}
-		g.file.addExport(message, ms)
 	}
+
+	opts := message.Options
+	ms := &messageSymbol{
+		sym:           goTypeName,
+		hasExtensions: len(message.ExtensionRange) > 0,
+		isMessageSet:  opts != nil && opts.GetMessageSetWireFormat(),
+		oneofTypes:    oneofTypes,
+	}
+	g.file.addExport(message, ms)
 
 	for _, ext := range message.ext {
 		g.generateExtension(ext)
@@ -3578,10 +3610,8 @@ func (g *Generator) generateExtension(ext *ExtensionDescriptor) {
 	// In addition, the situation for when to apply this special case is implemented
 	// differently in other languages:
 	// https://github.com/google/protobuf/blob/aff10976/src/google/protobuf/text_format.cc#L1560
-	mset := false
 	if extDesc.GetOptions().GetMessageSetWireFormat() && typeName[len(typeName)-1] == "message_set_extension" {
 		typeName = typeName[:len(typeName)-1]
-		mset = true
 	}
 
 	// For text formatting, the package must be exactly what the .proto file declares,
@@ -3605,13 +3635,6 @@ func (g *Generator) generateExtension(ext *ExtensionDescriptor) {
 	g.P()
 
 	g.addInitf("%s.RegisterExtension(%s)", g.Pkg["proto"], ext.DescName())
-	if mset {
-		// Generate a bit more code to register with message_set.go.
-		g.addInitf("%s.RegisterMessageSetType((%s)(nil), %d, %q)", g.Pkg["proto"], fieldType, *field.Number, extName)
-		if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
-			g.addInitf("%s.RegisterMessageSetType((%s)(nil), %d, %q)", g.Pkg["golang_proto"], fieldType, *field.Number, extName)
-		}
-	}
 
 	g.file.addExport(ext, constOrVarSymbol{ccTypeName, "var", ""})
 }

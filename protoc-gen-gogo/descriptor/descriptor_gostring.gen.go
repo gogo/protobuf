@@ -5,10 +5,9 @@ package descriptor
 
 import (
 	fmt "fmt"
+	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 	proto "github.com/gogo/protobuf/proto"
 	math "math"
-
-	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 	reflect "reflect"
 	sort "sort"
 	strconv "strconv"

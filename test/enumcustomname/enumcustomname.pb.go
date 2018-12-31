@@ -12,7 +12,6 @@ import (
 	proto "github.com/gogo/protobuf/proto"
 	test "github.com/gogo/protobuf/test"
 	math "math"
-
 	strconv "strconv"
 )
 

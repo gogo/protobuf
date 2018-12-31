@@ -6,12 +6,11 @@ package moredefaults
 import (
 	fmt "fmt"
 	_ "github.com/gogo/protobuf/gogoproto"
+	github_com_gogo_protobuf_jsonpb "github.com/gogo/protobuf/jsonpb"
+	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 	proto "github.com/gogo/protobuf/proto"
 	_ "github.com/gogo/protobuf/test/example"
 	math "math"
-
-	github_com_gogo_protobuf_jsonpb "github.com/gogo/protobuf/jsonpb"
-	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 	math_rand "math/rand"
 	testing "testing"
 	time "time"

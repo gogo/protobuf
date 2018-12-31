@@ -4,31 +4,24 @@
 package test
 
 import (
+	bytes "bytes"
+	compress_gzip "compress/gzip"
+	encoding_binary "encoding/binary"
 	fmt "fmt"
 	_ "github.com/gogo/protobuf/gogoproto"
+	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 	proto "github.com/gogo/protobuf/proto"
-	math "math"
-
+	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
 	github_com_gogo_protobuf_test_custom_dash_type "github.com/gogo/protobuf/test/custom-dash-type"
-
-	bytes "bytes"
-	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
-
-	compress_gzip "compress/gzip"
-	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	io "io"
 	io_ioutil "io/ioutil"
-
-	strconv "strconv"
-
+	math "math"
 	reflect "reflect"
 	sort "sort"
+	strconv "strconv"
 	strings "strings"
-
-	encoding_binary "encoding/binary"
-
-	io "io"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -2290,7 +2283,7 @@ var xxx_messageInfo_NestedScope proto.InternalMessageInfo
 
 type NinOptNativeDefault struct {
 	Field1               *float64 `protobuf:"fixed64,1,opt,name=Field1,def=1234.1234" json:"Field1,omitempty"`
-	Field2               *float32 `protobuf:"fixed32,2,opt,name=Field2,def=1234.12341" json:"Field2,omitempty"`
+	Field2               *float32 `protobuf:"fixed32,2,opt,name=Field2,def=1234.1234" json:"Field2,omitempty"`
 	Field3               *int32   `protobuf:"varint,3,opt,name=Field3,def=1234" json:"Field3,omitempty"`
 	Field4               *int64   `protobuf:"varint,4,opt,name=Field4,def=1234" json:"Field4,omitempty"`
 	Field5               *uint32  `protobuf:"varint,5,opt,name=Field5,def=1234" json:"Field5,omitempty"`
@@ -2342,7 +2335,7 @@ func (m *NinOptNativeDefault) XXX_DiscardUnknown() {
 var xxx_messageInfo_NinOptNativeDefault proto.InternalMessageInfo
 
 const Default_NinOptNativeDefault_Field1 float64 = 1234.1234
-const Default_NinOptNativeDefault_Field2 float32 = 1234.12341
+const Default_NinOptNativeDefault_Field2 float32 = 1234.1234
 const Default_NinOptNativeDefault_Field3 int32 = 1234
 const Default_NinOptNativeDefault_Field4 int64 = 1234
 const Default_NinOptNativeDefault_Field5 uint32 = 1234

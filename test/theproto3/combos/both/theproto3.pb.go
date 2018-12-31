@@ -4,29 +4,23 @@
 package theproto3
 
 import (
-	fmt "fmt"
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/gogo/protobuf/proto"
-	both "github.com/gogo/protobuf/test/combos/both"
-	math "math"
-
-	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
-
 	bytes "bytes"
 	compress_gzip "compress/gzip"
-	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-	io_ioutil "io/ioutil"
-
-	strconv "strconv"
-
-	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
-	reflect "reflect"
-	strings "strings"
-
 	encoding_binary "encoding/binary"
-
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+	proto "github.com/gogo/protobuf/proto"
+	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+	both "github.com/gogo/protobuf/test/combos/both"
+	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
 	io "io"
+	io_ioutil "io/ioutil"
+	math "math"
+	reflect "reflect"
+	strconv "strconv"
+	strings "strings"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

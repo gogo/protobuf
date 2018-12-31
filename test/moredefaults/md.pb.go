@@ -4,13 +4,12 @@
 package moredefaults
 
 import (
+	bytes "bytes"
 	fmt "fmt"
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	example "github.com/gogo/protobuf/test/example"
 	math "math"
-
-	bytes "bytes"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

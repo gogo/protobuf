@@ -4,18 +4,14 @@
 package types
 
 import (
+	bytes "bytes"
+	encoding_binary "encoding/binary"
 	fmt "fmt"
 	proto "github.com/gogo/protobuf/proto"
+	io "io"
 	math "math"
-
-	bytes "bytes"
-
 	reflect "reflect"
 	strings "strings"
-
-	encoding_binary "encoding/binary"
-
-	io "io"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

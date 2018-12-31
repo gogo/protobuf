@@ -4,19 +4,16 @@
 package unmarshalmerge
 
 import (
+	bytes "bytes"
+	encoding_binary "encoding/binary"
 	fmt "fmt"
 	_ "github.com/gogo/protobuf/gogoproto"
+	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 	proto "github.com/gogo/protobuf/proto"
+	io "io"
 	math "math"
-
-	bytes "bytes"
-
 	reflect "reflect"
 	strings "strings"
-
-	encoding_binary "encoding/binary"
-	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-	io "io"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

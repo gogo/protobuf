@@ -4,13 +4,11 @@
 package sortkeys
 
 import (
+	bytes "bytes"
 	fmt "fmt"
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	math "math"
-
-	bytes "bytes"
-
 	reflect "reflect"
 	strings "strings"
 )
