@@ -33,9 +33,7 @@ import (
 	"time"
 )
 
-func NewPopulatedDuration(r interface {
-	Int63() int64
-}, easy bool) *Duration {
+func NewPopulatedDuration(r int63er, easy bool) *Duration {
 	this := &Duration{}
 	maxSecs := time.Hour.Nanoseconds() / 1e9
 	max := 2 * maxSecs
@@ -58,9 +56,7 @@ func (d *Duration) String() string {
 	return td.String()
 }
 
-func NewPopulatedStdDuration(r interface {
-	Int63() int64
-}, easy bool) *time.Duration {
+func NewPopulatedStdDuration(r int63er, easy bool) *time.Duration {
 	dur := NewPopulatedDuration(r, easy)
 	d, err := DurationFromProto(dur)
 	if err != nil {
