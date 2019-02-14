@@ -959,6 +959,9 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthCastvalue
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthCastvalue
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1020,7 +1023,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 						return ErrInvalidLengthCastvalue
 					}
 					postmsgIndex := iNdEx + mapmsglen
-					if mapmsglen < 0 {
+					if postmsgIndex < 0 {
 						return ErrInvalidLengthCastvalue
 					}
 					if postmsgIndex > l {
@@ -1071,6 +1074,9 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthCastvalue
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthCastvalue
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1132,7 +1138,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 						return ErrInvalidLengthCastvalue
 					}
 					postmsgIndex := iNdEx + mapmsglen
-					if mapmsglen < 0 {
+					if postmsgIndex < 0 {
 						return ErrInvalidLengthCastvalue
 					}
 					if postmsgIndex > l {
@@ -1167,6 +1173,9 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthCastvalue
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthCastvalue
 			}
 			if (iNdEx + skippy) > l {
@@ -1240,6 +1249,9 @@ func (m *Wilson) Unmarshal(dAtA []byte) error {
 			if skippy < 0 {
 				return ErrInvalidLengthCastvalue
 			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthCastvalue
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1307,8 +1319,11 @@ func skipCastvalue(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthCastvalue
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthCastvalue
 			}
 			return iNdEx, nil
@@ -1339,6 +1354,9 @@ func skipCastvalue(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthCastvalue
+				}
 			}
 			return iNdEx, nil
 		case 4:

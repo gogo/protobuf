@@ -405,6 +405,9 @@ func (m *SourceContext) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthSourceContext
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthSourceContext
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -417,6 +420,9 @@ func (m *SourceContext) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthSourceContext
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthSourceContext
 			}
 			if (iNdEx + skippy) > l {
@@ -486,8 +492,11 @@ func skipSourceContext(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthSourceContext
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthSourceContext
 			}
 			return iNdEx, nil
@@ -518,6 +527,9 @@ func skipSourceContext(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthSourceContext
+				}
 			}
 			return iNdEx, nil
 		case 4:

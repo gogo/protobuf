@@ -1015,6 +1015,9 @@ func (m *Big) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUnmarshalmerge
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthUnmarshalmerge
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1052,6 +1055,9 @@ func (m *Big) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthUnmarshalmerge
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUnmarshalmerge
 			}
 			if (iNdEx + skippy) > l {
@@ -1119,6 +1125,9 @@ func (m *BigUnsafe) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUnmarshalmerge
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthUnmarshalmerge
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1156,6 +1165,9 @@ func (m *BigUnsafe) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthUnmarshalmerge
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUnmarshalmerge
 			}
 			if (iNdEx + skippy) > l {
@@ -1227,6 +1239,9 @@ func (m *Sub) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthUnmarshalmerge
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUnmarshalmerge
 			}
 			if (iNdEx + skippy) > l {
@@ -1463,6 +1478,9 @@ func (m *IntMerge) Unmarshal(dAtA []byte) error {
 			if skippy < 0 {
 				return ErrInvalidLengthUnmarshalmerge
 			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthUnmarshalmerge
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1542,8 +1560,11 @@ func skipUnmarshalmerge(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthUnmarshalmerge
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthUnmarshalmerge
 			}
 			return iNdEx, nil
@@ -1574,6 +1595,9 @@ func skipUnmarshalmerge(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthUnmarshalmerge
+				}
 			}
 			return iNdEx, nil
 		case 4:

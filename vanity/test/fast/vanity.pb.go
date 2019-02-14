@@ -223,6 +223,9 @@ func (m *A) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthVanity
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthVanity
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -257,6 +260,9 @@ func (m *A) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthVanity
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthVanity
 			}
 			if (iNdEx + skippy) > l {
@@ -329,8 +335,11 @@ func skipVanity(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthVanity
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthVanity
 			}
 			return iNdEx, nil
@@ -361,6 +370,9 @@ func skipVanity(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthVanity
+				}
 			}
 			return iNdEx, nil
 		case 4:

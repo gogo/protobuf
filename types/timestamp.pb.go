@@ -436,6 +436,9 @@ func (m *Timestamp) Unmarshal(dAtA []byte) error {
 			if skippy < 0 {
 				return ErrInvalidLengthTimestamp
 			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthTimestamp
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -503,8 +506,11 @@ func skipTimestamp(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthTimestamp
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthTimestamp
 			}
 			return iNdEx, nil
@@ -535,6 +541,9 @@ func skipTimestamp(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthTimestamp
+				}
 			}
 			return iNdEx, nil
 		case 4:

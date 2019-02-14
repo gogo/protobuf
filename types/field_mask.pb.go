@@ -626,6 +626,9 @@ func (m *FieldMask) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthFieldMask
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthFieldMask
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -638,6 +641,9 @@ func (m *FieldMask) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthFieldMask
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthFieldMask
 			}
 			if (iNdEx + skippy) > l {
@@ -707,8 +713,11 @@ func skipFieldMask(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthFieldMask
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthFieldMask
 			}
 			return iNdEx, nil
@@ -739,6 +748,9 @@ func skipFieldMask(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthFieldMask
+				}
 			}
 			return iNdEx, nil
 		case 4:

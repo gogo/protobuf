@@ -445,6 +445,9 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			if skippy < 0 {
 				return ErrInvalidLengthEnumdeclall
 			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthEnumdeclall
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -512,8 +515,11 @@ func skipEnumdeclall(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthEnumdeclall
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthEnumdeclall
 			}
 			return iNdEx, nil
@@ -544,6 +550,9 @@ func skipEnumdeclall(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthEnumdeclall
+				}
 			}
 			return iNdEx, nil
 		case 4:

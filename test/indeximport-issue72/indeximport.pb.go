@@ -336,6 +336,9 @@ func (m *IndexQueries) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthIndeximport
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthIndeximport
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -351,6 +354,9 @@ func (m *IndexQueries) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthIndeximport
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthIndeximport
 			}
 			if (iNdEx + skippy) > l {
@@ -420,8 +426,11 @@ func skipIndeximport(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthIndeximport
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthIndeximport
 			}
 			return iNdEx, nil
@@ -452,6 +461,9 @@ func skipIndeximport(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthIndeximport
+				}
 			}
 			return iNdEx, nil
 		case 4:

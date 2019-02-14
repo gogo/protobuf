@@ -368,6 +368,11 @@ func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.
 		p.Out()
 		p.P(`}`)
 		p.P(`postStringIndex`, varName, ` := iNdEx + intStringLen`, varName)
+		p.P(`if postStringIndex`, varName, ` < 0 {`)
+		p.In()
+		p.P(`return ErrInvalidLength` + p.localName)
+		p.Out()
+		p.P(`}`)
 		p.P(`if postStringIndex`, varName, ` > l {`)
 		p.In()
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
@@ -386,7 +391,7 @@ func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.
 		p.Out()
 		p.P(`}`)
 		p.P(`postmsgIndex := iNdEx + mapmsglen`)
-		p.P(`if mapmsglen < 0 {`)
+		p.P(`if postmsgIndex < 0 {`)
 		p.In()
 		p.P(`return ErrInvalidLength` + p.localName)
 		p.Out()
@@ -440,6 +445,11 @@ func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.
 		p.Out()
 		p.P(`}`)
 		p.P(`postbytesIndex := iNdEx + intMapbyteLen`)
+		p.P(`if postbytesIndex < 0 {`)
+		p.In()
+		p.P(`return ErrInvalidLength` + p.localName)
+		p.Out()
+		p.P(`}`)
 		p.P(`if postbytesIndex > l {`)
 		p.In()
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
@@ -632,6 +642,11 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.Out()
 		p.P(`}`)
 		p.P(`postIndex := iNdEx + intStringLen`)
+		p.P(`if postIndex < 0 {`)
+		p.In()
+		p.P(`return ErrInvalidLength` + p.localName)
+		p.Out()
+		p.P(`}`)
 		p.P(`if postIndex > l {`)
 		p.In()
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
@@ -661,6 +676,11 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.Out()
 		p.P(`}`)
 		p.P(`postIndex := iNdEx + msglen`)
+		p.P(`if postIndex < 0 {`)
+		p.In()
+		p.P(`return ErrInvalidLength` + p.localName)
+		p.Out()
+		p.P(`}`)
 		p.P(`if postIndex > l {`)
 		p.In()
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
@@ -1110,6 +1130,11 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.Out()
 		p.P(`}`)
 		p.P(`postIndex := iNdEx + byteLen`)
+		p.P(`if postIndex < 0 {`)
+		p.In()
+		p.P(`return ErrInvalidLength` + p.localName)
+		p.Out()
+		p.P(`}`)
 		p.P(`if postIndex > l {`)
 		p.In()
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
@@ -1364,6 +1389,11 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				p.Out()
 				p.P(`}`)
 				p.P(`postIndex := iNdEx + packedLen`)
+				p.P(`if postIndex < 0 {`)
+				p.In()
+				p.P(`return ErrInvalidLength` + p.localName)
+				p.Out()
+				p.P(`}`)
 				p.P(`if postIndex > l {`)
 				p.In()
 				p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
@@ -1459,6 +1489,11 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			p.P(`return ErrInvalidLength`, p.localName)
 			p.Out()
 			p.P(`}`)
+			p.P(`if (iNdEx + skippy) < 0 {`)
+			p.In()
+			p.P(`return ErrInvalidLength`, p.localName)
+			p.Out()
+			p.P(`}`)
 			p.P(`if (iNdEx + skippy) > l {`)
 			p.In()
 			p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
@@ -1478,6 +1513,11 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.Out()
 		p.P(`}`)
 		p.P(`if skippy < 0 {`)
+		p.In()
+		p.P(`return ErrInvalidLength`, p.localName)
+		p.Out()
+		p.P(`}`)
+		p.P(`if (iNdEx + skippy) < 0 {`)
 		p.In()
 		p.P(`return ErrInvalidLength`, p.localName)
 		p.Out()
@@ -1589,8 +1629,11 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 						break
 					}
 				}
-				iNdEx += length
 				if length < 0 {
+					return 0, ErrInvalidLength` + p.localName + `
+				}
+				iNdEx += length
+				if iNdEx < 0 {
 					return 0, ErrInvalidLength` + p.localName + `
 				}
 				return iNdEx, nil
@@ -1621,6 +1664,9 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 						return 0, err
 					}
 					iNdEx = start + next
+					if iNdEx < 0 {
+						return 0, ErrInvalidLength` + p.localName + `
+					}
 				}
 				return iNdEx, nil
 			case 4:

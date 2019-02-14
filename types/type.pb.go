@@ -2238,6 +2238,9 @@ func (m *Type) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2266,6 +2269,9 @@ func (m *Type) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2298,6 +2304,9 @@ func (m *Type) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2326,6 +2335,9 @@ func (m *Type) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2357,6 +2369,9 @@ func (m *Type) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2393,6 +2408,9 @@ func (m *Type) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthType
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthType
 			}
 			if (iNdEx + skippy) > l {
@@ -2518,6 +2536,9 @@ func (m *Field) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2547,6 +2568,9 @@ func (m *Field) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2614,6 +2638,9 @@ func (m *Field) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2646,6 +2673,9 @@ func (m *Field) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2675,6 +2705,9 @@ func (m *Field) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2687,6 +2720,9 @@ func (m *Field) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthType
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthType
 			}
 			if (iNdEx + skippy) > l {
@@ -2755,6 +2791,9 @@ func (m *Enum) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2783,6 +2822,9 @@ func (m *Enum) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2814,6 +2856,9 @@ func (m *Enum) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2845,6 +2890,9 @@ func (m *Enum) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2881,6 +2929,9 @@ func (m *Enum) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthType
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthType
 			}
 			if (iNdEx + skippy) > l {
@@ -2949,6 +3000,9 @@ func (m *EnumValue) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2996,6 +3050,9 @@ func (m *EnumValue) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3011,6 +3068,9 @@ func (m *EnumValue) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthType
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthType
 			}
 			if (iNdEx + skippy) > l {
@@ -3079,6 +3139,9 @@ func (m *Option) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3107,6 +3170,9 @@ func (m *Option) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthType
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthType
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3124,6 +3190,9 @@ func (m *Option) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthType
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthType
 			}
 			if (iNdEx + skippy) > l {
@@ -3193,8 +3262,11 @@ func skipType(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthType
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthType
 			}
 			return iNdEx, nil
@@ -3225,6 +3297,9 @@ func skipType(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthType
+				}
 			}
 			return iNdEx, nil
 		case 4:
