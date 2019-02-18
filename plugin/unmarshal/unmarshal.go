@@ -223,7 +223,7 @@ func (p *unmarshal) decodeVarint(varName string, typName string) {
 	p.P(`}`)
 	p.P(`b := dAtA[iNdEx]`)
 	p.P(`iNdEx++`)
-	p.P(varName, ` |= (`, typName, `(b) & 0x7F) << shift`)
+	p.P(varName, ` |= `, typName, `(b&0x7F) << shift`)
 	p.P(`if b < 0x80 {`)
 	p.In()
 	p.P(`break`)

@@ -645,7 +645,7 @@ func (m *Dropped) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
+			wire |= uint64(b&0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -673,7 +673,7 @@ func (m *Dropped) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -705,7 +705,7 @@ func (m *Dropped) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Age |= (int32(b) & 0x7F) << shift
+				m.Age |= int32(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -749,7 +749,7 @@ func (m *DroppedWithoutGetters) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
+			wire |= uint64(b&0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -777,7 +777,7 @@ func (m *DroppedWithoutGetters) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Height |= (int64(b) & 0x7F) << shift
+				m.Height |= int64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -796,7 +796,7 @@ func (m *DroppedWithoutGetters) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Width |= (int64(b) & 0x7F) << shift
+				m.Width |= int64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -840,7 +840,7 @@ func (m *Kept) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
+			wire |= uint64(b&0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -868,7 +868,7 @@ func (m *Kept) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -900,7 +900,7 @@ func (m *Kept) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Age |= (int32(b) & 0x7F) << shift
+				m.Age |= int32(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
