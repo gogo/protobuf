@@ -1378,7 +1378,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 					p.P(`elementCount = packedLen/`, 4)
 				case descriptor.FieldDescriptorProto_TYPE_INT64, descriptor.FieldDescriptorProto_TYPE_UINT64, descriptor.FieldDescriptorProto_TYPE_INT32, descriptor.FieldDescriptorProto_TYPE_UINT32, descriptor.FieldDescriptorProto_TYPE_SINT32, descriptor.FieldDescriptorProto_TYPE_SINT64:
 					p.P(`var count int`)
-					p.P(`for _, integer := range dAtA {`)
+					p.P(`for _, integer := range dAtA[iNdEx:postIndex] {`)
 					p.In()
 					p.P(`if integer < 128 {`)
 					p.In()
