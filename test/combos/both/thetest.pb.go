@@ -7010,10 +7010,10 @@ func (this *MyExtendable) Compare(that interface{}) int {
 	thismap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(this)
 	thatmap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(that1)
 	extkeys := make([]int32, 0, len(thismap)+len(thatmap))
-	for k, _ := range thismap {
+	for k := range thismap {
 		extkeys = append(extkeys, k)
 	}
-	for k, _ := range thatmap {
+	for k := range thatmap {
 		if _, ok := thismap[k]; !ok {
 			extkeys = append(extkeys, k)
 		}
@@ -7092,10 +7092,10 @@ func (this *OtherExtenable) Compare(that interface{}) int {
 	thismap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(this)
 	thatmap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(that1)
 	extkeys := make([]int32, 0, len(thismap)+len(thatmap))
-	for k, _ := range thismap {
+	for k := range thismap {
 		extkeys = append(extkeys, k)
 	}
-	for k, _ := range thatmap {
+	for k := range thatmap {
 		if _, ok := thismap[k]; !ok {
 			extkeys = append(extkeys, k)
 		}
@@ -14555,7 +14555,7 @@ func (this *MyExtendable) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("XXX_InternalExtensions[%v] Not In that", k)
 		}
 	}
-	for k, _ := range thatmap {
+	for k := range thatmap {
 		if _, ok := thismap[k]; !ok {
 			return fmt.Errorf("XXX_InternalExtensions[%v] Not In this", k)
 		}
@@ -14604,7 +14604,7 @@ func (this *MyExtendable) Equal(that interface{}) bool {
 			return false
 		}
 	}
-	for k, _ := range thatmap {
+	for k := range thatmap {
 		if _, ok := thismap[k]; !ok {
 			return false
 		}
@@ -14671,7 +14671,7 @@ func (this *OtherExtenable) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("XXX_InternalExtensions[%v] Not In that", k)
 		}
 	}
-	for k, _ := range thatmap {
+	for k := range thatmap {
 		if _, ok := thismap[k]; !ok {
 			return fmt.Errorf("XXX_InternalExtensions[%v] Not In this", k)
 		}
@@ -14732,7 +14732,7 @@ func (this *OtherExtenable) Equal(that interface{}) bool {
 			return false
 		}
 	}
-	for k, _ := range thatmap {
+	for k := range thatmap {
 		if _, ok := thismap[k]; !ok {
 			return false
 		}
