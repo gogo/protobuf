@@ -331,7 +331,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
+			wire |= uint64(b&0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -359,7 +359,7 @@ func (m *Message) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.EnumeratedField |= (MyEnum(b) & 0x7F) << shift
+				m.EnumeratedField |= MyEnum(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
