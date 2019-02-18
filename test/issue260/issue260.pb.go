@@ -709,6 +709,9 @@ func (m *Dropped) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthIssue260
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthIssue260
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -740,6 +743,9 @@ func (m *Dropped) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthIssue260
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthIssue260
 			}
 			if (iNdEx + skippy) > l {
@@ -844,6 +850,9 @@ func (m *DroppedWithoutGetters) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthIssue260
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthIssue260
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -858,6 +867,9 @@ func (m *DroppedWithoutGetters) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthIssue260
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthIssue260
 			}
 			if (iNdEx + skippy) > l {
@@ -925,6 +937,9 @@ func (m *Kept) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthIssue260
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthIssue260
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -956,6 +971,9 @@ func (m *Kept) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthIssue260
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthIssue260
 			}
 			if (iNdEx + skippy) > l {
@@ -1024,8 +1042,11 @@ func skipIssue260(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthIssue260
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthIssue260
 			}
 			return iNdEx, nil
@@ -1056,6 +1077,9 @@ func skipIssue260(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthIssue260
+				}
 			}
 			return iNdEx, nil
 		case 4:

@@ -229,6 +229,9 @@ func (m *B) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthGogovanity
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGogovanity
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -281,6 +284,9 @@ func (m *B) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthGogovanity
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthGogovanity
 			}
 			if (iNdEx + skippy) > l {
@@ -349,8 +355,11 @@ func skipGogovanity(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthGogovanity
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthGogovanity
 			}
 			return iNdEx, nil
@@ -381,6 +390,9 @@ func skipGogovanity(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthGogovanity
+				}
 			}
 			return iNdEx, nil
 		case 4:

@@ -1478,6 +1478,9 @@ func (m *Struct) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthStruct
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthStruct
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1525,6 +1528,9 @@ func (m *Struct) Unmarshal(dAtA []byte) error {
 						return ErrInvalidLengthStruct
 					}
 					postStringIndexmapkey := iNdEx + intStringLenmapkey
+					if postStringIndexmapkey < 0 {
+						return ErrInvalidLengthStruct
+					}
 					if postStringIndexmapkey > l {
 						return io.ErrUnexpectedEOF
 					}
@@ -1550,7 +1556,7 @@ func (m *Struct) Unmarshal(dAtA []byte) error {
 						return ErrInvalidLengthStruct
 					}
 					postmsgIndex := iNdEx + mapmsglen
-					if mapmsglen < 0 {
+					if postmsgIndex < 0 {
 						return ErrInvalidLengthStruct
 					}
 					if postmsgIndex > l {
@@ -1585,6 +1591,9 @@ func (m *Struct) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthStruct
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthStruct
 			}
 			if (iNdEx + skippy) > l {
@@ -1684,6 +1693,9 @@ func (m *Value) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthStruct
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthStruct
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1733,6 +1745,9 @@ func (m *Value) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthStruct
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthStruct
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1765,6 +1780,9 @@ func (m *Value) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthStruct
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthStruct
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1781,6 +1799,9 @@ func (m *Value) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthStruct
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthStruct
 			}
 			if (iNdEx + skippy) > l {
@@ -1848,6 +1869,9 @@ func (m *ListValue) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthStruct
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthStruct
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1863,6 +1887,9 @@ func (m *ListValue) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthStruct
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthStruct
 			}
 			if (iNdEx + skippy) > l {
@@ -1932,8 +1959,11 @@ func skipStruct(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthStruct
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthStruct
 			}
 			return iNdEx, nil
@@ -1964,6 +1994,9 @@ func skipStruct(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthStruct
+				}
 			}
 			return iNdEx, nil
 		case 4:

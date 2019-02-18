@@ -540,6 +540,9 @@ func (m *Any) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthAny
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAny
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -568,6 +571,9 @@ func (m *Any) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthAny
 			}
 			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthAny
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -583,6 +589,9 @@ func (m *Any) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthAny
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthAny
 			}
 			if (iNdEx + skippy) > l {
@@ -652,8 +661,11 @@ func skipAny(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthAny
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthAny
 			}
 			return iNdEx, nil
@@ -684,6 +696,9 @@ func skipAny(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthAny
+				}
 			}
 			return iNdEx, nil
 		case 4:

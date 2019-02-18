@@ -318,6 +318,9 @@ func (m *Object) Unmarshal(dAtA []byte) error {
 			if skippy < 0 {
 				return ErrInvalidLengthIssue330
 			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthIssue330
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -385,8 +388,11 @@ func skipIssue330(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthIssue330
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthIssue330
 			}
 			return iNdEx, nil
@@ -417,6 +423,9 @@ func skipIssue330(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthIssue330
+				}
 			}
 			return iNdEx, nil
 		case 4:

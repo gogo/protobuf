@@ -683,6 +683,9 @@ func (m *Dropped) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthTypedeclall
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypedeclall
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -714,6 +717,9 @@ func (m *Dropped) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthTypedeclall
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthTypedeclall
 			}
 			if (iNdEx + skippy) > l {
@@ -804,6 +810,9 @@ func (m *DroppedWithoutGetters) Unmarshal(dAtA []byte) error {
 			if skippy < 0 {
 				return ErrInvalidLengthTypedeclall
 			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthTypedeclall
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -869,6 +878,9 @@ func (m *Kept) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthTypedeclall
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypedeclall
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -900,6 +912,9 @@ func (m *Kept) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthTypedeclall
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthTypedeclall
 			}
 			if (iNdEx + skippy) > l {
@@ -968,8 +983,11 @@ func skipTypedeclall(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthTypedeclall
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthTypedeclall
 			}
 			return iNdEx, nil
@@ -1000,6 +1018,9 @@ func skipTypedeclall(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthTypedeclall
+				}
 			}
 			return iNdEx, nil
 		case 4:

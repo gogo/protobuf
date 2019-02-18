@@ -477,6 +477,9 @@ func (m *CodeGenMsg) Unmarshal(dAtA []byte) error {
 			if skippy < 0 {
 				return ErrInvalidLengthIssue449
 			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthIssue449
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -550,8 +553,11 @@ func skipIssue449(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthIssue449
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthIssue449
 			}
 			return iNdEx, nil
@@ -582,6 +588,9 @@ func skipIssue449(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthIssue449
+				}
 			}
 			return iNdEx, nil
 		case 4:

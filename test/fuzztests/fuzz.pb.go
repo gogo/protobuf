@@ -1370,6 +1370,9 @@ func (m *Nil) Unmarshal(dAtA []byte) error {
 			if skippy < 0 {
 				return ErrInvalidLengthFuzz
 			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthFuzz
+			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1442,6 +1445,9 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					return ErrInvalidLengthFuzz
 				}
 				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthFuzz
+				}
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1493,6 +1499,9 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					return ErrInvalidLengthFuzz
 				}
 				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthFuzz
+				}
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
@@ -1552,12 +1561,15 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					return ErrInvalidLengthFuzz
 				}
 				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthFuzz
+				}
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				var elementCount int
 				var count int
-				for _, integer := range dAtA {
+				for _, integer := range dAtA[iNdEx:postIndex] {
 					if integer < 128 {
 						count++
 					}
@@ -1625,12 +1637,15 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					return ErrInvalidLengthFuzz
 				}
 				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthFuzz
+				}
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				var elementCount int
 				var count int
-				for _, integer := range dAtA {
+				for _, integer := range dAtA[iNdEx:postIndex] {
 					if integer < 128 {
 						count++
 					}
@@ -1698,12 +1713,15 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					return ErrInvalidLengthFuzz
 				}
 				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthFuzz
+				}
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				var elementCount int
 				var count int
-				for _, integer := range dAtA {
+				for _, integer := range dAtA[iNdEx:postIndex] {
 					if integer < 128 {
 						count++
 					}
@@ -1771,12 +1789,15 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					return ErrInvalidLengthFuzz
 				}
 				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthFuzz
+				}
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				var elementCount int
 				var count int
-				for _, integer := range dAtA {
+				for _, integer := range dAtA[iNdEx:postIndex] {
 					if integer < 128 {
 						count++
 					}
@@ -1845,12 +1866,15 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					return ErrInvalidLengthFuzz
 				}
 				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthFuzz
+				}
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				var elementCount int
 				var count int
-				for _, integer := range dAtA {
+				for _, integer := range dAtA[iNdEx:postIndex] {
 					if integer < 128 {
 						count++
 					}
@@ -1920,12 +1944,15 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					return ErrInvalidLengthFuzz
 				}
 				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthFuzz
+				}
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
 				var elementCount int
 				var count int
-				for _, integer := range dAtA {
+				for _, integer := range dAtA[iNdEx:postIndex] {
 					if integer < 128 {
 						count++
 					}
@@ -1985,6 +2012,9 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					return ErrInvalidLengthFuzz
 				}
 				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthFuzz
+				}
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2034,6 +2064,9 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					return ErrInvalidLengthFuzz
 				}
 				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthFuzz
+				}
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2083,6 +2116,9 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					return ErrInvalidLengthFuzz
 				}
 				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthFuzz
+				}
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2132,6 +2168,9 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					return ErrInvalidLengthFuzz
 				}
 				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthFuzz
+				}
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2190,6 +2229,9 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 					return ErrInvalidLengthFuzz
 				}
 				postIndex := iNdEx + packedLen
+				if postIndex < 0 {
+					return ErrInvalidLengthFuzz
+				}
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
@@ -2226,6 +2268,9 @@ func (m *NinRepPackedNative) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthFuzz
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthFuzz
 			}
 			if (iNdEx + skippy) > l {
@@ -2506,6 +2551,9 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthFuzz
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthFuzz
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2535,6 +2583,9 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthFuzz
 			}
 			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthFuzz
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2550,6 +2601,9 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthFuzz
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthFuzz
 			}
 			if (iNdEx + skippy) > l {
@@ -2641,6 +2695,9 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthFuzz
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthFuzz
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2674,6 +2731,9 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthFuzz
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthFuzz
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2748,6 +2808,9 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthFuzz
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthFuzz
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2803,6 +2866,9 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthFuzz
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthFuzz
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2832,6 +2898,9 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthFuzz
 			}
 			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthFuzz
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2847,6 +2916,9 @@ func (m *NinOptStruct) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthFuzz
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthFuzz
 			}
 			if (iNdEx + skippy) > l {
@@ -2916,8 +2988,11 @@ func skipFuzz(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthFuzz
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthFuzz
 			}
 			return iNdEx, nil
@@ -2948,6 +3023,9 @@ func skipFuzz(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthFuzz
+				}
 			}
 			return iNdEx, nil
 		case 4:

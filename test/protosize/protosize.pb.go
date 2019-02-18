@@ -486,6 +486,9 @@ func (m *SizeMessage) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthProtosize
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthProtosize
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -499,6 +502,9 @@ func (m *SizeMessage) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthProtosize
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthProtosize
 			}
 			if (iNdEx + skippy) > l {
@@ -568,8 +574,11 @@ func skipProtosize(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthProtosize
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthProtosize
 			}
 			return iNdEx, nil
@@ -600,6 +609,9 @@ func skipProtosize(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthProtosize
+				}
 			}
 			return iNdEx, nil
 		case 4:

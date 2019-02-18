@@ -1232,6 +1232,9 @@ func (m *RequiredExample) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthRequiredexample
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1263,6 +1266,9 @@ func (m *RequiredExample) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthRequiredexample
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1293,6 +1299,9 @@ func (m *RequiredExample) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthRequiredexample
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1305,6 +1314,9 @@ func (m *RequiredExample) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthRequiredexample
 			}
 			if (iNdEx + skippy) > l {
@@ -1590,6 +1602,9 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthRequiredexample
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1619,6 +1634,9 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthRequiredexample
 			}
 			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1635,6 +1653,9 @@ func (m *NidOptNative) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthRequiredexample
 			}
 			if (iNdEx + skippy) > l {
@@ -1974,6 +1995,9 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthRequiredexample
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2004,6 +2028,9 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthRequiredexample
 			}
 			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2020,6 +2047,9 @@ func (m *NinOptNative) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthRequiredexample
 			}
 			if (iNdEx + skippy) > l {
@@ -2132,6 +2162,9 @@ func (m *NestedNinOptNative) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthRequiredexample
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2147,6 +2180,9 @@ func (m *NestedNinOptNative) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthRequiredexample
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthRequiredexample
 			}
 			if (iNdEx + skippy) > l {
@@ -2216,8 +2252,11 @@ func skipRequiredexample(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthRequiredexample
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthRequiredexample
 			}
 			return iNdEx, nil
@@ -2248,6 +2287,9 @@ func skipRequiredexample(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthRequiredexample
+				}
 			}
 			return iNdEx, nil
 		case 4:

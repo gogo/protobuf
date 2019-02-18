@@ -329,6 +329,9 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthIssue261
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthIssue261
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -390,7 +393,7 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 						return ErrInvalidLengthIssue261
 					}
 					postmsgIndex := iNdEx + mapmsglen
-					if mapmsglen < 0 {
+					if postmsgIndex < 0 {
 						return ErrInvalidLengthIssue261
 					}
 					if postmsgIndex > l {
@@ -424,6 +427,9 @@ func (m *MapStdTypes) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthIssue261
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthIssue261
 			}
 			if (iNdEx + skippy) > l {
@@ -492,8 +498,11 @@ func skipIssue261(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthIssue261
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthIssue261
 			}
 			return iNdEx, nil
@@ -524,6 +533,9 @@ func skipIssue261(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthIssue261
+				}
 			}
 			return iNdEx, nil
 		case 4:
