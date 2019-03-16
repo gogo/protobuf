@@ -49,6 +49,7 @@ These projects use gogoprotobuf:
   - <a href="https://github.com/spacemeshos/go-spacemesh">go-spacemesh</a>
   - <a href="https://github.com/weaveworks/cortex">cortex</a> - <a href="https://github.com/weaveworks/cortex/blob/fee02a59729d3771ef888f7bf0fd050e1197c56e/pkg/ingester/client/cortex.proto">sample proto file</a>
   - <a href="http://skywalking.apache.org/">Apache SkyWalking APM</a> - Istio telemetry receiver based on Mixer bypass protocol
+  - <a href="https://github.com/hyperledger/burrow">Hyperledger Burrow</a> - a permissioned DLT framework
 
 Please let us know if you are using gogoprotobuf by posting on our <a href="https://groups.google.com/forum/#!topic/gogoprotobuf/Brw76BxmFpQ">GoogleGroup</a>.
 
