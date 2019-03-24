@@ -26014,11 +26014,11 @@ func (this *NinOptStruct) String() string {
 	s := strings.Join([]string{`&NinOptStruct{`,
 		`Field1:` + valueToStringThetest(this.Field1) + `,`,
 		`Field2:` + valueToStringThetest(this.Field2) + `,`,
-		`Field3:` + strings.Replace(fmt.Sprintf("%v", this.Field3), "NidOptNative", "NidOptNative", 1) + `,`,
-		`Field4:` + strings.Replace(fmt.Sprintf("%v", this.Field4), "NinOptNative", "NinOptNative", 1) + `,`,
+		`Field3:` + strings.Replace(this.Field3.String(), "NidOptNative", "NidOptNative", 1) + `,`,
+		`Field4:` + strings.Replace(this.Field4.String(), "NinOptNative", "NinOptNative", 1) + `,`,
 		`Field6:` + valueToStringThetest(this.Field6) + `,`,
 		`Field7:` + valueToStringThetest(this.Field7) + `,`,
-		`Field8:` + strings.Replace(fmt.Sprintf("%v", this.Field8), "NidOptNative", "NidOptNative", 1) + `,`,
+		`Field8:` + strings.Replace(this.Field8.String(), "NidOptNative", "NidOptNative", 1) + `,`,
 		`Field13:` + valueToStringThetest(this.Field13) + `,`,
 		`Field14:` + valueToStringThetest(this.Field14) + `,`,
 		`Field15:` + valueToStringThetest(this.Field15) + `,`,
@@ -26031,14 +26031,29 @@ func (this *NidRepStruct) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForField3 := "[]NidOptNative{"
+	for _, f := range this.Field3 {
+		repeatedStringForField3 += strings.Replace(strings.Replace(f.String(), "NidOptNative", "NidOptNative", 1), `&`, ``, 1) + ","
+	}
+	repeatedStringForField3 += "}"
+	repeatedStringForField4 := "[]NinOptNative{"
+	for _, f := range this.Field4 {
+		repeatedStringForField4 += strings.Replace(strings.Replace(f.String(), "NinOptNative", "NinOptNative", 1), `&`, ``, 1) + ","
+	}
+	repeatedStringForField4 += "}"
+	repeatedStringForField8 := "[]NidOptNative{"
+	for _, f := range this.Field8 {
+		repeatedStringForField8 += strings.Replace(strings.Replace(f.String(), "NidOptNative", "NidOptNative", 1), `&`, ``, 1) + ","
+	}
+	repeatedStringForField8 += "}"
 	s := strings.Join([]string{`&NidRepStruct{`,
 		`Field1:` + fmt.Sprintf("%v", this.Field1) + `,`,
 		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
-		`Field3:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.Field3), "NidOptNative", "NidOptNative", 1), `&`, ``, 1) + `,`,
-		`Field4:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.Field4), "NinOptNative", "NinOptNative", 1), `&`, ``, 1) + `,`,
+		`Field3:` + repeatedStringForField3 + `,`,
+		`Field4:` + repeatedStringForField4 + `,`,
 		`Field6:` + fmt.Sprintf("%v", this.Field6) + `,`,
 		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
-		`Field8:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.Field8), "NidOptNative", "NidOptNative", 1), `&`, ``, 1) + `,`,
+		`Field8:` + repeatedStringForField8 + `,`,
 		`Field13:` + fmt.Sprintf("%v", this.Field13) + `,`,
 		`Field14:` + fmt.Sprintf("%v", this.Field14) + `,`,
 		`Field15:` + fmt.Sprintf("%v", this.Field15) + `,`,
@@ -26051,14 +26066,29 @@ func (this *NinRepStruct) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForField3 := "[]*NidOptNative{"
+	for _, f := range this.Field3 {
+		repeatedStringForField3 += strings.Replace(f.String(), "NidOptNative", "NidOptNative", 1) + ","
+	}
+	repeatedStringForField3 += "}"
+	repeatedStringForField4 := "[]*NinOptNative{"
+	for _, f := range this.Field4 {
+		repeatedStringForField4 += strings.Replace(f.String(), "NinOptNative", "NinOptNative", 1) + ","
+	}
+	repeatedStringForField4 += "}"
+	repeatedStringForField8 := "[]*NidOptNative{"
+	for _, f := range this.Field8 {
+		repeatedStringForField8 += strings.Replace(f.String(), "NidOptNative", "NidOptNative", 1) + ","
+	}
+	repeatedStringForField8 += "}"
 	s := strings.Join([]string{`&NinRepStruct{`,
 		`Field1:` + fmt.Sprintf("%v", this.Field1) + `,`,
 		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
-		`Field3:` + strings.Replace(fmt.Sprintf("%v", this.Field3), "NidOptNative", "NidOptNative", 1) + `,`,
-		`Field4:` + strings.Replace(fmt.Sprintf("%v", this.Field4), "NinOptNative", "NinOptNative", 1) + `,`,
+		`Field3:` + repeatedStringForField3 + `,`,
+		`Field4:` + repeatedStringForField4 + `,`,
 		`Field6:` + fmt.Sprintf("%v", this.Field6) + `,`,
 		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
-		`Field8:` + strings.Replace(fmt.Sprintf("%v", this.Field8), "NidOptNative", "NidOptNative", 1) + `,`,
+		`Field8:` + repeatedStringForField8 + `,`,
 		`Field13:` + fmt.Sprintf("%v", this.Field13) + `,`,
 		`Field14:` + fmt.Sprintf("%v", this.Field14) + `,`,
 		`Field15:` + fmt.Sprintf("%v", this.Field15) + `,`,
@@ -26072,7 +26102,7 @@ func (this *NidEmbeddedStruct) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NidEmbeddedStruct{`,
-		`NidOptNative:` + strings.Replace(fmt.Sprintf("%v", this.NidOptNative), "NidOptNative", "NidOptNative", 1) + `,`,
+		`NidOptNative:` + strings.Replace(this.NidOptNative.String(), "NidOptNative", "NidOptNative", 1) + `,`,
 		`Field200:` + strings.Replace(strings.Replace(this.Field200.String(), "NidOptNative", "NidOptNative", 1), `&`, ``, 1) + `,`,
 		`Field210:` + fmt.Sprintf("%v", this.Field210) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
@@ -26085,8 +26115,8 @@ func (this *NinEmbeddedStruct) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NinEmbeddedStruct{`,
-		`NidOptNative:` + strings.Replace(fmt.Sprintf("%v", this.NidOptNative), "NidOptNative", "NidOptNative", 1) + `,`,
-		`Field200:` + strings.Replace(fmt.Sprintf("%v", this.Field200), "NidOptNative", "NidOptNative", 1) + `,`,
+		`NidOptNative:` + strings.Replace(this.NidOptNative.String(), "NidOptNative", "NidOptNative", 1) + `,`,
+		`Field200:` + strings.Replace(this.Field200.String(), "NidOptNative", "NidOptNative", 1) + `,`,
 		`Field210:` + valueToStringThetest(this.Field210) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
@@ -26097,9 +26127,14 @@ func (this *NidNestedStruct) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForField2 := "[]NidRepStruct{"
+	for _, f := range this.Field2 {
+		repeatedStringForField2 += strings.Replace(strings.Replace(f.String(), "NidRepStruct", "NidRepStruct", 1), `&`, ``, 1) + ","
+	}
+	repeatedStringForField2 += "}"
 	s := strings.Join([]string{`&NidNestedStruct{`,
 		`Field1:` + strings.Replace(strings.Replace(this.Field1.String(), "NidOptStruct", "NidOptStruct", 1), `&`, ``, 1) + `,`,
-		`Field2:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.Field2), "NidRepStruct", "NidRepStruct", 1), `&`, ``, 1) + `,`,
+		`Field2:` + repeatedStringForField2 + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -26109,9 +26144,14 @@ func (this *NinNestedStruct) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForField2 := "[]*NinRepStruct{"
+	for _, f := range this.Field2 {
+		repeatedStringForField2 += strings.Replace(f.String(), "NinRepStruct", "NinRepStruct", 1) + ","
+	}
+	repeatedStringForField2 += "}"
 	s := strings.Join([]string{`&NinNestedStruct{`,
-		`Field1:` + strings.Replace(fmt.Sprintf("%v", this.Field1), "NinOptStruct", "NinOptStruct", 1) + `,`,
-		`Field2:` + strings.Replace(fmt.Sprintf("%v", this.Field2), "NinRepStruct", "NinRepStruct", 1) + `,`,
+		`Field1:` + strings.Replace(this.Field1.String(), "NinOptStruct", "NinOptStruct", 1) + `,`,
+		`Field2:` + repeatedStringForField2 + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -26202,8 +26242,8 @@ func (this *NinOptStructUnion) String() string {
 	s := strings.Join([]string{`&NinOptStructUnion{`,
 		`Field1:` + valueToStringThetest(this.Field1) + `,`,
 		`Field2:` + valueToStringThetest(this.Field2) + `,`,
-		`Field3:` + strings.Replace(fmt.Sprintf("%v", this.Field3), "NidOptNative", "NidOptNative", 1) + `,`,
-		`Field4:` + strings.Replace(fmt.Sprintf("%v", this.Field4), "NinOptNative", "NinOptNative", 1) + `,`,
+		`Field3:` + strings.Replace(this.Field3.String(), "NidOptNative", "NidOptNative", 1) + `,`,
+		`Field4:` + strings.Replace(this.Field4.String(), "NinOptNative", "NinOptNative", 1) + `,`,
 		`Field6:` + valueToStringThetest(this.Field6) + `,`,
 		`Field7:` + valueToStringThetest(this.Field7) + `,`,
 		`Field13:` + valueToStringThetest(this.Field13) + `,`,
@@ -26219,8 +26259,8 @@ func (this *NinEmbeddedStructUnion) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NinEmbeddedStructUnion{`,
-		`NidOptNative:` + strings.Replace(fmt.Sprintf("%v", this.NidOptNative), "NidOptNative", "NidOptNative", 1) + `,`,
-		`Field200:` + strings.Replace(fmt.Sprintf("%v", this.Field200), "NinOptNative", "NinOptNative", 1) + `,`,
+		`NidOptNative:` + strings.Replace(this.NidOptNative.String(), "NidOptNative", "NidOptNative", 1) + `,`,
+		`Field200:` + strings.Replace(this.Field200.String(), "NinOptNative", "NinOptNative", 1) + `,`,
 		`Field210:` + valueToStringThetest(this.Field210) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
@@ -26232,9 +26272,9 @@ func (this *NinNestedStructUnion) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NinNestedStructUnion{`,
-		`Field1:` + strings.Replace(fmt.Sprintf("%v", this.Field1), "NinOptNativeUnion", "NinOptNativeUnion", 1) + `,`,
-		`Field2:` + strings.Replace(fmt.Sprintf("%v", this.Field2), "NinOptStructUnion", "NinOptStructUnion", 1) + `,`,
-		`Field3:` + strings.Replace(fmt.Sprintf("%v", this.Field3), "NinEmbeddedStructUnion", "NinEmbeddedStructUnion", 1) + `,`,
+		`Field1:` + strings.Replace(this.Field1.String(), "NinOptNativeUnion", "NinOptNativeUnion", 1) + `,`,
+		`Field2:` + strings.Replace(this.Field2.String(), "NinOptStructUnion", "NinOptStructUnion", 1) + `,`,
+		`Field3:` + strings.Replace(this.Field3.String(), "NinEmbeddedStructUnion", "NinEmbeddedStructUnion", 1) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -26245,9 +26285,9 @@ func (this *Tree) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&Tree{`,
-		`Or:` + strings.Replace(fmt.Sprintf("%v", this.Or), "OrBranch", "OrBranch", 1) + `,`,
-		`And:` + strings.Replace(fmt.Sprintf("%v", this.And), "AndBranch", "AndBranch", 1) + `,`,
-		`Leaf:` + strings.Replace(fmt.Sprintf("%v", this.Leaf), "Leaf", "Leaf", 1) + `,`,
+		`Or:` + strings.Replace(this.Or.String(), "OrBranch", "OrBranch", 1) + `,`,
+		`And:` + strings.Replace(this.And.String(), "AndBranch", "AndBranch", 1) + `,`,
+		`Leaf:` + strings.Replace(this.Leaf.String(), "Leaf", "Leaf", 1) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -26294,9 +26334,9 @@ func (this *DeepTree) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&DeepTree{`,
-		`Down:` + strings.Replace(fmt.Sprintf("%v", this.Down), "ADeepBranch", "ADeepBranch", 1) + `,`,
-		`And:` + strings.Replace(fmt.Sprintf("%v", this.And), "AndDeepBranch", "AndDeepBranch", 1) + `,`,
-		`Leaf:` + strings.Replace(fmt.Sprintf("%v", this.Leaf), "DeepLeaf", "DeepLeaf", 1) + `,`,
+		`Down:` + strings.Replace(this.Down.String(), "ADeepBranch", "ADeepBranch", 1) + `,`,
+		`And:` + strings.Replace(this.And.String(), "AndDeepBranch", "AndDeepBranch", 1) + `,`,
+		`Leaf:` + strings.Replace(this.Leaf.String(), "DeepLeaf", "DeepLeaf", 1) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -26467,7 +26507,7 @@ func (this *OtherExtenable) String() string {
 	s := strings.Join([]string{`&OtherExtenable{`,
 		`Field2:` + valueToStringThetest(this.Field2) + `,`,
 		`Field13:` + valueToStringThetest(this.Field13) + `,`,
-		`M:` + strings.Replace(fmt.Sprintf("%v", this.M), "MyExtendable", "MyExtendable", 1) + `,`,
+		`M:` + strings.Replace(this.M.String(), "MyExtendable", "MyExtendable", 1) + `,`,
 		`XXX_InternalExtensions:` + github_com_gogo_protobuf_proto.StringFromInternalExtension(this) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
@@ -26639,14 +26679,19 @@ func (this *CustomNameNinStruct) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForFieldD := "[]*NinOptNative{"
+	for _, f := range this.FieldD {
+		repeatedStringForFieldD += strings.Replace(f.String(), "NinOptNative", "NinOptNative", 1) + ","
+	}
+	repeatedStringForFieldD += "}"
 	s := strings.Join([]string{`&CustomNameNinStruct{`,
 		`FieldA:` + valueToStringThetest(this.FieldA) + `,`,
 		`FieldB:` + valueToStringThetest(this.FieldB) + `,`,
-		`FieldC:` + strings.Replace(fmt.Sprintf("%v", this.FieldC), "NidOptNative", "NidOptNative", 1) + `,`,
-		`FieldD:` + strings.Replace(fmt.Sprintf("%v", this.FieldD), "NinOptNative", "NinOptNative", 1) + `,`,
+		`FieldC:` + strings.Replace(this.FieldC.String(), "NidOptNative", "NidOptNative", 1) + `,`,
+		`FieldD:` + repeatedStringForFieldD + `,`,
 		`FieldE:` + valueToStringThetest(this.FieldE) + `,`,
 		`FieldF:` + valueToStringThetest(this.FieldF) + `,`,
-		`FieldG:` + strings.Replace(fmt.Sprintf("%v", this.FieldG), "NidOptNative", "NidOptNative", 1) + `,`,
+		`FieldG:` + strings.Replace(this.FieldG.String(), "NidOptNative", "NidOptNative", 1) + `,`,
 		`FieldH:` + valueToStringThetest(this.FieldH) + `,`,
 		`FieldI:` + valueToStringThetest(this.FieldI) + `,`,
 		`FieldJ:` + valueToStringThetest(this.FieldJ) + `,`,
@@ -26674,8 +26719,8 @@ func (this *CustomNameNinEmbeddedStructUnion) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&CustomNameNinEmbeddedStructUnion{`,
-		`NidOptNative:` + strings.Replace(fmt.Sprintf("%v", this.NidOptNative), "NidOptNative", "NidOptNative", 1) + `,`,
-		`FieldA:` + strings.Replace(fmt.Sprintf("%v", this.FieldA), "NinOptNative", "NinOptNative", 1) + `,`,
+		`NidOptNative:` + strings.Replace(this.NidOptNative.String(), "NidOptNative", "NidOptNative", 1) + `,`,
+		`FieldA:` + strings.Replace(this.FieldA.String(), "NinOptNative", "NinOptNative", 1) + `,`,
 		`FieldB:` + valueToStringThetest(this.FieldB) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
@@ -26720,8 +26765,13 @@ func (this *UnrecognizedWithInner) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForEmbedded := "[]*UnrecognizedWithInner_Inner{"
+	for _, f := range this.Embedded {
+		repeatedStringForEmbedded += strings.Replace(fmt.Sprintf("%v", f), "UnrecognizedWithInner_Inner", "UnrecognizedWithInner_Inner", 1) + ","
+	}
+	repeatedStringForEmbedded += "}"
 	s := strings.Join([]string{`&UnrecognizedWithInner{`,
-		`Embedded:` + strings.Replace(fmt.Sprintf("%v", this.Embedded), "UnrecognizedWithInner_Inner", "UnrecognizedWithInner_Inner", 1) + `,`,
+		`Embedded:` + repeatedStringForEmbedded + `,`,
 		`Field2:` + valueToStringThetest(this.Field2) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
@@ -26743,7 +26793,7 @@ func (this *UnrecognizedWithEmbed) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&UnrecognizedWithEmbed{`,
-		`UnrecognizedWithEmbed_Embedded:` + strings.Replace(strings.Replace(this.UnrecognizedWithEmbed_Embedded.String(), "UnrecognizedWithEmbed_Embedded", "UnrecognizedWithEmbed_Embedded", 1), `&`, ``, 1) + `,`,
+		`UnrecognizedWithEmbed_Embedded:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.UnrecognizedWithEmbed_Embedded), "UnrecognizedWithEmbed_Embedded", "UnrecognizedWithEmbed_Embedded", 1), `&`, ``, 1) + `,`,
 		`Field2:` + valueToStringThetest(this.Field2) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
@@ -26764,9 +26814,14 @@ func (this *Node) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForChildren := "[]*Node{"
+	for _, f := range this.Children {
+		repeatedStringForChildren += strings.Replace(f.String(), "Node", "Node", 1) + ","
+	}
+	repeatedStringForChildren += "}"
 	s := strings.Join([]string{`&Node{`,
 		`Label:` + valueToStringThetest(this.Label) + `,`,
-		`Children:` + strings.Replace(fmt.Sprintf("%v", this.Children), "Node", "Node", 1) + `,`,
+		`Children:` + repeatedStringForChildren + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")

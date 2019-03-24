@@ -498,7 +498,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
+			wire |= uint64(b&0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -524,7 +524,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					v |= (int64(b) & 0x7F) << shift
+					v |= int64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -541,7 +541,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					packedLen |= (int(b) & 0x7F) << shift
+					packedLen |= int(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -578,7 +578,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 						}
 						b := dAtA[iNdEx]
 						iNdEx++
-						v |= (int64(b) & 0x7F) << shift
+						v |= int64(b&0x7F) << shift
 						if b < 0x80 {
 							break
 						}
@@ -600,7 +600,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					v |= (int32(b) & 0x7F) << shift
+					v |= int32(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -617,7 +617,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					packedLen |= (int(b) & 0x7F) << shift
+					packedLen |= int(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -654,7 +654,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 						}
 						b := dAtA[iNdEx]
 						iNdEx++
-						v |= (int32(b) & 0x7F) << shift
+						v |= int32(b&0x7F) << shift
 						if b < 0x80 {
 							break
 						}
@@ -678,7 +678,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -710,7 +710,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= (int(b) & 0x7F) << shift
+				byteLen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}

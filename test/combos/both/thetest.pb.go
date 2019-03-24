@@ -23034,17 +23034,17 @@ func (m *NidOptStruct) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0x1a
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Field3.Size()))
-	n41, err := m.Field3.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n41, err41 := m.Field3.MarshalTo(dAtA[i:])
+	if err41 != nil {
+		return 0, err41
 	}
 	i += n41
 	dAtA[i] = 0x22
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Field4.Size()))
-	n42, err := m.Field4.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n42, err42 := m.Field4.MarshalTo(dAtA[i:])
+	if err42 != nil {
+		return 0, err42
 	}
 	i += n42
 	dAtA[i] = 0x30
@@ -23056,9 +23056,9 @@ func (m *NidOptStruct) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0x42
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Field8.Size()))
-	n43, err := m.Field8.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n43, err43 := m.Field8.MarshalTo(dAtA[i:])
+	if err43 != nil {
+		return 0, err43
 	}
 	i += n43
 	dAtA[i] = 0x68
@@ -23116,9 +23116,9 @@ func (m *NinOptStruct) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1a
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Field3.Size()))
-		n44, err := m.Field3.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n44, err44 := m.Field3.MarshalTo(dAtA[i:])
+		if err44 != nil {
+			return 0, err44
 		}
 		i += n44
 	}
@@ -23126,9 +23126,9 @@ func (m *NinOptStruct) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x22
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Field4.Size()))
-		n45, err := m.Field4.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n45, err45 := m.Field4.MarshalTo(dAtA[i:])
+		if err45 != nil {
+			return 0, err45
 		}
 		i += n45
 	}
@@ -23146,9 +23146,9 @@ func (m *NinOptStruct) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x42
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Field8.Size()))
-		n46, err := m.Field8.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n46, err46 := m.Field8.MarshalTo(dAtA[i:])
+		if err46 != nil {
+			return 0, err46
 		}
 		i += n46
 	}
@@ -23461,9 +23461,9 @@ func (m *NidEmbeddedStruct) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.NidOptNative.Size()))
-		n53, err := m.NidOptNative.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n53, err53 := m.NidOptNative.MarshalTo(dAtA[i:])
+		if err53 != nil {
+			return 0, err53
 		}
 		i += n53
 	}
@@ -23472,9 +23472,9 @@ func (m *NidEmbeddedStruct) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0xc
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Field200.Size()))
-	n54, err := m.Field200.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n54, err54 := m.Field200.MarshalTo(dAtA[i:])
+	if err54 != nil {
+		return 0, err54
 	}
 	i += n54
 	dAtA[i] = 0x90
@@ -23512,9 +23512,9 @@ func (m *NinEmbeddedStruct) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.NidOptNative.Size()))
-		n55, err := m.NidOptNative.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n55, err55 := m.NidOptNative.MarshalTo(dAtA[i:])
+		if err55 != nil {
+			return 0, err55
 		}
 		i += n55
 	}
@@ -23524,9 +23524,9 @@ func (m *NinEmbeddedStruct) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xc
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Field200.Size()))
-		n56, err := m.Field200.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n56, err56 := m.Field200.MarshalTo(dAtA[i:])
+		if err56 != nil {
+			return 0, err56
 		}
 		i += n56
 	}
@@ -23566,9 +23566,9 @@ func (m *NidNestedStruct) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0xa
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
-	n57, err := m.Field1.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n57, err57 := m.Field1.MarshalTo(dAtA[i:])
+	if err57 != nil {
+		return 0, err57
 	}
 	i += n57
 	if len(m.Field2) > 0 {
@@ -23608,9 +23608,9 @@ func (m *NinNestedStruct) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
-		n58, err := m.Field1.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n58, err58 := m.Field1.MarshalTo(dAtA[i:])
+		if err58 != nil {
+			return 0, err58
 		}
 		i += n58
 	}
@@ -23650,17 +23650,17 @@ func (m *NidOptCustom) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0xa
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Id.Size()))
-	n59, err := m.Id.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n59, err59 := m.Id.MarshalTo(dAtA[i:])
+	if err59 != nil {
+		return 0, err59
 	}
 	i += n59
 	dAtA[i] = 0x12
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Value.Size()))
-	n60, err := m.Value.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n60, err60 := m.Value.MarshalTo(dAtA[i:])
+	if err60 != nil {
+		return 0, err60
 	}
 	i += n60
 	if m.XXX_unrecognized != nil {
@@ -23688,9 +23688,9 @@ func (m *CustomDash) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Value.Size()))
-		n61, err := m.Value.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n61, err61 := m.Value.MarshalTo(dAtA[i:])
+		if err61 != nil {
+			return 0, err61
 		}
 		i += n61
 	}
@@ -23719,9 +23719,9 @@ func (m *NinOptCustom) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Id.Size()))
-		n62, err := m.Id.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n62, err62 := m.Id.MarshalTo(dAtA[i:])
+		if err62 != nil {
+			return 0, err62
 		}
 		i += n62
 	}
@@ -23729,9 +23729,9 @@ func (m *NinOptCustom) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Value.Size()))
-		n63, err := m.Value.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n63, err63 := m.Value.MarshalTo(dAtA[i:])
+		if err63 != nil {
+			return 0, err63
 		}
 		i += n63
 	}
@@ -23937,9 +23937,9 @@ func (m *NinOptStructUnion) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1a
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Field3.Size()))
-		n64, err := m.Field3.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n64, err64 := m.Field3.MarshalTo(dAtA[i:])
+		if err64 != nil {
+			return 0, err64
 		}
 		i += n64
 	}
@@ -23947,9 +23947,9 @@ func (m *NinOptStructUnion) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x22
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Field4.Size()))
-		n65, err := m.Field4.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n65, err65 := m.Field4.MarshalTo(dAtA[i:])
+		if err65 != nil {
+			return 0, err65
 		}
 		i += n65
 	}
@@ -24010,9 +24010,9 @@ func (m *NinEmbeddedStructUnion) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.NidOptNative.Size()))
-		n66, err := m.NidOptNative.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n66, err66 := m.NidOptNative.MarshalTo(dAtA[i:])
+		if err66 != nil {
+			return 0, err66
 		}
 		i += n66
 	}
@@ -24022,9 +24022,9 @@ func (m *NinEmbeddedStructUnion) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xc
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Field200.Size()))
-		n67, err := m.Field200.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n67, err67 := m.Field200.MarshalTo(dAtA[i:])
+		if err67 != nil {
+			return 0, err67
 		}
 		i += n67
 	}
@@ -24065,9 +24065,9 @@ func (m *NinNestedStructUnion) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
-		n68, err := m.Field1.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n68, err68 := m.Field1.MarshalTo(dAtA[i:])
+		if err68 != nil {
+			return 0, err68
 		}
 		i += n68
 	}
@@ -24075,9 +24075,9 @@ func (m *NinNestedStructUnion) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Field2.Size()))
-		n69, err := m.Field2.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n69, err69 := m.Field2.MarshalTo(dAtA[i:])
+		if err69 != nil {
+			return 0, err69
 		}
 		i += n69
 	}
@@ -24085,9 +24085,9 @@ func (m *NinNestedStructUnion) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1a
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Field3.Size()))
-		n70, err := m.Field3.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n70, err70 := m.Field3.MarshalTo(dAtA[i:])
+		if err70 != nil {
+			return 0, err70
 		}
 		i += n70
 	}
@@ -24116,9 +24116,9 @@ func (m *Tree) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Or.Size()))
-		n71, err := m.Or.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n71, err71 := m.Or.MarshalTo(dAtA[i:])
+		if err71 != nil {
+			return 0, err71
 		}
 		i += n71
 	}
@@ -24126,9 +24126,9 @@ func (m *Tree) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.And.Size()))
-		n72, err := m.And.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n72, err72 := m.And.MarshalTo(dAtA[i:])
+		if err72 != nil {
+			return 0, err72
 		}
 		i += n72
 	}
@@ -24136,9 +24136,9 @@ func (m *Tree) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1a
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Leaf.Size()))
-		n73, err := m.Leaf.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n73, err73 := m.Leaf.MarshalTo(dAtA[i:])
+		if err73 != nil {
+			return 0, err73
 		}
 		i += n73
 	}
@@ -24166,17 +24166,17 @@ func (m *OrBranch) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0xa
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Left.Size()))
-	n74, err := m.Left.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n74, err74 := m.Left.MarshalTo(dAtA[i:])
+	if err74 != nil {
+		return 0, err74
 	}
 	i += n74
 	dAtA[i] = 0x12
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Right.Size()))
-	n75, err := m.Right.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n75, err75 := m.Right.MarshalTo(dAtA[i:])
+	if err75 != nil {
+		return 0, err75
 	}
 	i += n75
 	if m.XXX_unrecognized != nil {
@@ -24203,17 +24203,17 @@ func (m *AndBranch) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0xa
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Left.Size()))
-	n76, err := m.Left.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n76, err76 := m.Left.MarshalTo(dAtA[i:])
+	if err76 != nil {
+		return 0, err76
 	}
 	i += n76
 	dAtA[i] = 0x12
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Right.Size()))
-	n77, err := m.Right.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n77, err77 := m.Right.MarshalTo(dAtA[i:])
+	if err77 != nil {
+		return 0, err77
 	}
 	i += n77
 	if m.XXX_unrecognized != nil {
@@ -24269,9 +24269,9 @@ func (m *DeepTree) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Down.Size()))
-		n78, err := m.Down.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n78, err78 := m.Down.MarshalTo(dAtA[i:])
+		if err78 != nil {
+			return 0, err78
 		}
 		i += n78
 	}
@@ -24279,9 +24279,9 @@ func (m *DeepTree) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.And.Size()))
-		n79, err := m.And.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n79, err79 := m.And.MarshalTo(dAtA[i:])
+		if err79 != nil {
+			return 0, err79
 		}
 		i += n79
 	}
@@ -24289,9 +24289,9 @@ func (m *DeepTree) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1a
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Leaf.Size()))
-		n80, err := m.Leaf.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n80, err80 := m.Leaf.MarshalTo(dAtA[i:])
+		if err80 != nil {
+			return 0, err80
 		}
 		i += n80
 	}
@@ -24319,9 +24319,9 @@ func (m *ADeepBranch) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0x12
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Down.Size()))
-	n81, err := m.Down.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n81, err81 := m.Down.MarshalTo(dAtA[i:])
+	if err81 != nil {
+		return 0, err81
 	}
 	i += n81
 	if m.XXX_unrecognized != nil {
@@ -24348,17 +24348,17 @@ func (m *AndDeepBranch) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0xa
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Left.Size()))
-	n82, err := m.Left.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n82, err82 := m.Left.MarshalTo(dAtA[i:])
+	if err82 != nil {
+		return 0, err82
 	}
 	i += n82
 	dAtA[i] = 0x12
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Right.Size()))
-	n83, err := m.Right.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n83, err83 := m.Right.MarshalTo(dAtA[i:])
+	if err83 != nil {
+		return 0, err83
 	}
 	i += n83
 	if m.XXX_unrecognized != nil {
@@ -24385,9 +24385,9 @@ func (m *DeepLeaf) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0xa
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Tree.Size()))
-	n84, err := m.Tree.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n84, err84 := m.Tree.MarshalTo(dAtA[i:])
+	if err84 != nil {
+		return 0, err84
 	}
 	i += n84
 	if m.XXX_unrecognized != nil {
@@ -24754,9 +24754,9 @@ func (m *OtherExtenable) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.M.Size()))
-		n85, err := m.M.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n85, err85 := m.M.MarshalTo(dAtA[i:])
+		if err85 != nil {
+			return 0, err85
 		}
 		i += n85
 	}
@@ -24810,9 +24810,9 @@ func (m *NestedDefinition) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1a
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.NNM.Size()))
-		n86, err := m.NNM.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n86, err86 := m.NNM.MarshalTo(dAtA[i:])
+		if err86 != nil {
+			return 0, err86
 		}
 		i += n86
 	}
@@ -24820,9 +24820,9 @@ func (m *NestedDefinition) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x22
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.NM.Size()))
-		n87, err := m.NM.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n87, err87 := m.NM.MarshalTo(dAtA[i:])
+		if err87 != nil {
+			return 0, err87
 		}
 		i += n87
 	}
@@ -24857,9 +24857,9 @@ func (m *NestedDefinition_NestedMessage) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.NNM.Size()))
-		n88, err := m.NNM.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n88, err88 := m.NNM.MarshalTo(dAtA[i:])
+		if err88 != nil {
+			return 0, err88
 		}
 		i += n88
 	}
@@ -24915,9 +24915,9 @@ func (m *NestedScope) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.A.Size()))
-		n89, err := m.A.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n89, err89 := m.A.MarshalTo(dAtA[i:])
+		if err89 != nil {
+			return 0, err89
 		}
 		i += n89
 	}
@@ -24930,9 +24930,9 @@ func (m *NestedScope) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1a
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.C.Size()))
-		n90, err := m.C.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n90, err90 := m.C.MarshalTo(dAtA[i:])
+		if err90 != nil {
+			return 0, err90
 		}
 		i += n90
 	}
@@ -25069,9 +25069,9 @@ func (m *CustomContainer) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0xa
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.CustomStruct.Size()))
-	n91, err := m.CustomStruct.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n91, err91 := m.CustomStruct.MarshalTo(dAtA[i:])
+	if err91 != nil {
+		return 0, err91
 	}
 	i += n91
 	if m.XXX_unrecognized != nil {
@@ -25463,9 +25463,9 @@ func (m *CustomNameNinStruct) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1a
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.FieldC.Size()))
-		n96, err := m.FieldC.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n96, err96 := m.FieldC.MarshalTo(dAtA[i:])
+		if err96 != nil {
+			return 0, err96
 		}
 		i += n96
 	}
@@ -25495,9 +25495,9 @@ func (m *CustomNameNinStruct) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x42
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.FieldG.Size()))
-		n97, err := m.FieldG.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n97, err97 := m.FieldG.MarshalTo(dAtA[i:])
+		if err97 != nil {
+			return 0, err97
 		}
 		i += n97
 	}
@@ -25548,9 +25548,9 @@ func (m *CustomNameCustomType) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.FieldA.Size()))
-		n98, err := m.FieldA.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n98, err98 := m.FieldA.MarshalTo(dAtA[i:])
+		if err98 != nil {
+			return 0, err98
 		}
 		i += n98
 	}
@@ -25558,9 +25558,9 @@ func (m *CustomNameCustomType) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.FieldB.Size()))
-		n99, err := m.FieldB.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n99, err99 := m.FieldB.MarshalTo(dAtA[i:])
+		if err99 != nil {
+			return 0, err99
 		}
 		i += n99
 	}
@@ -25613,9 +25613,9 @@ func (m *CustomNameNinEmbeddedStructUnion) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.NidOptNative.Size()))
-		n100, err := m.NidOptNative.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n100, err100 := m.NidOptNative.MarshalTo(dAtA[i:])
+		if err100 != nil {
+			return 0, err100
 		}
 		i += n100
 	}
@@ -25625,9 +25625,9 @@ func (m *CustomNameNinEmbeddedStructUnion) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xc
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.FieldA.Size()))
-		n101, err := m.FieldA.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n101, err101 := m.FieldA.MarshalTo(dAtA[i:])
+		if err101 != nil {
+			return 0, err101
 		}
 		i += n101
 	}
@@ -25815,9 +25815,9 @@ func (m *UnrecognizedWithEmbed) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0xa
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.UnrecognizedWithEmbed_Embedded.Size()))
-	n102, err := m.UnrecognizedWithEmbed_Embedded.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n102, err102 := m.UnrecognizedWithEmbed_Embedded.MarshalTo(dAtA[i:])
+	if err102 != nil {
+		return 0, err102
 	}
 	i += n102
 	if m.Field2 != nil {
@@ -25913,9 +25913,9 @@ func (m *NonByteCustomType) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
-		n103, err := m.Field1.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n103, err103 := m.Field1.MarshalTo(dAtA[i:])
+		if err103 != nil {
+			return 0, err103
 		}
 		i += n103
 	}
@@ -25943,9 +25943,9 @@ func (m *NidOptNonByteCustomType) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0xa
 	i++
 	i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
-	n104, err := m.Field1.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n104, err104 := m.Field1.MarshalTo(dAtA[i:])
+	if err104 != nil {
+		return 0, err104
 	}
 	i += n104
 	if m.XXX_unrecognized != nil {
@@ -25973,9 +25973,9 @@ func (m *NinOptNonByteCustomType) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintThetest(dAtA, i, uint64(m.Field1.Size()))
-		n105, err := m.Field1.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n105, err105 := m.Field1.MarshalTo(dAtA[i:])
+		if err105 != nil {
+			return 0, err105
 		}
 		i += n105
 	}
@@ -30614,11 +30614,11 @@ func (this *NinOptStruct) String() string {
 	s := strings.Join([]string{`&NinOptStruct{`,
 		`Field1:` + valueToStringThetest(this.Field1) + `,`,
 		`Field2:` + valueToStringThetest(this.Field2) + `,`,
-		`Field3:` + strings.Replace(fmt.Sprintf("%v", this.Field3), "NidOptNative", "NidOptNative", 1) + `,`,
-		`Field4:` + strings.Replace(fmt.Sprintf("%v", this.Field4), "NinOptNative", "NinOptNative", 1) + `,`,
+		`Field3:` + strings.Replace(this.Field3.String(), "NidOptNative", "NidOptNative", 1) + `,`,
+		`Field4:` + strings.Replace(this.Field4.String(), "NinOptNative", "NinOptNative", 1) + `,`,
 		`Field6:` + valueToStringThetest(this.Field6) + `,`,
 		`Field7:` + valueToStringThetest(this.Field7) + `,`,
-		`Field8:` + strings.Replace(fmt.Sprintf("%v", this.Field8), "NidOptNative", "NidOptNative", 1) + `,`,
+		`Field8:` + strings.Replace(this.Field8.String(), "NidOptNative", "NidOptNative", 1) + `,`,
 		`Field13:` + valueToStringThetest(this.Field13) + `,`,
 		`Field14:` + valueToStringThetest(this.Field14) + `,`,
 		`Field15:` + valueToStringThetest(this.Field15) + `,`,
@@ -30631,14 +30631,29 @@ func (this *NidRepStruct) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForField3 := "[]NidOptNative{"
+	for _, f := range this.Field3 {
+		repeatedStringForField3 += strings.Replace(strings.Replace(f.String(), "NidOptNative", "NidOptNative", 1), `&`, ``, 1) + ","
+	}
+	repeatedStringForField3 += "}"
+	repeatedStringForField4 := "[]NinOptNative{"
+	for _, f := range this.Field4 {
+		repeatedStringForField4 += strings.Replace(strings.Replace(f.String(), "NinOptNative", "NinOptNative", 1), `&`, ``, 1) + ","
+	}
+	repeatedStringForField4 += "}"
+	repeatedStringForField8 := "[]NidOptNative{"
+	for _, f := range this.Field8 {
+		repeatedStringForField8 += strings.Replace(strings.Replace(f.String(), "NidOptNative", "NidOptNative", 1), `&`, ``, 1) + ","
+	}
+	repeatedStringForField8 += "}"
 	s := strings.Join([]string{`&NidRepStruct{`,
 		`Field1:` + fmt.Sprintf("%v", this.Field1) + `,`,
 		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
-		`Field3:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.Field3), "NidOptNative", "NidOptNative", 1), `&`, ``, 1) + `,`,
-		`Field4:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.Field4), "NinOptNative", "NinOptNative", 1), `&`, ``, 1) + `,`,
+		`Field3:` + repeatedStringForField3 + `,`,
+		`Field4:` + repeatedStringForField4 + `,`,
 		`Field6:` + fmt.Sprintf("%v", this.Field6) + `,`,
 		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
-		`Field8:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.Field8), "NidOptNative", "NidOptNative", 1), `&`, ``, 1) + `,`,
+		`Field8:` + repeatedStringForField8 + `,`,
 		`Field13:` + fmt.Sprintf("%v", this.Field13) + `,`,
 		`Field14:` + fmt.Sprintf("%v", this.Field14) + `,`,
 		`Field15:` + fmt.Sprintf("%v", this.Field15) + `,`,
@@ -30651,14 +30666,29 @@ func (this *NinRepStruct) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForField3 := "[]*NidOptNative{"
+	for _, f := range this.Field3 {
+		repeatedStringForField3 += strings.Replace(f.String(), "NidOptNative", "NidOptNative", 1) + ","
+	}
+	repeatedStringForField3 += "}"
+	repeatedStringForField4 := "[]*NinOptNative{"
+	for _, f := range this.Field4 {
+		repeatedStringForField4 += strings.Replace(f.String(), "NinOptNative", "NinOptNative", 1) + ","
+	}
+	repeatedStringForField4 += "}"
+	repeatedStringForField8 := "[]*NidOptNative{"
+	for _, f := range this.Field8 {
+		repeatedStringForField8 += strings.Replace(f.String(), "NidOptNative", "NidOptNative", 1) + ","
+	}
+	repeatedStringForField8 += "}"
 	s := strings.Join([]string{`&NinRepStruct{`,
 		`Field1:` + fmt.Sprintf("%v", this.Field1) + `,`,
 		`Field2:` + fmt.Sprintf("%v", this.Field2) + `,`,
-		`Field3:` + strings.Replace(fmt.Sprintf("%v", this.Field3), "NidOptNative", "NidOptNative", 1) + `,`,
-		`Field4:` + strings.Replace(fmt.Sprintf("%v", this.Field4), "NinOptNative", "NinOptNative", 1) + `,`,
+		`Field3:` + repeatedStringForField3 + `,`,
+		`Field4:` + repeatedStringForField4 + `,`,
 		`Field6:` + fmt.Sprintf("%v", this.Field6) + `,`,
 		`Field7:` + fmt.Sprintf("%v", this.Field7) + `,`,
-		`Field8:` + strings.Replace(fmt.Sprintf("%v", this.Field8), "NidOptNative", "NidOptNative", 1) + `,`,
+		`Field8:` + repeatedStringForField8 + `,`,
 		`Field13:` + fmt.Sprintf("%v", this.Field13) + `,`,
 		`Field14:` + fmt.Sprintf("%v", this.Field14) + `,`,
 		`Field15:` + fmt.Sprintf("%v", this.Field15) + `,`,
@@ -30672,7 +30702,7 @@ func (this *NidEmbeddedStruct) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NidEmbeddedStruct{`,
-		`NidOptNative:` + strings.Replace(fmt.Sprintf("%v", this.NidOptNative), "NidOptNative", "NidOptNative", 1) + `,`,
+		`NidOptNative:` + strings.Replace(this.NidOptNative.String(), "NidOptNative", "NidOptNative", 1) + `,`,
 		`Field200:` + strings.Replace(strings.Replace(this.Field200.String(), "NidOptNative", "NidOptNative", 1), `&`, ``, 1) + `,`,
 		`Field210:` + fmt.Sprintf("%v", this.Field210) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
@@ -30685,8 +30715,8 @@ func (this *NinEmbeddedStruct) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NinEmbeddedStruct{`,
-		`NidOptNative:` + strings.Replace(fmt.Sprintf("%v", this.NidOptNative), "NidOptNative", "NidOptNative", 1) + `,`,
-		`Field200:` + strings.Replace(fmt.Sprintf("%v", this.Field200), "NidOptNative", "NidOptNative", 1) + `,`,
+		`NidOptNative:` + strings.Replace(this.NidOptNative.String(), "NidOptNative", "NidOptNative", 1) + `,`,
+		`Field200:` + strings.Replace(this.Field200.String(), "NidOptNative", "NidOptNative", 1) + `,`,
 		`Field210:` + valueToStringThetest(this.Field210) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
@@ -30697,9 +30727,14 @@ func (this *NidNestedStruct) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForField2 := "[]NidRepStruct{"
+	for _, f := range this.Field2 {
+		repeatedStringForField2 += strings.Replace(strings.Replace(f.String(), "NidRepStruct", "NidRepStruct", 1), `&`, ``, 1) + ","
+	}
+	repeatedStringForField2 += "}"
 	s := strings.Join([]string{`&NidNestedStruct{`,
 		`Field1:` + strings.Replace(strings.Replace(this.Field1.String(), "NidOptStruct", "NidOptStruct", 1), `&`, ``, 1) + `,`,
-		`Field2:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.Field2), "NidRepStruct", "NidRepStruct", 1), `&`, ``, 1) + `,`,
+		`Field2:` + repeatedStringForField2 + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -30709,9 +30744,14 @@ func (this *NinNestedStruct) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForField2 := "[]*NinRepStruct{"
+	for _, f := range this.Field2 {
+		repeatedStringForField2 += strings.Replace(f.String(), "NinRepStruct", "NinRepStruct", 1) + ","
+	}
+	repeatedStringForField2 += "}"
 	s := strings.Join([]string{`&NinNestedStruct{`,
-		`Field1:` + strings.Replace(fmt.Sprintf("%v", this.Field1), "NinOptStruct", "NinOptStruct", 1) + `,`,
-		`Field2:` + strings.Replace(fmt.Sprintf("%v", this.Field2), "NinRepStruct", "NinRepStruct", 1) + `,`,
+		`Field1:` + strings.Replace(this.Field1.String(), "NinOptStruct", "NinOptStruct", 1) + `,`,
+		`Field2:` + repeatedStringForField2 + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -30802,8 +30842,8 @@ func (this *NinOptStructUnion) String() string {
 	s := strings.Join([]string{`&NinOptStructUnion{`,
 		`Field1:` + valueToStringThetest(this.Field1) + `,`,
 		`Field2:` + valueToStringThetest(this.Field2) + `,`,
-		`Field3:` + strings.Replace(fmt.Sprintf("%v", this.Field3), "NidOptNative", "NidOptNative", 1) + `,`,
-		`Field4:` + strings.Replace(fmt.Sprintf("%v", this.Field4), "NinOptNative", "NinOptNative", 1) + `,`,
+		`Field3:` + strings.Replace(this.Field3.String(), "NidOptNative", "NidOptNative", 1) + `,`,
+		`Field4:` + strings.Replace(this.Field4.String(), "NinOptNative", "NinOptNative", 1) + `,`,
 		`Field6:` + valueToStringThetest(this.Field6) + `,`,
 		`Field7:` + valueToStringThetest(this.Field7) + `,`,
 		`Field13:` + valueToStringThetest(this.Field13) + `,`,
@@ -30819,8 +30859,8 @@ func (this *NinEmbeddedStructUnion) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NinEmbeddedStructUnion{`,
-		`NidOptNative:` + strings.Replace(fmt.Sprintf("%v", this.NidOptNative), "NidOptNative", "NidOptNative", 1) + `,`,
-		`Field200:` + strings.Replace(fmt.Sprintf("%v", this.Field200), "NinOptNative", "NinOptNative", 1) + `,`,
+		`NidOptNative:` + strings.Replace(this.NidOptNative.String(), "NidOptNative", "NidOptNative", 1) + `,`,
+		`Field200:` + strings.Replace(this.Field200.String(), "NinOptNative", "NinOptNative", 1) + `,`,
 		`Field210:` + valueToStringThetest(this.Field210) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
@@ -30832,9 +30872,9 @@ func (this *NinNestedStructUnion) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&NinNestedStructUnion{`,
-		`Field1:` + strings.Replace(fmt.Sprintf("%v", this.Field1), "NinOptNativeUnion", "NinOptNativeUnion", 1) + `,`,
-		`Field2:` + strings.Replace(fmt.Sprintf("%v", this.Field2), "NinOptStructUnion", "NinOptStructUnion", 1) + `,`,
-		`Field3:` + strings.Replace(fmt.Sprintf("%v", this.Field3), "NinEmbeddedStructUnion", "NinEmbeddedStructUnion", 1) + `,`,
+		`Field1:` + strings.Replace(this.Field1.String(), "NinOptNativeUnion", "NinOptNativeUnion", 1) + `,`,
+		`Field2:` + strings.Replace(this.Field2.String(), "NinOptStructUnion", "NinOptStructUnion", 1) + `,`,
+		`Field3:` + strings.Replace(this.Field3.String(), "NinEmbeddedStructUnion", "NinEmbeddedStructUnion", 1) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -30845,9 +30885,9 @@ func (this *Tree) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&Tree{`,
-		`Or:` + strings.Replace(fmt.Sprintf("%v", this.Or), "OrBranch", "OrBranch", 1) + `,`,
-		`And:` + strings.Replace(fmt.Sprintf("%v", this.And), "AndBranch", "AndBranch", 1) + `,`,
-		`Leaf:` + strings.Replace(fmt.Sprintf("%v", this.Leaf), "Leaf", "Leaf", 1) + `,`,
+		`Or:` + strings.Replace(this.Or.String(), "OrBranch", "OrBranch", 1) + `,`,
+		`And:` + strings.Replace(this.And.String(), "AndBranch", "AndBranch", 1) + `,`,
+		`Leaf:` + strings.Replace(this.Leaf.String(), "Leaf", "Leaf", 1) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -30894,9 +30934,9 @@ func (this *DeepTree) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&DeepTree{`,
-		`Down:` + strings.Replace(fmt.Sprintf("%v", this.Down), "ADeepBranch", "ADeepBranch", 1) + `,`,
-		`And:` + strings.Replace(fmt.Sprintf("%v", this.And), "AndDeepBranch", "AndDeepBranch", 1) + `,`,
-		`Leaf:` + strings.Replace(fmt.Sprintf("%v", this.Leaf), "DeepLeaf", "DeepLeaf", 1) + `,`,
+		`Down:` + strings.Replace(this.Down.String(), "ADeepBranch", "ADeepBranch", 1) + `,`,
+		`And:` + strings.Replace(this.And.String(), "AndDeepBranch", "AndDeepBranch", 1) + `,`,
+		`Leaf:` + strings.Replace(this.Leaf.String(), "DeepLeaf", "DeepLeaf", 1) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")
@@ -31065,7 +31105,7 @@ func (this *OtherExtenable) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&OtherExtenable{`,
-		`M:` + strings.Replace(fmt.Sprintf("%v", this.M), "MyExtendable", "MyExtendable", 1) + `,`,
+		`M:` + strings.Replace(this.M.String(), "MyExtendable", "MyExtendable", 1) + `,`,
 		`Field2:` + valueToStringThetest(this.Field2) + `,`,
 		`Field13:` + valueToStringThetest(this.Field13) + `,`,
 		`XXX_InternalExtensions:` + github_com_gogo_protobuf_proto.StringFromInternalExtension(this) + `,`,
@@ -31239,14 +31279,19 @@ func (this *CustomNameNinStruct) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForFieldD := "[]*NinOptNative{"
+	for _, f := range this.FieldD {
+		repeatedStringForFieldD += strings.Replace(f.String(), "NinOptNative", "NinOptNative", 1) + ","
+	}
+	repeatedStringForFieldD += "}"
 	s := strings.Join([]string{`&CustomNameNinStruct{`,
 		`FieldA:` + valueToStringThetest(this.FieldA) + `,`,
 		`FieldB:` + valueToStringThetest(this.FieldB) + `,`,
-		`FieldC:` + strings.Replace(fmt.Sprintf("%v", this.FieldC), "NidOptNative", "NidOptNative", 1) + `,`,
-		`FieldD:` + strings.Replace(fmt.Sprintf("%v", this.FieldD), "NinOptNative", "NinOptNative", 1) + `,`,
+		`FieldC:` + strings.Replace(this.FieldC.String(), "NidOptNative", "NidOptNative", 1) + `,`,
+		`FieldD:` + repeatedStringForFieldD + `,`,
 		`FieldE:` + valueToStringThetest(this.FieldE) + `,`,
 		`FieldF:` + valueToStringThetest(this.FieldF) + `,`,
-		`FieldG:` + strings.Replace(fmt.Sprintf("%v", this.FieldG), "NidOptNative", "NidOptNative", 1) + `,`,
+		`FieldG:` + strings.Replace(this.FieldG.String(), "NidOptNative", "NidOptNative", 1) + `,`,
 		`FieldH:` + valueToStringThetest(this.FieldH) + `,`,
 		`FieldI:` + valueToStringThetest(this.FieldI) + `,`,
 		`FieldJ:` + valueToStringThetest(this.FieldJ) + `,`,
@@ -31274,8 +31319,8 @@ func (this *CustomNameNinEmbeddedStructUnion) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&CustomNameNinEmbeddedStructUnion{`,
-		`NidOptNative:` + strings.Replace(fmt.Sprintf("%v", this.NidOptNative), "NidOptNative", "NidOptNative", 1) + `,`,
-		`FieldA:` + strings.Replace(fmt.Sprintf("%v", this.FieldA), "NinOptNative", "NinOptNative", 1) + `,`,
+		`NidOptNative:` + strings.Replace(this.NidOptNative.String(), "NidOptNative", "NidOptNative", 1) + `,`,
+		`FieldA:` + strings.Replace(this.FieldA.String(), "NinOptNative", "NinOptNative", 1) + `,`,
 		`FieldB:` + valueToStringThetest(this.FieldB) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
@@ -31320,8 +31365,13 @@ func (this *UnrecognizedWithInner) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForEmbedded := "[]*UnrecognizedWithInner_Inner{"
+	for _, f := range this.Embedded {
+		repeatedStringForEmbedded += strings.Replace(fmt.Sprintf("%v", f), "UnrecognizedWithInner_Inner", "UnrecognizedWithInner_Inner", 1) + ","
+	}
+	repeatedStringForEmbedded += "}"
 	s := strings.Join([]string{`&UnrecognizedWithInner{`,
-		`Embedded:` + strings.Replace(fmt.Sprintf("%v", this.Embedded), "UnrecognizedWithInner_Inner", "UnrecognizedWithInner_Inner", 1) + `,`,
+		`Embedded:` + repeatedStringForEmbedded + `,`,
 		`Field2:` + valueToStringThetest(this.Field2) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
@@ -31343,7 +31393,7 @@ func (this *UnrecognizedWithEmbed) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&UnrecognizedWithEmbed{`,
-		`UnrecognizedWithEmbed_Embedded:` + strings.Replace(strings.Replace(this.UnrecognizedWithEmbed_Embedded.String(), "UnrecognizedWithEmbed_Embedded", "UnrecognizedWithEmbed_Embedded", 1), `&`, ``, 1) + `,`,
+		`UnrecognizedWithEmbed_Embedded:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.UnrecognizedWithEmbed_Embedded), "UnrecognizedWithEmbed_Embedded", "UnrecognizedWithEmbed_Embedded", 1), `&`, ``, 1) + `,`,
 		`Field2:` + valueToStringThetest(this.Field2) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
@@ -31364,9 +31414,14 @@ func (this *Node) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForChildren := "[]*Node{"
+	for _, f := range this.Children {
+		repeatedStringForChildren += strings.Replace(f.String(), "Node", "Node", 1) + ","
+	}
+	repeatedStringForChildren += "}"
 	s := strings.Join([]string{`&Node{`,
 		`Label:` + valueToStringThetest(this.Label) + `,`,
-		`Children:` + strings.Replace(fmt.Sprintf("%v", this.Children), "Node", "Node", 1) + `,`,
+		`Children:` + repeatedStringForChildren + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")

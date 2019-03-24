@@ -1067,8 +1067,13 @@ func (this *FakeMap) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForEntries := "[]*FakeMapEntry{"
+	for _, f := range this.Entries {
+		repeatedStringForEntries += strings.Replace(f.String(), "FakeMapEntry", "FakeMapEntry", 1) + ","
+	}
+	repeatedStringForEntries += "}"
 	s := strings.Join([]string{`&FakeMap{`,
-		`Entries:` + strings.Replace(fmt.Sprintf("%v", this.Entries), "FakeMapEntry", "FakeMapEntry", 1) + `,`,
+		`Entries:` + repeatedStringForEntries + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")

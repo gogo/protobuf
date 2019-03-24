@@ -1053,9 +1053,9 @@ func (m *NinOptStruct) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1a
 		i++
 		i = encodeVarintFuzz(dAtA, i, uint64(m.Field3.Size()))
-		n17, err := m.Field3.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n17, err17 := m.Field3.MarshalTo(dAtA[i:])
+		if err17 != nil {
+			return 0, err17
 		}
 		i += n17
 	}
@@ -1063,9 +1063,9 @@ func (m *NinOptStruct) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x22
 		i++
 		i = encodeVarintFuzz(dAtA, i, uint64(m.Field4.Size()))
-		n18, err := m.Field4.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n18, err18 := m.Field4.MarshalTo(dAtA[i:])
+		if err18 != nil {
+			return 0, err18
 		}
 		i += n18
 	}
@@ -1083,9 +1083,9 @@ func (m *NinOptStruct) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x42
 		i++
 		i = encodeVarintFuzz(dAtA, i, uint64(m.Field8.Size()))
-		n19, err := m.Field8.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n19, err19 := m.Field8.MarshalTo(dAtA[i:])
+		if err19 != nil {
+			return 0, err19
 		}
 		i += n19
 	}

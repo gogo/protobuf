@@ -435,9 +435,9 @@ func (m *DroppedWithoutGetters) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0x1a
 	i++
 	i = encodeVarintIssue260(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(m.Timestamp)))
-	n1, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(m.Timestamp, dAtA[i:])
-	if err != nil {
-		return 0, err
+	n1, err1 := github_com_gogo_protobuf_types.StdTimeMarshalTo(m.Timestamp, dAtA[i:])
+	if err1 != nil {
+		return 0, err1
 	}
 	i += n1
 	return i, nil

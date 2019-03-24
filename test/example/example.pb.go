@@ -1338,9 +1338,9 @@ func (m *A) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0x1a
 	i++
 	i = encodeVarintExample(dAtA, i, uint64(m.Id.Size()))
-	n1, err := m.Id.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n1, err1 := m.Id.MarshalTo(dAtA[i:])
+	if err1 != nil {
+		return 0, err1
 	}
 	i += n1
 	if m.XXX_unrecognized != nil {
@@ -1367,9 +1367,9 @@ func (m *B) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0xa
 	i++
 	i = encodeVarintExample(dAtA, i, uint64(m.A.Size()))
-	n2, err := m.A.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n2, err2 := m.A.MarshalTo(dAtA[i:])
+	if err2 != nil {
+		return 0, err2
 	}
 	i += n2
 	if len(m.G) > 0 {
@@ -1435,9 +1435,9 @@ func (m *U) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintExample(dAtA, i, uint64(m.A.Size()))
-		n3, err := m.A.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n3, err3 := m.A.MarshalTo(dAtA[i:])
+		if err3 != nil {
+			return 0, err3
 		}
 		i += n3
 	}
@@ -1445,9 +1445,9 @@ func (m *U) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintExample(dAtA, i, uint64(m.B.Size()))
-		n4, err := m.B.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n4, err4 := m.B.MarshalTo(dAtA[i:])
+		if err4 != nil {
+			return 0, err4
 		}
 		i += n4
 	}
@@ -1882,8 +1882,8 @@ func (this *U) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&U{`,
-		`A:` + strings.Replace(fmt.Sprintf("%v", this.A), "A", "A", 1) + `,`,
-		`B:` + strings.Replace(fmt.Sprintf("%v", this.B), "B", "B", 1) + `,`,
+		`A:` + strings.Replace(this.A.String(), "A", "A", 1) + `,`,
+		`B:` + strings.Replace(this.B.String(), "B", "B", 1) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")

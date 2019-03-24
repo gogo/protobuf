@@ -914,9 +914,9 @@ func (m *Api) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x2a
 		i++
 		i = encodeVarintApi(dAtA, i, uint64(m.SourceContext.Size()))
-		n1, err := m.SourceContext.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n1, err1 := m.SourceContext.MarshalTo(dAtA[i:])
+		if err1 != nil {
+			return 0, err1
 		}
 		i += n1
 	}
@@ -1320,13 +1320,28 @@ func (this *Api) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForMethods := "[]*Method{"
+	for _, f := range this.Methods {
+		repeatedStringForMethods += strings.Replace(f.String(), "Method", "Method", 1) + ","
+	}
+	repeatedStringForMethods += "}"
+	repeatedStringForOptions := "[]*Option{"
+	for _, f := range this.Options {
+		repeatedStringForOptions += strings.Replace(fmt.Sprintf("%v", f), "Option", "Option", 1) + ","
+	}
+	repeatedStringForOptions += "}"
+	repeatedStringForMixins := "[]*Mixin{"
+	for _, f := range this.Mixins {
+		repeatedStringForMixins += strings.Replace(f.String(), "Mixin", "Mixin", 1) + ","
+	}
+	repeatedStringForMixins += "}"
 	s := strings.Join([]string{`&Api{`,
 		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
-		`Methods:` + strings.Replace(fmt.Sprintf("%v", this.Methods), "Method", "Method", 1) + `,`,
-		`Options:` + strings.Replace(fmt.Sprintf("%v", this.Options), "Option", "Option", 1) + `,`,
+		`Methods:` + repeatedStringForMethods + `,`,
+		`Options:` + repeatedStringForOptions + `,`,
 		`Version:` + fmt.Sprintf("%v", this.Version) + `,`,
 		`SourceContext:` + strings.Replace(fmt.Sprintf("%v", this.SourceContext), "SourceContext", "SourceContext", 1) + `,`,
-		`Mixins:` + strings.Replace(fmt.Sprintf("%v", this.Mixins), "Mixin", "Mixin", 1) + `,`,
+		`Mixins:` + repeatedStringForMixins + `,`,
 		`Syntax:` + fmt.Sprintf("%v", this.Syntax) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
@@ -1337,13 +1352,18 @@ func (this *Method) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForOptions := "[]*Option{"
+	for _, f := range this.Options {
+		repeatedStringForOptions += strings.Replace(fmt.Sprintf("%v", f), "Option", "Option", 1) + ","
+	}
+	repeatedStringForOptions += "}"
 	s := strings.Join([]string{`&Method{`,
 		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
 		`RequestTypeUrl:` + fmt.Sprintf("%v", this.RequestTypeUrl) + `,`,
 		`RequestStreaming:` + fmt.Sprintf("%v", this.RequestStreaming) + `,`,
 		`ResponseTypeUrl:` + fmt.Sprintf("%v", this.ResponseTypeUrl) + `,`,
 		`ResponseStreaming:` + fmt.Sprintf("%v", this.ResponseStreaming) + `,`,
-		`Options:` + strings.Replace(fmt.Sprintf("%v", this.Options), "Option", "Option", 1) + `,`,
+		`Options:` + repeatedStringForOptions + `,`,
 		`Syntax:` + fmt.Sprintf("%v", this.Syntax) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,

@@ -132,6 +132,9 @@ regenerate:
 	make -C test/xxxfields regenerate
 	make -C test/issue435 regenerate
 	make -C test/issue411 regenerate
+	make -C test/issue498 regenerate
+	make -C test/issue503 regenerate
+	make -C test/issue530 regenerate
 
 	make gofmt
 

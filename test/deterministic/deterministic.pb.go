@@ -1019,9 +1019,9 @@ func (m *NestedOrderedMap) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintDeterministic(dAtA, i, uint64(m.NestedMap.Size()))
-		n1, err := m.NestedMap.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n1, err1 := m.NestedMap.MarshalTo(dAtA[i:])
+		if err1 != nil {
+			return 0, err1
 		}
 		i += n1
 	}
@@ -1110,9 +1110,9 @@ func (m *NestedUnorderedMap) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintDeterministic(dAtA, i, uint64(m.NestedMap.Size()))
-		n2, err := m.NestedMap.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n2, err2 := m.NestedMap.MarshalTo(dAtA[i:])
+		if err2 != nil {
+			return 0, err2
 		}
 		i += n2
 	}

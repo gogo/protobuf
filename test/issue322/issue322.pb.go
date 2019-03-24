@@ -270,9 +270,9 @@ func (m *OneofTest) MarshalTo(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if m.Union != nil {
-		nn1, err := m.Union.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		nn1, err1 := m.Union.MarshalTo(dAtA[i:])
+		if err1 != nil {
+			return 0, err1
 		}
 		i += nn1
 	}
