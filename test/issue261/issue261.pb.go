@@ -194,9 +194,9 @@ func (m *MapStdTypes) MarshalTo(dAtA []byte) (int, error) {
 				dAtA[i] = 0x12
 				i++
 				i = encodeVarintIssue261(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*v)))
-				n1, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(*v, dAtA[i:])
-				if err != nil {
-					return 0, err
+				n1, err1 := github_com_gogo_protobuf_types.StdDurationMarshalTo(*v, dAtA[i:])
+				if err1 != nil {
+					return 0, err1
 				}
 				i += n1
 			}

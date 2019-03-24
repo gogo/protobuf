@@ -2111,9 +2111,9 @@ func (m *SampleOneOf) MarshalTo(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if m.TestOneof != nil {
-		nn1, err := m.TestOneof.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		nn1, err1 := m.TestOneof.MarshalTo(dAtA[i:])
+		if err1 != nil {
+			return 0, err1
 		}
 		i += nn1
 	}
@@ -2251,9 +2251,9 @@ func (m *SampleOneOf_SubMessage) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1
 		i++
 		i = encodeVarintOne(dAtA, i, uint64(m.SubMessage.Size()))
-		n2, err := m.SubMessage.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n2, err2 := m.SubMessage.MarshalTo(dAtA[i:])
+		if err2 != nil {
+			return 0, err2
 		}
 		i += n2
 	}

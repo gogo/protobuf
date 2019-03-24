@@ -904,7 +904,7 @@ func (this *Big) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&Big{`,
-		`Sub:` + strings.Replace(fmt.Sprintf("%v", this.Sub), "Sub", "Sub", 1) + `,`,
+		`Sub:` + strings.Replace(this.Sub.String(), "Sub", "Sub", 1) + `,`,
 		`Number:` + valueToStringUnmarshalmerge(this.Number) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
@@ -916,7 +916,7 @@ func (this *BigUnsafe) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&BigUnsafe{`,
-		`Sub:` + strings.Replace(fmt.Sprintf("%v", this.Sub), "Sub", "Sub", 1) + `,`,
+		`Sub:` + strings.Replace(this.Sub.String(), "Sub", "Sub", 1) + `,`,
 		`Number:` + valueToStringUnmarshalmerge(this.Number) + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,

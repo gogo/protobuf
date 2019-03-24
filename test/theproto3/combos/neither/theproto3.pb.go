@@ -4771,7 +4771,7 @@ func (this *Message) String() string {
 		`TrueScotsman:` + fmt.Sprintf("%v", this.TrueScotsman) + `,`,
 		`Score:` + fmt.Sprintf("%v", this.Score) + `,`,
 		`Key:` + fmt.Sprintf("%v", this.Key) + `,`,
-		`Nested:` + strings.Replace(fmt.Sprintf("%v", this.Nested), "Nested", "Nested", 1) + `,`,
+		`Nested:` + strings.Replace(this.Nested.String(), "Nested", "Nested", 1) + `,`,
 		`Terrain:` + mapStringForTerrain + `,`,
 		`Proto2Field:` + strings.Replace(fmt.Sprintf("%v", this.Proto2Field), "NinOptNative", "both.NinOptNative", 1) + `,`,
 		`Proto2Value:` + mapStringForProto2Value + `,`,

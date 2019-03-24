@@ -68,7 +68,6 @@ func TestStringNMessageNString(t *testing.T) {
 	check(t, "Bar4", m.String(), exp)
 }
 
-// --- FAIL: TestStringRNNMessageNNString (0.00s)
 func TestStringRNNMessageNNString(t *testing.T) {
 	exp1 := "MessageWith&Ampersand1"
 	exp2 := "MessageWith&Ampersand2"
@@ -82,12 +81,11 @@ func TestStringRNMessageNNString(t *testing.T) {
 	exp1 := "MessageWith&Ampersand1"
 	exp2 := "MessageWith&Ampersand2"
 	m := &Foo5{
-		Bars2: []*Bar1{{Str: exp1}, {Str: exp2}},
+		Bars2: []*Bar1{{Str: exp1}, nil, {Str: exp2}},
 	}
 	check(t, "Bars2", m.String(), exp1, exp2)
 }
 
-// --- FAIL: TestStringRNNMessageNString (0.00s)
 func TestStringRNNMessageNString(t *testing.T) {
 	exp1 := "MessageWith&Ampersand1"
 	exp2 := "MessageWith&Ampersand2"
@@ -106,7 +104,6 @@ func TestStringRNMessageNString(t *testing.T) {
 	check(t, "Bars4", m.String(), exp1, exp2)
 }
 
-// --- FAIL: TestStringDeepRNNMessageRNNMessageNNStringAndNString (0.00s)
 func TestStringDeepRNNMessageRNNMessageNNStringAndNString(t *testing.T) {
 	exp1 := "MessageWith&Ampersand1"
 	exp2 := "MessageWith&Ampersand2"
@@ -129,21 +126,20 @@ func TestStringDeepRNNMessageRNNMessageNNStringAndNString(t *testing.T) {
 	check(t, "Barrs1", m.String(), exp1, exp2)
 }
 
-// --- FAIL: TestStringDeepRNNMessageRNMessageNNStringAndNString (0.00s)
 func TestStringDeepRNNMessageRNMessageNNStringAndNString(t *testing.T) {
 	exp1 := "MessageWith&Ampersand1"
 	exp2 := "MessageWith&Ampersand2"
 	m := &Foo5{
 		Barrs2: []Bar5{
 			{
-				Bars6: []*Bar6{
+				Bars2: []*Bar2{
 					{
 						Str: &exp1,
 					},
 				},
 				Bars1: []*Bar1{
 					{
-						Str: exp1,
+						Str: exp2,
 					},
 				},
 			},
@@ -152,7 +148,6 @@ func TestStringDeepRNNMessageRNMessageNNStringAndNString(t *testing.T) {
 	check(t, "Barrs2", m.String(), exp1, exp2)
 }
 
-// --- FAIL: TestStringMapNMessageRNNMessageNNStringAndNString (0.00s)
 func TestStringMapNMessageRNNMessageNNStringAndNString(t *testing.T) {
 	exp1 := "MessageWith&Ampersand1"
 	exp2 := "MessageWith&Ampersand2"
@@ -181,7 +176,7 @@ func TestStringMapNMessageRNMessageNNStringAndNString(t *testing.T) {
 	m := &Foo5{
 		Barmap2: map[string]*Bar5{
 			"one": {
-				Bars6: []*Bar6{
+				Bars2: []*Bar2{
 					{
 						Str: &exp1,
 					},
@@ -195,6 +190,35 @@ func TestStringMapNMessageRNMessageNNStringAndNString(t *testing.T) {
 		},
 	}
 	check(t, "Barmap2", m.String(), exp1, exp2)
+}
+
+func TestStringRNNMessageNNStringRNMessageNStringNString(t *testing.T) {
+	exp1 := "MessageWith&Ampersand1"
+	exp2 := "MessageWith&Ampersand2"
+	exp3 := "MessageWith&Ampersand3"
+	m := &Bar7{
+		Bars71: []Bar7{
+			{
+				Bars72: []*Bar7{
+					{
+						Str2: &exp3,
+					},
+				},
+				Str2: &exp2,
+			},
+		},
+		Str1: exp1,
+	}
+	check(t, "Bar7", m.String(), exp1, exp2, exp3)
+}
+
+func TestStringRNNMessageWithNoStringerNNString(t *testing.T) {
+	exp1 := "MessageWith&Ampersand1"
+	exp2 := "MessageWith&Ampersand2"
+	m := &Bar8{
+		Bars1: []Bar9{{Str: exp1}, {Str: exp2}},
+	}
+	check(t, "Bars1", m.String(), exp1, exp2)
 }
 
 func check(t *testing.T, field, result string, expects ...string) {

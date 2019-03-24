@@ -1192,9 +1192,9 @@ func (m *Castaway) MarshalTo(dAtA []byte) (int, error) {
 				dAtA[i] = 0x12
 				i++
 				i = encodeVarintCasttype(dAtA, i, uint64(v.Size()))
-				n1, err := v.MarshalTo(dAtA[i:])
-				if err != nil {
-					return 0, err
+				n1, err1 := v.MarshalTo(dAtA[i:])
+				if err1 != nil {
+					return 0, err1
 				}
 				i += n1
 			}
@@ -1218,9 +1218,9 @@ func (m *Castaway) MarshalTo(dAtA []byte) (int, error) {
 			dAtA[i] = 0x12
 			i++
 			i = encodeVarintCasttype(dAtA, i, uint64((&v).Size()))
-			n2, err := (&v).MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
+			n2, err2 := (&v).MarshalTo(dAtA[i:])
+			if err2 != nil {
+				return 0, err2
 			}
 			i += n2
 		}

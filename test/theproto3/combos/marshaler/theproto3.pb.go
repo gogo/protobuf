@@ -3771,9 +3771,9 @@ func (m *Message) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x32
 		i++
 		i = encodeVarintTheproto3(dAtA, i, uint64(m.Nested.Size()))
-		n3, err := m.Nested.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n3, err3 := m.Nested.MarshalTo(dAtA[i:])
+		if err3 != nil {
+			return 0, err3
 		}
 		i += n3
 	}
@@ -3817,9 +3817,9 @@ func (m *Message) MarshalTo(dAtA []byte) (int, error) {
 				dAtA[i] = 0x12
 				i++
 				i = encodeVarintTheproto3(dAtA, i, uint64(v.Size()))
-				n4, err := v.MarshalTo(dAtA[i:])
-				if err != nil {
-					return 0, err
+				n4, err4 := v.MarshalTo(dAtA[i:])
+				if err4 != nil {
+					return 0, err4
 				}
 				i += n4
 			}
@@ -3829,9 +3829,9 @@ func (m *Message) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x5a
 		i++
 		i = encodeVarintTheproto3(dAtA, i, uint64(m.Proto2Field.Size()))
-		n5, err := m.Proto2Field.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n5, err5 := m.Proto2Field.MarshalTo(dAtA[i:])
+		if err5 != nil {
+			return 0, err5
 		}
 		i += n5
 	}
@@ -3854,9 +3854,9 @@ func (m *Message) MarshalTo(dAtA []byte) (int, error) {
 				dAtA[i] = 0x12
 				i++
 				i = encodeVarintTheproto3(dAtA, i, uint64(v.Size()))
-				n6, err := v.MarshalTo(dAtA[i:])
-				if err != nil {
-					return 0, err
+				n6, err6 := v.MarshalTo(dAtA[i:])
+				if err6 != nil {
+					return 0, err6
 				}
 				i += n6
 			}
@@ -4207,9 +4207,9 @@ func (m *AllMaps) MarshalTo(dAtA []byte) (int, error) {
 				dAtA[i] = 0x12
 				i++
 				i = encodeVarintTheproto3(dAtA, i, uint64(v.Size()))
-				n7, err := v.MarshalTo(dAtA[i:])
-				if err != nil {
-					return 0, err
+				n7, err7 := v.MarshalTo(dAtA[i:])
+				if err7 != nil {
+					return 0, err7
 				}
 				i += n7
 			}
@@ -4618,9 +4618,9 @@ func (m *AllMapsOrdered) MarshalTo(dAtA []byte) (int, error) {
 				dAtA[i] = 0x12
 				i++
 				i = encodeVarintTheproto3(dAtA, i, uint64(v.Size()))
-				n8, err := v.MarshalTo(dAtA[i:])
-				if err != nil {
-					return 0, err
+				n8, err8 := v.MarshalTo(dAtA[i:])
+				if err8 != nil {
+					return 0, err8
 				}
 				i += n8
 			}
@@ -4682,9 +4682,9 @@ func (m *MessageWithMap) MarshalTo(dAtA []byte) (int, error) {
 				dAtA[i] = 0x12
 				i++
 				i = encodeVarintTheproto3(dAtA, i, uint64(v.Size()))
-				n9, err := v.MarshalTo(dAtA[i:])
-				if err != nil {
-					return 0, err
+				n9, err9 := v.MarshalTo(dAtA[i:])
+				if err9 != nil {
+					return 0, err9
 				}
 				i += n9
 			}
@@ -4768,18 +4768,18 @@ func (m *Uint128Pair) MarshalTo(dAtA []byte) (int, error) {
 	dAtA[i] = 0xa
 	i++
 	i = encodeVarintTheproto3(dAtA, i, uint64(m.Left.Size()))
-	n10, err := m.Left.MarshalTo(dAtA[i:])
-	if err != nil {
-		return 0, err
+	n10, err10 := m.Left.MarshalTo(dAtA[i:])
+	if err10 != nil {
+		return 0, err10
 	}
 	i += n10
 	if m.Right != nil {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintTheproto3(dAtA, i, uint64(m.Right.Size()))
-		n11, err := m.Right.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n11, err11 := m.Right.MarshalTo(dAtA[i:])
+		if err11 != nil {
+			return 0, err11
 		}
 		i += n11
 	}
@@ -6027,7 +6027,7 @@ func (this *Message) String() string {
 		`HeightInCm:` + fmt.Sprintf("%v", this.HeightInCm) + `,`,
 		`Data:` + fmt.Sprintf("%v", this.Data) + `,`,
 		`Key:` + fmt.Sprintf("%v", this.Key) + `,`,
-		`Nested:` + strings.Replace(fmt.Sprintf("%v", this.Nested), "Nested", "Nested", 1) + `,`,
+		`Nested:` + strings.Replace(this.Nested.String(), "Nested", "Nested", 1) + `,`,
 		`ResultCount:` + fmt.Sprintf("%v", this.ResultCount) + `,`,
 		`TrueScotsman:` + fmt.Sprintf("%v", this.TrueScotsman) + `,`,
 		`Score:` + fmt.Sprintf("%v", this.Score) + `,`,

@@ -985,8 +985,13 @@ func (this *Groups1) String() string {
 	if this == nil {
 		return "nil"
 	}
+	repeatedStringForG := "[]*Groups1_G{"
+	for _, f := range this.G {
+		repeatedStringForG += strings.Replace(fmt.Sprintf("%v", f), "Groups1_G", "Groups1_G", 1) + ","
+	}
+	repeatedStringForG += "}"
 	s := strings.Join([]string{`&Groups1{`,
-		`G:` + strings.Replace(fmt.Sprintf("%v", this.G), "Groups1_G", "Groups1_G", 1) + `,`,
+		`G:` + repeatedStringForG + `,`,
 		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
 		`}`,
 	}, "")

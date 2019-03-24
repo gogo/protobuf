@@ -160,9 +160,9 @@ func (m *TimeFail) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0xa
 		i++
 		i = encodeVarintTimefail(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.TimeTest)))
-		n1, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.TimeTest, dAtA[i:])
-		if err != nil {
-			return 0, err
+		n1, err1 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.TimeTest, dAtA[i:])
+		if err1 != nil {
+			return 0, err1
 		}
 		i += n1
 	}

@@ -38,6 +38,15 @@ option (gogoproto.goproto_unrecognized_all) = false;
 option (gogoproto.goproto_sizecache_all) = false;
 option (gogoproto.goproto_unkeyed_all) = false;
 
+//option (gogoproto.equal_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.equal_all) = true;
+
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+
 message Foo5 {
     optional Bar1 bar1  = 1 [(gogoproto.nullable) = false];
     optional Bar1 bar2  = 2 [(gogoproto.nullable) = true];
@@ -73,10 +82,23 @@ message Bar4 {
 }
 
 message Bar5 {
-    repeated Bar6 bars6 = 1 [(gogoproto.nullable) = true];
+    repeated Bar2 bars2 = 1 [(gogoproto.nullable) = true];
     repeated Bar1 bars1 = 2 [(gogoproto.nullable) = true];
 }
 
-message Bar6 {
-    optional string str = 1 [(gogoproto.nullable) = true];
+message Bar7 {
+    repeated Bar7 bars71 = 1 [(gogoproto.nullable) = false];
+    repeated Bar7 bars72 = 2 [(gogoproto.nullable) = true];
+    optional string str1 = 3 [(gogoproto.nullable) = false];
+    optional string str2 = 4 [(gogoproto.nullable) = true];
+}
+
+message Bar8 {
+    repeated Bar9 bars1 = 1 [(gogoproto.nullable) = false];
+}
+
+message Bar9 {
+    option (gogoproto.stringer) = false;
+    option (gogoproto.goproto_stringer) = true;
+    optional string str = 1 [(gogoproto.nullable) = false];
 }
