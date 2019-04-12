@@ -144,8 +144,9 @@ tests:
 	(cd test/stdtypes && make test)
 
 vet:
+	go get golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow
 	go vet ./...
-	go tool vet --shadow .
+	go vet -vettool=$(which shadow) ./...
 
 errcheck:
 	go get github.com/kisielk/errcheck
@@ -173,7 +174,7 @@ contributors:
 	git log --format='%aN <%aE>' | sort -fu > CONTRIBUTORS
 
 js:
-ifeq (go1.11, $(findstring go1.11, $(GO_VERSION)))
+ifeq (go1.12, $(findstring go1.12, $(GO_VERSION)))
 	go get -u github.com/gopherjs/gopherjs
 	gopherjs build github.com/gogo/protobuf/protoc-gen-gogo
 endif
