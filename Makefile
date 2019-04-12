@@ -144,8 +144,9 @@ tests:
 	(cd test/stdtypes && make test)
 
 vet:
+	go get golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow
 	go vet ./...
-	go tool vet --shadow .
+	go vet -vettool=$(which shadow) ./...
 
 errcheck:
 	go get github.com/kisielk/errcheck
