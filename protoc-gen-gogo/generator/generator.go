@@ -482,6 +482,7 @@ func New() *Generator {
 	g.Request = new(plugin.CodeGeneratorRequest)
 	g.Response = new(plugin.CodeGeneratorResponse)
 	g.writtenImports = make(map[string]bool)
+	g.addedImports = make(map[GoImportPath]bool)
 	return g
 }
 
