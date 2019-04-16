@@ -10,6 +10,7 @@ import (
 	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 	math "math"
+	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1318,14 +1319,7 @@ func (m *NestedMap2) Size() (n int) {
 }
 
 func sovDeterministic(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozDeterministic(x uint64) (n int) {
 	return sovDeterministic(uint64((x << 1) ^ uint64((int64(x) >> 63))))

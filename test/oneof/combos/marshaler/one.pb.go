@@ -16,6 +16,7 @@ import (
 	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
 	io_ioutil "io/ioutil"
 	math "math"
+	math_bits "math/bits"
 	reflect "reflect"
 	strings "strings"
 )
@@ -4445,14 +4446,7 @@ func (m *CustomOneof_MyCustomName) Size() (n int) {
 }
 
 func sovOne(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozOne(x uint64) (n int) {
 	return sovOne(uint64((x << 1) ^ uint64((int64(x) >> 63))))
