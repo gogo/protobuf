@@ -54,12 +54,12 @@ func TraceIDFromString(s string) (TraceID, error) {
 
 // MarshalText is called by encoding/json, which we do not want people to use.
 func (t TraceID) MarshalText() ([]byte, error) {
-	return nil, fmt.Errorf("unsupported method TraceID.MarshalText; please use github.com/gogo/protobuf/jsonpb for marshalling")
+	return nil, fmt.Errorf("unsupported method TraceID.MarshalText; please use github.com/buptbill220/protobuf/jsonpb for marshalling")
 }
 
 // UnmarshalText is called by encoding/json, which we do not want people to use.
 func (t *TraceID) UnmarshalText(text []byte) error {
-	return fmt.Errorf("unsupported method TraceID.UnmarshalText; please use github.com/gogo/protobuf/jsonpb for marshalling")
+	return fmt.Errorf("unsupported method TraceID.UnmarshalText; please use github.com/buptbill220/protobuf/jsonpb for marshalling")
 }
 
 // Size returns the size of this datum in protobuf. It is always 16 bytes.
@@ -153,12 +153,12 @@ func SpanIDFromString(s string) (SpanID, error) {
 
 // MarshalText is called by encoding/json, which we do not want people to use.
 func (s SpanID) MarshalText() ([]byte, error) {
-	return nil, fmt.Errorf("unsupported method SpanID.MarshalText; please use github.com/gogo/protobuf/jsonpb for marshalling")
+	return nil, fmt.Errorf("unsupported method SpanID.MarshalText; please use github.com/buptbill220/protobuf/jsonpb for marshalling")
 }
 
 // UnmarshalText is called by encoding/json, which we do not want people to use.
 func (s *SpanID) UnmarshalText(text []byte) error {
-	return fmt.Errorf("unsupported method SpanID.UnmarshalText; please use github.com/gogo/protobuf/jsonpb for marshalling")
+	return fmt.Errorf("unsupported method SpanID.UnmarshalText; please use github.com/buptbill220/protobuf/jsonpb for marshalling")
 }
 
 // Size returns the size of this datum in protobuf. It is always 8 bytes.
@@ -208,7 +208,7 @@ func (s SpanID) MarshalJSON() ([]byte, error) {
 // User by protobuf JSON serialization.
 //
 // There appears to be a bug in gogoproto, as this function is only called for numeric values.
-// https://github.com/gogo/protobuf/issues/411#issuecomment-393856837
+// https://github.com/buptbill220/protobuf/issues/411#issuecomment-393856837
 func (s *SpanID) UnmarshalJSON(data []byte) error {
 	str := string(data)
 	if l := len(str); l > 2 && str[0] == '"' && str[l-1] == '"' {

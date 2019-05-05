@@ -33,7 +33,7 @@ syntax = "proto3";
 
 package proto3;
 
-option go_package = "github.com/gogo/protobuf/protoc-gen-gogo/testdata/proto3";
+option go_package = "github.com/buptbill220/protobuf/protoc-gen-gogo/testdata/proto3";
 
 message Request {
   enum Flavour {

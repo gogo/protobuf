@@ -12,10 +12,10 @@ It has these top-level messages:
 */
 package subpkg
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/buptbill220/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
+import _ "github.com/buptbill220/protobuf/gogoproto"
 
 import io "io"
 

@@ -7,12 +7,12 @@ import (
 	bytes "bytes"
 	compress_gzip "compress/gzip"
 	fmt "fmt"
-	_ "github.com/gogo/protobuf/gogoproto"
-	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-	proto "github.com/gogo/protobuf/proto"
-	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-	github_com_gogo_protobuf_test "github.com/gogo/protobuf/test"
-	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
+	_ "github.com/buptbill220/protobuf/gogoproto"
+	github_com_gogo_protobuf_proto "github.com/buptbill220/protobuf/proto"
+	proto "github.com/buptbill220/protobuf/proto"
+	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/buptbill220/protobuf/protoc-gen-gogo/descriptor"
+	github_com_gogo_protobuf_test "github.com/buptbill220/protobuf/test"
+	github_com_gogo_protobuf_test_custom "github.com/buptbill220/protobuf/test/custom"
 	io "io"
 	io_ioutil "io/ioutil"
 	math "math"
@@ -34,7 +34,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type A struct {
 	Description          string                             `protobuf:"bytes,1,opt,name=Description" json:"Description"`
 	Number               int64                              `protobuf:"varint,2,opt,name=Number" json:"Number"`
-	Id                   github_com_gogo_protobuf_test.Uuid `protobuf:"bytes,3,opt,name=Id,customtype=github.com/gogo/protobuf/test.Uuid" json:"Id"`
+	Id                   github_com_gogo_protobuf_test.Uuid `protobuf:"bytes,3,opt,name=Id,customtype=github.com/buptbill220/protobuf/test.Uuid" json:"Id"`
 	XXX_NoUnkeyedLiteral struct{}                           `json:"-"`
 	XXX_unrecognized     []byte                             `json:"-"`
 	XXX_sizecache        int32                              `json:"-"`
@@ -74,7 +74,7 @@ var xxx_messageInfo_A proto.InternalMessageInfo
 
 type B struct {
 	A                    `protobuf:"bytes,1,opt,name=A,embedded=A" json:"A"`
-	G                    []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=G,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"G"`
+	G                    []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=G,customtype=github.com/buptbill220/protobuf/test/custom.Uint128" json:"G"`
 	XXX_NoUnkeyedLiteral struct{}                                       `json:"-"`
 	XXX_unrecognized     []byte                                         `json:"-"`
 	XXX_sizecache        int32                                          `json:"-"`

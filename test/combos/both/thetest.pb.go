@@ -8,13 +8,13 @@ import (
 	compress_gzip "compress/gzip"
 	encoding_binary "encoding/binary"
 	fmt "fmt"
-	_ "github.com/gogo/protobuf/gogoproto"
-	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-	proto "github.com/gogo/protobuf/proto"
-	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
-	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
-	github_com_gogo_protobuf_test_custom_dash_type "github.com/gogo/protobuf/test/custom-dash-type"
+	_ "github.com/buptbill220/protobuf/gogoproto"
+	github_com_gogo_protobuf_proto "github.com/buptbill220/protobuf/proto"
+	proto "github.com/buptbill220/protobuf/proto"
+	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/buptbill220/protobuf/protoc-gen-gogo/descriptor"
+	github_com_gogo_protobuf_sortkeys "github.com/buptbill220/protobuf/sortkeys"
+	github_com_gogo_protobuf_test_custom "github.com/buptbill220/protobuf/test/custom"
+	github_com_gogo_protobuf_test_custom_dash_type "github.com/buptbill220/protobuf/test/custom-dash-type"
 	io "io"
 	io_ioutil "io/ioutil"
 	math "math"
@@ -909,7 +909,7 @@ var xxx_messageInfo_NinNestedStruct proto.InternalMessageInfo
 
 type NidOptCustom struct {
 	Id                   Uuid                                         `protobuf:"bytes,1,opt,name=Id,customtype=Uuid" json:"Id"`
-	Value                github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
+	Value                github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=Value,customtype=github.com/buptbill220/protobuf/test/custom.Uint128" json:"Value"`
 	XXX_NoUnkeyedLiteral struct{}                                     `json:"-"`
 	XXX_unrecognized     []byte                                       `json:"-"`
 	XXX_sizecache        int32                                        `json:"-"`
@@ -948,7 +948,7 @@ func (m *NidOptCustom) XXX_DiscardUnknown() {
 var xxx_messageInfo_NidOptCustom proto.InternalMessageInfo
 
 type CustomDash struct {
-	Value                *github_com_gogo_protobuf_test_custom_dash_type.Bytes `protobuf:"bytes,1,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom-dash-type.Bytes" json:"Value,omitempty"`
+	Value                *github_com_gogo_protobuf_test_custom_dash_type.Bytes `protobuf:"bytes,1,opt,name=Value,customtype=github.com/buptbill220/protobuf/test/custom-dash-type.Bytes" json:"Value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                                              `json:"-"`
 	XXX_unrecognized     []byte                                                `json:"-"`
 	XXX_sizecache        int32                                                 `json:"-"`
@@ -988,7 +988,7 @@ var xxx_messageInfo_CustomDash proto.InternalMessageInfo
 
 type NinOptCustom struct {
 	Id                   *Uuid                                         `protobuf:"bytes,1,opt,name=Id,customtype=Uuid" json:"Id,omitempty"`
-	Value                *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
+	Value                *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=Value,customtype=github.com/buptbill220/protobuf/test/custom.Uint128" json:"Value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                                      `json:"-"`
 	XXX_unrecognized     []byte                                        `json:"-"`
 	XXX_sizecache        int32                                         `json:"-"`
@@ -1028,7 +1028,7 @@ var xxx_messageInfo_NinOptCustom proto.InternalMessageInfo
 
 type NidRepCustom struct {
 	Id                   []Uuid                                         `protobuf:"bytes,1,rep,name=Id,customtype=Uuid" json:"Id"`
-	Value                []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value"`
+	Value                []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=Value,customtype=github.com/buptbill220/protobuf/test/custom.Uint128" json:"Value"`
 	XXX_NoUnkeyedLiteral struct{}                                       `json:"-"`
 	XXX_unrecognized     []byte                                         `json:"-"`
 	XXX_sizecache        int32                                          `json:"-"`
@@ -1068,7 +1068,7 @@ var xxx_messageInfo_NidRepCustom proto.InternalMessageInfo
 
 type NinRepCustom struct {
 	Id                   []Uuid                                         `protobuf:"bytes,1,rep,name=Id,customtype=Uuid" json:"Id,omitempty"`
-	Value                []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
+	Value                []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=Value,customtype=github.com/buptbill220/protobuf/test/custom.Uint128" json:"Value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                                       `json:"-"`
 	XXX_unrecognized     []byte                                         `json:"-"`
 	XXX_sizecache        int32                                          `json:"-"`
@@ -2702,9 +2702,9 @@ var xxx_messageInfo_CustomNameNinStruct proto.InternalMessageInfo
 
 type CustomNameCustomType struct {
 	FieldA               *Uuid                                          `protobuf:"bytes,1,opt,name=Id,customtype=Uuid" json:"Id,omitempty"`
-	FieldB               *github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,2,opt,name=Value,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Value,omitempty"`
+	FieldB               *github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,2,opt,name=Value,customtype=github.com/buptbill220/protobuf/test/custom.Uint128" json:"Value,omitempty"`
 	FieldC               []Uuid                                         `protobuf:"bytes,3,rep,name=Ids,customtype=Uuid" json:"Ids,omitempty"`
-	FieldD               []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,4,rep,name=Values,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"Values,omitempty"`
+	FieldD               []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,4,rep,name=Values,customtype=github.com/buptbill220/protobuf/test/custom.Uint128" json:"Values,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                                       `json:"-"`
 	XXX_unrecognized     []byte                                         `json:"-"`
 	XXX_sizecache        int32                                          `json:"-"`

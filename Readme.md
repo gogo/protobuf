@@ -1,7 +1,7 @@
 # Protocol Buffers for Go with Gadgets
 
 [![Build Status](https://travis-ci.org/gogo/protobuf.svg?branch=master)](https://travis-ci.org/gogo/protobuf)
-[![GoDoc](https://godoc.org/github.com/gogo/protobuf?status.svg)](http://godoc.org/github.com/gogo/protobuf)
+[![GoDoc](https://godoc.org/github.com/buptbill220/protobuf?status.svg)](http://godoc.org/github.com/buptbill220/protobuf)
 
 gogoprotobuf is a fork of <a href="https://github.com/golang/protobuf">golang/protobuf</a> with extra code generation features.
 
@@ -15,7 +15,7 @@ This code generation is used to achieve:
   - other serialization formats
 
 Keeping track of how up to date gogoprotobuf is relative to golang/protobuf is done in this
-<a href="https://github.com/gogo/protobuf/issues/191">issue</a>
+<a href="https://github.com/buptbill220/protobuf/issues/191">issue</a>
 
 ## Users
 
@@ -86,13 +86,13 @@ Most versions from 2.3.1 should not give any problems, but 2.6.1, 3.0.2 and 3.6.
 
 Install the protoc-gen-gofast binary
 
-    go get github.com/gogo/protobuf/protoc-gen-gofast
+    go get github.com/buptbill220/protobuf/protoc-gen-gofast
 
 Use it to generate faster marshaling and unmarshaling go code for your protocol buffers.
 
     protoc --gofast_out=. myproto.proto
 
-This does not allow you to use any of the other gogoprotobuf [extensions](https://github.com/gogo/protobuf/blob/master/extensions.md).
+This does not allow you to use any of the other gogoprotobuf [extensions](https://github.com/buptbill220/protobuf/blob/master/extensions.md).
 
 ### More Speed and more generated code
 
@@ -107,24 +107,24 @@ Other binaries are also included:
 
 Installing any of these binaries is easy.  Simply run:
 
-    go get github.com/gogo/protobuf/proto
-    go get github.com/gogo/protobuf/{binary}
-    go get github.com/gogo/protobuf/gogoproto
+    go get github.com/buptbill220/protobuf/proto
+    go get github.com/buptbill220/protobuf/{binary}
+    go get github.com/buptbill220/protobuf/gogoproto
 
-These binaries allow you to use gogoprotobuf [extensions](https://github.com/gogo/protobuf/blob/master/extensions.md). You can also use your own binary.
+These binaries allow you to use gogoprotobuf [extensions](https://github.com/buptbill220/protobuf/blob/master/extensions.md). You can also use your own binary.
 
 To generate the code, you also need to set the include path properly.
 
-    protoc -I=. -I=$GOPATH/src -I=$GOPATH/src/github.com/gogo/protobuf/protobuf --{binary}_out=. myproto.proto
+    protoc -I=. -I=$GOPATH/src -I=$GOPATH/src/github.com/buptbill220/protobuf/protobuf --{binary}_out=. myproto.proto
 
 To use proto files from "google/protobuf" you need to add additional args to protoc.
 
-    protoc -I=. -I=$GOPATH/src -I=$GOPATH/src/github.com/gogo/protobuf/protobuf --{binary}_out=\
-    Mgoogle/protobuf/any.proto=github.com/gogo/protobuf/types,\
-    Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,\
-    Mgoogle/protobuf/struct.proto=github.com/gogo/protobuf/types,\
-    Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,\
-    Mgoogle/protobuf/wrappers.proto=github.com/gogo/protobuf/types:. \
+    protoc -I=. -I=$GOPATH/src -I=$GOPATH/src/github.com/buptbill220/protobuf/protobuf --{binary}_out=\
+    Mgoogle/protobuf/any.proto=github.com/buptbill220/protobuf/types,\
+    Mgoogle/protobuf/duration.proto=github.com/buptbill220/protobuf/types,\
+    Mgoogle/protobuf/struct.proto=github.com/buptbill220/protobuf/types,\
+    Mgoogle/protobuf/timestamp.proto=github.com/buptbill220/protobuf/types,\
+    Mgoogle/protobuf/wrappers.proto=github.com/buptbill220/protobuf/types:. \
     myproto.proto
 
 Note that in the protoc command, {binary} does not contain the initial prefix of "protoc-gen".
@@ -134,14 +134,14 @@ Note that in the protoc command, {binary} does not contain the initial prefix of
 Customizing the fields of the messages to be the fields that you actually want to use removes the need to copy between the structs you use and structs you use to serialize.
 gogoprotobuf also offers more serialization formats and generation of tests and even more methods.
 
-Please visit the [extensions](https://github.com/gogo/protobuf/blob/master/extensions.md) page for more documentation.
+Please visit the [extensions](https://github.com/buptbill220/protobuf/blob/master/extensions.md) page for more documentation.
 
 Install protoc-gen-gogo:
 
-    go get github.com/gogo/protobuf/proto
-    go get github.com/gogo/protobuf/jsonpb
-    go get github.com/gogo/protobuf/protoc-gen-gogo
-    go get github.com/gogo/protobuf/gogoproto
+    go get github.com/buptbill220/protobuf/proto
+    go get github.com/buptbill220/protobuf/jsonpb
+    go get github.com/buptbill220/protobuf/protoc-gen-gogo
+    go get github.com/buptbill220/protobuf/gogoproto
 
 ## GRPC
 

@@ -6,9 +6,9 @@ package required
 import (
 	encoding_binary "encoding/binary"
 	fmt "fmt"
-	_ "github.com/gogo/protobuf/gogoproto"
-	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-	proto "github.com/gogo/protobuf/proto"
+	_ "github.com/buptbill220/protobuf/gogoproto"
+	github_com_gogo_protobuf_proto "github.com/buptbill220/protobuf/proto"
+	proto "github.com/buptbill220/protobuf/proto"
 	io "io"
 	math "math"
 )

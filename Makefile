@@ -1,7 +1,7 @@
 # Protocol Buffers for Go with Gadgets
 #
 # Copyright (c) 2013, The GoGo Authors. All rights reserved.
-# http://github.com/gogo/protobuf
+# http://github.com/buptbill220/protobuf
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -29,8 +29,8 @@
 GO_VERSION:=$(shell go version)
 
 # Skip known issues from purego tests
-# https://github.com/gogo/protobuf/issues/447
-# https://github.com/gogo/protobuf/issues/448
+# https://github.com/buptbill220/protobuf/issues/447
+# https://github.com/buptbill220/protobuf/issues/448
 SKIPISSUE:="/jsonpb|/test/casttype/|/test/oneof/combos/"
 
 .PHONY: nuke regenerate tests clean install gofmt vet contributors
@@ -154,7 +154,7 @@ errcheck:
 
 drone:
 	sudo apt-get install protobuf-compiler
-	(cd $(GOPATH)/src/github.com/gogo/protobuf && make buildserverall)
+	(cd $(GOPATH)/src/github.com/buptbill220/protobuf && make buildserverall)
 
 testall:
 	go get -u github.com/golang/protobuf/proto
@@ -176,7 +176,7 @@ contributors:
 js:
 ifeq (go1.12, $(findstring go1.12, $(GO_VERSION)))
 	go get -u github.com/gopherjs/gopherjs
-	gopherjs build github.com/gogo/protobuf/protoc-gen-gogo
+	gopherjs build github.com/buptbill220/protobuf/protoc-gen-gogo
 endif
 
 purego:

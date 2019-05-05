@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/buptbill220/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -57,11 +57,11 @@ And benchmarks given it is enabled using one of the following extensions:
 
 Let us look at:
 
-  github.com/gogo/protobuf/test/example/example.proto
+  github.com/buptbill220/protobuf/test/example/example.proto
 
 Btw all the output can be seen at:
 
-  github.com/gogo/protobuf/test/example/*
+  github.com/buptbill220/protobuf/test/example/*
 
 The following message:
 
@@ -70,7 +70,7 @@ The following message:
   message B {
 	option (gogoproto.description) = true;
 	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
-	repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
+	repeated bytes G = 2 [(gogoproto.customtype) = "github.com/buptbill220/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
   }
 
 given to the unmarshal plugin, will generate the following code:
@@ -179,10 +179,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/gogo/protobuf/gogoproto"
-	"github.com/gogo/protobuf/proto"
-	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
+	"github.com/buptbill220/protobuf/gogoproto"
+	"github.com/buptbill220/protobuf/proto"
+	descriptor "github.com/buptbill220/protobuf/protoc-gen-gogo/descriptor"
+	"github.com/buptbill220/protobuf/protoc-gen-gogo/generator"
 )
 
 type unmarshal struct {
@@ -1304,10 +1304,10 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 
 	p.ioPkg = p.NewImport("io")
 	p.mathPkg = p.NewImport("math")
-	p.typesPkg = p.NewImport("github.com/gogo/protobuf/types")
+	p.typesPkg = p.NewImport("github.com/buptbill220/protobuf/types")
 	p.binaryPkg = p.NewImport("encoding/binary")
 	fmtPkg := p.NewImport("fmt")
-	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
+	protoPkg := p.NewImport("github.com/buptbill220/protobuf/proto")
 	if !gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
 		protoPkg = p.NewImport("github.com/golang/protobuf/proto")
 	}

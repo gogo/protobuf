@@ -40,8 +40,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gogo/protobuf/proto"
-	pb "github.com/gogo/protobuf/proto/test_proto"
+	"github.com/buptbill220/protobuf/proto"
+	pb "github.com/buptbill220/protobuf/proto/test_proto"
 )
 
 func TestGetExtensionsWithMissingExtensions(t *testing.T) {

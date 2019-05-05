@@ -34,7 +34,7 @@ syntax = "proto3";
 // package deprecated contains only deprecated messages and services.
 package deprecated;
 
-option go_package = "github.com/gogo/protobuf/protoc-gen-gogo/testdata/deprecated";
+option go_package = "github.com/buptbill220/protobuf/protoc-gen-gogo/testdata/deprecated";
 
 option deprecated = true; // file-level deprecation
 

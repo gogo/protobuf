@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2015, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/buptbill220/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -29,9 +29,9 @@
 package test
 
 import (
-	fast "github.com/gogo/protobuf/vanity/test/fast"
-	faster "github.com/gogo/protobuf/vanity/test/faster"
-	slick "github.com/gogo/protobuf/vanity/test/slick"
+	fast "github.com/buptbill220/protobuf/vanity/test/fast"
+	faster "github.com/buptbill220/protobuf/vanity/test/faster"
+	slick "github.com/buptbill220/protobuf/vanity/test/slick"
 	"testing"
 )
 

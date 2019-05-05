@@ -8,12 +8,12 @@ import (
 	compress_gzip "compress/gzip"
 	encoding_binary "encoding/binary"
 	fmt "fmt"
-	_ "github.com/gogo/protobuf/gogoproto"
-	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-	proto "github.com/gogo/protobuf/proto"
-	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-	github_com_gogo_protobuf_test_casttype "github.com/gogo/protobuf/test/casttype"
-	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
+	_ "github.com/buptbill220/protobuf/gogoproto"
+	github_com_gogo_protobuf_proto "github.com/buptbill220/protobuf/proto"
+	proto "github.com/buptbill220/protobuf/proto"
+	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/buptbill220/protobuf/protoc-gen-gogo/descriptor"
+	github_com_gogo_protobuf_test_casttype "github.com/buptbill220/protobuf/test/casttype"
+	github_com_gogo_protobuf_test_custom "github.com/buptbill220/protobuf/test/custom"
 	io_ioutil "io/ioutil"
 	math "math"
 	reflect "reflect"
@@ -929,10 +929,10 @@ type CustomOneof_Stringy struct {
 	Stringy string `protobuf:"bytes,34,opt,name=Stringy,oneof"`
 }
 type CustomOneof_CustomType struct {
-	CustomType github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,35,opt,name=CustomType,oneof,customtype=github.com/gogo/protobuf/test/custom.Uint128"`
+	CustomType github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,35,opt,name=CustomType,oneof,customtype=github.com/buptbill220/protobuf/test/custom.Uint128"`
 }
 type CustomOneof_CastType struct {
-	CastType github_com_gogo_protobuf_test_casttype.MyUint64Type `protobuf:"varint,36,opt,name=CastType,oneof,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type"`
+	CastType github_com_gogo_protobuf_test_casttype.MyUint64Type `protobuf:"varint,36,opt,name=CastType,oneof,casttype=github.com/buptbill220/protobuf/test/casttype.MyUint64Type"`
 }
 type CustomOneof_MyCustomName struct {
 	MyCustomName int64 `protobuf:"varint,37,opt,name=CustomName,oneof"`

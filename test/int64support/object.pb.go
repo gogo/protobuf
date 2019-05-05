@@ -5,8 +5,8 @@ package int64support
 
 import (
 	fmt "fmt"
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/gogo/protobuf/proto"
+	_ "github.com/buptbill220/protobuf/gogoproto"
+	proto "github.com/buptbill220/protobuf/proto"
 	io "io"
 	math "math"
 	reflect "reflect"

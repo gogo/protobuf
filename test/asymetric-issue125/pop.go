@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/buptbill220/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -33,7 +33,7 @@ func NewPopulatedMyType(r randyAsym) *MyType {
 	return this
 }
 
-// TODO: rename this to Marshal once https://github.com/gogo/protobuf/issues/388 is fixed
+// TODO: rename this to Marshal once https://github.com/buptbill220/protobuf/issues/388 is fixed
 func (m MyType) DisabledMarshal() (data []byte, err error) {
 	size := m.Size()
 	data = make([]byte, size)
