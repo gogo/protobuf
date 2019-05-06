@@ -87,6 +87,7 @@ extend google.protobuf.FileOptions {
 
 	optional bool goproto_sizecache_all = 63034;
 	optional bool goproto_unkeyed_all = 63035;
+	optional bool jsonmarshal_all = 63036;
 }
 
 extend google.protobuf.MessageOptions {
@@ -124,6 +125,7 @@ extend google.protobuf.MessageOptions {
 
 	optional bool goproto_sizecache = 64034;
 	optional bool goproto_unkeyed = 64035;
+	optional bool jsonmarshal = 63036;
 }
 
 extend google.protobuf.FieldOptions {

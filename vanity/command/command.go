@@ -51,6 +51,7 @@ import (
 	"github.com/buptbill220/protobuf/plugin/testgen"
 	_ "github.com/buptbill220/protobuf/plugin/union"
 	_ "github.com/buptbill220/protobuf/plugin/unmarshal"
+	_ "github.com/buptbill220/protobuf/plugin/jsonmarshal"
 	"github.com/buptbill220/protobuf/proto"
 	"github.com/buptbill220/protobuf/protoc-gen-gogo/generator"
 	_ "github.com/buptbill220/protobuf/protoc-gen-gogo/grpc"

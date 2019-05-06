@@ -413,3 +413,11 @@ func HasSizecache(file *google_protobuf.FileDescriptorProto, message *google_pro
 func HasUnkeyed(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
 	return proto.GetBoolExtension(message.Options, E_GoprotoUnkeyed, proto.GetBoolExtension(file.Options, E_GoprotoUnkeyedAll, true))
 }
+
+func HasJsonMarshal(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
+	return proto.GetBoolExtension(message.Options, E_Jsonmarshal, proto.GetBoolExtension(file.Options, E_JsonmarshalAll, true))
+}
+
+func IsJsonMarshal(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
+	return proto.GetBoolExtension(message.Options, E_Jsonmarshal, proto.GetBoolExtension(file.Options, E_JsonmarshalAll, false))
+}

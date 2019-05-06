@@ -554,7 +554,7 @@ func (g *Generator) CommandLineParameters(parameter string) {
 	if pluginList == "none" {
 		pluginList = ""
 	}
-	gogoPluginNames := []string{"unmarshal", "unsafeunmarshaler", "union", "stringer", "size", "protosizer", "populate", "marshalto", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck", "oneofcheck", "compare"}
+	gogoPluginNames := []string{"jsonmarshal", "unmarshal", "unsafeunmarshaler", "union", "stringer", "size", "protosizer", "populate", "marshalto", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck", "oneofcheck", "compare"}
 	pluginList = strings.Join(append(gogoPluginNames, pluginList), "+")
 	if pluginList != "" {
 		// Amend the set of plugins.
@@ -1317,21 +1317,21 @@ func (g *Generator) generateHeader() {
 		g.P("// source: ", *g.file.Name)
 	}
 	var topMsgs []string
-		g.P("// It is generated from these files:")
-		for _, f := range g.genFiles {
-			g.P("// \t", f.Name)
-			for _, msg := range f.desc {
-				if msg.parent != nil {
-					continue
-				}
-				topMsgs = append(topMsgs, CamelCaseSlice(msg.TypeName()))
+	g.P("// It is generated from these files:")
+	for _, f := range g.genFiles {
+		g.P("// \t", f.Name)
+		for _, msg := range f.desc {
+			if msg.parent != nil {
+				continue
 			}
+			topMsgs = append(topMsgs, CamelCaseSlice(msg.TypeName()))
 		}
-		g.P()
-		g.P("// It has these top-level messages:")
-		for _, msg := range topMsgs {
-			g.P("// \t", msg)
-		}
+	}
+	g.P()
+	g.P("// It has these top-level messages:")
+	for _, msg := range topMsgs {
+		g.P("//== \t", msg)
+	}
 	g.P()
 	g.PrintComments(strconv.Itoa(packagePath))
 	g.P()
