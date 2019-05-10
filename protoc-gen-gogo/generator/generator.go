@@ -2927,7 +2927,7 @@ func (g *Generator) generateSet(mc *msgCtx, protoField *descriptor.FieldDescript
 	if tname[0] == '*' && protoField.GetType() != descriptor.FieldDescriptorProto_TYPE_MESSAGE {
 		tname = tname[1:]
 	}
-	g.P("func (m *", mc.goName, ") ", Annotate(mc.message.file, fullpath, gname), "(v " + tname + ") {")
+	g.P("func (m *", mc.goName, ") ", Annotate(mc.message.file, fullpath, gname), "(v " + tname + ") (*" + mc.goName + ") {")
 	g.P("if m != nil {")
 	g.In()
 	if star == "*" && protoField.GetType() != descriptor.FieldDescriptorProto_TYPE_MESSAGE {
@@ -2937,7 +2937,7 @@ func (g *Generator) generateSet(mc *msgCtx, protoField *descriptor.FieldDescript
 	}
 	g.Out()
 	g.P("}")
-	
+	g.P(`return m`)
 	g.Out()
 	g.P("}")
 	g.P()

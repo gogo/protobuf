@@ -99,10 +99,24 @@ func (p *JsonMarshal) Generate(file *generator.FileDescriptor) {
 		p.Out()
 		p.P(`}`)
 		for _, f := range message.GetField() {
+			goName := CamelCase(f.GetName())
 			if f.GetLabel() == descriptor.FieldDescriptorProto_LABEL_REPEATED {
+				if f.GetType() == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
+					p.P(`for _, p := range m.` + goName + ` {`)
+					p.In()
+					
+					p.P(`if err := p.Validate(); err != nil {`)
+					p.In()
+					p.P(`return err`)
+					p.Out()
+					p.P(`}`)
+					
+					p.Out()
+					p.P(`}`)
+				}
 				continue
 			}
-			goName := CamelCase(f.GetName())
+			
 			if f.GetType() == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
 				if f.GetLabel() == descriptor.FieldDescriptorProto_LABEL_REQUIRED {
 					p.P(`if m.` + goName + ` == nil {`)
