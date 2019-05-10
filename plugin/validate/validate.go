@@ -52,12 +52,13 @@ Let us look at:
 
   github.com/buptbill220/protobuf/test/example/example.proto
 */
-package jsonmarshal
+package validate
 
 import (
 	"fmt"
 
 	"github.com/buptbill220/protobuf/protoc-gen-gogo/generator"
+	"github.com/buptbill220/protobuf/protoc-gen-gogo/descriptor"
 )
 
 type JsonMarshal struct {
@@ -73,7 +74,7 @@ func NewJsonMarshal() *JsonMarshal {
 }
 
 func (p *JsonMarshal) Name() string {
-	return "jsonmarshal"
+	return "validate"
 }
 
 func (p *JsonMarshal) Init(g *generator.Generator) {
@@ -83,64 +84,112 @@ func (p *JsonMarshal) Init(g *generator.Generator) {
 func (p *JsonMarshal) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	fmtPkg := p.PluginImports.NewImport("fmt").Use()
-	jsonPkg := p.PluginImports.NewImport("encoding/json").Use()
 	p.atleastOne = false
 	p.localName = generator.FileName(file)
+	
+	
 	for _, message := range file.Messages() {
 		p.atleastOne = true
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
-		
-		// marshal
-		p.P(`func (m *`, ccTypeName, `) Marshal() ([]byte, error) {`)
-		p.In()
-		p.P(`if m == nil {`)
-		p.In()
-		p.P(fmt.Sprintf(`return nil, ` + fmtPkg + `.Errorf("msg %s is nil")`, ccTypeName))
-		p.Out()
-		p.P(`}`)
-		
-		// validate
-		p.P(`if err := m.Validate(); err != nil {`)
-		p.In()
-		p.P(`return nil, err`)
-		p.Out()
-		p.P(`}`)
-		
-		// marshal end
-		p.P(`return ` + jsonPkg + `.Marshal(m)`)
-		p.Out()
-		p.P(`}`)
-		p.P()
-		
-		// unmarshal
-		p.P(`func (m *`, ccTypeName, `) Unmarshal(data []byte) error {`)
+		p.P(`func (m *`, ccTypeName, `) Validate() (error) {`)
 		p.In()
 		p.P(`if m == nil {`)
 		p.In()
 		p.P(fmt.Sprintf(`return ` + fmtPkg + `.Errorf("msg %s is nil")`, ccTypeName))
 		p.Out()
 		p.P(`}`)
-		
-		// unmarshal begin
-		p.P(`if err := ` + jsonPkg + `.Unmarshal(data, m); err != nil {`)
-		p.In()
-		p.P(`return err`)
-		p.Out()
-		p.P(`}`)
-		
-		// validate
-		p.P(`if err := m.Validate(); err != nil {`)
-		p.In()
-		p.P(`return err`)
-		p.Out()
-		p.P(`}`)
-		
-		// unmarshal end
+		for _, f := range message.GetField() {
+			if f.GetLabel() == descriptor.FieldDescriptorProto_LABEL_REPEATED {
+				continue
+			}
+			goName := CamelCase(f.GetName())
+			if f.GetType() == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
+				if f.GetLabel() == descriptor.FieldDescriptorProto_LABEL_REQUIRED {
+					p.P(`if m.` + goName + ` == nil {`)
+					p.In()
+					p.P(fmt.Sprintf(`return ` + fmtPkg + `.Errorf("required field %s.%s is nil")`, ccTypeName, goName))
+					p.Out()
+					p.P(`}`)
+					p.P(`if err := m.` + goName + `.Validate(); err != nil {`)
+					p.In()
+					p.P(`return err`)
+					p.Out()
+					p.P(`}`)
+				} else {
+					p.P(`if m.` + goName + ` != nil {`)
+					p.In()
+					
+					p.P(`if err := m.` + goName + `.Validate(); err != nil {`)
+					p.In()
+					p.P(`return err`)
+					p.Out()
+					p.P(`}`)
+					
+					p.Out()
+					p.P(`}`)
+				}
+				
+			} else if f.GetLabel() == descriptor.FieldDescriptorProto_LABEL_REQUIRED {
+				p.P(`if m.` + goName + ` == nil {`)
+				p.In()
+				p.P(fmt.Sprintf(`return ` + fmtPkg + `.Errorf("required field %s.%s is nil")`, ccTypeName, goName))
+				p.Out()
+				p.P(`}`)
+			}
+		}
 		p.P(`return nil`)
 		p.Out()
 		p.P(`}`)
 		p.P()
 	}
+}
+
+func CamelCase(s string) string {
+	if s == "" {
+		return ""
+	}
+	t := make([]byte, 0, 32)
+	i := 0
+	if s[0] == '_' {
+		// Need a capital letter; drop the '_'.
+		t = append(t, 'X')
+		i++
+	}
+	// Invariant: if the next letter is lower case, it must be converted
+	// to upper case.
+	// That is, we process a word at a time, where words are marked by _ or
+	// upper case letter. Digits are treated as words.
+	for ; i < len(s); i++ {
+		c := s[i]
+		if c == '_' && i+1 < len(s) && isASCIILower(s[i+1]) {
+			continue // Skip the underscore in s.
+		}
+		if isASCIIDigit(c) {
+			t = append(t, c)
+			continue
+		}
+		// Assume we have a letter now - if not, it's a bogus identifier.
+		// The next word is a sequence of characters that must start upper case.
+		if isASCIILower(c) {
+			c ^= ' ' // Make it a capital letter.
+		}
+		t = append(t, c) // Guaranteed not lower case.
+		// Accept lower case sequence that follows.
+		for i+1 < len(s) && isASCIILower(s[i+1]) {
+			i++
+			t = append(t, s[i])
+		}
+	}
+	return string(t)
+}
+
+func isASCIILower(c byte) bool {
+	return 'a' <= c && c <= 'z'
+}
+
+// Is c an ASCII digit?
+func isASCIIDigit(c byte) bool {
+	return '0' <= c && c <= '9'
 }
 
 func init() {

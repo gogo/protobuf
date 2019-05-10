@@ -41,6 +41,7 @@ func main() {
 	files = vanity.FilterFiles(files, vanity.NotGoogleProtobufDescriptorProto)
 	
 	vanity.ForEachFile(files, vanity.TurnOnJsonMarshalAll)
+	vanity.ForEachFile(files, vanity.TurnOnValidateAll)
 
 	resp := command.Generate(req)
 	command.Write(resp)

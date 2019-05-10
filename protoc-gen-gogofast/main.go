@@ -42,6 +42,7 @@ func main() {
 	vanity.ForEachFile(files, vanity.TurnOnSizerAll)
 	vanity.ForEachFile(files, vanity.TurnOnUnmarshalerAll)
 	vanity.ForEachFile(files, vanity.TurnOffJsonMarshalAll)
+	vanity.ForEachFile(files, vanity.TurnOffValidateAll)
 
 	resp := command.Generate(req)
 	command.Write(resp)

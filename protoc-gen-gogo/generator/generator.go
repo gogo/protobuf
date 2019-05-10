@@ -556,6 +556,7 @@ func (g *Generator) CommandLineParameters(parameter string) {
 	}
 	gogoPluginNames := []string{"unmarshal", "unsafeunmarshaler", "union", "stringer", "size", "protosizer", "populate", "marshalto", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck", "oneofcheck", "compare"}
 	if IsFmqJson {
+		gogoPluginNames = append(gogoPluginNames, "validate")
 		gogoPluginNames = append(gogoPluginNames, "jsonmarshal")
 	}
 	pluginList = strings.Join(append(gogoPluginNames, pluginList), "+")
@@ -1837,10 +1838,12 @@ func needsStar(field *descriptor.FieldDescriptorProto, proto3 bool, allowOneOf b
 		!gogoproto.IsCustomType(field) {
 		return false
 	}
+	/*
 	if IsFmqJson && field.GetLabel() != descriptor.FieldDescriptorProto_LABEL_OPTIONAL &&
 		field.GetType() != descriptor.FieldDescriptorProto_TYPE_MESSAGE {
 		return false
 	}
+	*/
 	return true
 }
 
