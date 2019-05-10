@@ -199,3 +199,7 @@ func TurnOnGoRegistration(file *descriptor.FileDescriptorProto) {
 func TurnOnJsonMarshalAll(file *descriptor.FileDescriptorProto) {
 	SetBoolFileOption(gogoproto.E_JsonmarshalAll, true)(file)
 }
+
+func TurnOffJsonMarshalAll(file *descriptor.FileDescriptorProto) {
+	SetBoolFileOption(gogoproto.E_JsonmarshalAll, false)(file)
+}

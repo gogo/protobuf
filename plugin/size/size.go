@@ -587,8 +587,8 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
 	p.localName = generator.FileName(file)
-	p.typesPkg = p.NewImport("github.com/buptbill220/protobuf/types")
-	protoPkg := p.NewImport("github.com/buptbill220/protobuf/proto")
+	p.typesPkg = p.NewImport("github.com/gogo/protobuf/types")
+	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
 	if !gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
 		protoPkg = p.NewImport("github.com/golang/protobuf/proto")
 	}

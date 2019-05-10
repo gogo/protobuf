@@ -1215,14 +1215,14 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 	p.localName = generator.FileName(file)
 
 	p.mathPkg = p.NewImport("math")
-	p.sortKeysPkg = p.NewImport("github.com/buptbill220/protobuf/sortkeys")
-	p.protoPkg = p.NewImport("github.com/buptbill220/protobuf/proto")
+	p.sortKeysPkg = p.NewImport("github.com/gogo/protobuf/sortkeys")
+	p.protoPkg = p.NewImport("github.com/gogo/protobuf/proto")
 	if !gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
 		p.protoPkg = p.NewImport("github.com/golang/protobuf/proto")
 	}
 	p.errorsPkg = p.NewImport("errors")
 	p.binaryPkg = p.NewImport("encoding/binary")
-	p.typesPkg = p.NewImport("github.com/buptbill220/protobuf/types")
+	p.typesPkg = p.NewImport("github.com/gogo/protobuf/types")
 
 	for _, message := range file.Messages() {
 		if message.DescriptorProto.GetOptions().GetMapEntry() {
