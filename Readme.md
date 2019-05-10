@@ -337,9 +337,9 @@ func testUser() {
 	}
 	fmt.Printf("8: user marshal data %s\n", string(data))
 }
-```javascript
-  - test output
 ```
+  - test output
+```javascript
 1: user marshal err required field User.Id is nil
 1: user marshal data
 2: user marshal err required field User.Name is nil
