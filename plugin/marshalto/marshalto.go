@@ -956,10 +956,13 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 		}
 		if message.DescriptorProto.HasExtension() {
 			if gogoproto.HasExtensionsMap(file.FileDescriptorProto, message.DescriptorProto) {
-				p.P(`i -= `, p.protoPkg.Use(), `.SizeOfInternalExtension(m)`)
-				p.P(`if _, err := `, p.protoPkg.Use(), `.EncodeInternalExtension(m, dAtA[i:]); err != nil {`)
+				p.P(`if n, err := `, p.protoPkg.Use(), `.EncodeInternalExtensionBackwards(m, dAtA[:i]); err != nil {`)
 				p.In()
 				p.P(`return 0, err`)
+				p.Out()
+				p.P(`} else {`)
+				p.In()
+				p.P(`i -= n`)
 				p.Out()
 				p.P(`}`)
 			} else {
