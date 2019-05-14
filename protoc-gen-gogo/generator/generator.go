@@ -2946,6 +2946,7 @@ func (g *Generator) generateSet(mc *msgCtx, protoField *descriptor.FieldDescript
 // generateInternalStructFields just adds the XXX_<something> fields to the message struct.
 func (g *Generator) generateInternalStructFields(mc *msgCtx, topLevelFields []topLevelField) {
 	if IsFmqJson {
+		g.P("Extra\tmap[string]interface{} `json:\"extra,omitempty\"`")
 		return
 	}
 	if gogoproto.HasUnkeyed(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
@@ -2957,6 +2958,7 @@ func (g *Generator) generateInternalStructFields(mc *msgCtx, topLevelFields []to
 			if opts := mc.message.Options; opts != nil && opts.GetMessageSetWireFormat() {
 				messageset = "protobuf_messageset:\"1\" "
 			}
+			
 			g.P(g.Pkg["proto"], ".XXX_InternalExtensions `", messageset, "json:\"-\"`")
 		} else {
 			g.P("XXX_extensions\t\t[]byte `protobuf:\"bytes,0,opt\" json:\"-\"`")
@@ -2968,6 +2970,7 @@ func (g *Generator) generateInternalStructFields(mc *msgCtx, topLevelFields []to
 	if gogoproto.HasSizecache(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
 		g.P("XXX_sizecache\tint32 `json:\"-\"`")
 	}
+	
 }
 
 // generateOneofFuncs adds all the utility functions for oneof, including marshalling, unmarshalling and sizer.
@@ -3371,7 +3374,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		}
 		var tag string
 		if IsFmqJson {
-			tag = fmt.Sprintf("json:%q", jsonName)
+			tag = fmt.Sprintf("json:%q", jsonTag)
 		} else {
 			tag = fmt.Sprintf("protobuf:%s json:%q%s", g.goTag(message, field, wiretype), jsonTag, moreTags)
 		}
