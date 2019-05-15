@@ -70,6 +70,14 @@ import (
 )
 
 var IsFmqJson = false
+var FmqJsonExtra = false
+
+func init() {
+	if os.Getenv("FMQJSON_EXTRA") == "1" {
+		FmqJsonExtra = true
+	}
+}
+
 
 // generatedCodeVersion indicates a version of the generated code.
 // It is incremented whenever an incompatibility between the generated code and
@@ -2946,7 +2954,9 @@ func (g *Generator) generateSet(mc *msgCtx, protoField *descriptor.FieldDescript
 // generateInternalStructFields just adds the XXX_<something> fields to the message struct.
 func (g *Generator) generateInternalStructFields(mc *msgCtx, topLevelFields []topLevelField) {
 	if IsFmqJson {
-		g.P("Extra\tmap[string]interface{} `json:\"extra,omitempty\"`")
+		if FmqJsonExtra {
+			g.P("Extra\tmap[string]interface{} `json:\"extra,omitempty\"`")
+		}
 		return
 	}
 	if gogoproto.HasUnkeyed(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
