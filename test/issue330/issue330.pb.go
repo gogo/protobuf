@@ -10,6 +10,7 @@ import (
 	proto "github.com/gogo/protobuf/proto"
 	io "io"
 	math "math"
+	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -249,14 +250,7 @@ func (m *Object) Size() (n int) {
 }
 
 func sovIssue330(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozIssue330(x uint64) (n int) {
 	return sovIssue330(uint64((x << 1) ^ uint64((int64(x) >> 63))))

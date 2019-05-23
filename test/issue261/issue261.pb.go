@@ -12,6 +12,7 @@ import (
 	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 	io "io"
 	math "math"
+	math_bits "math/bits"
 	reflect "reflect"
 	strings "strings"
 	time "time"
@@ -237,14 +238,7 @@ func (m *MapStdTypes) Size() (n int) {
 }
 
 func sovIssue261(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozIssue261(x uint64) (n int) {
 	return sovIssue261(uint64((x << 1) ^ uint64((int64(x) >> 63))))

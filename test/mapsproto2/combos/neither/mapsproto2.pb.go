@@ -16,6 +16,7 @@ import (
 	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
 	io_ioutil "io/ioutil"
 	math "math"
+	math_bits "math/bits"
 	reflect "reflect"
 	strconv "strconv"
 	strings "strings"
@@ -3243,14 +3244,7 @@ func (m *AllMapsOrdered) Size() (n int) {
 }
 
 func sovMapsproto2(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozMapsproto2(x uint64) (n int) {
 	return sovMapsproto2(uint64((x << 1) ^ uint64((int64(x) >> 63))))
