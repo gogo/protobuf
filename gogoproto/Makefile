@@ -28,7 +28,11 @@
 
 regenerate:
 	go install github.com/gogo/protobuf/protoc-gen-gogo
+ifeq ($(shell expr $(PROTOBUF_VERSION) \>= 3.7.0), 1)
+	protoc --gogo_out=Mgoogle/protobuf/descriptor.proto=github.com/gogo/protobuf/protoc-gen-gogo/descriptor:../../../../ --proto_path=../../../../:../protobuf/ github.com/gogo/protobuf/gogoproto/gogo.proto
+else
 	protoc --gogo_out=Mgoogle/protobuf/descriptor.proto=github.com/gogo/protobuf/protoc-gen-gogo/descriptor:../../../../ --proto_path=../../../../:../protobuf/:. *.proto
+endif
 
 restore:
 	cp gogo.pb.golden gogo.pb.go

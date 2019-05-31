@@ -49,6 +49,8 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+
+	"github.com/golang/protobuf/proto"
 )
 
 const debug bool = false
@@ -593,6 +595,8 @@ var (
 // full file name of a .proto file to its compressed FileDescriptorProto.
 func RegisterFile(filename string, fileDescriptor []byte) {
 	protoFiles[filename] = fileDescriptor
+	// register to golang proto
+	proto.RegisterFile(filename, fileDescriptor)
 }
 
 // FileDescriptor returns the compressed FileDescriptorProto for a .proto file.

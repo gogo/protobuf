@@ -2,13 +2,17 @@ apt:
   update: true
 
 env:
-  - PROTOBUF_VERSION=2.6.1
-  - PROTOBUF_VERSION=3.0.2
-  - PROTOBUF_VERSION=3.7.1
+  global:
+    - GO111MODULE=off
+  matrix:
+    - PROTOBUF_VERSION=2.6.1
+    - PROTOBUF_VERSION=3.0.2
+    - PROTOBUF_VERSION=3.7.1
 
 before_install:
   - ./install-protobuf.sh
   - PATH=/home/travis/bin:$PATH protoc --version
+  - go get github.com/golang/protobuf/proto
 
 script:
   - PATH=/home/travis/bin:$PATH make buildserverall
