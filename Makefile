@@ -27,6 +27,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 GO_VERSION:=$(shell go version)
+BENCHLIST?=all
 
 # Skip known issues from purego tests
 # https://github.com/gogo/protobuf/issues/447
@@ -168,7 +169,7 @@ testall:
 bench:
 	go get golang.org/x/tools/cmd/benchcmp
 	(cd test/mixbench && go build .)
-	./test/mixbench/mixbench
+	./test/mixbench/mixbench -benchlist "${BENCHLIST}"
 
 contributors:
 	git log --format='%aN <%aE>' | sort -fu > CONTRIBUTORS
