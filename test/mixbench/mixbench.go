@@ -78,7 +78,7 @@ func init() {
 	benches["unmarshaler"] = func() { bench("./test/combos/both/", "ProtoUnmarshal", "./test/mixbench/unmarshaler.txt") }
 	benches["unmarshal"] = func() { bench("./test/", "ProtoUnmarshal", "./test/mixbench/unmarshal.txt") }
 	var ops []string
-	for k, _ := range benches {
+	for k := range benches {
 		ops = append(ops, k)
 	}
 	sort.Strings(ops)
