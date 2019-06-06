@@ -520,6 +520,7 @@ var marshalingTests = []struct {
 	{"BytesValue", marshaler, &pb.KnownTypes{Bytes: &types.BytesValue{Value: []byte("wow")}}, `{"bytes":"d293"}`},
 	{"required", marshaler, &pb.MsgWithRequired{Str: proto.String("hello")}, `{"str":"hello"}`},
 	{"required bytes", marshaler, &pb.MsgWithRequiredBytes{Byts: []byte{}}, `{"byts":""}`},
+	{"FieldMask", marshaler, &pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths: []string{"a", "b", "c_d"}}}, `{"fieldMask":"a,b,cD"}`},
 }
 
 func TestMarshaling(t *testing.T) {
@@ -718,6 +719,25 @@ func TestMarshalUnsetRequiredFields(t *testing.T) {
 	}
 }
 
+func TestMarshalIllegalFieldMask(t *testing.T) {
+	tests := []struct {
+		pb   proto.Message
+		fail bool
+	}{
+		{&pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths: []string{"c__d"}}}, true},
+		{&pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths: []string{"c_"}}}, true},
+	}
+	for _, tt := range tests {
+		_, err := marshaler.MarshalToString(tt.pb)
+		if err == nil && tt.fail {
+			t.Errorf("marshaler.MarshalToString(%v) = _, <nil>; want _, <non-nil>", tt.pb)
+		}
+		if err != nil && !tt.fail {
+			t.Errorf("marshaler.MarshalToString(%v) = _, %v; want _, <nil>", tt.pb, err)
+		}
+	}
+}
+
 var unmarshalingTests = []struct {
 	desc        string
 	unmarshaler Unmarshaler
@@ -860,6 +880,7 @@ var unmarshalingTests = []struct {
 	{"null BytesValue", Unmarshaler{}, `{"bytes":null}`, &pb.KnownTypes{Bytes: nil}},
 	{"required", Unmarshaler{}, `{"str":"hello"}`, &pb.MsgWithRequired{Str: proto.String("hello")}},
 	{"required bytes", Unmarshaler{}, `{"byts": []}`, &pb.MsgWithRequiredBytes{Byts: []byte{}}},
+	{"FieldMask", Unmarshaler{}, `{"fieldMask":"a,b,cD"}`, &pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths: []string{"a", "b", "c_d"}}}},
 }
 
 func TestUnmarshaling(t *testing.T) {
