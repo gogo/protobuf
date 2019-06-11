@@ -143,12 +143,10 @@ func StringFromExtensionsMap(m map[int32]Extension) string {
 }
 
 func StringFromExtensionsBytes(ext []byte) string {
-	fmt.Printf("Stringing: %v\n", ext)
 	m, err := BytesToExtensionsMap(ext)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("Stringing extensionMap: %v\n", m)
 	return StringFromExtensionsMap(m)
 }
 

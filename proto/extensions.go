@@ -345,7 +345,6 @@ func clearExtension(pb Message, fieldNum int32) {
 func GetExtension(pb Message, extension *ExtensionDesc) (interface{}, error) {
 	if epb, doki := pb.(extensionsBytes); doki {
 		ext := epb.GetExtensions()
-		fmt.Printf("GetExtension: %v\n", ext)
 		return decodeExtensionFromBytes(extension, *ext)
 	}
 
@@ -528,15 +527,13 @@ func ExtensionDescs(pb Message) ([]*ExtensionDesc, error) {
 // SetExtension sets the specified extension of pb to the specified value.
 func SetExtension(pb Message, extension *ExtensionDesc, value interface{}) error {
 	if epb, ok := pb.(extensionsBytes); ok {
+		ClearExtension(pb, extension)
 		newb, err := encodeExtension(extension, value)
-
 		if err != nil {
 			return err
 		}
-		fmt.Printf("SetExtension NewVal: %v\n", newb)
 		bb := epb.GetExtensions()
 		*bb = append(*bb, newb...)
-		fmt.Printf("SetExtension Done: %v\n", bb)
 		return nil
 	}
 	epb, err := extendable(pb)
