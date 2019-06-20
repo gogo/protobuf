@@ -20,15 +20,15 @@
 */
 package theproto3
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/frankee/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-import test "github.com/gogo/protobuf/test/combos/both"
+import _ "github.com/frankee/protobuf/gogoproto"
+import test "github.com/frankee/protobuf/test/combos/both"
 
-import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
+import github_com_gogo_protobuf_test_custom "github.com/frankee/protobuf/test/custom"
 
-import descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import descriptor "github.com/frankee/protobuf/protoc-gen-gogo/descriptor"
 import gzip "compress/gzip"
 import bytes "bytes"
 import ioutil "io/ioutil"
@@ -37,7 +37,7 @@ import strconv "strconv"
 
 import strings "strings"
 import reflect "reflect"
-import sortkeys "github.com/gogo/protobuf/sortkeys"
+import sortkeys "github.com/frankee/protobuf/sortkeys"
 
 import binary "encoding/binary"
 
@@ -193,8 +193,8 @@ func (*FloatingPoint) ProtoMessage()               {}
 func (*FloatingPoint) Descriptor() ([]byte, []int) { return fileDescriptorTheproto3, []int{5} }
 
 type Uint128Pair struct {
-	Left  github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,1,opt,name=left,proto3,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"left"`
-	Right *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=right,proto3,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"right,omitempty"`
+	Left  github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,1,opt,name=left,proto3,customtype=github.com/frankee/protobuf/test/custom.Uint128" json:"left"`
+	Right *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=right,proto3,customtype=github.com/frankee/protobuf/test/custom.Uint128" json:"right,omitempty"`
 }
 
 func (m *Uint128Pair) Reset()                    { *m = Uint128Pair{} }

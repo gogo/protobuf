@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package issue312;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/frankee/protobuf/gogoproto/gogo.proto";
 
 option go_package = "issue312";
 option (gogoproto.gostring_all) = true;

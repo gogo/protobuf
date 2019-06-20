@@ -1,6 +1,6 @@
 goos: darwin
 goarch: amd64
-pkg: github.com/gogo/protobuf/test/combos/unsafeboth
+pkg: github.com/frankee/protobuf/test/combos/unsafeboth
 BenchmarkNidOptNativeProtoMarshal-8                                     	10000000	       235 ns/op	 976.65 MB/s
 BenchmarkNinOptNativeProtoMarshal-8                                     	 5000000	       265 ns/op	 788.37 MB/s
 BenchmarkNidRepNativeProtoMarshal-8                                     	 1000000	      1011 ns/op	 810.06 MB/s
@@ -70,4 +70,4 @@ BenchmarkNidRepNonByteCustomTypeProtoMarshal-8                          	 500000
 BenchmarkNinRepNonByteCustomTypeProtoMarshal-8                          	 5000000	       382 ns/op	 601.83 MB/s
 BenchmarkProtoTypeProtoMarshal-8                                        	20000000	        94.3 ns/op	 869.89 MB/s
 PASS
-ok  	github.com/gogo/protobuf/test/combos/unsafeboth	147.234s
+ok  	github.com/frankee/protobuf/test/combos/unsafeboth	147.234s

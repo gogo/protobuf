@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/frankee/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -41,11 +41,11 @@ The stringer plugin also generates a test given it is enabled using one of the f
 
 Let us look at:
 
-  github.com/gogo/protobuf/test/example/example.proto
+  github.com/frankee/protobuf/test/example/example.proto
 
 Btw all the output can be seen at:
 
-  github.com/gogo/protobuf/test/example/*
+  github.com/frankee/protobuf/test/example/*
 
 The following message:
 
@@ -55,7 +55,7 @@ The following message:
   message A {
 	optional string Description = 1 [(gogoproto.nullable) = false];
 	optional int64 Number = 2 [(gogoproto.nullable) = false];
-	optional bytes Id = 3 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uuid", (gogoproto.nullable) = false];
+	optional bytes Id = 3 [(gogoproto.customtype) = "github.com/frankee/protobuf/test/custom.Uuid", (gogoproto.nullable) = false];
   }
 
 given to the stringer stringer, will generate the following code:
@@ -93,8 +93,8 @@ not print their values, while the generated String method will always print all 
 package stringer
 
 import (
-	"github.com/gogo/protobuf/gogoproto"
-	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
+	"github.com/frankee/protobuf/gogoproto"
+	"github.com/frankee/protobuf/protoc-gen-gogo/generator"
 	"strings"
 )
 
@@ -127,8 +127,8 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 	fmtPkg := p.NewImport("fmt")
 	stringsPkg := p.NewImport("strings")
 	reflectPkg := p.NewImport("reflect")
-	sortKeysPkg := p.NewImport("github.com/gogo/protobuf/sortkeys")
-	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
+	sortKeysPkg := p.NewImport("github.com/frankee/protobuf/sortkeys")
+	protoPkg := p.NewImport("github.com/frankee/protobuf/proto")
 	for _, message := range file.Messages() {
 		if !gogoproto.IsStringer(file.FileDescriptorProto, message.DescriptorProto) {
 			continue

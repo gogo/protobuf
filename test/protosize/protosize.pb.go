@@ -12,10 +12,10 @@
 */
 package protosize
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/frankee/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
+import _ "github.com/frankee/protobuf/gogoproto"
 
 import bytes "bytes"
 

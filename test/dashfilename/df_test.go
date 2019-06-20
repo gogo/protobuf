@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/frankee/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -34,7 +34,7 @@ import (
 	"testing"
 )
 
-//Issue 16 : https://github.com/gogo/protobuf/issues/detail?id=16
+//Issue 16 : https://github.com/frankee/protobuf/issues/detail?id=16
 func TestDashFilename(t *testing.T) {
 	name := "dash-filename"
 	cmd := exec.Command("protoc", "--gogo_out=.", "-I=../../../../../:../../protobuf/:.", name+".proto")

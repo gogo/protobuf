@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/frankee/protobuf
 //
 // Go support for Protocol Buffers - Google's data interchange format
 //
@@ -38,9 +38,9 @@ syntax = "proto3";
 
 package theproto3;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/frankee/protobuf/gogoproto/gogo.proto";
 
-import "github.com/gogo/protobuf/test/combos/both/thetest.proto";
+import "github.com/frankee/protobuf/test/combos/both/thetest.proto";
 
 option (gogoproto.goproto_stringer_all) = false;
 option (gogoproto.goproto_enum_prefix_all) = false;
@@ -153,8 +153,8 @@ message FloatingPoint {
 }
 
 message Uint128Pair {
-  bytes left = 1 [(gogoproto.nullable) = false, (gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128"];
-  bytes right = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128"];
+  bytes left = 1 [(gogoproto.nullable) = false, (gogoproto.customtype) = "github.com/frankee/protobuf/test/custom.Uint128"];
+  bytes right = 2 [(gogoproto.customtype) = "github.com/frankee/protobuf/test/custom.Uint128"];
 }
 
 message ContainsNestedMap {

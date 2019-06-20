@@ -1,7 +1,7 @@
 # Protocol Buffers for Go with Gadgets
 #
 # Copyright (c) 2013, The GoGo Authors. All rights reserved.
-# http://github.com/gogo/protobuf
+# http://github.com/frankee/protobuf
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -135,7 +135,7 @@ errcheck:
 
 drone:
 	sudo apt-get install protobuf-compiler
-	(cd $(GOPATH)/src/github.com/gogo/protobuf && make buildserverall)
+	(cd $(GOPATH)/src/github.com/frankee/protobuf && make buildserverall)
 
 testall:
 	go get -u github.com/golang/protobuf/proto
@@ -155,7 +155,7 @@ contributors:
 js:
 ifeq (go1.9, $(findstring go1.9, $(GO_VERSION)))
 	go get -u github.com/gopherjs/gopherjs
-	gopherjs build github.com/gogo/protobuf/protoc-gen-gogo
+	gopherjs build github.com/frankee/protobuf/protoc-gen-gogo
 endif
 
 update:

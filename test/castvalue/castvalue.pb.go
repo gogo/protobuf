@@ -13,19 +13,19 @@ It has these top-level messages:
 */
 package castvalue
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/frankee/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
+import _ "github.com/frankee/protobuf/gogoproto"
 
-import descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import descriptor "github.com/frankee/protobuf/protoc-gen-gogo/descriptor"
 import gzip "compress/gzip"
 import bytes "bytes"
 import ioutil "io/ioutil"
 
 import strings "strings"
 import reflect "reflect"
-import sortkeys "github.com/gogo/protobuf/sortkeys"
+import sortkeys "github.com/frankee/protobuf/sortkeys"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package typedecl;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/frankee/protobuf/gogoproto/gogo.proto";
 
 option (gogoproto.testgen_all) = true;
 option (gogoproto.populate_all) = true;

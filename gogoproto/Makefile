@@ -1,7 +1,7 @@
 # Protocol Buffers for Go with Gadgets
 #
 # Copyright (c) 2013, The GoGo Authors. All rights reserved.
-# http://github.com/gogo/protobuf
+# http://github.com/frankee/protobuf
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -27,8 +27,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	go install github.com/gogo/protobuf/protoc-gen-gogo
-	protoc --gogo_out=Mgoogle/protobuf/descriptor.proto=github.com/gogo/protobuf/protoc-gen-gogo/descriptor:../../../../ --proto_path=../../../../:../protobuf/:. *.proto
+	go install github.com/frankee/protobuf/protoc-gen-gogo
+	protoc --gogo_out=Mgoogle/protobuf/descriptor.proto=github.com/frankee/protobuf/protoc-gen-gogo/descriptor:../../../../ --proto_path=../../../../:../protobuf/:. *.proto
 
 restore:
 	cp gogo.pb.golden gogo.pb.go

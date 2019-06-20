@@ -39,8 +39,8 @@ test:	regenerate testbuild
 #	@echo PASS
 
 regenerate:
-	go install github.com/gogo/protobuf/protoc-min-version
-	protoc-min-version --version="3.0.0" --gogo_out=Mmulti/multi1.proto=github.com/gogo/protobuf/protoc-gen-gogo/testdata/multi:. ./my_test/test.proto
+	go install github.com/frankee/protobuf/protoc-min-version
+	protoc-min-version --version="3.0.0" --gogo_out=Mmulti/multi1.proto=github.com/frankee/protobuf/protoc-gen-gogo/testdata/multi:. ./my_test/test.proto
 
 nuke:	clean
 

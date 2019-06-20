@@ -14,7 +14,7 @@
 */
 package types
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/frankee/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
@@ -22,7 +22,7 @@ import strconv "strconv"
 
 import strings "strings"
 import reflect "reflect"
-import sortkeys "github.com/gogo/protobuf/sortkeys"
+import sortkeys "github.com/frankee/protobuf/sortkeys"
 
 import binary "encoding/binary"
 
@@ -598,7 +598,7 @@ func (this *Struct) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&types.Struct{")
 	keysForFields := make([]string, 0, len(this.Fields))
-	for k := range this.Fields {
+	for k, _ := range this.Fields {
 		keysForFields = append(keysForFields, k)
 	}
 	sortkeys.Strings(keysForFields)
@@ -709,7 +709,7 @@ func (m *Struct) MarshalTo(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if len(m.Fields) > 0 {
-		for k := range m.Fields {
+		for k, _ := range m.Fields {
 			dAtA[i] = 0xa
 			i++
 			v := m.Fields[k]
@@ -1122,7 +1122,7 @@ func (this *Struct) String() string {
 		return "nil"
 	}
 	keysForFields := make([]string, 0, len(this.Fields))
-	for k := range this.Fields {
+	for k, _ := range this.Fields {
 		keysForFields = append(keysForFields, k)
 	}
 	sortkeys.Strings(keysForFields)

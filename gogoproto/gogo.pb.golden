@@ -4,10 +4,10 @@
 
 package gogoproto
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/frankee/protobuf/proto"
 import json "encoding/json"
 import math "math"
-import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import google_protobuf "github.com/frankee/protobuf/protoc-gen-gogo/descriptor"
 
 // Reference proto, json, and math imports to suppress error if they are not otherwise used.
 var _ = proto.Marshal

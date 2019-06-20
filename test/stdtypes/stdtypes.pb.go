@@ -15,21 +15,21 @@ It has these top-level messages:
 */
 package stdtypes
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/frankee/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-import _ "github.com/gogo/protobuf/types"
-import _ "github.com/gogo/protobuf/types"
+import _ "github.com/frankee/protobuf/gogoproto"
+import _ "github.com/frankee/protobuf/types"
+import _ "github.com/frankee/protobuf/types"
 
 import time "time"
-import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+import github_com_gogo_protobuf_types "github.com/frankee/protobuf/types"
 
 import strings "strings"
 import reflect "reflect"
-import sortkeys "github.com/gogo/protobuf/sortkeys"
+import sortkeys "github.com/frankee/protobuf/sortkeys"
 
-import types "github.com/gogo/protobuf/types"
+import types "github.com/frankee/protobuf/types"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

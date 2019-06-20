@@ -1,6 +1,6 @@
 goos: darwin
 goarch: amd64
-pkg: github.com/gogo/protobuf/test
+pkg: github.com/frankee/protobuf/test
 BenchmarkNidOptNativeProtoMarshal-8                                     	 2000000	       831 ns/op	 276.72 MB/s
 BenchmarkNinOptNativeProtoMarshal-8                                     	 2000000	       931 ns/op	 224.49 MB/s
 BenchmarkNidRepNativeProtoMarshal-8                                     	  500000	      2341 ns/op	 349.71 MB/s
@@ -70,4 +70,4 @@ BenchmarkNidRepNonByteCustomTypeProtoMarshal-8                          	  50000
 BenchmarkNinRepNonByteCustomTypeProtoMarshal-8                          	  500000	      2750 ns/op	  83.62 MB/s
 BenchmarkProtoTypeProtoMarshal-8                                        	 5000000	       395 ns/op	 207.07 MB/s
 PASS
-ok  	github.com/gogo/protobuf/test	159.241s
+ok  	github.com/frankee/protobuf/test	159.241s

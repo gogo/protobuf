@@ -12,11 +12,11 @@ It has these top-level messages:
 */
 package events
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/frankee/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import issue312 "github.com/gogo/protobuf/test/issue312"
-import _ "github.com/gogo/protobuf/gogoproto"
+import issue312 "github.com/frankee/protobuf/test/issue312"
+import _ "github.com/frankee/protobuf/gogoproto"
 
 import bytes "bytes"
 

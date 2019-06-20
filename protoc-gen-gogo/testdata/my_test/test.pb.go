@@ -20,10 +20,10 @@ It has these top-level messages:
 */
 package my_test
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/frankee/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/gogo/protobuf/protoc-gen-gogo/testdata/multi"
+import _ "github.com/frankee/protobuf/protoc-gen-gogo/testdata/multi"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -190,12 +190,12 @@ type Request struct {
 	Deadline  *float32           `protobuf:"fixed32,7,opt,name=deadline,def=inf" json:"deadline,omitempty"`
 	Somegroup *Request_SomeGroup `protobuf:"group,8,opt,name=SomeGroup,json=somegroup" json:"somegroup,omitempty"`
 	// This is a map field. It will generate map[int32]string.
-	NameMapping map[int32]string `protobuf:"bytes,14,rep,name=name_mapping,json=nameMapping" json:"name_mapping,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	NameMapping map[int32]string `protobuf:"bytes,14,rep,name=name_mapping,json=nameMapping" json:"nameMapping,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// This is a map field whose value type is a message.
-	MsgMapping map[int64]*Reply `protobuf:"bytes,15,rep,name=msg_mapping,json=msgMapping" json:"msg_mapping,omitempty" protobuf_key:"zigzag64,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	MsgMapping map[int64]*Reply `protobuf:"bytes,15,rep,name=msg_mapping,json=msgMapping" json:"msgMapping,omitempty" protobuf_key:"zigzag64,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Reset_     *int32           `protobuf:"varint,12,opt,name=reset" json:"reset,omitempty"`
 	// This field should not conflict with any getters.
-	GetKey_          *string `protobuf:"bytes,16,opt,name=get_key,json=getKey" json:"get_key,omitempty"`
+	GetKey_          *string `protobuf:"bytes,16,opt,name=get_key,json=getKey" json:"getKey,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -272,7 +272,7 @@ func (m *Request) GetGetKey_() string {
 }
 
 type Request_SomeGroup struct {
-	GroupField       *int32 `protobuf:"varint,9,opt,name=group_field,json=groupField" json:"group_field,omitempty"`
+	GroupField       *int32 `protobuf:"varint,9,opt,name=group_field,json=groupField" json:"groupField,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
@@ -290,7 +290,7 @@ func (m *Request_SomeGroup) GetGroupField() int32 {
 
 type Reply struct {
 	Found                        []*Reply_Entry `protobuf:"bytes,1,rep,name=found" json:"found,omitempty"`
-	CompactKeys                  []int32        `protobuf:"varint,2,rep,packed,name=compact_keys,json=compactKeys" json:"compact_keys,omitempty"`
+	CompactKeys                  []int32        `protobuf:"varint,2,rep,packed,name=compact_keys,json=compactKeys" json:"compactKeys,omitempty"`
 	proto.XXX_InternalExtensions `json:"-"`
 	XXX_unrecognized             []byte `json:"-"`
 }
@@ -323,9 +323,9 @@ func (m *Reply) GetCompactKeys() []int32 {
 }
 
 type Reply_Entry struct {
-	KeyThatNeeds_1234Camel_CasIng *int64 `protobuf:"varint,1,req,name=key_that_needs_1234camel_CasIng,json=keyThatNeeds1234camelCasIng" json:"key_that_needs_1234camel_CasIng,omitempty"`
+	KeyThatNeeds_1234Camel_CasIng *int64 `protobuf:"varint,1,req,name=key_that_needs_1234camel_CasIng,json=keyThatNeeds1234camelCasIng" json:"keyThatNeeds1234camelCasIng,omitempty"`
 	Value                         *int64 `protobuf:"varint,2,opt,name=value,def=7" json:"value,omitempty"`
-	XMyFieldName_2                *int64 `protobuf:"varint,3,opt,name=_my_field_name_2,json=MyFieldName2" json:"_my_field_name_2,omitempty"`
+	XMyFieldName_2                *int64 `protobuf:"varint,3,opt,name=_my_field_name_2,json=MyFieldName2" json:"MyFieldName2,omitempty"`
 	XXX_unrecognized              []byte `json:"-"`
 }
 
@@ -472,7 +472,7 @@ func (*OldReply) ExtensionRangeArray() []proto.ExtensionRange {
 }
 
 type Communique struct {
-	MakeMeCry *bool `protobuf:"varint,1,opt,name=make_me_cry,json=makeMeCry" json:"make_me_cry,omitempty"`
+	MakeMeCry *bool `protobuf:"varint,1,opt,name=make_me_cry,json=makeMeCry" json:"makeMeCry,omitempty"`
 	// This is a oneof, called "union".
 	//
 	// Types that are valid to be assigned to Union:

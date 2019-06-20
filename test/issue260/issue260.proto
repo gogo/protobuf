@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package issue260;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/frankee/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
 
 option (gogoproto.testgen_all) = true;

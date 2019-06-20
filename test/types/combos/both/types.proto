@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2016, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/frankee/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -30,7 +30,7 @@ syntax = "proto3";
 
 package types;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/frankee/protobuf/gogoproto/gogo.proto";
 
 //import "google/protobuf/any.proto";
 import "google/protobuf/duration.proto";
@@ -63,7 +63,7 @@ message KnownTypes {
   google.protobuf.StringValue str = 10;
   google.protobuf.BytesValue bytes = 11;
 
-  // TODO uncomment this once https://github.com/gogo/protobuf/issues/197 is fixed
+  // TODO uncomment this once https://github.com/frankee/protobuf/issues/197 is fixed
   // google.protobuf.Struct st = 12;
   // google.protobuf.Any an = 14;
 }

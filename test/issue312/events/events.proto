@@ -2,8 +2,8 @@ syntax = "proto2";
 
 package issue312.events;
 
-import "github.com/gogo/protobuf/test/issue312/issue312.proto";
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/frankee/protobuf/test/issue312/issue312.proto";
+import "github.com/frankee/protobuf/gogoproto/gogo.proto";
 
 option go_package = "events";
 option (gogoproto.gostring_all) = true;

@@ -12,18 +12,18 @@
 */
 package timefail
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/frankee/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-import _ "github.com/gogo/protobuf/types"
+import _ "github.com/frankee/protobuf/gogoproto"
+import _ "github.com/frankee/protobuf/types"
 
 import time "time"
 
 import strings "strings"
 import reflect "reflect"
 
-import types "github.com/gogo/protobuf/types"
+import types "github.com/frankee/protobuf/types"
 
 import io "io"
 

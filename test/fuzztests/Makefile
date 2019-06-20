@@ -1,7 +1,7 @@
 # Protocol Buffers for Go with Gadgets
 #
 # Copyright (c) 2015, The GoGo Authors. All rights reserved.
-# http://github.com/gogo/protobuf
+# http://github.com/frankee/protobuf
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -27,5 +27,5 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
-	go install github.com/gogo/protobuf/protoc-gen-gogofast
+	go install github.com/frankee/protobuf/protoc-gen-gogofast
 	protoc  --proto_path=../../../../../:../../protobuf/:. --gogofast_out=. fuzz.proto

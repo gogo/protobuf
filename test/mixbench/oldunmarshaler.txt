@@ -1,6 +1,6 @@
 goos: darwin
 goarch: amd64
-pkg: github.com/gogo/protobuf/test/combos/both
+pkg: github.com/frankee/protobuf/test/combos/both
 BenchmarkNidOptNativeProtoUnmarshal-8                                     	 3000000	       441 ns/op	 520.98 MB/s
 BenchmarkNinOptNativeProtoUnmarshal-8                                     	 2000000	       638 ns/op	 327.14 MB/s
 BenchmarkNidRepNativeProtoUnmarshal-8                                     	  500000	      2830 ns/op	 289.36 MB/s
@@ -70,4 +70,4 @@ BenchmarkNidRepNonByteCustomTypeProtoUnmarshal-8                          	 1000
 BenchmarkNinRepNonByteCustomTypeProtoUnmarshal-8                          	 1000000	      1043 ns/op	 220.36 MB/s
 BenchmarkProtoTypeProtoUnmarshal-8                                        	10000000	       221 ns/op	 369.64 MB/s
 PASS
-ok  	github.com/gogo/protobuf/test/combos/both	152.331s
+ok  	github.com/frankee/protobuf/test/combos/both	152.331s

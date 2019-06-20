@@ -1,7 +1,7 @@
 URL="https://raw.githubusercontent.com/google/protobuf/master/src/google/protobuf/"
 
 update:
-	go install github.com/gogo/protobuf/gogoreplace
+	go install github.com/frankee/protobuf/gogoreplace
 
 	(cd ./google/protobuf && rm descriptor.proto; wget ${URL}/descriptor.proto)
 	# gogoprotobuf requires users to import gogo.proto which imports descriptor.proto

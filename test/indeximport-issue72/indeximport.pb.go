@@ -12,11 +12,11 @@
 */
 package indeximport
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/frankee/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import index "github.com/gogo/protobuf/test/indeximport-issue72/index"
-import _ "github.com/gogo/protobuf/gogoproto"
+import index "github.com/frankee/protobuf/test/indeximport-issue72/index"
+import _ "github.com/frankee/protobuf/gogoproto"
 
 import bytes "bytes"
 

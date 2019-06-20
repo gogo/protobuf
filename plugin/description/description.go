@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/frankee/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -43,18 +43,18 @@ The description plugin also generates a test given it is enabled using one of th
 
 Let us look at:
 
-  github.com/gogo/protobuf/test/example/example.proto
+  github.com/frankee/protobuf/test/example/example.proto
 
 Btw all the output can be seen at:
 
-  github.com/gogo/protobuf/test/example/*
+  github.com/frankee/protobuf/test/example/*
 
 The following message:
 
   message B {
 	option (gogoproto.description) = true;
 	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
-	repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
+	repeated bytes G = 2 [(gogoproto.customtype) = "github.com/frankee/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
   }
 
 given to the description plugin, will generate the following code:
@@ -79,10 +79,10 @@ import (
 	"bytes"
 	"compress/gzip"
 	"fmt"
-	"github.com/gogo/protobuf/gogoproto"
-	"github.com/gogo/protobuf/proto"
-	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
+	"github.com/frankee/protobuf/gogoproto"
+	"github.com/frankee/protobuf/proto"
+	descriptor "github.com/frankee/protobuf/protoc-gen-gogo/descriptor"
+	"github.com/frankee/protobuf/protoc-gen-gogo/generator"
 )
 
 type plugin struct {
@@ -107,8 +107,8 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	localName := generator.FileName(file)
 
 	p.PluginImports = generator.NewPluginImports(p.Generator)
-	descriptorPkg := p.NewImport("github.com/gogo/protobuf/protoc-gen-gogo/descriptor")
-	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
+	descriptorPkg := p.NewImport("github.com/frankee/protobuf/protoc-gen-gogo/descriptor")
+	protoPkg := p.NewImport("github.com/frankee/protobuf/proto")
 	gzipPkg := p.NewImport("compress/gzip")
 	bytesPkg := p.NewImport("bytes")
 	ioutilPkg := p.NewImport("io/ioutil")

@@ -34,7 +34,7 @@ package descriptor
 
 import fmt "fmt"
 import strings "strings"
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/frankee/protobuf/proto"
 import sort "sort"
 import strconv "strconv"
 import reflect "reflect"

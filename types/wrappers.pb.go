@@ -20,7 +20,7 @@ It has these top-level messages:
 */
 package types
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/frankee/protobuf/proto"
 import fmt "fmt"
 import math "math"
 

@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2016, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/frankee/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -29,8 +29,8 @@
 package main
 
 import (
-	"github.com/gogo/protobuf/plugin/gostring"
-	"github.com/gogo/protobuf/vanity/command"
+	"github.com/frankee/protobuf/plugin/gostring"
+	"github.com/frankee/protobuf/vanity/command"
 )
 
 func main() {

@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2015, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/frankee/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -31,8 +31,8 @@ package main
 import (
 	"strings"
 
-	"github.com/gogo/protobuf/vanity"
-	"github.com/gogo/protobuf/vanity/command"
+	"github.com/frankee/protobuf/vanity"
+	"github.com/frankee/protobuf/vanity/command"
 )
 
 func main() {
@@ -55,7 +55,7 @@ func main() {
 	for _, file := range files {
 		if strings.HasSuffix(file.GetName(), "struct.proto") {
 			// TODO struct can also get a compare method when
-			// https://github.com/gogo/protobuf/issues/221 is fixed
+			// https://github.com/frankee/protobuf/issues/221 is fixed
 			continue
 		}
 		vanity.TurnOnCompareAll(file)

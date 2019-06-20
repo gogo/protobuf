@@ -20,13 +20,18 @@ It has these top-level messages:
 	Widget
 	Maps
 	MsgWithOneof
+	Building
+	Floor
+	Place
+	UnionPlace
+	UnionPlaces
 	Real
 	Complex
 	KnownTypes
 */
 package jsonpb
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/frankee/protobuf/proto"
 import fmt "fmt"
 import math "math"
 

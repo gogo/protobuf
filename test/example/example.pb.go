@@ -18,15 +18,15 @@
 */
 package test
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/frankee/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
+import _ "github.com/frankee/protobuf/gogoproto"
 
-import github_com_gogo_protobuf_test "github.com/gogo/protobuf/test"
-import github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
+import github_com_gogo_protobuf_test "github.com/frankee/protobuf/test"
+import github_com_gogo_protobuf_test_custom "github.com/frankee/protobuf/test/custom"
 
-import descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+import descriptor "github.com/frankee/protobuf/protoc-gen-gogo/descriptor"
 import gzip "compress/gzip"
 import bytes "bytes"
 import ioutil "io/ioutil"
@@ -50,7 +50,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 type A struct {
 	Description      string                             `protobuf:"bytes,1,opt,name=Description" json:"Description"`
 	Number           int64                              `protobuf:"varint,2,opt,name=Number" json:"Number"`
-	Id               github_com_gogo_protobuf_test.Uuid `protobuf:"bytes,3,opt,name=Id,customtype=github.com/gogo/protobuf/test.Uuid" json:"Id"`
+	Id               github_com_gogo_protobuf_test.Uuid `protobuf:"bytes,3,opt,name=Id,customtype=github.com/frankee/protobuf/test.Uuid" json:"Id"`
 	XXX_unrecognized []byte                             `json:"-"`
 }
 
@@ -60,7 +60,7 @@ func (*A) Descriptor() ([]byte, []int) { return fileDescriptorExample, []int{0} 
 
 type B struct {
 	A                `protobuf:"bytes,1,opt,name=A,embedded=A" json:"A"`
-	G                []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=G,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"G"`
+	G                []github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,rep,name=G,customtype=github.com/frankee/protobuf/test/custom.Uint128" json:"G"`
 	XXX_unrecognized []byte                                         `json:"-"`
 }
 

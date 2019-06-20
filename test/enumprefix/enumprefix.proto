@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/frankee/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -29,8 +29,8 @@
 syntax = "proto2";
 package enumprefix;
 
-import "github.com/gogo/protobuf/test/thetest.proto";
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/frankee/protobuf/test/thetest.proto";
+import "github.com/frankee/protobuf/gogoproto/gogo.proto";
 
 message MyMessage {
 	optional test.TheTestEnum TheField = 1 [(gogoproto.nullable) = false];
