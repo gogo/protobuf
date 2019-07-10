@@ -838,7 +838,7 @@ func valueToGoStringGroup(v interface{}, typ string) string {
 }
 func NewPopulatedGroups1(r randyGroup, easy bool) *Groups1 {
 	this := &Groups1{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v1 := r.Intn(5)
 		this.G = make([]*Groups1_G, v1)
 		for i := 0; i < v1; i++ {
@@ -853,14 +853,14 @@ func NewPopulatedGroups1(r randyGroup, easy bool) *Groups1 {
 
 func NewPopulatedGroups1_G(r randyGroup, easy bool) *Groups1_G {
 	this := &Groups1_G{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v2 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v2 *= -1
 		}
 		this.Field1 = &v2
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v3 := float64(r.Float64())
 		if r.Intn(2) == 0 {
 			v3 *= -1
@@ -875,7 +875,7 @@ func NewPopulatedGroups1_G(r randyGroup, easy bool) *Groups1_G {
 
 func NewPopulatedGroups2(r randyGroup, easy bool) *Groups2 {
 	this := &Groups2{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.G = NewPopulatedGroups2_G(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -886,14 +886,14 @@ func NewPopulatedGroups2(r randyGroup, easy bool) *Groups2 {
 
 func NewPopulatedGroups2_G(r randyGroup, easy bool) *Groups2_G {
 	this := &Groups2_G{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v4 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v4 *= -1
 		}
 		this.Field1 = &v4
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v5 := r.Intn(10)
 		this.Field2 = make([]float64, v5)
 		for i := 0; i < v5; i++ {

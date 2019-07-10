@@ -166,7 +166,3 @@ message ContainsNestedMap {
 message NotPacked {
 	repeated uint64 key = 5 [packed=false];
 }
-
-message DeepMap {
-	map<string, DeepMap> maps = 1;
-}

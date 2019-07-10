@@ -42,7 +42,7 @@ func (m *OrderedMap) XXX_Unmarshal(b []byte) error {
 }
 func (m *OrderedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
+	n, err := m.MarshalToSizedBuffer(b)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ func (m *UnorderedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 		return xxx_messageInfo_UnorderedMap.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -171,7 +171,7 @@ func (m *NestedOrderedMap) XXX_Unmarshal(b []byte) error {
 }
 func (m *NestedOrderedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
+	n, err := m.MarshalToSizedBuffer(b)
 	if err != nil {
 		return nil, err
 	}
@@ -221,7 +221,7 @@ func (m *NestedMap1) XXX_Unmarshal(b []byte) error {
 }
 func (m *NestedMap1) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
+	n, err := m.MarshalToSizedBuffer(b)
 	if err != nil {
 		return nil, err
 	}
@@ -268,7 +268,7 @@ func (m *NestedUnorderedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 		return xxx_messageInfo_NestedUnorderedMap.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -322,7 +322,7 @@ func (m *NestedMap2) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_NestedMap2.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -901,7 +901,7 @@ func (this *NestedMap2) Equal(that interface{}) bool {
 func (m *OrderedMap) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -909,42 +909,50 @@ func (m *OrderedMap) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *OrderedMap) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *OrderedMap) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
 	if len(m.StringMap) > 0 {
 		keysForStringMap := make([]string, 0, len(m.StringMap))
 		for k := range m.StringMap {
 			keysForStringMap = append(keysForStringMap, string(k))
 		}
 		github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
-		for _, k := range keysForStringMap {
-			dAtA[i] = 0xa
-			i++
-			v := m.StringMap[string(k)]
-			mapSize := 1 + len(k) + sovDeterministic(uint64(len(k))) + 1 + len(v) + sovDeterministic(uint64(len(v)))
-			i = encodeVarintDeterministic(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
+		for iNdEx := len(keysForStringMap) - 1; iNdEx >= 0; iNdEx-- {
+			v := m.StringMap[string(keysForStringMap[iNdEx])]
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
 			i = encodeVarintDeterministic(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
+			i--
+			dAtA[i] = 0x12
+			i -= len(keysForStringMap[iNdEx])
+			copy(dAtA[i:], keysForStringMap[iNdEx])
+			i = encodeVarintDeterministic(dAtA, i, uint64(len(keysForStringMap[iNdEx])))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintDeterministic(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *UnorderedMap) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -952,37 +960,45 @@ func (m *UnorderedMap) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *UnorderedMap) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UnorderedMap) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
 	if len(m.StringMap) > 0 {
 		for k := range m.StringMap {
-			dAtA[i] = 0xa
-			i++
 			v := m.StringMap[k]
-			mapSize := 1 + len(k) + sovDeterministic(uint64(len(k))) + 1 + len(v) + sovDeterministic(uint64(len(v)))
-			i = encodeVarintDeterministic(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
 			i = encodeVarintDeterministic(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
+			i--
+			dAtA[i] = 0x12
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintDeterministic(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *NestedOrderedMap) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -990,52 +1006,62 @@ func (m *NestedOrderedMap) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *NestedOrderedMap) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *NestedOrderedMap) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if m.NestedMap != nil {
+		{
+			size, err := m.NestedMap.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintDeterministic(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
 	if len(m.StringMap) > 0 {
 		keysForStringMap := make([]string, 0, len(m.StringMap))
 		for k := range m.StringMap {
 			keysForStringMap = append(keysForStringMap, string(k))
 		}
 		github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
-		for _, k := range keysForStringMap {
-			dAtA[i] = 0xa
-			i++
-			v := m.StringMap[string(k)]
-			mapSize := 1 + len(k) + sovDeterministic(uint64(len(k))) + 1 + len(v) + sovDeterministic(uint64(len(v)))
-			i = encodeVarintDeterministic(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
+		for iNdEx := len(keysForStringMap) - 1; iNdEx >= 0; iNdEx-- {
+			v := m.StringMap[string(keysForStringMap[iNdEx])]
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
 			i = encodeVarintDeterministic(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
+			i--
+			dAtA[i] = 0x12
+			i -= len(keysForStringMap[iNdEx])
+			copy(dAtA[i:], keysForStringMap[iNdEx])
+			i = encodeVarintDeterministic(dAtA, i, uint64(len(keysForStringMap[iNdEx])))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintDeterministic(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
 		}
 	}
-	if m.NestedMap != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintDeterministic(dAtA, i, uint64(m.NestedMap.Size()))
-		n1, err1 := m.NestedMap.MarshalTo(dAtA[i:])
-		if err1 != nil {
-			return 0, err1
-		}
-		i += n1
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *NestedMap1) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1043,42 +1069,50 @@ func (m *NestedMap1) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *NestedMap1) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *NestedMap1) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
 	if len(m.NestedStringMap) > 0 {
 		keysForNestedStringMap := make([]string, 0, len(m.NestedStringMap))
 		for k := range m.NestedStringMap {
 			keysForNestedStringMap = append(keysForNestedStringMap, string(k))
 		}
 		github_com_gogo_protobuf_sortkeys.Strings(keysForNestedStringMap)
-		for _, k := range keysForNestedStringMap {
-			dAtA[i] = 0xa
-			i++
-			v := m.NestedStringMap[string(k)]
-			mapSize := 1 + len(k) + sovDeterministic(uint64(len(k))) + 1 + len(v) + sovDeterministic(uint64(len(v)))
-			i = encodeVarintDeterministic(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
+		for iNdEx := len(keysForNestedStringMap) - 1; iNdEx >= 0; iNdEx-- {
+			v := m.NestedStringMap[string(keysForNestedStringMap[iNdEx])]
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
 			i = encodeVarintDeterministic(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
+			i--
+			dAtA[i] = 0x12
+			i -= len(keysForNestedStringMap[iNdEx])
+			copy(dAtA[i:], keysForNestedStringMap[iNdEx])
+			i = encodeVarintDeterministic(dAtA, i, uint64(len(keysForNestedStringMap[iNdEx])))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintDeterministic(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *NestedUnorderedMap) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1086,47 +1120,57 @@ func (m *NestedUnorderedMap) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *NestedUnorderedMap) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *NestedUnorderedMap) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.StringMap) > 0 {
-		for k := range m.StringMap {
-			dAtA[i] = 0xa
-			i++
-			v := m.StringMap[k]
-			mapSize := 1 + len(k) + sovDeterministic(uint64(len(k))) + 1 + len(v) + sovDeterministic(uint64(len(v)))
-			i = encodeVarintDeterministic(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintDeterministic(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
-		}
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	if m.NestedMap != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintDeterministic(dAtA, i, uint64(m.NestedMap.Size()))
-		n2, err2 := m.NestedMap.MarshalTo(dAtA[i:])
-		if err2 != nil {
-			return 0, err2
+		{
+			size, err := m.NestedMap.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintDeterministic(dAtA, i, uint64(size))
 		}
-		i += n2
+		i--
+		dAtA[i] = 0x12
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
+	if len(m.StringMap) > 0 {
+		for k := range m.StringMap {
+			v := m.StringMap[k]
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
+			i = encodeVarintDeterministic(dAtA, i, uint64(len(v)))
+			i--
+			dAtA[i] = 0x12
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintDeterministic(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
+		}
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *NestedMap2) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1134,41 +1178,51 @@ func (m *NestedMap2) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *NestedMap2) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *NestedMap2) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
 	if len(m.NestedStringMap) > 0 {
 		for k := range m.NestedStringMap {
-			dAtA[i] = 0xa
-			i++
 			v := m.NestedStringMap[k]
-			mapSize := 1 + len(k) + sovDeterministic(uint64(len(k))) + 1 + len(v) + sovDeterministic(uint64(len(v)))
-			i = encodeVarintDeterministic(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
 			i = encodeVarintDeterministic(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
+			i--
+			dAtA[i] = 0x12
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintDeterministic(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintDeterministic(dAtA []byte, offset int, v uint64) int {
+	offset -= sovDeterministic(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func (m *OrderedMap) Size() (n int) {
 	if m == nil {

@@ -47,7 +47,7 @@ func (m *SizeMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return xxx_messageInfo_SizeMessage.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -162,7 +162,7 @@ func (this *SizeMessage) Equal(that interface{}) bool {
 func (m *SizeMessage) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -170,60 +170,69 @@ func (m *SizeMessage) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *SizeMessage) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *SizeMessage) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.Size_ != nil {
-		dAtA[i] = 0x8
-		i++
-		i = encodeVarintSizeunderscore(dAtA, i, uint64(*m.Size_))
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if m.String_ != nil {
+		i -= len(*m.String_)
+		copy(dAtA[i:], *m.String_)
+		i = encodeVarintSizeunderscore(dAtA, i, uint64(len(*m.String_)))
+		i--
+		dAtA[i] = 0x1a
 	}
 	if m.Equal_ != nil {
-		dAtA[i] = 0x10
-		i++
+		i--
 		if *m.Equal_ {
 			dAtA[i] = 1
 		} else {
 			dAtA[i] = 0
 		}
-		i++
+		i--
+		dAtA[i] = 0x10
 	}
-	if m.String_ != nil {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintSizeunderscore(dAtA, i, uint64(len(*m.String_)))
-		i += copy(dAtA[i:], *m.String_)
+	if m.Size_ != nil {
+		i = encodeVarintSizeunderscore(dAtA, i, uint64(*m.Size_))
+		i--
+		dAtA[i] = 0x8
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintSizeunderscore(dAtA []byte, offset int, v uint64) int {
+	offset -= sovSizeunderscore(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func NewPopulatedSizeMessage(r randySizeunderscore, easy bool) *SizeMessage {
 	this := &SizeMessage{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v1 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v1 *= -1
 		}
 		this.Size_ = &v1
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v2 := bool(bool(r.Intn(2) == 0))
 		this.Equal_ = &v2
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v3 := string(randStringSizeunderscore(r))
 		this.String_ = &v3
 	}

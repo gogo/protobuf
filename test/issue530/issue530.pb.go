@@ -54,7 +54,7 @@ func (m *Foo5) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_Foo5.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -174,7 +174,7 @@ func (m *Bar1) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_Bar1.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -217,7 +217,7 @@ func (m *Bar2) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_Bar2.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -261,7 +261,7 @@ func (m *Bar3) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_Bar3.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -311,7 +311,7 @@ func (m *Bar4) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_Bar4.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -355,7 +355,7 @@ func (m *Bar5) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_Bar5.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -408,7 +408,7 @@ func (m *Bar7) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_Bar7.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -472,7 +472,7 @@ func (m *Bar8) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_Bar8.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -516,7 +516,7 @@ func (m *Bar9) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_Bar9.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -948,7 +948,7 @@ func (this *Bar9) Equal(that interface{}) bool {
 func (m *Foo5) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -956,181 +956,202 @@ func (m *Foo5) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Foo5) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Foo5) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	dAtA[i] = 0xa
-	i++
-	i = encodeVarintIssue530(dAtA, i, uint64(m.Bar1.Size()))
-	n1, err1 := m.Bar1.MarshalTo(dAtA[i:])
-	if err1 != nil {
-		return 0, err1
-	}
-	i += n1
-	if m.Bar2 != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintIssue530(dAtA, i, uint64(m.Bar2.Size()))
-		n2, err2 := m.Bar2.MarshalTo(dAtA[i:])
-		if err2 != nil {
-			return 0, err2
-		}
-		i += n2
-	}
-	dAtA[i] = 0x1a
-	i++
-	i = encodeVarintIssue530(dAtA, i, uint64(m.Bar3.Size()))
-	n3, err3 := m.Bar3.MarshalTo(dAtA[i:])
-	if err3 != nil {
-		return 0, err3
-	}
-	i += n3
-	if m.Bar4 != nil {
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintIssue530(dAtA, i, uint64(m.Bar4.Size()))
-		n4, err4 := m.Bar4.MarshalTo(dAtA[i:])
-		if err4 != nil {
-			return 0, err4
-		}
-		i += n4
-	}
-	if len(m.Bars1) > 0 {
-		for _, msg := range m.Bars1 {
-			dAtA[i] = 0x2a
-			i++
-			i = encodeVarintIssue530(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
+	if len(m.Barmap2) > 0 {
+		for k := range m.Barmap2 {
+			v := m.Barmap2[k]
+			baseI := i
+			if v != nil {
+				{
+					size, err := v.MarshalToSizedBuffer(dAtA[:i])
+					if err != nil {
+						return 0, err
+					}
+					i -= size
+					i = encodeVarintIssue530(dAtA, i, uint64(size))
+				}
+				i--
+				dAtA[i] = 0x12
 			}
-			i += n
-		}
-	}
-	if len(m.Bars2) > 0 {
-		for _, msg := range m.Bars2 {
-			dAtA[i] = 0x32
-			i++
-			i = encodeVarintIssue530(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Bars3) > 0 {
-		for _, msg := range m.Bars3 {
-			dAtA[i] = 0x3a
-			i++
-			i = encodeVarintIssue530(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Bars4) > 0 {
-		for _, msg := range m.Bars4 {
-			dAtA[i] = 0x42
-			i++
-			i = encodeVarintIssue530(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Barrs1) > 0 {
-		for _, msg := range m.Barrs1 {
-			dAtA[i] = 0x4a
-			i++
-			i = encodeVarintIssue530(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Barrs2) > 0 {
-		for _, msg := range m.Barrs2 {
-			dAtA[i] = 0x52
-			i++
-			i = encodeVarintIssue530(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintIssue530(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintIssue530(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x62
 		}
 	}
 	if len(m.Barmap1) > 0 {
 		for k := range m.Barmap1 {
-			dAtA[i] = 0x5a
-			i++
 			v := m.Barmap1[k]
-			msgSize := 0
+			baseI := i
 			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovIssue530(uint64(msgSize))
-			}
-			mapSize := 1 + len(k) + sovIssue530(uint64(len(k))) + msgSize
-			i = encodeVarintIssue530(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintIssue530(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintIssue530(dAtA, i, uint64(v.Size()))
-				n5, err5 := v.MarshalTo(dAtA[i:])
-				if err5 != nil {
-					return 0, err5
+				{
+					size, err := v.MarshalToSizedBuffer(dAtA[:i])
+					if err != nil {
+						return 0, err
+					}
+					i -= size
+					i = encodeVarintIssue530(dAtA, i, uint64(size))
 				}
-				i += n5
+				i--
+				dAtA[i] = 0x12
 			}
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintIssue530(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintIssue530(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x5a
 		}
 	}
-	if len(m.Barmap2) > 0 {
-		for k := range m.Barmap2 {
-			dAtA[i] = 0x62
-			i++
-			v := m.Barmap2[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovIssue530(uint64(msgSize))
-			}
-			mapSize := 1 + len(k) + sovIssue530(uint64(len(k))) + msgSize
-			i = encodeVarintIssue530(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintIssue530(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintIssue530(dAtA, i, uint64(v.Size()))
-				n6, err6 := v.MarshalTo(dAtA[i:])
-				if err6 != nil {
-					return 0, err6
+	if len(m.Barrs2) > 0 {
+		for iNdEx := len(m.Barrs2) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Barrs2[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
 				}
-				i += n6
+				i -= size
+				i = encodeVarintIssue530(dAtA, i, uint64(size))
 			}
+			i--
+			dAtA[i] = 0x52
 		}
 	}
-	return i, nil
+	if len(m.Barrs1) > 0 {
+		for iNdEx := len(m.Barrs1) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Barrs1[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintIssue530(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x4a
+		}
+	}
+	if len(m.Bars4) > 0 {
+		for iNdEx := len(m.Bars4) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Bars4[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintIssue530(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x42
+		}
+	}
+	if len(m.Bars3) > 0 {
+		for iNdEx := len(m.Bars3) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Bars3[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintIssue530(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x3a
+		}
+	}
+	if len(m.Bars2) > 0 {
+		for iNdEx := len(m.Bars2) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Bars2[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintIssue530(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x32
+		}
+	}
+	if len(m.Bars1) > 0 {
+		for iNdEx := len(m.Bars1) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Bars1[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintIssue530(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
+	if m.Bar4 != nil {
+		{
+			size, err := m.Bar4.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintIssue530(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x22
+	}
+	{
+		size, err := m.Bar3.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintIssue530(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0x1a
+	if m.Bar2 != nil {
+		{
+			size, err := m.Bar2.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintIssue530(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	{
+		size, err := m.Bar1.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintIssue530(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
 }
 
 func (m *Bar1) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1138,21 +1159,27 @@ func (m *Bar1) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Bar1) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Bar1) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	dAtA[i] = 0xa
-	i++
+	i -= len(m.Str)
+	copy(dAtA[i:], m.Str)
 	i = encodeVarintIssue530(dAtA, i, uint64(len(m.Str)))
-	i += copy(dAtA[i:], m.Str)
-	return i, nil
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
 }
 
 func (m *Bar2) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1160,23 +1187,29 @@ func (m *Bar2) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Bar2) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Bar2) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if m.Str != nil {
-		dAtA[i] = 0xa
-		i++
+		i -= len(*m.Str)
+		copy(dAtA[i:], *m.Str)
 		i = encodeVarintIssue530(dAtA, i, uint64(len(*m.Str)))
-		i += copy(dAtA[i:], *m.Str)
+		i--
+		dAtA[i] = 0xa
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *Bar3) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1184,41 +1217,50 @@ func (m *Bar3) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Bar3) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Bar3) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Bars4) > 0 {
-		for _, msg := range m.Bars4 {
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintIssue530(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
 	if len(m.Bars2) > 0 {
-		for _, msg := range m.Bars2 {
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintIssue530(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
+		for iNdEx := len(m.Bars2) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Bars2[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintIssue530(dAtA, i, uint64(size))
 			}
-			i += n
+			i--
+			dAtA[i] = 0x12
 		}
 	}
-	return i, nil
+	if len(m.Bars4) > 0 {
+		for iNdEx := len(m.Bars4) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Bars4[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintIssue530(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *Bar4) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1226,21 +1268,27 @@ func (m *Bar4) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Bar4) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Bar4) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	dAtA[i] = 0xa
-	i++
+	i -= len(m.Str)
+	copy(dAtA[i:], m.Str)
 	i = encodeVarintIssue530(dAtA, i, uint64(len(m.Str)))
-	i += copy(dAtA[i:], m.Str)
-	return i, nil
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
 }
 
 func (m *Bar5) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1248,41 +1296,50 @@ func (m *Bar5) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Bar5) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Bar5) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Bars2) > 0 {
-		for _, msg := range m.Bars2 {
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintIssue530(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
 	if len(m.Bars1) > 0 {
-		for _, msg := range m.Bars1 {
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintIssue530(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
+		for iNdEx := len(m.Bars1) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Bars1[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintIssue530(dAtA, i, uint64(size))
 			}
-			i += n
+			i--
+			dAtA[i] = 0x12
 		}
 	}
-	return i, nil
+	if len(m.Bars2) > 0 {
+		for iNdEx := len(m.Bars2) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Bars2[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintIssue530(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *Bar7) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1290,51 +1347,62 @@ func (m *Bar7) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Bar7) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Bar7) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Bars71) > 0 {
-		for _, msg := range m.Bars71 {
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintIssue530(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Bars72) > 0 {
-		for _, msg := range m.Bars72 {
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintIssue530(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	dAtA[i] = 0x1a
-	i++
-	i = encodeVarintIssue530(dAtA, i, uint64(len(m.Str1)))
-	i += copy(dAtA[i:], m.Str1)
 	if m.Str2 != nil {
-		dAtA[i] = 0x22
-		i++
+		i -= len(*m.Str2)
+		copy(dAtA[i:], *m.Str2)
 		i = encodeVarintIssue530(dAtA, i, uint64(len(*m.Str2)))
-		i += copy(dAtA[i:], *m.Str2)
+		i--
+		dAtA[i] = 0x22
 	}
-	return i, nil
+	i -= len(m.Str1)
+	copy(dAtA[i:], m.Str1)
+	i = encodeVarintIssue530(dAtA, i, uint64(len(m.Str1)))
+	i--
+	dAtA[i] = 0x1a
+	if len(m.Bars72) > 0 {
+		for iNdEx := len(m.Bars72) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Bars72[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintIssue530(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+		}
+	}
+	if len(m.Bars71) > 0 {
+		for iNdEx := len(m.Bars71) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Bars71[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintIssue530(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *Bar8) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1342,29 +1410,36 @@ func (m *Bar8) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Bar8) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Bar8) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.Bars1) > 0 {
-		for _, msg := range m.Bars1 {
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintIssue530(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
+		for iNdEx := len(m.Bars1) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Bars1[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintIssue530(dAtA, i, uint64(size))
 			}
-			i += n
+			i--
+			dAtA[i] = 0xa
 		}
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *Bar9) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1372,39 +1447,47 @@ func (m *Bar9) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Bar9) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Bar9) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	dAtA[i] = 0xa
-	i++
+	i -= len(m.Str)
+	copy(dAtA[i:], m.Str)
 	i = encodeVarintIssue530(dAtA, i, uint64(len(m.Str)))
-	i += copy(dAtA[i:], m.Str)
-	return i, nil
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintIssue530(dAtA []byte, offset int, v uint64) int {
+	offset -= sovIssue530(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func NewPopulatedFoo5(r randyIssue530, easy bool) *Foo5 {
 	this := &Foo5{}
 	v1 := NewPopulatedBar1(r, easy)
 	this.Bar1 = *v1
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Bar2 = NewPopulatedBar1(r, easy)
 	}
 	v2 := NewPopulatedBar2(r, easy)
 	this.Bar3 = *v2
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Bar4 = NewPopulatedBar2(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v3 := r.Intn(5)
 		this.Bars1 = make([]Bar1, v3)
 		for i := 0; i < v3; i++ {
@@ -1412,14 +1495,14 @@ func NewPopulatedFoo5(r randyIssue530, easy bool) *Foo5 {
 			this.Bars1[i] = *v4
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v5 := r.Intn(5)
 		this.Bars2 = make([]*Bar1, v5)
 		for i := 0; i < v5; i++ {
 			this.Bars2[i] = NewPopulatedBar1(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v6 := r.Intn(5)
 		this.Bars3 = make([]Bar2, v6)
 		for i := 0; i < v6; i++ {
@@ -1427,14 +1510,14 @@ func NewPopulatedFoo5(r randyIssue530, easy bool) *Foo5 {
 			this.Bars3[i] = *v7
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v8 := r.Intn(5)
 		this.Bars4 = make([]*Bar2, v8)
 		for i := 0; i < v8; i++ {
 			this.Bars4[i] = NewPopulatedBar2(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v9 := r.Intn(5)
 		this.Barrs1 = make([]Bar3, v9)
 		for i := 0; i < v9; i++ {
@@ -1442,7 +1525,7 @@ func NewPopulatedFoo5(r randyIssue530, easy bool) *Foo5 {
 			this.Barrs1[i] = *v10
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v11 := r.Intn(5)
 		this.Barrs2 = make([]Bar5, v11)
 		for i := 0; i < v11; i++ {
@@ -1450,14 +1533,14 @@ func NewPopulatedFoo5(r randyIssue530, easy bool) *Foo5 {
 			this.Barrs2[i] = *v12
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v13 := r.Intn(10)
 		this.Barmap1 = make(map[string]*Bar3)
 		for i := 0; i < v13; i++ {
 			this.Barmap1[randStringIssue530(r)] = NewPopulatedBar3(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v14 := r.Intn(10)
 		this.Barmap2 = make(map[string]*Bar5)
 		for i := 0; i < v14; i++ {
@@ -1479,7 +1562,7 @@ func NewPopulatedBar1(r randyIssue530, easy bool) *Bar1 {
 
 func NewPopulatedBar2(r randyIssue530, easy bool) *Bar2 {
 	this := &Bar2{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v15 := string(randStringIssue530(r))
 		this.Str = &v15
 	}
@@ -1490,7 +1573,7 @@ func NewPopulatedBar2(r randyIssue530, easy bool) *Bar2 {
 
 func NewPopulatedBar3(r randyIssue530, easy bool) *Bar3 {
 	this := &Bar3{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v16 := r.Intn(5)
 		this.Bars4 = make([]Bar4, v16)
 		for i := 0; i < v16; i++ {
@@ -1498,7 +1581,7 @@ func NewPopulatedBar3(r randyIssue530, easy bool) *Bar3 {
 			this.Bars4[i] = *v17
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v18 := r.Intn(5)
 		this.Bars2 = make([]Bar2, v18)
 		for i := 0; i < v18; i++ {
@@ -1521,14 +1604,14 @@ func NewPopulatedBar4(r randyIssue530, easy bool) *Bar4 {
 
 func NewPopulatedBar5(r randyIssue530, easy bool) *Bar5 {
 	this := &Bar5{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v20 := r.Intn(5)
 		this.Bars2 = make([]*Bar2, v20)
 		for i := 0; i < v20; i++ {
 			this.Bars2[i] = NewPopulatedBar2(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v21 := r.Intn(5)
 		this.Bars1 = make([]*Bar1, v21)
 		for i := 0; i < v21; i++ {
@@ -1542,7 +1625,7 @@ func NewPopulatedBar5(r randyIssue530, easy bool) *Bar5 {
 
 func NewPopulatedBar7(r randyIssue530, easy bool) *Bar7 {
 	this := &Bar7{}
-	if r.Intn(10) == 0 {
+	if r.Intn(5) == 0 {
 		v22 := r.Intn(5)
 		this.Bars71 = make([]Bar7, v22)
 		for i := 0; i < v22; i++ {
@@ -1550,7 +1633,7 @@ func NewPopulatedBar7(r randyIssue530, easy bool) *Bar7 {
 			this.Bars71[i] = *v23
 		}
 	}
-	if r.Intn(10) == 0 {
+	if r.Intn(5) == 0 {
 		v24 := r.Intn(5)
 		this.Bars72 = make([]*Bar7, v24)
 		for i := 0; i < v24; i++ {
@@ -1558,7 +1641,7 @@ func NewPopulatedBar7(r randyIssue530, easy bool) *Bar7 {
 		}
 	}
 	this.Str1 = string(randStringIssue530(r))
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v25 := string(randStringIssue530(r))
 		this.Str2 = &v25
 	}
@@ -1569,7 +1652,7 @@ func NewPopulatedBar7(r randyIssue530, easy bool) *Bar7 {
 
 func NewPopulatedBar8(r randyIssue530, easy bool) *Bar8 {
 	this := &Bar8{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v26 := r.Intn(5)
 		this.Bars1 = make([]Bar9, v26)
 		for i := 0; i < v26; i++ {

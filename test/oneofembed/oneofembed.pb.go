@@ -327,7 +327,7 @@ func (this *Bar_B) Equal(that interface{}) bool {
 }
 func NewPopulatedFoo(r randyOneofembed, easy bool) *Foo {
 	this := &Foo{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Bar = NewPopulatedBar(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {

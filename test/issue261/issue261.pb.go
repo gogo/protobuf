@@ -47,7 +47,7 @@ func (m *MapStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return xxx_messageInfo_MapStdTypes.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -164,7 +164,7 @@ func valueToGoStringIssue261(v interface{}, typ string) string {
 func (m *MapStdTypes) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -172,48 +172,50 @@ func (m *MapStdTypes) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *MapStdTypes) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MapStdTypes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if len(m.NullableDuration) > 0 {
 		for k := range m.NullableDuration {
-			dAtA[i] = 0x1a
-			i++
 			v := m.NullableDuration[k]
-			msgSize := 0
+			baseI := i
 			if v != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdDuration(*v)
-				msgSize += 1 + sovIssue261(uint64(msgSize))
-			}
-			mapSize := 1 + sovIssue261(uint64(k)) + msgSize
-			i = encodeVarintIssue261(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintIssue261(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintIssue261(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*v)))
-				n1, err1 := github_com_gogo_protobuf_types.StdDurationMarshalTo(*v, dAtA[i:])
+				n1, err1 := github_com_gogo_protobuf_types.StdDurationMarshalTo((*v), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDuration((*v)):])
 				if err1 != nil {
 					return 0, err1
 				}
-				i += n1
+				i -= n1
+				i = encodeVarintIssue261(dAtA, i, uint64(n1))
+				i--
+				dAtA[i] = 0x12
 			}
+			i = encodeVarintIssue261(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintIssue261(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1a
 		}
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintIssue261(dAtA []byte, offset int, v uint64) int {
+	offset -= sovIssue261(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func (m *MapStdTypes) Size() (n int) {
 	if m == nil {

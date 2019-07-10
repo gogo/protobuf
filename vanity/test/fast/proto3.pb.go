@@ -43,7 +43,7 @@ func (m *Aproto3) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_Aproto3.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -88,7 +88,7 @@ var fileDescriptor_4fee6d65e34a64b6 = []byte{
 func (m *Aproto3) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -96,30 +96,39 @@ func (m *Aproto3) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Aproto3) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Aproto3) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.B) > 0 {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintProto3(dAtA, i, uint64(len(m.B)))
-		i += copy(dAtA[i:], m.B)
-	}
 	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
-	return i, nil
+	if len(m.B) > 0 {
+		i -= len(m.B)
+		copy(dAtA[i:], m.B)
+		i = encodeVarintProto3(dAtA, i, uint64(len(m.B)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintProto3(dAtA []byte, offset int, v uint64) int {
+	offset -= sovProto3(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func (m *Aproto3) Size() (n int) {
 	if m == nil {

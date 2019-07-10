@@ -711,7 +711,7 @@ func valueToGoStringMap(v interface{}, typ string) string {
 }
 func NewPopulatedMapTest(r randyMap, easy bool) *MapTest {
 	this := &MapTest{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v1 := r.Intn(10)
 		this.StrStr = make(map[string]string)
 		for i := 0; i < v1; i++ {
@@ -726,7 +726,7 @@ func NewPopulatedMapTest(r randyMap, easy bool) *MapTest {
 
 func NewPopulatedFakeMap(r randyMap, easy bool) *FakeMap {
 	this := &FakeMap{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v2 := r.Intn(5)
 		this.Entries = make([]*FakeMapEntry, v2)
 		for i := 0; i < v2; i++ {

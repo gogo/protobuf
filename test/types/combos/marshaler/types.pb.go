@@ -58,7 +58,7 @@ func (m *KnownTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_KnownTypes.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -196,7 +196,7 @@ func (m *ProtoTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_ProtoTypes.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -411,7 +411,7 @@ func (m *StdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_StdTypes.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -626,7 +626,7 @@ func (m *RepProtoTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return xxx_messageInfo_RepProtoTypes.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -841,7 +841,7 @@ func (m *RepStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return xxx_messageInfo_RepStdTypes.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1056,7 +1056,7 @@ func (m *MapProtoTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return xxx_messageInfo_MapProtoTypes.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1271,7 +1271,7 @@ func (m *MapStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return xxx_messageInfo_MapStdTypes.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1477,7 +1477,7 @@ func (m *OneofProtoTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 		return xxx_messageInfo_OneofProtoTypes.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1912,7 +1912,7 @@ func (m *OneofStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 		return xxx_messageInfo_OneofStdTypes.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -6876,7 +6876,7 @@ func (this *OneofStdTypes_RepBytes) Equal(that interface{}) bool {
 func (m *KnownTypes) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -6884,130 +6884,158 @@ func (m *KnownTypes) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *KnownTypes) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *KnownTypes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.Dur != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.Dur.Size()))
-		n1, err1 := m.Dur.MarshalTo(dAtA[i:])
-		if err1 != nil {
-			return 0, err1
-		}
-		i += n1
-	}
-	if m.Ts != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.Ts.Size()))
-		n2, err2 := m.Ts.MarshalTo(dAtA[i:])
-		if err2 != nil {
-			return 0, err2
-		}
-		i += n2
-	}
-	if m.Dbl != nil {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.Dbl.Size()))
-		n3, err3 := m.Dbl.MarshalTo(dAtA[i:])
-		if err3 != nil {
-			return 0, err3
-		}
-		i += n3
-	}
-	if m.Flt != nil {
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.Flt.Size()))
-		n4, err4 := m.Flt.MarshalTo(dAtA[i:])
-		if err4 != nil {
-			return 0, err4
-		}
-		i += n4
-	}
-	if m.I64 != nil {
-		dAtA[i] = 0x2a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.I64.Size()))
-		n5, err5 := m.I64.MarshalTo(dAtA[i:])
-		if err5 != nil {
-			return 0, err5
-		}
-		i += n5
-	}
-	if m.U64 != nil {
-		dAtA[i] = 0x32
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.U64.Size()))
-		n6, err6 := m.U64.MarshalTo(dAtA[i:])
-		if err6 != nil {
-			return 0, err6
-		}
-		i += n6
-	}
-	if m.I32 != nil {
-		dAtA[i] = 0x3a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.I32.Size()))
-		n7, err7 := m.I32.MarshalTo(dAtA[i:])
-		if err7 != nil {
-			return 0, err7
-		}
-		i += n7
-	}
-	if m.U32 != nil {
-		dAtA[i] = 0x42
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.U32.Size()))
-		n8, err8 := m.U32.MarshalTo(dAtA[i:])
-		if err8 != nil {
-			return 0, err8
-		}
-		i += n8
-	}
-	if m.Bool != nil {
-		dAtA[i] = 0x4a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.Bool.Size()))
-		n9, err9 := m.Bool.MarshalTo(dAtA[i:])
-		if err9 != nil {
-			return 0, err9
-		}
-		i += n9
-	}
-	if m.Str != nil {
-		dAtA[i] = 0x52
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.Str.Size()))
-		n10, err10 := m.Str.MarshalTo(dAtA[i:])
-		if err10 != nil {
-			return 0, err10
-		}
-		i += n10
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	if m.Bytes != nil {
-		dAtA[i] = 0x5a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.Bytes.Size()))
-		n11, err11 := m.Bytes.MarshalTo(dAtA[i:])
-		if err11 != nil {
-			return 0, err11
+		{
+			size, err := m.Bytes.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
 		}
-		i += n11
+		i--
+		dAtA[i] = 0x5a
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
+	if m.Str != nil {
+		{
+			size, err := m.Str.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x52
 	}
-	return i, nil
+	if m.Bool != nil {
+		{
+			size, err := m.Bool.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x4a
+	}
+	if m.U32 != nil {
+		{
+			size, err := m.U32.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x42
+	}
+	if m.I32 != nil {
+		{
+			size, err := m.I32.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x3a
+	}
+	if m.U64 != nil {
+		{
+			size, err := m.U64.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x32
+	}
+	if m.I64 != nil {
+		{
+			size, err := m.I64.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x2a
+	}
+	if m.Flt != nil {
+		{
+			size, err := m.Flt.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x22
+	}
+	if m.Dbl != nil {
+		{
+			size, err := m.Dbl.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x1a
+	}
+	if m.Ts != nil {
+		{
+			size, err := m.Ts.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.Dur != nil {
+		{
+			size, err := m.Dur.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *ProtoTypes) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -7015,232 +7043,282 @@ func (m *ProtoTypes) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *ProtoTypes) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ProtoTypes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.NullableTimestamp != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.NullableTimestamp.Size()))
-		n12, err12 := m.NullableTimestamp.MarshalTo(dAtA[i:])
-		if err12 != nil {
-			return 0, err12
-		}
-		i += n12
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
-	if m.NullableDuration != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.NullableDuration.Size()))
-		n13, err13 := m.NullableDuration.MarshalTo(dAtA[i:])
-		if err13 != nil {
-			return 0, err13
+	{
+		size, err := m.NonnullBytes.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
 		}
-		i += n13
+		i -= size
+		i = encodeVarintTypes(dAtA, i, uint64(size))
 	}
-	if m.NullableDouble != nil {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.NullableDouble.Size()))
-		n14, err14 := m.NullableDouble.MarshalTo(dAtA[i:])
-		if err14 != nil {
-			return 0, err14
+	i--
+	dAtA[i] = 0x1
+	i--
+	dAtA[i] = 0xb2
+	{
+		size, err := m.NonnullString.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
 		}
-		i += n14
+		i -= size
+		i = encodeVarintTypes(dAtA, i, uint64(size))
 	}
-	if m.NullableFloat != nil {
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.NullableFloat.Size()))
-		n15, err15 := m.NullableFloat.MarshalTo(dAtA[i:])
-		if err15 != nil {
-			return 0, err15
+	i--
+	dAtA[i] = 0x1
+	i--
+	dAtA[i] = 0xaa
+	{
+		size, err := m.NonnullBool.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
 		}
-		i += n15
+		i -= size
+		i = encodeVarintTypes(dAtA, i, uint64(size))
 	}
-	if m.NullableInt64 != nil {
-		dAtA[i] = 0x2a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.NullableInt64.Size()))
-		n16, err16 := m.NullableInt64.MarshalTo(dAtA[i:])
-		if err16 != nil {
-			return 0, err16
+	i--
+	dAtA[i] = 0x1
+	i--
+	dAtA[i] = 0xa2
+	{
+		size, err := m.NonnullUInt32.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
 		}
-		i += n16
+		i -= size
+		i = encodeVarintTypes(dAtA, i, uint64(size))
 	}
-	if m.NullableUInt64 != nil {
-		dAtA[i] = 0x32
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.NullableUInt64.Size()))
-		n17, err17 := m.NullableUInt64.MarshalTo(dAtA[i:])
-		if err17 != nil {
-			return 0, err17
+	i--
+	dAtA[i] = 0x1
+	i--
+	dAtA[i] = 0x9a
+	{
+		size, err := m.NonnullInt32.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
 		}
-		i += n17
+		i -= size
+		i = encodeVarintTypes(dAtA, i, uint64(size))
 	}
-	if m.NullableInt32 != nil {
-		dAtA[i] = 0x3a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.NullableInt32.Size()))
-		n18, err18 := m.NullableInt32.MarshalTo(dAtA[i:])
-		if err18 != nil {
-			return 0, err18
+	i--
+	dAtA[i] = 0x1
+	i--
+	dAtA[i] = 0x92
+	{
+		size, err := m.NonnullUInt64.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
 		}
-		i += n18
+		i -= size
+		i = encodeVarintTypes(dAtA, i, uint64(size))
 	}
-	if m.NullableUInt32 != nil {
-		dAtA[i] = 0x42
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.NullableUInt32.Size()))
-		n19, err19 := m.NullableUInt32.MarshalTo(dAtA[i:])
-		if err19 != nil {
-			return 0, err19
+	i--
+	dAtA[i] = 0x1
+	i--
+	dAtA[i] = 0x8a
+	{
+		size, err := m.NonnullInt64.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
 		}
-		i += n19
+		i -= size
+		i = encodeVarintTypes(dAtA, i, uint64(size))
 	}
-	if m.NullableBool != nil {
-		dAtA[i] = 0x4a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.NullableBool.Size()))
-		n20, err20 := m.NullableBool.MarshalTo(dAtA[i:])
-		if err20 != nil {
-			return 0, err20
+	i--
+	dAtA[i] = 0x1
+	i--
+	dAtA[i] = 0x82
+	{
+		size, err := m.NonnullFloat.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
 		}
-		i += n20
+		i -= size
+		i = encodeVarintTypes(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0x7a
+	{
+		size, err := m.NonnullDouble.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintTypes(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0x72
+	{
+		size, err := m.Duration.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintTypes(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0x6a
+	{
+		size, err := m.Timestamp.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintTypes(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0x62
+	if m.NullableBytes != nil {
+		{
+			size, err := m.NullableBytes.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x5a
 	}
 	if m.NullableString != nil {
+		{
+			size, err := m.NullableString.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
 		dAtA[i] = 0x52
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.NullableString.Size()))
-		n21, err21 := m.NullableString.MarshalTo(dAtA[i:])
-		if err21 != nil {
-			return 0, err21
+	}
+	if m.NullableBool != nil {
+		{
+			size, err := m.NullableBool.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
 		}
-		i += n21
+		i--
+		dAtA[i] = 0x4a
 	}
-	if m.NullableBytes != nil {
-		dAtA[i] = 0x5a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.NullableBytes.Size()))
-		n22, err22 := m.NullableBytes.MarshalTo(dAtA[i:])
-		if err22 != nil {
-			return 0, err22
+	if m.NullableUInt32 != nil {
+		{
+			size, err := m.NullableUInt32.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
 		}
-		i += n22
+		i--
+		dAtA[i] = 0x42
 	}
-	dAtA[i] = 0x62
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(m.Timestamp.Size()))
-	n23, err23 := m.Timestamp.MarshalTo(dAtA[i:])
-	if err23 != nil {
-		return 0, err23
+	if m.NullableInt32 != nil {
+		{
+			size, err := m.NullableInt32.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x3a
 	}
-	i += n23
-	dAtA[i] = 0x6a
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(m.Duration.Size()))
-	n24, err24 := m.Duration.MarshalTo(dAtA[i:])
-	if err24 != nil {
-		return 0, err24
+	if m.NullableUInt64 != nil {
+		{
+			size, err := m.NullableUInt64.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x32
 	}
-	i += n24
-	dAtA[i] = 0x72
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(m.NonnullDouble.Size()))
-	n25, err25 := m.NonnullDouble.MarshalTo(dAtA[i:])
-	if err25 != nil {
-		return 0, err25
+	if m.NullableInt64 != nil {
+		{
+			size, err := m.NullableInt64.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x2a
 	}
-	i += n25
-	dAtA[i] = 0x7a
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(m.NonnullFloat.Size()))
-	n26, err26 := m.NonnullFloat.MarshalTo(dAtA[i:])
-	if err26 != nil {
-		return 0, err26
+	if m.NullableFloat != nil {
+		{
+			size, err := m.NullableFloat.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x22
 	}
-	i += n26
-	dAtA[i] = 0x82
-	i++
-	dAtA[i] = 0x1
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(m.NonnullInt64.Size()))
-	n27, err27 := m.NonnullInt64.MarshalTo(dAtA[i:])
-	if err27 != nil {
-		return 0, err27
+	if m.NullableDouble != nil {
+		{
+			size, err := m.NullableDouble.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x1a
 	}
-	i += n27
-	dAtA[i] = 0x8a
-	i++
-	dAtA[i] = 0x1
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(m.NonnullUInt64.Size()))
-	n28, err28 := m.NonnullUInt64.MarshalTo(dAtA[i:])
-	if err28 != nil {
-		return 0, err28
+	if m.NullableDuration != nil {
+		{
+			size, err := m.NullableDuration.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
 	}
-	i += n28
-	dAtA[i] = 0x92
-	i++
-	dAtA[i] = 0x1
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(m.NonnullInt32.Size()))
-	n29, err29 := m.NonnullInt32.MarshalTo(dAtA[i:])
-	if err29 != nil {
-		return 0, err29
+	if m.NullableTimestamp != nil {
+		{
+			size, err := m.NullableTimestamp.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
 	}
-	i += n29
-	dAtA[i] = 0x9a
-	i++
-	dAtA[i] = 0x1
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(m.NonnullUInt32.Size()))
-	n30, err30 := m.NonnullUInt32.MarshalTo(dAtA[i:])
-	if err30 != nil {
-		return 0, err30
-	}
-	i += n30
-	dAtA[i] = 0xa2
-	i++
-	dAtA[i] = 0x1
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(m.NonnullBool.Size()))
-	n31, err31 := m.NonnullBool.MarshalTo(dAtA[i:])
-	if err31 != nil {
-		return 0, err31
-	}
-	i += n31
-	dAtA[i] = 0xaa
-	i++
-	dAtA[i] = 0x1
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(m.NonnullString.Size()))
-	n32, err32 := m.NonnullString.MarshalTo(dAtA[i:])
-	if err32 != nil {
-		return 0, err32
-	}
-	i += n32
-	dAtA[i] = 0xb2
-	i++
-	dAtA[i] = 0x1
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(m.NonnullBytes.Size()))
-	n33, err33 := m.NonnullBytes.MarshalTo(dAtA[i:])
-	if err33 != nil {
-		return 0, err33
-	}
-	i += n33
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *StdTypes) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -7248,232 +7326,238 @@ func (m *StdTypes) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *StdTypes) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *StdTypes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.NullableTimestamp != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.NullableTimestamp)))
-		n34, err34 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.NullableTimestamp, dAtA[i:])
-		if err34 != nil {
-			return 0, err34
-		}
-		i += n34
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
-	if m.NullableDuration != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*m.NullableDuration)))
-		n35, err35 := github_com_gogo_protobuf_types.StdDurationMarshalTo(*m.NullableDuration, dAtA[i:])
-		if err35 != nil {
-			return 0, err35
-		}
-		i += n35
+	n34, err34 := github_com_gogo_protobuf_types.StdBytesMarshalTo(m.NonnullBytes, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdBytes(m.NonnullBytes):])
+	if err34 != nil {
+		return 0, err34
 	}
-	if m.NullableDouble != nil {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDouble(*m.NullableDouble)))
-		n36, err36 := github_com_gogo_protobuf_types.StdDoubleMarshalTo(*m.NullableDouble, dAtA[i:])
-		if err36 != nil {
-			return 0, err36
-		}
-		i += n36
+	i -= n34
+	i = encodeVarintTypes(dAtA, i, uint64(n34))
+	i--
+	dAtA[i] = 0x1
+	i--
+	dAtA[i] = 0xb2
+	n35, err35 := github_com_gogo_protobuf_types.StdStringMarshalTo(m.NonnullString, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdString(m.NonnullString):])
+	if err35 != nil {
+		return 0, err35
 	}
-	if m.NullableFloat != nil {
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdFloat(*m.NullableFloat)))
-		n37, err37 := github_com_gogo_protobuf_types.StdFloatMarshalTo(*m.NullableFloat, dAtA[i:])
-		if err37 != nil {
-			return 0, err37
-		}
-		i += n37
+	i -= n35
+	i = encodeVarintTypes(dAtA, i, uint64(n35))
+	i--
+	dAtA[i] = 0x1
+	i--
+	dAtA[i] = 0xaa
+	n36, err36 := github_com_gogo_protobuf_types.StdBoolMarshalTo(m.NonnullBool, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdBool(m.NonnullBool):])
+	if err36 != nil {
+		return 0, err36
 	}
-	if m.NullableInt64 != nil {
-		dAtA[i] = 0x2a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdInt64(*m.NullableInt64)))
-		n38, err38 := github_com_gogo_protobuf_types.StdInt64MarshalTo(*m.NullableInt64, dAtA[i:])
-		if err38 != nil {
-			return 0, err38
-		}
-		i += n38
+	i -= n36
+	i = encodeVarintTypes(dAtA, i, uint64(n36))
+	i--
+	dAtA[i] = 0x1
+	i--
+	dAtA[i] = 0xa2
+	n37, err37 := github_com_gogo_protobuf_types.StdUInt32MarshalTo(m.NonnullUInt32, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdUInt32(m.NonnullUInt32):])
+	if err37 != nil {
+		return 0, err37
 	}
-	if m.NullableUInt64 != nil {
-		dAtA[i] = 0x32
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdUInt64(*m.NullableUInt64)))
-		n39, err39 := github_com_gogo_protobuf_types.StdUInt64MarshalTo(*m.NullableUInt64, dAtA[i:])
-		if err39 != nil {
-			return 0, err39
-		}
-		i += n39
+	i -= n37
+	i = encodeVarintTypes(dAtA, i, uint64(n37))
+	i--
+	dAtA[i] = 0x1
+	i--
+	dAtA[i] = 0x9a
+	n38, err38 := github_com_gogo_protobuf_types.StdInt32MarshalTo(m.NonnullInt32, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdInt32(m.NonnullInt32):])
+	if err38 != nil {
+		return 0, err38
 	}
-	if m.NullableInt32 != nil {
-		dAtA[i] = 0x3a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdInt32(*m.NullableInt32)))
-		n40, err40 := github_com_gogo_protobuf_types.StdInt32MarshalTo(*m.NullableInt32, dAtA[i:])
-		if err40 != nil {
-			return 0, err40
-		}
-		i += n40
+	i -= n38
+	i = encodeVarintTypes(dAtA, i, uint64(n38))
+	i--
+	dAtA[i] = 0x1
+	i--
+	dAtA[i] = 0x92
+	n39, err39 := github_com_gogo_protobuf_types.StdUInt64MarshalTo(m.NonnullUInt64, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdUInt64(m.NonnullUInt64):])
+	if err39 != nil {
+		return 0, err39
 	}
-	if m.NullableUInt32 != nil {
-		dAtA[i] = 0x42
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdUInt32(*m.NullableUInt32)))
-		n41, err41 := github_com_gogo_protobuf_types.StdUInt32MarshalTo(*m.NullableUInt32, dAtA[i:])
-		if err41 != nil {
-			return 0, err41
-		}
-		i += n41
+	i -= n39
+	i = encodeVarintTypes(dAtA, i, uint64(n39))
+	i--
+	dAtA[i] = 0x1
+	i--
+	dAtA[i] = 0x8a
+	n40, err40 := github_com_gogo_protobuf_types.StdInt64MarshalTo(m.NonnullInt64, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdInt64(m.NonnullInt64):])
+	if err40 != nil {
+		return 0, err40
 	}
-	if m.NullableBool != nil {
-		dAtA[i] = 0x4a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdBool(*m.NullableBool)))
-		n42, err42 := github_com_gogo_protobuf_types.StdBoolMarshalTo(*m.NullableBool, dAtA[i:])
-		if err42 != nil {
-			return 0, err42
+	i -= n40
+	i = encodeVarintTypes(dAtA, i, uint64(n40))
+	i--
+	dAtA[i] = 0x1
+	i--
+	dAtA[i] = 0x82
+	n41, err41 := github_com_gogo_protobuf_types.StdFloatMarshalTo(m.NonnullFloat, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdFloat(m.NonnullFloat):])
+	if err41 != nil {
+		return 0, err41
+	}
+	i -= n41
+	i = encodeVarintTypes(dAtA, i, uint64(n41))
+	i--
+	dAtA[i] = 0x7a
+	n42, err42 := github_com_gogo_protobuf_types.StdDoubleMarshalTo(m.NonnullDouble, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDouble(m.NonnullDouble):])
+	if err42 != nil {
+		return 0, err42
+	}
+	i -= n42
+	i = encodeVarintTypes(dAtA, i, uint64(n42))
+	i--
+	dAtA[i] = 0x72
+	n43, err43 := github_com_gogo_protobuf_types.StdDurationMarshalTo(m.Duration, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDuration(m.Duration):])
+	if err43 != nil {
+		return 0, err43
+	}
+	i -= n43
+	i = encodeVarintTypes(dAtA, i, uint64(n43))
+	i--
+	dAtA[i] = 0x6a
+	n44, err44 := github_com_gogo_protobuf_types.StdTimeMarshalTo(m.Timestamp, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(m.Timestamp):])
+	if err44 != nil {
+		return 0, err44
+	}
+	i -= n44
+	i = encodeVarintTypes(dAtA, i, uint64(n44))
+	i--
+	dAtA[i] = 0x62
+	if m.NullableBytes != nil {
+		n45, err45 := github_com_gogo_protobuf_types.StdBytesMarshalTo(*m.NullableBytes, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdBytes(*m.NullableBytes):])
+		if err45 != nil {
+			return 0, err45
 		}
-		i += n42
+		i -= n45
+		i = encodeVarintTypes(dAtA, i, uint64(n45))
+		i--
+		dAtA[i] = 0x5a
 	}
 	if m.NullableString != nil {
+		n46, err46 := github_com_gogo_protobuf_types.StdStringMarshalTo(*m.NullableString, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdString(*m.NullableString):])
+		if err46 != nil {
+			return 0, err46
+		}
+		i -= n46
+		i = encodeVarintTypes(dAtA, i, uint64(n46))
+		i--
 		dAtA[i] = 0x52
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdString(*m.NullableString)))
-		n43, err43 := github_com_gogo_protobuf_types.StdStringMarshalTo(*m.NullableString, dAtA[i:])
-		if err43 != nil {
-			return 0, err43
+	}
+	if m.NullableBool != nil {
+		n47, err47 := github_com_gogo_protobuf_types.StdBoolMarshalTo(*m.NullableBool, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdBool(*m.NullableBool):])
+		if err47 != nil {
+			return 0, err47
 		}
-		i += n43
+		i -= n47
+		i = encodeVarintTypes(dAtA, i, uint64(n47))
+		i--
+		dAtA[i] = 0x4a
 	}
-	if m.NullableBytes != nil {
-		dAtA[i] = 0x5a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdBytes(*m.NullableBytes)))
-		n44, err44 := github_com_gogo_protobuf_types.StdBytesMarshalTo(*m.NullableBytes, dAtA[i:])
-		if err44 != nil {
-			return 0, err44
+	if m.NullableUInt32 != nil {
+		n48, err48 := github_com_gogo_protobuf_types.StdUInt32MarshalTo(*m.NullableUInt32, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdUInt32(*m.NullableUInt32):])
+		if err48 != nil {
+			return 0, err48
 		}
-		i += n44
+		i -= n48
+		i = encodeVarintTypes(dAtA, i, uint64(n48))
+		i--
+		dAtA[i] = 0x42
 	}
-	dAtA[i] = 0x62
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(m.Timestamp)))
-	n45, err45 := github_com_gogo_protobuf_types.StdTimeMarshalTo(m.Timestamp, dAtA[i:])
-	if err45 != nil {
-		return 0, err45
+	if m.NullableInt32 != nil {
+		n49, err49 := github_com_gogo_protobuf_types.StdInt32MarshalTo(*m.NullableInt32, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdInt32(*m.NullableInt32):])
+		if err49 != nil {
+			return 0, err49
+		}
+		i -= n49
+		i = encodeVarintTypes(dAtA, i, uint64(n49))
+		i--
+		dAtA[i] = 0x3a
 	}
-	i += n45
-	dAtA[i] = 0x6a
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(m.Duration)))
-	n46, err46 := github_com_gogo_protobuf_types.StdDurationMarshalTo(m.Duration, dAtA[i:])
-	if err46 != nil {
-		return 0, err46
+	if m.NullableUInt64 != nil {
+		n50, err50 := github_com_gogo_protobuf_types.StdUInt64MarshalTo(*m.NullableUInt64, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdUInt64(*m.NullableUInt64):])
+		if err50 != nil {
+			return 0, err50
+		}
+		i -= n50
+		i = encodeVarintTypes(dAtA, i, uint64(n50))
+		i--
+		dAtA[i] = 0x32
 	}
-	i += n46
-	dAtA[i] = 0x72
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDouble(m.NonnullDouble)))
-	n47, err47 := github_com_gogo_protobuf_types.StdDoubleMarshalTo(m.NonnullDouble, dAtA[i:])
-	if err47 != nil {
-		return 0, err47
+	if m.NullableInt64 != nil {
+		n51, err51 := github_com_gogo_protobuf_types.StdInt64MarshalTo(*m.NullableInt64, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdInt64(*m.NullableInt64):])
+		if err51 != nil {
+			return 0, err51
+		}
+		i -= n51
+		i = encodeVarintTypes(dAtA, i, uint64(n51))
+		i--
+		dAtA[i] = 0x2a
 	}
-	i += n47
-	dAtA[i] = 0x7a
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdFloat(m.NonnullFloat)))
-	n48, err48 := github_com_gogo_protobuf_types.StdFloatMarshalTo(m.NonnullFloat, dAtA[i:])
-	if err48 != nil {
-		return 0, err48
+	if m.NullableFloat != nil {
+		n52, err52 := github_com_gogo_protobuf_types.StdFloatMarshalTo(*m.NullableFloat, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdFloat(*m.NullableFloat):])
+		if err52 != nil {
+			return 0, err52
+		}
+		i -= n52
+		i = encodeVarintTypes(dAtA, i, uint64(n52))
+		i--
+		dAtA[i] = 0x22
 	}
-	i += n48
-	dAtA[i] = 0x82
-	i++
-	dAtA[i] = 0x1
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdInt64(m.NonnullInt64)))
-	n49, err49 := github_com_gogo_protobuf_types.StdInt64MarshalTo(m.NonnullInt64, dAtA[i:])
-	if err49 != nil {
-		return 0, err49
+	if m.NullableDouble != nil {
+		n53, err53 := github_com_gogo_protobuf_types.StdDoubleMarshalTo(*m.NullableDouble, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDouble(*m.NullableDouble):])
+		if err53 != nil {
+			return 0, err53
+		}
+		i -= n53
+		i = encodeVarintTypes(dAtA, i, uint64(n53))
+		i--
+		dAtA[i] = 0x1a
 	}
-	i += n49
-	dAtA[i] = 0x8a
-	i++
-	dAtA[i] = 0x1
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdUInt64(m.NonnullUInt64)))
-	n50, err50 := github_com_gogo_protobuf_types.StdUInt64MarshalTo(m.NonnullUInt64, dAtA[i:])
-	if err50 != nil {
-		return 0, err50
+	if m.NullableDuration != nil {
+		n54, err54 := github_com_gogo_protobuf_types.StdDurationMarshalTo(*m.NullableDuration, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDuration(*m.NullableDuration):])
+		if err54 != nil {
+			return 0, err54
+		}
+		i -= n54
+		i = encodeVarintTypes(dAtA, i, uint64(n54))
+		i--
+		dAtA[i] = 0x12
 	}
-	i += n50
-	dAtA[i] = 0x92
-	i++
-	dAtA[i] = 0x1
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdInt32(m.NonnullInt32)))
-	n51, err51 := github_com_gogo_protobuf_types.StdInt32MarshalTo(m.NonnullInt32, dAtA[i:])
-	if err51 != nil {
-		return 0, err51
+	if m.NullableTimestamp != nil {
+		n55, err55 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.NullableTimestamp, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.NullableTimestamp):])
+		if err55 != nil {
+			return 0, err55
+		}
+		i -= n55
+		i = encodeVarintTypes(dAtA, i, uint64(n55))
+		i--
+		dAtA[i] = 0xa
 	}
-	i += n51
-	dAtA[i] = 0x9a
-	i++
-	dAtA[i] = 0x1
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdUInt32(m.NonnullUInt32)))
-	n52, err52 := github_com_gogo_protobuf_types.StdUInt32MarshalTo(m.NonnullUInt32, dAtA[i:])
-	if err52 != nil {
-		return 0, err52
-	}
-	i += n52
-	dAtA[i] = 0xa2
-	i++
-	dAtA[i] = 0x1
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdBool(m.NonnullBool)))
-	n53, err53 := github_com_gogo_protobuf_types.StdBoolMarshalTo(m.NonnullBool, dAtA[i:])
-	if err53 != nil {
-		return 0, err53
-	}
-	i += n53
-	dAtA[i] = 0xaa
-	i++
-	dAtA[i] = 0x1
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdString(m.NonnullString)))
-	n54, err54 := github_com_gogo_protobuf_types.StdStringMarshalTo(m.NonnullString, dAtA[i:])
-	if err54 != nil {
-		return 0, err54
-	}
-	i += n54
-	dAtA[i] = 0xb2
-	i++
-	dAtA[i] = 0x1
-	i++
-	i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdBytes(m.NonnullBytes)))
-	n55, err55 := github_com_gogo_protobuf_types.StdBytesMarshalTo(m.NonnullBytes, dAtA[i:])
-	if err55 != nil {
-		return 0, err55
-	}
-	i += n55
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *RepProtoTypes) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -7481,298 +7565,348 @@ func (m *RepProtoTypes) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *RepProtoTypes) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *RepProtoTypes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.NullableTimestamps) > 0 {
-		for _, msg := range m.NullableTimestamps {
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
-	if len(m.NullableDurations) > 0 {
-		for _, msg := range m.NullableDurations {
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
+	if len(m.NonnullBytes) > 0 {
+		for iNdEx := len(m.NonnullBytes) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NonnullBytes[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
 			}
-			i += n
-		}
-	}
-	if len(m.Timestamps) > 0 {
-		for _, msg := range m.Timestamps {
-			dAtA[i] = 0x1a
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Durations) > 0 {
-		for _, msg := range m.Durations {
-			dAtA[i] = 0x22
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableDouble) > 0 {
-		for _, msg := range m.NullableDouble {
-			dAtA[i] = 0x2a
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullDouble) > 0 {
-		for _, msg := range m.NonnullDouble {
-			dAtA[i] = 0x32
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableFloat) > 0 {
-		for _, msg := range m.NullableFloat {
-			dAtA[i] = 0x3a
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullFloat) > 0 {
-		for _, msg := range m.NonnullFloat {
-			dAtA[i] = 0x42
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableInt64) > 0 {
-		for _, msg := range m.NullableInt64 {
-			dAtA[i] = 0x4a
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullInt64) > 0 {
-		for _, msg := range m.NonnullInt64 {
-			dAtA[i] = 0x52
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableUInt64) > 0 {
-		for _, msg := range m.NullableUInt64 {
-			dAtA[i] = 0x5a
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullUInt64) > 0 {
-		for _, msg := range m.NonnullUInt64 {
-			dAtA[i] = 0x62
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableInt32) > 0 {
-		for _, msg := range m.NullableInt32 {
-			dAtA[i] = 0x6a
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullInt32) > 0 {
-		for _, msg := range m.NonnullInt32 {
-			dAtA[i] = 0x72
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableUInt32) > 0 {
-		for _, msg := range m.NullableUInt32 {
-			dAtA[i] = 0x7a
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullUInt32) > 0 {
-		for _, msg := range m.NonnullUInt32 {
-			dAtA[i] = 0x82
-			i++
+			i--
 			dAtA[i] = 0x1
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableBool) > 0 {
-		for _, msg := range m.NullableBool {
-			dAtA[i] = 0x8a
-			i++
-			dAtA[i] = 0x1
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullBool) > 0 {
-		for _, msg := range m.NonnullBool {
-			dAtA[i] = 0x92
-			i++
-			dAtA[i] = 0x1
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableString) > 0 {
-		for _, msg := range m.NullableString {
-			dAtA[i] = 0x9a
-			i++
-			dAtA[i] = 0x1
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullString) > 0 {
-		for _, msg := range m.NonnullString {
-			dAtA[i] = 0xa2
-			i++
-			dAtA[i] = 0x1
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
+			i--
+			dAtA[i] = 0xb2
 		}
 	}
 	if len(m.NullableBytes) > 0 {
-		for _, msg := range m.NullableBytes {
+		for iNdEx := len(m.NullableBytes) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NullableBytes[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x1
+			i--
 			dAtA[i] = 0xaa
-			i++
-			dAtA[i] = 0x1
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
 		}
 	}
-	if len(m.NonnullBytes) > 0 {
-		for _, msg := range m.NonnullBytes {
-			dAtA[i] = 0xb2
-			i++
-			dAtA[i] = 0x1
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(msg.Size()))
-			n, err := msg.MarshalTo(dAtA[i:])
-			if err != nil {
-				return 0, err
+	if len(m.NonnullString) > 0 {
+		for iNdEx := len(m.NonnullString) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NonnullString[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
 			}
-			i += n
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0xa2
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
+	if len(m.NullableString) > 0 {
+		for iNdEx := len(m.NullableString) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NullableString[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x9a
+		}
 	}
-	return i, nil
+	if len(m.NonnullBool) > 0 {
+		for iNdEx := len(m.NonnullBool) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NonnullBool[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x92
+		}
+	}
+	if len(m.NullableBool) > 0 {
+		for iNdEx := len(m.NullableBool) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NullableBool[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x8a
+		}
+	}
+	if len(m.NonnullUInt32) > 0 {
+		for iNdEx := len(m.NonnullUInt32) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NonnullUInt32[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x82
+		}
+	}
+	if len(m.NullableUInt32) > 0 {
+		for iNdEx := len(m.NullableUInt32) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NullableUInt32[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x7a
+		}
+	}
+	if len(m.NonnullInt32) > 0 {
+		for iNdEx := len(m.NonnullInt32) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NonnullInt32[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x72
+		}
+	}
+	if len(m.NullableInt32) > 0 {
+		for iNdEx := len(m.NullableInt32) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NullableInt32[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x6a
+		}
+	}
+	if len(m.NonnullUInt64) > 0 {
+		for iNdEx := len(m.NonnullUInt64) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NonnullUInt64[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x62
+		}
+	}
+	if len(m.NullableUInt64) > 0 {
+		for iNdEx := len(m.NullableUInt64) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NullableUInt64[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x5a
+		}
+	}
+	if len(m.NonnullInt64) > 0 {
+		for iNdEx := len(m.NonnullInt64) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NonnullInt64[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x52
+		}
+	}
+	if len(m.NullableInt64) > 0 {
+		for iNdEx := len(m.NullableInt64) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NullableInt64[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x4a
+		}
+	}
+	if len(m.NonnullFloat) > 0 {
+		for iNdEx := len(m.NonnullFloat) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NonnullFloat[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x42
+		}
+	}
+	if len(m.NullableFloat) > 0 {
+		for iNdEx := len(m.NullableFloat) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NullableFloat[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x3a
+		}
+	}
+	if len(m.NonnullDouble) > 0 {
+		for iNdEx := len(m.NonnullDouble) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NonnullDouble[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x32
+		}
+	}
+	if len(m.NullableDouble) > 0 {
+		for iNdEx := len(m.NullableDouble) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NullableDouble[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
+	if len(m.Durations) > 0 {
+		for iNdEx := len(m.Durations) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Durations[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x22
+		}
+	}
+	if len(m.Timestamps) > 0 {
+		for iNdEx := len(m.Timestamps) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Timestamps[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x1a
+		}
+	}
+	if len(m.NullableDurations) > 0 {
+		for iNdEx := len(m.NullableDurations) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NullableDurations[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+		}
+	}
+	if len(m.NullableTimestamps) > 0 {
+		for iNdEx := len(m.NullableTimestamps) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.NullableTimestamps[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *RepStdTypes) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -7780,298 +7914,304 @@ func (m *RepStdTypes) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *RepStdTypes) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *RepStdTypes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.NullableTimestamps) > 0 {
-		for _, msg := range m.NullableTimestamps {
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*msg)))
-			n, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*msg, dAtA[i:])
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.NonnullBytes) > 0 {
+		for iNdEx := len(m.NonnullBytes) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdBytesMarshalTo(m.NonnullBytes[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdBytes(m.NonnullBytes[iNdEx]):])
 			if err != nil {
 				return 0, err
 			}
-			i += n
-		}
-	}
-	if len(m.NullableDurations) > 0 {
-		for _, msg := range m.NullableDurations {
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*msg)))
-			n, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(*msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Timestamps) > 0 {
-		for _, msg := range m.Timestamps {
-			dAtA[i] = 0x1a
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(msg)))
-			n, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.Durations) > 0 {
-		for _, msg := range m.Durations {
-			dAtA[i] = 0x22
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(msg)))
-			n, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableDouble) > 0 {
-		for _, msg := range m.NullableDouble {
-			dAtA[i] = 0x2a
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDouble(*msg)))
-			n, err := github_com_gogo_protobuf_types.StdDoubleMarshalTo(*msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullDouble) > 0 {
-		for _, msg := range m.NonnullDouble {
-			dAtA[i] = 0x32
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDouble(msg)))
-			n, err := github_com_gogo_protobuf_types.StdDoubleMarshalTo(msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableFloat) > 0 {
-		for _, msg := range m.NullableFloat {
-			dAtA[i] = 0x3a
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdFloat(*msg)))
-			n, err := github_com_gogo_protobuf_types.StdFloatMarshalTo(*msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullFloat) > 0 {
-		for _, msg := range m.NonnullFloat {
-			dAtA[i] = 0x42
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdFloat(msg)))
-			n, err := github_com_gogo_protobuf_types.StdFloatMarshalTo(msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableInt64) > 0 {
-		for _, msg := range m.NullableInt64 {
-			dAtA[i] = 0x4a
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdInt64(*msg)))
-			n, err := github_com_gogo_protobuf_types.StdInt64MarshalTo(*msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullInt64) > 0 {
-		for _, msg := range m.NonnullInt64 {
-			dAtA[i] = 0x52
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdInt64(msg)))
-			n, err := github_com_gogo_protobuf_types.StdInt64MarshalTo(msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableUInt64) > 0 {
-		for _, msg := range m.NullableUInt64 {
-			dAtA[i] = 0x5a
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdUInt64(*msg)))
-			n, err := github_com_gogo_protobuf_types.StdUInt64MarshalTo(*msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullUInt64) > 0 {
-		for _, msg := range m.NonnullUInt64 {
-			dAtA[i] = 0x62
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdUInt64(msg)))
-			n, err := github_com_gogo_protobuf_types.StdUInt64MarshalTo(msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableInt32) > 0 {
-		for _, msg := range m.NullableInt32 {
-			dAtA[i] = 0x6a
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdInt32(*msg)))
-			n, err := github_com_gogo_protobuf_types.StdInt32MarshalTo(*msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullInt32) > 0 {
-		for _, msg := range m.NonnullInt32 {
-			dAtA[i] = 0x72
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdInt32(msg)))
-			n, err := github_com_gogo_protobuf_types.StdInt32MarshalTo(msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableUInt32) > 0 {
-		for _, msg := range m.NullableUInt32 {
-			dAtA[i] = 0x7a
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdUInt32(*msg)))
-			n, err := github_com_gogo_protobuf_types.StdUInt32MarshalTo(*msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullUInt32) > 0 {
-		for _, msg := range m.NonnullUInt32 {
-			dAtA[i] = 0x82
-			i++
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
 			dAtA[i] = 0x1
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdUInt32(msg)))
-			n, err := github_com_gogo_protobuf_types.StdUInt32MarshalTo(msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableBool) > 0 {
-		for _, msg := range m.NullableBool {
-			dAtA[i] = 0x8a
-			i++
-			dAtA[i] = 0x1
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdBool(*msg)))
-			n, err := github_com_gogo_protobuf_types.StdBoolMarshalTo(*msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullBool) > 0 {
-		for _, msg := range m.NonnullBool {
-			dAtA[i] = 0x92
-			i++
-			dAtA[i] = 0x1
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdBool(msg)))
-			n, err := github_com_gogo_protobuf_types.StdBoolMarshalTo(msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NullableString) > 0 {
-		for _, msg := range m.NullableString {
-			dAtA[i] = 0x9a
-			i++
-			dAtA[i] = 0x1
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdString(*msg)))
-			n, err := github_com_gogo_protobuf_types.StdStringMarshalTo(*msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
-		}
-	}
-	if len(m.NonnullString) > 0 {
-		for _, msg := range m.NonnullString {
-			dAtA[i] = 0xa2
-			i++
-			dAtA[i] = 0x1
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdString(msg)))
-			n, err := github_com_gogo_protobuf_types.StdStringMarshalTo(msg, dAtA[i:])
-			if err != nil {
-				return 0, err
-			}
-			i += n
+			i--
+			dAtA[i] = 0xb2
 		}
 	}
 	if len(m.NullableBytes) > 0 {
-		for _, msg := range m.NullableBytes {
+		for iNdEx := len(m.NullableBytes) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdBytesMarshalTo(*m.NullableBytes[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdBytes(*m.NullableBytes[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x1
+			i--
 			dAtA[i] = 0xaa
-			i++
-			dAtA[i] = 0x1
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdBytes(*msg)))
-			n, err := github_com_gogo_protobuf_types.StdBytesMarshalTo(*msg, dAtA[i:])
+		}
+	}
+	if len(m.NonnullString) > 0 {
+		for iNdEx := len(m.NonnullString) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdStringMarshalTo(m.NonnullString[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdString(m.NonnullString[iNdEx]):])
 			if err != nil {
 				return 0, err
 			}
-			i += n
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0xa2
 		}
 	}
-	if len(m.NonnullBytes) > 0 {
-		for _, msg := range m.NonnullBytes {
-			dAtA[i] = 0xb2
-			i++
-			dAtA[i] = 0x1
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdBytes(msg)))
-			n, err := github_com_gogo_protobuf_types.StdBytesMarshalTo(msg, dAtA[i:])
+	if len(m.NullableString) > 0 {
+		for iNdEx := len(m.NullableString) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdStringMarshalTo(*m.NullableString[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdString(*m.NullableString[iNdEx]):])
 			if err != nil {
 				return 0, err
 			}
-			i += n
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x9a
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
+	if len(m.NonnullBool) > 0 {
+		for iNdEx := len(m.NonnullBool) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdBoolMarshalTo(m.NonnullBool[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdBool(m.NonnullBool[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x92
+		}
 	}
-	return i, nil
+	if len(m.NullableBool) > 0 {
+		for iNdEx := len(m.NullableBool) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdBoolMarshalTo(*m.NullableBool[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdBool(*m.NullableBool[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x8a
+		}
+	}
+	if len(m.NonnullUInt32) > 0 {
+		for iNdEx := len(m.NonnullUInt32) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdUInt32MarshalTo(m.NonnullUInt32[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdUInt32(m.NonnullUInt32[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x82
+		}
+	}
+	if len(m.NullableUInt32) > 0 {
+		for iNdEx := len(m.NullableUInt32) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdUInt32MarshalTo(*m.NullableUInt32[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdUInt32(*m.NullableUInt32[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x7a
+		}
+	}
+	if len(m.NonnullInt32) > 0 {
+		for iNdEx := len(m.NonnullInt32) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdInt32MarshalTo(m.NonnullInt32[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdInt32(m.NonnullInt32[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x72
+		}
+	}
+	if len(m.NullableInt32) > 0 {
+		for iNdEx := len(m.NullableInt32) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdInt32MarshalTo(*m.NullableInt32[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdInt32(*m.NullableInt32[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x6a
+		}
+	}
+	if len(m.NonnullUInt64) > 0 {
+		for iNdEx := len(m.NonnullUInt64) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdUInt64MarshalTo(m.NonnullUInt64[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdUInt64(m.NonnullUInt64[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x62
+		}
+	}
+	if len(m.NullableUInt64) > 0 {
+		for iNdEx := len(m.NullableUInt64) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdUInt64MarshalTo(*m.NullableUInt64[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdUInt64(*m.NullableUInt64[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x5a
+		}
+	}
+	if len(m.NonnullInt64) > 0 {
+		for iNdEx := len(m.NonnullInt64) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdInt64MarshalTo(m.NonnullInt64[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdInt64(m.NonnullInt64[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x52
+		}
+	}
+	if len(m.NullableInt64) > 0 {
+		for iNdEx := len(m.NullableInt64) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdInt64MarshalTo(*m.NullableInt64[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdInt64(*m.NullableInt64[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x4a
+		}
+	}
+	if len(m.NonnullFloat) > 0 {
+		for iNdEx := len(m.NonnullFloat) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdFloatMarshalTo(m.NonnullFloat[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdFloat(m.NonnullFloat[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x42
+		}
+	}
+	if len(m.NullableFloat) > 0 {
+		for iNdEx := len(m.NullableFloat) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdFloatMarshalTo(*m.NullableFloat[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdFloat(*m.NullableFloat[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x3a
+		}
+	}
+	if len(m.NonnullDouble) > 0 {
+		for iNdEx := len(m.NonnullDouble) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdDoubleMarshalTo(m.NonnullDouble[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDouble(m.NonnullDouble[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x32
+		}
+	}
+	if len(m.NullableDouble) > 0 {
+		for iNdEx := len(m.NullableDouble) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdDoubleMarshalTo(*m.NullableDouble[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDouble(*m.NullableDouble[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
+	if len(m.Durations) > 0 {
+		for iNdEx := len(m.Durations) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(m.Durations[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDuration(m.Durations[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x22
+		}
+	}
+	if len(m.Timestamps) > 0 {
+		for iNdEx := len(m.Timestamps) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(m.Timestamps[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(m.Timestamps[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x1a
+		}
+	}
+	if len(m.NullableDurations) > 0 {
+		for iNdEx := len(m.NullableDurations) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdDurationMarshalTo(*m.NullableDurations[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDuration(*m.NullableDurations[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0x12
+		}
+	}
+	if len(m.NullableTimestamps) > 0 {
+		for iNdEx := len(m.NullableTimestamps) - 1; iNdEx >= 0; iNdEx-- {
+			n, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.NullableTimestamps[iNdEx], dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.NullableTimestamps[iNdEx]):])
+			if err != nil {
+				return 0, err
+			}
+			i -= n
+			i = encodeVarintTypes(dAtA, i, uint64(n))
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *MapProtoTypes) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -8079,606 +8219,546 @@ func (m *MapProtoTypes) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *MapProtoTypes) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MapProtoTypes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.NullableTimestamp) > 0 {
-		for k := range m.NullableTimestamp {
-			dAtA[i] = 0xa
-			i++
-			v := m.NullableTimestamp[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(v.Size()))
-				n56, err56 := v.MarshalTo(dAtA[i:])
-				if err56 != nil {
-					return 0, err56
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.NonnullBytes) > 0 {
+		for k := range m.NonnullBytes {
+			v := m.NonnullBytes[k]
+			baseI := i
+			{
+				size, err := (&v).MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
 				}
-				i += n56
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
 			}
-		}
-	}
-	if len(m.Timestamp) > 0 {
-		for k := range m.Timestamp {
+			i--
 			dAtA[i] = 0x12
-			i++
-			v := m.Timestamp[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = (&v).Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
 			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64((&v).Size()))
-			n57, err57 := (&v).MarshalTo(dAtA[i:])
-			if err57 != nil {
-				return 0, err57
-			}
-			i += n57
-		}
-	}
-	if len(m.NullableDuration) > 0 {
-		for k := range m.NullableDuration {
-			dAtA[i] = 0x1a
-			i++
-			v := m.NullableDuration[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
+			i--
 			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(v.Size()))
-				n58, err58 := v.MarshalTo(dAtA[i:])
-				if err58 != nil {
-					return 0, err58
-				}
-				i += n58
-			}
-		}
-	}
-	if len(m.Duration) > 0 {
-		for k := range m.Duration {
-			dAtA[i] = 0x22
-			i++
-			v := m.Duration[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = (&v).Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64((&v).Size()))
-			n59, err59 := (&v).MarshalTo(dAtA[i:])
-			if err59 != nil {
-				return 0, err59
-			}
-			i += n59
-		}
-	}
-	if len(m.NullableDouble) > 0 {
-		for k := range m.NullableDouble {
-			dAtA[i] = 0x2a
-			i++
-			v := m.NullableDouble[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(v.Size()))
-				n60, err60 := v.MarshalTo(dAtA[i:])
-				if err60 != nil {
-					return 0, err60
-				}
-				i += n60
-			}
-		}
-	}
-	if len(m.NonnullDouble) > 0 {
-		for k := range m.NonnullDouble {
-			dAtA[i] = 0x32
-			i++
-			v := m.NonnullDouble[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = (&v).Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64((&v).Size()))
-			n61, err61 := (&v).MarshalTo(dAtA[i:])
-			if err61 != nil {
-				return 0, err61
-			}
-			i += n61
-		}
-	}
-	if len(m.NullableFloat) > 0 {
-		for k := range m.NullableFloat {
-			dAtA[i] = 0x3a
-			i++
-			v := m.NullableFloat[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(v.Size()))
-				n62, err62 := v.MarshalTo(dAtA[i:])
-				if err62 != nil {
-					return 0, err62
-				}
-				i += n62
-			}
-		}
-	}
-	if len(m.NonnullFloat) > 0 {
-		for k := range m.NonnullFloat {
-			dAtA[i] = 0x42
-			i++
-			v := m.NonnullFloat[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = (&v).Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64((&v).Size()))
-			n63, err63 := (&v).MarshalTo(dAtA[i:])
-			if err63 != nil {
-				return 0, err63
-			}
-			i += n63
-		}
-	}
-	if len(m.NullableInt64) > 0 {
-		for k := range m.NullableInt64 {
-			dAtA[i] = 0x4a
-			i++
-			v := m.NullableInt64[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(v.Size()))
-				n64, err64 := v.MarshalTo(dAtA[i:])
-				if err64 != nil {
-					return 0, err64
-				}
-				i += n64
-			}
-		}
-	}
-	if len(m.NonnullInt64) > 0 {
-		for k := range m.NonnullInt64 {
-			dAtA[i] = 0x52
-			i++
-			v := m.NonnullInt64[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = (&v).Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64((&v).Size()))
-			n65, err65 := (&v).MarshalTo(dAtA[i:])
-			if err65 != nil {
-				return 0, err65
-			}
-			i += n65
-		}
-	}
-	if len(m.NullableUInt64) > 0 {
-		for k := range m.NullableUInt64 {
-			dAtA[i] = 0x5a
-			i++
-			v := m.NullableUInt64[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(v.Size()))
-				n66, err66 := v.MarshalTo(dAtA[i:])
-				if err66 != nil {
-					return 0, err66
-				}
-				i += n66
-			}
-		}
-	}
-	if len(m.NonnullUInt64) > 0 {
-		for k := range m.NonnullUInt64 {
-			dAtA[i] = 0x62
-			i++
-			v := m.NonnullUInt64[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = (&v).Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64((&v).Size()))
-			n67, err67 := (&v).MarshalTo(dAtA[i:])
-			if err67 != nil {
-				return 0, err67
-			}
-			i += n67
-		}
-	}
-	if len(m.NullableInt32) > 0 {
-		for k := range m.NullableInt32 {
-			dAtA[i] = 0x6a
-			i++
-			v := m.NullableInt32[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(v.Size()))
-				n68, err68 := v.MarshalTo(dAtA[i:])
-				if err68 != nil {
-					return 0, err68
-				}
-				i += n68
-			}
-		}
-	}
-	if len(m.NonnullInt32) > 0 {
-		for k := range m.NonnullInt32 {
-			dAtA[i] = 0x72
-			i++
-			v := m.NonnullInt32[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = (&v).Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64((&v).Size()))
-			n69, err69 := (&v).MarshalTo(dAtA[i:])
-			if err69 != nil {
-				return 0, err69
-			}
-			i += n69
-		}
-	}
-	if len(m.NullableUInt32) > 0 {
-		for k := range m.NullableUInt32 {
-			dAtA[i] = 0x7a
-			i++
-			v := m.NullableUInt32[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(v.Size()))
-				n70, err70 := v.MarshalTo(dAtA[i:])
-				if err70 != nil {
-					return 0, err70
-				}
-				i += n70
-			}
-		}
-	}
-	if len(m.NonnullUInt32) > 0 {
-		for k := range m.NonnullUInt32 {
-			dAtA[i] = 0x82
-			i++
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
 			dAtA[i] = 0x1
-			i++
-			v := m.NonnullUInt32[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = (&v).Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64((&v).Size()))
-			n71, err71 := (&v).MarshalTo(dAtA[i:])
-			if err71 != nil {
-				return 0, err71
-			}
-			i += n71
-		}
-	}
-	if len(m.NullableBool) > 0 {
-		for k := range m.NullableBool {
-			dAtA[i] = 0x8a
-			i++
-			dAtA[i] = 0x1
-			i++
-			v := m.NullableBool[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(v.Size()))
-				n72, err72 := v.MarshalTo(dAtA[i:])
-				if err72 != nil {
-					return 0, err72
-				}
-				i += n72
-			}
-		}
-	}
-	if len(m.NonnullBool) > 0 {
-		for k := range m.NonnullBool {
-			dAtA[i] = 0x92
-			i++
-			dAtA[i] = 0x1
-			i++
-			v := m.NonnullBool[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = (&v).Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64((&v).Size()))
-			n73, err73 := (&v).MarshalTo(dAtA[i:])
-			if err73 != nil {
-				return 0, err73
-			}
-			i += n73
-		}
-	}
-	if len(m.NullableString) > 0 {
-		for k := range m.NullableString {
-			dAtA[i] = 0x9a
-			i++
-			dAtA[i] = 0x1
-			i++
-			v := m.NullableString[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(v.Size()))
-				n74, err74 := v.MarshalTo(dAtA[i:])
-				if err74 != nil {
-					return 0, err74
-				}
-				i += n74
-			}
-		}
-	}
-	if len(m.NonnullString) > 0 {
-		for k := range m.NonnullString {
-			dAtA[i] = 0xa2
-			i++
-			dAtA[i] = 0x1
-			i++
-			v := m.NonnullString[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = (&v).Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64((&v).Size()))
-			n75, err75 := (&v).MarshalTo(dAtA[i:])
-			if err75 != nil {
-				return 0, err75
-			}
-			i += n75
+			i--
+			dAtA[i] = 0xb2
 		}
 	}
 	if len(m.NullableBytes) > 0 {
 		for k := range m.NullableBytes {
-			dAtA[i] = 0xaa
-			i++
-			dAtA[i] = 0x1
-			i++
 			v := m.NullableBytes[k]
-			msgSize := 0
+			baseI := i
 			if v != nil {
-				msgSize = v.Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(v.Size()))
-				n76, err76 := v.MarshalTo(dAtA[i:])
-				if err76 != nil {
-					return 0, err76
+				{
+					size, err := v.MarshalToSizedBuffer(dAtA[:i])
+					if err != nil {
+						return 0, err
+					}
+					i -= size
+					i = encodeVarintTypes(dAtA, i, uint64(size))
 				}
-				i += n76
+				i--
+				dAtA[i] = 0x12
 			}
-		}
-	}
-	if len(m.NonnullBytes) > 0 {
-		for k := range m.NonnullBytes {
-			dAtA[i] = 0xb2
-			i++
-			dAtA[i] = 0x1
-			i++
-			v := m.NonnullBytes[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = (&v).Size()
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
 			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64((&v).Size()))
-			n77, err77 := (&v).MarshalTo(dAtA[i:])
-			if err77 != nil {
-				return 0, err77
-			}
-			i += n77
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0xaa
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
+	if len(m.NonnullString) > 0 {
+		for k := range m.NonnullString {
+			v := m.NonnullString[k]
+			baseI := i
+			{
+				size, err := (&v).MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0xa2
+		}
 	}
-	return i, nil
+	if len(m.NullableString) > 0 {
+		for k := range m.NullableString {
+			v := m.NullableString[k]
+			baseI := i
+			if v != nil {
+				{
+					size, err := v.MarshalToSizedBuffer(dAtA[:i])
+					if err != nil {
+						return 0, err
+					}
+					i -= size
+					i = encodeVarintTypes(dAtA, i, uint64(size))
+				}
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x9a
+		}
+	}
+	if len(m.NonnullBool) > 0 {
+		for k := range m.NonnullBool {
+			v := m.NonnullBool[k]
+			baseI := i
+			{
+				size, err := (&v).MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x92
+		}
+	}
+	if len(m.NullableBool) > 0 {
+		for k := range m.NullableBool {
+			v := m.NullableBool[k]
+			baseI := i
+			if v != nil {
+				{
+					size, err := v.MarshalToSizedBuffer(dAtA[:i])
+					if err != nil {
+						return 0, err
+					}
+					i -= size
+					i = encodeVarintTypes(dAtA, i, uint64(size))
+				}
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x8a
+		}
+	}
+	if len(m.NonnullUInt32) > 0 {
+		for k := range m.NonnullUInt32 {
+			v := m.NonnullUInt32[k]
+			baseI := i
+			{
+				size, err := (&v).MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x82
+		}
+	}
+	if len(m.NullableUInt32) > 0 {
+		for k := range m.NullableUInt32 {
+			v := m.NullableUInt32[k]
+			baseI := i
+			if v != nil {
+				{
+					size, err := v.MarshalToSizedBuffer(dAtA[:i])
+					if err != nil {
+						return 0, err
+					}
+					i -= size
+					i = encodeVarintTypes(dAtA, i, uint64(size))
+				}
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x7a
+		}
+	}
+	if len(m.NonnullInt32) > 0 {
+		for k := range m.NonnullInt32 {
+			v := m.NonnullInt32[k]
+			baseI := i
+			{
+				size, err := (&v).MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x72
+		}
+	}
+	if len(m.NullableInt32) > 0 {
+		for k := range m.NullableInt32 {
+			v := m.NullableInt32[k]
+			baseI := i
+			if v != nil {
+				{
+					size, err := v.MarshalToSizedBuffer(dAtA[:i])
+					if err != nil {
+						return 0, err
+					}
+					i -= size
+					i = encodeVarintTypes(dAtA, i, uint64(size))
+				}
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x6a
+		}
+	}
+	if len(m.NonnullUInt64) > 0 {
+		for k := range m.NonnullUInt64 {
+			v := m.NonnullUInt64[k]
+			baseI := i
+			{
+				size, err := (&v).MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x62
+		}
+	}
+	if len(m.NullableUInt64) > 0 {
+		for k := range m.NullableUInt64 {
+			v := m.NullableUInt64[k]
+			baseI := i
+			if v != nil {
+				{
+					size, err := v.MarshalToSizedBuffer(dAtA[:i])
+					if err != nil {
+						return 0, err
+					}
+					i -= size
+					i = encodeVarintTypes(dAtA, i, uint64(size))
+				}
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x5a
+		}
+	}
+	if len(m.NonnullInt64) > 0 {
+		for k := range m.NonnullInt64 {
+			v := m.NonnullInt64[k]
+			baseI := i
+			{
+				size, err := (&v).MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x52
+		}
+	}
+	if len(m.NullableInt64) > 0 {
+		for k := range m.NullableInt64 {
+			v := m.NullableInt64[k]
+			baseI := i
+			if v != nil {
+				{
+					size, err := v.MarshalToSizedBuffer(dAtA[:i])
+					if err != nil {
+						return 0, err
+					}
+					i -= size
+					i = encodeVarintTypes(dAtA, i, uint64(size))
+				}
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x4a
+		}
+	}
+	if len(m.NonnullFloat) > 0 {
+		for k := range m.NonnullFloat {
+			v := m.NonnullFloat[k]
+			baseI := i
+			{
+				size, err := (&v).MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x42
+		}
+	}
+	if len(m.NullableFloat) > 0 {
+		for k := range m.NullableFloat {
+			v := m.NullableFloat[k]
+			baseI := i
+			if v != nil {
+				{
+					size, err := v.MarshalToSizedBuffer(dAtA[:i])
+					if err != nil {
+						return 0, err
+					}
+					i -= size
+					i = encodeVarintTypes(dAtA, i, uint64(size))
+				}
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x3a
+		}
+	}
+	if len(m.NonnullDouble) > 0 {
+		for k := range m.NonnullDouble {
+			v := m.NonnullDouble[k]
+			baseI := i
+			{
+				size, err := (&v).MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x32
+		}
+	}
+	if len(m.NullableDouble) > 0 {
+		for k := range m.NullableDouble {
+			v := m.NullableDouble[k]
+			baseI := i
+			if v != nil {
+				{
+					size, err := v.MarshalToSizedBuffer(dAtA[:i])
+					if err != nil {
+						return 0, err
+					}
+					i -= size
+					i = encodeVarintTypes(dAtA, i, uint64(size))
+				}
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
+	if len(m.Duration) > 0 {
+		for k := range m.Duration {
+			v := m.Duration[k]
+			baseI := i
+			{
+				size, err := (&v).MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x22
+		}
+	}
+	if len(m.NullableDuration) > 0 {
+		for k := range m.NullableDuration {
+			v := m.NullableDuration[k]
+			baseI := i
+			if v != nil {
+				{
+					size, err := v.MarshalToSizedBuffer(dAtA[:i])
+					if err != nil {
+						return 0, err
+					}
+					i -= size
+					i = encodeVarintTypes(dAtA, i, uint64(size))
+				}
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1a
+		}
+	}
+	if len(m.Timestamp) > 0 {
+		for k := range m.Timestamp {
+			v := m.Timestamp[k]
+			baseI := i
+			{
+				size, err := (&v).MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTypes(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x12
+		}
+	}
+	if len(m.NullableTimestamp) > 0 {
+		for k := range m.NullableTimestamp {
+			v := m.NullableTimestamp[k]
+			baseI := i
+			if v != nil {
+				{
+					size, err := v.MarshalToSizedBuffer(dAtA[:i])
+					if err != nil {
+						return 0, err
+					}
+					i -= size
+					i = encodeVarintTypes(dAtA, i, uint64(size))
+				}
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *MapStdTypes) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -8686,606 +8766,502 @@ func (m *MapStdTypes) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *MapStdTypes) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MapStdTypes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.NullableTimestamp) > 0 {
-		for k := range m.NullableTimestamp {
-			dAtA[i] = 0xa
-			i++
-			v := m.NullableTimestamp[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdTime(*v)
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*v)))
-				n78, err78 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*v, dAtA[i:])
-				if err78 != nil {
-					return 0, err78
-				}
-				i += n78
-			}
-		}
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
-	if len(m.Timestamp) > 0 {
-		for k := range m.Timestamp {
+	if len(m.NonnullBytes) > 0 {
+		for k := range m.NonnullBytes {
+			v := m.NonnullBytes[k]
+			baseI := i
+			n78, err78 := github_com_gogo_protobuf_types.StdBytesMarshalTo((*(&v)), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdBytes((*(&v))):])
+			if err78 != nil {
+				return 0, err78
+			}
+			i -= n78
+			i = encodeVarintTypes(dAtA, i, uint64(n78))
+			i--
 			dAtA[i] = 0x12
-			i++
-			v := m.Timestamp[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdTime(*(&v))
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
 			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*(&v))))
-			n79, err79 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*(&v), dAtA[i:])
-			if err79 != nil {
-				return 0, err79
-			}
-			i += n79
-		}
-	}
-	if len(m.NullableDuration) > 0 {
-		for k := range m.NullableDuration {
-			dAtA[i] = 0x1a
-			i++
-			v := m.NullableDuration[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdDuration(*v)
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
+			i--
 			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*v)))
-				n80, err80 := github_com_gogo_protobuf_types.StdDurationMarshalTo(*v, dAtA[i:])
-				if err80 != nil {
-					return 0, err80
-				}
-				i += n80
-			}
-		}
-	}
-	if len(m.Duration) > 0 {
-		for k := range m.Duration {
-			dAtA[i] = 0x22
-			i++
-			v := m.Duration[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdDuration(*(&v))
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*(&v))))
-			n81, err81 := github_com_gogo_protobuf_types.StdDurationMarshalTo(*(&v), dAtA[i:])
-			if err81 != nil {
-				return 0, err81
-			}
-			i += n81
-		}
-	}
-	if len(m.NullableDouble) > 0 {
-		for k := range m.NullableDouble {
-			dAtA[i] = 0x2a
-			i++
-			v := m.NullableDouble[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdDouble(*v)
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDouble(*v)))
-				n82, err82 := github_com_gogo_protobuf_types.StdDoubleMarshalTo(*v, dAtA[i:])
-				if err82 != nil {
-					return 0, err82
-				}
-				i += n82
-			}
-		}
-	}
-	if len(m.NonnullDouble) > 0 {
-		for k := range m.NonnullDouble {
-			dAtA[i] = 0x32
-			i++
-			v := m.NonnullDouble[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdDouble(*(&v))
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDouble(*(&v))))
-			n83, err83 := github_com_gogo_protobuf_types.StdDoubleMarshalTo(*(&v), dAtA[i:])
-			if err83 != nil {
-				return 0, err83
-			}
-			i += n83
-		}
-	}
-	if len(m.NullableFloat) > 0 {
-		for k := range m.NullableFloat {
-			dAtA[i] = 0x3a
-			i++
-			v := m.NullableFloat[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdFloat(*v)
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdFloat(*v)))
-				n84, err84 := github_com_gogo_protobuf_types.StdFloatMarshalTo(*v, dAtA[i:])
-				if err84 != nil {
-					return 0, err84
-				}
-				i += n84
-			}
-		}
-	}
-	if len(m.NonnullFloat) > 0 {
-		for k := range m.NonnullFloat {
-			dAtA[i] = 0x42
-			i++
-			v := m.NonnullFloat[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdFloat(*(&v))
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdFloat(*(&v))))
-			n85, err85 := github_com_gogo_protobuf_types.StdFloatMarshalTo(*(&v), dAtA[i:])
-			if err85 != nil {
-				return 0, err85
-			}
-			i += n85
-		}
-	}
-	if len(m.NullableInt64) > 0 {
-		for k := range m.NullableInt64 {
-			dAtA[i] = 0x4a
-			i++
-			v := m.NullableInt64[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdInt64(*v)
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdInt64(*v)))
-				n86, err86 := github_com_gogo_protobuf_types.StdInt64MarshalTo(*v, dAtA[i:])
-				if err86 != nil {
-					return 0, err86
-				}
-				i += n86
-			}
-		}
-	}
-	if len(m.NonnullInt64) > 0 {
-		for k := range m.NonnullInt64 {
-			dAtA[i] = 0x52
-			i++
-			v := m.NonnullInt64[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdInt64(*(&v))
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdInt64(*(&v))))
-			n87, err87 := github_com_gogo_protobuf_types.StdInt64MarshalTo(*(&v), dAtA[i:])
-			if err87 != nil {
-				return 0, err87
-			}
-			i += n87
-		}
-	}
-	if len(m.NullableUInt64) > 0 {
-		for k := range m.NullableUInt64 {
-			dAtA[i] = 0x5a
-			i++
-			v := m.NullableUInt64[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdUInt64(*v)
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdUInt64(*v)))
-				n88, err88 := github_com_gogo_protobuf_types.StdUInt64MarshalTo(*v, dAtA[i:])
-				if err88 != nil {
-					return 0, err88
-				}
-				i += n88
-			}
-		}
-	}
-	if len(m.NonnullUInt64) > 0 {
-		for k := range m.NonnullUInt64 {
-			dAtA[i] = 0x62
-			i++
-			v := m.NonnullUInt64[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdUInt64(*(&v))
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdUInt64(*(&v))))
-			n89, err89 := github_com_gogo_protobuf_types.StdUInt64MarshalTo(*(&v), dAtA[i:])
-			if err89 != nil {
-				return 0, err89
-			}
-			i += n89
-		}
-	}
-	if len(m.NullableInt32) > 0 {
-		for k := range m.NullableInt32 {
-			dAtA[i] = 0x6a
-			i++
-			v := m.NullableInt32[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdInt32(*v)
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdInt32(*v)))
-				n90, err90 := github_com_gogo_protobuf_types.StdInt32MarshalTo(*v, dAtA[i:])
-				if err90 != nil {
-					return 0, err90
-				}
-				i += n90
-			}
-		}
-	}
-	if len(m.NonnullInt32) > 0 {
-		for k := range m.NonnullInt32 {
-			dAtA[i] = 0x72
-			i++
-			v := m.NonnullInt32[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdInt32(*(&v))
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdInt32(*(&v))))
-			n91, err91 := github_com_gogo_protobuf_types.StdInt32MarshalTo(*(&v), dAtA[i:])
-			if err91 != nil {
-				return 0, err91
-			}
-			i += n91
-		}
-	}
-	if len(m.NullableUInt32) > 0 {
-		for k := range m.NullableUInt32 {
-			dAtA[i] = 0x7a
-			i++
-			v := m.NullableUInt32[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdUInt32(*v)
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdUInt32(*v)))
-				n92, err92 := github_com_gogo_protobuf_types.StdUInt32MarshalTo(*v, dAtA[i:])
-				if err92 != nil {
-					return 0, err92
-				}
-				i += n92
-			}
-		}
-	}
-	if len(m.NonnullUInt32) > 0 {
-		for k := range m.NonnullUInt32 {
-			dAtA[i] = 0x82
-			i++
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
 			dAtA[i] = 0x1
-			i++
-			v := m.NonnullUInt32[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdUInt32(*(&v))
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdUInt32(*(&v))))
-			n93, err93 := github_com_gogo_protobuf_types.StdUInt32MarshalTo(*(&v), dAtA[i:])
-			if err93 != nil {
-				return 0, err93
-			}
-			i += n93
-		}
-	}
-	if len(m.NullableBool) > 0 {
-		for k := range m.NullableBool {
-			dAtA[i] = 0x8a
-			i++
-			dAtA[i] = 0x1
-			i++
-			v := m.NullableBool[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdBool(*v)
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdBool(*v)))
-				n94, err94 := github_com_gogo_protobuf_types.StdBoolMarshalTo(*v, dAtA[i:])
-				if err94 != nil {
-					return 0, err94
-				}
-				i += n94
-			}
-		}
-	}
-	if len(m.NonnullBool) > 0 {
-		for k := range m.NonnullBool {
-			dAtA[i] = 0x92
-			i++
-			dAtA[i] = 0x1
-			i++
-			v := m.NonnullBool[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdBool(*(&v))
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdBool(*(&v))))
-			n95, err95 := github_com_gogo_protobuf_types.StdBoolMarshalTo(*(&v), dAtA[i:])
-			if err95 != nil {
-				return 0, err95
-			}
-			i += n95
-		}
-	}
-	if len(m.NullableString) > 0 {
-		for k := range m.NullableString {
-			dAtA[i] = 0x9a
-			i++
-			dAtA[i] = 0x1
-			i++
-			v := m.NullableString[k]
-			msgSize := 0
-			if v != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdString(*v)
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdString(*v)))
-				n96, err96 := github_com_gogo_protobuf_types.StdStringMarshalTo(*v, dAtA[i:])
-				if err96 != nil {
-					return 0, err96
-				}
-				i += n96
-			}
-		}
-	}
-	if len(m.NonnullString) > 0 {
-		for k := range m.NonnullString {
-			dAtA[i] = 0xa2
-			i++
-			dAtA[i] = 0x1
-			i++
-			v := m.NonnullString[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdString(*(&v))
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdString(*(&v))))
-			n97, err97 := github_com_gogo_protobuf_types.StdStringMarshalTo(*(&v), dAtA[i:])
-			if err97 != nil {
-				return 0, err97
-			}
-			i += n97
+			i--
+			dAtA[i] = 0xb2
 		}
 	}
 	if len(m.NullableBytes) > 0 {
 		for k := range m.NullableBytes {
-			dAtA[i] = 0xaa
-			i++
-			dAtA[i] = 0x1
-			i++
 			v := m.NullableBytes[k]
-			msgSize := 0
+			baseI := i
 			if v != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdBytes(*v)
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(k))
-			if v != nil {
-				dAtA[i] = 0x12
-				i++
-				i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdBytes(*v)))
-				n98, err98 := github_com_gogo_protobuf_types.StdBytesMarshalTo(*v, dAtA[i:])
-				if err98 != nil {
-					return 0, err98
+				n79, err79 := github_com_gogo_protobuf_types.StdBytesMarshalTo((*v), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdBytes((*v)):])
+				if err79 != nil {
+					return 0, err79
 				}
-				i += n98
+				i -= n79
+				i = encodeVarintTypes(dAtA, i, uint64(n79))
+				i--
+				dAtA[i] = 0x12
 			}
-		}
-	}
-	if len(m.NonnullBytes) > 0 {
-		for k := range m.NonnullBytes {
-			dAtA[i] = 0xb2
-			i++
-			dAtA[i] = 0x1
-			i++
-			v := m.NonnullBytes[k]
-			msgSize := 0
-			if (&v) != nil {
-				msgSize = github_com_gogo_protobuf_types.SizeOfStdBytes(*(&v))
-				msgSize += 1 + sovTypes(uint64(msgSize))
-			}
-			mapSize := 1 + sovTypes(uint64(k)) + msgSize
-			i = encodeVarintTypes(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0x8
-			i++
 			i = encodeVarintTypes(dAtA, i, uint64(k))
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdBytes(*(&v))))
-			n99, err99 := github_com_gogo_protobuf_types.StdBytesMarshalTo(*(&v), dAtA[i:])
-			if err99 != nil {
-				return 0, err99
-			}
-			i += n99
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0xaa
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
+	if len(m.NonnullString) > 0 {
+		for k := range m.NonnullString {
+			v := m.NonnullString[k]
+			baseI := i
+			n80, err80 := github_com_gogo_protobuf_types.StdStringMarshalTo((*(&v)), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdString((*(&v))):])
+			if err80 != nil {
+				return 0, err80
+			}
+			i -= n80
+			i = encodeVarintTypes(dAtA, i, uint64(n80))
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0xa2
+		}
 	}
-	return i, nil
+	if len(m.NullableString) > 0 {
+		for k := range m.NullableString {
+			v := m.NullableString[k]
+			baseI := i
+			if v != nil {
+				n81, err81 := github_com_gogo_protobuf_types.StdStringMarshalTo((*v), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdString((*v)):])
+				if err81 != nil {
+					return 0, err81
+				}
+				i -= n81
+				i = encodeVarintTypes(dAtA, i, uint64(n81))
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x9a
+		}
+	}
+	if len(m.NonnullBool) > 0 {
+		for k := range m.NonnullBool {
+			v := m.NonnullBool[k]
+			baseI := i
+			n82, err82 := github_com_gogo_protobuf_types.StdBoolMarshalTo((*(&v)), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdBool((*(&v))):])
+			if err82 != nil {
+				return 0, err82
+			}
+			i -= n82
+			i = encodeVarintTypes(dAtA, i, uint64(n82))
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x92
+		}
+	}
+	if len(m.NullableBool) > 0 {
+		for k := range m.NullableBool {
+			v := m.NullableBool[k]
+			baseI := i
+			if v != nil {
+				n83, err83 := github_com_gogo_protobuf_types.StdBoolMarshalTo((*v), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdBool((*v)):])
+				if err83 != nil {
+					return 0, err83
+				}
+				i -= n83
+				i = encodeVarintTypes(dAtA, i, uint64(n83))
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x8a
+		}
+	}
+	if len(m.NonnullUInt32) > 0 {
+		for k := range m.NonnullUInt32 {
+			v := m.NonnullUInt32[k]
+			baseI := i
+			n84, err84 := github_com_gogo_protobuf_types.StdUInt32MarshalTo((*(&v)), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdUInt32((*(&v))):])
+			if err84 != nil {
+				return 0, err84
+			}
+			i -= n84
+			i = encodeVarintTypes(dAtA, i, uint64(n84))
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1
+			i--
+			dAtA[i] = 0x82
+		}
+	}
+	if len(m.NullableUInt32) > 0 {
+		for k := range m.NullableUInt32 {
+			v := m.NullableUInt32[k]
+			baseI := i
+			if v != nil {
+				n85, err85 := github_com_gogo_protobuf_types.StdUInt32MarshalTo((*v), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdUInt32((*v)):])
+				if err85 != nil {
+					return 0, err85
+				}
+				i -= n85
+				i = encodeVarintTypes(dAtA, i, uint64(n85))
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x7a
+		}
+	}
+	if len(m.NonnullInt32) > 0 {
+		for k := range m.NonnullInt32 {
+			v := m.NonnullInt32[k]
+			baseI := i
+			n86, err86 := github_com_gogo_protobuf_types.StdInt32MarshalTo((*(&v)), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdInt32((*(&v))):])
+			if err86 != nil {
+				return 0, err86
+			}
+			i -= n86
+			i = encodeVarintTypes(dAtA, i, uint64(n86))
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x72
+		}
+	}
+	if len(m.NullableInt32) > 0 {
+		for k := range m.NullableInt32 {
+			v := m.NullableInt32[k]
+			baseI := i
+			if v != nil {
+				n87, err87 := github_com_gogo_protobuf_types.StdInt32MarshalTo((*v), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdInt32((*v)):])
+				if err87 != nil {
+					return 0, err87
+				}
+				i -= n87
+				i = encodeVarintTypes(dAtA, i, uint64(n87))
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x6a
+		}
+	}
+	if len(m.NonnullUInt64) > 0 {
+		for k := range m.NonnullUInt64 {
+			v := m.NonnullUInt64[k]
+			baseI := i
+			n88, err88 := github_com_gogo_protobuf_types.StdUInt64MarshalTo((*(&v)), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdUInt64((*(&v))):])
+			if err88 != nil {
+				return 0, err88
+			}
+			i -= n88
+			i = encodeVarintTypes(dAtA, i, uint64(n88))
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x62
+		}
+	}
+	if len(m.NullableUInt64) > 0 {
+		for k := range m.NullableUInt64 {
+			v := m.NullableUInt64[k]
+			baseI := i
+			if v != nil {
+				n89, err89 := github_com_gogo_protobuf_types.StdUInt64MarshalTo((*v), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdUInt64((*v)):])
+				if err89 != nil {
+					return 0, err89
+				}
+				i -= n89
+				i = encodeVarintTypes(dAtA, i, uint64(n89))
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x5a
+		}
+	}
+	if len(m.NonnullInt64) > 0 {
+		for k := range m.NonnullInt64 {
+			v := m.NonnullInt64[k]
+			baseI := i
+			n90, err90 := github_com_gogo_protobuf_types.StdInt64MarshalTo((*(&v)), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdInt64((*(&v))):])
+			if err90 != nil {
+				return 0, err90
+			}
+			i -= n90
+			i = encodeVarintTypes(dAtA, i, uint64(n90))
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x52
+		}
+	}
+	if len(m.NullableInt64) > 0 {
+		for k := range m.NullableInt64 {
+			v := m.NullableInt64[k]
+			baseI := i
+			if v != nil {
+				n91, err91 := github_com_gogo_protobuf_types.StdInt64MarshalTo((*v), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdInt64((*v)):])
+				if err91 != nil {
+					return 0, err91
+				}
+				i -= n91
+				i = encodeVarintTypes(dAtA, i, uint64(n91))
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x4a
+		}
+	}
+	if len(m.NonnullFloat) > 0 {
+		for k := range m.NonnullFloat {
+			v := m.NonnullFloat[k]
+			baseI := i
+			n92, err92 := github_com_gogo_protobuf_types.StdFloatMarshalTo((*(&v)), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdFloat((*(&v))):])
+			if err92 != nil {
+				return 0, err92
+			}
+			i -= n92
+			i = encodeVarintTypes(dAtA, i, uint64(n92))
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x42
+		}
+	}
+	if len(m.NullableFloat) > 0 {
+		for k := range m.NullableFloat {
+			v := m.NullableFloat[k]
+			baseI := i
+			if v != nil {
+				n93, err93 := github_com_gogo_protobuf_types.StdFloatMarshalTo((*v), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdFloat((*v)):])
+				if err93 != nil {
+					return 0, err93
+				}
+				i -= n93
+				i = encodeVarintTypes(dAtA, i, uint64(n93))
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x3a
+		}
+	}
+	if len(m.NonnullDouble) > 0 {
+		for k := range m.NonnullDouble {
+			v := m.NonnullDouble[k]
+			baseI := i
+			n94, err94 := github_com_gogo_protobuf_types.StdDoubleMarshalTo((*(&v)), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDouble((*(&v))):])
+			if err94 != nil {
+				return 0, err94
+			}
+			i -= n94
+			i = encodeVarintTypes(dAtA, i, uint64(n94))
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x32
+		}
+	}
+	if len(m.NullableDouble) > 0 {
+		for k := range m.NullableDouble {
+			v := m.NullableDouble[k]
+			baseI := i
+			if v != nil {
+				n95, err95 := github_com_gogo_protobuf_types.StdDoubleMarshalTo((*v), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDouble((*v)):])
+				if err95 != nil {
+					return 0, err95
+				}
+				i -= n95
+				i = encodeVarintTypes(dAtA, i, uint64(n95))
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
+	if len(m.Duration) > 0 {
+		for k := range m.Duration {
+			v := m.Duration[k]
+			baseI := i
+			n96, err96 := github_com_gogo_protobuf_types.StdDurationMarshalTo((*(&v)), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDuration((*(&v))):])
+			if err96 != nil {
+				return 0, err96
+			}
+			i -= n96
+			i = encodeVarintTypes(dAtA, i, uint64(n96))
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x22
+		}
+	}
+	if len(m.NullableDuration) > 0 {
+		for k := range m.NullableDuration {
+			v := m.NullableDuration[k]
+			baseI := i
+			if v != nil {
+				n97, err97 := github_com_gogo_protobuf_types.StdDurationMarshalTo((*v), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDuration((*v)):])
+				if err97 != nil {
+					return 0, err97
+				}
+				i -= n97
+				i = encodeVarintTypes(dAtA, i, uint64(n97))
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x1a
+		}
+	}
+	if len(m.Timestamp) > 0 {
+		for k := range m.Timestamp {
+			v := m.Timestamp[k]
+			baseI := i
+			n98, err98 := github_com_gogo_protobuf_types.StdTimeMarshalTo((*(&v)), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime((*(&v))):])
+			if err98 != nil {
+				return 0, err98
+			}
+			i -= n98
+			i = encodeVarintTypes(dAtA, i, uint64(n98))
+			i--
+			dAtA[i] = 0x12
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0x12
+		}
+	}
+	if len(m.NullableTimestamp) > 0 {
+		for k := range m.NullableTimestamp {
+			v := m.NullableTimestamp[k]
+			baseI := i
+			if v != nil {
+				n99, err99 := github_com_gogo_protobuf_types.StdTimeMarshalTo((*v), dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime((*v)):])
+				if err99 != nil {
+					return 0, err99
+				}
+				i -= n99
+				i = encodeVarintTypes(dAtA, i, uint64(n99))
+				i--
+				dAtA[i] = 0x12
+			}
+			i = encodeVarintTypes(dAtA, i, uint64(k))
+			i--
+			dAtA[i] = 0x8
+			i = encodeVarintTypes(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *OneofProtoTypes) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -9293,181 +9269,255 @@ func (m *OneofProtoTypes) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *OneofProtoTypes) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *OneofProtoTypes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.OneOfProtoTimes != nil {
-		nn100, err100 := m.OneOfProtoTimes.MarshalTo(dAtA[i:])
-		if err100 != nil {
-			return 0, err100
-		}
-		i += nn100
-	}
 	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
-	return i, nil
+	if m.OneOfProtoTimes != nil {
+		{
+			size := m.OneOfProtoTimes.Size()
+			i -= size
+			if _, err := m.OneOfProtoTimes.MarshalTo(dAtA[i:]); err != nil {
+				return 0, err
+			}
+		}
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *OneofProtoTypes_Timestamp) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofProtoTypes_Timestamp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	if m.Timestamp != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.Timestamp.Size()))
-		n101, err101 := m.Timestamp.MarshalTo(dAtA[i:])
-		if err101 != nil {
-			return 0, err101
+		{
+			size, err := m.Timestamp.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
 		}
-		i += n101
+		i--
+		dAtA[i] = 0xa
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 func (m *OneofProtoTypes_Duration) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofProtoTypes_Duration) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	if m.Duration != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.Duration.Size()))
-		n102, err102 := m.Duration.MarshalTo(dAtA[i:])
-		if err102 != nil {
-			return 0, err102
+		{
+			size, err := m.Duration.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
 		}
-		i += n102
+		i--
+		dAtA[i] = 0x12
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 func (m *OneofProtoTypes_RepDouble) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofProtoTypes_RepDouble) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	if m.RepDouble != nil {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.RepDouble.Size()))
-		n103, err103 := m.RepDouble.MarshalTo(dAtA[i:])
-		if err103 != nil {
-			return 0, err103
+		{
+			size, err := m.RepDouble.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
 		}
-		i += n103
+		i--
+		dAtA[i] = 0x1a
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 func (m *OneofProtoTypes_RepFloat) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofProtoTypes_RepFloat) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	if m.RepFloat != nil {
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.RepFloat.Size()))
-		n104, err104 := m.RepFloat.MarshalTo(dAtA[i:])
-		if err104 != nil {
-			return 0, err104
+		{
+			size, err := m.RepFloat.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
 		}
-		i += n104
+		i--
+		dAtA[i] = 0x22
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 func (m *OneofProtoTypes_RepInt64) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofProtoTypes_RepInt64) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	if m.RepInt64 != nil {
-		dAtA[i] = 0x2a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.RepInt64.Size()))
-		n105, err105 := m.RepInt64.MarshalTo(dAtA[i:])
-		if err105 != nil {
-			return 0, err105
+		{
+			size, err := m.RepInt64.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
 		}
-		i += n105
+		i--
+		dAtA[i] = 0x2a
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 func (m *OneofProtoTypes_RepUInt64) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofProtoTypes_RepUInt64) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	if m.RepUInt64 != nil {
-		dAtA[i] = 0x32
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.RepUInt64.Size()))
-		n106, err106 := m.RepUInt64.MarshalTo(dAtA[i:])
-		if err106 != nil {
-			return 0, err106
+		{
+			size, err := m.RepUInt64.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
 		}
-		i += n106
+		i--
+		dAtA[i] = 0x32
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 func (m *OneofProtoTypes_RepInt32) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofProtoTypes_RepInt32) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	if m.RepInt32 != nil {
-		dAtA[i] = 0x3a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.RepInt32.Size()))
-		n107, err107 := m.RepInt32.MarshalTo(dAtA[i:])
-		if err107 != nil {
-			return 0, err107
+		{
+			size, err := m.RepInt32.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
 		}
-		i += n107
+		i--
+		dAtA[i] = 0x3a
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 func (m *OneofProtoTypes_RepUInt32) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofProtoTypes_RepUInt32) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	if m.RepUInt32 != nil {
-		dAtA[i] = 0x42
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.RepUInt32.Size()))
-		n108, err108 := m.RepUInt32.MarshalTo(dAtA[i:])
-		if err108 != nil {
-			return 0, err108
+		{
+			size, err := m.RepUInt32.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
 		}
-		i += n108
+		i--
+		dAtA[i] = 0x42
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 func (m *OneofProtoTypes_RepBool) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofProtoTypes_RepBool) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	if m.RepBool != nil {
-		dAtA[i] = 0x4a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.RepBool.Size()))
-		n109, err109 := m.RepBool.MarshalTo(dAtA[i:])
-		if err109 != nil {
-			return 0, err109
+		{
+			size, err := m.RepBool.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
 		}
-		i += n109
+		i--
+		dAtA[i] = 0x4a
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 func (m *OneofProtoTypes_RepString) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofProtoTypes_RepString) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	if m.RepString != nil {
-		dAtA[i] = 0x52
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.RepString.Size()))
-		n110, err110 := m.RepString.MarshalTo(dAtA[i:])
-		if err110 != nil {
-			return 0, err110
+		{
+			size, err := m.RepString.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
 		}
-		i += n110
+		i--
+		dAtA[i] = 0x52
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 func (m *OneofProtoTypes_RepBytes) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofProtoTypes_RepBytes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	if m.RepBytes != nil {
-		dAtA[i] = 0x5a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(m.RepBytes.Size()))
-		n111, err111 := m.RepBytes.MarshalTo(dAtA[i:])
-		if err111 != nil {
-			return 0, err111
+		{
+			size, err := m.RepBytes.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintTypes(dAtA, i, uint64(size))
 		}
-		i += n111
+		i--
+		dAtA[i] = 0x5a
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 func (m *OneofStdTypes) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -9475,219 +9525,273 @@ func (m *OneofStdTypes) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *OneofStdTypes) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *OneofStdTypes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.OneOfStdTimes != nil {
-		nn112, err112 := m.OneOfStdTimes.MarshalTo(dAtA[i:])
-		if err112 != nil {
-			return 0, err112
-		}
-		i += nn112
-	}
 	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
-	return i, nil
+	if m.OneOfStdTimes != nil {
+		{
+			size := m.OneOfStdTimes.Size()
+			i -= size
+			if _, err := m.OneOfStdTimes.MarshalTo(dAtA[i:]); err != nil {
+				return 0, err
+			}
+		}
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *OneofStdTypes_Timestamp) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofStdTypes_Timestamp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	if m.Timestamp != nil {
+		n111, err111 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.Timestamp, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.Timestamp):])
+		if err111 != nil {
+			return 0, err111
+		}
+		i -= n111
+		i = encodeVarintTypes(dAtA, i, uint64(n111))
+		i--
 		dAtA[i] = 0xa
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.Timestamp)))
-		n113, err113 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.Timestamp, dAtA[i:])
+	}
+	return len(dAtA) - i, nil
+}
+func (m *OneofStdTypes_Duration) MarshalTo(dAtA []byte) (int, error) {
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofStdTypes_Duration) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.Duration != nil {
+		n112, err112 := github_com_gogo_protobuf_types.StdDurationMarshalTo(*m.Duration, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDuration(*m.Duration):])
+		if err112 != nil {
+			return 0, err112
+		}
+		i -= n112
+		i = encodeVarintTypes(dAtA, i, uint64(n112))
+		i--
+		dAtA[i] = 0x12
+	}
+	return len(dAtA) - i, nil
+}
+func (m *OneofStdTypes_RepDouble) MarshalTo(dAtA []byte) (int, error) {
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofStdTypes_RepDouble) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.RepDouble != nil {
+		n113, err113 := github_com_gogo_protobuf_types.StdDoubleMarshalTo(*m.RepDouble, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDouble(*m.RepDouble):])
 		if err113 != nil {
 			return 0, err113
 		}
-		i += n113
+		i -= n113
+		i = encodeVarintTypes(dAtA, i, uint64(n113))
+		i--
+		dAtA[i] = 0x1a
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
-func (m *OneofStdTypes_Duration) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	if m.Duration != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDuration(*m.Duration)))
-		n114, err114 := github_com_gogo_protobuf_types.StdDurationMarshalTo(*m.Duration, dAtA[i:])
+func (m *OneofStdTypes_RepFloat) MarshalTo(dAtA []byte) (int, error) {
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofStdTypes_RepFloat) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.RepFloat != nil {
+		n114, err114 := github_com_gogo_protobuf_types.StdFloatMarshalTo(*m.RepFloat, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdFloat(*m.RepFloat):])
 		if err114 != nil {
 			return 0, err114
 		}
-		i += n114
+		i -= n114
+		i = encodeVarintTypes(dAtA, i, uint64(n114))
+		i--
+		dAtA[i] = 0x22
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
-func (m *OneofStdTypes_RepDouble) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	if m.RepDouble != nil {
-		dAtA[i] = 0x1a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdDouble(*m.RepDouble)))
-		n115, err115 := github_com_gogo_protobuf_types.StdDoubleMarshalTo(*m.RepDouble, dAtA[i:])
+func (m *OneofStdTypes_RepInt64) MarshalTo(dAtA []byte) (int, error) {
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofStdTypes_RepInt64) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.RepInt64 != nil {
+		n115, err115 := github_com_gogo_protobuf_types.StdInt64MarshalTo(*m.RepInt64, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdInt64(*m.RepInt64):])
 		if err115 != nil {
 			return 0, err115
 		}
-		i += n115
+		i -= n115
+		i = encodeVarintTypes(dAtA, i, uint64(n115))
+		i--
+		dAtA[i] = 0x2a
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
-func (m *OneofStdTypes_RepFloat) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	if m.RepFloat != nil {
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdFloat(*m.RepFloat)))
-		n116, err116 := github_com_gogo_protobuf_types.StdFloatMarshalTo(*m.RepFloat, dAtA[i:])
+func (m *OneofStdTypes_RepUInt64) MarshalTo(dAtA []byte) (int, error) {
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofStdTypes_RepUInt64) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.RepUInt64 != nil {
+		n116, err116 := github_com_gogo_protobuf_types.StdUInt64MarshalTo(*m.RepUInt64, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdUInt64(*m.RepUInt64):])
 		if err116 != nil {
 			return 0, err116
 		}
-		i += n116
+		i -= n116
+		i = encodeVarintTypes(dAtA, i, uint64(n116))
+		i--
+		dAtA[i] = 0x32
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
-func (m *OneofStdTypes_RepInt64) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	if m.RepInt64 != nil {
-		dAtA[i] = 0x2a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdInt64(*m.RepInt64)))
-		n117, err117 := github_com_gogo_protobuf_types.StdInt64MarshalTo(*m.RepInt64, dAtA[i:])
+func (m *OneofStdTypes_RepInt32) MarshalTo(dAtA []byte) (int, error) {
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofStdTypes_RepInt32) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.RepInt32 != nil {
+		n117, err117 := github_com_gogo_protobuf_types.StdInt32MarshalTo(*m.RepInt32, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdInt32(*m.RepInt32):])
 		if err117 != nil {
 			return 0, err117
 		}
-		i += n117
+		i -= n117
+		i = encodeVarintTypes(dAtA, i, uint64(n117))
+		i--
+		dAtA[i] = 0x3a
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
-func (m *OneofStdTypes_RepUInt64) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	if m.RepUInt64 != nil {
-		dAtA[i] = 0x32
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdUInt64(*m.RepUInt64)))
-		n118, err118 := github_com_gogo_protobuf_types.StdUInt64MarshalTo(*m.RepUInt64, dAtA[i:])
+func (m *OneofStdTypes_RepUInt32) MarshalTo(dAtA []byte) (int, error) {
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofStdTypes_RepUInt32) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.RepUInt32 != nil {
+		n118, err118 := github_com_gogo_protobuf_types.StdUInt32MarshalTo(*m.RepUInt32, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdUInt32(*m.RepUInt32):])
 		if err118 != nil {
 			return 0, err118
 		}
-		i += n118
+		i -= n118
+		i = encodeVarintTypes(dAtA, i, uint64(n118))
+		i--
+		dAtA[i] = 0x42
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
-func (m *OneofStdTypes_RepInt32) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	if m.RepInt32 != nil {
-		dAtA[i] = 0x3a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdInt32(*m.RepInt32)))
-		n119, err119 := github_com_gogo_protobuf_types.StdInt32MarshalTo(*m.RepInt32, dAtA[i:])
+func (m *OneofStdTypes_RepBool) MarshalTo(dAtA []byte) (int, error) {
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofStdTypes_RepBool) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.RepBool != nil {
+		n119, err119 := github_com_gogo_protobuf_types.StdBoolMarshalTo(*m.RepBool, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdBool(*m.RepBool):])
 		if err119 != nil {
 			return 0, err119
 		}
-		i += n119
+		i -= n119
+		i = encodeVarintTypes(dAtA, i, uint64(n119))
+		i--
+		dAtA[i] = 0x4a
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
-func (m *OneofStdTypes_RepUInt32) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	if m.RepUInt32 != nil {
-		dAtA[i] = 0x42
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdUInt32(*m.RepUInt32)))
-		n120, err120 := github_com_gogo_protobuf_types.StdUInt32MarshalTo(*m.RepUInt32, dAtA[i:])
+func (m *OneofStdTypes_RepString) MarshalTo(dAtA []byte) (int, error) {
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofStdTypes_RepString) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.RepString != nil {
+		n120, err120 := github_com_gogo_protobuf_types.StdStringMarshalTo(*m.RepString, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdString(*m.RepString):])
 		if err120 != nil {
 			return 0, err120
 		}
-		i += n120
+		i -= n120
+		i = encodeVarintTypes(dAtA, i, uint64(n120))
+		i--
+		dAtA[i] = 0x52
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
-func (m *OneofStdTypes_RepBool) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	if m.RepBool != nil {
-		dAtA[i] = 0x4a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdBool(*m.RepBool)))
-		n121, err121 := github_com_gogo_protobuf_types.StdBoolMarshalTo(*m.RepBool, dAtA[i:])
+func (m *OneofStdTypes_RepBytes) MarshalTo(dAtA []byte) (int, error) {
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *OneofStdTypes_RepBytes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.RepBytes != nil {
+		n121, err121 := github_com_gogo_protobuf_types.StdBytesMarshalTo(*m.RepBytes, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdBytes(*m.RepBytes):])
 		if err121 != nil {
 			return 0, err121
 		}
-		i += n121
-	}
-	return i, nil
-}
-func (m *OneofStdTypes_RepString) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	if m.RepString != nil {
-		dAtA[i] = 0x52
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdString(*m.RepString)))
-		n122, err122 := github_com_gogo_protobuf_types.StdStringMarshalTo(*m.RepString, dAtA[i:])
-		if err122 != nil {
-			return 0, err122
-		}
-		i += n122
-	}
-	return i, nil
-}
-func (m *OneofStdTypes_RepBytes) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	if m.RepBytes != nil {
+		i -= n121
+		i = encodeVarintTypes(dAtA, i, uint64(n121))
+		i--
 		dAtA[i] = 0x5a
-		i++
-		i = encodeVarintTypes(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdBytes(*m.RepBytes)))
-		n123, err123 := github_com_gogo_protobuf_types.StdBytesMarshalTo(*m.RepBytes, dAtA[i:])
-		if err123 != nil {
-			return 0, err123
-		}
-		i += n123
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 func encodeVarintTypes(dAtA []byte, offset int, v uint64) int {
+	offset -= sovTypes(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func NewPopulatedKnownTypes(r randyTypes, easy bool) *KnownTypes {
 	this := &KnownTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Dur = types.NewPopulatedDuration(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Ts = types.NewPopulatedTimestamp(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Dbl = types.NewPopulatedDoubleValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Flt = types.NewPopulatedFloatValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.I64 = types.NewPopulatedInt64Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.U64 = types.NewPopulatedUInt64Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.I32 = types.NewPopulatedInt32Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.U32 = types.NewPopulatedUInt32Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Bool = types.NewPopulatedBoolValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Str = types.NewPopulatedStringValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Bytes = types.NewPopulatedBytesValue(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -9698,37 +9802,37 @@ func NewPopulatedKnownTypes(r randyTypes, easy bool) *KnownTypes {
 
 func NewPopulatedProtoTypes(r randyTypes, easy bool) *ProtoTypes {
 	this := &ProtoTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableTimestamp = types.NewPopulatedTimestamp(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableDuration = types.NewPopulatedDuration(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableDouble = types.NewPopulatedDoubleValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableFloat = types.NewPopulatedFloatValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableInt64 = types.NewPopulatedInt64Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableUInt64 = types.NewPopulatedUInt64Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableInt32 = types.NewPopulatedInt32Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableUInt32 = types.NewPopulatedUInt32Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableBool = types.NewPopulatedBoolValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableString = types.NewPopulatedStringValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableBytes = types.NewPopulatedBytesValue(r, easy)
 	}
 	v1 := types.NewPopulatedTimestamp(r, easy)
@@ -9761,37 +9865,37 @@ func NewPopulatedProtoTypes(r randyTypes, easy bool) *ProtoTypes {
 
 func NewPopulatedStdTypes(r randyTypes, easy bool) *StdTypes {
 	this := &StdTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableTimestamp = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableDuration = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableDouble = github_com_gogo_protobuf_types.NewPopulatedStdDouble(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableFloat = github_com_gogo_protobuf_types.NewPopulatedStdFloat(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableInt64 = github_com_gogo_protobuf_types.NewPopulatedStdInt64(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableUInt64 = github_com_gogo_protobuf_types.NewPopulatedStdUInt64(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableInt32 = github_com_gogo_protobuf_types.NewPopulatedStdInt32(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableUInt32 = github_com_gogo_protobuf_types.NewPopulatedStdUInt32(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableBool = github_com_gogo_protobuf_types.NewPopulatedStdBool(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableString = github_com_gogo_protobuf_types.NewPopulatedStdString(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableBytes = github_com_gogo_protobuf_types.NewPopulatedStdBytes(r, easy)
 	}
 	v12 := github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
@@ -9824,21 +9928,21 @@ func NewPopulatedStdTypes(r randyTypes, easy bool) *StdTypes {
 
 func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 	this := &RepProtoTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v23 := r.Intn(5)
 		this.NullableTimestamps = make([]*types.Timestamp, v23)
 		for i := 0; i < v23; i++ {
 			this.NullableTimestamps[i] = types.NewPopulatedTimestamp(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v24 := r.Intn(5)
 		this.NullableDurations = make([]*types.Duration, v24)
 		for i := 0; i < v24; i++ {
 			this.NullableDurations[i] = types.NewPopulatedDuration(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v25 := r.Intn(5)
 		this.Timestamps = make([]types.Timestamp, v25)
 		for i := 0; i < v25; i++ {
@@ -9846,7 +9950,7 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.Timestamps[i] = *v26
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v27 := r.Intn(5)
 		this.Durations = make([]types.Duration, v27)
 		for i := 0; i < v27; i++ {
@@ -9854,14 +9958,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.Durations[i] = *v28
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v29 := r.Intn(5)
 		this.NullableDouble = make([]*types.DoubleValue, v29)
 		for i := 0; i < v29; i++ {
 			this.NullableDouble[i] = types.NewPopulatedDoubleValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v30 := r.Intn(5)
 		this.NonnullDouble = make([]types.DoubleValue, v30)
 		for i := 0; i < v30; i++ {
@@ -9869,14 +9973,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullDouble[i] = *v31
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v32 := r.Intn(5)
 		this.NullableFloat = make([]*types.FloatValue, v32)
 		for i := 0; i < v32; i++ {
 			this.NullableFloat[i] = types.NewPopulatedFloatValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v33 := r.Intn(5)
 		this.NonnullFloat = make([]types.FloatValue, v33)
 		for i := 0; i < v33; i++ {
@@ -9884,14 +9988,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullFloat[i] = *v34
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v35 := r.Intn(5)
 		this.NullableInt64 = make([]*types.Int64Value, v35)
 		for i := 0; i < v35; i++ {
 			this.NullableInt64[i] = types.NewPopulatedInt64Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v36 := r.Intn(5)
 		this.NonnullInt64 = make([]types.Int64Value, v36)
 		for i := 0; i < v36; i++ {
@@ -9899,14 +10003,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullInt64[i] = *v37
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v38 := r.Intn(5)
 		this.NullableUInt64 = make([]*types.UInt64Value, v38)
 		for i := 0; i < v38; i++ {
 			this.NullableUInt64[i] = types.NewPopulatedUInt64Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v39 := r.Intn(5)
 		this.NonnullUInt64 = make([]types.UInt64Value, v39)
 		for i := 0; i < v39; i++ {
@@ -9914,14 +10018,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullUInt64[i] = *v40
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v41 := r.Intn(5)
 		this.NullableInt32 = make([]*types.Int32Value, v41)
 		for i := 0; i < v41; i++ {
 			this.NullableInt32[i] = types.NewPopulatedInt32Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v42 := r.Intn(5)
 		this.NonnullInt32 = make([]types.Int32Value, v42)
 		for i := 0; i < v42; i++ {
@@ -9929,14 +10033,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullInt32[i] = *v43
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v44 := r.Intn(5)
 		this.NullableUInt32 = make([]*types.UInt32Value, v44)
 		for i := 0; i < v44; i++ {
 			this.NullableUInt32[i] = types.NewPopulatedUInt32Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v45 := r.Intn(5)
 		this.NonnullUInt32 = make([]types.UInt32Value, v45)
 		for i := 0; i < v45; i++ {
@@ -9944,14 +10048,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullUInt32[i] = *v46
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v47 := r.Intn(5)
 		this.NullableBool = make([]*types.BoolValue, v47)
 		for i := 0; i < v47; i++ {
 			this.NullableBool[i] = types.NewPopulatedBoolValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v48 := r.Intn(5)
 		this.NonnullBool = make([]types.BoolValue, v48)
 		for i := 0; i < v48; i++ {
@@ -9959,14 +10063,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullBool[i] = *v49
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v50 := r.Intn(5)
 		this.NullableString = make([]*types.StringValue, v50)
 		for i := 0; i < v50; i++ {
 			this.NullableString[i] = types.NewPopulatedStringValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v51 := r.Intn(5)
 		this.NonnullString = make([]types.StringValue, v51)
 		for i := 0; i < v51; i++ {
@@ -9974,14 +10078,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullString[i] = *v52
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v53 := r.Intn(5)
 		this.NullableBytes = make([]*types.BytesValue, v53)
 		for i := 0; i < v53; i++ {
 			this.NullableBytes[i] = types.NewPopulatedBytesValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v54 := r.Intn(5)
 		this.NonnullBytes = make([]types.BytesValue, v54)
 		for i := 0; i < v54; i++ {
@@ -9997,21 +10101,21 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 
 func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 	this := &RepStdTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v56 := r.Intn(5)
 		this.NullableTimestamps = make([]*time.Time, v56)
 		for i := 0; i < v56; i++ {
 			this.NullableTimestamps[i] = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v57 := r.Intn(5)
 		this.NullableDurations = make([]*time.Duration, v57)
 		for i := 0; i < v57; i++ {
 			this.NullableDurations[i] = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v58 := r.Intn(5)
 		this.Timestamps = make([]time.Time, v58)
 		for i := 0; i < v58; i++ {
@@ -10019,7 +10123,7 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.Timestamps[i] = *v59
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v60 := r.Intn(5)
 		this.Durations = make([]time.Duration, v60)
 		for i := 0; i < v60; i++ {
@@ -10027,14 +10131,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.Durations[i] = *v61
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v62 := r.Intn(5)
 		this.NullableDouble = make([]*float64, v62)
 		for i := 0; i < v62; i++ {
 			this.NullableDouble[i] = github_com_gogo_protobuf_types.NewPopulatedStdDouble(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v63 := r.Intn(5)
 		this.NonnullDouble = make([]float64, v63)
 		for i := 0; i < v63; i++ {
@@ -10042,14 +10146,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullDouble[i] = *v64
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v65 := r.Intn(5)
 		this.NullableFloat = make([]*float32, v65)
 		for i := 0; i < v65; i++ {
 			this.NullableFloat[i] = github_com_gogo_protobuf_types.NewPopulatedStdFloat(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v66 := r.Intn(5)
 		this.NonnullFloat = make([]float32, v66)
 		for i := 0; i < v66; i++ {
@@ -10057,14 +10161,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullFloat[i] = *v67
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v68 := r.Intn(5)
 		this.NullableInt64 = make([]*int64, v68)
 		for i := 0; i < v68; i++ {
 			this.NullableInt64[i] = github_com_gogo_protobuf_types.NewPopulatedStdInt64(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v69 := r.Intn(5)
 		this.NonnullInt64 = make([]int64, v69)
 		for i := 0; i < v69; i++ {
@@ -10072,14 +10176,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullInt64[i] = *v70
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v71 := r.Intn(5)
 		this.NullableUInt64 = make([]*uint64, v71)
 		for i := 0; i < v71; i++ {
 			this.NullableUInt64[i] = github_com_gogo_protobuf_types.NewPopulatedStdUInt64(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v72 := r.Intn(5)
 		this.NonnullUInt64 = make([]uint64, v72)
 		for i := 0; i < v72; i++ {
@@ -10087,14 +10191,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullUInt64[i] = *v73
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v74 := r.Intn(5)
 		this.NullableInt32 = make([]*int32, v74)
 		for i := 0; i < v74; i++ {
 			this.NullableInt32[i] = github_com_gogo_protobuf_types.NewPopulatedStdInt32(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v75 := r.Intn(5)
 		this.NonnullInt32 = make([]int32, v75)
 		for i := 0; i < v75; i++ {
@@ -10102,14 +10206,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullInt32[i] = *v76
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v77 := r.Intn(5)
 		this.NullableUInt32 = make([]*uint32, v77)
 		for i := 0; i < v77; i++ {
 			this.NullableUInt32[i] = github_com_gogo_protobuf_types.NewPopulatedStdUInt32(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v78 := r.Intn(5)
 		this.NonnullUInt32 = make([]uint32, v78)
 		for i := 0; i < v78; i++ {
@@ -10117,14 +10221,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullUInt32[i] = *v79
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v80 := r.Intn(5)
 		this.NullableBool = make([]*bool, v80)
 		for i := 0; i < v80; i++ {
 			this.NullableBool[i] = github_com_gogo_protobuf_types.NewPopulatedStdBool(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v81 := r.Intn(5)
 		this.NonnullBool = make([]bool, v81)
 		for i := 0; i < v81; i++ {
@@ -10132,14 +10236,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullBool[i] = *v82
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v83 := r.Intn(5)
 		this.NullableString = make([]*string, v83)
 		for i := 0; i < v83; i++ {
 			this.NullableString[i] = github_com_gogo_protobuf_types.NewPopulatedStdString(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v84 := r.Intn(5)
 		this.NonnullString = make([]string, v84)
 		for i := 0; i < v84; i++ {
@@ -10147,14 +10251,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullString[i] = *v85
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v86 := r.Intn(5)
 		this.NullableBytes = make([]*[]byte, v86)
 		for i := 0; i < v86; i++ {
 			this.NullableBytes[i] = github_com_gogo_protobuf_types.NewPopulatedStdBytes(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v87 := r.Intn(5)
 		this.NonnullBytes = make([][]byte, v87)
 		for i := 0; i < v87; i++ {
@@ -10170,154 +10274,154 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 
 func NewPopulatedMapProtoTypes(r randyTypes, easy bool) *MapProtoTypes {
 	this := &MapProtoTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v89 := r.Intn(10)
 		this.NullableTimestamp = make(map[int32]*types.Timestamp)
 		for i := 0; i < v89; i++ {
 			this.NullableTimestamp[int32(r.Int31())] = types.NewPopulatedTimestamp(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v90 := r.Intn(10)
 		this.Timestamp = make(map[int32]types.Timestamp)
 		for i := 0; i < v90; i++ {
 			this.Timestamp[int32(r.Int31())] = *types.NewPopulatedTimestamp(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v91 := r.Intn(10)
 		this.NullableDuration = make(map[int32]*types.Duration)
 		for i := 0; i < v91; i++ {
 			this.NullableDuration[int32(r.Int31())] = types.NewPopulatedDuration(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v92 := r.Intn(10)
 		this.Duration = make(map[int32]types.Duration)
 		for i := 0; i < v92; i++ {
 			this.Duration[int32(r.Int31())] = *types.NewPopulatedDuration(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v93 := r.Intn(10)
 		this.NullableDouble = make(map[int32]*types.DoubleValue)
 		for i := 0; i < v93; i++ {
 			this.NullableDouble[int32(r.Int31())] = types.NewPopulatedDoubleValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v94 := r.Intn(10)
 		this.NonnullDouble = make(map[int32]types.DoubleValue)
 		for i := 0; i < v94; i++ {
 			this.NonnullDouble[int32(r.Int31())] = *types.NewPopulatedDoubleValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v95 := r.Intn(10)
 		this.NullableFloat = make(map[int32]*types.FloatValue)
 		for i := 0; i < v95; i++ {
 			this.NullableFloat[int32(r.Int31())] = types.NewPopulatedFloatValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v96 := r.Intn(10)
 		this.NonnullFloat = make(map[int32]types.FloatValue)
 		for i := 0; i < v96; i++ {
 			this.NonnullFloat[int32(r.Int31())] = *types.NewPopulatedFloatValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v97 := r.Intn(10)
 		this.NullableInt64 = make(map[int32]*types.Int64Value)
 		for i := 0; i < v97; i++ {
 			this.NullableInt64[int32(r.Int31())] = types.NewPopulatedInt64Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v98 := r.Intn(10)
 		this.NonnullInt64 = make(map[int32]types.Int64Value)
 		for i := 0; i < v98; i++ {
 			this.NonnullInt64[int32(r.Int31())] = *types.NewPopulatedInt64Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v99 := r.Intn(10)
 		this.NullableUInt64 = make(map[int32]*types.UInt64Value)
 		for i := 0; i < v99; i++ {
 			this.NullableUInt64[int32(r.Int31())] = types.NewPopulatedUInt64Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v100 := r.Intn(10)
 		this.NonnullUInt64 = make(map[int32]types.UInt64Value)
 		for i := 0; i < v100; i++ {
 			this.NonnullUInt64[int32(r.Int31())] = *types.NewPopulatedUInt64Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v101 := r.Intn(10)
 		this.NullableInt32 = make(map[int32]*types.Int32Value)
 		for i := 0; i < v101; i++ {
 			this.NullableInt32[int32(r.Int31())] = types.NewPopulatedInt32Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v102 := r.Intn(10)
 		this.NonnullInt32 = make(map[int32]types.Int32Value)
 		for i := 0; i < v102; i++ {
 			this.NonnullInt32[int32(r.Int31())] = *types.NewPopulatedInt32Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v103 := r.Intn(10)
 		this.NullableUInt32 = make(map[int32]*types.UInt32Value)
 		for i := 0; i < v103; i++ {
 			this.NullableUInt32[int32(r.Int31())] = types.NewPopulatedUInt32Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v104 := r.Intn(10)
 		this.NonnullUInt32 = make(map[int32]types.UInt32Value)
 		for i := 0; i < v104; i++ {
 			this.NonnullUInt32[int32(r.Int31())] = *types.NewPopulatedUInt32Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v105 := r.Intn(10)
 		this.NullableBool = make(map[int32]*types.BoolValue)
 		for i := 0; i < v105; i++ {
 			this.NullableBool[int32(r.Int31())] = types.NewPopulatedBoolValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v106 := r.Intn(10)
 		this.NonnullBool = make(map[int32]types.BoolValue)
 		for i := 0; i < v106; i++ {
 			this.NonnullBool[int32(r.Int31())] = *types.NewPopulatedBoolValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v107 := r.Intn(10)
 		this.NullableString = make(map[int32]*types.StringValue)
 		for i := 0; i < v107; i++ {
 			this.NullableString[int32(r.Int31())] = types.NewPopulatedStringValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v108 := r.Intn(10)
 		this.NonnullString = make(map[int32]types.StringValue)
 		for i := 0; i < v108; i++ {
 			this.NonnullString[int32(r.Int31())] = *types.NewPopulatedStringValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v109 := r.Intn(10)
 		this.NullableBytes = make(map[int32]*types.BytesValue)
 		for i := 0; i < v109; i++ {
 			this.NullableBytes[int32(r.Int31())] = types.NewPopulatedBytesValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v110 := r.Intn(10)
 		this.NonnullBytes = make(map[int32]types.BytesValue)
 		for i := 0; i < v110; i++ {
@@ -10332,154 +10436,154 @@ func NewPopulatedMapProtoTypes(r randyTypes, easy bool) *MapProtoTypes {
 
 func NewPopulatedMapStdTypes(r randyTypes, easy bool) *MapStdTypes {
 	this := &MapStdTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v111 := r.Intn(10)
 		this.NullableTimestamp = make(map[int32]*time.Time)
 		for i := 0; i < v111; i++ {
 			this.NullableTimestamp[int32(r.Int31())] = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v112 := r.Intn(10)
 		this.Timestamp = make(map[int32]time.Time)
 		for i := 0; i < v112; i++ {
 			this.Timestamp[int32(r.Int31())] = *github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v113 := r.Intn(10)
 		this.NullableDuration = make(map[int32]*time.Duration)
 		for i := 0; i < v113; i++ {
 			this.NullableDuration[int32(r.Int31())] = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v114 := r.Intn(10)
 		this.Duration = make(map[int32]time.Duration)
 		for i := 0; i < v114; i++ {
 			this.Duration[int32(r.Int31())] = *github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v115 := r.Intn(10)
 		this.NullableDouble = make(map[int32]*float64)
 		for i := 0; i < v115; i++ {
 			this.NullableDouble[int32(r.Int31())] = (*float64)(github_com_gogo_protobuf_types.NewPopulatedStdDouble(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v116 := r.Intn(10)
 		this.NonnullDouble = make(map[int32]float64)
 		for i := 0; i < v116; i++ {
 			this.NonnullDouble[int32(r.Int31())] = (float64)(*github_com_gogo_protobuf_types.NewPopulatedStdDouble(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v117 := r.Intn(10)
 		this.NullableFloat = make(map[int32]*float32)
 		for i := 0; i < v117; i++ {
 			this.NullableFloat[int32(r.Int31())] = (*float32)(github_com_gogo_protobuf_types.NewPopulatedStdFloat(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v118 := r.Intn(10)
 		this.NonnullFloat = make(map[int32]float32)
 		for i := 0; i < v118; i++ {
 			this.NonnullFloat[int32(r.Int31())] = (float32)(*github_com_gogo_protobuf_types.NewPopulatedStdFloat(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v119 := r.Intn(10)
 		this.NullableInt64 = make(map[int32]*int64)
 		for i := 0; i < v119; i++ {
 			this.NullableInt64[int32(r.Int31())] = (*int64)(github_com_gogo_protobuf_types.NewPopulatedStdInt64(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v120 := r.Intn(10)
 		this.NonnullInt64 = make(map[int32]int64)
 		for i := 0; i < v120; i++ {
 			this.NonnullInt64[int32(r.Int31())] = (int64)(*github_com_gogo_protobuf_types.NewPopulatedStdInt64(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v121 := r.Intn(10)
 		this.NullableUInt64 = make(map[int32]*uint64)
 		for i := 0; i < v121; i++ {
 			this.NullableUInt64[int32(r.Int31())] = (*uint64)(github_com_gogo_protobuf_types.NewPopulatedStdUInt64(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v122 := r.Intn(10)
 		this.NonnullUInt64 = make(map[int32]uint64)
 		for i := 0; i < v122; i++ {
 			this.NonnullUInt64[int32(r.Int31())] = (uint64)(*github_com_gogo_protobuf_types.NewPopulatedStdUInt64(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v123 := r.Intn(10)
 		this.NullableInt32 = make(map[int32]*int32)
 		for i := 0; i < v123; i++ {
 			this.NullableInt32[int32(r.Int31())] = (*int32)(github_com_gogo_protobuf_types.NewPopulatedStdInt32(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v124 := r.Intn(10)
 		this.NonnullInt32 = make(map[int32]int32)
 		for i := 0; i < v124; i++ {
 			this.NonnullInt32[int32(r.Int31())] = (int32)(*github_com_gogo_protobuf_types.NewPopulatedStdInt32(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v125 := r.Intn(10)
 		this.NullableUInt32 = make(map[int32]*uint32)
 		for i := 0; i < v125; i++ {
 			this.NullableUInt32[int32(r.Int31())] = (*uint32)(github_com_gogo_protobuf_types.NewPopulatedStdUInt32(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v126 := r.Intn(10)
 		this.NonnullUInt32 = make(map[int32]uint32)
 		for i := 0; i < v126; i++ {
 			this.NonnullUInt32[int32(r.Int31())] = (uint32)(*github_com_gogo_protobuf_types.NewPopulatedStdUInt32(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v127 := r.Intn(10)
 		this.NullableBool = make(map[int32]*bool)
 		for i := 0; i < v127; i++ {
 			this.NullableBool[int32(r.Int31())] = (*bool)(github_com_gogo_protobuf_types.NewPopulatedStdBool(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v128 := r.Intn(10)
 		this.NonnullBool = make(map[int32]bool)
 		for i := 0; i < v128; i++ {
 			this.NonnullBool[int32(r.Int31())] = (bool)(*github_com_gogo_protobuf_types.NewPopulatedStdBool(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v129 := r.Intn(10)
 		this.NullableString = make(map[int32]*string)
 		for i := 0; i < v129; i++ {
 			this.NullableString[int32(r.Int31())] = (*string)(github_com_gogo_protobuf_types.NewPopulatedStdString(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v130 := r.Intn(10)
 		this.NonnullString = make(map[int32]string)
 		for i := 0; i < v130; i++ {
 			this.NonnullString[int32(r.Int31())] = (string)(*github_com_gogo_protobuf_types.NewPopulatedStdString(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v131 := r.Intn(10)
 		this.NullableBytes = make(map[int32]*[]byte)
 		for i := 0; i < v131; i++ {
 			this.NullableBytes[int32(r.Int31())] = (*[]byte)(github_com_gogo_protobuf_types.NewPopulatedStdBytes(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v132 := r.Intn(10)
 		this.NonnullBytes = make(map[int32][]byte)
 		for i := 0; i < v132; i++ {

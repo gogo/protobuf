@@ -46,7 +46,7 @@ func (m *TimeFail) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_TimeFail.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -145,7 +145,7 @@ func valueToGoStringTimefail(v interface{}, typ string) string {
 func (m *TimeFail) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -153,31 +153,38 @@ func (m *TimeFail) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *TimeFail) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *TimeFail) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	if m.TimeTest != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintTimefail(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.TimeTest)))
-		n1, err1 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.TimeTest, dAtA[i:])
+		n1, err1 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.TimeTest, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdTime(*m.TimeTest):])
 		if err1 != nil {
 			return 0, err1
 		}
-		i += n1
+		i -= n1
+		i = encodeVarintTimefail(dAtA, i, uint64(n1))
+		i--
+		dAtA[i] = 0xa
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintTimefail(dAtA []byte, offset int, v uint64) int {
+	offset -= sovTimefail(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func (m *TimeFail) Size() (n int) {
 	if m == nil {

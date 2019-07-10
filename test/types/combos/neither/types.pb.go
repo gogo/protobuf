@@ -6792,37 +6792,37 @@ func (this *OneofStdTypes_RepBytes) Equal(that interface{}) bool {
 }
 func NewPopulatedKnownTypes(r randyTypes, easy bool) *KnownTypes {
 	this := &KnownTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Dur = types.NewPopulatedDuration(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Ts = types.NewPopulatedTimestamp(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Dbl = types.NewPopulatedDoubleValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Flt = types.NewPopulatedFloatValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.I64 = types.NewPopulatedInt64Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.U64 = types.NewPopulatedUInt64Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.I32 = types.NewPopulatedInt32Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.U32 = types.NewPopulatedUInt32Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Bool = types.NewPopulatedBoolValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Str = types.NewPopulatedStringValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Bytes = types.NewPopulatedBytesValue(r, easy)
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -6833,37 +6833,37 @@ func NewPopulatedKnownTypes(r randyTypes, easy bool) *KnownTypes {
 
 func NewPopulatedProtoTypes(r randyTypes, easy bool) *ProtoTypes {
 	this := &ProtoTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableTimestamp = types.NewPopulatedTimestamp(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableDuration = types.NewPopulatedDuration(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableDouble = types.NewPopulatedDoubleValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableFloat = types.NewPopulatedFloatValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableInt64 = types.NewPopulatedInt64Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableUInt64 = types.NewPopulatedUInt64Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableInt32 = types.NewPopulatedInt32Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableUInt32 = types.NewPopulatedUInt32Value(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableBool = types.NewPopulatedBoolValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableString = types.NewPopulatedStringValue(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableBytes = types.NewPopulatedBytesValue(r, easy)
 	}
 	v1 := types.NewPopulatedTimestamp(r, easy)
@@ -6896,37 +6896,37 @@ func NewPopulatedProtoTypes(r randyTypes, easy bool) *ProtoTypes {
 
 func NewPopulatedStdTypes(r randyTypes, easy bool) *StdTypes {
 	this := &StdTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableTimestamp = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableDuration = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableDouble = github_com_gogo_protobuf_types.NewPopulatedStdDouble(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableFloat = github_com_gogo_protobuf_types.NewPopulatedStdFloat(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableInt64 = github_com_gogo_protobuf_types.NewPopulatedStdInt64(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableUInt64 = github_com_gogo_protobuf_types.NewPopulatedStdUInt64(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableInt32 = github_com_gogo_protobuf_types.NewPopulatedStdInt32(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableUInt32 = github_com_gogo_protobuf_types.NewPopulatedStdUInt32(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableBool = github_com_gogo_protobuf_types.NewPopulatedStdBool(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableString = github_com_gogo_protobuf_types.NewPopulatedStdString(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableBytes = github_com_gogo_protobuf_types.NewPopulatedStdBytes(r, easy)
 	}
 	v12 := github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
@@ -6959,21 +6959,21 @@ func NewPopulatedStdTypes(r randyTypes, easy bool) *StdTypes {
 
 func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 	this := &RepProtoTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v23 := r.Intn(5)
 		this.NullableTimestamps = make([]*types.Timestamp, v23)
 		for i := 0; i < v23; i++ {
 			this.NullableTimestamps[i] = types.NewPopulatedTimestamp(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v24 := r.Intn(5)
 		this.NullableDurations = make([]*types.Duration, v24)
 		for i := 0; i < v24; i++ {
 			this.NullableDurations[i] = types.NewPopulatedDuration(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v25 := r.Intn(5)
 		this.Timestamps = make([]types.Timestamp, v25)
 		for i := 0; i < v25; i++ {
@@ -6981,7 +6981,7 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.Timestamps[i] = *v26
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v27 := r.Intn(5)
 		this.Durations = make([]types.Duration, v27)
 		for i := 0; i < v27; i++ {
@@ -6989,14 +6989,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.Durations[i] = *v28
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v29 := r.Intn(5)
 		this.NullableDouble = make([]*types.DoubleValue, v29)
 		for i := 0; i < v29; i++ {
 			this.NullableDouble[i] = types.NewPopulatedDoubleValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v30 := r.Intn(5)
 		this.NonnullDouble = make([]types.DoubleValue, v30)
 		for i := 0; i < v30; i++ {
@@ -7004,14 +7004,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullDouble[i] = *v31
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v32 := r.Intn(5)
 		this.NullableFloat = make([]*types.FloatValue, v32)
 		for i := 0; i < v32; i++ {
 			this.NullableFloat[i] = types.NewPopulatedFloatValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v33 := r.Intn(5)
 		this.NonnullFloat = make([]types.FloatValue, v33)
 		for i := 0; i < v33; i++ {
@@ -7019,14 +7019,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullFloat[i] = *v34
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v35 := r.Intn(5)
 		this.NullableInt64 = make([]*types.Int64Value, v35)
 		for i := 0; i < v35; i++ {
 			this.NullableInt64[i] = types.NewPopulatedInt64Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v36 := r.Intn(5)
 		this.NonnullInt64 = make([]types.Int64Value, v36)
 		for i := 0; i < v36; i++ {
@@ -7034,14 +7034,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullInt64[i] = *v37
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v38 := r.Intn(5)
 		this.NullableUInt64 = make([]*types.UInt64Value, v38)
 		for i := 0; i < v38; i++ {
 			this.NullableUInt64[i] = types.NewPopulatedUInt64Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v39 := r.Intn(5)
 		this.NonnullUInt64 = make([]types.UInt64Value, v39)
 		for i := 0; i < v39; i++ {
@@ -7049,14 +7049,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullUInt64[i] = *v40
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v41 := r.Intn(5)
 		this.NullableInt32 = make([]*types.Int32Value, v41)
 		for i := 0; i < v41; i++ {
 			this.NullableInt32[i] = types.NewPopulatedInt32Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v42 := r.Intn(5)
 		this.NonnullInt32 = make([]types.Int32Value, v42)
 		for i := 0; i < v42; i++ {
@@ -7064,14 +7064,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullInt32[i] = *v43
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v44 := r.Intn(5)
 		this.NullableUInt32 = make([]*types.UInt32Value, v44)
 		for i := 0; i < v44; i++ {
 			this.NullableUInt32[i] = types.NewPopulatedUInt32Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v45 := r.Intn(5)
 		this.NonnullUInt32 = make([]types.UInt32Value, v45)
 		for i := 0; i < v45; i++ {
@@ -7079,14 +7079,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullUInt32[i] = *v46
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v47 := r.Intn(5)
 		this.NullableBool = make([]*types.BoolValue, v47)
 		for i := 0; i < v47; i++ {
 			this.NullableBool[i] = types.NewPopulatedBoolValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v48 := r.Intn(5)
 		this.NonnullBool = make([]types.BoolValue, v48)
 		for i := 0; i < v48; i++ {
@@ -7094,14 +7094,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullBool[i] = *v49
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v50 := r.Intn(5)
 		this.NullableString = make([]*types.StringValue, v50)
 		for i := 0; i < v50; i++ {
 			this.NullableString[i] = types.NewPopulatedStringValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v51 := r.Intn(5)
 		this.NonnullString = make([]types.StringValue, v51)
 		for i := 0; i < v51; i++ {
@@ -7109,14 +7109,14 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 			this.NonnullString[i] = *v52
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v53 := r.Intn(5)
 		this.NullableBytes = make([]*types.BytesValue, v53)
 		for i := 0; i < v53; i++ {
 			this.NullableBytes[i] = types.NewPopulatedBytesValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v54 := r.Intn(5)
 		this.NonnullBytes = make([]types.BytesValue, v54)
 		for i := 0; i < v54; i++ {
@@ -7132,21 +7132,21 @@ func NewPopulatedRepProtoTypes(r randyTypes, easy bool) *RepProtoTypes {
 
 func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 	this := &RepStdTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v56 := r.Intn(5)
 		this.NullableTimestamps = make([]*time.Time, v56)
 		for i := 0; i < v56; i++ {
 			this.NullableTimestamps[i] = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v57 := r.Intn(5)
 		this.NullableDurations = make([]*time.Duration, v57)
 		for i := 0; i < v57; i++ {
 			this.NullableDurations[i] = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v58 := r.Intn(5)
 		this.Timestamps = make([]time.Time, v58)
 		for i := 0; i < v58; i++ {
@@ -7154,7 +7154,7 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.Timestamps[i] = *v59
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v60 := r.Intn(5)
 		this.Durations = make([]time.Duration, v60)
 		for i := 0; i < v60; i++ {
@@ -7162,14 +7162,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.Durations[i] = *v61
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v62 := r.Intn(5)
 		this.NullableDouble = make([]*float64, v62)
 		for i := 0; i < v62; i++ {
 			this.NullableDouble[i] = github_com_gogo_protobuf_types.NewPopulatedStdDouble(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v63 := r.Intn(5)
 		this.NonnullDouble = make([]float64, v63)
 		for i := 0; i < v63; i++ {
@@ -7177,14 +7177,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullDouble[i] = *v64
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v65 := r.Intn(5)
 		this.NullableFloat = make([]*float32, v65)
 		for i := 0; i < v65; i++ {
 			this.NullableFloat[i] = github_com_gogo_protobuf_types.NewPopulatedStdFloat(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v66 := r.Intn(5)
 		this.NonnullFloat = make([]float32, v66)
 		for i := 0; i < v66; i++ {
@@ -7192,14 +7192,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullFloat[i] = *v67
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v68 := r.Intn(5)
 		this.NullableInt64 = make([]*int64, v68)
 		for i := 0; i < v68; i++ {
 			this.NullableInt64[i] = github_com_gogo_protobuf_types.NewPopulatedStdInt64(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v69 := r.Intn(5)
 		this.NonnullInt64 = make([]int64, v69)
 		for i := 0; i < v69; i++ {
@@ -7207,14 +7207,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullInt64[i] = *v70
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v71 := r.Intn(5)
 		this.NullableUInt64 = make([]*uint64, v71)
 		for i := 0; i < v71; i++ {
 			this.NullableUInt64[i] = github_com_gogo_protobuf_types.NewPopulatedStdUInt64(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v72 := r.Intn(5)
 		this.NonnullUInt64 = make([]uint64, v72)
 		for i := 0; i < v72; i++ {
@@ -7222,14 +7222,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullUInt64[i] = *v73
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v74 := r.Intn(5)
 		this.NullableInt32 = make([]*int32, v74)
 		for i := 0; i < v74; i++ {
 			this.NullableInt32[i] = github_com_gogo_protobuf_types.NewPopulatedStdInt32(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v75 := r.Intn(5)
 		this.NonnullInt32 = make([]int32, v75)
 		for i := 0; i < v75; i++ {
@@ -7237,14 +7237,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullInt32[i] = *v76
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v77 := r.Intn(5)
 		this.NullableUInt32 = make([]*uint32, v77)
 		for i := 0; i < v77; i++ {
 			this.NullableUInt32[i] = github_com_gogo_protobuf_types.NewPopulatedStdUInt32(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v78 := r.Intn(5)
 		this.NonnullUInt32 = make([]uint32, v78)
 		for i := 0; i < v78; i++ {
@@ -7252,14 +7252,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullUInt32[i] = *v79
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v80 := r.Intn(5)
 		this.NullableBool = make([]*bool, v80)
 		for i := 0; i < v80; i++ {
 			this.NullableBool[i] = github_com_gogo_protobuf_types.NewPopulatedStdBool(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v81 := r.Intn(5)
 		this.NonnullBool = make([]bool, v81)
 		for i := 0; i < v81; i++ {
@@ -7267,14 +7267,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullBool[i] = *v82
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v83 := r.Intn(5)
 		this.NullableString = make([]*string, v83)
 		for i := 0; i < v83; i++ {
 			this.NullableString[i] = github_com_gogo_protobuf_types.NewPopulatedStdString(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v84 := r.Intn(5)
 		this.NonnullString = make([]string, v84)
 		for i := 0; i < v84; i++ {
@@ -7282,14 +7282,14 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 			this.NonnullString[i] = *v85
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v86 := r.Intn(5)
 		this.NullableBytes = make([]*[]byte, v86)
 		for i := 0; i < v86; i++ {
 			this.NullableBytes[i] = github_com_gogo_protobuf_types.NewPopulatedStdBytes(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v87 := r.Intn(5)
 		this.NonnullBytes = make([][]byte, v87)
 		for i := 0; i < v87; i++ {
@@ -7305,154 +7305,154 @@ func NewPopulatedRepStdTypes(r randyTypes, easy bool) *RepStdTypes {
 
 func NewPopulatedMapProtoTypes(r randyTypes, easy bool) *MapProtoTypes {
 	this := &MapProtoTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v89 := r.Intn(10)
 		this.NullableTimestamp = make(map[int32]*types.Timestamp)
 		for i := 0; i < v89; i++ {
 			this.NullableTimestamp[int32(r.Int31())] = types.NewPopulatedTimestamp(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v90 := r.Intn(10)
 		this.Timestamp = make(map[int32]types.Timestamp)
 		for i := 0; i < v90; i++ {
 			this.Timestamp[int32(r.Int31())] = *types.NewPopulatedTimestamp(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v91 := r.Intn(10)
 		this.NullableDuration = make(map[int32]*types.Duration)
 		for i := 0; i < v91; i++ {
 			this.NullableDuration[int32(r.Int31())] = types.NewPopulatedDuration(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v92 := r.Intn(10)
 		this.Duration = make(map[int32]types.Duration)
 		for i := 0; i < v92; i++ {
 			this.Duration[int32(r.Int31())] = *types.NewPopulatedDuration(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v93 := r.Intn(10)
 		this.NullableDouble = make(map[int32]*types.DoubleValue)
 		for i := 0; i < v93; i++ {
 			this.NullableDouble[int32(r.Int31())] = types.NewPopulatedDoubleValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v94 := r.Intn(10)
 		this.NonnullDouble = make(map[int32]types.DoubleValue)
 		for i := 0; i < v94; i++ {
 			this.NonnullDouble[int32(r.Int31())] = *types.NewPopulatedDoubleValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v95 := r.Intn(10)
 		this.NullableFloat = make(map[int32]*types.FloatValue)
 		for i := 0; i < v95; i++ {
 			this.NullableFloat[int32(r.Int31())] = types.NewPopulatedFloatValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v96 := r.Intn(10)
 		this.NonnullFloat = make(map[int32]types.FloatValue)
 		for i := 0; i < v96; i++ {
 			this.NonnullFloat[int32(r.Int31())] = *types.NewPopulatedFloatValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v97 := r.Intn(10)
 		this.NullableInt64 = make(map[int32]*types.Int64Value)
 		for i := 0; i < v97; i++ {
 			this.NullableInt64[int32(r.Int31())] = types.NewPopulatedInt64Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v98 := r.Intn(10)
 		this.NonnullInt64 = make(map[int32]types.Int64Value)
 		for i := 0; i < v98; i++ {
 			this.NonnullInt64[int32(r.Int31())] = *types.NewPopulatedInt64Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v99 := r.Intn(10)
 		this.NullableUInt64 = make(map[int32]*types.UInt64Value)
 		for i := 0; i < v99; i++ {
 			this.NullableUInt64[int32(r.Int31())] = types.NewPopulatedUInt64Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v100 := r.Intn(10)
 		this.NonnullUInt64 = make(map[int32]types.UInt64Value)
 		for i := 0; i < v100; i++ {
 			this.NonnullUInt64[int32(r.Int31())] = *types.NewPopulatedUInt64Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v101 := r.Intn(10)
 		this.NullableInt32 = make(map[int32]*types.Int32Value)
 		for i := 0; i < v101; i++ {
 			this.NullableInt32[int32(r.Int31())] = types.NewPopulatedInt32Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v102 := r.Intn(10)
 		this.NonnullInt32 = make(map[int32]types.Int32Value)
 		for i := 0; i < v102; i++ {
 			this.NonnullInt32[int32(r.Int31())] = *types.NewPopulatedInt32Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v103 := r.Intn(10)
 		this.NullableUInt32 = make(map[int32]*types.UInt32Value)
 		for i := 0; i < v103; i++ {
 			this.NullableUInt32[int32(r.Int31())] = types.NewPopulatedUInt32Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v104 := r.Intn(10)
 		this.NonnullUInt32 = make(map[int32]types.UInt32Value)
 		for i := 0; i < v104; i++ {
 			this.NonnullUInt32[int32(r.Int31())] = *types.NewPopulatedUInt32Value(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v105 := r.Intn(10)
 		this.NullableBool = make(map[int32]*types.BoolValue)
 		for i := 0; i < v105; i++ {
 			this.NullableBool[int32(r.Int31())] = types.NewPopulatedBoolValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v106 := r.Intn(10)
 		this.NonnullBool = make(map[int32]types.BoolValue)
 		for i := 0; i < v106; i++ {
 			this.NonnullBool[int32(r.Int31())] = *types.NewPopulatedBoolValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v107 := r.Intn(10)
 		this.NullableString = make(map[int32]*types.StringValue)
 		for i := 0; i < v107; i++ {
 			this.NullableString[int32(r.Int31())] = types.NewPopulatedStringValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v108 := r.Intn(10)
 		this.NonnullString = make(map[int32]types.StringValue)
 		for i := 0; i < v108; i++ {
 			this.NonnullString[int32(r.Int31())] = *types.NewPopulatedStringValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v109 := r.Intn(10)
 		this.NullableBytes = make(map[int32]*types.BytesValue)
 		for i := 0; i < v109; i++ {
 			this.NullableBytes[int32(r.Int31())] = types.NewPopulatedBytesValue(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v110 := r.Intn(10)
 		this.NonnullBytes = make(map[int32]types.BytesValue)
 		for i := 0; i < v110; i++ {
@@ -7467,154 +7467,154 @@ func NewPopulatedMapProtoTypes(r randyTypes, easy bool) *MapProtoTypes {
 
 func NewPopulatedMapStdTypes(r randyTypes, easy bool) *MapStdTypes {
 	this := &MapStdTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v111 := r.Intn(10)
 		this.NullableTimestamp = make(map[int32]*time.Time)
 		for i := 0; i < v111; i++ {
 			this.NullableTimestamp[int32(r.Int31())] = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v112 := r.Intn(10)
 		this.Timestamp = make(map[int32]time.Time)
 		for i := 0; i < v112; i++ {
 			this.Timestamp[int32(r.Int31())] = *github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v113 := r.Intn(10)
 		this.NullableDuration = make(map[int32]*time.Duration)
 		for i := 0; i < v113; i++ {
 			this.NullableDuration[int32(r.Int31())] = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v114 := r.Intn(10)
 		this.Duration = make(map[int32]time.Duration)
 		for i := 0; i < v114; i++ {
 			this.Duration[int32(r.Int31())] = *github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v115 := r.Intn(10)
 		this.NullableDouble = make(map[int32]*float64)
 		for i := 0; i < v115; i++ {
 			this.NullableDouble[int32(r.Int31())] = (*float64)(github_com_gogo_protobuf_types.NewPopulatedStdDouble(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v116 := r.Intn(10)
 		this.NonnullDouble = make(map[int32]float64)
 		for i := 0; i < v116; i++ {
 			this.NonnullDouble[int32(r.Int31())] = (float64)(*github_com_gogo_protobuf_types.NewPopulatedStdDouble(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v117 := r.Intn(10)
 		this.NullableFloat = make(map[int32]*float32)
 		for i := 0; i < v117; i++ {
 			this.NullableFloat[int32(r.Int31())] = (*float32)(github_com_gogo_protobuf_types.NewPopulatedStdFloat(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v118 := r.Intn(10)
 		this.NonnullFloat = make(map[int32]float32)
 		for i := 0; i < v118; i++ {
 			this.NonnullFloat[int32(r.Int31())] = (float32)(*github_com_gogo_protobuf_types.NewPopulatedStdFloat(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v119 := r.Intn(10)
 		this.NullableInt64 = make(map[int32]*int64)
 		for i := 0; i < v119; i++ {
 			this.NullableInt64[int32(r.Int31())] = (*int64)(github_com_gogo_protobuf_types.NewPopulatedStdInt64(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v120 := r.Intn(10)
 		this.NonnullInt64 = make(map[int32]int64)
 		for i := 0; i < v120; i++ {
 			this.NonnullInt64[int32(r.Int31())] = (int64)(*github_com_gogo_protobuf_types.NewPopulatedStdInt64(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v121 := r.Intn(10)
 		this.NullableUInt64 = make(map[int32]*uint64)
 		for i := 0; i < v121; i++ {
 			this.NullableUInt64[int32(r.Int31())] = (*uint64)(github_com_gogo_protobuf_types.NewPopulatedStdUInt64(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v122 := r.Intn(10)
 		this.NonnullUInt64 = make(map[int32]uint64)
 		for i := 0; i < v122; i++ {
 			this.NonnullUInt64[int32(r.Int31())] = (uint64)(*github_com_gogo_protobuf_types.NewPopulatedStdUInt64(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v123 := r.Intn(10)
 		this.NullableInt32 = make(map[int32]*int32)
 		for i := 0; i < v123; i++ {
 			this.NullableInt32[int32(r.Int31())] = (*int32)(github_com_gogo_protobuf_types.NewPopulatedStdInt32(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v124 := r.Intn(10)
 		this.NonnullInt32 = make(map[int32]int32)
 		for i := 0; i < v124; i++ {
 			this.NonnullInt32[int32(r.Int31())] = (int32)(*github_com_gogo_protobuf_types.NewPopulatedStdInt32(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v125 := r.Intn(10)
 		this.NullableUInt32 = make(map[int32]*uint32)
 		for i := 0; i < v125; i++ {
 			this.NullableUInt32[int32(r.Int31())] = (*uint32)(github_com_gogo_protobuf_types.NewPopulatedStdUInt32(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v126 := r.Intn(10)
 		this.NonnullUInt32 = make(map[int32]uint32)
 		for i := 0; i < v126; i++ {
 			this.NonnullUInt32[int32(r.Int31())] = (uint32)(*github_com_gogo_protobuf_types.NewPopulatedStdUInt32(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v127 := r.Intn(10)
 		this.NullableBool = make(map[int32]*bool)
 		for i := 0; i < v127; i++ {
 			this.NullableBool[int32(r.Int31())] = (*bool)(github_com_gogo_protobuf_types.NewPopulatedStdBool(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v128 := r.Intn(10)
 		this.NonnullBool = make(map[int32]bool)
 		for i := 0; i < v128; i++ {
 			this.NonnullBool[int32(r.Int31())] = (bool)(*github_com_gogo_protobuf_types.NewPopulatedStdBool(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v129 := r.Intn(10)
 		this.NullableString = make(map[int32]*string)
 		for i := 0; i < v129; i++ {
 			this.NullableString[int32(r.Int31())] = (*string)(github_com_gogo_protobuf_types.NewPopulatedStdString(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v130 := r.Intn(10)
 		this.NonnullString = make(map[int32]string)
 		for i := 0; i < v130; i++ {
 			this.NonnullString[int32(r.Int31())] = (string)(*github_com_gogo_protobuf_types.NewPopulatedStdString(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v131 := r.Intn(10)
 		this.NullableBytes = make(map[int32]*[]byte)
 		for i := 0; i < v131; i++ {
 			this.NullableBytes[int32(r.Int31())] = (*[]byte)(github_com_gogo_protobuf_types.NewPopulatedStdBytes(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v132 := r.Intn(10)
 		this.NonnullBytes = make(map[int32][]byte)
 		for i := 0; i < v132; i++ {
