@@ -1202,9 +1202,13 @@ func (g *Generator) runPlugins(file *FileDescriptor) {
 	}
 }
 
+var NeedJsonExtra = false
 // Fill the response protocol buffer with the generated output for all the files we're
 // supposed to generate.
 func (g *Generator) generate(file *FileDescriptor) {
+	defer func() {
+		NeedJsonExtra = false
+	}()
 	g.customImports = make([]string, 0)
 	g.file = file
 	g.usedPackages = make(map[GoImportPath]bool)
@@ -1235,10 +1239,13 @@ func (g *Generator) generate(file *FileDescriptor) {
 	for _, enum := range g.file.enum {
 		g.generateEnum(enum)
 	}
-	for _, desc := range g.file.desc {
+	for idx, desc := range g.file.desc {
 		// Don't generate virtual messages for maps.
 		if desc.GetOptions().GetMapEntry() {
 			continue
+		}
+		if idx == len(g.file.desc) - 1 {
+			NeedJsonExtra = true
 		}
 		g.generateMessage(desc)
 	}
@@ -2955,7 +2962,16 @@ func (g *Generator) generateSet(mc *msgCtx, protoField *descriptor.FieldDescript
 func (g *Generator) generateInternalStructFields(mc *msgCtx, topLevelFields []topLevelField) {
 	if IsFmqJson {
 		if FmqJsonExtra {
-			g.P("Extra\tmap[string]interface{} `json:\"extra,omitempty\"`")
+			foundExtra := false
+			for _, field := range mc.message.Field {
+				if strings.ToLower(field.GetName()) == "extra" {
+					foundExtra = true
+					break
+				}
+			}
+			if NeedJsonExtra && !foundExtra {
+				g.P("Extra\tmap[string]interface{} `json:\"extra,omitempty\"`")
+			}
 		}
 		return
 	}
