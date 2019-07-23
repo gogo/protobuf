@@ -686,14 +686,14 @@ func valueToGoStringCastvalue(v interface{}, typ string) string {
 }
 func NewPopulatedCastaway(r randyCastvalue, easy bool) *Castaway {
 	this := &Castaway{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v1 := r.Intn(10)
 		this.CastMapValueMessage = make(map[int32]MyWilson)
 		for i := 0; i < v1; i++ {
 			this.CastMapValueMessage[int32(r.Int31())] = (MyWilson)(*NewPopulatedWilson(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v2 := r.Intn(10)
 		this.CastMapValueMessageNullable = make(map[int32]*MyWilson)
 		for i := 0; i < v2; i++ {
@@ -708,7 +708,7 @@ func NewPopulatedCastaway(r randyCastvalue, easy bool) *Castaway {
 
 func NewPopulatedWilson(r randyCastvalue, easy bool) *Wilson {
 	this := &Wilson{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v3 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v3 *= -1

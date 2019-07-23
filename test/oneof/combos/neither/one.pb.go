@@ -3377,7 +3377,7 @@ func valueToGoStringOne(v interface{}, typ string) string {
 }
 func NewPopulatedSubby(r randyOne, easy bool) *Subby {
 	this := &Subby{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v1 := string(randStringOne(r))
 		this.Sub = &v1
 	}

@@ -51,7 +51,7 @@ func (m *Subby) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_Subby.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -107,7 +107,7 @@ func (m *SampleOneOf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return xxx_messageInfo_SampleOneOf.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2073,7 +2073,7 @@ func valueToGoStringOne(v interface{}, typ string) string {
 func (m *Subby) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -2081,26 +2081,33 @@ func (m *Subby) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Subby) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Subby) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Sub) > 0 {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintOne(dAtA, i, uint64(len(m.Sub)))
-		i += copy(dAtA[i:], m.Sub)
-	}
 	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
-	return i, nil
+	if len(m.Sub) > 0 {
+		i -= len(m.Sub)
+		copy(dAtA[i:], m.Sub)
+		i = encodeVarintOne(dAtA, i, uint64(len(m.Sub)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *SampleOneOf) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -2108,167 +2115,245 @@ func (m *SampleOneOf) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *SampleOneOf) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *SampleOneOf) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.TestOneof != nil {
-		nn1, err1 := m.TestOneof.MarshalTo(dAtA[i:])
-		if err1 != nil {
-			return 0, err1
-		}
-		i += nn1
-	}
 	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
-	return i, nil
+	if m.TestOneof != nil {
+		{
+			size := m.TestOneof.Size()
+			i -= size
+			if _, err := m.TestOneof.MarshalTo(dAtA[i:]); err != nil {
+				return 0, err
+			}
+		}
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *SampleOneOf_Field1) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	dAtA[i] = 0x9
-	i++
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_Field1) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	i -= 8
 	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Field1))))
-	i += 8
-	return i, nil
+	i--
+	dAtA[i] = 0x9
+	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field2) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	dAtA[i] = 0x15
-	i++
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_Field2) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	i -= 4
 	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(math.Float32bits(float32(m.Field2))))
-	i += 4
-	return i, nil
+	i--
+	dAtA[i] = 0x15
+	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field3) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	dAtA[i] = 0x18
-	i++
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_Field3) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	i = encodeVarintOne(dAtA, i, uint64(m.Field3))
-	return i, nil
+	i--
+	dAtA[i] = 0x18
+	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field4) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	dAtA[i] = 0x20
-	i++
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_Field4) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	i = encodeVarintOne(dAtA, i, uint64(m.Field4))
-	return i, nil
+	i--
+	dAtA[i] = 0x20
+	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field5) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	dAtA[i] = 0x28
-	i++
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_Field5) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	i = encodeVarintOne(dAtA, i, uint64(m.Field5))
-	return i, nil
+	i--
+	dAtA[i] = 0x28
+	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field6) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	dAtA[i] = 0x30
-	i++
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_Field6) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	i = encodeVarintOne(dAtA, i, uint64(m.Field6))
-	return i, nil
+	i--
+	dAtA[i] = 0x30
+	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field7) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	dAtA[i] = 0x38
-	i++
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_Field7) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	i = encodeVarintOne(dAtA, i, uint64((uint32(m.Field7)<<1)^uint32((m.Field7>>31))))
-	return i, nil
+	i--
+	dAtA[i] = 0x38
+	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field8) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	dAtA[i] = 0x40
-	i++
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_Field8) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	i = encodeVarintOne(dAtA, i, uint64((uint64(m.Field8)<<1)^uint64((m.Field8>>63))))
-	return i, nil
+	i--
+	dAtA[i] = 0x40
+	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field9) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	dAtA[i] = 0x4d
-	i++
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_Field9) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	i -= 4
 	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field9))
-	i += 4
-	return i, nil
+	i--
+	dAtA[i] = 0x4d
+	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field10) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	dAtA[i] = 0x55
-	i++
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_Field10) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	i -= 4
 	encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(m.Field10))
-	i += 4
-	return i, nil
+	i--
+	dAtA[i] = 0x55
+	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field11) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	dAtA[i] = 0x59
-	i++
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_Field11) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	i -= 8
 	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field11))
-	i += 8
-	return i, nil
+	i--
+	dAtA[i] = 0x59
+	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field12) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	dAtA[i] = 0x61
-	i++
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_Field12) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	i -= 8
 	encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(m.Field12))
-	i += 8
-	return i, nil
+	i--
+	dAtA[i] = 0x61
+	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field13) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	dAtA[i] = 0x68
-	i++
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_Field13) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	i--
 	if m.Field13 {
 		dAtA[i] = 1
 	} else {
 		dAtA[i] = 0
 	}
-	i++
-	return i, nil
+	i--
+	dAtA[i] = 0x68
+	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field14) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
-	dAtA[i] = 0x72
-	i++
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_Field14) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	i -= len(m.Field14)
+	copy(dAtA[i:], m.Field14)
 	i = encodeVarintOne(dAtA, i, uint64(len(m.Field14)))
-	i += copy(dAtA[i:], m.Field14)
-	return i, nil
+	i--
+	dAtA[i] = 0x72
+	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field15) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_Field15) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	if m.Field15 != nil {
-		dAtA[i] = 0x7a
-		i++
+		i -= len(m.Field15)
+		copy(dAtA[i:], m.Field15)
 		i = encodeVarintOne(dAtA, i, uint64(len(m.Field15)))
-		i += copy(dAtA[i:], m.Field15)
+		i--
+		dAtA[i] = 0x7a
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_SubMessage) MarshalTo(dAtA []byte) (int, error) {
-	i := 0
+	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+}
+
+func (m *SampleOneOf_SubMessage) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	if m.SubMessage != nil {
-		dAtA[i] = 0x82
-		i++
-		dAtA[i] = 0x1
-		i++
-		i = encodeVarintOne(dAtA, i, uint64(m.SubMessage.Size()))
-		n2, err2 := m.SubMessage.MarshalTo(dAtA[i:])
-		if err2 != nil {
-			return 0, err2
+		{
+			size, err := m.SubMessage.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintOne(dAtA, i, uint64(size))
 		}
-		i += n2
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0x82
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 func encodeVarintOne(dAtA []byte, offset int, v uint64) int {
+	offset -= sovOne(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func NewPopulatedSubby(r randyOne, easy bool) *Subby {
 	this := &Subby{}

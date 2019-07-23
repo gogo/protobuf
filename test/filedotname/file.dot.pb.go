@@ -469,7 +469,7 @@ func valueToGoStringFileDot(v interface{}, typ string) string {
 }
 func NewPopulatedM(r randyFileDot, easy bool) *M {
 	this := &M{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v1 := string(randStringFileDot(r))
 		this.A = &v1
 	}

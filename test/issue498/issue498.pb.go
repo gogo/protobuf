@@ -49,7 +49,7 @@ func (m *Message) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_Message.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -181,7 +181,7 @@ func (this *Message) Equal(that interface{}) bool {
 func (m *Message) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -189,52 +189,60 @@ func (m *Message) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *Message) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Message) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.Uint8 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("uint8")
-	} else {
-		dAtA[i] = 0x8
-		i++
-		i = encodeVarintIssue498(dAtA, i, uint64(*m.Uint8))
-	}
-	if m.Uint16 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("uint16")
-	} else {
-		dAtA[i] = 0x10
-		i++
-		i = encodeVarintIssue498(dAtA, i, uint64(*m.Uint16))
-	}
-	if m.Int8 == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("int8")
-	} else {
-		dAtA[i] = 0x18
-		i++
-		i = encodeVarintIssue498(dAtA, i, uint64(*m.Int8))
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	if m.Int16 == nil {
 		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("int16")
 	} else {
-		dAtA[i] = 0x20
-		i++
 		i = encodeVarintIssue498(dAtA, i, uint64(*m.Int16))
+		i--
+		dAtA[i] = 0x20
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
+	if m.Int8 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("int8")
+	} else {
+		i = encodeVarintIssue498(dAtA, i, uint64(*m.Int8))
+		i--
+		dAtA[i] = 0x18
 	}
-	return i, nil
+	if m.Uint16 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("uint16")
+	} else {
+		i = encodeVarintIssue498(dAtA, i, uint64(*m.Uint16))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.Uint8 == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("uint8")
+	} else {
+		i = encodeVarintIssue498(dAtA, i, uint64(*m.Uint8))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintIssue498(dAtA []byte, offset int, v uint64) int {
+	offset -= sovIssue498(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func NewPopulatedMessage(r randyIssue498, easy bool) *Message {
 	this := &Message{}

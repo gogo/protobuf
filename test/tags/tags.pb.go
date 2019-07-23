@@ -124,10 +124,10 @@ var fileDescriptor_e7d9cbcae1e528f6 = []byte{
 
 func NewPopulatedOutside(r randyTags, easy bool) *Outside {
 	this := &Outside{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Inside = NewPopulatedInside(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v1 := string(randStringTags(r))
 		this.Field2 = &v1
 	}
@@ -139,7 +139,7 @@ func NewPopulatedOutside(r randyTags, easy bool) *Outside {
 
 func NewPopulatedInside(r randyTags, easy bool) *Inside {
 	this := &Inside{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v2 := string(randStringTags(r))
 		this.Field1 = &v2
 	}

@@ -142,7 +142,7 @@ func valueToGoStringEvents(v interface{}, typ string) string {
 }
 func NewPopulatedSubtype(r randyEvents, easy bool) *Subtype {
 	this := &Subtype{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v1 := issue312.TaskState([]int32{6, 0, 1}[r.Intn(3)])
 		this.State = &v1
 	}

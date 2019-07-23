@@ -741,10 +741,10 @@ func valueToGoStringUnmarshalmerge(v interface{}, typ string) string {
 }
 func NewPopulatedBig(r randyUnmarshalmerge, easy bool) *Big {
 	this := &Big{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Sub = NewPopulatedSub(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v1 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v1 *= -1
@@ -759,10 +759,10 @@ func NewPopulatedBig(r randyUnmarshalmerge, easy bool) *Big {
 
 func NewPopulatedBigUnsafe(r randyUnmarshalmerge, easy bool) *BigUnsafe {
 	this := &BigUnsafe{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.Sub = NewPopulatedSub(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v2 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v2 *= -1
@@ -777,7 +777,7 @@ func NewPopulatedBigUnsafe(r randyUnmarshalmerge, easy bool) *BigUnsafe {
 
 func NewPopulatedSub(r randyUnmarshalmerge, easy bool) *Sub {
 	this := &Sub{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v3 := int64(r.Int63())
 		if r.Intn(2) == 0 {
 			v3 *= -1

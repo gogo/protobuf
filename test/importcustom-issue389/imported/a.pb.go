@@ -45,7 +45,7 @@ func (m *A) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_A.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
@@ -119,7 +119,7 @@ func (this *A) Equal(that interface{}) bool {
 func (m *A) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -127,30 +127,39 @@ func (m *A) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *A) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *A) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.F1) > 0 {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintA(dAtA, i, uint64(len(m.F1)))
-		i += copy(dAtA[i:], m.F1)
-	}
 	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
-	return i, nil
+	if len(m.F1) > 0 {
+		i -= len(m.F1)
+		copy(dAtA[i:], m.F1)
+		i = encodeVarintA(dAtA, i, uint64(len(m.F1)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintA(dAtA []byte, offset int, v uint64) int {
+	offset -= sovA(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func NewPopulatedA(r randyA, easy bool) *A {
 	this := &A{}
