@@ -12,8 +12,12 @@
 
 ## 安装使用
 json协议代码生成
+golang版
   - 1. go get github.com/buptbill220/protobuf/protoc-gen-gogofmqjson
   - 2. protoc --gogofmqjson_out=./  xxx.proto
+python版
+  - 1. go get github.com/buptbill220/protobuf/protoc-gen-pyfmqjson
+  - 2. protoc --pyfmqjson_out=./  xxx.proto
 
 无缝迁移gogo
   - 1. go get github.com/buptbill220/protobuf/protoc-gen-gogo

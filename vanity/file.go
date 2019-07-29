@@ -211,3 +211,11 @@ func TurnOnValidateAll(file *descriptor.FileDescriptorProto) {
 func TurnOffValidateAll(file *descriptor.FileDescriptorProto) {
 	SetBoolFileOption(gogoproto.E_ValidateAll, false)(file)
 }
+
+func TurnOnPyJsonMarshalAll(file *descriptor.FileDescriptorProto) {
+	SetBoolFileOption(gogoproto.E_PyjsonmarshalAll, true)(file)
+}
+
+func TurnOffPyJsonMarshalAll(file *descriptor.FileDescriptorProto) {
+	SetBoolFileOption(gogoproto.E_PyjsonmarshalAll, false)(file)
+}
