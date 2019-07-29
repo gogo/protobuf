@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/buptbill220/protobuf
 //
 // Go support for Protocol Buffers - Google's data interchange format
 //
@@ -61,13 +61,26 @@ import (
 	"strings"
 	"unicode"
 	"unicode/utf8"
+	"text/template"
 
-	"github.com/gogo/protobuf/gogoproto"
-	"github.com/gogo/protobuf/proto"
-	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-	"github.com/gogo/protobuf/protoc-gen-gogo/generator/internal/remap"
-	plugin "github.com/gogo/protobuf/protoc-gen-gogo/plugin"
+	"github.com/buptbill220/protobuf/gogoproto"
+	"github.com/buptbill220/protobuf/proto"
+	descriptor "github.com/buptbill220/protobuf/protoc-gen-gogo/descriptor"
+	"github.com/buptbill220/protobuf/protoc-gen-gogo/generator/internal/remap"
+	plugin "github.com/buptbill220/protobuf/protoc-gen-gogo/plugin"
+	pyfmqjson "github.com/buptbill220/protobuf/plugin/pyjsonmarshal"
 )
+
+var IsFmqJson = false
+var IsPyFmq = false
+var FmqJsonExtra = false
+
+func init() {
+	if os.Getenv("FMQJSON_EXTRA") == "1" {
+		FmqJsonExtra = true
+	}
+}
+
 
 // generatedCodeVersion indicates a version of the generated code.
 // It is incremented whenever an incompatibility between the generated code and
@@ -349,7 +362,13 @@ func (d *FileDescriptor) goFileName(pathType pathType) string {
 	if ext := path.Ext(name); ext == ".proto" || ext == ".protodevel" {
 		name = name[:len(name)-len(ext)]
 	}
-	name += ".pb.go"
+	if IsFmqJson {
+		name += ".json.go"
+	} else if IsPyFmq {
+		name += "_json.py"
+	} else {
+		name += ".pb.go"
+	}
 
 	if pathType == pathTypeSourceRelative {
 		return name
@@ -490,14 +509,14 @@ func New() *Generator {
 func (g *Generator) Error(err error, msgs ...string) {
 	s := strings.Join(msgs, " ") + ":" + err.Error()
 	log.Print("protoc-gen-gogo: error:", s)
-	os.Exit(1)
+	//os.Exit()
 }
 
 // Fail reports a problem and exits the program.
 func (g *Generator) Fail(msgs ...string) {
 	s := strings.Join(msgs, " ")
 	log.Print("protoc-gen-gogo: error:", s)
-	os.Exit(1)
+	//os.Exit(1)
 }
 
 // CommandLineParameters breaks the comma-separated list of key=value pairs
@@ -549,6 +568,13 @@ func (g *Generator) CommandLineParameters(parameter string) {
 		pluginList = ""
 	}
 	gogoPluginNames := []string{"unmarshal", "unsafeunmarshaler", "union", "stringer", "size", "protosizer", "populate", "marshalto", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck", "oneofcheck", "compare"}
+	if IsFmqJson {
+		gogoPluginNames = append(gogoPluginNames, "validate")
+		gogoPluginNames = append(gogoPluginNames, "jsonmarshal")
+	}
+	if IsPyFmq {
+		gogoPluginNames = append(gogoPluginNames, "pyjsonmarshal")
+	}
 	pluginList = strings.Join(append(gogoPluginNames, pluginList), "+")
 	if pluginList != "" {
 		// Amend the set of plugins.
@@ -1184,9 +1210,13 @@ func (g *Generator) runPlugins(file *FileDescriptor) {
 	}
 }
 
+var NeedJsonExtra = false
 // Fill the response protocol buffer with the generated output for all the files we're
 // supposed to generate.
 func (g *Generator) generate(file *FileDescriptor) {
+	defer func() {
+		NeedJsonExtra = false
+	}()
 	g.customImports = make([]string, 0)
 	g.file = file
 	g.usedPackages = make(map[GoImportPath]bool)
@@ -1197,16 +1227,18 @@ func (g *Generator) generate(file *FileDescriptor) {
 		g.usedPackageNames[name] = true
 	}
 
-	g.P("// This is a compile-time assertion to ensure that this generated file")
-	g.P("// is compatible with the proto package it is being compiled against.")
-	g.P("// A compilation error at this line likely means your copy of the")
-	g.P("// proto package needs to be updated.")
-	if gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
-		g.P("const _ = ", g.Pkg["proto"], ".GoGoProtoPackageIsVersion", generatedCodeVersion, " // please upgrade the proto package")
-	} else {
-		g.P("const _ = ", g.Pkg["proto"], ".ProtoPackageIsVersion", generatedCodeVersion, " // please upgrade the proto package")
+	if  !IsFmqJson && !IsPyFmq {
+		g.P("// This is a compile-time assertion to ensure that this generated file")
+		g.P("// is compatible with the proto package it is being compiled against.")
+		g.P("// A compilation error at this line likely means your copy of the")
+		g.P("// proto package needs to be updated.")
+		if gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
+			g.P("const _ = ", g.Pkg["proto"], ".GoGoProtoPackageIsVersion", generatedCodeVersion, " // please upgrade the proto package")
+		} else {
+			g.P("const _ = ", g.Pkg["proto"], ".ProtoPackageIsVersion", generatedCodeVersion, " // please upgrade the proto package")
+		}
+		g.P()
 	}
-	g.P()
 	// Reset on each file
 	g.writtenImports = make(map[string]bool)
 	for _, td := range g.file.imp {
@@ -1215,10 +1247,13 @@ func (g *Generator) generate(file *FileDescriptor) {
 	for _, enum := range g.file.enum {
 		g.generateEnum(enum)
 	}
-	for _, desc := range g.file.desc {
+	for idx, desc := range g.file.desc {
 		// Don't generate virtual messages for maps.
 		if desc.GetOptions().GetMapEntry() {
 			continue
+		}
+		if idx == len(g.file.desc) - 1 {
+			NeedJsonExtra = true
 		}
 		g.generateMessage(desc)
 	}
@@ -1248,7 +1283,10 @@ func (g *Generator) generate(file *FileDescriptor) {
 		g.annotations = append(g.annotations, anno)
 	}
 	g.Write(rem.Bytes())
-
+	
+	if IsPyFmq {
+		return
+	}
 	// Reformat generated code and patch annotation locations.
 	fset := token.NewFileSet()
 	original := g.Bytes()
@@ -1271,6 +1309,7 @@ func (g *Generator) generate(file *FileDescriptor) {
 		} else {
 			g.Fail("bad Go source code was generated:", err.Error(), "\n"+src.String())
 		}
+		
 	}
 	ast.SortImports(fset, fileAST)
 	g.Reset()
@@ -1296,17 +1335,78 @@ func (g *Generator) generate(file *FileDescriptor) {
 
 // Generate the header, including package definition
 func (g *Generator) generateHeader() {
-	g.P("// Code generated by protoc-gen-gogo. DO NOT EDIT.")
-	if g.file.GetOptions().GetDeprecated() {
-		g.P("// ", *g.file.Name, " is a deprecated file.")
+	if IsPyFmq {
+		g.P("#coding:utf-8")
+		g.P("## Code generated by protoc-gen-pyfmqjson. DO NOT EDIT.")
+		g.P("## Author: fangming")
+		g.P("## Email: fangming@bytedance.com")
+		if g.file.proto3 {
+			g.P("## Porotobuf Version: 3")
+		} else {
+			g.P("## Porotobuf Version: 2")
+		}
+		if g.file.GetOptions().GetDeprecated() {
+			g.P("# ", *g.file.Name, " is a deprecated file.")
+		} else {
+			g.P("# source: ", *g.file.Name)
+		}
+		var topMsgs []string
+		g.P("# It is generated from these files:")
+		for _, f := range g.genFiles {
+			g.P("# \t", f.Name)
+			for _, msg := range f.desc {
+				if msg.parent != nil {
+					continue
+				}
+				topMsgs = append(topMsgs, CamelCaseSlice(msg.TypeName()))
+			}
+		}
+		g.P()
+		g.P("# It has these top-level messages:")
+		for _, msg := range topMsgs {
+			g.P("#== \t", msg)
+		}
 	} else {
-		g.P("// source: ", *g.file.Name)
+		if IsFmqJson {
+			g.P("// FmqJsonCode generated by protoc-gen-gogofmqjson. Do NOT EDIT")
+			g.P("// Author: fangming")
+			g.P("// Email: fangming@bytedance.com")
+		} else {
+			g.P("// Code generated by protoc-gen-gogo. DO NOT EDIT.")
+			g.P("// Author: fangming")
+			g.P("// Email: fangming@bytedance.com")
+		}
+		if g.file.GetOptions().GetDeprecated() {
+			g.P("// ", *g.file.Name, " is a deprecated file.")
+		} else {
+			g.P("// source: ", *g.file.Name)
+		}
+		var topMsgs []string
+		g.P("// It is generated from these files:")
+		for _, f := range g.genFiles {
+			g.P("// \t", f.Name)
+			for _, msg := range f.desc {
+				if msg.parent != nil {
+					continue
+				}
+				topMsgs = append(topMsgs, CamelCaseSlice(msg.TypeName()))
+			}
+		}
+		g.P()
+		if IsPyFmq {
+			g.P("// It has these top-level messages:")
+		} else {
+			
+		}
+		for _, msg := range topMsgs {
+			g.P("//== \t", msg)
+		}
+		g.P()
+		g.PrintComments(strconv.Itoa(packagePath))
+		g.P()
+		g.P("package ", g.file.packageName)
+		g.P()
 	}
-	g.P()
-	g.PrintComments(strconv.Itoa(packagePath))
-	g.P()
-	g.P("package ", g.file.packageName)
-	g.P()
 }
 
 // deprecationComment is the standard comment added to deprecated
@@ -1399,19 +1499,32 @@ func (g *Generator) generateImports() {
 	for importPath := range g.addedImports {
 		imports[importPath] = g.GoPackageName(importPath)
 	}
+	if IsPyFmq {
+		g.P(`
+import json
+try:
+    from frame import logger
+    logging = logger
+except:
+    import logging
+`)
+		return
+	}
 	// We almost always need a proto import.  Rather than computing when we
 	// do, which is tricky when there's a plugin, just import it and
 	// reference it later. The same argument applies to the fmt and math packages.
 	g.P("import (")
-	g.PrintImport(GoPackageName(g.Pkg["fmt"]), "fmt")
-	g.PrintImport(GoPackageName(g.Pkg["math"]), "math")
-	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) {
-		g.PrintImport(GoPackageName(g.Pkg["proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/gogo/protobuf/proto"))
-		if gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
-			g.PrintImport(GoPackageName(g.Pkg["golang_proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/golang/protobuf/proto"))
+	if !IsFmqJson {
+		g.PrintImport(GoPackageName(g.Pkg["fmt"]), "fmt")
+		g.PrintImport(GoPackageName(g.Pkg["math"]), "math")
+		if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) {
+			g.PrintImport(GoPackageName(g.Pkg["proto"]), GoImportPath(g.ImportPrefix) + GoImportPath("github.com/gogo/protobuf/proto"))
+			if gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
+				g.PrintImport(GoPackageName(g.Pkg["golang_proto"]), GoImportPath(g.ImportPrefix) + GoImportPath("github.com/golang/protobuf/proto"))
+			}
+		} else {
+			g.PrintImport(GoPackageName(g.Pkg["proto"]), GoImportPath(g.ImportPrefix) + GoImportPath("github.com/golang/protobuf/proto"))
 		}
-	} else {
-		g.PrintImport(GoPackageName(g.Pkg["proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/golang/protobuf/proto"))
 	}
 	for importPath, packageName := range imports {
 		g.P(packageName, " ", GoImportPath(g.ImportPrefix)+importPath)
@@ -1429,20 +1542,22 @@ func (g *Generator) generateImports() {
 	}
 	g.P(")")
 
-	g.P("// Reference imports to suppress errors if they are not otherwise used.")
-	g.P("var _ = ", g.Pkg["proto"], ".Marshal")
-	if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
-		g.P("var _ = ", g.Pkg["golang_proto"], ".Marshal")
-	}
-	g.P("var _ = ", g.Pkg["fmt"], ".Errorf")
-	g.P("var _ = ", g.Pkg["math"], ".Inf")
-	for _, cimport := range g.customImports {
-		if cimport == "time" {
-			g.P("var _ = time.Kitchen")
-			break
+	if !IsFmqJson && !IsPyFmq {
+		g.P("// Reference imports to suppress errors if they are not otherwise used.")
+		g.P("var _ = ", g.Pkg["proto"], ".Marshal")
+		if gogoproto.ImportsGoGoProto(g.file.FileDescriptorProto) && gogoproto.RegistersGolangProto(g.file.FileDescriptorProto) {
+			g.P("var _ = ", g.Pkg["golang_proto"], ".Marshal")
 		}
+		g.P("var _ = ", g.Pkg["fmt"], ".Errorf")
+		g.P("var _ = ", g.Pkg["math"], ".Inf")
+		for _, cimport := range g.customImports {
+			if cimport == "time" {
+				g.P("var _ = time.Kitchen")
+				break
+			}
+		}
+		g.P()
 	}
-	g.P()
 }
 
 func (g *Generator) generateImported(id *ImportedDescriptor) {
@@ -1480,7 +1595,25 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	if !gogoproto.EnabledGoEnumPrefix(enum.file.FileDescriptorProto, enum.EnumDescriptorProto) {
 		ccPrefix = ""
 	}
+	if IsPyFmq {
+		for i, e := range enum.Value {
+			etorPath := fmt.Sprintf("%s,%d,%d", enum.path, enumValuePath, i)
+			g.PrintComments(etorPath)
 
+			deprecatedValue := ""
+			if e.GetOptions().GetDeprecated() {
+				deprecatedValue = deprecationComment
+			}
+			name := *e.Name
+			if gogoproto.IsEnumValueCustomName(e) {
+				name = gogoproto.GetEnumValueCustomName(e)
+			}
+			//name = ccPrefix + name
+
+			g.P(name, " = ", e.Number, " ", deprecatedValue)
+		}
+		return
+	}
 	if gogoproto.HasEnumDecl(enum.file.FileDescriptorProto, enum.EnumDescriptorProto) {
 		g.P("type ", Annotate(enum.file, enum.path, ccTypeName), " int32", deprecatedEnum)
 		g.file.addExport(enum, enumSymbol{ccTypeName, enum.proto3()})
@@ -1549,7 +1682,10 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		g.P("}")
 		g.P()
 	}
-
+	
+	if IsFmqJson {
+		return
+	}
 	if !enum.proto3() && !gogoproto.IsGoEnumStringer(g.file.FileDescriptorProto, enum.EnumDescriptorProto) {
 		g.P("func (x ", ccTypeName, ") MarshalJSON() ([]byte, error) {")
 		g.In()
@@ -1580,12 +1716,14 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 		indexes = append([]string{strconv.Itoa(m.index)}, indexes...)
 	}
 	indexes = append(indexes, strconv.Itoa(enum.index))
-	g.P("func (", ccTypeName, ") EnumDescriptor() ([]byte, []int) {")
-	g.In()
-	g.P("return ", g.file.VarName(), ", []int{", strings.Join(indexes, ", "), "}")
-	g.Out()
-	g.P("}")
-	g.P()
+	if !IsFmqJson {
+		g.P("func (", ccTypeName, ") EnumDescriptor() ([]byte, []int) {")
+		g.In()
+		g.P("return ", g.file.VarName(), ", []int{", strings.Join(indexes, ", "), "}")
+		g.Out()
+		g.P("}")
+		g.P()
+	}
 	if enum.file.GetPackage() == "google.protobuf" && enum.GetName() == "NullValue" {
 		g.P("func (", ccTypeName, `) XXX_WellKnownType() string { return "`, enum.GetName(), `" }`)
 		g.P()
@@ -1798,6 +1936,12 @@ func needsStar(field *descriptor.FieldDescriptorProto, proto3 bool, allowOneOf b
 		!gogoproto.IsCustomType(field) {
 		return false
 	}
+	/*
+	if IsFmqJson && field.GetLabel() != descriptor.FieldDescriptorProto_LABEL_OPTIONAL &&
+		field.GetType() != descriptor.FieldDescriptorProto_TYPE_MESSAGE {
+		return false
+	}
+	*/
 	return true
 }
 
@@ -2197,6 +2341,7 @@ func (f *simpleField) getter(g *Generator, mc *msgCtx) {
 		g.P(f.deprecated)
 	}
 	g.generateGet(mc, f.protoField, f.protoType, false, f.goName, f.goType, "", "", f.fullPath, f.getterName, f.getterDef)
+	g.generateSet(mc, f.protoField, f.protoType, false, f.goName, f.goType, "", "", f.fullPath, f.getterName, f.getterDef)
 }
 
 // setter prints the setter method of the field.
@@ -2670,6 +2815,7 @@ func (f *oneofField) getter(g *Generator, mc *msgCtx) {
 			g.P(sf.deprecated)
 		}
 		g.generateGet(mc, sf.protoField, sf.protoType, true, sf.goName, sf.goType, f.goName, sf.oneofTypeName, sf.fullPath, sf.getterName, sf.getterDef)
+		g.generateSet(mc, sf.protoField, sf.protoType, true, sf.goName, sf.goType, f.goName, sf.oneofTypeName, sf.fullPath, sf.getterName, sf.getterDef)
 	}
 }
 
@@ -2800,6 +2946,9 @@ func (g *Generator) generateDefaultConstants(mc *msgCtx, topLevelFields []topLev
 // up with this ugly method. At least the logic is in one place. This can be reworked.
 func (g *Generator) generateGet(mc *msgCtx, protoField *descriptor.FieldDescriptorProto, protoType descriptor.FieldDescriptorProto_Type,
 	oneof bool, fname, tname, uname, oneoftname, fullpath, gname, def string) {
+	if IsPyFmq {
+		return
+	}
 	star := ""
 	if (protoType != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
 		(protoType != descriptor.FieldDescriptorProto_TYPE_GROUP) &&
@@ -2842,7 +2991,11 @@ func (g *Generator) generateGet(mc *msgCtx, protoField *descriptor.FieldDescript
 		if mc.message.proto3() {
 			g.P("if m != nil {")
 		} else {
-			g.P("if m != nil && m." + fname + " != nil {")
+			if star == "" {
+				g.P("if m != nil {")
+			} else {
+				g.P("if m != nil && m." + fname + " != nil {")
+			}
 		}
 		g.In()
 		g.P("return " + star + "m." + fname)
@@ -2861,8 +3014,60 @@ func (g *Generator) generateGet(mc *msgCtx, protoField *descriptor.FieldDescript
 	g.P()
 }
 
+func (g *Generator) generateSet(mc *msgCtx, protoField *descriptor.FieldDescriptorProto, protoType descriptor.FieldDescriptorProto_Type,
+	oneof bool, fname, tname, uname, oneoftname, fullpath, gname, def string) {
+	if IsPyFmq {
+		return
+	}
+	gname = strings.Replace(gname, "Get", "Set", 1)
+	star := ""
+	if (protoType != descriptor.FieldDescriptorProto_TYPE_MESSAGE) &&
+		(protoType != descriptor.FieldDescriptorProto_TYPE_GROUP) &&
+		needsStar(protoField, g.file.proto3, mc.message != nil && mc.message.allowOneof()) && tname[0] == '*' {
+		tname = tname[1:]
+		star = "*"
+	}
+	
+	if tname[0] == '*' && protoField.GetType() != descriptor.FieldDescriptorProto_TYPE_MESSAGE {
+		tname = tname[1:]
+	}
+	g.P("func (m *", mc.goName, ") ", Annotate(mc.message.file, fullpath, gname), "(v " + tname + ") (*" + mc.goName + ") {")
+	g.P("if m != nil {")
+	g.In()
+	if star == "*" && protoField.GetType() != descriptor.FieldDescriptorProto_TYPE_MESSAGE {
+		g.P("m." + fname + " = &v")
+	} else {
+		g.P("m." + fname + " = v")
+	}
+	g.Out()
+	g.P("}")
+	g.P(`return m`)
+	g.Out()
+	g.P("}")
+	g.P()
+}
+
 // generateInternalStructFields just adds the XXX_<something> fields to the message struct.
 func (g *Generator) generateInternalStructFields(mc *msgCtx, topLevelFields []topLevelField) {
+	if IsFmqJson || IsPyFmq {
+		if FmqJsonExtra {
+			foundExtra := false
+			for _, field := range mc.message.Field {
+				if strings.ToLower(field.GetName()) == "extra" {
+					foundExtra = true
+					break
+				}
+			}
+			if NeedJsonExtra && !foundExtra {
+				if IsFmqJson {
+					g.P("Extra\tmap[string]interface{} `json:\"extra,omitempty\"`")
+				} else {
+					g.P("extra = None")
+				}
+			}
+		}
+		return
+	}
 	if gogoproto.HasUnkeyed(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
 		g.P("XXX_NoUnkeyedLiteral\tstruct{} `json:\"-\"`") // prevent unkeyed struct literals
 	}
@@ -2872,6 +3077,7 @@ func (g *Generator) generateInternalStructFields(mc *msgCtx, topLevelFields []to
 			if opts := mc.message.Options; opts != nil && opts.GetMessageSetWireFormat() {
 				messageset = "protobuf_messageset:\"1\" "
 			}
+			
 			g.P(g.Pkg["proto"], ".XXX_InternalExtensions `", messageset, "json:\"-\"`")
 		} else {
 			g.P("XXX_extensions\t\t[]byte `protobuf:\"bytes,0,opt\" json:\"-\"`")
@@ -2883,6 +3089,7 @@ func (g *Generator) generateInternalStructFields(mc *msgCtx, topLevelFields []to
 	if gogoproto.HasSizecache(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
 		g.P("XXX_sizecache\tint32 `json:\"-\"`")
 	}
+	
 }
 
 // generateOneofFuncs adds all the utility functions for oneof, including marshalling, unmarshalling and sizer.
@@ -3046,23 +3253,65 @@ func (g *Generator) generateMessageStruct(mc *msgCtx, topLevelFields []topLevelF
 		if comments {
 			// Convention: Separate deprecation comments from original
 			// comments with an empty line.
-			g.P("//")
+			if IsPyFmq {
+				g.P("//")
+			} else {
+				g.P("#")
+			}
 		}
 		g.P(deprecationComment)
 	}
-	g.P("type ", Annotate(mc.message.file, mc.message.path, mc.goName), " struct {")
-	for _, pf := range topLevelFields {
-		pf.decl(g, mc)
+	if IsPyFmq {
+		msgReflectBuf := bytes.NewBuffer(make([]byte, 0, 1024))
+		msgValidateBuf := bytes.NewBuffer(make([]byte, 0, 1024))
+		msgDefBuf := bytes.NewBuffer(make([]byte, 0, 1024))
+		for idx, field := range mc.message.Field {
+			if field.GetType() == descriptor.FieldDescriptorProto_TYPE_MESSAGE {
+				var fieldType string
+				if fp, ok := topLevelFields[idx].(*simpleField); ok {
+					fieldType = fp.goType
+				} else if fp, ok := topLevelFields[idx].(*oneofField); ok {
+					fieldType = fp.goType
+				}
+				if fieldType[0] == '*' {
+					fieldType = fieldType[1:]
+				}
+				msgReflectBuf.WriteString(fmt.Sprintf("    \"%s\": %s,\n", field.GetName(), fieldType))
+			}
+			if field.IsRequired() {
+				msgValidateBuf.WriteString(fmt.Sprintf("    \"%s\": True,\n", field.GetName()))
+			}
+			msgDefBuf.WriteString(fmt.Sprintf("    %s = None\n", field.GetName()))
+		}
+		blockBuf := bytes.NewBuffer(make([]byte, 0, 4096))
+		err := template.Must(template.New("pyfmqjson_tpl").
+			Parse(pyfmqjson.PyClassTpl)).
+			ExecuteTemplate(blockBuf, "pyfmqjson_tpl",
+				pyfmqjson.PyClassNode {
+					ClassName:      mc.message.GetName(),
+					FieldDef:       msgDefBuf.String(),
+					ReflectDef:     msgReflectBuf.String(),
+					ValidateDef:    msgValidateBuf.String(),
+				},
+		)
+		if err != nil {
+			g.Fail("golang_FmqServer_tpl generate code error %s\n", err.Error())
+		}
+		g.P(blockBuf.String())
+	} else {
+		g.P("type ", Annotate(mc.message.file, mc.message.path, mc.goName), " struct {")
+		for _, pf := range topLevelFields {
+			pf.decl(g, mc)
+		}
+		g.generateInternalStructFields(mc, topLevelFields)
+		g.P("}")
 	}
-	g.generateInternalStructFields(mc, topLevelFields)
-	g.P("}")
 }
 
 // generateGetters adds getters for all fields, including oneofs and weak fields when applicable.
 func (g *Generator) generateGetters(mc *msgCtx, topLevelFields []topLevelField) {
 	for _, pf := range topLevelFields {
 		pf.getter(g, mc)
-
 	}
 }
 
@@ -3075,12 +3324,20 @@ func (g *Generator) generateSetters(mc *msgCtx, topLevelFields []topLevelField) 
 
 // generateCommonMethods adds methods to the message that are not on a per field basis.
 func (g *Generator) generateCommonMethods(mc *msgCtx) {
+	if IsPyFmq {
+		return
+	}
 	// Reset, String and ProtoMessage methods.
 	g.P("func (m *", mc.goName, ") Reset() { *m = ", mc.goName, "{} }")
 	if gogoproto.EnabledGoStringer(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
-		g.P("func (m *", mc.goName, ") String() string { return ", g.Pkg["proto"], ".CompactTextString(m) }")
+		if !IsFmqJson && !IsPyFmq {
+			g.P("func (m *", mc.goName, ") String() string { return ", g.Pkg["proto"], ".CompactTextString(m) }")
+		}
 	}
 	g.P("func (*", mc.goName, ") ProtoMessage() {}")
+	if IsFmqJson {
+		return
+	}
 	var indexes []string
 	for m := mc.message; m != nil; m = m.parent {
 		indexes = append([]string{strconv.Itoa(m.index)}, indexes...)
@@ -3279,7 +3536,12 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		if gogoMoreTags != nil {
 			moreTags = " " + *gogoMoreTags
 		}
-		tag := fmt.Sprintf("protobuf:%s json:%q%s", g.goTag(message, field, wiretype), jsonTag, moreTags)
+		var tag string
+		if IsFmqJson {
+			tag = fmt.Sprintf("json:%q", jsonTag)
+		} else {
+			tag = fmt.Sprintf("protobuf:%s json:%q%s", g.goTag(message, field, wiretype), jsonTag, moreTags)
+		}
 		if *field.Type == descriptor.FieldDescriptorProto_TYPE_MESSAGE && gogoproto.IsEmbed(field) {
 			fieldName = ""
 		}
@@ -3440,6 +3702,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	if gogoproto.HasTypeDecl(message.file.FileDescriptorProto, message.DescriptorProto) {
 		g.generateMessageStruct(mc, topLevelFields)
 		g.P()
+	}
+	if IsPyFmq {
+		return
 	}
 	g.generateCommonMethods(mc)
 	g.P()
@@ -3644,6 +3909,9 @@ func (g *Generator) generateInitFunction() {
 	if len(g.init) == 0 {
 		return
 	}
+	if IsFmqJson || IsPyFmq {
+		return
+	}
 	g.P("func init() {")
 	g.In()
 	for _, l := range g.init {
@@ -3665,6 +3933,9 @@ func (g *Generator) generateFileDescriptor(file *FileDescriptor) {
 		g.Fail(err.Error())
 	}
 
+	if IsFmqJson || IsPyFmq {
+		return
+	}
 	var buf bytes.Buffer
 	w, _ := gzip.NewWriterLevel(&buf, gzip.BestCompression)
 	w.Write(b)

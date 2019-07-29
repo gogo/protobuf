@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2015, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/buptbill220/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -30,7 +30,7 @@ syntax = "proto2";
 
 package asym;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/buptbill220/protobuf/gogoproto/gogo.proto";
 
 option (gogoproto.equal_all) = true;
 option (gogoproto.verbose_equal_all) = true;
@@ -38,7 +38,7 @@ option (gogoproto.marshaler_all) = true;
 option (gogoproto.sizer_all) = true;
 option (gogoproto.unmarshaler_all) = true;
 option (gogoproto.populate_all) = true;
-// TODO: renable this once https://github.com/gogo/protobuf/issues/388 is fixed: option (gogoproto.testgen_all) = true;
+// TODO: renable this once https://github.com/buptbill220/protobuf/issues/388 is fixed: option (gogoproto.testgen_all) = true;
 
 message M {
     repeated bytes arr = 1 [(gogoproto.customtype) = "MyType", (gogoproto.nullable) = false];

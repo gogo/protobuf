@@ -31,5 +31,5 @@
 
 syntax = "proto3";
 package fmt;
-option go_package = "github.com/gogo/protobuf/protoc-gen-gogo/testdata/imports/fmt";
+option go_package = "github.com/buptbill220/protobuf/protoc-gen-gogo/testdata/imports/fmt";
 message M {}

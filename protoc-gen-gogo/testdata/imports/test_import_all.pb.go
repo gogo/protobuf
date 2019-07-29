@@ -5,11 +5,11 @@ package imports
 
 import (
 	fmt "fmt"
-	proto "github.com/gogo/protobuf/proto"
-	fmt1 "github.com/gogo/protobuf/protoc-gen-gogo/testdata/imports/fmt"
-	test_a_1 "github.com/gogo/protobuf/protoc-gen-gogo/testdata/imports/test_a_1"
-	test_a_2 "github.com/gogo/protobuf/protoc-gen-gogo/testdata/imports/test_a_2"
-	test_b_1 "github.com/gogo/protobuf/protoc-gen-gogo/testdata/imports/test_b_1"
+	proto "github.com/buptbill220/protobuf/proto"
+	fmt1 "github.com/buptbill220/protobuf/protoc-gen-gogo/testdata/imports/fmt"
+	test_a_1 "github.com/buptbill220/protobuf/protoc-gen-gogo/testdata/imports/test_a_1"
+	test_a_2 "github.com/buptbill220/protobuf/protoc-gen-gogo/testdata/imports/test_a_2"
+	test_b_1 "github.com/buptbill220/protobuf/protoc-gen-gogo/testdata/imports/test_b_1"
 	math "math"
 )
 

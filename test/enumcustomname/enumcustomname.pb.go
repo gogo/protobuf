@@ -8,9 +8,9 @@ package enumcustomname
 
 import (
 	fmt "fmt"
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/gogo/protobuf/proto"
-	test "github.com/gogo/protobuf/test"
+	_ "github.com/buptbill220/protobuf/gogoproto"
+	proto "github.com/buptbill220/protobuf/proto"
+	test "github.com/buptbill220/protobuf/test"
 	math "math"
 	strconv "strconv"
 )

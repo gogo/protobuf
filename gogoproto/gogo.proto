@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/buptbill220/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -33,7 +33,7 @@ import "google/protobuf/descriptor.proto";
 
 option java_package = "com.google.protobuf";
 option java_outer_classname = "GoGoProtos";
-option go_package = "github.com/gogo/protobuf/gogoproto";
+option go_package = "github.com/buptbill220/protobuf/gogoproto";
 
 extend google.protobuf.EnumOptions {
 	optional bool goproto_enum_prefix = 62001;
@@ -87,6 +87,9 @@ extend google.protobuf.FileOptions {
 
 	optional bool goproto_sizecache_all = 63034;
 	optional bool goproto_unkeyed_all = 63035;
+	optional bool jsonmarshal_all = 63036;
+	optional bool validate_all = 63037;
+	optional bool pyjsonmarshal_all = 63038;
 }
 
 extend google.protobuf.MessageOptions {
@@ -124,6 +127,9 @@ extend google.protobuf.MessageOptions {
 
 	optional bool goproto_sizecache = 64034;
 	optional bool goproto_unkeyed = 64035;
+	optional bool jsonmarshal = 63036;
+	optional bool validate = 63037;
+	optional bool pyjsonmarshal = 63038;
 }
 
 extend google.protobuf.FieldOptions {

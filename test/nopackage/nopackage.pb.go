@@ -6,7 +6,7 @@ package nopackage
 import (
 	encoding_binary "encoding/binary"
 	fmt "fmt"
-	proto "github.com/gogo/protobuf/proto"
+	proto "github.com/buptbill220/protobuf/proto"
 	io "io"
 	math "math"
 	math_bits "math/bits"

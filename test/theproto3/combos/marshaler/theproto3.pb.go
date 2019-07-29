@@ -8,13 +8,13 @@ import (
 	compress_gzip "compress/gzip"
 	encoding_binary "encoding/binary"
 	fmt "fmt"
-	_ "github.com/gogo/protobuf/gogoproto"
-	github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
-	proto "github.com/gogo/protobuf/proto"
-	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
-	both "github.com/gogo/protobuf/test/combos/both"
-	github_com_gogo_protobuf_test_custom "github.com/gogo/protobuf/test/custom"
+	_ "github.com/buptbill220/protobuf/gogoproto"
+	github_com_gogo_protobuf_proto "github.com/buptbill220/protobuf/proto"
+	proto "github.com/buptbill220/protobuf/proto"
+	github_com_gogo_protobuf_protoc_gen_gogo_descriptor "github.com/buptbill220/protobuf/protoc-gen-gogo/descriptor"
+	github_com_gogo_protobuf_sortkeys "github.com/buptbill220/protobuf/sortkeys"
+	both "github.com/buptbill220/protobuf/test/combos/both"
+	github_com_gogo_protobuf_test_custom "github.com/buptbill220/protobuf/test/custom"
 	io_ioutil "io/ioutil"
 	math "math"
 	math_bits "math/bits"
@@ -361,8 +361,8 @@ func (m *FloatingPoint) XXX_DiscardUnknown() {
 var xxx_messageInfo_FloatingPoint proto.InternalMessageInfo
 
 type Uint128Pair struct {
-	Left                 github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,1,opt,name=left,proto3,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"left"`
-	Right                *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=right,proto3,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"right,omitempty"`
+	Left                 github_com_gogo_protobuf_test_custom.Uint128  `protobuf:"bytes,1,opt,name=left,proto3,customtype=github.com/buptbill220/protobuf/test/custom.Uint128" json:"left"`
+	Right                *github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,2,opt,name=right,proto3,customtype=github.com/buptbill220/protobuf/test/custom.Uint128" json:"right,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                                      `json:"-"`
 	XXX_unrecognized     []byte                                        `json:"-"`
 	XXX_sizecache        int32                                         `json:"-"`

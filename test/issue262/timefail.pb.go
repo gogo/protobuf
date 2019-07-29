@@ -5,10 +5,10 @@ package timefail
 
 import (
 	fmt "fmt"
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/gogo/protobuf/proto"
-	_ "github.com/gogo/protobuf/types"
-	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+	_ "github.com/buptbill220/protobuf/gogoproto"
+	proto "github.com/buptbill220/protobuf/proto"
+	_ "github.com/buptbill220/protobuf/types"
+	github_com_gogo_protobuf_types "github.com/buptbill220/protobuf/types"
 	io "io"
 	math "math"
 	math_bits "math/bits"

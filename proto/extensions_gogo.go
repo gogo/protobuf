@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://github.com/gogo/protobuf
+// http://github.com/buptbill220/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -50,7 +50,7 @@ type slowExtensionAdapter struct {
 }
 
 func (s slowExtensionAdapter) extensionsWrite() map[int32]Extension {
-	panic("Please report a bug to github.com/gogo/protobuf if you see this message: Writing extensions is not supported for extensions stored in a byte slice field.")
+	panic("Please report a bug to github.com/buptbill220/protobuf if you see this message: Writing extensions is not supported for extensions stored in a byte slice field.")
 }
 
 func (s slowExtensionAdapter) extensionsRead() (map[int32]Extension, sync.Locker) {

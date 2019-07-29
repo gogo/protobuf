@@ -5,7 +5,7 @@ package test_a_1
 
 import (
 	fmt "fmt"
-	proto "github.com/gogo/protobuf/proto"
+	proto "github.com/buptbill220/protobuf/proto"
 	math "math"
 )
 

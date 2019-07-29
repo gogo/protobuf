@@ -34,9 +34,9 @@ package proto_test
 import (
 	"testing"
 
-	"github.com/gogo/protobuf/proto"
-	proto3pb "github.com/gogo/protobuf/proto/proto3_proto"
-	pb "github.com/gogo/protobuf/proto/test_proto"
+	"github.com/buptbill220/protobuf/proto"
+	proto3pb "github.com/buptbill220/protobuf/proto/proto3_proto"
+	pb "github.com/buptbill220/protobuf/proto/test_proto"
 )
 
 func TestDiscardUnknown(t *testing.T) {
