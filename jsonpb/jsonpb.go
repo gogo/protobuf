@@ -264,7 +264,26 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 			return m.marshalValue(out, &proto.Properties{}, x, indent)
 		}
 	}
-
+	// To correctly support marshaling field masks, the following is largely copied from the `golang/protobuf` v2 implementation
+	// https://github.com/golang/protobuf/blob/a3369c5dc28ac197f8ec8de40a7291be4dea85b5/encoding/protojson/well_known_types.go#L884
+	if proto.MessageName(v) == "google.protobuf.FieldMask" {
+		list := s.Field(0)
+		paths := make([]string, 0, list.Len())
+		for i := 0; i < list.Len(); i++ {
+			s := list.Index(i).String()
+			// Return error if conversion to camelCase is not reversible.
+			cc := JSONCamelCase(s)
+			if s != JSONSnakeCase(cc) {
+				return fmt.Errorf("paths contains irreversible value %q", s)
+			}
+			paths = append(paths, cc)
+		}
+		// explicitly output quotation marks, similar to other WKTs (eg "Timestamp")
+		out.write(`"`)
+		out.write(strings.Join(paths, ","))
+		out.write(`"`)
+		return out.err
+	}
 	out.write("{")
 	if m.Indent != "" {
 		out.write("\n")
@@ -959,6 +978,27 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 			return nil
 		}
 	}
+	// To correctly support unmarshaling field masks, the following is largely copied from the `golang/protobuf` v2 implementation
+	//https://github.com/golang/protobuf/blob/a3369c5dc28ac197f8ec8de40a7291be4dea85b5/encoding/protojson/well_known_types.go#L903
+	//unmarshalFieldMask
+	type xname interface {
+		XXX_MessageName() string
+	}
+	if m, ok := target.Addr().Interface().(xname); ok && m.XXX_MessageName() == "google.protobuf.FieldMask" {
+		str := strings.TrimSpace(string(inputValue))
+		// Unquote the input value, similar to other WKTs (eg "Timestamp")
+		unq, err := unquote(str)
+		if err != nil {
+			return err
+		}
+		paths := strings.Split(unq, ",")
+		tval := target.Field(0) // The first field for a `FieldMask` is a string slice
+		for i := 0; i < len(paths); i++ {
+			paths[i] = JSONSnakeCase(paths[i])
+		}
+		tval.Set(reflect.ValueOf(paths))
+		return nil
+	}
 
 	if t, ok := target.Addr().Interface().(*time.Time); ok {
 		ts := &types.Timestamp{}
@@ -1418,4 +1458,41 @@ func checkRequiredFieldsInValue(v reflect.Value) error {
 		return checkRequiredFields(pm)
 	}
 	return nil
+}
+
+// JSONCamelCase converts a snake_case identifier to a camelCase identifier,
+// according to the protobuf JSON specification.
+// Taken from https://github.com/golang/protobuf/blob/a3369c5dc28ac197f8ec8de40a7291be4dea85b5/internal/strs/strings.go#L28
+func JSONCamelCase(s string) string {
+	var b []byte
+	var wasUnderscore bool
+	for i := 0; i < len(s); i++ { // proto identifiers are always ASCII
+		c := s[i]
+		if c != '_' {
+			isLower := 'a' <= c && c <= 'z'
+			if wasUnderscore && isLower {
+				c -= 'a' - 'A' // convert to uppercase
+			}
+			b = append(b, c)
+		}
+		wasUnderscore = c == '_'
+	}
+	return string(b)
+}
+
+// JSONSnakeCase converts a camelCase identifier to a snake_case identifier,
+// according to the protobuf JSON specification.
+// Taken from https://github.com/golang/protobuf/blob/a3369c5dc28ac197f8ec8de40a7291be4dea85b5/internal/strs/strings.go#L47
+func JSONSnakeCase(s string) string {
+	var b []byte
+	for i := 0; i < len(s); i++ { // proto identifiers are always ASCII
+		c := s[i]
+		isUpper := 'A' <= c && c <= 'Z'
+		if isUpper {
+			b = append(b, '_')
+			c += 'a' - 'A' // convert to lowercase
+		}
+		b = append(b, c)
+	}
+	return string(b)
 }
