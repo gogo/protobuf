@@ -33,6 +33,7 @@ package tags;
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 option (gogoproto.populate_all) = true;
+option (gogoproto.goproto_morexxx_all) = "xml:\"-\"";
 
 message Outside {
 	optional Inside Inside = 1 [(gogoproto.embed) = true, (gogoproto.jsontag) = ""];

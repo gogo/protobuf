@@ -288,6 +288,10 @@ func GetMoreTags(field *google_protobuf.FieldDescriptorProto) *string {
 	return nil
 }
 
+func GetMoreXXXTags(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) string {
+	return proto.GetStringExtension(message.Options, E_GoprotoMorexxx, proto.GetStringExtension(file.Options, E_GoprotoMorexxxAll, ""))
+}
+
 type EnableFunc func(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool
 
 func EnabledGoEnumPrefix(file *google_protobuf.FileDescriptorProto, enum *google_protobuf.EnumDescriptorProto) bool {
