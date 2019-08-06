@@ -32,9 +32,9 @@ package types;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
-//import "google/protobuf/any.proto";
+import "google/protobuf/any.proto";
 import "google/protobuf/duration.proto";
-//import "google/protobuf/struct.proto";
+import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -63,9 +63,8 @@ message KnownTypes {
   google.protobuf.StringValue str = 10;
   google.protobuf.BytesValue bytes = 11;
 
-  // TODO uncomment this once https://github.com/gogo/protobuf/issues/197 is fixed
-  // google.protobuf.Struct st = 12;
-  // google.protobuf.Any an = 14;
+  google.protobuf.Struct st = 12;
+  google.protobuf.Any an = 14;
 }
 
 message ProtoTypes {
