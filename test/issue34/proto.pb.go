@@ -3,12 +3,13 @@
 
 package issue34
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-
-import io "io"
+import (
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	io "io"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -32,7 +33,7 @@ func (m *Foo) Reset()         { *m = Foo{} }
 func (m *Foo) String() string { return proto.CompactTextString(m) }
 func (*Foo) ProtoMessage()    {}
 func (*Foo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_proto_9c2649a35ed336bb, []int{0}
+	return fileDescriptor_2fcc84b9998d60d8, []int{0}
 }
 func (m *Foo) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -40,8 +41,8 @@ func (m *Foo) XXX_Unmarshal(b []byte) error {
 func (m *Foo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Foo.Marshal(b, m, deterministic)
 }
-func (dst *Foo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Foo.Merge(dst, src)
+func (m *Foo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Foo.Merge(m, src)
 }
 func (m *Foo) XXX_Size() int {
 	return xxx_messageInfo_Foo.Size(m)
@@ -70,7 +71,7 @@ func (m *FooWithRepeated) Reset()         { *m = FooWithRepeated{} }
 func (m *FooWithRepeated) String() string { return proto.CompactTextString(m) }
 func (*FooWithRepeated) ProtoMessage()    {}
 func (*FooWithRepeated) Descriptor() ([]byte, []int) {
-	return fileDescriptor_proto_9c2649a35ed336bb, []int{1}
+	return fileDescriptor_2fcc84b9998d60d8, []int{1}
 }
 func (m *FooWithRepeated) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -78,8 +79,8 @@ func (m *FooWithRepeated) XXX_Unmarshal(b []byte) error {
 func (m *FooWithRepeated) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_FooWithRepeated.Marshal(b, m, deterministic)
 }
-func (dst *FooWithRepeated) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_FooWithRepeated.Merge(dst, src)
+func (m *FooWithRepeated) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FooWithRepeated.Merge(m, src)
 }
 func (m *FooWithRepeated) XXX_Size() int {
 	return xxx_messageInfo_FooWithRepeated.Size(m)
@@ -101,6 +102,21 @@ func init() {
 	proto.RegisterType((*Foo)(nil), "issue34.Foo")
 	proto.RegisterType((*FooWithRepeated)(nil), "issue34.FooWithRepeated")
 }
+
+func init() { proto.RegisterFile("proto.proto", fileDescriptor_2fcc84b9998d60d8) }
+
+var fileDescriptor_2fcc84b9998d60d8 = []byte{
+	// 126 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2e, 0x28, 0xca, 0x2f,
+	0xc9, 0xd7, 0x03, 0x93, 0x42, 0xec, 0x99, 0xc5, 0xc5, 0xa5, 0xa9, 0xc6, 0x26, 0x52, 0xba, 0xe9,
+	0x99, 0x25, 0x19, 0xa5, 0x49, 0x7a, 0xc9, 0xf9, 0xb9, 0xfa, 0xe9, 0xf9, 0xe9, 0xf9, 0xfa, 0x60,
+	0xf9, 0xa4, 0xd2, 0x34, 0x30, 0x0f, 0xcc, 0x01, 0xb3, 0x20, 0xfa, 0x94, 0xc4, 0xb9, 0x98, 0xdd,
+	0xf2, 0xf3, 0x85, 0x04, 0xb8, 0x98, 0x93, 0x12, 0x8b, 0x24, 0x18, 0x15, 0x18, 0x35, 0x78, 0x82,
+	0x40, 0x4c, 0x25, 0x65, 0x2e, 0x7e, 0xb7, 0xfc, 0xfc, 0xf0, 0xcc, 0x92, 0x8c, 0xa0, 0xd4, 0x82,
+	0xd4, 0xc4, 0x92, 0xd4, 0x14, 0x84, 0x22, 0x66, 0xa8, 0x22, 0x27, 0x96, 0x0b, 0x8f, 0xe4, 0x18,
+	0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0x00, 0xb2, 0x1b, 0xef, 0x89, 0x00, 0x00, 0x00,
+}
+
 func (m *Foo) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -116,7 +132,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
+			wire |= uint64(b&0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -144,7 +160,7 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= (int(b) & 0x7F) << shift
+				byteLen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -153,6 +169,9 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthProto
 			}
 			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthProto
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -168,6 +187,9 @@ func (m *Foo) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthProto
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthProto
 			}
 			if (iNdEx + skippy) > l {
@@ -198,7 +220,7 @@ func (m *FooWithRepeated) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
+			wire |= uint64(b&0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -226,7 +248,7 @@ func (m *FooWithRepeated) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= (int(b) & 0x7F) << shift
+				byteLen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -235,6 +257,9 @@ func (m *FooWithRepeated) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthProto
 			}
 			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthProto
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -248,6 +273,9 @@ func (m *FooWithRepeated) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthProto
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthProto
 			}
 			if (iNdEx + skippy) > l {
@@ -317,8 +345,11 @@ func skipProto(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthProto
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthProto
 			}
 			return iNdEx, nil
@@ -349,6 +380,9 @@ func skipProto(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthProto
+				}
 			}
 			return iNdEx, nil
 		case 4:
@@ -367,17 +401,3 @@ var (
 	ErrInvalidLengthProto = fmt.Errorf("proto: negative length found during unmarshaling")
 	ErrIntOverflowProto   = fmt.Errorf("proto: integer overflow")
 )
-
-func init() { proto.RegisterFile("proto.proto", fileDescriptor_proto_9c2649a35ed336bb) }
-
-var fileDescriptor_proto_9c2649a35ed336bb = []byte{
-	// 126 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2e, 0x28, 0xca, 0x2f,
-	0xc9, 0xd7, 0x03, 0x93, 0x42, 0xec, 0x99, 0xc5, 0xc5, 0xa5, 0xa9, 0xc6, 0x26, 0x52, 0xba, 0xe9,
-	0x99, 0x25, 0x19, 0xa5, 0x49, 0x7a, 0xc9, 0xf9, 0xb9, 0xfa, 0xe9, 0xf9, 0xe9, 0xf9, 0xfa, 0x60,
-	0xf9, 0xa4, 0xd2, 0x34, 0x30, 0x0f, 0xcc, 0x01, 0xb3, 0x20, 0xfa, 0x94, 0xc4, 0xb9, 0x98, 0xdd,
-	0xf2, 0xf3, 0x85, 0x04, 0xb8, 0x98, 0x93, 0x12, 0x8b, 0x24, 0x18, 0x15, 0x18, 0x35, 0x78, 0x82,
-	0x40, 0x4c, 0x25, 0x65, 0x2e, 0x7e, 0xb7, 0xfc, 0xfc, 0xf0, 0xcc, 0x92, 0x8c, 0xa0, 0xd4, 0x82,
-	0xd4, 0xc4, 0x92, 0xd4, 0x14, 0x84, 0x22, 0x66, 0xa8, 0x22, 0x27, 0x96, 0x0b, 0x8f, 0xe4, 0x18,
-	0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0x00, 0xb2, 0x1b, 0xef, 0x89, 0x00, 0x00, 0x00,
-}

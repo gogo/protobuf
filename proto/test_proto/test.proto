@@ -561,6 +561,10 @@ message Communique {
   }
 }
 
-message CustomDeterministicMarshaler {
-  optional uint64 field1 = 1;
+message TestUTF8 {
+  optional string scalar = 1;
+  repeated string vector = 2;
+  oneof oneof { string field = 3; }
+  map<string, int64> map_key = 4;
+  map<int64, string> map_value = 5;
 }

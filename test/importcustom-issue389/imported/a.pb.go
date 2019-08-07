@@ -3,14 +3,15 @@
 
 package imported
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-
-import bytes "bytes"
-
-import io "io"
+import (
+	bytes "bytes"
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	io "io"
+	math "math"
+	math_bits "math/bits"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -34,7 +35,7 @@ func (m *A) Reset()         { *m = A{} }
 func (m *A) String() string { return proto.CompactTextString(m) }
 func (*A) ProtoMessage()    {}
 func (*A) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a_b3350f4009dfb5d2, []int{0}
+	return fileDescriptor_44591ff926c61195, []int{0}
 }
 func (m *A) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -44,15 +45,15 @@ func (m *A) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_A.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
 		return b[:n], nil
 	}
 }
-func (dst *A) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_A.Merge(dst, src)
+func (m *A) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_A.Merge(m, src)
 }
 func (m *A) XXX_Size() int {
 	return m.Size()
@@ -73,6 +74,21 @@ func (m *A) GetF1() string {
 func init() {
 	proto.RegisterType((*A)(nil), "imported.A")
 }
+
+func init() { proto.RegisterFile("a.proto", fileDescriptor_44591ff926c61195) }
+
+var fileDescriptor_44591ff926c61195 = []byte{
+	// 127 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x62, 0x4f, 0xd4, 0x2b, 0x28,
+	0xca, 0x2f, 0xc9, 0x17, 0xe2, 0xc8, 0xcc, 0x2d, 0xc8, 0x2f, 0x2a, 0x49, 0x4d, 0x91, 0xd2, 0x4d,
+	0xcf, 0x2c, 0xc9, 0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0x4f, 0xcf, 0x4f, 0xcf, 0xd7, 0x07,
+	0x2b, 0x48, 0x2a, 0x4d, 0x03, 0xf3, 0xc0, 0x1c, 0x30, 0x0b, 0xa2, 0x51, 0x49, 0x98, 0x8b, 0xd1,
+	0x51, 0x88, 0x8f, 0x8b, 0x29, 0xcd, 0x50, 0x82, 0x51, 0x81, 0x51, 0x83, 0x33, 0x88, 0x29, 0xcd,
+	0xd0, 0x49, 0xe2, 0xc7, 0x43, 0x39, 0xc6, 0x15, 0x8f, 0xe4, 0x18, 0x77, 0x3c, 0x92, 0x63, 0x3c,
+	0xf1, 0x48, 0x8e, 0xf1, 0xc2, 0x23, 0x39, 0xc6, 0x07, 0x8f, 0xe4, 0x18, 0x93, 0xd8, 0xc0, 0xba,
+	0x8c, 0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0x70, 0x12, 0x2a, 0xca, 0x79, 0x00, 0x00, 0x00,
+}
+
 func (this *A) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
@@ -103,7 +119,7 @@ func (this *A) Equal(that interface{}) bool {
 func (m *A) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -111,30 +127,39 @@ func (m *A) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *A) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *A) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.F1) > 0 {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintA(dAtA, i, uint64(len(m.F1)))
-		i += copy(dAtA[i:], m.F1)
-	}
 	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
-	return i, nil
+	if len(m.F1) > 0 {
+		i -= len(m.F1)
+		copy(dAtA[i:], m.F1)
+		i = encodeVarintA(dAtA, i, uint64(len(m.F1)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintA(dAtA []byte, offset int, v uint64) int {
+	offset -= sovA(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func NewPopulatedA(r randyA, easy bool) *A {
 	this := &A{}
@@ -234,14 +259,7 @@ func (m *A) Size() (n int) {
 }
 
 func sovA(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozA(x uint64) (n int) {
 	return sovA(uint64((x << 1) ^ uint64((int64(x) >> 63))))
@@ -261,7 +279,7 @@ func (m *A) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
+			wire |= uint64(b&0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -289,7 +307,7 @@ func (m *A) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -299,6 +317,9 @@ func (m *A) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthA
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthA
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -311,6 +332,9 @@ func (m *A) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthA
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthA
 			}
 			if (iNdEx + skippy) > l {
@@ -380,8 +404,11 @@ func skipA(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthA
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthA
 			}
 			return iNdEx, nil
@@ -412,6 +439,9 @@ func skipA(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthA
+				}
 			}
 			return iNdEx, nil
 		case 4:
@@ -430,17 +460,3 @@ var (
 	ErrInvalidLengthA = fmt.Errorf("proto: negative length found during unmarshaling")
 	ErrIntOverflowA   = fmt.Errorf("proto: integer overflow")
 )
-
-func init() { proto.RegisterFile("a.proto", fileDescriptor_a_b3350f4009dfb5d2) }
-
-var fileDescriptor_a_b3350f4009dfb5d2 = []byte{
-	// 127 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x62, 0x4f, 0xd4, 0x2b, 0x28,
-	0xca, 0x2f, 0xc9, 0x17, 0xe2, 0xc8, 0xcc, 0x2d, 0xc8, 0x2f, 0x2a, 0x49, 0x4d, 0x91, 0xd2, 0x4d,
-	0xcf, 0x2c, 0xc9, 0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0x4f, 0xcf, 0x4f, 0xcf, 0xd7, 0x07,
-	0x2b, 0x48, 0x2a, 0x4d, 0x03, 0xf3, 0xc0, 0x1c, 0x30, 0x0b, 0xa2, 0x51, 0x49, 0x98, 0x8b, 0xd1,
-	0x51, 0x88, 0x8f, 0x8b, 0x29, 0xcd, 0x50, 0x82, 0x51, 0x81, 0x51, 0x83, 0x33, 0x88, 0x29, 0xcd,
-	0xd0, 0x49, 0xe2, 0xc7, 0x43, 0x39, 0xc6, 0x15, 0x8f, 0xe4, 0x18, 0x77, 0x3c, 0x92, 0x63, 0x3c,
-	0xf1, 0x48, 0x8e, 0xf1, 0xc2, 0x23, 0x39, 0xc6, 0x07, 0x8f, 0xe4, 0x18, 0x93, 0xd8, 0xc0, 0xba,
-	0x8c, 0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0x70, 0x12, 0x2a, 0xca, 0x79, 0x00, 0x00, 0x00,
-}

@@ -3,20 +3,20 @@
 
 package stdtypes
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-import _ "github.com/gogo/protobuf/types"
-
-import time "time"
-import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
-
-import bytes "bytes"
-
-import strings "strings"
-import reflect "reflect"
-import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+import (
+	bytes "bytes"
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+	_ "github.com/gogo/protobuf/types"
+	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+	math "math"
+	math_bits "math/bits"
+	reflect "reflect"
+	strings "strings"
+	time "time"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -31,28 +31,28 @@ var _ = time.Kitchen
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type StdTypes struct {
-	NullableTimestamp    *time.Time     `protobuf:"bytes,1,opt,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty"`
-	NullableDuration     *time.Duration `protobuf:"bytes,2,opt,name=nullableDuration,stdduration" json:"nullableDuration,omitempty"`
-	Timestamp            time.Time      `protobuf:"bytes,3,opt,name=timestamp,stdtime" json:"timestamp"`
-	Duration             time.Duration  `protobuf:"bytes,4,opt,name=duration,stdduration" json:"duration"`
-	NullableDouble       *float64       `protobuf:"bytes,5,opt,name=nullableDouble,wktptr" json:"nullableDouble,omitempty"`
-	NonnullDouble        float64        `protobuf:"bytes,6,opt,name=nonnullDouble,wktptr" json:"nonnullDouble"`
-	NullableFloat        *float32       `protobuf:"bytes,7,opt,name=nullableFloat,wktptr" json:"nullableFloat,omitempty"`
-	NonnullFloat         float32        `protobuf:"bytes,8,opt,name=nonnullFloat,wktptr" json:"nonnullFloat"`
-	NullableInt64        *int64         `protobuf:"bytes,9,opt,name=nullableInt64,wktptr" json:"nullableInt64,omitempty"`
-	NonnullInt64         int64          `protobuf:"bytes,10,opt,name=nonnullInt64,wktptr" json:"nonnullInt64"`
-	NullableUInt64       *uint64        `protobuf:"bytes,11,opt,name=nullableUInt64,wktptr" json:"nullableUInt64,omitempty"`
-	NonnullUInt64        uint64         `protobuf:"bytes,12,opt,name=nonnullUInt64,wktptr" json:"nonnullUInt64"`
-	NullableInt32        *int32         `protobuf:"bytes,13,opt,name=nullableInt32,wktptr" json:"nullableInt32,omitempty"`
-	NonnullInt32         int32          `protobuf:"bytes,14,opt,name=nonnullInt32,wktptr" json:"nonnullInt32"`
-	NullableUInt32       *uint32        `protobuf:"bytes,15,opt,name=nullableUInt32,wktptr" json:"nullableUInt32,omitempty"`
-	NonnullUInt32        uint32         `protobuf:"bytes,16,opt,name=nonnullUInt32,wktptr" json:"nonnullUInt32"`
-	NullableBool         *bool          `protobuf:"bytes,17,opt,name=nullableBool,wktptr" json:"nullableBool,omitempty"`
-	NonnullBool          bool           `protobuf:"bytes,18,opt,name=nonnullBool,wktptr" json:"nonnullBool"`
-	NullableString       *string        `protobuf:"bytes,19,opt,name=nullableString,wktptr" json:"nullableString,omitempty"`
-	NonnullString        string         `protobuf:"bytes,20,opt,name=nonnullString,wktptr" json:"nonnullString"`
-	NullableBytes        *[]byte        `protobuf:"bytes,21,opt,name=nullableBytes,wktptr" json:"nullableBytes,omitempty"`
-	NonnullBytes         []byte         `protobuf:"bytes,22,opt,name=nonnullBytes,wktptr" json:"nonnullBytes"`
+	NullableTimestamp    *time.Time     `protobuf:"bytes,1,opt,name=nullableTimestamp,proto3,stdtime" json:"nullableTimestamp,omitempty"`
+	NullableDuration     *time.Duration `protobuf:"bytes,2,opt,name=nullableDuration,proto3,stdduration" json:"nullableDuration,omitempty"`
+	Timestamp            time.Time      `protobuf:"bytes,3,opt,name=timestamp,proto3,stdtime" json:"timestamp"`
+	Duration             time.Duration  `protobuf:"bytes,4,opt,name=duration,proto3,stdduration" json:"duration"`
+	NullableDouble       *float64       `protobuf:"bytes,5,opt,name=nullableDouble,proto3,wktptr" json:"nullableDouble,omitempty"`
+	NonnullDouble        float64        `protobuf:"bytes,6,opt,name=nonnullDouble,proto3,wktptr" json:"nonnullDouble"`
+	NullableFloat        *float32       `protobuf:"bytes,7,opt,name=nullableFloat,proto3,wktptr" json:"nullableFloat,omitempty"`
+	NonnullFloat         float32        `protobuf:"bytes,8,opt,name=nonnullFloat,proto3,wktptr" json:"nonnullFloat"`
+	NullableInt64        *int64         `protobuf:"bytes,9,opt,name=nullableInt64,proto3,wktptr" json:"nullableInt64,omitempty"`
+	NonnullInt64         int64          `protobuf:"bytes,10,opt,name=nonnullInt64,proto3,wktptr" json:"nonnullInt64"`
+	NullableUInt64       *uint64        `protobuf:"bytes,11,opt,name=nullableUInt64,proto3,wktptr" json:"nullableUInt64,omitempty"`
+	NonnullUInt64        uint64         `protobuf:"bytes,12,opt,name=nonnullUInt64,proto3,wktptr" json:"nonnullUInt64"`
+	NullableInt32        *int32         `protobuf:"bytes,13,opt,name=nullableInt32,proto3,wktptr" json:"nullableInt32,omitempty"`
+	NonnullInt32         int32          `protobuf:"bytes,14,opt,name=nonnullInt32,proto3,wktptr" json:"nonnullInt32"`
+	NullableUInt32       *uint32        `protobuf:"bytes,15,opt,name=nullableUInt32,proto3,wktptr" json:"nullableUInt32,omitempty"`
+	NonnullUInt32        uint32         `protobuf:"bytes,16,opt,name=nonnullUInt32,proto3,wktptr" json:"nonnullUInt32"`
+	NullableBool         *bool          `protobuf:"bytes,17,opt,name=nullableBool,proto3,wktptr" json:"nullableBool,omitempty"`
+	NonnullBool          bool           `protobuf:"bytes,18,opt,name=nonnullBool,proto3,wktptr" json:"nonnullBool"`
+	NullableString       *string        `protobuf:"bytes,19,opt,name=nullableString,proto3,wktptr" json:"nullableString,omitempty"`
+	NonnullString        string         `protobuf:"bytes,20,opt,name=nonnullString,proto3,wktptr" json:"nonnullString"`
+	NullableBytes        *[]byte        `protobuf:"bytes,21,opt,name=nullableBytes,proto3,wktptr" json:"nullableBytes,omitempty"`
+	NonnullBytes         []byte         `protobuf:"bytes,22,opt,name=nonnullBytes,proto3,wktptr" json:"nonnullBytes"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -62,7 +62,7 @@ func (m *StdTypes) Reset()         { *m = StdTypes{} }
 func (m *StdTypes) String() string { return proto.CompactTextString(m) }
 func (*StdTypes) ProtoMessage()    {}
 func (*StdTypes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_stdtypes_ce26a3b6156de25d, []int{0}
+	return fileDescriptor_fa784ced32c4280a, []int{0}
 }
 func (m *StdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StdTypes.Unmarshal(m, b)
@@ -70,8 +70,8 @@ func (m *StdTypes) XXX_Unmarshal(b []byte) error {
 func (m *StdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_StdTypes.Marshal(b, m, deterministic)
 }
-func (dst *StdTypes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_StdTypes.Merge(dst, src)
+func (m *StdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StdTypes.Merge(m, src)
 }
 func (m *StdTypes) XXX_Size() int {
 	return xxx_messageInfo_StdTypes.Size(m)
@@ -237,28 +237,28 @@ func (m *StdTypes) GetNonnullBytes() []byte {
 }
 
 type RepStdTypes struct {
-	NullableTimestamps   []*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamps,stdtime" json:"nullableTimestamps,omitempty"`
-	NullableDurations    []*time.Duration `protobuf:"bytes,2,rep,name=nullableDurations,stdduration" json:"nullableDurations,omitempty"`
-	Timestamps           []time.Time      `protobuf:"bytes,3,rep,name=timestamps,stdtime" json:"timestamps"`
-	Durations            []time.Duration  `protobuf:"bytes,4,rep,name=durations,stdduration" json:"durations"`
-	NullableDouble       []*float64       `protobuf:"bytes,5,rep,name=nullableDouble,wktptr" json:"nullableDouble,omitempty"`
-	NonnullDouble        []float64        `protobuf:"bytes,6,rep,name=nonnullDouble,wktptr" json:"nonnullDouble"`
-	NullableFloat        []*float32       `protobuf:"bytes,7,rep,name=nullableFloat,wktptr" json:"nullableFloat,omitempty"`
-	NonnullFloat         []float32        `protobuf:"bytes,8,rep,name=nonnullFloat,wktptr" json:"nonnullFloat"`
-	NullableInt64        []*int64         `protobuf:"bytes,9,rep,name=nullableInt64,wktptr" json:"nullableInt64,omitempty"`
-	NonnullInt64         []int64          `protobuf:"bytes,10,rep,name=nonnullInt64,wktptr" json:"nonnullInt64"`
-	NullableUInt64       []*uint64        `protobuf:"bytes,11,rep,name=nullableUInt64,wktptr" json:"nullableUInt64,omitempty"`
-	NonnullUInt64        []uint64         `protobuf:"bytes,12,rep,name=nonnullUInt64,wktptr" json:"nonnullUInt64"`
-	NullableInt32        []*int32         `protobuf:"bytes,13,rep,name=nullableInt32,wktptr" json:"nullableInt32,omitempty"`
-	NonnullInt32         []int32          `protobuf:"bytes,14,rep,name=nonnullInt32,wktptr" json:"nonnullInt32"`
-	NullableUInt32       []*uint32        `protobuf:"bytes,15,rep,name=nullableUInt32,wktptr" json:"nullableUInt32,omitempty"`
-	NonnullUInt32        []uint32         `protobuf:"bytes,16,rep,name=nonnullUInt32,wktptr" json:"nonnullUInt32"`
-	NullableBool         []*bool          `protobuf:"bytes,17,rep,name=nullableBool,wktptr" json:"nullableBool,omitempty"`
-	NonnullBool          []bool           `protobuf:"bytes,18,rep,name=nonnullBool,wktptr" json:"nonnullBool"`
-	NullableString       []*string        `protobuf:"bytes,19,rep,name=nullableString,wktptr" json:"nullableString,omitempty"`
-	NonnullString        []string         `protobuf:"bytes,20,rep,name=nonnullString,wktptr" json:"nonnullString"`
-	NullableBytes        []*[]byte        `protobuf:"bytes,21,rep,name=nullableBytes,wktptr" json:"nullableBytes,omitempty"`
-	NonnullBytes         [][]byte         `protobuf:"bytes,22,rep,name=nonnullBytes,wktptr" json:"nonnullBytes"`
+	NullableTimestamps   []*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamps,proto3,stdtime" json:"nullableTimestamps,omitempty"`
+	NullableDurations    []*time.Duration `protobuf:"bytes,2,rep,name=nullableDurations,proto3,stdduration" json:"nullableDurations,omitempty"`
+	Timestamps           []time.Time      `protobuf:"bytes,3,rep,name=timestamps,proto3,stdtime" json:"timestamps"`
+	Durations            []time.Duration  `protobuf:"bytes,4,rep,name=durations,proto3,stdduration" json:"durations"`
+	NullableDouble       []*float64       `protobuf:"bytes,5,rep,name=nullableDouble,proto3,wktptr" json:"nullableDouble,omitempty"`
+	NonnullDouble        []float64        `protobuf:"bytes,6,rep,name=nonnullDouble,proto3,wktptr" json:"nonnullDouble"`
+	NullableFloat        []*float32       `protobuf:"bytes,7,rep,name=nullableFloat,proto3,wktptr" json:"nullableFloat,omitempty"`
+	NonnullFloat         []float32        `protobuf:"bytes,8,rep,name=nonnullFloat,proto3,wktptr" json:"nonnullFloat"`
+	NullableInt64        []*int64         `protobuf:"bytes,9,rep,name=nullableInt64,proto3,wktptr" json:"nullableInt64,omitempty"`
+	NonnullInt64         []int64          `protobuf:"bytes,10,rep,name=nonnullInt64,proto3,wktptr" json:"nonnullInt64"`
+	NullableUInt64       []*uint64        `protobuf:"bytes,11,rep,name=nullableUInt64,proto3,wktptr" json:"nullableUInt64,omitempty"`
+	NonnullUInt64        []uint64         `protobuf:"bytes,12,rep,name=nonnullUInt64,proto3,wktptr" json:"nonnullUInt64"`
+	NullableInt32        []*int32         `protobuf:"bytes,13,rep,name=nullableInt32,proto3,wktptr" json:"nullableInt32,omitempty"`
+	NonnullInt32         []int32          `protobuf:"bytes,14,rep,name=nonnullInt32,proto3,wktptr" json:"nonnullInt32"`
+	NullableUInt32       []*uint32        `protobuf:"bytes,15,rep,name=nullableUInt32,proto3,wktptr" json:"nullableUInt32,omitempty"`
+	NonnullUInt32        []uint32         `protobuf:"bytes,16,rep,name=nonnullUInt32,proto3,wktptr" json:"nonnullUInt32"`
+	NullableBool         []*bool          `protobuf:"bytes,17,rep,name=nullableBool,proto3,wktptr" json:"nullableBool,omitempty"`
+	NonnullBool          []bool           `protobuf:"bytes,18,rep,name=nonnullBool,proto3,wktptr" json:"nonnullBool"`
+	NullableString       []*string        `protobuf:"bytes,19,rep,name=nullableString,proto3,wktptr" json:"nullableString,omitempty"`
+	NonnullString        []string         `protobuf:"bytes,20,rep,name=nonnullString,proto3,wktptr" json:"nonnullString"`
+	NullableBytes        []*[]byte        `protobuf:"bytes,21,rep,name=nullableBytes,proto3,wktptr" json:"nullableBytes,omitempty"`
+	NonnullBytes         [][]byte         `protobuf:"bytes,22,rep,name=nonnullBytes,proto3,wktptr" json:"nonnullBytes"`
 	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
 	XXX_unrecognized     []byte           `json:"-"`
 	XXX_sizecache        int32            `json:"-"`
@@ -268,7 +268,7 @@ func (m *RepStdTypes) Reset()         { *m = RepStdTypes{} }
 func (m *RepStdTypes) String() string { return proto.CompactTextString(m) }
 func (*RepStdTypes) ProtoMessage()    {}
 func (*RepStdTypes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_stdtypes_ce26a3b6156de25d, []int{1}
+	return fileDescriptor_fa784ced32c4280a, []int{1}
 }
 func (m *RepStdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RepStdTypes.Unmarshal(m, b)
@@ -276,8 +276,8 @@ func (m *RepStdTypes) XXX_Unmarshal(b []byte) error {
 func (m *RepStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_RepStdTypes.Marshal(b, m, deterministic)
 }
-func (dst *RepStdTypes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_RepStdTypes.Merge(dst, src)
+func (m *RepStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RepStdTypes.Merge(m, src)
 }
 func (m *RepStdTypes) XXX_Size() int {
 	return xxx_messageInfo_RepStdTypes.Size(m)
@@ -443,28 +443,28 @@ func (m *RepStdTypes) GetNonnullBytes() [][]byte {
 }
 
 type MapStdTypes struct {
-	NullableTimestamp    map[int32]*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamp,stdtime" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Timestamp            map[int32]time.Time      `protobuf:"bytes,2,rep,name=timestamp,stdtime" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableDuration     map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	Duration             map[int32]time.Duration  `protobuf:"bytes,4,rep,name=duration,stdduration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableDouble       map[int32]*float64       `protobuf:"bytes,5,rep,name=nullableDouble,wktptr" json:"nullableDouble,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullDouble        map[int32]float64        `protobuf:"bytes,6,rep,name=nonnullDouble,wktptr" json:"nonnullDouble" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableFloat        map[int32]*float32       `protobuf:"bytes,7,rep,name=nullableFloat,wktptr" json:"nullableFloat,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullFloat         map[int32]float32        `protobuf:"bytes,8,rep,name=nonnullFloat,wktptr" json:"nonnullFloat" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableInt64        map[int32]*int64         `protobuf:"bytes,9,rep,name=nullableInt64,wktptr" json:"nullableInt64,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullInt64         map[int32]int64          `protobuf:"bytes,10,rep,name=nonnullInt64,wktptr" json:"nonnullInt64" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableUInt64       map[int32]*uint64        `protobuf:"bytes,11,rep,name=nullableUInt64,wktptr" json:"nullableUInt64,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullUInt64        map[int32]uint64         `protobuf:"bytes,12,rep,name=nonnullUInt64,wktptr" json:"nonnullUInt64" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableInt32        map[int32]*int32         `protobuf:"bytes,13,rep,name=nullableInt32,wktptr" json:"nullableInt32,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullInt32         map[int32]int32          `protobuf:"bytes,14,rep,name=nonnullInt32,wktptr" json:"nonnullInt32" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableUInt32       map[int32]*uint32        `protobuf:"bytes,15,rep,name=nullableUInt32,wktptr" json:"nullableUInt32,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullUInt32        map[int32]uint32         `protobuf:"bytes,16,rep,name=nonnullUInt32,wktptr" json:"nonnullUInt32" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableBool         map[int32]*bool          `protobuf:"bytes,17,rep,name=nullableBool,wktptr" json:"nullableBool,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullBool          map[int32]bool           `protobuf:"bytes,18,rep,name=nonnullBool,wktptr" json:"nonnullBool" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableString       map[int32]*string        `protobuf:"bytes,19,rep,name=nullableString,wktptr" json:"nullableString,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullString        map[int32]string         `protobuf:"bytes,20,rep,name=nonnullString,wktptr" json:"nonnullString" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NullableBytes        map[int32]*[]byte        `protobuf:"bytes,21,rep,name=nullableBytes,wktptr" json:"nullableBytes,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
-	NonnullBytes         map[int32][]byte         `protobuf:"bytes,22,rep,name=nonnullBytes,wktptr" json:"nonnullBytes" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value"`
+	NullableTimestamp    map[int32]*time.Time     `protobuf:"bytes,1,rep,name=nullableTimestamp,proto3,stdtime" json:"nullableTimestamp,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Timestamp            map[int32]time.Time      `protobuf:"bytes,2,rep,name=timestamp,proto3,stdtime" json:"timestamp" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableDuration     map[int32]*time.Duration `protobuf:"bytes,3,rep,name=nullableDuration,proto3,stdduration" json:"nullableDuration,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Duration             map[int32]time.Duration  `protobuf:"bytes,4,rep,name=duration,proto3,stdduration" json:"duration" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableDouble       map[int32]*float64       `protobuf:"bytes,5,rep,name=nullableDouble,proto3,wktptr" json:"nullableDouble,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullDouble        map[int32]float64        `protobuf:"bytes,6,rep,name=nonnullDouble,proto3,wktptr" json:"nonnullDouble" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableFloat        map[int32]*float32       `protobuf:"bytes,7,rep,name=nullableFloat,proto3,wktptr" json:"nullableFloat,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullFloat         map[int32]float32        `protobuf:"bytes,8,rep,name=nonnullFloat,proto3,wktptr" json:"nonnullFloat" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableInt64        map[int32]*int64         `protobuf:"bytes,9,rep,name=nullableInt64,proto3,wktptr" json:"nullableInt64,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullInt64         map[int32]int64          `protobuf:"bytes,10,rep,name=nonnullInt64,proto3,wktptr" json:"nonnullInt64" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableUInt64       map[int32]*uint64        `protobuf:"bytes,11,rep,name=nullableUInt64,proto3,wktptr" json:"nullableUInt64,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullUInt64        map[int32]uint64         `protobuf:"bytes,12,rep,name=nonnullUInt64,proto3,wktptr" json:"nonnullUInt64" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableInt32        map[int32]*int32         `protobuf:"bytes,13,rep,name=nullableInt32,proto3,wktptr" json:"nullableInt32,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullInt32         map[int32]int32          `protobuf:"bytes,14,rep,name=nonnullInt32,proto3,wktptr" json:"nonnullInt32" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableUInt32       map[int32]*uint32        `protobuf:"bytes,15,rep,name=nullableUInt32,proto3,wktptr" json:"nullableUInt32,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullUInt32        map[int32]uint32         `protobuf:"bytes,16,rep,name=nonnullUInt32,proto3,wktptr" json:"nonnullUInt32" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableBool         map[int32]*bool          `protobuf:"bytes,17,rep,name=nullableBool,proto3,wktptr" json:"nullableBool,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullBool          map[int32]bool           `protobuf:"bytes,18,rep,name=nonnullBool,proto3,wktptr" json:"nonnullBool" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableString       map[int32]*string        `protobuf:"bytes,19,rep,name=nullableString,proto3,wktptr" json:"nullableString,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullString        map[int32]string         `protobuf:"bytes,20,rep,name=nonnullString,proto3,wktptr" json:"nonnullString" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NullableBytes        map[int32]*[]byte        `protobuf:"bytes,21,rep,name=nullableBytes,proto3,wktptr" json:"nullableBytes,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NonnullBytes         map[int32][]byte         `protobuf:"bytes,22,rep,name=nonnullBytes,proto3,wktptr" json:"nonnullBytes" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
 	XXX_unrecognized     []byte                   `json:"-"`
 	XXX_sizecache        int32                    `json:"-"`
@@ -474,7 +474,7 @@ func (m *MapStdTypes) Reset()         { *m = MapStdTypes{} }
 func (m *MapStdTypes) String() string { return proto.CompactTextString(m) }
 func (*MapStdTypes) ProtoMessage()    {}
 func (*MapStdTypes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_stdtypes_ce26a3b6156de25d, []int{2}
+	return fileDescriptor_fa784ced32c4280a, []int{2}
 }
 func (m *MapStdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MapStdTypes.Unmarshal(m, b)
@@ -482,8 +482,8 @@ func (m *MapStdTypes) XXX_Unmarshal(b []byte) error {
 func (m *MapStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MapStdTypes.Marshal(b, m, deterministic)
 }
-func (dst *MapStdTypes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MapStdTypes.Merge(dst, src)
+func (m *MapStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MapStdTypes.Merge(m, src)
 }
 func (m *MapStdTypes) XXX_Size() int {
 	return xxx_messageInfo_MapStdTypes.Size(m)
@@ -671,7 +671,7 @@ func (m *OneofStdTypes) Reset()         { *m = OneofStdTypes{} }
 func (m *OneofStdTypes) String() string { return proto.CompactTextString(m) }
 func (*OneofStdTypes) ProtoMessage()    {}
 func (*OneofStdTypes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_stdtypes_ce26a3b6156de25d, []int{3}
+	return fileDescriptor_fa784ced32c4280a, []int{3}
 }
 func (m *OneofStdTypes) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OneofStdTypes.Unmarshal(m, b)
@@ -679,8 +679,8 @@ func (m *OneofStdTypes) XXX_Unmarshal(b []byte) error {
 func (m *OneofStdTypes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OneofStdTypes.Marshal(b, m, deterministic)
 }
-func (dst *OneofStdTypes) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_OneofStdTypes.Merge(dst, src)
+func (m *OneofStdTypes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OneofStdTypes.Merge(m, src)
 }
 func (m *OneofStdTypes) XXX_Size() int {
 	return xxx_messageInfo_OneofStdTypes.Size(m)
@@ -699,37 +699,37 @@ type isOneofStdTypes_OneOfStdTimes interface {
 }
 
 type OneofStdTypes_Timestamp struct {
-	Timestamp *time.Time `protobuf:"bytes,1,opt,name=timestamp,oneof,stdtime"`
+	Timestamp *time.Time `protobuf:"bytes,1,opt,name=timestamp,proto3,oneof,stdtime"`
 }
 type OneofStdTypes_Duration struct {
-	Duration *time.Duration `protobuf:"bytes,2,opt,name=duration,oneof,stdduration"`
+	Duration *time.Duration `protobuf:"bytes,2,opt,name=duration,proto3,oneof,stdduration"`
 }
 type OneofStdTypes_RepDouble struct {
-	RepDouble *float64 `protobuf:"bytes,3,opt,name=repDouble,oneof,wktptr"`
+	RepDouble *float64 `protobuf:"bytes,3,opt,name=repDouble,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepFloat struct {
-	RepFloat *float32 `protobuf:"bytes,4,opt,name=repFloat,oneof,wktptr"`
+	RepFloat *float32 `protobuf:"bytes,4,opt,name=repFloat,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepInt64 struct {
-	RepInt64 *int64 `protobuf:"bytes,5,opt,name=repInt64,oneof,wktptr"`
+	RepInt64 *int64 `protobuf:"bytes,5,opt,name=repInt64,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepUInt64 struct {
-	RepUInt64 *uint64 `protobuf:"bytes,6,opt,name=repUInt64,oneof,wktptr"`
+	RepUInt64 *uint64 `protobuf:"bytes,6,opt,name=repUInt64,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepInt32 struct {
-	RepInt32 *int32 `protobuf:"bytes,7,opt,name=repInt32,oneof,wktptr"`
+	RepInt32 *int32 `protobuf:"bytes,7,opt,name=repInt32,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepUInt32 struct {
-	RepUInt32 *uint32 `protobuf:"bytes,8,opt,name=repUInt32,oneof,wktptr"`
+	RepUInt32 *uint32 `protobuf:"bytes,8,opt,name=repUInt32,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepBool struct {
-	RepBool *bool `protobuf:"bytes,9,opt,name=repBool,oneof,wktptr"`
+	RepBool *bool `protobuf:"bytes,9,opt,name=repBool,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepString struct {
-	RepString *string `protobuf:"bytes,10,opt,name=repString,oneof,wktptr"`
+	RepString *string `protobuf:"bytes,10,opt,name=repString,proto3,oneof,wktptr"`
 }
 type OneofStdTypes_RepBytes struct {
-	RepBytes *[]byte `protobuf:"bytes,11,opt,name=repBytes,oneof,wktptr"`
+	RepBytes *[]byte `protobuf:"bytes,11,opt,name=repBytes,proto3,oneof,wktptr"`
 }
 
 func (*OneofStdTypes_Timestamp) isOneofStdTypes_OneOfStdTimes() {}
@@ -1211,6 +1211,99 @@ func init() {
 	proto.RegisterMapType((map[int32]time.Time)(nil), "stdtypes.MapStdTypes.TimestampEntry")
 	proto.RegisterType((*OneofStdTypes)(nil), "stdtypes.OneofStdTypes")
 }
+
+func init() { proto.RegisterFile("stdtypes.proto", fileDescriptor_fa784ced32c4280a) }
+
+var fileDescriptor_fa784ced32c4280a = []byte{
+	// 1372 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x99, 0x4f, 0x6f, 0x1b, 0xc5,
+	0x1b, 0xc7, 0xbd, 0x19, 0x3b, 0xb5, 0xc7, 0x76, 0x9a, 0x4c, 0x7f, 0xad, 0xf6, 0x67, 0xd0, 0xa6,
+	0x0a, 0x88, 0x06, 0x51, 0x1c, 0xd8, 0x45, 0x08, 0x21, 0x50, 0xc1, 0x0a, 0x25, 0x81, 0xfe, 0x01,
+	0xd7, 0x6e, 0x2c, 0xa0, 0x50, 0x9b, 0x6c, 0x4d, 0x84, 0xe3, 0xb5, 0xec, 0x35, 0x28, 0x37, 0x5e,
+	0x02, 0x47, 0x8e, 0x1c, 0xb9, 0x73, 0xe1, 0xc8, 0xb1, 0x47, 0x5e, 0x01, 0x34, 0xe6, 0x0d, 0x20,
+	0xb8, 0xf4, 0x82, 0x84, 0x76, 0x66, 0x76, 0x77, 0x76, 0xf7, 0x99, 0xdd, 0x95, 0x35, 0xbe, 0x25,
+	0x99, 0x79, 0x3e, 0xfe, 0xee, 0xe3, 0x51, 0x3e, 0x7e, 0x3c, 0x78, 0x63, 0xe6, 0x1e, 0xbb, 0x67,
+	0x13, 0x7b, 0xd6, 0x9c, 0x4c, 0x1d, 0xd7, 0x21, 0x65, 0xff, 0xf7, 0xc6, 0xcb, 0xc3, 0x13, 0xf7,
+	0xab, 0xf9, 0xa0, 0xf9, 0xa5, 0x73, 0xba, 0x37, 0x74, 0x86, 0xce, 0x1e, 0xdd, 0x30, 0x98, 0x3f,
+	0xa2, 0xbf, 0xd1, 0x5f, 0xe8, 0x4f, 0xac, 0xb0, 0x61, 0x0c, 0x1d, 0x67, 0x38, 0xb2, 0xc3, 0x5d,
+	0xc7, 0xf3, 0x69, 0xdf, 0x3d, 0x71, 0xc6, 0x7c, 0x7d, 0x3b, 0xbe, 0xee, 0x9e, 0x9c, 0xda, 0x33,
+	0xb7, 0x7f, 0x3a, 0x91, 0x01, 0xbe, 0x9d, 0xf6, 0x27, 0x13, 0x7b, 0xca, 0x93, 0xed, 0xfc, 0x5d,
+	0xc3, 0xe5, 0x7b, 0xee, 0x71, 0xc7, 0x0b, 0x47, 0xee, 0xe0, 0xad, 0xf1, 0x7c, 0x34, 0xea, 0x0f,
+	0x46, 0x76, 0xc7, 0xe7, 0xe8, 0xda, 0x55, 0x6d, 0xb7, 0x6a, 0x36, 0x9a, 0x0c, 0xd4, 0xf4, 0x41,
+	0xcd, 0x60, 0x47, 0xab, 0xf8, 0xfd, 0x1f, 0xdb, 0x5a, 0x3b, 0x59, 0x4a, 0x3e, 0xc4, 0x9b, 0xfe,
+	0x1f, 0xf7, 0x79, 0x6e, 0x7d, 0x8d, 0xe2, 0xfe, 0x9f, 0xc0, 0xf9, 0x1b, 0x5a, 0xc5, 0x1f, 0x3c,
+	0x5a, 0xa2, 0x90, 0xb4, 0x70, 0x25, 0x78, 0x38, 0x1d, 0x65, 0x86, 0x2a, 0x3f, 0xfe, 0x7d, 0xbb,
+	0x40, 0x83, 0x85, 0x65, 0xe4, 0x06, 0x2e, 0xfb, 0x0d, 0xd4, 0x8b, 0x59, 0x41, 0x28, 0x81, 0x86,
+	0x09, 0x8a, 0xc8, 0x07, 0x78, 0x23, 0x08, 0xe6, 0xcc, 0x07, 0x23, 0x5b, 0x2f, 0x51, 0xcc, 0xb3,
+	0x49, 0x0c, 0x5d, 0xbe, 0xdf, 0x1f, 0xcd, 0xed, 0x56, 0xf1, 0x47, 0x8f, 0x12, 0xab, 0x24, 0xb7,
+	0x70, 0x7d, 0xec, 0x8c, 0xbd, 0x3f, 0x72, 0xd4, 0x7a, 0x0e, 0x14, 0x0d, 0x45, 0x71, 0xd1, 0x62,
+	0xf2, 0x3e, 0xae, 0xfb, 0xfc, 0x9b, 0x23, 0xa7, 0xef, 0xea, 0x17, 0x28, 0xed, 0x99, 0x04, 0x8d,
+	0xae, 0x8a, 0xb9, 0xa2, 0x75, 0xe4, 0x10, 0xd7, 0x38, 0x99, 0x71, 0xca, 0xd9, 0x9c, 0x30, 0x54,
+	0xa4, 0x54, 0xcc, 0x74, 0x38, 0x76, 0x5f, 0x7f, 0x4d, 0xaf, 0x48, 0x58, 0x74, 0x15, 0xcc, 0x44,
+	0x57, 0x84, 0x4c, 0x8c, 0x83, 0xb3, 0x39, 0xc9, 0x4c, 0x0c, 0x25, 0xbc, 0x83, 0x5d, 0x06, 0xab,
+	0x4a, 0xda, 0xde, 0x4d, 0xa4, 0x8a, 0x55, 0x0a, 0xef, 0x20, 0x47, 0xd5, 0x72, 0xa0, 0x92, 0xef,
+	0x20, 0xa7, 0x45, 0xbb, 0x65, 0x99, 0x7a, 0x5d, 0xfe, 0x94, 0x96, 0x29, 0xeb, 0x96, 0x65, 0x46,
+	0xbb, 0x65, 0x99, 0xfa, 0x46, 0x36, 0x07, 0xec, 0x96, 0x65, 0xc6, 0xbb, 0x65, 0x99, 0xfa, 0xc5,
+	0x94, 0x47, 0x8c, 0xa6, 0x8a, 0x55, 0xc6, 0xba, 0x65, 0x99, 0xfa, 0x66, 0x0e, 0x14, 0xdc, 0x2d,
+	0xcb, 0x24, 0xfb, 0xb8, 0xe6, 0xf3, 0x5b, 0x8e, 0x33, 0xd2, 0xb7, 0x24, 0xff, 0x11, 0xbc, 0x45,
+	0x31, 0x55, 0xa4, 0x8a, 0xdc, 0xc4, 0x55, 0x8e, 0xa5, 0x10, 0x92, 0x09, 0x09, 0xf3, 0x88, 0x85,
+	0x62, 0x9f, 0xee, 0xb9, 0xd3, 0x93, 0xf1, 0x50, 0xbf, 0x24, 0x79, 0x38, 0xb6, 0x0c, 0xf6, 0x89,
+	0x2d, 0x09, 0x7d, 0xe2, 0xa8, 0xff, 0xe5, 0x40, 0x25, 0xfb, 0xc4, 0x69, 0xc2, 0xa9, 0x6a, 0x9d,
+	0xb9, 0xf6, 0x4c, 0xbf, 0x2c, 0x39, 0x0d, 0x74, 0x15, 0x3c, 0x55, 0x74, 0x45, 0x38, 0x55, 0x8c,
+	0x73, 0x25, 0x9b, 0x93, 0x3c, 0x55, 0x74, 0x71, 0xe7, 0xdf, 0x1a, 0xae, 0xb6, 0xed, 0x49, 0xe0,
+	0x9d, 0x8f, 0x30, 0x49, 0xc8, 0x63, 0xa6, 0x6b, 0x57, 0x51, 0x2e, 0xf1, 0x00, 0xb5, 0xe4, 0x76,
+	0x68, 0x32, 0xff, 0xff, 0xf9, 0x4c, 0x5f, 0xa3, 0xc0, 0x4c, 0xf5, 0x24, 0x2b, 0xc9, 0x3e, 0xc6,
+	0x6e, 0x18, 0x0c, 0x65, 0x06, 0x0b, 0xe5, 0x23, 0xd4, 0x91, 0x77, 0x71, 0xe5, 0x38, 0x08, 0x53,
+	0xcc, 0x0a, 0x13, 0xea, 0x27, 0xac, 0x02, 0xfd, 0x83, 0xd4, 0xf9, 0x07, 0x29, 0xf5, 0x0f, 0x52,
+	0xe4, 0x1f, 0xa4, 0xd0, 0x3f, 0x48, 0x91, 0x7f, 0x90, 0x4a, 0xff, 0x20, 0x75, 0xfe, 0x41, 0x4a,
+	0xfd, 0x83, 0x14, 0xf9, 0x07, 0xa9, 0xf4, 0x0f, 0x52, 0xe7, 0x1f, 0xa4, 0xd2, 0x3f, 0x48, 0x85,
+	0x7f, 0x90, 0x3a, 0xff, 0x20, 0x75, 0xfe, 0x41, 0x4a, 0xfd, 0x83, 0x14, 0xf9, 0x07, 0x2d, 0xeb,
+	0x9f, 0x9f, 0xb7, 0x71, 0xf5, 0x76, 0x3f, 0xf4, 0xcf, 0x43, 0x78, 0xee, 0xf1, 0xf8, 0xd7, 0x9b,
+	0xc1, 0x28, 0x27, 0x54, 0x34, 0xef, 0xc4, 0xb7, 0xbf, 0x37, 0x76, 0xa7, 0x67, 0xf2, 0x49, 0xe8,
+	0x96, 0x38, 0xbc, 0x30, 0x0f, 0x3d, 0x0f, 0x93, 0x63, 0x44, 0x70, 0x8c, 0x79, 0x00, 0xcc, 0x55,
+	0x4c, 0x4a, 0x2f, 0xa5, 0xc7, 0xf5, 0x77, 0xf3, 0xb4, 0x92, 0x49, 0xeb, 0x30, 0x32, 0x25, 0x79,
+	0xd8, 0xe7, 0x60, 0x6c, 0x14, 0x07, 0xcd, 0x4b, 0x47, 0x12, 0x5f, 0xbd, 0x98, 0x91, 0x93, 0xee,
+	0xe5, 0x29, 0x41, 0x79, 0xf5, 0x60, 0x79, 0xed, 0x4a, 0xb8, 0xe2, 0x56, 0x21, 0x2d, 0x24, 0xb2,
+	0x0e, 0x2c, 0xb2, 0xdd, 0xf4, 0xc4, 0x74, 0xab, 0x18, 0x38, 0x66, 0xb5, 0x2e, 0x68, 0xb5, 0x6b,
+	0xa9, 0x71, 0x05, 0xa6, 0xcc, 0x70, 0x1d, 0xd8, 0x70, 0x19, 0x61, 0xe9, 0x56, 0x30, 0x2c, 0x33,
+	0x41, 0x17, 0xd4, 0x5d, 0x7a, 0x58, 0x81, 0x29, 0x53, 0xdf, 0x91, 0x44, 0x7d, 0x19, 0x87, 0xa1,
+	0x9b, 0x88, 0x1b, 0xf7, 0x60, 0x0f, 0xf6, 0x60, 0xfa, 0x61, 0xe8, 0x82, 0x89, 0x63, 0x4e, 0xec,
+	0xc0, 0x4e, 0xcc, 0xee, 0xaf, 0x65, 0xca, 0xfa, 0x6b, 0x99, 0xd1, 0xfe, 0x06, 0x82, 0xcc, 0xec,
+	0xaf, 0xcf, 0x94, 0xc9, 0xf2, 0x48, 0x22, 0xcb, 0x1c, 0xfd, 0x8d, 0xc6, 0x8d, 0x9b, 0xb3, 0x07,
+	0x9b, 0x33, 0xbb, 0xbf, 0xc9, 0xc4, 0x31, 0x8b, 0x7e, 0x0c, 0x5a, 0xf4, 0x5a, 0x7a, 0x60, 0x6f,
+	0xa7, 0x18, 0x37, 0xaa, 0xd4, 0x36, 0xa4, 0xd4, 0x17, 0x52, 0xa3, 0x86, 0x40, 0x89, 0x5e, 0x8f,
+	0x24, 0x7a, 0xcd, 0xe8, 0x2c, 0xdb, 0x0b, 0x76, 0x96, 0xdb, 0xb1, 0x07, 0xbb, 0x36, 0xbd, 0xb3,
+	0x22, 0x56, 0xea, 0xdd, 0x0e, 0xec, 0xdd, 0x8c, 0x93, 0x4b, 0xb7, 0x82, 0x27, 0x97, 0x49, 0xb8,
+	0x0b, 0x4a, 0x38, 0xfd, 0xe4, 0x0a, 0x4c, 0x89, 0x90, 0x1b, 0x0f, 0xf1, 0x15, 0xd8, 0xa8, 0x64,
+	0x13, 0xa3, 0xaf, 0xed, 0x33, 0xfa, 0x25, 0x64, 0xa9, 0xed, 0xfd, 0x48, 0x5e, 0xc1, 0xa5, 0x6f,
+	0x3c, 0xbb, 0xf3, 0x6f, 0x12, 0x53, 0xc6, 0xb0, 0x36, 0xdb, 0xf8, 0xe6, 0xda, 0x1b, 0x5a, 0xa3,
+	0x87, 0x37, 0x56, 0x44, 0xfe, 0x1c, 0x5f, 0x06, 0xf5, 0x0a, 0xbc, 0xc0, 0x5e, 0xf4, 0x05, 0xe4,
+	0xc3, 0x9f, 0xc8, 0xbf, 0x8f, 0xeb, 0x2b, 0xe1, 0x7e, 0x81, 0x2f, 0x01, 0xba, 0x05, 0xe8, 0x66,
+	0x94, 0x9e, 0x3a, 0x1f, 0x46, 0x1b, 0x43, 0x92, 0xde, 0x55, 0xc8, 0x7f, 0x80, 0x49, 0xd2, 0xbe,
+	0x00, 0xff, 0xd5, 0x28, 0x3f, 0x6d, 0x92, 0x14, 0xf1, 0x9f, 0xe1, 0xad, 0x84, 0x87, 0xd5, 0xd1,
+	0x85, 0xf0, 0xa1, 0x87, 0x96, 0xc1, 0x87, 0x93, 0x1d, 0x1c, 0x7e, 0x15, 0x74, 0xe1, 0xe8, 0x74,
+	0x53, 0xf9, 0x99, 0x6f, 0x6d, 0x17, 0x7e, 0x81, 0xf0, 0xe8, 0xac, 0x86, 0x1f, 0xed, 0x3e, 0xb7,
+	0xd4, 0x92, 0xfd, 0xe1, 0x93, 0xa2, 0xb4, 0xfb, 0xca, 0xe9, 0xb1, 0xee, 0xcb, 0xf9, 0xb9, 0xba,
+	0x03, 0xbc, 0x40, 0xb4, 0xfb, 0xea, 0xf9, 0x9f, 0xe2, 0xad, 0x84, 0xca, 0x97, 0xf9, 0x77, 0x1c,
+	0x4c, 0xc5, 0x22, 0xfc, 0x13, 0xbc, 0x19, 0xb7, 0xba, 0x32, 0xb6, 0xd0, 0x79, 0xc1, 0xc1, 0xcb,
+	0x74, 0x46, 0x18, 0x9d, 0xe1, 0xce, 0xaf, 0x86, 0x2f, 0x9c, 0xfb, 0xd0, 0xca, 0xcb, 0x9c, 0xcc,
+	0x70, 0xc8, 0x86, 0xcf, 0xfd, 0x0a, 0xe8, 0x3b, 0xff, 0x94, 0x70, 0xfd, 0xee, 0xd8, 0x76, 0x1e,
+	0x05, 0x73, 0xfb, 0x3b, 0xe2, 0x54, 0x9d, 0xf3, 0x9e, 0xf2, 0xa0, 0x20, 0x4e, 0xd2, 0x6f, 0x0b,
+	0xa3, 0x6e, 0xbe, 0x9b, 0xc9, 0x83, 0x82, 0x30, 0xde, 0xb6, 0x70, 0x65, 0x6a, 0x4f, 0xf8, 0x04,
+	0x8a, 0xf2, 0xde, 0x04, 0x7a, 0x11, 0x82, 0x32, 0x72, 0x03, 0x97, 0xa7, 0xf6, 0x84, 0x4d, 0x85,
+	0xc5, 0x9c, 0x77, 0x76, 0x5e, 0x08, 0xbf, 0x88, 0x03, 0xd8, 0xe0, 0x53, 0xca, 0x79, 0xc1, 0xc6,
+	0x01, 0x6c, 0xc8, 0x61, 0x4f, 0xc1, 0x47, 0xa7, 0xf5, 0xbc, 0xb7, 0x61, 0xfc, 0x29, 0xf8, 0xa0,
+	0x14, 0x84, 0xb0, 0x4c, 0xe9, 0xcd, 0x63, 0xfc, 0x1b, 0xba, 0x30, 0x84, 0x65, 0x0a, 0x21, 0x2c,
+	0x93, 0xdf, 0x39, 0xe6, 0xf8, 0x92, 0x4f, 0x08, 0x61, 0x99, 0xe4, 0x2d, 0x7c, 0x61, 0x6a, 0x4f,
+	0xe8, 0xc7, 0xfe, 0x4a, 0xbe, 0xeb, 0xa0, 0x83, 0x42, 0xdb, 0x2f, 0xe1, 0x09, 0xf8, 0xe7, 0x70,
+	0x9c, 0xf7, 0xfa, 0x86, 0x27, 0xe0, 0x9f, 0xba, 0x59, 0x1b, 0xd8, 0x67, 0xe3, 0x6a, 0xce, 0x8b,
+	0x16, 0xde, 0x06, 0xfa, 0xe7, 0xd6, 0x45, 0x7a, 0xc6, 0xef, 0xd2, 0x33, 0xee, 0x9d, 0xd2, 0xd6,
+	0xf5, 0x27, 0xe7, 0x86, 0xf6, 0xd7, 0xb9, 0xa1, 0x3d, 0x3d, 0x37, 0xb4, 0x9f, 0x16, 0x86, 0xf6,
+	0xcb, 0xc2, 0xd0, 0x7e, 0x5d, 0x18, 0xda, 0xe3, 0x85, 0x51, 0xf8, 0x6d, 0x61, 0x14, 0x9e, 0x2c,
+	0x0c, 0xed, 0xe9, 0xc2, 0x28, 0x7c, 0xf7, 0xa7, 0x51, 0x18, 0xac, 0xd3, 0x57, 0xb1, 0xfe, 0x0b,
+	0x00, 0x00, 0xff, 0xff, 0xd9, 0x80, 0xa9, 0x4d, 0x81, 0x20, 0x00, 0x00,
+}
+
 func (this *StdTypes) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
@@ -3674,57 +3767,57 @@ func valueToGoStringStdtypes(v interface{}, typ string) string {
 }
 func NewPopulatedStdTypes(r randyStdtypes, easy bool) *StdTypes {
 	this := &StdTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableTimestamp = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableDuration = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 	}
 	v1 := github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 	this.Timestamp = *v1
 	v2 := github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 	this.Duration = *v2
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableDouble = github_com_gogo_protobuf_types.NewPopulatedStdDouble(r, easy)
 	}
 	v3 := github_com_gogo_protobuf_types.NewPopulatedStdDouble(r, easy)
 	this.NonnullDouble = *v3
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableFloat = github_com_gogo_protobuf_types.NewPopulatedStdFloat(r, easy)
 	}
 	v4 := github_com_gogo_protobuf_types.NewPopulatedStdFloat(r, easy)
 	this.NonnullFloat = *v4
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableInt64 = github_com_gogo_protobuf_types.NewPopulatedStdInt64(r, easy)
 	}
 	v5 := github_com_gogo_protobuf_types.NewPopulatedStdInt64(r, easy)
 	this.NonnullInt64 = *v5
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableUInt64 = github_com_gogo_protobuf_types.NewPopulatedStdUInt64(r, easy)
 	}
 	v6 := github_com_gogo_protobuf_types.NewPopulatedStdUInt64(r, easy)
 	this.NonnullUInt64 = *v6
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableInt32 = github_com_gogo_protobuf_types.NewPopulatedStdInt32(r, easy)
 	}
 	v7 := github_com_gogo_protobuf_types.NewPopulatedStdInt32(r, easy)
 	this.NonnullInt32 = *v7
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableUInt32 = github_com_gogo_protobuf_types.NewPopulatedStdUInt32(r, easy)
 	}
 	v8 := github_com_gogo_protobuf_types.NewPopulatedStdUInt32(r, easy)
 	this.NonnullUInt32 = *v8
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableBool = github_com_gogo_protobuf_types.NewPopulatedStdBool(r, easy)
 	}
 	v9 := github_com_gogo_protobuf_types.NewPopulatedStdBool(r, easy)
 	this.NonnullBool = *v9
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableString = github_com_gogo_protobuf_types.NewPopulatedStdString(r, easy)
 	}
 	v10 := github_com_gogo_protobuf_types.NewPopulatedStdString(r, easy)
 	this.NonnullString = *v10
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		this.NullableBytes = github_com_gogo_protobuf_types.NewPopulatedStdBytes(r, easy)
 	}
 	v11 := github_com_gogo_protobuf_types.NewPopulatedStdBytes(r, easy)
@@ -3737,21 +3830,21 @@ func NewPopulatedStdTypes(r randyStdtypes, easy bool) *StdTypes {
 
 func NewPopulatedRepStdTypes(r randyStdtypes, easy bool) *RepStdTypes {
 	this := &RepStdTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v12 := r.Intn(5)
 		this.NullableTimestamps = make([]*time.Time, v12)
 		for i := 0; i < v12; i++ {
 			this.NullableTimestamps[i] = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v13 := r.Intn(5)
 		this.NullableDurations = make([]*time.Duration, v13)
 		for i := 0; i < v13; i++ {
 			this.NullableDurations[i] = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v14 := r.Intn(5)
 		this.Timestamps = make([]time.Time, v14)
 		for i := 0; i < v14; i++ {
@@ -3759,7 +3852,7 @@ func NewPopulatedRepStdTypes(r randyStdtypes, easy bool) *RepStdTypes {
 			this.Timestamps[i] = *v15
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v16 := r.Intn(5)
 		this.Durations = make([]time.Duration, v16)
 		for i := 0; i < v16; i++ {
@@ -3767,14 +3860,14 @@ func NewPopulatedRepStdTypes(r randyStdtypes, easy bool) *RepStdTypes {
 			this.Durations[i] = *v17
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v18 := r.Intn(5)
 		this.NullableDouble = make([]*float64, v18)
 		for i := 0; i < v18; i++ {
 			this.NullableDouble[i] = github_com_gogo_protobuf_types.NewPopulatedStdDouble(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v19 := r.Intn(5)
 		this.NonnullDouble = make([]float64, v19)
 		for i := 0; i < v19; i++ {
@@ -3782,14 +3875,14 @@ func NewPopulatedRepStdTypes(r randyStdtypes, easy bool) *RepStdTypes {
 			this.NonnullDouble[i] = *v20
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v21 := r.Intn(5)
 		this.NullableFloat = make([]*float32, v21)
 		for i := 0; i < v21; i++ {
 			this.NullableFloat[i] = github_com_gogo_protobuf_types.NewPopulatedStdFloat(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v22 := r.Intn(5)
 		this.NonnullFloat = make([]float32, v22)
 		for i := 0; i < v22; i++ {
@@ -3797,14 +3890,14 @@ func NewPopulatedRepStdTypes(r randyStdtypes, easy bool) *RepStdTypes {
 			this.NonnullFloat[i] = *v23
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v24 := r.Intn(5)
 		this.NullableInt64 = make([]*int64, v24)
 		for i := 0; i < v24; i++ {
 			this.NullableInt64[i] = github_com_gogo_protobuf_types.NewPopulatedStdInt64(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v25 := r.Intn(5)
 		this.NonnullInt64 = make([]int64, v25)
 		for i := 0; i < v25; i++ {
@@ -3812,14 +3905,14 @@ func NewPopulatedRepStdTypes(r randyStdtypes, easy bool) *RepStdTypes {
 			this.NonnullInt64[i] = *v26
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v27 := r.Intn(5)
 		this.NullableUInt64 = make([]*uint64, v27)
 		for i := 0; i < v27; i++ {
 			this.NullableUInt64[i] = github_com_gogo_protobuf_types.NewPopulatedStdUInt64(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v28 := r.Intn(5)
 		this.NonnullUInt64 = make([]uint64, v28)
 		for i := 0; i < v28; i++ {
@@ -3827,14 +3920,14 @@ func NewPopulatedRepStdTypes(r randyStdtypes, easy bool) *RepStdTypes {
 			this.NonnullUInt64[i] = *v29
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v30 := r.Intn(5)
 		this.NullableInt32 = make([]*int32, v30)
 		for i := 0; i < v30; i++ {
 			this.NullableInt32[i] = github_com_gogo_protobuf_types.NewPopulatedStdInt32(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v31 := r.Intn(5)
 		this.NonnullInt32 = make([]int32, v31)
 		for i := 0; i < v31; i++ {
@@ -3842,14 +3935,14 @@ func NewPopulatedRepStdTypes(r randyStdtypes, easy bool) *RepStdTypes {
 			this.NonnullInt32[i] = *v32
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v33 := r.Intn(5)
 		this.NullableUInt32 = make([]*uint32, v33)
 		for i := 0; i < v33; i++ {
 			this.NullableUInt32[i] = github_com_gogo_protobuf_types.NewPopulatedStdUInt32(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v34 := r.Intn(5)
 		this.NonnullUInt32 = make([]uint32, v34)
 		for i := 0; i < v34; i++ {
@@ -3857,14 +3950,14 @@ func NewPopulatedRepStdTypes(r randyStdtypes, easy bool) *RepStdTypes {
 			this.NonnullUInt32[i] = *v35
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v36 := r.Intn(5)
 		this.NullableBool = make([]*bool, v36)
 		for i := 0; i < v36; i++ {
 			this.NullableBool[i] = github_com_gogo_protobuf_types.NewPopulatedStdBool(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v37 := r.Intn(5)
 		this.NonnullBool = make([]bool, v37)
 		for i := 0; i < v37; i++ {
@@ -3872,14 +3965,14 @@ func NewPopulatedRepStdTypes(r randyStdtypes, easy bool) *RepStdTypes {
 			this.NonnullBool[i] = *v38
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v39 := r.Intn(5)
 		this.NullableString = make([]*string, v39)
 		for i := 0; i < v39; i++ {
 			this.NullableString[i] = github_com_gogo_protobuf_types.NewPopulatedStdString(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v40 := r.Intn(5)
 		this.NonnullString = make([]string, v40)
 		for i := 0; i < v40; i++ {
@@ -3887,14 +3980,14 @@ func NewPopulatedRepStdTypes(r randyStdtypes, easy bool) *RepStdTypes {
 			this.NonnullString[i] = *v41
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v42 := r.Intn(5)
 		this.NullableBytes = make([]*[]byte, v42)
 		for i := 0; i < v42; i++ {
 			this.NullableBytes[i] = github_com_gogo_protobuf_types.NewPopulatedStdBytes(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v43 := r.Intn(5)
 		this.NonnullBytes = make([][]byte, v43)
 		for i := 0; i < v43; i++ {
@@ -3910,154 +4003,154 @@ func NewPopulatedRepStdTypes(r randyStdtypes, easy bool) *RepStdTypes {
 
 func NewPopulatedMapStdTypes(r randyStdtypes, easy bool) *MapStdTypes {
 	this := &MapStdTypes{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v45 := r.Intn(10)
 		this.NullableTimestamp = make(map[int32]*time.Time)
 		for i := 0; i < v45; i++ {
 			this.NullableTimestamp[int32(r.Int31())] = github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v46 := r.Intn(10)
 		this.Timestamp = make(map[int32]time.Time)
 		for i := 0; i < v46; i++ {
 			this.Timestamp[int32(r.Int31())] = *github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v47 := r.Intn(10)
 		this.NullableDuration = make(map[int32]*time.Duration)
 		for i := 0; i < v47; i++ {
 			this.NullableDuration[int32(r.Int31())] = github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v48 := r.Intn(10)
 		this.Duration = make(map[int32]time.Duration)
 		for i := 0; i < v48; i++ {
 			this.Duration[int32(r.Int31())] = *github_com_gogo_protobuf_types.NewPopulatedStdDuration(r, easy)
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v49 := r.Intn(10)
 		this.NullableDouble = make(map[int32]*float64)
 		for i := 0; i < v49; i++ {
 			this.NullableDouble[int32(r.Int31())] = (*float64)(github_com_gogo_protobuf_types.NewPopulatedStdDouble(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v50 := r.Intn(10)
 		this.NonnullDouble = make(map[int32]float64)
 		for i := 0; i < v50; i++ {
 			this.NonnullDouble[int32(r.Int31())] = (float64)(*github_com_gogo_protobuf_types.NewPopulatedStdDouble(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v51 := r.Intn(10)
 		this.NullableFloat = make(map[int32]*float32)
 		for i := 0; i < v51; i++ {
 			this.NullableFloat[int32(r.Int31())] = (*float32)(github_com_gogo_protobuf_types.NewPopulatedStdFloat(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v52 := r.Intn(10)
 		this.NonnullFloat = make(map[int32]float32)
 		for i := 0; i < v52; i++ {
 			this.NonnullFloat[int32(r.Int31())] = (float32)(*github_com_gogo_protobuf_types.NewPopulatedStdFloat(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v53 := r.Intn(10)
 		this.NullableInt64 = make(map[int32]*int64)
 		for i := 0; i < v53; i++ {
 			this.NullableInt64[int32(r.Int31())] = (*int64)(github_com_gogo_protobuf_types.NewPopulatedStdInt64(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v54 := r.Intn(10)
 		this.NonnullInt64 = make(map[int32]int64)
 		for i := 0; i < v54; i++ {
 			this.NonnullInt64[int32(r.Int31())] = (int64)(*github_com_gogo_protobuf_types.NewPopulatedStdInt64(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v55 := r.Intn(10)
 		this.NullableUInt64 = make(map[int32]*uint64)
 		for i := 0; i < v55; i++ {
 			this.NullableUInt64[int32(r.Int31())] = (*uint64)(github_com_gogo_protobuf_types.NewPopulatedStdUInt64(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v56 := r.Intn(10)
 		this.NonnullUInt64 = make(map[int32]uint64)
 		for i := 0; i < v56; i++ {
 			this.NonnullUInt64[int32(r.Int31())] = (uint64)(*github_com_gogo_protobuf_types.NewPopulatedStdUInt64(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v57 := r.Intn(10)
 		this.NullableInt32 = make(map[int32]*int32)
 		for i := 0; i < v57; i++ {
 			this.NullableInt32[int32(r.Int31())] = (*int32)(github_com_gogo_protobuf_types.NewPopulatedStdInt32(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v58 := r.Intn(10)
 		this.NonnullInt32 = make(map[int32]int32)
 		for i := 0; i < v58; i++ {
 			this.NonnullInt32[int32(r.Int31())] = (int32)(*github_com_gogo_protobuf_types.NewPopulatedStdInt32(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v59 := r.Intn(10)
 		this.NullableUInt32 = make(map[int32]*uint32)
 		for i := 0; i < v59; i++ {
 			this.NullableUInt32[int32(r.Int31())] = (*uint32)(github_com_gogo_protobuf_types.NewPopulatedStdUInt32(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v60 := r.Intn(10)
 		this.NonnullUInt32 = make(map[int32]uint32)
 		for i := 0; i < v60; i++ {
 			this.NonnullUInt32[int32(r.Int31())] = (uint32)(*github_com_gogo_protobuf_types.NewPopulatedStdUInt32(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v61 := r.Intn(10)
 		this.NullableBool = make(map[int32]*bool)
 		for i := 0; i < v61; i++ {
 			this.NullableBool[int32(r.Int31())] = (*bool)(github_com_gogo_protobuf_types.NewPopulatedStdBool(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v62 := r.Intn(10)
 		this.NonnullBool = make(map[int32]bool)
 		for i := 0; i < v62; i++ {
 			this.NonnullBool[int32(r.Int31())] = (bool)(*github_com_gogo_protobuf_types.NewPopulatedStdBool(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v63 := r.Intn(10)
 		this.NullableString = make(map[int32]*string)
 		for i := 0; i < v63; i++ {
 			this.NullableString[int32(r.Int31())] = (*string)(github_com_gogo_protobuf_types.NewPopulatedStdString(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v64 := r.Intn(10)
 		this.NonnullString = make(map[int32]string)
 		for i := 0; i < v64; i++ {
 			this.NonnullString[int32(r.Int31())] = (string)(*github_com_gogo_protobuf_types.NewPopulatedStdString(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v65 := r.Intn(10)
 		this.NullableBytes = make(map[int32]*[]byte)
 		for i := 0; i < v65; i++ {
 			this.NullableBytes[int32(r.Int31())] = (*[]byte)(github_com_gogo_protobuf_types.NewPopulatedStdBytes(r, easy))
 		}
 	}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v66 := r.Intn(10)
 		this.NonnullBytes = make(map[int32][]byte)
 		for i := 0; i < v66; i++ {
@@ -4856,107 +4949,8 @@ func (m *OneofStdTypes_RepBytes) Size() (n int) {
 }
 
 func sovStdtypes(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozStdtypes(x uint64) (n int) {
 	return sovStdtypes(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-
-func init() { proto.RegisterFile("stdtypes.proto", fileDescriptor_stdtypes_ce26a3b6156de25d) }
-
-var fileDescriptor_stdtypes_ce26a3b6156de25d = []byte{
-	// 1372 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x99, 0x4f, 0x6f, 0x1b, 0xc5,
-	0x1b, 0xc7, 0xbd, 0x19, 0x3b, 0xb5, 0xc7, 0x76, 0x9a, 0x4c, 0x7f, 0xad, 0xf6, 0x67, 0xd0, 0xa6,
-	0x0a, 0x88, 0x06, 0x51, 0x1c, 0xd8, 0x45, 0x08, 0x21, 0x50, 0xc1, 0x0a, 0x25, 0x81, 0xfe, 0x01,
-	0xd7, 0x6e, 0x2c, 0xa0, 0x50, 0x9b, 0x6c, 0x4d, 0x84, 0xe3, 0xb5, 0xec, 0x35, 0x28, 0x37, 0x5e,
-	0x02, 0x47, 0x8e, 0x1c, 0xb9, 0x73, 0xe1, 0xc8, 0xb1, 0x47, 0x5e, 0x01, 0x34, 0xe6, 0x0d, 0x20,
-	0xb8, 0xf4, 0x82, 0x84, 0x76, 0x66, 0x76, 0x77, 0x76, 0xf7, 0x99, 0xdd, 0x95, 0x35, 0xbe, 0x25,
-	0x99, 0x79, 0x3e, 0xfe, 0xee, 0xe3, 0x51, 0x3e, 0x7e, 0x3c, 0x78, 0x63, 0xe6, 0x1e, 0xbb, 0x67,
-	0x13, 0x7b, 0xd6, 0x9c, 0x4c, 0x1d, 0xd7, 0x21, 0x65, 0xff, 0xf7, 0xc6, 0xcb, 0xc3, 0x13, 0xf7,
-	0xab, 0xf9, 0xa0, 0xf9, 0xa5, 0x73, 0xba, 0x37, 0x74, 0x86, 0xce, 0x1e, 0xdd, 0x30, 0x98, 0x3f,
-	0xa2, 0xbf, 0xd1, 0x5f, 0xe8, 0x4f, 0xac, 0xb0, 0x61, 0x0c, 0x1d, 0x67, 0x38, 0xb2, 0xc3, 0x5d,
-	0xc7, 0xf3, 0x69, 0xdf, 0x3d, 0x71, 0xc6, 0x7c, 0x7d, 0x3b, 0xbe, 0xee, 0x9e, 0x9c, 0xda, 0x33,
-	0xb7, 0x7f, 0x3a, 0x91, 0x01, 0xbe, 0x9d, 0xf6, 0x27, 0x13, 0x7b, 0xca, 0x93, 0xed, 0xfc, 0x5d,
-	0xc3, 0xe5, 0x7b, 0xee, 0x71, 0xc7, 0x0b, 0x47, 0xee, 0xe0, 0xad, 0xf1, 0x7c, 0x34, 0xea, 0x0f,
-	0x46, 0x76, 0xc7, 0xe7, 0xe8, 0xda, 0x55, 0x6d, 0xb7, 0x6a, 0x36, 0x9a, 0x0c, 0xd4, 0xf4, 0x41,
-	0xcd, 0x60, 0x47, 0xab, 0xf8, 0xfd, 0x1f, 0xdb, 0x5a, 0x3b, 0x59, 0x4a, 0x3e, 0xc4, 0x9b, 0xfe,
-	0x1f, 0xf7, 0x79, 0x6e, 0x7d, 0x8d, 0xe2, 0xfe, 0x9f, 0xc0, 0xf9, 0x1b, 0x5a, 0xc5, 0x1f, 0x3c,
-	0x5a, 0xa2, 0x90, 0xb4, 0x70, 0x25, 0x78, 0x38, 0x1d, 0x65, 0x86, 0x2a, 0x3f, 0xfe, 0x7d, 0xbb,
-	0x40, 0x83, 0x85, 0x65, 0xe4, 0x06, 0x2e, 0xfb, 0x0d, 0xd4, 0x8b, 0x59, 0x41, 0x28, 0x81, 0x86,
-	0x09, 0x8a, 0xc8, 0x07, 0x78, 0x23, 0x08, 0xe6, 0xcc, 0x07, 0x23, 0x5b, 0x2f, 0x51, 0xcc, 0xb3,
-	0x49, 0x0c, 0x5d, 0xbe, 0xdf, 0x1f, 0xcd, 0xed, 0x56, 0xf1, 0x47, 0x8f, 0x12, 0xab, 0x24, 0xb7,
-	0x70, 0x7d, 0xec, 0x8c, 0xbd, 0x3f, 0x72, 0xd4, 0x7a, 0x0e, 0x14, 0x0d, 0x45, 0x71, 0xd1, 0x62,
-	0xf2, 0x3e, 0xae, 0xfb, 0xfc, 0x9b, 0x23, 0xa7, 0xef, 0xea, 0x17, 0x28, 0xed, 0x99, 0x04, 0x8d,
-	0xae, 0x8a, 0xb9, 0xa2, 0x75, 0xe4, 0x10, 0xd7, 0x38, 0x99, 0x71, 0xca, 0xd9, 0x9c, 0x30, 0x54,
-	0xa4, 0x54, 0xcc, 0x74, 0x38, 0x76, 0x5f, 0x7f, 0x4d, 0xaf, 0x48, 0x58, 0x74, 0x15, 0xcc, 0x44,
-	0x57, 0x84, 0x4c, 0x8c, 0x83, 0xb3, 0x39, 0xc9, 0x4c, 0x0c, 0x25, 0xbc, 0x83, 0x5d, 0x06, 0xab,
-	0x4a, 0xda, 0xde, 0x4d, 0xa4, 0x8a, 0x55, 0x0a, 0xef, 0x20, 0x47, 0xd5, 0x72, 0xa0, 0x92, 0xef,
-	0x20, 0xa7, 0x45, 0xbb, 0x65, 0x99, 0x7a, 0x5d, 0xfe, 0x94, 0x96, 0x29, 0xeb, 0x96, 0x65, 0x46,
-	0xbb, 0x65, 0x99, 0xfa, 0x46, 0x36, 0x07, 0xec, 0x96, 0x65, 0xc6, 0xbb, 0x65, 0x99, 0xfa, 0xc5,
-	0x94, 0x47, 0x8c, 0xa6, 0x8a, 0x55, 0xc6, 0xba, 0x65, 0x99, 0xfa, 0x66, 0x0e, 0x14, 0xdc, 0x2d,
-	0xcb, 0x24, 0xfb, 0xb8, 0xe6, 0xf3, 0x5b, 0x8e, 0x33, 0xd2, 0xb7, 0x24, 0xff, 0x11, 0xbc, 0x45,
-	0x31, 0x55, 0xa4, 0x8a, 0xdc, 0xc4, 0x55, 0x8e, 0xa5, 0x10, 0x92, 0x09, 0x09, 0xf3, 0x88, 0x85,
-	0x62, 0x9f, 0xee, 0xb9, 0xd3, 0x93, 0xf1, 0x50, 0xbf, 0x24, 0x79, 0x38, 0xb6, 0x0c, 0xf6, 0x89,
-	0x2d, 0x09, 0x7d, 0xe2, 0xa8, 0xff, 0xe5, 0x40, 0x25, 0xfb, 0xc4, 0x69, 0xc2, 0xa9, 0x6a, 0x9d,
-	0xb9, 0xf6, 0x4c, 0xbf, 0x2c, 0x39, 0x0d, 0x74, 0x15, 0x3c, 0x55, 0x74, 0x45, 0x38, 0x55, 0x8c,
-	0x73, 0x25, 0x9b, 0x93, 0x3c, 0x55, 0x74, 0x71, 0xe7, 0xdf, 0x1a, 0xae, 0xb6, 0xed, 0x49, 0xe0,
-	0x9d, 0x8f, 0x30, 0x49, 0xc8, 0x63, 0xa6, 0x6b, 0x57, 0x51, 0x2e, 0xf1, 0x00, 0xb5, 0xe4, 0x76,
-	0x68, 0x32, 0xff, 0xff, 0xf9, 0x4c, 0x5f, 0xa3, 0xc0, 0x4c, 0xf5, 0x24, 0x2b, 0xc9, 0x3e, 0xc6,
-	0x6e, 0x18, 0x0c, 0x65, 0x06, 0x0b, 0xe5, 0x23, 0xd4, 0x91, 0x77, 0x71, 0xe5, 0x38, 0x08, 0x53,
-	0xcc, 0x0a, 0x13, 0xea, 0x27, 0xac, 0x02, 0xfd, 0x83, 0xd4, 0xf9, 0x07, 0x29, 0xf5, 0x0f, 0x52,
-	0xe4, 0x1f, 0xa4, 0xd0, 0x3f, 0x48, 0x91, 0x7f, 0x90, 0x4a, 0xff, 0x20, 0x75, 0xfe, 0x41, 0x4a,
-	0xfd, 0x83, 0x14, 0xf9, 0x07, 0xa9, 0xf4, 0x0f, 0x52, 0xe7, 0x1f, 0xa4, 0xd2, 0x3f, 0x48, 0x85,
-	0x7f, 0x90, 0x3a, 0xff, 0x20, 0x75, 0xfe, 0x41, 0x4a, 0xfd, 0x83, 0x14, 0xf9, 0x07, 0x2d, 0xeb,
-	0x9f, 0x9f, 0xb7, 0x71, 0xf5, 0x76, 0x3f, 0xf4, 0xcf, 0x43, 0x78, 0xee, 0xf1, 0xf8, 0xd7, 0x9b,
-	0xc1, 0x28, 0x27, 0x54, 0x34, 0xef, 0xc4, 0xb7, 0xbf, 0x37, 0x76, 0xa7, 0x67, 0xf2, 0x49, 0xe8,
-	0x96, 0x38, 0xbc, 0x30, 0x0f, 0x3d, 0x0f, 0x93, 0x63, 0x44, 0x70, 0x8c, 0x79, 0x00, 0xcc, 0x55,
-	0x4c, 0x4a, 0x2f, 0xa5, 0xc7, 0xf5, 0x77, 0xf3, 0xb4, 0x92, 0x49, 0xeb, 0x30, 0x32, 0x25, 0x79,
-	0xd8, 0xe7, 0x60, 0x6c, 0x14, 0x07, 0xcd, 0x4b, 0x47, 0x12, 0x5f, 0xbd, 0x98, 0x91, 0x93, 0xee,
-	0xe5, 0x29, 0x41, 0x79, 0xf5, 0x60, 0x79, 0xed, 0x4a, 0xb8, 0xe2, 0x56, 0x21, 0x2d, 0x24, 0xb2,
-	0x0e, 0x2c, 0xb2, 0xdd, 0xf4, 0xc4, 0x74, 0xab, 0x18, 0x38, 0x66, 0xb5, 0x2e, 0x68, 0xb5, 0x6b,
-	0xa9, 0x71, 0x05, 0xa6, 0xcc, 0x70, 0x1d, 0xd8, 0x70, 0x19, 0x61, 0xe9, 0x56, 0x30, 0x2c, 0x33,
-	0x41, 0x17, 0xd4, 0x5d, 0x7a, 0x58, 0x81, 0x29, 0x53, 0xdf, 0x91, 0x44, 0x7d, 0x19, 0x87, 0xa1,
-	0x9b, 0x88, 0x1b, 0xf7, 0x60, 0x0f, 0xf6, 0x60, 0xfa, 0x61, 0xe8, 0x82, 0x89, 0x63, 0x4e, 0xec,
-	0xc0, 0x4e, 0xcc, 0xee, 0xaf, 0x65, 0xca, 0xfa, 0x6b, 0x99, 0xd1, 0xfe, 0x06, 0x82, 0xcc, 0xec,
-	0xaf, 0xcf, 0x94, 0xc9, 0xf2, 0x48, 0x22, 0xcb, 0x1c, 0xfd, 0x8d, 0xc6, 0x8d, 0x9b, 0xb3, 0x07,
-	0x9b, 0x33, 0xbb, 0xbf, 0xc9, 0xc4, 0x31, 0x8b, 0x7e, 0x0c, 0x5a, 0xf4, 0x5a, 0x7a, 0x60, 0x6f,
-	0xa7, 0x18, 0x37, 0xaa, 0xd4, 0x36, 0xa4, 0xd4, 0x17, 0x52, 0xa3, 0x86, 0x40, 0x89, 0x5e, 0x8f,
-	0x24, 0x7a, 0xcd, 0xe8, 0x2c, 0xdb, 0x0b, 0x76, 0x96, 0xdb, 0xb1, 0x07, 0xbb, 0x36, 0xbd, 0xb3,
-	0x22, 0x56, 0xea, 0xdd, 0x0e, 0xec, 0xdd, 0x8c, 0x93, 0x4b, 0xb7, 0x82, 0x27, 0x97, 0x49, 0xb8,
-	0x0b, 0x4a, 0x38, 0xfd, 0xe4, 0x0a, 0x4c, 0x89, 0x90, 0x1b, 0x0f, 0xf1, 0x15, 0xd8, 0xa8, 0x64,
-	0x13, 0xa3, 0xaf, 0xed, 0x33, 0xfa, 0x25, 0x64, 0xa9, 0xed, 0xfd, 0x48, 0x5e, 0xc1, 0xa5, 0x6f,
-	0x3c, 0xbb, 0xf3, 0x6f, 0x12, 0x53, 0xc6, 0xb0, 0x36, 0xdb, 0xf8, 0xe6, 0xda, 0x1b, 0x5a, 0xa3,
-	0x87, 0x37, 0x56, 0x44, 0xfe, 0x1c, 0x5f, 0x06, 0xf5, 0x0a, 0xbc, 0xc0, 0x5e, 0xf4, 0x05, 0xe4,
-	0xc3, 0x9f, 0xc8, 0xbf, 0x8f, 0xeb, 0x2b, 0xe1, 0x7e, 0x81, 0x2f, 0x01, 0xba, 0x05, 0xe8, 0x66,
-	0x94, 0x9e, 0x3a, 0x1f, 0x46, 0x1b, 0x43, 0x92, 0xde, 0x55, 0xc8, 0x7f, 0x80, 0x49, 0xd2, 0xbe,
-	0x00, 0xff, 0xd5, 0x28, 0x3f, 0x6d, 0x92, 0x14, 0xf1, 0x9f, 0xe1, 0xad, 0x84, 0x87, 0xd5, 0xd1,
-	0x85, 0xf0, 0xa1, 0x87, 0x96, 0xc1, 0x87, 0x93, 0x1d, 0x1c, 0x7e, 0x15, 0x74, 0xe1, 0xe8, 0x74,
-	0x53, 0xf9, 0x99, 0x6f, 0x6d, 0x17, 0x7e, 0x81, 0xf0, 0xe8, 0xac, 0x86, 0x1f, 0xed, 0x3e, 0xb7,
-	0xd4, 0x92, 0xfd, 0xe1, 0x93, 0xa2, 0xb4, 0xfb, 0xca, 0xe9, 0xb1, 0xee, 0xcb, 0xf9, 0xb9, 0xba,
-	0x03, 0xbc, 0x40, 0xb4, 0xfb, 0xea, 0xf9, 0x9f, 0xe2, 0xad, 0x84, 0xca, 0x97, 0xf9, 0x77, 0x1c,
-	0x4c, 0xc5, 0x22, 0xfc, 0x13, 0xbc, 0x19, 0xb7, 0xba, 0x32, 0xb6, 0xd0, 0x79, 0xc1, 0xc1, 0xcb,
-	0x74, 0x46, 0x18, 0x9d, 0xe1, 0xce, 0xaf, 0x86, 0x2f, 0x9c, 0xfb, 0xd0, 0xca, 0xcb, 0x9c, 0xcc,
-	0x70, 0xc8, 0x86, 0xcf, 0xfd, 0x0a, 0xe8, 0x3b, 0xff, 0x94, 0x70, 0xfd, 0xee, 0xd8, 0x76, 0x1e,
-	0x05, 0x73, 0xfb, 0x3b, 0xe2, 0x54, 0x9d, 0xf3, 0x9e, 0xf2, 0xa0, 0x20, 0x4e, 0xd2, 0x6f, 0x0b,
-	0xa3, 0x6e, 0xbe, 0x9b, 0xc9, 0x83, 0x82, 0x30, 0xde, 0xb6, 0x70, 0x65, 0x6a, 0x4f, 0xf8, 0x04,
-	0x8a, 0xf2, 0xde, 0x04, 0x7a, 0x11, 0x82, 0x32, 0x72, 0x03, 0x97, 0xa7, 0xf6, 0x84, 0x4d, 0x85,
-	0xc5, 0x9c, 0x77, 0x76, 0x5e, 0x08, 0xbf, 0x88, 0x03, 0xd8, 0xe0, 0x53, 0xca, 0x79, 0xc1, 0xc6,
-	0x01, 0x6c, 0xc8, 0x61, 0x4f, 0xc1, 0x47, 0xa7, 0xf5, 0xbc, 0xb7, 0x61, 0xfc, 0x29, 0xf8, 0xa0,
-	0x14, 0x84, 0xb0, 0x4c, 0xe9, 0xcd, 0x63, 0xfc, 0x1b, 0xba, 0x30, 0x84, 0x65, 0x0a, 0x21, 0x2c,
-	0x93, 0xdf, 0x39, 0xe6, 0xf8, 0x92, 0x4f, 0x08, 0x61, 0x99, 0xe4, 0x2d, 0x7c, 0x61, 0x6a, 0x4f,
-	0xe8, 0xc7, 0xfe, 0x4a, 0xbe, 0xeb, 0xa0, 0x83, 0x42, 0xdb, 0x2f, 0xe1, 0x09, 0xf8, 0xe7, 0x70,
-	0x9c, 0xf7, 0xfa, 0x86, 0x27, 0xe0, 0x9f, 0xba, 0x59, 0x1b, 0xd8, 0x67, 0xe3, 0x6a, 0xce, 0x8b,
-	0x16, 0xde, 0x06, 0xfa, 0xe7, 0xd6, 0x45, 0x7a, 0xc6, 0xef, 0xd2, 0x33, 0xee, 0x9d, 0xd2, 0xd6,
-	0xf5, 0x27, 0xe7, 0x86, 0xf6, 0xd7, 0xb9, 0xa1, 0x3d, 0x3d, 0x37, 0xb4, 0x9f, 0x16, 0x86, 0xf6,
-	0xcb, 0xc2, 0xd0, 0x7e, 0x5d, 0x18, 0xda, 0xe3, 0x85, 0x51, 0xf8, 0x6d, 0x61, 0x14, 0x9e, 0x2c,
-	0x0c, 0xed, 0xe9, 0xc2, 0x28, 0x7c, 0xf7, 0xa7, 0x51, 0x18, 0xac, 0xd3, 0x57, 0xb1, 0xfe, 0x0b,
-	0x00, 0x00, 0xff, 0xff, 0xd9, 0x80, 0xa9, 0x4d, 0x81, 0x20, 0x00, 0x00,
 }

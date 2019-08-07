@@ -3,10 +3,12 @@
 
 package issue312
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
+import (
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -32,6 +34,7 @@ var TaskState_name = map[int32]string{
 	0: "TASK_STARTING",
 	1: "TASK_RUNNING",
 }
+
 var TaskState_value = map[string]int32{
 	"TASK_STAGING":  6,
 	"TASK_STARTING": 0,
@@ -43,9 +46,11 @@ func (x TaskState) Enum() *TaskState {
 	*p = x
 	return p
 }
+
 func (x TaskState) String() string {
 	return proto.EnumName(TaskState_name, int32(x))
 }
+
 func (x *TaskState) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(TaskState_value, data, "TaskState")
 	if err != nil {
@@ -54,17 +59,18 @@ func (x *TaskState) UnmarshalJSON(data []byte) error {
 	*x = TaskState(value)
 	return nil
 }
+
 func (TaskState) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_issue312_ffe23d3d41bbbf36, []int{0}
+	return fileDescriptor_8a64932ccacef062, []int{0}
 }
 
 func init() {
 	proto.RegisterEnum("issue312.TaskState", TaskState_name, TaskState_value)
 }
 
-func init() { proto.RegisterFile("issue312.proto", fileDescriptor_issue312_ffe23d3d41bbbf36) }
+func init() { proto.RegisterFile("issue312.proto", fileDescriptor_8a64932ccacef062) }
 
-var fileDescriptor_issue312_ffe23d3d41bbbf36 = []byte{
+var fileDescriptor_8a64932ccacef062 = []byte{
 	// 147 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0x2c, 0x2e, 0x2e,
 	0x4d, 0x35, 0x36, 0x34, 0xd2, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x80, 0xf1, 0xa5, 0x74,

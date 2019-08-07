@@ -3,14 +3,15 @@
 
 package deterministic
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
-
-import bytes "bytes"
-
-import github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+import (
+	bytes "bytes"
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
+	math "math"
+	math_bits "math/bits"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -24,7 +25,7 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type OrderedMap struct {
-	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap,proto3" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -34,21 +35,21 @@ func (m *OrderedMap) Reset()         { *m = OrderedMap{} }
 func (m *OrderedMap) String() string { return proto.CompactTextString(m) }
 func (*OrderedMap) ProtoMessage()    {}
 func (*OrderedMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_f6340fb8decdd007, []int{0}
+	return fileDescriptor_c4c11acb40b6bc2e, []int{0}
 }
 func (m *OrderedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OrderedMap.Unmarshal(m, b)
 }
 func (m *OrderedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
+	n, err := m.MarshalToSizedBuffer(b)
 	if err != nil {
 		return nil, err
 	}
 	return b[:n], nil
 }
-func (dst *OrderedMap) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_OrderedMap.Merge(dst, src)
+func (m *OrderedMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OrderedMap.Merge(m, src)
 }
 func (m *OrderedMap) XXX_Size() int {
 	return m.Size()
@@ -67,7 +68,7 @@ func (m *OrderedMap) GetStringMap() map[string]string {
 }
 
 type UnorderedMap struct {
-	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap,proto3" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -77,7 +78,7 @@ func (m *UnorderedMap) Reset()         { *m = UnorderedMap{} }
 func (m *UnorderedMap) String() string { return proto.CompactTextString(m) }
 func (*UnorderedMap) ProtoMessage()    {}
 func (*UnorderedMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_f6340fb8decdd007, []int{1}
+	return fileDescriptor_c4c11acb40b6bc2e, []int{1}
 }
 func (m *UnorderedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnorderedMap.Unmarshal(m, b)
@@ -87,15 +88,15 @@ func (m *UnorderedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 		return xxx_messageInfo_UnorderedMap.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
 		return b[:n], nil
 	}
 }
-func (dst *UnorderedMap) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UnorderedMap.Merge(dst, src)
+func (m *UnorderedMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UnorderedMap.Merge(m, src)
 }
 func (m *UnorderedMap) XXX_Size() int {
 	return m.Size()
@@ -114,7 +115,7 @@ func (m *UnorderedMap) GetStringMap() map[string]string {
 }
 
 type MapNoMarshaler struct {
-	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap,proto3" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -124,7 +125,7 @@ func (m *MapNoMarshaler) Reset()         { *m = MapNoMarshaler{} }
 func (m *MapNoMarshaler) String() string { return proto.CompactTextString(m) }
 func (*MapNoMarshaler) ProtoMessage()    {}
 func (*MapNoMarshaler) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_f6340fb8decdd007, []int{2}
+	return fileDescriptor_c4c11acb40b6bc2e, []int{2}
 }
 func (m *MapNoMarshaler) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MapNoMarshaler.Unmarshal(m, b)
@@ -132,8 +133,8 @@ func (m *MapNoMarshaler) XXX_Unmarshal(b []byte) error {
 func (m *MapNoMarshaler) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_MapNoMarshaler.Marshal(b, m, deterministic)
 }
-func (dst *MapNoMarshaler) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MapNoMarshaler.Merge(dst, src)
+func (m *MapNoMarshaler) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MapNoMarshaler.Merge(m, src)
 }
 func (m *MapNoMarshaler) XXX_Size() int {
 	return xxx_messageInfo_MapNoMarshaler.Size(m)
@@ -152,8 +153,8 @@ func (m *MapNoMarshaler) GetStringMap() map[string]string {
 }
 
 type NestedOrderedMap struct {
-	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	NestedMap            *NestedMap1       `protobuf:"bytes,2,opt,name=NestedMap" json:"NestedMap,omitempty"`
+	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap,proto3" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NestedMap            *NestedMap1       `protobuf:"bytes,2,opt,name=NestedMap,proto3" json:"NestedMap,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -163,21 +164,21 @@ func (m *NestedOrderedMap) Reset()         { *m = NestedOrderedMap{} }
 func (m *NestedOrderedMap) String() string { return proto.CompactTextString(m) }
 func (*NestedOrderedMap) ProtoMessage()    {}
 func (*NestedOrderedMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_f6340fb8decdd007, []int{3}
+	return fileDescriptor_c4c11acb40b6bc2e, []int{3}
 }
 func (m *NestedOrderedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedOrderedMap.Unmarshal(m, b)
 }
 func (m *NestedOrderedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
+	n, err := m.MarshalToSizedBuffer(b)
 	if err != nil {
 		return nil, err
 	}
 	return b[:n], nil
 }
-func (dst *NestedOrderedMap) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NestedOrderedMap.Merge(dst, src)
+func (m *NestedOrderedMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NestedOrderedMap.Merge(m, src)
 }
 func (m *NestedOrderedMap) XXX_Size() int {
 	return m.Size()
@@ -203,7 +204,7 @@ func (m *NestedOrderedMap) GetNestedMap() *NestedMap1 {
 }
 
 type NestedMap1 struct {
-	NestedStringMap      map[string]string `protobuf:"bytes,1,rep,name=NestedStringMap" json:"NestedStringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NestedStringMap      map[string]string `protobuf:"bytes,1,rep,name=NestedStringMap,proto3" json:"NestedStringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -213,21 +214,21 @@ func (m *NestedMap1) Reset()         { *m = NestedMap1{} }
 func (m *NestedMap1) String() string { return proto.CompactTextString(m) }
 func (*NestedMap1) ProtoMessage()    {}
 func (*NestedMap1) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_f6340fb8decdd007, []int{4}
+	return fileDescriptor_c4c11acb40b6bc2e, []int{4}
 }
 func (m *NestedMap1) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedMap1.Unmarshal(m, b)
 }
 func (m *NestedMap1) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	b = b[:cap(b)]
-	n, err := m.MarshalTo(b)
+	n, err := m.MarshalToSizedBuffer(b)
 	if err != nil {
 		return nil, err
 	}
 	return b[:n], nil
 }
-func (dst *NestedMap1) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NestedMap1.Merge(dst, src)
+func (m *NestedMap1) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NestedMap1.Merge(m, src)
 }
 func (m *NestedMap1) XXX_Size() int {
 	return m.Size()
@@ -246,8 +247,8 @@ func (m *NestedMap1) GetNestedStringMap() map[string]string {
 }
 
 type NestedUnorderedMap struct {
-	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	NestedMap            *NestedMap2       `protobuf:"bytes,2,opt,name=NestedMap" json:"NestedMap,omitempty"`
+	StringMap            map[string]string `protobuf:"bytes,1,rep,name=StringMap,proto3" json:"StringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NestedMap            *NestedMap2       `protobuf:"bytes,2,opt,name=NestedMap,proto3" json:"NestedMap,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -257,7 +258,7 @@ func (m *NestedUnorderedMap) Reset()         { *m = NestedUnorderedMap{} }
 func (m *NestedUnorderedMap) String() string { return proto.CompactTextString(m) }
 func (*NestedUnorderedMap) ProtoMessage()    {}
 func (*NestedUnorderedMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_f6340fb8decdd007, []int{5}
+	return fileDescriptor_c4c11acb40b6bc2e, []int{5}
 }
 func (m *NestedUnorderedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedUnorderedMap.Unmarshal(m, b)
@@ -267,15 +268,15 @@ func (m *NestedUnorderedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 		return xxx_messageInfo_NestedUnorderedMap.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
 		return b[:n], nil
 	}
 }
-func (dst *NestedUnorderedMap) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NestedUnorderedMap.Merge(dst, src)
+func (m *NestedUnorderedMap) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NestedUnorderedMap.Merge(m, src)
 }
 func (m *NestedUnorderedMap) XXX_Size() int {
 	return m.Size()
@@ -301,7 +302,7 @@ func (m *NestedUnorderedMap) GetNestedMap() *NestedMap2 {
 }
 
 type NestedMap2 struct {
-	NestedStringMap      map[string]string `protobuf:"bytes,1,rep,name=NestedStringMap" json:"NestedStringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	NestedStringMap      map[string]string `protobuf:"bytes,1,rep,name=NestedStringMap,proto3" json:"NestedStringMap,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -311,7 +312,7 @@ func (m *NestedMap2) Reset()         { *m = NestedMap2{} }
 func (m *NestedMap2) String() string { return proto.CompactTextString(m) }
 func (*NestedMap2) ProtoMessage()    {}
 func (*NestedMap2) Descriptor() ([]byte, []int) {
-	return fileDescriptor_deterministic_f6340fb8decdd007, []int{6}
+	return fileDescriptor_c4c11acb40b6bc2e, []int{6}
 }
 func (m *NestedMap2) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedMap2.Unmarshal(m, b)
@@ -321,15 +322,15 @@ func (m *NestedMap2) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return xxx_messageInfo_NestedMap2.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
+		n, err := m.MarshalToSizedBuffer(b)
 		if err != nil {
 			return nil, err
 		}
 		return b[:n], nil
 	}
 }
-func (dst *NestedMap2) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NestedMap2.Merge(dst, src)
+func (m *NestedMap2) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_NestedMap2.Merge(m, src)
 }
 func (m *NestedMap2) XXX_Size() int {
 	return m.Size()
@@ -363,6 +364,38 @@ func init() {
 	proto.RegisterType((*NestedMap2)(nil), "deterministic.NestedMap2")
 	proto.RegisterMapType((map[string]string)(nil), "deterministic.NestedMap2.NestedStringMapEntry")
 }
+
+func init() { proto.RegisterFile("deterministic.proto", fileDescriptor_c4c11acb40b6bc2e) }
+
+var fileDescriptor_c4c11acb40b6bc2e = []byte{
+	// 385 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x4e, 0x49, 0x2d, 0x49,
+	0x2d, 0xca, 0xcd, 0xcc, 0xcb, 0x2c, 0x2e, 0xc9, 0x4c, 0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17,
+	0xe2, 0x45, 0x11, 0x94, 0xd2, 0x4d, 0xcf, 0x2c, 0xc9, 0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5,
+	0x4f, 0xcf, 0x4f, 0xcf, 0xd7, 0x07, 0xab, 0x4a, 0x2a, 0x4d, 0x03, 0xf3, 0xc0, 0x1c, 0x30, 0x0b,
+	0xa2, 0x5b, 0x69, 0x0e, 0x23, 0x17, 0x97, 0x7f, 0x51, 0x4a, 0x6a, 0x51, 0x6a, 0x8a, 0x6f, 0x62,
+	0x81, 0x90, 0x1b, 0x17, 0x67, 0x70, 0x49, 0x51, 0x66, 0x5e, 0xba, 0x6f, 0x62, 0x81, 0x04, 0xa3,
+	0x02, 0xb3, 0x06, 0xb7, 0x91, 0x86, 0x1e, 0xaa, 0xad, 0x08, 0xd5, 0x7a, 0x70, 0xa5, 0xae, 0x79,
+	0x25, 0x45, 0x95, 0x41, 0x08, 0xad, 0x52, 0x36, 0x5c, 0x7c, 0xa8, 0x92, 0x42, 0x02, 0x5c, 0xcc,
+	0xd9, 0xa9, 0x95, 0x12, 0x8c, 0x0a, 0x8c, 0x1a, 0x9c, 0x41, 0x20, 0xa6, 0x90, 0x08, 0x17, 0x6b,
+	0x59, 0x62, 0x4e, 0x69, 0xaa, 0x04, 0x13, 0x58, 0x0c, 0xc2, 0xb1, 0x62, 0xb2, 0x60, 0xb4, 0xe2,
+	0xe8, 0x58, 0x28, 0xcf, 0x38, 0x63, 0xa1, 0x3c, 0xa3, 0xd2, 0x02, 0x46, 0x2e, 0x9e, 0xd0, 0xbc,
+	0x7c, 0x84, 0x03, 0x3d, 0x30, 0x1d, 0xa8, 0x85, 0xe6, 0x40, 0x64, 0xf5, 0x34, 0x77, 0x22, 0x03,
+	0xc8, 0x89, 0x7c, 0xbe, 0x89, 0x05, 0x7e, 0xf9, 0xbe, 0x89, 0x45, 0xc5, 0x19, 0x89, 0x39, 0xa9,
+	0x45, 0x42, 0x5e, 0x98, 0x8e, 0xd4, 0x41, 0x73, 0x24, 0xaa, 0x0e, 0x9a, 0x39, 0x93, 0xa5, 0x03,
+	0xe4, 0xc4, 0x87, 0x8c, 0x5c, 0x02, 0x7e, 0xa9, 0xc5, 0x25, 0xa9, 0x29, 0x48, 0x51, 0xed, 0x83,
+	0xe9, 0x48, 0x3d, 0x34, 0x47, 0xa2, 0xeb, 0xc1, 0xed, 0x4c, 0x21, 0x73, 0x2e, 0x4e, 0x88, 0x6a,
+	0x90, 0x69, 0x20, 0x67, 0x70, 0x1b, 0x49, 0x62, 0x35, 0xcd, 0x37, 0xb1, 0xc0, 0x30, 0x08, 0xa1,
+	0x96, 0x6a, 0x29, 0x65, 0x0b, 0x23, 0x17, 0x17, 0xc2, 0x06, 0xa1, 0x08, 0x2e, 0x7e, 0x08, 0x8f,
+	0x38, 0x3f, 0x82, 0xf4, 0xe8, 0xa1, 0x69, 0x80, 0xf8, 0x11, 0xdd, 0x18, 0x29, 0x27, 0x2e, 0x11,
+	0x6c, 0x0a, 0xc9, 0x74, 0xf6, 0x53, 0x46, 0x2e, 0x21, 0x88, 0x71, 0x28, 0xc9, 0xdc, 0x0f, 0x33,
+	0x72, 0x0c, 0xb0, 0x3a, 0x9c, 0xb8, 0xc4, 0x4e, 0x52, 0xf4, 0x18, 0x51, 0x3f, 0x7a, 0x18, 0x50,
+	0xa3, 0xc7, 0x88, 0x8c, 0xe8, 0x31, 0x1a, 0x80, 0xe8, 0x61, 0x70, 0x12, 0x78, 0xf0, 0x50, 0x8e,
+	0x71, 0xc5, 0x23, 0x39, 0xc6, 0x07, 0x8f, 0xe4, 0x18, 0x3f, 0x3c, 0x92, 0x63, 0x4c, 0x62, 0x03,
+	0x97, 0x9b, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0xa0, 0xcf, 0x58, 0xa8, 0x8c, 0x05, 0x00,
+	0x00,
+}
+
 func (this *OrderedMap) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
@@ -868,7 +901,7 @@ func (this *NestedMap2) Equal(that interface{}) bool {
 func (m *OrderedMap) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -876,42 +909,50 @@ func (m *OrderedMap) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *OrderedMap) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *OrderedMap) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
 	if len(m.StringMap) > 0 {
 		keysForStringMap := make([]string, 0, len(m.StringMap))
 		for k := range m.StringMap {
 			keysForStringMap = append(keysForStringMap, string(k))
 		}
 		github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
-		for _, k := range keysForStringMap {
-			dAtA[i] = 0xa
-			i++
-			v := m.StringMap[string(k)]
-			mapSize := 1 + len(k) + sovDeterministic(uint64(len(k))) + 1 + len(v) + sovDeterministic(uint64(len(v)))
-			i = encodeVarintDeterministic(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
+		for iNdEx := len(keysForStringMap) - 1; iNdEx >= 0; iNdEx-- {
+			v := m.StringMap[string(keysForStringMap[iNdEx])]
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
 			i = encodeVarintDeterministic(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
+			i--
+			dAtA[i] = 0x12
+			i -= len(keysForStringMap[iNdEx])
+			copy(dAtA[i:], keysForStringMap[iNdEx])
+			i = encodeVarintDeterministic(dAtA, i, uint64(len(keysForStringMap[iNdEx])))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintDeterministic(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *UnorderedMap) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -919,37 +960,45 @@ func (m *UnorderedMap) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *UnorderedMap) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UnorderedMap) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
 	if len(m.StringMap) > 0 {
 		for k := range m.StringMap {
-			dAtA[i] = 0xa
-			i++
 			v := m.StringMap[k]
-			mapSize := 1 + len(k) + sovDeterministic(uint64(len(k))) + 1 + len(v) + sovDeterministic(uint64(len(v)))
-			i = encodeVarintDeterministic(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
 			i = encodeVarintDeterministic(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
+			i--
+			dAtA[i] = 0x12
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintDeterministic(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *NestedOrderedMap) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -957,52 +1006,62 @@ func (m *NestedOrderedMap) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *NestedOrderedMap) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *NestedOrderedMap) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if m.NestedMap != nil {
+		{
+			size, err := m.NestedMap.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintDeterministic(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
 	if len(m.StringMap) > 0 {
 		keysForStringMap := make([]string, 0, len(m.StringMap))
 		for k := range m.StringMap {
 			keysForStringMap = append(keysForStringMap, string(k))
 		}
 		github_com_gogo_protobuf_sortkeys.Strings(keysForStringMap)
-		for _, k := range keysForStringMap {
-			dAtA[i] = 0xa
-			i++
-			v := m.StringMap[string(k)]
-			mapSize := 1 + len(k) + sovDeterministic(uint64(len(k))) + 1 + len(v) + sovDeterministic(uint64(len(v)))
-			i = encodeVarintDeterministic(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
+		for iNdEx := len(keysForStringMap) - 1; iNdEx >= 0; iNdEx-- {
+			v := m.StringMap[string(keysForStringMap[iNdEx])]
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
 			i = encodeVarintDeterministic(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
+			i--
+			dAtA[i] = 0x12
+			i -= len(keysForStringMap[iNdEx])
+			copy(dAtA[i:], keysForStringMap[iNdEx])
+			i = encodeVarintDeterministic(dAtA, i, uint64(len(keysForStringMap[iNdEx])))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintDeterministic(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
 		}
 	}
-	if m.NestedMap != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintDeterministic(dAtA, i, uint64(m.NestedMap.Size()))
-		n1, err := m.NestedMap.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n1
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *NestedMap1) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1010,42 +1069,50 @@ func (m *NestedMap1) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *NestedMap1) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *NestedMap1) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
 	if len(m.NestedStringMap) > 0 {
 		keysForNestedStringMap := make([]string, 0, len(m.NestedStringMap))
 		for k := range m.NestedStringMap {
 			keysForNestedStringMap = append(keysForNestedStringMap, string(k))
 		}
 		github_com_gogo_protobuf_sortkeys.Strings(keysForNestedStringMap)
-		for _, k := range keysForNestedStringMap {
-			dAtA[i] = 0xa
-			i++
-			v := m.NestedStringMap[string(k)]
-			mapSize := 1 + len(k) + sovDeterministic(uint64(len(k))) + 1 + len(v) + sovDeterministic(uint64(len(v)))
-			i = encodeVarintDeterministic(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
+		for iNdEx := len(keysForNestedStringMap) - 1; iNdEx >= 0; iNdEx-- {
+			v := m.NestedStringMap[string(keysForNestedStringMap[iNdEx])]
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
 			i = encodeVarintDeterministic(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
+			i--
+			dAtA[i] = 0x12
+			i -= len(keysForNestedStringMap[iNdEx])
+			copy(dAtA[i:], keysForNestedStringMap[iNdEx])
+			i = encodeVarintDeterministic(dAtA, i, uint64(len(keysForNestedStringMap[iNdEx])))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintDeterministic(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *NestedUnorderedMap) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1053,47 +1120,57 @@ func (m *NestedUnorderedMap) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *NestedUnorderedMap) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *NestedUnorderedMap) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.StringMap) > 0 {
-		for k := range m.StringMap {
-			dAtA[i] = 0xa
-			i++
-			v := m.StringMap[k]
-			mapSize := 1 + len(k) + sovDeterministic(uint64(len(k))) + 1 + len(v) + sovDeterministic(uint64(len(v)))
-			i = encodeVarintDeterministic(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
-			i = encodeVarintDeterministic(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
-		}
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	if m.NestedMap != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintDeterministic(dAtA, i, uint64(m.NestedMap.Size()))
-		n2, err := m.NestedMap.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		{
+			size, err := m.NestedMap.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintDeterministic(dAtA, i, uint64(size))
 		}
-		i += n2
+		i--
+		dAtA[i] = 0x12
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
+	if len(m.StringMap) > 0 {
+		for k := range m.StringMap {
+			v := m.StringMap[k]
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
+			i = encodeVarintDeterministic(dAtA, i, uint64(len(v)))
+			i--
+			dAtA[i] = 0x12
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintDeterministic(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
+		}
 	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func (m *NestedMap2) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
 	if err != nil {
 		return nil, err
 	}
@@ -1101,41 +1178,51 @@ func (m *NestedMap2) Marshal() (dAtA []byte, err error) {
 }
 
 func (m *NestedMap2) MarshalTo(dAtA []byte) (int, error) {
-	var i int
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *NestedMap2) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
 	if len(m.NestedStringMap) > 0 {
 		for k := range m.NestedStringMap {
-			dAtA[i] = 0xa
-			i++
 			v := m.NestedStringMap[k]
-			mapSize := 1 + len(k) + sovDeterministic(uint64(len(k))) + 1 + len(v) + sovDeterministic(uint64(len(v)))
-			i = encodeVarintDeterministic(dAtA, i, uint64(mapSize))
-			dAtA[i] = 0xa
-			i++
-			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
-			i += copy(dAtA[i:], k)
-			dAtA[i] = 0x12
-			i++
+			baseI := i
+			i -= len(v)
+			copy(dAtA[i:], v)
 			i = encodeVarintDeterministic(dAtA, i, uint64(len(v)))
-			i += copy(dAtA[i:], v)
+			i--
+			dAtA[i] = 0x12
+			i -= len(k)
+			copy(dAtA[i:], k)
+			i = encodeVarintDeterministic(dAtA, i, uint64(len(k)))
+			i--
+			dAtA[i] = 0xa
+			i = encodeVarintDeterministic(dAtA, i, uint64(baseI-i))
+			i--
+			dAtA[i] = 0xa
 		}
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
+	return len(dAtA) - i, nil
 }
 
 func encodeVarintDeterministic(dAtA []byte, offset int, v uint64) int {
+	offset -= sovDeterministic(v)
+	base := offset
 	for v >= 1<<7 {
 		dAtA[offset] = uint8(v&0x7f | 0x80)
 		v >>= 7
 		offset++
 	}
 	dAtA[offset] = uint8(v)
-	return offset + 1
+	return base
 }
 func (m *OrderedMap) Size() (n int) {
 	if m == nil {
@@ -1286,46 +1373,8 @@ func (m *NestedMap2) Size() (n int) {
 }
 
 func sovDeterministic(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozDeterministic(x uint64) (n int) {
 	return sovDeterministic(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-
-func init() { proto.RegisterFile("deterministic.proto", fileDescriptor_deterministic_f6340fb8decdd007) }
-
-var fileDescriptor_deterministic_f6340fb8decdd007 = []byte{
-	// 385 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x4e, 0x49, 0x2d, 0x49,
-	0x2d, 0xca, 0xcd, 0xcc, 0xcb, 0x2c, 0x2e, 0xc9, 0x4c, 0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17,
-	0xe2, 0x45, 0x11, 0x94, 0xd2, 0x4d, 0xcf, 0x2c, 0xc9, 0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5,
-	0x4f, 0xcf, 0x4f, 0xcf, 0xd7, 0x07, 0xab, 0x4a, 0x2a, 0x4d, 0x03, 0xf3, 0xc0, 0x1c, 0x30, 0x0b,
-	0xa2, 0x5b, 0x69, 0x0e, 0x23, 0x17, 0x97, 0x7f, 0x51, 0x4a, 0x6a, 0x51, 0x6a, 0x8a, 0x6f, 0x62,
-	0x81, 0x90, 0x1b, 0x17, 0x67, 0x70, 0x49, 0x51, 0x66, 0x5e, 0xba, 0x6f, 0x62, 0x81, 0x04, 0xa3,
-	0x02, 0xb3, 0x06, 0xb7, 0x91, 0x86, 0x1e, 0xaa, 0xad, 0x08, 0xd5, 0x7a, 0x70, 0xa5, 0xae, 0x79,
-	0x25, 0x45, 0x95, 0x41, 0x08, 0xad, 0x52, 0x36, 0x5c, 0x7c, 0xa8, 0x92, 0x42, 0x02, 0x5c, 0xcc,
-	0xd9, 0xa9, 0x95, 0x12, 0x8c, 0x0a, 0x8c, 0x1a, 0x9c, 0x41, 0x20, 0xa6, 0x90, 0x08, 0x17, 0x6b,
-	0x59, 0x62, 0x4e, 0x69, 0xaa, 0x04, 0x13, 0x58, 0x0c, 0xc2, 0xb1, 0x62, 0xb2, 0x60, 0xb4, 0xe2,
-	0xe8, 0x58, 0x28, 0xcf, 0x38, 0x63, 0xa1, 0x3c, 0xa3, 0xd2, 0x02, 0x46, 0x2e, 0x9e, 0xd0, 0xbc,
-	0x7c, 0x84, 0x03, 0x3d, 0x30, 0x1d, 0xa8, 0x85, 0xe6, 0x40, 0x64, 0xf5, 0x34, 0x77, 0x22, 0x03,
-	0xc8, 0x89, 0x7c, 0xbe, 0x89, 0x05, 0x7e, 0xf9, 0xbe, 0x89, 0x45, 0xc5, 0x19, 0x89, 0x39, 0xa9,
-	0x45, 0x42, 0x5e, 0x98, 0x8e, 0xd4, 0x41, 0x73, 0x24, 0xaa, 0x0e, 0x9a, 0x39, 0x93, 0xa5, 0x03,
-	0xe4, 0xc4, 0x87, 0x8c, 0x5c, 0x02, 0x7e, 0xa9, 0xc5, 0x25, 0xa9, 0x29, 0x48, 0x51, 0xed, 0x83,
-	0xe9, 0x48, 0x3d, 0x34, 0x47, 0xa2, 0xeb, 0xc1, 0xed, 0x4c, 0x21, 0x73, 0x2e, 0x4e, 0x88, 0x6a,
-	0x90, 0x69, 0x20, 0x67, 0x70, 0x1b, 0x49, 0x62, 0x35, 0xcd, 0x37, 0xb1, 0xc0, 0x30, 0x08, 0xa1,
-	0x96, 0x6a, 0x29, 0x65, 0x0b, 0x23, 0x17, 0x17, 0xc2, 0x06, 0xa1, 0x08, 0x2e, 0x7e, 0x08, 0x8f,
-	0x38, 0x3f, 0x82, 0xf4, 0xe8, 0xa1, 0x69, 0x80, 0xf8, 0x11, 0xdd, 0x18, 0x29, 0x27, 0x2e, 0x11,
-	0x6c, 0x0a, 0xc9, 0x74, 0xf6, 0x53, 0x46, 0x2e, 0x21, 0x88, 0x71, 0x28, 0xc9, 0xdc, 0x0f, 0x33,
-	0x72, 0x0c, 0xb0, 0x3a, 0x9c, 0xb8, 0xc4, 0x4e, 0x52, 0xf4, 0x18, 0x51, 0x3f, 0x7a, 0x18, 0x50,
-	0xa3, 0xc7, 0x88, 0x8c, 0xe8, 0x31, 0x1a, 0x80, 0xe8, 0x61, 0x70, 0x12, 0x78, 0xf0, 0x50, 0x8e,
-	0x71, 0xc5, 0x23, 0x39, 0xc6, 0x07, 0x8f, 0xe4, 0x18, 0x3f, 0x3c, 0x92, 0x63, 0x4c, 0x62, 0x03,
-	0x97, 0x9b, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0xa0, 0xcf, 0x58, 0xa8, 0x8c, 0x05, 0x00,
-	0x00,
 }

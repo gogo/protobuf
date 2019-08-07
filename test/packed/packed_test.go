@@ -31,12 +31,13 @@ package packed
 import (
 	"bytes"
 	"fmt"
-	"github.com/gogo/protobuf/proto"
 	math_rand "math/rand"
 	"runtime"
 	"testing"
 	"time"
 	"unsafe"
+
+	"github.com/gogo/protobuf/proto"
 )
 
 func BenchmarkVarintIssue436withCount(b *testing.B) {
@@ -192,6 +193,47 @@ func TestIssue436(t *testing.T) {
 	usedRatio := float64(totalPacked) / float64(totalNormal)
 	if usedRatio > 0.5 {
 		t.Fatalf("unmarshaling packed msg allocated too much memory:\nnormal:\t\t%d bytes\npacked:\t\t%d bytes\nused ratio:\t%.2f%%", totalNormal, totalPacked, usedRatio*100)
+	}
+}
+
+/*
+https://github.com/gogo/protobuf/issues/503
+preallocation was estimating length over all data vs. just that for the given field.
+*/
+func TestTestPackedPreallocation(t *testing.T) {
+	n1 := 900
+	n2 := 700
+
+	msgPacked := &NinRepPackedNative{
+		Field3: make([]int32, n1),
+		Field4: make([]int64, n2),
+	}
+
+	dataPacked, err := proto.Marshal(msgPacked)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	packedmsg := &NinRepPackedNative{}
+	err = proto.Unmarshal(dataPacked, packedmsg)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if v := len(packedmsg.Field3); v != n1 {
+		t.Errorf("Field3 incorrect len: %v != %v", v, n1)
+	}
+
+	if v := len(packedmsg.Field4); v != n2 {
+		t.Errorf("Field4 incorrect len: %v != %v", v, n2)
+	}
+
+	if v := cap(packedmsg.Field3); v != n1 {
+		t.Errorf("Field3 incorrect cap: %v != %v", v, n1)
+	}
+
+	if v := cap(packedmsg.Field4); v != n2 {
+		t.Errorf("Field4 incorrect cap: %v != %v", v, n2)
 	}
 }
 

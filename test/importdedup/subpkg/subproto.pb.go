@@ -3,10 +3,12 @@
 
 package subpkg
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import _ "github.com/gogo/protobuf/gogoproto"
+import (
+	fmt "fmt"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/gogo/protobuf/proto"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -29,7 +31,7 @@ func (m *SubObject) Reset()         { *m = SubObject{} }
 func (m *SubObject) String() string { return proto.CompactTextString(m) }
 func (*SubObject) ProtoMessage()    {}
 func (*SubObject) Descriptor() ([]byte, []int) {
-	return fileDescriptor_subproto_094c5f22e1aecb1e, []int{0}
+	return fileDescriptor_896c12f092e0b025, []int{0}
 }
 func (m *SubObject) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SubObject.Unmarshal(m, b)
@@ -37,8 +39,8 @@ func (m *SubObject) XXX_Unmarshal(b []byte) error {
 func (m *SubObject) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SubObject.Marshal(b, m, deterministic)
 }
-func (dst *SubObject) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SubObject.Merge(dst, src)
+func (m *SubObject) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SubObject.Merge(m, src)
 }
 func (m *SubObject) XXX_Size() int {
 	return xxx_messageInfo_SubObject.Size(m)
@@ -53,9 +55,9 @@ func init() {
 	proto.RegisterType((*SubObject)(nil), "subpkg.SubObject")
 }
 
-func init() { proto.RegisterFile("subpkg/subproto.proto", fileDescriptor_subproto_094c5f22e1aecb1e) }
+func init() { proto.RegisterFile("subpkg/subproto.proto", fileDescriptor_896c12f092e0b025) }
 
-var fileDescriptor_subproto_094c5f22e1aecb1e = []byte{
+var fileDescriptor_896c12f092e0b025 = []byte{
 	// 88 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2d, 0x2e, 0x4d, 0x2a,
 	0xc8, 0x4e, 0xd7, 0x07, 0x51, 0x45, 0xf9, 0x25, 0xf9, 0x7a, 0x60, 0x52, 0x88, 0x0d, 0x22, 0x2c,
