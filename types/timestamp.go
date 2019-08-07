@@ -132,7 +132,7 @@ func TimestampProto(t time.Time) (*Timestamp, error) {
 
 func timestampProto(t time.Time) (Timestamp, error) {
 	ts := Timestamp{
-    Seconds: t.Unix(),
+		Seconds: t.Unix(),
 		Nanos:   int32(t.Nanosecond()),
 	}
 	return ts, validateTimestamp(&ts)
