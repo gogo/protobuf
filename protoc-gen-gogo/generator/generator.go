@@ -2047,6 +2047,7 @@ var wellKnownTypes = map[string]bool{
 	"BoolValue":   true,
 	"StringValue": true,
 	"BytesValue":  true,
+	"FieldMask":   true,
 }
 
 // getterDefault finds the default value for the field to return from a getter,

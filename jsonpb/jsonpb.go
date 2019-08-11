@@ -80,6 +80,12 @@ type Marshaler struct {
 	// fully-qualified type name from the type URL and pass that to
 	// proto.MessageType(string).
 	AnyResolver AnyResolver
+
+	//If set, marshals FieldMask messages correctly according to spec
+	// mask { paths: "user.display_name" paths: "photo" } is marshaled as { mask: "user.displayName,photo" }
+	//If unset, keeps the existing behavior
+	// mask { paths: "user.display_name" paths: "photo" } is marshaled as {mask: {paths: ["user.displayName","photo"]}}
+	FieldMaskAsWKT bool
 }
 
 // AnyResolver takes a type URL, present in an Any message, and resolves it into
@@ -262,27 +268,28 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 			x := kind.Elem().Elem().Field(0)
 			// TODO: pass the correct Properties if needed.
 			return m.marshalValue(out, &proto.Properties{}, x, indent)
-		}
-	}
-	// To correctly support marshaling field masks, the following is largely copied from the `golang/protobuf` v2 implementation
-	// https://github.com/golang/protobuf/blob/a3369c5dc28ac197f8ec8de40a7291be4dea85b5/encoding/protojson/well_known_types.go#L884
-	if proto.MessageName(v) == "google.protobuf.FieldMask" {
-		list := s.Field(0)
-		paths := make([]string, 0, list.Len())
-		for i := 0; i < list.Len(); i++ {
-			s := list.Index(i).String()
-			// Return error if conversion to camelCase is not reversible.
-			cc := JSONCamelCase(s)
-			if s != JSONSnakeCase(cc) {
-				return fmt.Errorf("paths contains irreversible value %q", s)
+		case "FieldMask":
+			// To correctly support marshaling field masks, the following is largely copied from the `golang/protobuf` v2 implementation
+			// https://github.com/golang/protobuf/blob/a3369c5dc28ac197f8ec8de40a7291be4dea85b5/encoding/protojson/well_known_types.go#L884
+			if m.FieldMaskAsWKT {
+				list := s.Field(0)
+				paths := make([]string, 0, list.Len())
+				for i := 0; i < list.Len(); i++ {
+					s := list.Index(i).String()
+					// Return error if conversion to camelCase is not reversible.
+					cc := JSONCamelCase(s)
+					if s != JSONSnakeCase(cc) {
+						return fmt.Errorf("paths contains irreversible value %q", s)
+					}
+					paths = append(paths, cc)
+				}
+				// explicitly output quotation marks, similar to other WKTs (eg "Timestamp")
+				out.write(`"`)
+				out.write(strings.Join(paths, ","))
+				out.write(`"`)
+				return out.err
 			}
-			paths = append(paths, cc)
 		}
-		// explicitly output quotation marks, similar to other WKTs (eg "Timestamp")
-		out.write(`"`)
-		out.write(strings.Join(paths, ","))
-		out.write(`"`)
-		return out.err
 	}
 	out.write("{")
 	if m.Indent != "" {
@@ -764,6 +771,12 @@ type Unmarshaler struct {
 	// fully-qualified type name from the type URL and pass that to
 	// proto.MessageType(string).
 	AnyResolver AnyResolver
+
+	//If set, unmarshals FieldMask messages correctly according to spec
+	//JSON: { mask: "user.displayName,photo" } is unmarshaled as mask { paths: "user.display_name" paths: "photo" }
+	//If unset, keeps the existing behavior
+	//JSON: {mask: {paths: ["user.displayName","photo"]}} is unmarshaled as mask { paths: "user.display_name" paths: "photo" }
+	FieldMaskAsWKT bool
 }
 
 // UnmarshalNext unmarshals the next protocol buffer from a JSON object stream.
@@ -976,28 +989,26 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 				return fmt.Errorf("unrecognized type for Value %q", ivStr)
 			}
 			return nil
+		case "FieldMask":
+			// To correctly support unmarshaling field masks, the following is largely copied from the `golang/protobuf` v2 implementation
+			//https://github.com/golang/protobuf/blob/a3369c5dc28ac197f8ec8de40a7291be4dea85b5/encoding/protojson/well_known_types.go#L903
+			//unmarshalFieldMask
+			if u.FieldMaskAsWKT {
+				str := strings.TrimSpace(string(inputValue))
+				// Unquote the input value, similar to other WKTs (eg "Timestamp")
+				unq, err := unquote(str)
+				if err != nil {
+					return err
+				}
+				paths := strings.Split(unq, ",")
+				tval := target.Field(0) // The first field for a `FieldMask` is a string slice
+				for i := 0; i < len(paths); i++ {
+					paths[i] = JSONSnakeCase(paths[i])
+				}
+				tval.Set(reflect.ValueOf(paths))
+				return nil
+			}
 		}
-	}
-	// To correctly support unmarshaling field masks, the following is largely copied from the `golang/protobuf` v2 implementation
-	//https://github.com/golang/protobuf/blob/a3369c5dc28ac197f8ec8de40a7291be4dea85b5/encoding/protojson/well_known_types.go#L903
-	//unmarshalFieldMask
-	type xname interface {
-		XXX_MessageName() string
-	}
-	if m, ok := target.Addr().Interface().(xname); ok && m.XXX_MessageName() == "google.protobuf.FieldMask" {
-		str := strings.TrimSpace(string(inputValue))
-		// Unquote the input value, similar to other WKTs (eg "Timestamp")
-		unq, err := unquote(str)
-		if err != nil {
-			return err
-		}
-		paths := strings.Split(unq, ",")
-		tval := target.Field(0) // The first field for a `FieldMask` is a string slice
-		for i := 0; i < len(paths); i++ {
-			paths[i] = JSONSnakeCase(paths[i])
-		}
-		tval.Set(reflect.ValueOf(paths))
-		return nil
 	}
 
 	if t, ok := target.Addr().Interface().(*time.Time); ok {

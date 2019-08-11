@@ -1,0 +1,458 @@
+From 866f44fa155d2840c6b70d26e0f83d7290d21647 Mon Sep 17 00:00:00 2001
+From: Gaurav Tungatkar <gauravt@uber.com>
+Date: Thu, 6 Jun 2019 13:56:16 -0700
+Subject: [PATCH 1/3] Add jsonpb support for FieldMask wkt
+
+---
+ jsonpb/jsonpb.go                              | 108 +++++++++++++++++-
+ jsonpb/jsonpb_test.go                         |  31 +++++
+ jsonpb/jsonpb_test_proto/Makefile             |   2 +-
+ .../field_mask_test_object.pb.go              |  78 +++++++++++++
+ .../field_mask_test_object.proto              |  40 +++++++
+ 5 files changed, 257 insertions(+), 2 deletions(-)
+ create mode 100644 jsonpb/jsonpb_test_proto/field_mask_test_object.pb.go
+ create mode 100644 jsonpb/jsonpb_test_proto/field_mask_test_object.proto
+
+diff --git a/jsonpb/jsonpb.go b/jsonpb/jsonpb.go
+index 3893c02d..36a675f5 100755
+--- a/jsonpb/jsonpb.go
++++ b/jsonpb/jsonpb.go
+@@ -45,6 +45,7 @@ import (
+ 	"fmt"
+ 	"io"
+ 	"math"
++	"os"
+ 	"reflect"
+ 	"sort"
+ 	"strconv"
+@@ -57,6 +58,27 @@ import (
+ 
+ const secondInNanos = int64(time.Second / time.Nanosecond)
+ 
++// supportFieldMaskWKT is a flag which will be set based on env var SUPPORT_FIELD_MASK_WKT_JSON
++
++// google.protobuf.FieldMask is a well known type (wkt) with json spec defined as follows:
++// mask {
++//  paths: "user.display_name"
++//  paths: "photo"
++//}
++// JSON:
++//{
++//  mask: "user.displayName,photo"
++//}
++// Current library does not correctly serialize FieldMask, and generates following JSON
++//{
++//  mask: {paths: ["user.displayName","photo"]}
++//}
++// SUPPORT_FIELD_MASK_WKT_JSON is an environment variable to allow clients to opt in to the fix to correctly serialize FieldMask
++// if SUPPORT_FIELD_MASK_WKT_JSON is set to 1, FieldMask will be handled correctly and JSON generated will match spec
++// If undefined or unset, no change to FieldMask to JSON conversion, so that any existing users of the library do not break.
++// Fix to correctly serialize FieldMask is taken from https://github.com/golang/protobuf/blob/api-v2/encoding/protojson/well_known_types.go
++var supportFieldMaskWKT = os.Getenv("SUPPORT_FIELD_MASK_WKT_JSON") == "1"
++
+ // Marshaler is a configurable object for converting between
+ // protocol buffer objects and a JSON representation for them.
+ type Marshaler struct {
+@@ -264,7 +286,25 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
+ 			return m.marshalValue(out, &proto.Properties{}, x, indent)
+ 		}
+ 	}
+-
++	//Clients want to support FieldMask WKT correctly
++	if supportFieldMaskWKT {
++		if proto.MessageName(v) == "google.protobuf.FieldMask" {
++			list := s.Field(0)
++			paths := make([]string, 0, list.Len())
++			for i := 0; i < list.Len(); i++ {
++				s := list.Index(i).String()
++				cc := camelCase(s)
++				if s != snakeCase(cc) {
++					return fmt.Errorf("invalid field mask: %v", s)
++				}
++				paths = append(paths, cc)
++			}
++			out.write(`"`)
++			out.write(strings.Join(paths, ","))
++			out.write(`"`)
++			return nil
++		}
++	}
+ 	out.write("{")
+ 	if m.Indent != "" {
+ 		out.write("\n")
+@@ -959,6 +999,26 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
+ 			return nil
+ 		}
+ 	}
++	//Clients want to support FieldMask WKT correctly
++	if supportFieldMaskWKT {
++		type xname interface {
++			XXX_MessageName() string
++		}
++		if m, ok := target.Addr().Interface().(xname); ok && m.XXX_MessageName() == "google.protobuf.FieldMask" {
++			str := strings.TrimSpace(string(inputValue))
++			unq, err := unquote(str)
++			if err != nil {
++				return err
++			}
++			paths := strings.Split(unq, ",")
++			tval := target.Field(0)
++			tval.Set(reflect.ValueOf(make([]string, len(paths))))
++			for i, s := range paths {
++				tval.Index(i).Set(reflect.ValueOf(snakeCase(s)))
++			}
++			return nil
++		}
++	}
+ 
+ 	if t, ok := target.Addr().Interface().(*time.Time); ok {
+ 		ts := &types.Timestamp{}
+@@ -1419,3 +1479,49 @@ func checkRequiredFieldsInValue(v reflect.Value) error {
+ 	}
+ 	return nil
+ }
++
++// camelCase converts given string into camelCase where ASCII character after _
++// is turned into uppercase and _'s are removed.
++func camelCase(s string) string {
++	var b []byte
++	var afterUnderscore bool
++	for i := 0; i < len(s); i++ {
++		c := s[i]
++		if afterUnderscore {
++			if isASCIILower(c) {
++				c -= 'a' - 'A'
++			}
++		}
++		if c == '_' {
++			afterUnderscore = true
++			continue
++		}
++		afterUnderscore = false
++		b = append(b, c)
++	}
++	return string(b)
++}
++
++// snakeCase converts given string into snake_case where ASCII uppercase
++// character is turned into _ + lowercase.
++func snakeCase(s string) string {
++	var b []byte
++	for i := 0; i < len(s); i++ {
++		c := s[i]
++		if isASCIIUpper(c) {
++			c += 'a' - 'A'
++			b = append(b, '_', c)
++		} else {
++			b = append(b, c)
++		}
++	}
++	return string(b)
++}
++
++func isASCIILower(c byte) bool {
++	return 'a' <= c && c <= 'z'
++}
++
++func isASCIIUpper(c byte) bool {
++	return 'A' <= c && c <= 'Z'
++}
+diff --git a/jsonpb/jsonpb_test.go b/jsonpb/jsonpb_test.go
+index 9de2b3f1..c4e583ee 100755
+--- a/jsonpb/jsonpb_test.go
++++ b/jsonpb/jsonpb_test.go
+@@ -34,6 +34,7 @@ package jsonpb
+ import (
+ 	"bytes"
+ 	"encoding/json"
++	"fmt"
+ 	"io"
+ 	"math"
+ 	"reflect"
+@@ -41,6 +42,7 @@ import (
+ 	"testing"
+ 
+ 	pb "github.com/gogo/protobuf/jsonpb/jsonpb_test_proto"
++
+ 	"github.com/gogo/protobuf/proto"
+ 	proto3pb "github.com/gogo/protobuf/proto/proto3_proto"
+ 	"github.com/gogo/protobuf/types"
+@@ -520,9 +522,12 @@ var marshalingTests = []struct {
+ 	{"BytesValue", marshaler, &pb.KnownTypes{Bytes: &types.BytesValue{Value: []byte("wow")}}, `{"bytes":"d293"}`},
+ 	{"required", marshaler, &pb.MsgWithRequired{Str: proto.String("hello")}, `{"str":"hello"}`},
+ 	{"required bytes", marshaler, &pb.MsgWithRequiredBytes{Byts: []byte{}}, `{"byts":""}`},
++	{"FieldMask", marshaler, &pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths:[]string{"a", "b", "c_d"}}}, `{"fieldMask":"a,b,cD"}`},
++
+ }
+ 
+ func TestMarshaling(t *testing.T) {
++	supportFieldMaskWKT = true
+ 	for _, tt := range marshalingTests {
+ 		json, err := tt.marshaler.MarshalToString(tt.pb)
+ 		if err != nil {
+@@ -718,6 +723,28 @@ func TestMarshalUnsetRequiredFields(t *testing.T) {
+ 	}
+ }
+ 
++func TestMarshalIllegalFieldMask(t *testing.T) {
++	supportFieldMaskWKT = true
++	tests := []struct {
++		pb   proto.Message
++		fail bool
++	}{
++		{&pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths:[]string{"c__d"}}}, true},
++		{&pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths:[]string{"c_"}}}, true},
++	}
++	marshaler = Marshaler{}
++	for _, tt := range tests {
++		f, err := marshaler.MarshalToString(tt.pb)
++		fmt.Println(f)
++		if err == nil && tt.fail {
++			t.Errorf("marshaler.MarshalToString(%v) = _, <nil>; want _, <non-nil>", tt.pb)
++		}
++		if err != nil && !tt.fail {
++			t.Errorf("marshaler.MarshalToString(%v) = _, %v; want _, <nil>", tt.pb, err)
++		}
++	}
++}
++
+ var unmarshalingTests = []struct {
+ 	desc        string
+ 	unmarshaler Unmarshaler
+@@ -860,9 +887,13 @@ var unmarshalingTests = []struct {
+ 	{"null BytesValue", Unmarshaler{}, `{"bytes":null}`, &pb.KnownTypes{Bytes: nil}},
+ 	{"required", Unmarshaler{}, `{"str":"hello"}`, &pb.MsgWithRequired{Str: proto.String("hello")}},
+ 	{"required bytes", Unmarshaler{}, `{"byts": []}`, &pb.MsgWithRequiredBytes{Byts: []byte{}}},
++	{"FieldMask", Unmarshaler{}, `{"fieldMask":"a,b,cD"}`, &pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths:[]string{"a", "b", "c_d"}}}},
++
+ }
+ 
+ func TestUnmarshaling(t *testing.T) {
++	supportFieldMaskWKT = true
++
+ 	for _, tt := range unmarshalingTests {
+ 		// Make a new instance of the type of our expected object.
+ 		p := reflect.New(reflect.TypeOf(tt.pb).Elem()).Interface().(proto.Message)
+diff --git a/jsonpb/jsonpb_test_proto/Makefile b/jsonpb/jsonpb_test_proto/Makefile
+index e294f68d..a681f0b1 100644
+--- a/jsonpb/jsonpb_test_proto/Makefile
++++ b/jsonpb/jsonpb_test_proto/Makefile
+@@ -30,4 +30,4 @@
+ # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ 
+ regenerate:
+-	protoc-min-version --version="3.0.0" --gogo_out=Mgoogle/protobuf/any.proto=github.com/gogo/protobuf/types,Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,Mgoogle/protobuf/wrappers.proto=github.com/gogo/protobuf/types,Mgoogle/protobuf/struct.proto=github.com/gogo/protobuf/types:. *.proto -I . -I ../../ -I ../../protobuf/
++	protoc-min-version --version="3.0.0" --gogo_out=Mgoogle/protobuf/any.proto=github.com/gogo/protobuf/types,Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,Mgoogle/protobuf/wrappers.proto=github.com/gogo/protobuf/types,Mgoogle/protobuf/struct.proto=github.com/gogo/protobuf/types,Mgoogle/protobuf/field_mask.proto=github.com/gogo/protobuf/types:. *.proto -I . -I ../../ -I ../../protobuf/
+diff --git a/jsonpb/jsonpb_test_proto/field_mask_test_object.pb.go b/jsonpb/jsonpb_test_proto/field_mask_test_object.pb.go
+new file mode 100644
+index 00000000..2a6bb273
+--- /dev/null
++++ b/jsonpb/jsonpb_test_proto/field_mask_test_object.pb.go
+@@ -0,0 +1,78 @@
++// Code generated by protoc-gen-gogo. DO NOT EDIT.
++// source: field_mask_test_object.proto
++
++package jsonpb
++
++import (
++	fmt "fmt"
++	proto "github.com/gogo/protobuf/proto"
++	types "github.com/gogo/protobuf/types"
++	math "math"
++)
++
++// Reference imports to suppress errors if they are not otherwise used.
++var _ = proto.Marshal
++var _ = fmt.Errorf
++var _ = math.Inf
++
++// This is a compile-time assertion to ensure that this generated file
++// is compatible with the proto package it is being compiled against.
++// A compilation error at this line likely means your copy of the
++// proto package needs to be updated.
++const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
++
++type FieldMaskWKT struct {
++	FieldMask            *types.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
++	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
++	XXX_unrecognized     []byte           `json:"-"`
++	XXX_sizecache        int32            `json:"-"`
++}
++
++func (m *FieldMaskWKT) Reset()         { *m = FieldMaskWKT{} }
++func (m *FieldMaskWKT) String() string { return proto.CompactTextString(m) }
++func (*FieldMaskWKT) ProtoMessage()    {}
++func (*FieldMaskWKT) Descriptor() ([]byte, []int) {
++	return fileDescriptor_8e5516809704a705, []int{0}
++}
++func (m *FieldMaskWKT) XXX_Unmarshal(b []byte) error {
++	return xxx_messageInfo_FieldMaskWKT.Unmarshal(m, b)
++}
++func (m *FieldMaskWKT) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
++	return xxx_messageInfo_FieldMaskWKT.Marshal(b, m, deterministic)
++}
++func (m *FieldMaskWKT) XXX_Merge(src proto.Message) {
++	xxx_messageInfo_FieldMaskWKT.Merge(m, src)
++}
++func (m *FieldMaskWKT) XXX_Size() int {
++	return xxx_messageInfo_FieldMaskWKT.Size(m)
++}
++func (m *FieldMaskWKT) XXX_DiscardUnknown() {
++	xxx_messageInfo_FieldMaskWKT.DiscardUnknown(m)
++}
++
++var xxx_messageInfo_FieldMaskWKT proto.InternalMessageInfo
++
++func (m *FieldMaskWKT) GetFieldMask() *types.FieldMask {
++	if m != nil {
++		return m.FieldMask
++	}
++	return nil
++}
++
++func init() {
++	proto.RegisterType((*FieldMaskWKT)(nil), "jsonpb.FieldMaskWKT")
++}
++
++func init() { proto.RegisterFile("field_mask_test_object.proto", fileDescriptor_8e5516809704a705) }
++
++var fileDescriptor_8e5516809704a705 = []byte{
++	// 128 bytes of a gzipped FileDescriptorProto
++	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x49, 0xcb, 0x4c, 0xcd,
++	0x49, 0x89, 0xcf, 0x4d, 0x2c, 0xce, 0x8e, 0x2f, 0x49, 0x2d, 0x2e, 0x89, 0xcf, 0x4f, 0xca, 0x4a,
++	0x4d, 0x2e, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0xcb, 0x2a, 0xce, 0xcf, 0x2b, 0x48,
++	0x92, 0x52, 0x48, 0xcf, 0xcf, 0x4f, 0xcf, 0x49, 0xd5, 0x07, 0x8b, 0x26, 0x95, 0xa6, 0xe9, 0x23,
++	0x74, 0x41, 0x54, 0x2a, 0x79, 0x72, 0xf1, 0xb8, 0x81, 0xc4, 0x7c, 0x13, 0x8b, 0xb3, 0xc3, 0xbd,
++	0x43, 0x84, 0x2c, 0xb9, 0xb8, 0x10, 0x6a, 0x24, 0x18, 0x15, 0x18, 0x35, 0xb8, 0x8d, 0xa4, 0xf4,
++	0x20, 0xc6, 0xe8, 0xc1, 0x8c, 0xd1, 0x83, 0x6b, 0x09, 0xe2, 0x4c, 0x83, 0x31, 0x93, 0xd8, 0xc0,
++	0xd2, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0x8a, 0x41, 0x44, 0x7b, 0x9b, 0x00, 0x00, 0x00,
++}
+diff --git a/jsonpb/jsonpb_test_proto/field_mask_test_object.proto b/jsonpb/jsonpb_test_proto/field_mask_test_object.proto
+new file mode 100644
+index 00000000..c5abcb1b
+--- /dev/null
++++ b/jsonpb/jsonpb_test_proto/field_mask_test_object.proto
+@@ -0,0 +1,40 @@
++// Go support for Protocol Buffers - Google's data interchange format
++//
++// Copyright 2015 The Go Authors.  All rights reserved.
++// https://github.com/golang/protobuf
++//
++// Redistribution and use in source and binary forms, with or without
++// modification, are permitted provided that the following conditions are
++// met:
++//
++//     * Redistributions of source code must retain the above copyright
++// notice, this list of conditions and the following disclaimer.
++//     * Redistributions in binary form must reproduce the above
++// copyright notice, this list of conditions and the following disclaimer
++// in the documentation and/or other materials provided with the
++// distribution.
++//     * Neither the name of Google Inc. nor the names of its
++// contributors may be used to endorse or promote products derived from
++// this software without specific prior written permission.
++//
++// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
++// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
++// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
++// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
++// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
++// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++
++syntax = "proto3";
++
++import "google/protobuf/field_mask.proto";
++
++package jsonpb;
++
++message FieldMaskWKT {
++  google.protobuf.FieldMask field_mask = 1;
++}
+\ No newline at end of file
+-- 
+2.21.0
+
+
+From 6fdb491e30d90f930495436789fd95f9a2c33cba Mon Sep 17 00:00:00 2001
+From: Gaurav Tungatkar <gauravt@uber.com>
+Date: Thu, 6 Jun 2019 21:42:49 -0700
+Subject: [PATCH 2/3] Fix formatting
+
+---
+ jsonpb/jsonpb_test.go | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/jsonpb/jsonpb_test.go b/jsonpb/jsonpb_test.go
+index c4e583ee..11a961a3 100755
+--- a/jsonpb/jsonpb_test.go
++++ b/jsonpb/jsonpb_test.go
+@@ -522,7 +522,7 @@ var marshalingTests = []struct {
+ 	{"BytesValue", marshaler, &pb.KnownTypes{Bytes: &types.BytesValue{Value: []byte("wow")}}, `{"bytes":"d293"}`},
+ 	{"required", marshaler, &pb.MsgWithRequired{Str: proto.String("hello")}, `{"str":"hello"}`},
+ 	{"required bytes", marshaler, &pb.MsgWithRequiredBytes{Byts: []byte{}}, `{"byts":""}`},
+-	{"FieldMask", marshaler, &pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths:[]string{"a", "b", "c_d"}}}, `{"fieldMask":"a,b,cD"}`},
++	{"FieldMask", marshaler, &pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths: []string{"a", "b", "c_d"}}}, `{"fieldMask":"a,b,cD"}`},
+ 
+ }
+ 
+@@ -729,8 +729,8 @@ func TestMarshalIllegalFieldMask(t *testing.T) {
+ 		pb   proto.Message
+ 		fail bool
+ 	}{
+-		{&pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths:[]string{"c__d"}}}, true},
+-		{&pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths:[]string{"c_"}}}, true},
++		{&pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths: []string{"c__d"}}}, true},
++		{&pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths: []string{"c_"}}}, true},
+ 	}
+ 	marshaler = Marshaler{}
+ 	for _, tt := range tests {
+@@ -887,7 +887,7 @@ var unmarshalingTests = []struct {
+ 	{"null BytesValue", Unmarshaler{}, `{"bytes":null}`, &pb.KnownTypes{Bytes: nil}},
+ 	{"required", Unmarshaler{}, `{"str":"hello"}`, &pb.MsgWithRequired{Str: proto.String("hello")}},
+ 	{"required bytes", Unmarshaler{}, `{"byts": []}`, &pb.MsgWithRequiredBytes{Byts: []byte{}}},
+-	{"FieldMask", Unmarshaler{}, `{"fieldMask":"a,b,cD"}`, &pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths:[]string{"a", "b", "c_d"}}}},
++	{"FieldMask", Unmarshaler{}, `{"fieldMask":"a,b,cD"}`, &pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths: []string{"a", "b", "c_d"}}}},
+ 
+ }
+ 
+-- 
+2.21.0
+
+
+From 5ef86c042a566e0d4c62e415b564b83d4126a02a Mon Sep 17 00:00:00 2001
+From: Gaurav Tungatkar <gauravt@uber.com>
+Date: Fri, 7 Jun 2019 10:59:57 -0700
+Subject: [PATCH 3/3] More formatting changes
+
+---
+ jsonpb/jsonpb_test.go | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/jsonpb/jsonpb_test.go b/jsonpb/jsonpb_test.go
+index 11a961a3..c5b48742 100755
+--- a/jsonpb/jsonpb_test.go
++++ b/jsonpb/jsonpb_test.go
+@@ -523,7 +523,6 @@ var marshalingTests = []struct {
+ 	{"required", marshaler, &pb.MsgWithRequired{Str: proto.String("hello")}, `{"str":"hello"}`},
+ 	{"required bytes", marshaler, &pb.MsgWithRequiredBytes{Byts: []byte{}}, `{"byts":""}`},
+ 	{"FieldMask", marshaler, &pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths: []string{"a", "b", "c_d"}}}, `{"fieldMask":"a,b,cD"}`},
+-
+ }
+ 
+ func TestMarshaling(t *testing.T) {
+@@ -888,7 +887,6 @@ var unmarshalingTests = []struct {
+ 	{"required", Unmarshaler{}, `{"str":"hello"}`, &pb.MsgWithRequired{Str: proto.String("hello")}},
+ 	{"required bytes", Unmarshaler{}, `{"byts": []}`, &pb.MsgWithRequiredBytes{Byts: []byte{}}},
+ 	{"FieldMask", Unmarshaler{}, `{"fieldMask":"a,b,cD"}`, &pb.FieldMaskWKT{FieldMask: &types.FieldMask{Paths: []string{"a", "b", "c_d"}}}},
+-
+ }
+ 
+ func TestUnmarshaling(t *testing.T) {
+-- 
+2.21.0
+
