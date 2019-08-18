@@ -3005,6 +3005,9 @@ func (g *Generator) generateOneofDecls(mc *msgCtx, topLevelFields []topLevelFiel
 		if gogoproto.IsProtoSizer(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
 			g.P(`ProtoSize() int`)
 		}
+		if gogoproto.HasCompare(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
+			g.P(`Compare(interface{}) int`)
+		}
 		g.Out()
 		g.P("}")
 	}
