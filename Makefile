@@ -36,9 +36,13 @@ SKIPISSUE:="/jsonpb|/test/casttype/|/test/oneof/combos/"
 
 .PHONY: nuke regenerate tests clean install gofmt vet contributors
 
-all: clean install regenerate install tests errcheck vet
+all: clean dependencies install regenerate install tests errcheck vet
 
-buildserverall: clean install regenerate install tests vet js purego
+buildserverall: clean dependencies install regenerate install tests vet js purego
+
+dependencies:
+	go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
+	go get -u google.golang.org/grpc
 
 install:
 	go install ./proto
@@ -48,6 +52,7 @@ install:
 	go install ./protoc-gen-gofast
 	go install ./protoc-gen-gogofast
 	go install ./protoc-gen-gogofaster
+	go install ./protoc-gen-gogo-gateway
 	go install ./protoc-gen-gogoslick
 	go install ./protoc-gen-gostring
 	go install ./protoc-min-version
@@ -136,6 +141,7 @@ regenerate:
 	make -C test/issue498 regenerate
 	make -C test/issue503 regenerate
 	make -C test/issue530 regenerate
+	make -C test/grpc-gateway-customname regenerate
 
 	make gofmt
 

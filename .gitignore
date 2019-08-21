@@ -4,3 +4,5 @@
 
 # Conformance test output and transient files.
 conformance/failing_tests.txt
+
+vendor
