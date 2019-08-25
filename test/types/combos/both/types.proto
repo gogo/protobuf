@@ -97,6 +97,7 @@ message ProtoTypes {
 }
 
 message StdTypes {
+  option (gogoproto.compare) = true;
   google.protobuf.Timestamp nullableTimestamp = 1 [(gogoproto.stdtime) = true];
   google.protobuf.Duration nullableDuration = 2 [(gogoproto.stdduration) = true];
   google.protobuf.DoubleValue nullableDouble = 3 [(gogoproto.wktpointer) = true];;
@@ -158,6 +159,7 @@ message RepProtoTypes {
 }
 
 message RepStdTypes {
+  option (gogoproto.compare) = true;
   repeated google.protobuf.Timestamp nullableTimestamps = 1 [(gogoproto.stdtime) = true];
   repeated google.protobuf.Duration nullableDurations = 2 [(gogoproto.stdduration) = true];
   repeated google.protobuf.Timestamp timestamps = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
@@ -262,6 +264,7 @@ message MapStdTypes {
 }
 
 message OneofProtoTypes {
+  option (gogoproto.compare) = true;
   oneof OneOfProtoTimes {
     google.protobuf.Timestamp timestamp = 1;
     google.protobuf.Duration duration = 2;
@@ -278,6 +281,7 @@ message OneofProtoTypes {
 }
 
 message OneofStdTypes {
+  option (gogoproto.compare) = true;
   oneof OneOfStdTimes {
     google.protobuf.Timestamp timestamp = 1 [(gogoproto.stdtime) = true];
     google.protobuf.Duration duration = 2 [(gogoproto.stdduration) = true];
@@ -292,4 +296,3 @@ message OneofStdTypes {
     google.protobuf.BytesValue repBytes = 11 [(gogoproto.wktpointer) = true];
   }
 }
-

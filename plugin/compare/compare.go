@@ -74,9 +74,24 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	}
 }
 
-func (p *plugin) generateNullableField(fieldname string) {
-	p.P(`if this.`, fieldname, ` != nil && that1.`, fieldname, ` != nil {`)
+func (p *plugin) generateNullableFieldPre(fieldname string) {
+	p.P(`if that1.`, fieldname, ` == nil {`)
 	p.In()
+	p.P(`if this.`, fieldname, ` != nil {`)
+	p.In()
+	p.P(`return 1`)
+	p.Out()
+	p.P(`}`)
+	p.Out()
+	p.P(`} else if this.`, fieldname, ` == nil {`)
+	p.In()
+	p.P(`return -1`)
+	p.Out()
+	p.P(`} else `)
+}
+
+func (p *plugin) generateNullableField(fieldname string) {
+	p.generateNullableFieldPre(fieldname)
 	p.P(`if *this.`, fieldname, ` != *that1.`, fieldname, `{`)
 	p.In()
 	p.P(`if *this.`, fieldname, ` < *that1.`, fieldname, `{`)
@@ -85,16 +100,6 @@ func (p *plugin) generateNullableField(fieldname string) {
 	p.Out()
 	p.P(`}`)
 	p.P(`return 1`)
-	p.Out()
-	p.P(`}`)
-	p.Out()
-	p.P(`} else if this.`, fieldname, ` != nil {`)
-	p.In()
-	p.P(`return 1`)
-	p.Out()
-	p.P(`} else if that1.`, fieldname, ` != nil {`)
-	p.In()
-	p.P(`return -1`)
 	p.Out()
 	p.P(`}`)
 }
@@ -148,7 +153,12 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 	repeated := field.IsRepeated()
 	ctype := gogoproto.IsCustomType(field)
 	nullable := gogoproto.IsNullable(field)
-	// oneof := field.OneofIndex != nil
+	stdType := gogoproto.IsStdType(field)
+	// Currently do not case about proto3 if stdType == true
+	// stdType can be nullable with proto3
+	if stdType {
+		proto3 = !stdType
+	}
 	if !repeated {
 		if ctype {
 			if nullable {
@@ -173,7 +183,7 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 			p.Out()
 			p.P(`}`)
 		} else {
-			if field.IsMessage() || p.IsGroup(field) {
+			if !stdType && (field.IsMessage() || p.IsGroup(field)) {
 				if nullable {
 					p.P(`if c := this.`, fieldname, `.Compare(that1.`, fieldname, `); c != 0 {`)
 				} else {
@@ -183,13 +193,18 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 				p.P(`return c`)
 				p.Out()
 				p.P(`}`)
-			} else if field.IsBytes() {
-				p.P(`if c := `, p.bytesPkg.Use(), `.Compare(this.`, fieldname, `, that1.`, fieldname, `); c != 0 {`)
+			} else if field.IsBytes() || gogoproto.IsStdBytes(field) {
+				if stdType && nullable && !proto3 {
+					p.generateNullableFieldPre(fieldname)
+					p.P(`if c := `, p.bytesPkg.Use(), `.Compare(*this.`, fieldname, `, *that1.`, fieldname, `); c != 0 {`)
+				} else {
+					p.P(`if c := `, p.bytesPkg.Use(), `.Compare(this.`, fieldname, `, that1.`, fieldname, `); c != 0 {`)
+				}
 				p.In()
 				p.P(`return c`)
 				p.Out()
 				p.P(`}`)
-			} else if field.IsString() {
+			} else if field.IsString() || gogoproto.IsStdString(field) {
 				if nullable && !proto3 {
 					p.generateNullableField(fieldname)
 				} else {
@@ -204,42 +219,42 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 					p.Out()
 					p.P(`}`)
 				}
-			} else if field.IsBool() {
+			} else if field.IsBool() || gogoproto.IsStdBool(field) {
 				if nullable && !proto3 {
-					p.P(`if this.`, fieldname, ` != nil && that1.`, fieldname, ` != nil {`)
-					p.In()
+					p.generateNullableFieldPre(fieldname)
 					p.P(`if *this.`, fieldname, ` != *that1.`, fieldname, `{`)
 					p.In()
 					p.P(`if !*this.`, fieldname, ` {`)
-					p.In()
-					p.P(`return -1`)
-					p.Out()
-					p.P(`}`)
-					p.P(`return 1`)
-					p.Out()
-					p.P(`}`)
-					p.Out()
-					p.P(`} else if this.`, fieldname, ` != nil {`)
-					p.In()
-					p.P(`return 1`)
-					p.Out()
-					p.P(`} else if that1.`, fieldname, ` != nil {`)
-					p.In()
-					p.P(`return -1`)
-					p.Out()
-					p.P(`}`)
 				} else {
 					p.P(`if this.`, fieldname, ` != that1.`, fieldname, `{`)
 					p.In()
 					p.P(`if !this.`, fieldname, ` {`)
-					p.In()
-					p.P(`return -1`)
-					p.Out()
-					p.P(`}`)
-					p.P(`return 1`)
-					p.Out()
-					p.P(`}`)
 				}
+				p.In()
+				p.P(`return -1`)
+				p.Out()
+				p.P(`}`)
+				p.P(`return 1`)
+				p.Out()
+				p.P(`}`)
+			} else if gogoproto.IsStdTime(field) {
+				if nullable && !proto3 {
+					p.generateNullableFieldPre(fieldname)
+					p.P(`if !this.`, fieldname, `.Equal(*that1.`, fieldname, `) {`)
+					p.In()
+					p.P(`if this.`, fieldname, `.Before(*that1.`, fieldname, `) {`)
+				} else {
+					p.P(`if !this.`, fieldname, `.Equal(that1.`, fieldname, `) {`)
+					p.In()
+					p.P(`if this.`, fieldname, `.Before(that1.`, fieldname, `) {`)
+				}
+				p.In()
+				p.P(`return -1`)
+				p.Out()
+				p.P(`}`)
+				p.P(`return 1`)
+				p.Out()
+				p.P(`}`)
 			} else {
 				if nullable && !proto3 {
 					p.generateNullableField(fieldname)
@@ -282,9 +297,11 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 				valuegoTyp, _ := p.GoType(nil, m.ValueField)
 				valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField)
 				nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp)
-
 				mapValue := m.ValueAliasField
-				if mapValue.IsMessage() || p.IsGroup(mapValue) {
+				stdTypeMapValueField := gogoproto.IsStdType(m.ValueField)
+				stdTypeMapValueAliasField := gogoproto.IsStdType(m.ValueAliasField)
+				stdTypeMapValueField = stdTypeMapValueField || stdTypeMapValueAliasField
+				if !stdTypeMapValueField && mapValue.IsMessage() || p.IsGroup(mapValue) {
 					if nullable && valuegoTyp == valuegoAliasTyp {
 						p.P(`if c := this.`, fieldname, `[i].Compare(that1.`, fieldname, `[i]); c != 0 {`)
 					} else {
@@ -308,16 +325,46 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 					p.P(`return c`)
 					p.Out()
 					p.P(`}`)
-				} else if mapValue.IsBytes() {
-					p.P(`if c := `, p.bytesPkg.Use(), `.Compare(this.`, fieldname, `[i], that1.`, fieldname, `[i]); c != 0 {`)
+				} else if mapValue.IsBytes() || gogoproto.IsStdBytes(mapValue) {
+					if stdTypeMapValueField && nullable {
+						p.generateNullableFieldPre(fieldname + `[i]`)
+						p.P(`if c := `, p.bytesPkg.Use(), `.Compare(*this.`, fieldname, `[i], *that1.`, fieldname, `[i]); c != 0 {`)
+					} else {
+						p.P(`if c := `, p.bytesPkg.Use(), `.Compare(this.`, fieldname, `[i], that1.`, fieldname, `[i]); c != 0 {`)
+					}
 					p.In()
 					p.P(`return c`)
 					p.Out()
 					p.P(`}`)
-				} else if mapValue.IsString() {
-					p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+				} else if mapValue.IsBool() || gogoproto.IsStdBool(mapValue) {
+					if stdTypeMapValueField && nullable {
+						p.generateNullableFieldPre(fieldname + `[i]`)
+						p.P(`if *this.`, fieldname, `[i] != *that1.`, fieldname, `[i] {`)
+						p.In()
+						p.P(`if !*this.`, fieldname, `[i] {`)
+					} else {
+						p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+						p.In()
+						p.P(`if !this.`, fieldname, `[i] {`)
+					}
 					p.In()
-					p.P(`if this.`, fieldname, `[i] < that1.`, fieldname, `[i] {`)
+					p.P(`return -1`)
+					p.Out()
+					p.P(`}`)
+					p.P(`return 1`)
+					p.Out()
+					p.P(`}`)
+				} else if gogoproto.IsStdTime(mapValue) {
+					if stdTypeMapValueField && nullable {
+						p.generateNullableFieldPre(fieldname + `[i]`)
+						p.P(`if !this.`, fieldname, `[i].Equal(*that1.`, fieldname, `[i]) {`)
+						p.In()
+						p.P(`if this.`, fieldname, `[i].Before(*that1.`, fieldname, `[i]) {`)
+					} else {
+						p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
+						p.In()
+						p.P(`if this.`, fieldname, `[i].Before(that1.`, fieldname, `[i]) {`)
+					}
 					p.In()
 					p.P(`return -1`)
 					p.Out()
@@ -326,41 +373,53 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 					p.Out()
 					p.P(`}`)
 				} else {
-					p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
-					p.In()
-					p.P(`if this.`, fieldname, `[i] < that1.`, fieldname, `[i] {`)
-					p.In()
-					p.P(`return -1`)
-					p.Out()
-					p.P(`}`)
-					p.P(`return 1`)
-					p.Out()
-					p.P(`}`)
+					if stdTypeMapValueField && nullable {
+						p.generateNullableField(fieldname + "[i]")
+					} else {
+						p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+						p.In()
+						p.P(`if this.`, fieldname, `[i] < that1.`, fieldname, `[i] {`)
+						p.In()
+						p.P(`return -1`)
+						p.Out()
+						p.P(`}`)
+						p.P(`return 1`)
+						p.Out()
+						p.P(`}`)
+					}
 				}
-			} else if field.IsMessage() || p.IsGroup(field) {
+			} else if !stdType && (field.IsMessage() || p.IsGroup(field)) {
 				if nullable {
 					p.P(`if c := this.`, fieldname, `[i].Compare(that1.`, fieldname, `[i]); c != 0 {`)
-					p.In()
-					p.P(`return c`)
-					p.Out()
-					p.P(`}`)
 				} else {
 					p.P(`if c := this.`, fieldname, `[i].Compare(&that1.`, fieldname, `[i]); c != 0 {`)
-					p.In()
-					p.P(`return c`)
-					p.Out()
-					p.P(`}`)
 				}
-			} else if field.IsBytes() {
-				p.P(`if c := `, p.bytesPkg.Use(), `.Compare(this.`, fieldname, `[i], that1.`, fieldname, `[i]); c != 0 {`)
 				p.In()
 				p.P(`return c`)
 				p.Out()
 				p.P(`}`)
-			} else if field.IsString() {
-				p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+			} else if field.IsBytes() || gogoproto.IsStdBytes(field) {
+				if stdType && nullable && !proto3 {
+					p.generateNullableFieldPre(fieldname + `[i]`)
+					p.P(`if c := `, p.bytesPkg.Use(), `.Compare(*this.`, fieldname, `[i], *that1.`, fieldname, `[i]); c != 0 {`)
+				} else {
+					p.P(`if c := `, p.bytesPkg.Use(), `.Compare(this.`, fieldname, `[i], that1.`, fieldname, `[i]); c != 0 {`)
+				}
 				p.In()
-				p.P(`if this.`, fieldname, `[i] < that1.`, fieldname, `[i] {`)
+				p.P(`return c`)
+				p.Out()
+				p.P(`}`)
+			} else if field.IsBool() || gogoproto.IsStdBool(field) {
+				if stdType && nullable && !proto3 {
+					p.generateNullableFieldPre(fieldname + `[i]`)
+					p.P(`if *this.`, fieldname, `[i] != *that1.`, fieldname, `[i] {`)
+					p.In()
+					p.P(`if !*this.`, fieldname, `[i] {`)
+				} else {
+					p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+					p.In()
+					p.P(`if !this.`, fieldname, `[i] {`)
+				}
 				p.In()
 				p.P(`return -1`)
 				p.Out()
@@ -368,10 +427,17 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 				p.P(`return 1`)
 				p.Out()
 				p.P(`}`)
-			} else if field.IsBool() {
-				p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
-				p.In()
-				p.P(`if !this.`, fieldname, `[i] {`)
+			} else if gogoproto.IsStdTime(field) {
+				if nullable && !proto3 {
+					p.generateNullableFieldPre(fieldname + `[i]`)
+					p.P(`if !this.`, fieldname, `[i].Equal(*that1.`, fieldname, `[i]) {`)
+					p.In()
+					p.P(`if this.`, fieldname, `[i].Before(*that1.`, fieldname, `[i]) {`)
+				} else {
+					p.P(`if !this.`, fieldname, `[i].Equal(that1.`, fieldname, `[i]) {`)
+					p.In()
+					p.P(`if this.`, fieldname, `[i].Before(that1.`, fieldname, `[i]) {`)
+				}
 				p.In()
 				p.P(`return -1`)
 				p.Out()
@@ -380,16 +446,20 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 				p.Out()
 				p.P(`}`)
 			} else {
-				p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
-				p.In()
-				p.P(`if this.`, fieldname, `[i] < that1.`, fieldname, `[i] {`)
-				p.In()
-				p.P(`return -1`)
-				p.Out()
-				p.P(`}`)
-				p.P(`return 1`)
-				p.Out()
-				p.P(`}`)
+				if stdType && nullable && !proto3 {
+					p.generateNullableField(fieldname + "[i]")
+				} else {
+					p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+					p.In()
+					p.P(`if this.`, fieldname, `[i] < that1.`, fieldname, `[i] {`)
+					p.In()
+					p.P(`return -1`)
+					p.Out()
+					p.P(`}`)
+					p.P(`return 1`)
+					p.Out()
+					p.P(`}`)
+				}
 			}
 		}
 		p.Out()

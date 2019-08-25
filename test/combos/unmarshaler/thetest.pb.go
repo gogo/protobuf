@@ -3232,173 +3232,173 @@ func (this *NinOptNative) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			if *this.Field1 < *that1.Field1 {
-				return -1
-			}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
 			return 1
 		}
-	} else if this.Field1 != nil {
-		return 1
-	} else if that1.Field1 != nil {
+	} else if this.Field1 == nil {
 		return -1
+	} else if *this.Field1 != *that1.Field1 {
+		if *this.Field1 < *that1.Field1 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			if *this.Field2 < *that1.Field2 {
-				return -1
-			}
+	if that1.Field2 == nil {
+		if this.Field2 != nil {
 			return 1
 		}
-	} else if this.Field2 != nil {
-		return 1
-	} else if that1.Field2 != nil {
+	} else if this.Field2 == nil {
 		return -1
+	} else if *this.Field2 != *that1.Field2 {
+		if *this.Field2 < *that1.Field2 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field3 != nil && that1.Field3 != nil {
-		if *this.Field3 != *that1.Field3 {
-			if *this.Field3 < *that1.Field3 {
-				return -1
-			}
+	if that1.Field3 == nil {
+		if this.Field3 != nil {
 			return 1
 		}
-	} else if this.Field3 != nil {
-		return 1
-	} else if that1.Field3 != nil {
+	} else if this.Field3 == nil {
 		return -1
+	} else if *this.Field3 != *that1.Field3 {
+		if *this.Field3 < *that1.Field3 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field4 != nil && that1.Field4 != nil {
-		if *this.Field4 != *that1.Field4 {
-			if *this.Field4 < *that1.Field4 {
-				return -1
-			}
+	if that1.Field4 == nil {
+		if this.Field4 != nil {
 			return 1
 		}
-	} else if this.Field4 != nil {
-		return 1
-	} else if that1.Field4 != nil {
+	} else if this.Field4 == nil {
 		return -1
+	} else if *this.Field4 != *that1.Field4 {
+		if *this.Field4 < *that1.Field4 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field5 != nil && that1.Field5 != nil {
-		if *this.Field5 != *that1.Field5 {
-			if *this.Field5 < *that1.Field5 {
-				return -1
-			}
+	if that1.Field5 == nil {
+		if this.Field5 != nil {
 			return 1
 		}
-	} else if this.Field5 != nil {
-		return 1
-	} else if that1.Field5 != nil {
+	} else if this.Field5 == nil {
 		return -1
+	} else if *this.Field5 != *that1.Field5 {
+		if *this.Field5 < *that1.Field5 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field6 != nil && that1.Field6 != nil {
-		if *this.Field6 != *that1.Field6 {
-			if *this.Field6 < *that1.Field6 {
-				return -1
-			}
+	if that1.Field6 == nil {
+		if this.Field6 != nil {
 			return 1
 		}
-	} else if this.Field6 != nil {
-		return 1
-	} else if that1.Field6 != nil {
+	} else if this.Field6 == nil {
 		return -1
+	} else if *this.Field6 != *that1.Field6 {
+		if *this.Field6 < *that1.Field6 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field7 != nil && that1.Field7 != nil {
-		if *this.Field7 != *that1.Field7 {
-			if *this.Field7 < *that1.Field7 {
-				return -1
-			}
+	if that1.Field7 == nil {
+		if this.Field7 != nil {
 			return 1
 		}
-	} else if this.Field7 != nil {
-		return 1
-	} else if that1.Field7 != nil {
+	} else if this.Field7 == nil {
 		return -1
+	} else if *this.Field7 != *that1.Field7 {
+		if *this.Field7 < *that1.Field7 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field8 != nil && that1.Field8 != nil {
-		if *this.Field8 != *that1.Field8 {
-			if *this.Field8 < *that1.Field8 {
-				return -1
-			}
+	if that1.Field8 == nil {
+		if this.Field8 != nil {
 			return 1
 		}
-	} else if this.Field8 != nil {
-		return 1
-	} else if that1.Field8 != nil {
+	} else if this.Field8 == nil {
 		return -1
+	} else if *this.Field8 != *that1.Field8 {
+		if *this.Field8 < *that1.Field8 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field9 != nil && that1.Field9 != nil {
-		if *this.Field9 != *that1.Field9 {
-			if *this.Field9 < *that1.Field9 {
-				return -1
-			}
+	if that1.Field9 == nil {
+		if this.Field9 != nil {
 			return 1
 		}
-	} else if this.Field9 != nil {
-		return 1
-	} else if that1.Field9 != nil {
+	} else if this.Field9 == nil {
 		return -1
+	} else if *this.Field9 != *that1.Field9 {
+		if *this.Field9 < *that1.Field9 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field10 != nil && that1.Field10 != nil {
-		if *this.Field10 != *that1.Field10 {
-			if *this.Field10 < *that1.Field10 {
-				return -1
-			}
+	if that1.Field10 == nil {
+		if this.Field10 != nil {
 			return 1
 		}
-	} else if this.Field10 != nil {
-		return 1
-	} else if that1.Field10 != nil {
+	} else if this.Field10 == nil {
 		return -1
+	} else if *this.Field10 != *that1.Field10 {
+		if *this.Field10 < *that1.Field10 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field11 != nil && that1.Field11 != nil {
-		if *this.Field11 != *that1.Field11 {
-			if *this.Field11 < *that1.Field11 {
-				return -1
-			}
+	if that1.Field11 == nil {
+		if this.Field11 != nil {
 			return 1
 		}
-	} else if this.Field11 != nil {
-		return 1
-	} else if that1.Field11 != nil {
+	} else if this.Field11 == nil {
 		return -1
+	} else if *this.Field11 != *that1.Field11 {
+		if *this.Field11 < *that1.Field11 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field12 != nil && that1.Field12 != nil {
-		if *this.Field12 != *that1.Field12 {
-			if *this.Field12 < *that1.Field12 {
-				return -1
-			}
+	if that1.Field12 == nil {
+		if this.Field12 != nil {
 			return 1
 		}
-	} else if this.Field12 != nil {
-		return 1
-	} else if that1.Field12 != nil {
+	} else if this.Field12 == nil {
 		return -1
+	} else if *this.Field12 != *that1.Field12 {
+		if *this.Field12 < *that1.Field12 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field13 != nil && that1.Field13 != nil {
-		if *this.Field13 != *that1.Field13 {
-			if !*this.Field13 {
-				return -1
-			}
+	if that1.Field13 == nil {
+		if this.Field13 != nil {
 			return 1
 		}
-	} else if this.Field13 != nil {
-		return 1
-	} else if that1.Field13 != nil {
+	} else if this.Field13 == nil {
 		return -1
+	} else if *this.Field13 != *that1.Field13 {
+		if !*this.Field13 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field14 != nil && that1.Field14 != nil {
-		if *this.Field14 != *that1.Field14 {
-			if *this.Field14 < *that1.Field14 {
-				return -1
-			}
+	if that1.Field14 == nil {
+		if this.Field14 != nil {
 			return 1
 		}
-	} else if this.Field14 != nil {
-		return 1
-	} else if that1.Field14 != nil {
+	} else if this.Field14 == nil {
 		return -1
+	} else if *this.Field14 != *that1.Field14 {
+		if *this.Field14 < *that1.Field14 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.Field15, that1.Field15); c != 0 {
 		return c
@@ -4409,29 +4409,29 @@ func (this *NinOptStruct) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			if *this.Field1 < *that1.Field1 {
-				return -1
-			}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
 			return 1
 		}
-	} else if this.Field1 != nil {
-		return 1
-	} else if that1.Field1 != nil {
+	} else if this.Field1 == nil {
 		return -1
+	} else if *this.Field1 != *that1.Field1 {
+		if *this.Field1 < *that1.Field1 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			if *this.Field2 < *that1.Field2 {
-				return -1
-			}
+	if that1.Field2 == nil {
+		if this.Field2 != nil {
 			return 1
 		}
-	} else if this.Field2 != nil {
-		return 1
-	} else if that1.Field2 != nil {
+	} else if this.Field2 == nil {
 		return -1
+	} else if *this.Field2 != *that1.Field2 {
+		if *this.Field2 < *that1.Field2 {
+			return -1
+		}
+		return 1
 	}
 	if c := this.Field3.Compare(that1.Field3); c != 0 {
 		return c
@@ -4439,56 +4439,56 @@ func (this *NinOptStruct) Compare(that interface{}) int {
 	if c := this.Field4.Compare(that1.Field4); c != 0 {
 		return c
 	}
-	if this.Field6 != nil && that1.Field6 != nil {
-		if *this.Field6 != *that1.Field6 {
-			if *this.Field6 < *that1.Field6 {
-				return -1
-			}
+	if that1.Field6 == nil {
+		if this.Field6 != nil {
 			return 1
 		}
-	} else if this.Field6 != nil {
-		return 1
-	} else if that1.Field6 != nil {
+	} else if this.Field6 == nil {
 		return -1
+	} else if *this.Field6 != *that1.Field6 {
+		if *this.Field6 < *that1.Field6 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field7 != nil && that1.Field7 != nil {
-		if *this.Field7 != *that1.Field7 {
-			if *this.Field7 < *that1.Field7 {
-				return -1
-			}
+	if that1.Field7 == nil {
+		if this.Field7 != nil {
 			return 1
 		}
-	} else if this.Field7 != nil {
-		return 1
-	} else if that1.Field7 != nil {
+	} else if this.Field7 == nil {
 		return -1
+	} else if *this.Field7 != *that1.Field7 {
+		if *this.Field7 < *that1.Field7 {
+			return -1
+		}
+		return 1
 	}
 	if c := this.Field8.Compare(that1.Field8); c != 0 {
 		return c
 	}
-	if this.Field13 != nil && that1.Field13 != nil {
-		if *this.Field13 != *that1.Field13 {
-			if !*this.Field13 {
-				return -1
-			}
+	if that1.Field13 == nil {
+		if this.Field13 != nil {
 			return 1
 		}
-	} else if this.Field13 != nil {
-		return 1
-	} else if that1.Field13 != nil {
+	} else if this.Field13 == nil {
 		return -1
+	} else if *this.Field13 != *that1.Field13 {
+		if !*this.Field13 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field14 != nil && that1.Field14 != nil {
-		if *this.Field14 != *that1.Field14 {
-			if *this.Field14 < *that1.Field14 {
-				return -1
-			}
+	if that1.Field14 == nil {
+		if this.Field14 != nil {
 			return 1
 		}
-	} else if this.Field14 != nil {
-		return 1
-	} else if that1.Field14 != nil {
+	} else if this.Field14 == nil {
 		return -1
+	} else if *this.Field14 != *that1.Field14 {
+		if *this.Field14 < *that1.Field14 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.Field15, that1.Field15); c != 0 {
 		return c
@@ -4887,17 +4887,17 @@ func (this *NinEmbeddedStruct) Compare(that interface{}) int {
 	if c := this.Field200.Compare(that1.Field200); c != 0 {
 		return c
 	}
-	if this.Field210 != nil && that1.Field210 != nil {
-		if *this.Field210 != *that1.Field210 {
-			if !*this.Field210 {
-				return -1
-			}
+	if that1.Field210 == nil {
+		if this.Field210 != nil {
 			return 1
 		}
-	} else if this.Field210 != nil {
-		return 1
-	} else if that1.Field210 != nil {
+	} else if this.Field210 == nil {
 		return -1
+	} else if *this.Field210 != *that1.Field210 {
+		if !*this.Field210 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
 		return c
@@ -5244,101 +5244,101 @@ func (this *NinOptNativeUnion) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			if *this.Field1 < *that1.Field1 {
-				return -1
-			}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
 			return 1
 		}
-	} else if this.Field1 != nil {
-		return 1
-	} else if that1.Field1 != nil {
+	} else if this.Field1 == nil {
 		return -1
+	} else if *this.Field1 != *that1.Field1 {
+		if *this.Field1 < *that1.Field1 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			if *this.Field2 < *that1.Field2 {
-				return -1
-			}
+	if that1.Field2 == nil {
+		if this.Field2 != nil {
 			return 1
 		}
-	} else if this.Field2 != nil {
-		return 1
-	} else if that1.Field2 != nil {
+	} else if this.Field2 == nil {
 		return -1
+	} else if *this.Field2 != *that1.Field2 {
+		if *this.Field2 < *that1.Field2 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field3 != nil && that1.Field3 != nil {
-		if *this.Field3 != *that1.Field3 {
-			if *this.Field3 < *that1.Field3 {
-				return -1
-			}
+	if that1.Field3 == nil {
+		if this.Field3 != nil {
 			return 1
 		}
-	} else if this.Field3 != nil {
-		return 1
-	} else if that1.Field3 != nil {
+	} else if this.Field3 == nil {
 		return -1
+	} else if *this.Field3 != *that1.Field3 {
+		if *this.Field3 < *that1.Field3 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field4 != nil && that1.Field4 != nil {
-		if *this.Field4 != *that1.Field4 {
-			if *this.Field4 < *that1.Field4 {
-				return -1
-			}
+	if that1.Field4 == nil {
+		if this.Field4 != nil {
 			return 1
 		}
-	} else if this.Field4 != nil {
-		return 1
-	} else if that1.Field4 != nil {
+	} else if this.Field4 == nil {
 		return -1
+	} else if *this.Field4 != *that1.Field4 {
+		if *this.Field4 < *that1.Field4 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field5 != nil && that1.Field5 != nil {
-		if *this.Field5 != *that1.Field5 {
-			if *this.Field5 < *that1.Field5 {
-				return -1
-			}
+	if that1.Field5 == nil {
+		if this.Field5 != nil {
 			return 1
 		}
-	} else if this.Field5 != nil {
-		return 1
-	} else if that1.Field5 != nil {
+	} else if this.Field5 == nil {
 		return -1
+	} else if *this.Field5 != *that1.Field5 {
+		if *this.Field5 < *that1.Field5 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field6 != nil && that1.Field6 != nil {
-		if *this.Field6 != *that1.Field6 {
-			if *this.Field6 < *that1.Field6 {
-				return -1
-			}
+	if that1.Field6 == nil {
+		if this.Field6 != nil {
 			return 1
 		}
-	} else if this.Field6 != nil {
-		return 1
-	} else if that1.Field6 != nil {
+	} else if this.Field6 == nil {
 		return -1
+	} else if *this.Field6 != *that1.Field6 {
+		if *this.Field6 < *that1.Field6 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field13 != nil && that1.Field13 != nil {
-		if *this.Field13 != *that1.Field13 {
-			if !*this.Field13 {
-				return -1
-			}
+	if that1.Field13 == nil {
+		if this.Field13 != nil {
 			return 1
 		}
-	} else if this.Field13 != nil {
-		return 1
-	} else if that1.Field13 != nil {
+	} else if this.Field13 == nil {
 		return -1
+	} else if *this.Field13 != *that1.Field13 {
+		if !*this.Field13 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field14 != nil && that1.Field14 != nil {
-		if *this.Field14 != *that1.Field14 {
-			if *this.Field14 < *that1.Field14 {
-				return -1
-			}
+	if that1.Field14 == nil {
+		if this.Field14 != nil {
 			return 1
 		}
-	} else if this.Field14 != nil {
-		return 1
-	} else if that1.Field14 != nil {
+	} else if this.Field14 == nil {
 		return -1
+	} else if *this.Field14 != *that1.Field14 {
+		if *this.Field14 < *that1.Field14 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.Field15, that1.Field15); c != 0 {
 		return c
@@ -5373,29 +5373,29 @@ func (this *NinOptStructUnion) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			if *this.Field1 < *that1.Field1 {
-				return -1
-			}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
 			return 1
 		}
-	} else if this.Field1 != nil {
-		return 1
-	} else if that1.Field1 != nil {
+	} else if this.Field1 == nil {
 		return -1
+	} else if *this.Field1 != *that1.Field1 {
+		if *this.Field1 < *that1.Field1 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			if *this.Field2 < *that1.Field2 {
-				return -1
-			}
+	if that1.Field2 == nil {
+		if this.Field2 != nil {
 			return 1
 		}
-	} else if this.Field2 != nil {
-		return 1
-	} else if that1.Field2 != nil {
+	} else if this.Field2 == nil {
 		return -1
+	} else if *this.Field2 != *that1.Field2 {
+		if *this.Field2 < *that1.Field2 {
+			return -1
+		}
+		return 1
 	}
 	if c := this.Field3.Compare(that1.Field3); c != 0 {
 		return c
@@ -5403,53 +5403,53 @@ func (this *NinOptStructUnion) Compare(that interface{}) int {
 	if c := this.Field4.Compare(that1.Field4); c != 0 {
 		return c
 	}
-	if this.Field6 != nil && that1.Field6 != nil {
-		if *this.Field6 != *that1.Field6 {
-			if *this.Field6 < *that1.Field6 {
-				return -1
-			}
+	if that1.Field6 == nil {
+		if this.Field6 != nil {
 			return 1
 		}
-	} else if this.Field6 != nil {
-		return 1
-	} else if that1.Field6 != nil {
+	} else if this.Field6 == nil {
 		return -1
+	} else if *this.Field6 != *that1.Field6 {
+		if *this.Field6 < *that1.Field6 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field7 != nil && that1.Field7 != nil {
-		if *this.Field7 != *that1.Field7 {
-			if *this.Field7 < *that1.Field7 {
-				return -1
-			}
+	if that1.Field7 == nil {
+		if this.Field7 != nil {
 			return 1
 		}
-	} else if this.Field7 != nil {
-		return 1
-	} else if that1.Field7 != nil {
+	} else if this.Field7 == nil {
 		return -1
+	} else if *this.Field7 != *that1.Field7 {
+		if *this.Field7 < *that1.Field7 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field13 != nil && that1.Field13 != nil {
-		if *this.Field13 != *that1.Field13 {
-			if !*this.Field13 {
-				return -1
-			}
+	if that1.Field13 == nil {
+		if this.Field13 != nil {
 			return 1
 		}
-	} else if this.Field13 != nil {
-		return 1
-	} else if that1.Field13 != nil {
+	} else if this.Field13 == nil {
 		return -1
+	} else if *this.Field13 != *that1.Field13 {
+		if !*this.Field13 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field14 != nil && that1.Field14 != nil {
-		if *this.Field14 != *that1.Field14 {
-			if *this.Field14 < *that1.Field14 {
-				return -1
-			}
+	if that1.Field14 == nil {
+		if this.Field14 != nil {
 			return 1
 		}
-	} else if this.Field14 != nil {
-		return 1
-	} else if that1.Field14 != nil {
+	} else if this.Field14 == nil {
 		return -1
+	} else if *this.Field14 != *that1.Field14 {
+		if *this.Field14 < *that1.Field14 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.Field15, that1.Field15); c != 0 {
 		return c
@@ -5490,17 +5490,17 @@ func (this *NinEmbeddedStructUnion) Compare(that interface{}) int {
 	if c := this.Field200.Compare(that1.Field200); c != 0 {
 		return c
 	}
-	if this.Field210 != nil && that1.Field210 != nil {
-		if *this.Field210 != *that1.Field210 {
-			if !*this.Field210 {
-				return -1
-			}
+	if that1.Field210 == nil {
+		if this.Field210 != nil {
 			return 1
 		}
-	} else if this.Field210 != nil {
-		return 1
-	} else if that1.Field210 != nil {
+	} else if this.Field210 == nil {
 		return -1
+	} else if *this.Field210 != *that1.Field210 {
+		if !*this.Field210 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
 		return c
@@ -5931,41 +5931,41 @@ func (this *NinOptEnum) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			if *this.Field1 < *that1.Field1 {
-				return -1
-			}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
 			return 1
 		}
-	} else if this.Field1 != nil {
-		return 1
-	} else if that1.Field1 != nil {
+	} else if this.Field1 == nil {
 		return -1
+	} else if *this.Field1 != *that1.Field1 {
+		if *this.Field1 < *that1.Field1 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			if *this.Field2 < *that1.Field2 {
-				return -1
-			}
+	if that1.Field2 == nil {
+		if this.Field2 != nil {
 			return 1
 		}
-	} else if this.Field2 != nil {
-		return 1
-	} else if that1.Field2 != nil {
+	} else if this.Field2 == nil {
 		return -1
+	} else if *this.Field2 != *that1.Field2 {
+		if *this.Field2 < *that1.Field2 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field3 != nil && that1.Field3 != nil {
-		if *this.Field3 != *that1.Field3 {
-			if *this.Field3 < *that1.Field3 {
-				return -1
-			}
+	if that1.Field3 == nil {
+		if this.Field3 != nil {
 			return 1
 		}
-	} else if this.Field3 != nil {
-		return 1
-	} else if that1.Field3 != nil {
+	} else if this.Field3 == nil {
 		return -1
+	} else if *this.Field3 != *that1.Field3 {
+		if *this.Field3 < *that1.Field3 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
 		return c
@@ -6141,41 +6141,41 @@ func (this *NinOptEnumDefault) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			if *this.Field1 < *that1.Field1 {
-				return -1
-			}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
 			return 1
 		}
-	} else if this.Field1 != nil {
-		return 1
-	} else if that1.Field1 != nil {
+	} else if this.Field1 == nil {
 		return -1
+	} else if *this.Field1 != *that1.Field1 {
+		if *this.Field1 < *that1.Field1 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			if *this.Field2 < *that1.Field2 {
-				return -1
-			}
+	if that1.Field2 == nil {
+		if this.Field2 != nil {
 			return 1
 		}
-	} else if this.Field2 != nil {
-		return 1
-	} else if that1.Field2 != nil {
+	} else if this.Field2 == nil {
 		return -1
+	} else if *this.Field2 != *that1.Field2 {
+		if *this.Field2 < *that1.Field2 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field3 != nil && that1.Field3 != nil {
-		if *this.Field3 != *that1.Field3 {
-			if *this.Field3 < *that1.Field3 {
-				return -1
-			}
+	if that1.Field3 == nil {
+		if this.Field3 != nil {
 			return 1
 		}
-	} else if this.Field3 != nil {
-		return 1
-	} else if that1.Field3 != nil {
+	} else if this.Field3 == nil {
 		return -1
+	} else if *this.Field3 != *that1.Field3 {
+		if *this.Field3 < *that1.Field3 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
 		return c
@@ -6207,41 +6207,41 @@ func (this *AnotherNinOptEnum) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			if *this.Field1 < *that1.Field1 {
-				return -1
-			}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
 			return 1
 		}
-	} else if this.Field1 != nil {
-		return 1
-	} else if that1.Field1 != nil {
+	} else if this.Field1 == nil {
 		return -1
+	} else if *this.Field1 != *that1.Field1 {
+		if *this.Field1 < *that1.Field1 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			if *this.Field2 < *that1.Field2 {
-				return -1
-			}
+	if that1.Field2 == nil {
+		if this.Field2 != nil {
 			return 1
 		}
-	} else if this.Field2 != nil {
-		return 1
-	} else if that1.Field2 != nil {
+	} else if this.Field2 == nil {
 		return -1
+	} else if *this.Field2 != *that1.Field2 {
+		if *this.Field2 < *that1.Field2 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field3 != nil && that1.Field3 != nil {
-		if *this.Field3 != *that1.Field3 {
-			if *this.Field3 < *that1.Field3 {
-				return -1
-			}
+	if that1.Field3 == nil {
+		if this.Field3 != nil {
 			return 1
 		}
-	} else if this.Field3 != nil {
-		return 1
-	} else if that1.Field3 != nil {
+	} else if this.Field3 == nil {
 		return -1
+	} else if *this.Field3 != *that1.Field3 {
+		if *this.Field3 < *that1.Field3 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
 		return c
@@ -6273,41 +6273,41 @@ func (this *AnotherNinOptEnumDefault) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			if *this.Field1 < *that1.Field1 {
-				return -1
-			}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
 			return 1
 		}
-	} else if this.Field1 != nil {
-		return 1
-	} else if that1.Field1 != nil {
+	} else if this.Field1 == nil {
 		return -1
+	} else if *this.Field1 != *that1.Field1 {
+		if *this.Field1 < *that1.Field1 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			if *this.Field2 < *that1.Field2 {
-				return -1
-			}
+	if that1.Field2 == nil {
+		if this.Field2 != nil {
 			return 1
 		}
-	} else if this.Field2 != nil {
-		return 1
-	} else if that1.Field2 != nil {
+	} else if this.Field2 == nil {
 		return -1
+	} else if *this.Field2 != *that1.Field2 {
+		if *this.Field2 < *that1.Field2 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field3 != nil && that1.Field3 != nil {
-		if *this.Field3 != *that1.Field3 {
-			if *this.Field3 < *that1.Field3 {
-				return -1
-			}
+	if that1.Field3 == nil {
+		if this.Field3 != nil {
 			return 1
 		}
-	} else if this.Field3 != nil {
-		return 1
-	} else if that1.Field3 != nil {
+	} else if this.Field3 == nil {
 		return -1
+	} else if *this.Field3 != *that1.Field3 {
+		if *this.Field3 < *that1.Field3 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
 		return c
@@ -6384,17 +6384,17 @@ func (this *MyExtendable) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			if *this.Field1 < *that1.Field1 {
-				return -1
-			}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
 			return 1
 		}
-	} else if this.Field1 != nil {
-		return 1
-	} else if that1.Field1 != nil {
+	} else if this.Field1 == nil {
 		return -1
+	} else if *this.Field1 != *that1.Field1 {
+		if *this.Field1 < *that1.Field1 {
+			return -1
+		}
+		return 1
 	}
 	thismap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(this)
 	thatmap := github_com_gogo_protobuf_proto.GetUnsafeExtensionsMap(that1)
@@ -6451,29 +6451,29 @@ func (this *OtherExtenable) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			if *this.Field2 < *that1.Field2 {
-				return -1
-			}
+	if that1.Field2 == nil {
+		if this.Field2 != nil {
 			return 1
 		}
-	} else if this.Field2 != nil {
-		return 1
-	} else if that1.Field2 != nil {
+	} else if this.Field2 == nil {
 		return -1
+	} else if *this.Field2 != *that1.Field2 {
+		if *this.Field2 < *that1.Field2 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field13 != nil && that1.Field13 != nil {
-		if *this.Field13 != *that1.Field13 {
-			if *this.Field13 < *that1.Field13 {
-				return -1
-			}
+	if that1.Field13 == nil {
+		if this.Field13 != nil {
 			return 1
 		}
-	} else if this.Field13 != nil {
-		return 1
-	} else if that1.Field13 != nil {
+	} else if this.Field13 == nil {
 		return -1
+	} else if *this.Field13 != *that1.Field13 {
+		if *this.Field13 < *that1.Field13 {
+			return -1
+		}
+		return 1
 	}
 	if c := this.M.Compare(that1.M); c != 0 {
 		return c
@@ -6533,29 +6533,29 @@ func (this *NestedDefinition) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			if *this.Field1 < *that1.Field1 {
-				return -1
-			}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
 			return 1
 		}
-	} else if this.Field1 != nil {
-		return 1
-	} else if that1.Field1 != nil {
+	} else if this.Field1 == nil {
 		return -1
+	} else if *this.Field1 != *that1.Field1 {
+		if *this.Field1 < *that1.Field1 {
+			return -1
+		}
+		return 1
 	}
-	if this.EnumField != nil && that1.EnumField != nil {
-		if *this.EnumField != *that1.EnumField {
-			if *this.EnumField < *that1.EnumField {
-				return -1
-			}
+	if that1.EnumField == nil {
+		if this.EnumField != nil {
 			return 1
 		}
-	} else if this.EnumField != nil {
-		return 1
-	} else if that1.EnumField != nil {
+	} else if this.EnumField == nil {
 		return -1
+	} else if *this.EnumField != *that1.EnumField {
+		if *this.EnumField < *that1.EnumField {
+			return -1
+		}
+		return 1
 	}
 	if c := this.NNM.Compare(that1.NNM); c != 0 {
 		return c
@@ -6593,17 +6593,17 @@ func (this *NestedDefinition_NestedMessage) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.NestedField1 != nil && that1.NestedField1 != nil {
-		if *this.NestedField1 != *that1.NestedField1 {
-			if *this.NestedField1 < *that1.NestedField1 {
-				return -1
-			}
+	if that1.NestedField1 == nil {
+		if this.NestedField1 != nil {
 			return 1
 		}
-	} else if this.NestedField1 != nil {
-		return 1
-	} else if that1.NestedField1 != nil {
+	} else if this.NestedField1 == nil {
 		return -1
+	} else if *this.NestedField1 != *that1.NestedField1 {
+		if *this.NestedField1 < *that1.NestedField1 {
+			return -1
+		}
+		return 1
 	}
 	if c := this.NNM.Compare(that1.NNM); c != 0 {
 		return c
@@ -6638,17 +6638,17 @@ func (this *NestedDefinition_NestedMessage_NestedNestedMsg) Compare(that interfa
 	} else if this == nil {
 		return -1
 	}
-	if this.NestedNestedField1 != nil && that1.NestedNestedField1 != nil {
-		if *this.NestedNestedField1 != *that1.NestedNestedField1 {
-			if *this.NestedNestedField1 < *that1.NestedNestedField1 {
-				return -1
-			}
+	if that1.NestedNestedField1 == nil {
+		if this.NestedNestedField1 != nil {
 			return 1
 		}
-	} else if this.NestedNestedField1 != nil {
-		return 1
-	} else if that1.NestedNestedField1 != nil {
+	} else if this.NestedNestedField1 == nil {
 		return -1
+	} else if *this.NestedNestedField1 != *that1.NestedNestedField1 {
+		if *this.NestedNestedField1 < *that1.NestedNestedField1 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
 		return c
@@ -6683,17 +6683,17 @@ func (this *NestedScope) Compare(that interface{}) int {
 	if c := this.A.Compare(that1.A); c != 0 {
 		return c
 	}
-	if this.B != nil && that1.B != nil {
-		if *this.B != *that1.B {
-			if *this.B < *that1.B {
-				return -1
-			}
+	if that1.B == nil {
+		if this.B != nil {
 			return 1
 		}
-	} else if this.B != nil {
-		return 1
-	} else if that1.B != nil {
+	} else if this.B == nil {
 		return -1
+	} else if *this.B != *that1.B {
+		if *this.B < *that1.B {
+			return -1
+		}
+		return 1
 	}
 	if c := this.C.Compare(that1.C); c != 0 {
 		return c
@@ -6728,173 +6728,173 @@ func (this *NinOptNativeDefault) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			if *this.Field1 < *that1.Field1 {
-				return -1
-			}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
 			return 1
 		}
-	} else if this.Field1 != nil {
-		return 1
-	} else if that1.Field1 != nil {
+	} else if this.Field1 == nil {
 		return -1
+	} else if *this.Field1 != *that1.Field1 {
+		if *this.Field1 < *that1.Field1 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			if *this.Field2 < *that1.Field2 {
-				return -1
-			}
+	if that1.Field2 == nil {
+		if this.Field2 != nil {
 			return 1
 		}
-	} else if this.Field2 != nil {
-		return 1
-	} else if that1.Field2 != nil {
+	} else if this.Field2 == nil {
 		return -1
+	} else if *this.Field2 != *that1.Field2 {
+		if *this.Field2 < *that1.Field2 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field3 != nil && that1.Field3 != nil {
-		if *this.Field3 != *that1.Field3 {
-			if *this.Field3 < *that1.Field3 {
-				return -1
-			}
+	if that1.Field3 == nil {
+		if this.Field3 != nil {
 			return 1
 		}
-	} else if this.Field3 != nil {
-		return 1
-	} else if that1.Field3 != nil {
+	} else if this.Field3 == nil {
 		return -1
+	} else if *this.Field3 != *that1.Field3 {
+		if *this.Field3 < *that1.Field3 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field4 != nil && that1.Field4 != nil {
-		if *this.Field4 != *that1.Field4 {
-			if *this.Field4 < *that1.Field4 {
-				return -1
-			}
+	if that1.Field4 == nil {
+		if this.Field4 != nil {
 			return 1
 		}
-	} else if this.Field4 != nil {
-		return 1
-	} else if that1.Field4 != nil {
+	} else if this.Field4 == nil {
 		return -1
+	} else if *this.Field4 != *that1.Field4 {
+		if *this.Field4 < *that1.Field4 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field5 != nil && that1.Field5 != nil {
-		if *this.Field5 != *that1.Field5 {
-			if *this.Field5 < *that1.Field5 {
-				return -1
-			}
+	if that1.Field5 == nil {
+		if this.Field5 != nil {
 			return 1
 		}
-	} else if this.Field5 != nil {
-		return 1
-	} else if that1.Field5 != nil {
+	} else if this.Field5 == nil {
 		return -1
+	} else if *this.Field5 != *that1.Field5 {
+		if *this.Field5 < *that1.Field5 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field6 != nil && that1.Field6 != nil {
-		if *this.Field6 != *that1.Field6 {
-			if *this.Field6 < *that1.Field6 {
-				return -1
-			}
+	if that1.Field6 == nil {
+		if this.Field6 != nil {
 			return 1
 		}
-	} else if this.Field6 != nil {
-		return 1
-	} else if that1.Field6 != nil {
+	} else if this.Field6 == nil {
 		return -1
+	} else if *this.Field6 != *that1.Field6 {
+		if *this.Field6 < *that1.Field6 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field7 != nil && that1.Field7 != nil {
-		if *this.Field7 != *that1.Field7 {
-			if *this.Field7 < *that1.Field7 {
-				return -1
-			}
+	if that1.Field7 == nil {
+		if this.Field7 != nil {
 			return 1
 		}
-	} else if this.Field7 != nil {
-		return 1
-	} else if that1.Field7 != nil {
+	} else if this.Field7 == nil {
 		return -1
+	} else if *this.Field7 != *that1.Field7 {
+		if *this.Field7 < *that1.Field7 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field8 != nil && that1.Field8 != nil {
-		if *this.Field8 != *that1.Field8 {
-			if *this.Field8 < *that1.Field8 {
-				return -1
-			}
+	if that1.Field8 == nil {
+		if this.Field8 != nil {
 			return 1
 		}
-	} else if this.Field8 != nil {
-		return 1
-	} else if that1.Field8 != nil {
+	} else if this.Field8 == nil {
 		return -1
+	} else if *this.Field8 != *that1.Field8 {
+		if *this.Field8 < *that1.Field8 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field9 != nil && that1.Field9 != nil {
-		if *this.Field9 != *that1.Field9 {
-			if *this.Field9 < *that1.Field9 {
-				return -1
-			}
+	if that1.Field9 == nil {
+		if this.Field9 != nil {
 			return 1
 		}
-	} else if this.Field9 != nil {
-		return 1
-	} else if that1.Field9 != nil {
+	} else if this.Field9 == nil {
 		return -1
+	} else if *this.Field9 != *that1.Field9 {
+		if *this.Field9 < *that1.Field9 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field10 != nil && that1.Field10 != nil {
-		if *this.Field10 != *that1.Field10 {
-			if *this.Field10 < *that1.Field10 {
-				return -1
-			}
+	if that1.Field10 == nil {
+		if this.Field10 != nil {
 			return 1
 		}
-	} else if this.Field10 != nil {
-		return 1
-	} else if that1.Field10 != nil {
+	} else if this.Field10 == nil {
 		return -1
+	} else if *this.Field10 != *that1.Field10 {
+		if *this.Field10 < *that1.Field10 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field11 != nil && that1.Field11 != nil {
-		if *this.Field11 != *that1.Field11 {
-			if *this.Field11 < *that1.Field11 {
-				return -1
-			}
+	if that1.Field11 == nil {
+		if this.Field11 != nil {
 			return 1
 		}
-	} else if this.Field11 != nil {
-		return 1
-	} else if that1.Field11 != nil {
+	} else if this.Field11 == nil {
 		return -1
+	} else if *this.Field11 != *that1.Field11 {
+		if *this.Field11 < *that1.Field11 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field12 != nil && that1.Field12 != nil {
-		if *this.Field12 != *that1.Field12 {
-			if *this.Field12 < *that1.Field12 {
-				return -1
-			}
+	if that1.Field12 == nil {
+		if this.Field12 != nil {
 			return 1
 		}
-	} else if this.Field12 != nil {
-		return 1
-	} else if that1.Field12 != nil {
+	} else if this.Field12 == nil {
 		return -1
+	} else if *this.Field12 != *that1.Field12 {
+		if *this.Field12 < *that1.Field12 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field13 != nil && that1.Field13 != nil {
-		if *this.Field13 != *that1.Field13 {
-			if !*this.Field13 {
-				return -1
-			}
+	if that1.Field13 == nil {
+		if this.Field13 != nil {
 			return 1
 		}
-	} else if this.Field13 != nil {
-		return 1
-	} else if that1.Field13 != nil {
+	} else if this.Field13 == nil {
 		return -1
+	} else if *this.Field13 != *that1.Field13 {
+		if !*this.Field13 {
+			return -1
+		}
+		return 1
 	}
-	if this.Field14 != nil && that1.Field14 != nil {
-		if *this.Field14 != *that1.Field14 {
-			if *this.Field14 < *that1.Field14 {
-				return -1
-			}
+	if that1.Field14 == nil {
+		if this.Field14 != nil {
 			return 1
 		}
-	} else if this.Field14 != nil {
-		return 1
-	} else if that1.Field14 != nil {
+	} else if this.Field14 == nil {
 		return -1
+	} else if *this.Field14 != *that1.Field14 {
+		if *this.Field14 < *that1.Field14 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.Field15, that1.Field15); c != 0 {
 		return c
@@ -7079,173 +7079,173 @@ func (this *CustomNameNinOptNative) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.FieldA != nil && that1.FieldA != nil {
-		if *this.FieldA != *that1.FieldA {
-			if *this.FieldA < *that1.FieldA {
-				return -1
-			}
+	if that1.FieldA == nil {
+		if this.FieldA != nil {
 			return 1
 		}
-	} else if this.FieldA != nil {
-		return 1
-	} else if that1.FieldA != nil {
+	} else if this.FieldA == nil {
 		return -1
+	} else if *this.FieldA != *that1.FieldA {
+		if *this.FieldA < *that1.FieldA {
+			return -1
+		}
+		return 1
 	}
-	if this.FieldB != nil && that1.FieldB != nil {
-		if *this.FieldB != *that1.FieldB {
-			if *this.FieldB < *that1.FieldB {
-				return -1
-			}
+	if that1.FieldB == nil {
+		if this.FieldB != nil {
 			return 1
 		}
-	} else if this.FieldB != nil {
-		return 1
-	} else if that1.FieldB != nil {
+	} else if this.FieldB == nil {
 		return -1
+	} else if *this.FieldB != *that1.FieldB {
+		if *this.FieldB < *that1.FieldB {
+			return -1
+		}
+		return 1
 	}
-	if this.FieldC != nil && that1.FieldC != nil {
-		if *this.FieldC != *that1.FieldC {
-			if *this.FieldC < *that1.FieldC {
-				return -1
-			}
+	if that1.FieldC == nil {
+		if this.FieldC != nil {
 			return 1
 		}
-	} else if this.FieldC != nil {
-		return 1
-	} else if that1.FieldC != nil {
+	} else if this.FieldC == nil {
 		return -1
+	} else if *this.FieldC != *that1.FieldC {
+		if *this.FieldC < *that1.FieldC {
+			return -1
+		}
+		return 1
 	}
-	if this.FieldD != nil && that1.FieldD != nil {
-		if *this.FieldD != *that1.FieldD {
-			if *this.FieldD < *that1.FieldD {
-				return -1
-			}
+	if that1.FieldD == nil {
+		if this.FieldD != nil {
 			return 1
 		}
-	} else if this.FieldD != nil {
-		return 1
-	} else if that1.FieldD != nil {
+	} else if this.FieldD == nil {
 		return -1
+	} else if *this.FieldD != *that1.FieldD {
+		if *this.FieldD < *that1.FieldD {
+			return -1
+		}
+		return 1
 	}
-	if this.FieldE != nil && that1.FieldE != nil {
-		if *this.FieldE != *that1.FieldE {
-			if *this.FieldE < *that1.FieldE {
-				return -1
-			}
+	if that1.FieldE == nil {
+		if this.FieldE != nil {
 			return 1
 		}
-	} else if this.FieldE != nil {
-		return 1
-	} else if that1.FieldE != nil {
+	} else if this.FieldE == nil {
 		return -1
+	} else if *this.FieldE != *that1.FieldE {
+		if *this.FieldE < *that1.FieldE {
+			return -1
+		}
+		return 1
 	}
-	if this.FieldF != nil && that1.FieldF != nil {
-		if *this.FieldF != *that1.FieldF {
-			if *this.FieldF < *that1.FieldF {
-				return -1
-			}
+	if that1.FieldF == nil {
+		if this.FieldF != nil {
 			return 1
 		}
-	} else if this.FieldF != nil {
-		return 1
-	} else if that1.FieldF != nil {
+	} else if this.FieldF == nil {
 		return -1
+	} else if *this.FieldF != *that1.FieldF {
+		if *this.FieldF < *that1.FieldF {
+			return -1
+		}
+		return 1
 	}
-	if this.FieldG != nil && that1.FieldG != nil {
-		if *this.FieldG != *that1.FieldG {
-			if *this.FieldG < *that1.FieldG {
-				return -1
-			}
+	if that1.FieldG == nil {
+		if this.FieldG != nil {
 			return 1
 		}
-	} else if this.FieldG != nil {
-		return 1
-	} else if that1.FieldG != nil {
+	} else if this.FieldG == nil {
 		return -1
+	} else if *this.FieldG != *that1.FieldG {
+		if *this.FieldG < *that1.FieldG {
+			return -1
+		}
+		return 1
 	}
-	if this.FieldH != nil && that1.FieldH != nil {
-		if *this.FieldH != *that1.FieldH {
-			if *this.FieldH < *that1.FieldH {
-				return -1
-			}
+	if that1.FieldH == nil {
+		if this.FieldH != nil {
 			return 1
 		}
-	} else if this.FieldH != nil {
-		return 1
-	} else if that1.FieldH != nil {
+	} else if this.FieldH == nil {
 		return -1
+	} else if *this.FieldH != *that1.FieldH {
+		if *this.FieldH < *that1.FieldH {
+			return -1
+		}
+		return 1
 	}
-	if this.FieldI != nil && that1.FieldI != nil {
-		if *this.FieldI != *that1.FieldI {
-			if *this.FieldI < *that1.FieldI {
-				return -1
-			}
+	if that1.FieldI == nil {
+		if this.FieldI != nil {
 			return 1
 		}
-	} else if this.FieldI != nil {
-		return 1
-	} else if that1.FieldI != nil {
+	} else if this.FieldI == nil {
 		return -1
+	} else if *this.FieldI != *that1.FieldI {
+		if *this.FieldI < *that1.FieldI {
+			return -1
+		}
+		return 1
 	}
-	if this.FieldJ != nil && that1.FieldJ != nil {
-		if *this.FieldJ != *that1.FieldJ {
-			if *this.FieldJ < *that1.FieldJ {
-				return -1
-			}
+	if that1.FieldJ == nil {
+		if this.FieldJ != nil {
 			return 1
 		}
-	} else if this.FieldJ != nil {
-		return 1
-	} else if that1.FieldJ != nil {
+	} else if this.FieldJ == nil {
 		return -1
+	} else if *this.FieldJ != *that1.FieldJ {
+		if *this.FieldJ < *that1.FieldJ {
+			return -1
+		}
+		return 1
 	}
-	if this.FieldK != nil && that1.FieldK != nil {
-		if *this.FieldK != *that1.FieldK {
-			if *this.FieldK < *that1.FieldK {
-				return -1
-			}
+	if that1.FieldK == nil {
+		if this.FieldK != nil {
 			return 1
 		}
-	} else if this.FieldK != nil {
-		return 1
-	} else if that1.FieldK != nil {
+	} else if this.FieldK == nil {
 		return -1
+	} else if *this.FieldK != *that1.FieldK {
+		if *this.FieldK < *that1.FieldK {
+			return -1
+		}
+		return 1
 	}
-	if this.FielL != nil && that1.FielL != nil {
-		if *this.FielL != *that1.FielL {
-			if *this.FielL < *that1.FielL {
-				return -1
-			}
+	if that1.FielL == nil {
+		if this.FielL != nil {
 			return 1
 		}
-	} else if this.FielL != nil {
-		return 1
-	} else if that1.FielL != nil {
+	} else if this.FielL == nil {
 		return -1
+	} else if *this.FielL != *that1.FielL {
+		if *this.FielL < *that1.FielL {
+			return -1
+		}
+		return 1
 	}
-	if this.FieldM != nil && that1.FieldM != nil {
-		if *this.FieldM != *that1.FieldM {
-			if !*this.FieldM {
-				return -1
-			}
+	if that1.FieldM == nil {
+		if this.FieldM != nil {
 			return 1
 		}
-	} else if this.FieldM != nil {
-		return 1
-	} else if that1.FieldM != nil {
+	} else if this.FieldM == nil {
 		return -1
+	} else if *this.FieldM != *that1.FieldM {
+		if !*this.FieldM {
+			return -1
+		}
+		return 1
 	}
-	if this.FieldN != nil && that1.FieldN != nil {
-		if *this.FieldN != *that1.FieldN {
-			if *this.FieldN < *that1.FieldN {
-				return -1
-			}
+	if that1.FieldN == nil {
+		if this.FieldN != nil {
 			return 1
 		}
-	} else if this.FieldN != nil {
-		return 1
-	} else if that1.FieldN != nil {
+	} else if this.FieldN == nil {
 		return -1
+	} else if *this.FieldN != *that1.FieldN {
+		if *this.FieldN < *that1.FieldN {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.FieldO, that1.FieldO); c != 0 {
 		return c
@@ -7517,29 +7517,29 @@ func (this *CustomNameNinStruct) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.FieldA != nil && that1.FieldA != nil {
-		if *this.FieldA != *that1.FieldA {
-			if *this.FieldA < *that1.FieldA {
-				return -1
-			}
+	if that1.FieldA == nil {
+		if this.FieldA != nil {
 			return 1
 		}
-	} else if this.FieldA != nil {
-		return 1
-	} else if that1.FieldA != nil {
+	} else if this.FieldA == nil {
 		return -1
+	} else if *this.FieldA != *that1.FieldA {
+		if *this.FieldA < *that1.FieldA {
+			return -1
+		}
+		return 1
 	}
-	if this.FieldB != nil && that1.FieldB != nil {
-		if *this.FieldB != *that1.FieldB {
-			if *this.FieldB < *that1.FieldB {
-				return -1
-			}
+	if that1.FieldB == nil {
+		if this.FieldB != nil {
 			return 1
 		}
-	} else if this.FieldB != nil {
-		return 1
-	} else if that1.FieldB != nil {
+	} else if this.FieldB == nil {
 		return -1
+	} else if *this.FieldB != *that1.FieldB {
+		if *this.FieldB < *that1.FieldB {
+			return -1
+		}
+		return 1
 	}
 	if c := this.FieldC.Compare(that1.FieldC); c != 0 {
 		return c
@@ -7555,56 +7555,56 @@ func (this *CustomNameNinStruct) Compare(that interface{}) int {
 			return c
 		}
 	}
-	if this.FieldE != nil && that1.FieldE != nil {
-		if *this.FieldE != *that1.FieldE {
-			if *this.FieldE < *that1.FieldE {
-				return -1
-			}
+	if that1.FieldE == nil {
+		if this.FieldE != nil {
 			return 1
 		}
-	} else if this.FieldE != nil {
-		return 1
-	} else if that1.FieldE != nil {
+	} else if this.FieldE == nil {
 		return -1
+	} else if *this.FieldE != *that1.FieldE {
+		if *this.FieldE < *that1.FieldE {
+			return -1
+		}
+		return 1
 	}
-	if this.FieldF != nil && that1.FieldF != nil {
-		if *this.FieldF != *that1.FieldF {
-			if *this.FieldF < *that1.FieldF {
-				return -1
-			}
+	if that1.FieldF == nil {
+		if this.FieldF != nil {
 			return 1
 		}
-	} else if this.FieldF != nil {
-		return 1
-	} else if that1.FieldF != nil {
+	} else if this.FieldF == nil {
 		return -1
+	} else if *this.FieldF != *that1.FieldF {
+		if *this.FieldF < *that1.FieldF {
+			return -1
+		}
+		return 1
 	}
 	if c := this.FieldG.Compare(that1.FieldG); c != 0 {
 		return c
 	}
-	if this.FieldH != nil && that1.FieldH != nil {
-		if *this.FieldH != *that1.FieldH {
-			if !*this.FieldH {
-				return -1
-			}
+	if that1.FieldH == nil {
+		if this.FieldH != nil {
 			return 1
 		}
-	} else if this.FieldH != nil {
-		return 1
-	} else if that1.FieldH != nil {
+	} else if this.FieldH == nil {
 		return -1
+	} else if *this.FieldH != *that1.FieldH {
+		if !*this.FieldH {
+			return -1
+		}
+		return 1
 	}
-	if this.FieldI != nil && that1.FieldI != nil {
-		if *this.FieldI != *that1.FieldI {
-			if *this.FieldI < *that1.FieldI {
-				return -1
-			}
+	if that1.FieldI == nil {
+		if this.FieldI != nil {
 			return 1
 		}
-	} else if this.FieldI != nil {
-		return 1
-	} else if that1.FieldI != nil {
+	} else if this.FieldI == nil {
 		return -1
+	} else if *this.FieldI != *that1.FieldI {
+		if *this.FieldI < *that1.FieldI {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.FieldJ, that1.FieldJ); c != 0 {
 		return c
@@ -7715,17 +7715,17 @@ func (this *CustomNameNinEmbeddedStructUnion) Compare(that interface{}) int {
 	if c := this.FieldA.Compare(that1.FieldA); c != 0 {
 		return c
 	}
-	if this.FieldB != nil && that1.FieldB != nil {
-		if *this.FieldB != *that1.FieldB {
-			if !*this.FieldB {
-				return -1
-			}
+	if that1.FieldB == nil {
+		if this.FieldB != nil {
 			return 1
 		}
-	} else if this.FieldB != nil {
-		return 1
-	} else if that1.FieldB != nil {
+	} else if this.FieldB == nil {
 		return -1
+	} else if *this.FieldB != *that1.FieldB {
+		if !*this.FieldB {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
 		return c
@@ -7757,17 +7757,17 @@ func (this *CustomNameEnum) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.FieldA != nil && that1.FieldA != nil {
-		if *this.FieldA != *that1.FieldA {
-			if *this.FieldA < *that1.FieldA {
-				return -1
-			}
+	if that1.FieldA == nil {
+		if this.FieldA != nil {
 			return 1
 		}
-	} else if this.FieldA != nil {
-		return 1
-	} else if that1.FieldA != nil {
+	} else if this.FieldA == nil {
 		return -1
+	} else if *this.FieldA != *that1.FieldA {
+		if *this.FieldA < *that1.FieldA {
+			return -1
+		}
+		return 1
 	}
 	if len(this.FieldB) != len(that1.FieldB) {
 		if len(this.FieldB) < len(that1.FieldB) {
@@ -7813,17 +7813,17 @@ func (this *NoExtensionsMap) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			if *this.Field1 < *that1.Field1 {
-				return -1
-			}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
 			return 1
 		}
-	} else if this.Field1 != nil {
-		return 1
-	} else if that1.Field1 != nil {
+	} else if this.Field1 == nil {
 		return -1
+	} else if *this.Field1 != *that1.Field1 {
+		if *this.Field1 < *that1.Field1 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.XXX_extensions, that1.XXX_extensions); c != 0 {
 		return c
@@ -7858,17 +7858,17 @@ func (this *Unrecognized) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			if *this.Field1 < *that1.Field1 {
-				return -1
-			}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
 			return 1
 		}
-	} else if this.Field1 != nil {
-		return 1
-	} else if that1.Field1 != nil {
+	} else if this.Field1 == nil {
 		return -1
+	} else if *this.Field1 != *that1.Field1 {
+		if *this.Field1 < *that1.Field1 {
+			return -1
+		}
+		return 1
 	}
 	return 0
 }
@@ -7908,17 +7908,17 @@ func (this *UnrecognizedWithInner) Compare(that interface{}) int {
 			return c
 		}
 	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			if *this.Field2 < *that1.Field2 {
-				return -1
-			}
+	if that1.Field2 == nil {
+		if this.Field2 != nil {
 			return 1
 		}
-	} else if this.Field2 != nil {
-		return 1
-	} else if that1.Field2 != nil {
+	} else if this.Field2 == nil {
 		return -1
+	} else if *this.Field2 != *that1.Field2 {
+		if *this.Field2 < *that1.Field2 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
 		return c
@@ -7950,17 +7950,17 @@ func (this *UnrecognizedWithInner_Inner) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			if *this.Field1 < *that1.Field1 {
-				return -1
-			}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
 			return 1
 		}
-	} else if this.Field1 != nil {
-		return 1
-	} else if that1.Field1 != nil {
+	} else if this.Field1 == nil {
 		return -1
+	} else if *this.Field1 != *that1.Field1 {
+		if *this.Field1 < *that1.Field1 {
+			return -1
+		}
+		return 1
 	}
 	return 0
 }
@@ -7992,17 +7992,17 @@ func (this *UnrecognizedWithEmbed) Compare(that interface{}) int {
 	if c := this.UnrecognizedWithEmbed_Embedded.Compare(&that1.UnrecognizedWithEmbed_Embedded); c != 0 {
 		return c
 	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			if *this.Field2 < *that1.Field2 {
-				return -1
-			}
+	if that1.Field2 == nil {
+		if this.Field2 != nil {
 			return 1
 		}
-	} else if this.Field2 != nil {
-		return 1
-	} else if that1.Field2 != nil {
+	} else if this.Field2 == nil {
 		return -1
+	} else if *this.Field2 != *that1.Field2 {
+		if *this.Field2 < *that1.Field2 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
 		return c
@@ -8034,17 +8034,17 @@ func (this *UnrecognizedWithEmbed_Embedded) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field1 != nil && that1.Field1 != nil {
-		if *this.Field1 != *that1.Field1 {
-			if *this.Field1 < *that1.Field1 {
-				return -1
-			}
+	if that1.Field1 == nil {
+		if this.Field1 != nil {
 			return 1
 		}
-	} else if this.Field1 != nil {
-		return 1
-	} else if that1.Field1 != nil {
+	} else if this.Field1 == nil {
 		return -1
+	} else if *this.Field1 != *that1.Field1 {
+		if *this.Field1 < *that1.Field1 {
+			return -1
+		}
+		return 1
 	}
 	return 0
 }
@@ -8073,17 +8073,17 @@ func (this *Node) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Label != nil && that1.Label != nil {
-		if *this.Label != *that1.Label {
-			if *this.Label < *that1.Label {
-				return -1
-			}
+	if that1.Label == nil {
+		if this.Label != nil {
 			return 1
 		}
-	} else if this.Label != nil {
-		return 1
-	} else if that1.Label != nil {
+	} else if this.Label == nil {
 		return -1
+	} else if *this.Label != *that1.Label {
+		if *this.Label < *that1.Label {
+			return -1
+		}
+		return 1
 	}
 	if len(this.Children) != len(that1.Children) {
 		if len(this.Children) < len(that1.Children) {
@@ -8319,17 +8319,17 @@ func (this *ProtoType) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Field2 != nil && that1.Field2 != nil {
-		if *this.Field2 != *that1.Field2 {
-			if *this.Field2 < *that1.Field2 {
-				return -1
-			}
+	if that1.Field2 == nil {
+		if this.Field2 != nil {
 			return 1
 		}
-	} else if this.Field2 != nil {
-		return 1
-	} else if that1.Field2 != nil {
+	} else if this.Field2 == nil {
 		return -1
+	} else if *this.Field2 != *that1.Field2 {
+		if *this.Field2 < *that1.Field2 {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
 		return c
