@@ -2,7 +2,7 @@ name: Continuous Integration
 on:
   push:
     branches:
-      - master
+      - ghworkflow
 
 jobs:
   build_and_test:
@@ -24,10 +24,10 @@ jobs:
           PROTOBUF_VERSION: ${{ matrix.protobuf_version }}
         run: ./install-protobuf.sh
       - name: Protoc version
-        run: PATH=/home/travis/bin:$PATH protoc --version
+        run: PATH=$HOME/bin:$PATH protoc --version
       - name: Build server all
-        run: PATH=/home/travis/bin:$PATH make buildserverall
+        run: PATH=$HOME/bin:$PATH make buildserverall
       - name: Diff check
         if: matrix.protobuf_version == '3.7.1' && matrix.go_version == '1.12.x'
         run: git status --porcelain | read || (git status; git diff; exit 1); fi
-        
+
