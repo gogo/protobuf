@@ -1,0 +1,33 @@
+name: Continuous Integration
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_test:
+    name: Build server all go-${{ matrix.go_version }} and protobuf-${{ matrix.protobuf_version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go_version: [1.12.x]
+        protobuf_version: [3.7.1]
+    steps:
+      - name: Checkout ${{ github.ref }}
+        uses: actions/checkout@v1
+      - name: Setup go-${{ matrix.go_version }}
+        uses: actions/setup-go@v1
+        with:
+          go-version: ${{ matrix.go_version }}
+      - name: Setup protoc
+        env:
+          PROTOBUF_VERSION: ${{ matrix.protobuf_version }}
+        run: ./install-protobuf.sh
+      - name: Protoc version
+        run: PATH=/home/travis/bin:$PATH protoc --version
+      - name: Build server all
+        run: PATH=/home/travis/bin:$PATH make buildserverall
+      - name: Diff check
+        if: matrix.protobuf_version == '3.7.1' && matrix.go_version == '1.12.x'
+        run: git status --porcelain | read || (git status; git diff; exit 1); fi
+        
