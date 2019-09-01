@@ -24,7 +24,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type C struct {
 	F2                   *github_com_gogo_protobuf_test_importcustom_issue389_imported.B `protobuf:"bytes,1,opt,name=f2,proto3,customtype=github.com/gogo/protobuf/test/importcustom-issue389/imported.B" json:"f2,omitempty"`
