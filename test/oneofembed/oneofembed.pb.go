@@ -20,7 +20,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type Foo struct {
 	*Bar                 `protobuf:"bytes,1,opt,name=bar,proto3,embedded=bar" json:"bar,omitempty"`
@@ -124,76 +124,12 @@ func (m *Bar) GetB() bool {
 	return false
 }
 
-// XXX_OneofFuncs is for the internal use of the proto package.
-func (*Bar) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
-	return _Bar_OneofMarshaler, _Bar_OneofUnmarshaler, _Bar_OneofSizer, []interface{}{
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*Bar) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
 		(*Bar_A)(nil),
 		(*Bar_B)(nil),
 	}
-}
-
-func _Bar_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
-	m := msg.(*Bar)
-	// pick
-	switch x := m.Pick.(type) {
-	case *Bar_A:
-		t := uint64(0)
-		if x.A {
-			t = 1
-		}
-		_ = b.EncodeVarint(11<<3 | proto.WireVarint)
-		_ = b.EncodeVarint(t)
-	case *Bar_B:
-		t := uint64(0)
-		if x.B {
-			t = 1
-		}
-		_ = b.EncodeVarint(12<<3 | proto.WireVarint)
-		_ = b.EncodeVarint(t)
-	case nil:
-	default:
-		return fmt.Errorf("Bar.Pick has unexpected type %T", x)
-	}
-	return nil
-}
-
-func _Bar_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
-	m := msg.(*Bar)
-	switch tag {
-	case 11: // pick.a
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeVarint()
-		m.Pick = &Bar_A{x != 0}
-		return true, err
-	case 12: // pick.b
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeVarint()
-		m.Pick = &Bar_B{x != 0}
-		return true, err
-	default:
-		return false, nil
-	}
-}
-
-func _Bar_OneofSizer(msg proto.Message) (n int) {
-	m := msg.(*Bar)
-	// pick
-	switch x := m.Pick.(type) {
-	case *Bar_A:
-		n += 1 // tag and wire
-		n += 1
-	case *Bar_B:
-		n += 1 // tag and wire
-		n += 1
-	case nil:
-	default:
-		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
-	}
-	return n
 }
 
 func init() {
