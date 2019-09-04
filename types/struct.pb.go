@@ -1167,7 +1167,8 @@ func (m *Value) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 }
 
 func (m *Value_NullValue) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *Value_NullValue) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -1178,7 +1179,8 @@ func (m *Value_NullValue) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *Value_NumberValue) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *Value_NumberValue) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -1190,7 +1192,8 @@ func (m *Value_NumberValue) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *Value_StringValue) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *Value_StringValue) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -1203,7 +1206,8 @@ func (m *Value_StringValue) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *Value_BoolValue) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *Value_BoolValue) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -1219,7 +1223,8 @@ func (m *Value_BoolValue) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *Value_StructValue) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *Value_StructValue) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -1239,7 +1244,8 @@ func (m *Value_StructValue) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *Value_ListValue) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *Value_ListValue) MarshalToSizedBuffer(dAtA []byte) (int, error) {

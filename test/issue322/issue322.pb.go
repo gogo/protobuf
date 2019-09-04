@@ -344,7 +344,8 @@ func (m *OneofTest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 }
 
 func (m *OneofTest_I) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *OneofTest_I) MarshalToSizedBuffer(dAtA []byte) (int, error) {
