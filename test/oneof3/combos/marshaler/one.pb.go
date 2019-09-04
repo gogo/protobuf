@@ -2571,7 +2571,8 @@ func (m *SampleOneOf) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 }
 
 func (m *SampleOneOf_Field1) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_Field1) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -2583,7 +2584,8 @@ func (m *SampleOneOf_Field1) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field2) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_Field2) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -2595,7 +2597,8 @@ func (m *SampleOneOf_Field2) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field3) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_Field3) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -2606,7 +2609,8 @@ func (m *SampleOneOf_Field3) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field4) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_Field4) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -2617,7 +2621,8 @@ func (m *SampleOneOf_Field4) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field5) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_Field5) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -2628,7 +2633,8 @@ func (m *SampleOneOf_Field5) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field6) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_Field6) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -2639,7 +2645,8 @@ func (m *SampleOneOf_Field6) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field7) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_Field7) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -2650,7 +2657,8 @@ func (m *SampleOneOf_Field7) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field8) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_Field8) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -2661,7 +2669,8 @@ func (m *SampleOneOf_Field8) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field9) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_Field9) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -2673,7 +2682,8 @@ func (m *SampleOneOf_Field9) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field10) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_Field10) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -2685,7 +2695,8 @@ func (m *SampleOneOf_Field10) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field11) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_Field11) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -2697,7 +2708,8 @@ func (m *SampleOneOf_Field11) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field12) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_Field12) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -2709,7 +2721,8 @@ func (m *SampleOneOf_Field12) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field13) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_Field13) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -2725,7 +2738,8 @@ func (m *SampleOneOf_Field13) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field14) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_Field14) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -2738,7 +2752,8 @@ func (m *SampleOneOf_Field14) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_Field15) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_Field15) MarshalToSizedBuffer(dAtA []byte) (int, error) {
@@ -2753,7 +2768,8 @@ func (m *SampleOneOf_Field15) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 func (m *SampleOneOf_SubMessage) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *SampleOneOf_SubMessage) MarshalToSizedBuffer(dAtA []byte) (int, error) {
