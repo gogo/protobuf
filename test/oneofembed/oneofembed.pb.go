@@ -94,10 +94,10 @@ type isBar_Pick interface {
 }
 
 type Bar_A struct {
-	A bool `protobuf:"varint,11,opt,name=a,proto3,oneof"`
+	A bool `protobuf:"varint,11,opt,name=a,proto3,oneof" json:"a,omitempty"`
 }
 type Bar_B struct {
-	B bool `protobuf:"varint,12,opt,name=b,proto3,oneof"`
+	B bool `protobuf:"varint,12,opt,name=b,proto3,oneof" json:"b,omitempty"`
 }
 
 func (*Bar_A) isBar_Pick() {}

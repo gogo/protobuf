@@ -79,7 +79,7 @@ type isOneofTest_Union interface {
 }
 
 type OneofTest_I struct {
-	I int32 `protobuf:"varint,1,opt,name=i,oneof,def=4"`
+	I int32 `protobuf:"varint,1,opt,name=i,oneof,def=4" json:"i,omitempty"`
 }
 
 func (*OneofTest_I) isOneofTest_Union() {}

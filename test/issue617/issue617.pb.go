@@ -72,7 +72,7 @@ type isFoo_Details interface {
 }
 
 type Foo_Bar_ struct {
-	Bar *Foo_Bar `protobuf:"bytes,1,opt,name=bar,proto3,oneof"`
+	Bar *Foo_Bar `protobuf:"bytes,1,opt,name=bar,proto3,oneof" json:"bar,omitempty"`
 }
 
 func (*Foo_Bar_) isFoo_Details() {}
