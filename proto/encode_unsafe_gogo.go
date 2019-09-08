@@ -1,6 +1,6 @@
 // Protocol Buffers for Go with Gadgets
 //
-// Copyright (c) 2019, The GoGo Authors. All rights reserved.
+// Copyright (c) 2013, The GoGo Authors. All rights reserved.
 // http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
@@ -26,50 +26,15 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package protobuffer
+// +build !purego,!appengine,!js
+
+package proto
 
 import (
-	"bytes"
-	"testing"
-
-	proto "github.com/gogo/protobuf/proto"
+	"reflect"
+	"unsafe"
 )
 
-func TestProtoBufferMarshal12(t *testing.T) {
-	i := int32(33)
-	m := &PBuffMarshal{Field1: []byte(string("Tester123")), Field2: &i}
-	mer := &PBuffMarshaler{Field1: []byte(string("Tester123")), Field2: &i}
-	testCases := []struct {
-		name string
-		size int
-		m    proto.Message
-	}{
-		{"MarshalLarge", 1024, m},
-		{"MarshalSmall", 0, m},
-		{"MarshalerLarge", 1024, mer},
-		{"MarshalerSmall", 0, mer},
-	}
-	for _, tc := range testCases {
-		t.Run(tc.name, func(t *testing.T) {
-			marshalCheck(t, tc.m, tc.size)
-		})
-	}
-}
-
-func marshalCheck(t *testing.T, m proto.Message, size int) {
-	buf := proto.NewBuffer(make([]byte, 0, size))
-	err := buf.Marshal(m)
-	if err != nil {
-		t.Fatal(err)
-	}
-	err = buf.Marshal(m)
-	if err != nil {
-		t.Fatal(err)
-	}
-	bufferBytes := buf.Bytes()
-	protoBytes, _ := proto.Marshal(m)
-	protoBytes = append(protoBytes, protoBytes...)
-	if !bytes.Equal(bufferBytes, protoBytes) {
-		t.Fatalf("proto.Buffer Marshal != proto.Marshal (%v != %v)\n", bufferBytes, protoBytes)
-	}
+func (p *Buffer) adjustBufferCap(newCap int) {
+	(*reflect.SliceHeader)(unsafe.Pointer(&p.buf)).Cap = newCap
 }

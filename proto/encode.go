@@ -189,8 +189,22 @@ type Marshaler interface {
 // prefixed by a varint-encoded length.
 func (p *Buffer) EncodeMessage(pb Message) error {
 	siz := Size(pb)
+	sizVar := SizeVarint(uint64(siz))
+	p.grow(siz + sizVar)
 	p.EncodeVarint(uint64(siz))
-	return p.Marshal(pb)
+
+	// Adjust p.buf so that we marshal
+	// at the correct place when calling
+	// p.Marshal()
+	pp := p.buf
+	p.buf = p.buf[len(p.buf):]
+	p.adjustBufferCap(siz)
+
+	err := p.Marshal(pb)
+	// Prefix the marshaled message with the
+	// encoded varint.
+	p.buf = append(pp, p.buf...)
+	return err
 }
 
 // All protocol buffer fields are nillable, but be careful.
