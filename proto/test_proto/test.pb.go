@@ -3111,58 +3111,58 @@ type isOneof_Tormato interface {
 }
 
 type Oneof_F_Bool struct {
-	F_Bool bool `protobuf:"varint,1,opt,name=F_Bool,json=FBool,oneof"`
+	F_Bool bool `protobuf:"varint,1,opt,name=F_Bool,json=FBool,oneof" json:"F_Bool,omitempty"`
 }
 type Oneof_F_Int32 struct {
-	F_Int32 int32 `protobuf:"varint,2,opt,name=F_Int32,json=FInt32,oneof"`
+	F_Int32 int32 `protobuf:"varint,2,opt,name=F_Int32,json=FInt32,oneof" json:"F_Int32,omitempty"`
 }
 type Oneof_F_Int64 struct {
-	F_Int64 int64 `protobuf:"varint,3,opt,name=F_Int64,json=FInt64,oneof"`
+	F_Int64 int64 `protobuf:"varint,3,opt,name=F_Int64,json=FInt64,oneof" json:"F_Int64,omitempty"`
 }
 type Oneof_F_Fixed32 struct {
-	F_Fixed32 uint32 `protobuf:"fixed32,4,opt,name=F_Fixed32,json=FFixed32,oneof"`
+	F_Fixed32 uint32 `protobuf:"fixed32,4,opt,name=F_Fixed32,json=FFixed32,oneof" json:"F_Fixed32,omitempty"`
 }
 type Oneof_F_Fixed64 struct {
-	F_Fixed64 uint64 `protobuf:"fixed64,5,opt,name=F_Fixed64,json=FFixed64,oneof"`
+	F_Fixed64 uint64 `protobuf:"fixed64,5,opt,name=F_Fixed64,json=FFixed64,oneof" json:"F_Fixed64,omitempty"`
 }
 type Oneof_F_Uint32 struct {
-	F_Uint32 uint32 `protobuf:"varint,6,opt,name=F_Uint32,json=FUint32,oneof"`
+	F_Uint32 uint32 `protobuf:"varint,6,opt,name=F_Uint32,json=FUint32,oneof" json:"F_Uint32,omitempty"`
 }
 type Oneof_F_Uint64 struct {
-	F_Uint64 uint64 `protobuf:"varint,7,opt,name=F_Uint64,json=FUint64,oneof"`
+	F_Uint64 uint64 `protobuf:"varint,7,opt,name=F_Uint64,json=FUint64,oneof" json:"F_Uint64,omitempty"`
 }
 type Oneof_F_Float struct {
-	F_Float float32 `protobuf:"fixed32,8,opt,name=F_Float,json=FFloat,oneof"`
+	F_Float float32 `protobuf:"fixed32,8,opt,name=F_Float,json=FFloat,oneof" json:"F_Float,omitempty"`
 }
 type Oneof_F_Double struct {
-	F_Double float64 `protobuf:"fixed64,9,opt,name=F_Double,json=FDouble,oneof"`
+	F_Double float64 `protobuf:"fixed64,9,opt,name=F_Double,json=FDouble,oneof" json:"F_Double,omitempty"`
 }
 type Oneof_F_String struct {
-	F_String string `protobuf:"bytes,10,opt,name=F_String,json=FString,oneof"`
+	F_String string `protobuf:"bytes,10,opt,name=F_String,json=FString,oneof" json:"F_String,omitempty"`
 }
 type Oneof_F_Bytes struct {
-	F_Bytes []byte `protobuf:"bytes,11,opt,name=F_Bytes,json=FBytes,oneof"`
+	F_Bytes []byte `protobuf:"bytes,11,opt,name=F_Bytes,json=FBytes,oneof" json:"F_Bytes,omitempty"`
 }
 type Oneof_F_Sint32 struct {
-	F_Sint32 int32 `protobuf:"zigzag32,12,opt,name=F_Sint32,json=FSint32,oneof"`
+	F_Sint32 int32 `protobuf:"zigzag32,12,opt,name=F_Sint32,json=FSint32,oneof" json:"F_Sint32,omitempty"`
 }
 type Oneof_F_Sint64 struct {
-	F_Sint64 int64 `protobuf:"zigzag64,13,opt,name=F_Sint64,json=FSint64,oneof"`
+	F_Sint64 int64 `protobuf:"zigzag64,13,opt,name=F_Sint64,json=FSint64,oneof" json:"F_Sint64,omitempty"`
 }
 type Oneof_F_Enum struct {
-	F_Enum MyMessage_Color `protobuf:"varint,14,opt,name=F_Enum,json=FEnum,enum=test_proto.MyMessage_Color,oneof"`
+	F_Enum MyMessage_Color `protobuf:"varint,14,opt,name=F_Enum,json=FEnum,enum=test_proto.MyMessage_Color,oneof" json:"F_Enum,omitempty"`
 }
 type Oneof_F_Message struct {
-	F_Message *GoTestField `protobuf:"bytes,15,opt,name=F_Message,json=FMessage,oneof"`
+	F_Message *GoTestField `protobuf:"bytes,15,opt,name=F_Message,json=FMessage,oneof" json:"F_Message,omitempty"`
 }
 type Oneof_FGroup struct {
-	FGroup *Oneof_F_Group `protobuf:"group,16,opt,name=F_Group,json=fGroup,oneof"`
+	FGroup *Oneof_F_Group `protobuf:"group,16,opt,name=F_Group,json=fGroup,oneof" json:"f_group,omitempty"`
 }
 type Oneof_F_Largest_Tag struct {
-	F_Largest_Tag int32 `protobuf:"varint,536870911,opt,name=F_Largest_Tag,json=FLargestTag,oneof"`
+	F_Largest_Tag int32 `protobuf:"varint,536870911,opt,name=F_Largest_Tag,json=FLargestTag,oneof" json:"F_Largest_Tag,omitempty"`
 }
 type Oneof_Value struct {
-	Value int32 `protobuf:"varint,100,opt,name=value,oneof"`
+	Value int32 `protobuf:"varint,100,opt,name=value,oneof" json:"value,omitempty"`
 }
 
 func (*Oneof_F_Bool) isOneof_Union()        {}
@@ -3431,22 +3431,22 @@ type isCommunique_Union interface {
 }
 
 type Communique_Number struct {
-	Number int32 `protobuf:"varint,5,opt,name=number,oneof"`
+	Number int32 `protobuf:"varint,5,opt,name=number,oneof" json:"number,omitempty"`
 }
 type Communique_Name struct {
-	Name string `protobuf:"bytes,6,opt,name=name,oneof"`
+	Name string `protobuf:"bytes,6,opt,name=name,oneof" json:"name,omitempty"`
 }
 type Communique_Data struct {
-	Data []byte `protobuf:"bytes,7,opt,name=data,oneof"`
+	Data []byte `protobuf:"bytes,7,opt,name=data,oneof" json:"data,omitempty"`
 }
 type Communique_TempC struct {
-	TempC float64 `protobuf:"fixed64,8,opt,name=temp_c,json=tempC,oneof"`
+	TempC float64 `protobuf:"fixed64,8,opt,name=temp_c,json=tempC,oneof" json:"temp_c,omitempty"`
 }
 type Communique_Col struct {
-	Col MyMessage_Color `protobuf:"varint,9,opt,name=col,enum=test_proto.MyMessage_Color,oneof"`
+	Col MyMessage_Color `protobuf:"varint,9,opt,name=col,enum=test_proto.MyMessage_Color,oneof" json:"col,omitempty"`
 }
 type Communique_Msg struct {
-	Msg *Strings `protobuf:"bytes,10,opt,name=msg,oneof"`
+	Msg *Strings `protobuf:"bytes,10,opt,name=msg,oneof" json:"msg,omitempty"`
 }
 
 func (*Communique_Number) isCommunique_Union() {}
@@ -3566,7 +3566,7 @@ type isTestUTF8_Oneof interface {
 }
 
 type TestUTF8_Field struct {
-	Field string `protobuf:"bytes,3,opt,name=field,oneof"`
+	Field string `protobuf:"bytes,3,opt,name=field,oneof" json:"field,omitempty"`
 }
 
 func (*TestUTF8_Field) isTestUTF8_Oneof() {}
