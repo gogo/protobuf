@@ -157,10 +157,10 @@ type isConformanceRequest_Payload interface {
 }
 
 type ConformanceRequest_ProtobufPayload struct {
-	ProtobufPayload []byte `protobuf:"bytes,1,opt,name=protobuf_payload,json=protobufPayload,proto3,oneof"`
+	ProtobufPayload []byte `protobuf:"bytes,1,opt,name=protobuf_payload,json=protobufPayload,proto3,oneof" json:"protobuf_payload,omitempty"`
 }
 type ConformanceRequest_JsonPayload struct {
-	JsonPayload string `protobuf:"bytes,2,opt,name=json_payload,json=jsonPayload,proto3,oneof"`
+	JsonPayload string `protobuf:"bytes,2,opt,name=json_payload,json=jsonPayload,proto3,oneof" json:"json_payload,omitempty"`
 }
 
 func (*ConformanceRequest_ProtobufPayload) isConformanceRequest_Payload() {}
@@ -246,22 +246,22 @@ type isConformanceResponse_Result interface {
 }
 
 type ConformanceResponse_ParseError struct {
-	ParseError string `protobuf:"bytes,1,opt,name=parse_error,json=parseError,proto3,oneof"`
+	ParseError string `protobuf:"bytes,1,opt,name=parse_error,json=parseError,proto3,oneof" json:"parse_error,omitempty"`
 }
 type ConformanceResponse_SerializeError struct {
-	SerializeError string `protobuf:"bytes,6,opt,name=serialize_error,json=serializeError,proto3,oneof"`
+	SerializeError string `protobuf:"bytes,6,opt,name=serialize_error,json=serializeError,proto3,oneof" json:"serialize_error,omitempty"`
 }
 type ConformanceResponse_RuntimeError struct {
-	RuntimeError string `protobuf:"bytes,2,opt,name=runtime_error,json=runtimeError,proto3,oneof"`
+	RuntimeError string `protobuf:"bytes,2,opt,name=runtime_error,json=runtimeError,proto3,oneof" json:"runtime_error,omitempty"`
 }
 type ConformanceResponse_ProtobufPayload struct {
-	ProtobufPayload []byte `protobuf:"bytes,3,opt,name=protobuf_payload,json=protobufPayload,proto3,oneof"`
+	ProtobufPayload []byte `protobuf:"bytes,3,opt,name=protobuf_payload,json=protobufPayload,proto3,oneof" json:"protobuf_payload,omitempty"`
 }
 type ConformanceResponse_JsonPayload struct {
-	JsonPayload string `protobuf:"bytes,4,opt,name=json_payload,json=jsonPayload,proto3,oneof"`
+	JsonPayload string `protobuf:"bytes,4,opt,name=json_payload,json=jsonPayload,proto3,oneof" json:"json_payload,omitempty"`
 }
 type ConformanceResponse_Skipped struct {
-	Skipped string `protobuf:"bytes,5,opt,name=skipped,proto3,oneof"`
+	Skipped string `protobuf:"bytes,5,opt,name=skipped,proto3,oneof" json:"skipped,omitempty"`
 }
 
 func (*ConformanceResponse_ParseError) isConformanceResponse_Result()      {}
@@ -484,16 +484,16 @@ type isTestAllTypes_OneofField interface {
 }
 
 type TestAllTypes_OneofUint32 struct {
-	OneofUint32 uint32 `protobuf:"varint,111,opt,name=oneof_uint32,json=oneofUint32,proto3,oneof"`
+	OneofUint32 uint32 `protobuf:"varint,111,opt,name=oneof_uint32,json=oneofUint32,proto3,oneof" json:"oneof_uint32,omitempty"`
 }
 type TestAllTypes_OneofNestedMessage struct {
-	OneofNestedMessage *TestAllTypes_NestedMessage `protobuf:"bytes,112,opt,name=oneof_nested_message,json=oneofNestedMessage,proto3,oneof"`
+	OneofNestedMessage *TestAllTypes_NestedMessage `protobuf:"bytes,112,opt,name=oneof_nested_message,json=oneofNestedMessage,proto3,oneof" json:"oneof_nested_message,omitempty"`
 }
 type TestAllTypes_OneofString struct {
-	OneofString string `protobuf:"bytes,113,opt,name=oneof_string,json=oneofString,proto3,oneof"`
+	OneofString string `protobuf:"bytes,113,opt,name=oneof_string,json=oneofString,proto3,oneof" json:"oneof_string,omitempty"`
 }
 type TestAllTypes_OneofBytes struct {
-	OneofBytes []byte `protobuf:"bytes,114,opt,name=oneof_bytes,json=oneofBytes,proto3,oneof"`
+	OneofBytes []byte `protobuf:"bytes,114,opt,name=oneof_bytes,json=oneofBytes,proto3,oneof" json:"oneof_bytes,omitempty"`
 }
 
 func (*TestAllTypes_OneofUint32) isTestAllTypes_OneofField()        {}

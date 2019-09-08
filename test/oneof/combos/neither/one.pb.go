@@ -117,52 +117,52 @@ type isAllTypesOneOf_TestOneof interface {
 }
 
 type AllTypesOneOf_Field1 struct {
-	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1,oneof"`
+	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1,oneof" json:"Field1,omitempty"`
 }
 type AllTypesOneOf_Field2 struct {
-	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2,oneof"`
+	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2,oneof" json:"Field2,omitempty"`
 }
 type AllTypesOneOf_Field3 struct {
-	Field3 int32 `protobuf:"varint,3,opt,name=Field3,oneof"`
+	Field3 int32 `protobuf:"varint,3,opt,name=Field3,oneof" json:"Field3,omitempty"`
 }
 type AllTypesOneOf_Field4 struct {
-	Field4 int64 `protobuf:"varint,4,opt,name=Field4,oneof"`
+	Field4 int64 `protobuf:"varint,4,opt,name=Field4,oneof" json:"Field4,omitempty"`
 }
 type AllTypesOneOf_Field5 struct {
-	Field5 uint32 `protobuf:"varint,5,opt,name=Field5,oneof"`
+	Field5 uint32 `protobuf:"varint,5,opt,name=Field5,oneof" json:"Field5,omitempty"`
 }
 type AllTypesOneOf_Field6 struct {
-	Field6 uint64 `protobuf:"varint,6,opt,name=Field6,oneof"`
+	Field6 uint64 `protobuf:"varint,6,opt,name=Field6,oneof" json:"Field6,omitempty"`
 }
 type AllTypesOneOf_Field7 struct {
-	Field7 int32 `protobuf:"zigzag32,7,opt,name=Field7,oneof"`
+	Field7 int32 `protobuf:"zigzag32,7,opt,name=Field7,oneof" json:"Field7,omitempty"`
 }
 type AllTypesOneOf_Field8 struct {
-	Field8 int64 `protobuf:"zigzag64,8,opt,name=Field8,oneof"`
+	Field8 int64 `protobuf:"zigzag64,8,opt,name=Field8,oneof" json:"Field8,omitempty"`
 }
 type AllTypesOneOf_Field9 struct {
-	Field9 uint32 `protobuf:"fixed32,9,opt,name=Field9,oneof"`
+	Field9 uint32 `protobuf:"fixed32,9,opt,name=Field9,oneof" json:"Field9,omitempty"`
 }
 type AllTypesOneOf_Field10 struct {
-	Field10 int32 `protobuf:"fixed32,10,opt,name=Field10,oneof"`
+	Field10 int32 `protobuf:"fixed32,10,opt,name=Field10,oneof" json:"Field10,omitempty"`
 }
 type AllTypesOneOf_Field11 struct {
-	Field11 uint64 `protobuf:"fixed64,11,opt,name=Field11,oneof"`
+	Field11 uint64 `protobuf:"fixed64,11,opt,name=Field11,oneof" json:"Field11,omitempty"`
 }
 type AllTypesOneOf_Field12 struct {
-	Field12 int64 `protobuf:"fixed64,12,opt,name=Field12,oneof"`
+	Field12 int64 `protobuf:"fixed64,12,opt,name=Field12,oneof" json:"Field12,omitempty"`
 }
 type AllTypesOneOf_Field13 struct {
-	Field13 bool `protobuf:"varint,13,opt,name=Field13,oneof"`
+	Field13 bool `protobuf:"varint,13,opt,name=Field13,oneof" json:"Field13,omitempty"`
 }
 type AllTypesOneOf_Field14 struct {
-	Field14 string `protobuf:"bytes,14,opt,name=Field14,oneof"`
+	Field14 string `protobuf:"bytes,14,opt,name=Field14,oneof" json:"Field14,omitempty"`
 }
 type AllTypesOneOf_Field15 struct {
-	Field15 []byte `protobuf:"bytes,15,opt,name=Field15,oneof"`
+	Field15 []byte `protobuf:"bytes,15,opt,name=Field15,oneof" json:"Field15,omitempty"`
 }
 type AllTypesOneOf_SubMessage struct {
-	SubMessage *Subby `protobuf:"bytes,16,opt,name=sub_message,json=subMessage,oneof"`
+	SubMessage *Subby `protobuf:"bytes,16,opt,name=sub_message,json=subMessage,oneof" json:"sub_message,omitempty"`
 }
 
 func (*AllTypesOneOf_Field1) isAllTypesOneOf_TestOneof()     {}
@@ -378,22 +378,22 @@ type isTwoOneofs_Two interface {
 }
 
 type TwoOneofs_Field1 struct {
-	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1,oneof"`
+	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1,oneof" json:"Field1,omitempty"`
 }
 type TwoOneofs_Field2 struct {
-	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2,oneof"`
+	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2,oneof" json:"Field2,omitempty"`
 }
 type TwoOneofs_Field3 struct {
-	Field3 int32 `protobuf:"varint,3,opt,name=Field3,oneof"`
+	Field3 int32 `protobuf:"varint,3,opt,name=Field3,oneof" json:"Field3,omitempty"`
 }
 type TwoOneofs_Field34 struct {
-	Field34 string `protobuf:"bytes,34,opt,name=Field34,oneof"`
+	Field34 string `protobuf:"bytes,34,opt,name=Field34,oneof" json:"Field34,omitempty"`
 }
 type TwoOneofs_Field35 struct {
-	Field35 []byte `protobuf:"bytes,35,opt,name=Field35,oneof"`
+	Field35 []byte `protobuf:"bytes,35,opt,name=Field35,oneof" json:"Field35,omitempty"`
 }
 type TwoOneofs_SubMessage2 struct {
-	SubMessage2 *Subby `protobuf:"bytes,36,opt,name=sub_message2,json=subMessage2,oneof"`
+	SubMessage2 *Subby `protobuf:"bytes,36,opt,name=sub_message2,json=subMessage2,oneof" json:"sub_message2,omitempty"`
 }
 
 func (*TwoOneofs_Field1) isTwoOneofs_One()      {}
@@ -514,16 +514,16 @@ type isCustomOneof_Custom interface {
 }
 
 type CustomOneof_Stringy struct {
-	Stringy string `protobuf:"bytes,34,opt,name=Stringy,oneof"`
+	Stringy string `protobuf:"bytes,34,opt,name=Stringy,oneof" json:"Stringy,omitempty"`
 }
 type CustomOneof_CustomType struct {
-	CustomType github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,35,opt,name=CustomType,oneof,customtype=github.com/gogo/protobuf/test/custom.Uint128"`
+	CustomType github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,35,opt,name=CustomType,oneof,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"CustomType,omitempty"`
 }
 type CustomOneof_CastType struct {
-	CastType github_com_gogo_protobuf_test_casttype.MyUint64Type `protobuf:"varint,36,opt,name=CastType,oneof,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type"`
+	CastType github_com_gogo_protobuf_test_casttype.MyUint64Type `protobuf:"varint,36,opt,name=CastType,oneof,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"CastType,omitempty"`
 }
 type CustomOneof_MyCustomName struct {
-	MyCustomName int64 `protobuf:"varint,37,opt,name=CustomName,oneof"`
+	MyCustomName int64 `protobuf:"varint,37,opt,name=CustomName,oneof" json:"CustomName,omitempty"`
 }
 
 func (*CustomOneof_Stringy) isCustomOneof_Custom()      {}

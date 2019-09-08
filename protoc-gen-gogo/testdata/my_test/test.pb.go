@@ -743,34 +743,34 @@ type isCommunique_Union interface {
 }
 
 type Communique_Number struct {
-	Number int32 `protobuf:"varint,5,opt,name=number,oneof"`
+	Number int32 `protobuf:"varint,5,opt,name=number,oneof" json:"number,omitempty"`
 }
 type Communique_Name struct {
-	Name string `protobuf:"bytes,6,opt,name=name,oneof"`
+	Name string `protobuf:"bytes,6,opt,name=name,oneof" json:"name,omitempty"`
 }
 type Communique_Data struct {
-	Data []byte `protobuf:"bytes,7,opt,name=data,oneof"`
+	Data []byte `protobuf:"bytes,7,opt,name=data,oneof" json:"data,omitempty"`
 }
 type Communique_TempC struct {
-	TempC float64 `protobuf:"fixed64,8,opt,name=temp_c,json=tempC,oneof"`
+	TempC float64 `protobuf:"fixed64,8,opt,name=temp_c,json=tempC,oneof" json:"temp_c,omitempty"`
 }
 type Communique_Height struct {
-	Height float32 `protobuf:"fixed32,9,opt,name=height,oneof"`
+	Height float32 `protobuf:"fixed32,9,opt,name=height,oneof" json:"height,omitempty"`
 }
 type Communique_Today struct {
-	Today Days `protobuf:"varint,10,opt,name=today,enum=my.test.Days,oneof"`
+	Today Days `protobuf:"varint,10,opt,name=today,enum=my.test.Days,oneof" json:"today,omitempty"`
 }
 type Communique_Maybe struct {
-	Maybe bool `protobuf:"varint,11,opt,name=maybe,oneof"`
+	Maybe bool `protobuf:"varint,11,opt,name=maybe,oneof" json:"maybe,omitempty"`
 }
 type Communique_Delta_ struct {
-	Delta int32 `protobuf:"zigzag32,12,opt,name=delta,oneof"`
+	Delta int32 `protobuf:"zigzag32,12,opt,name=delta,oneof" json:"delta,omitempty"`
 }
 type Communique_Msg struct {
-	Msg *Reply `protobuf:"bytes,16,opt,name=msg,oneof"`
+	Msg *Reply `protobuf:"bytes,16,opt,name=msg,oneof" json:"msg,omitempty"`
 }
 type Communique_Somegroup struct {
-	Somegroup *Communique_SomeGroup `protobuf:"group,14,opt,name=SomeGroup,json=somegroup,oneof"`
+	Somegroup *Communique_SomeGroup `protobuf:"group,14,opt,name=SomeGroup,json=somegroup,oneof" json:"somegroup,omitempty"`
 }
 
 func (*Communique_Number) isCommunique_Union()    {}
