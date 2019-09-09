@@ -41,8 +41,7 @@ func (m *OrderedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OrderedMap.Unmarshal(m, b)
 }
 func (m *OrderedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalToSizedBuffer(b)
+	n, err := m.MarshalTo(b)
 	if err != nil {
 		return nil, err
 	}
@@ -87,8 +86,7 @@ func (m *UnorderedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_UnorderedMap.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -170,8 +168,7 @@ func (m *NestedOrderedMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedOrderedMap.Unmarshal(m, b)
 }
 func (m *NestedOrderedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalToSizedBuffer(b)
+	n, err := m.MarshalTo(b)
 	if err != nil {
 		return nil, err
 	}
@@ -220,8 +217,7 @@ func (m *NestedMap1) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_NestedMap1.Unmarshal(m, b)
 }
 func (m *NestedMap1) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalToSizedBuffer(b)
+	n, err := m.MarshalTo(b)
 	if err != nil {
 		return nil, err
 	}
@@ -267,8 +263,7 @@ func (m *NestedUnorderedMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 	if deterministic {
 		return xxx_messageInfo_NestedUnorderedMap.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -321,8 +316,7 @@ func (m *NestedMap2) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_NestedMap2.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}

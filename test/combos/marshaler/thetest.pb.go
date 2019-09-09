@@ -272,8 +272,7 @@ func (m *NidOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_NidOptNative.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -325,8 +324,7 @@ func (m *NinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_NinOptNative.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -378,8 +376,7 @@ func (m *NidRepNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_NidRepNative.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -431,8 +428,7 @@ func (m *NinRepNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_NinRepNative.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -482,8 +478,7 @@ func (m *NidRepPackedNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 	if deterministic {
 		return xxx_messageInfo_NidRepPackedNative.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -533,8 +528,7 @@ func (m *NinRepPackedNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 	if deterministic {
 		return xxx_messageInfo_NinRepPackedNative.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -581,8 +575,7 @@ func (m *NidOptStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_NidOptStruct.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -629,8 +622,7 @@ func (m *NinOptStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_NinOptStruct.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -677,8 +669,7 @@ func (m *NidRepStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_NidRepStruct.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -725,8 +716,7 @@ func (m *NinRepStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_NinRepStruct.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -766,8 +756,7 @@ func (m *NidEmbeddedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, e
 	if deterministic {
 		return xxx_messageInfo_NidEmbeddedStruct.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -807,8 +796,7 @@ func (m *NinEmbeddedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, e
 	if deterministic {
 		return xxx_messageInfo_NinEmbeddedStruct.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -847,8 +835,7 @@ func (m *NidNestedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 	if deterministic {
 		return xxx_messageInfo_NidNestedStruct.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -887,8 +874,7 @@ func (m *NinNestedStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 	if deterministic {
 		return xxx_messageInfo_NinNestedStruct.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -927,8 +913,7 @@ func (m *NidOptCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_NidOptCustom.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -966,8 +951,7 @@ func (m *CustomDash) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_CustomDash.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1006,8 +990,7 @@ func (m *NinOptCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_NinOptCustom.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1046,8 +1029,7 @@ func (m *NidRepCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_NidRepCustom.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1086,8 +1068,7 @@ func (m *NinRepCustom) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_NinRepCustom.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1133,8 +1114,7 @@ func (m *NinOptNativeUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, e
 	if deterministic {
 		return xxx_messageInfo_NinOptNativeUnion.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1180,8 +1160,7 @@ func (m *NinOptStructUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte, e
 	if deterministic {
 		return xxx_messageInfo_NinOptStructUnion.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1221,8 +1200,7 @@ func (m *NinEmbeddedStructUnion) XXX_Marshal(b []byte, deterministic bool) ([]by
 	if deterministic {
 		return xxx_messageInfo_NinEmbeddedStructUnion.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1262,8 +1240,7 @@ func (m *NinNestedStructUnion) XXX_Marshal(b []byte, deterministic bool) ([]byte
 	if deterministic {
 		return xxx_messageInfo_NinNestedStructUnion.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1303,8 +1280,7 @@ func (m *Tree) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_Tree.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1343,8 +1319,7 @@ func (m *OrBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_OrBranch.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1383,8 +1358,7 @@ func (m *AndBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_AndBranch.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1423,8 +1397,7 @@ func (m *Leaf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_Leaf.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1464,8 +1437,7 @@ func (m *DeepTree) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_DeepTree.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1503,8 +1475,7 @@ func (m *ADeepBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 	if deterministic {
 		return xxx_messageInfo_ADeepBranch.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1543,8 +1514,7 @@ func (m *AndDeepBranch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 	if deterministic {
 		return xxx_messageInfo_AndDeepBranch.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1582,8 +1552,7 @@ func (m *DeepLeaf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_DeepLeaf.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1620,8 +1589,7 @@ func (m *Nil) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_Nil.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1659,8 +1627,7 @@ func (m *NidOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_NidOptEnum.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1700,8 +1667,7 @@ func (m *NinOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_NinOptEnum.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1741,8 +1707,7 @@ func (m *NidRepEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_NidRepEnum.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1782,8 +1747,7 @@ func (m *NinRepEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_NinRepEnum.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1823,8 +1787,7 @@ func (m *NinOptEnumDefault) XXX_Marshal(b []byte, deterministic bool) ([]byte, e
 	if deterministic {
 		return xxx_messageInfo_NinOptEnumDefault.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1889,8 +1852,7 @@ func (m *AnotherNinOptEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, e
 	if deterministic {
 		return xxx_messageInfo_AnotherNinOptEnum.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1930,8 +1892,7 @@ func (m *AnotherNinOptEnumDefault) XXX_Marshal(b []byte, deterministic bool) ([]
 	if deterministic {
 		return xxx_messageInfo_AnotherNinOptEnumDefault.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -1996,8 +1957,7 @@ func (m *Timer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_Timer.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2045,8 +2005,7 @@ func (m *MyExtendable) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_MyExtendable.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2097,8 +2056,7 @@ func (m *OtherExtenable) XXX_Marshal(b []byte, deterministic bool) ([]byte, erro
 	if deterministic {
 		return xxx_messageInfo_OtherExtenable.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2139,8 +2097,7 @@ func (m *NestedDefinition) XXX_Marshal(b []byte, deterministic bool) ([]byte, er
 	if deterministic {
 		return xxx_messageInfo_NestedDefinition.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2179,8 +2136,7 @@ func (m *NestedDefinition_NestedMessage) XXX_Marshal(b []byte, deterministic boo
 	if deterministic {
 		return xxx_messageInfo_NestedDefinition_NestedMessage.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2220,8 +2176,7 @@ func (m *NestedDefinition_NestedMessage_NestedNestedMsg) XXX_Marshal(b []byte, d
 	if deterministic {
 		return xxx_messageInfo_NestedDefinition_NestedMessage_NestedNestedMsg.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2261,8 +2216,7 @@ func (m *NestedScope) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 	if deterministic {
 		return xxx_messageInfo_NestedScope.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2314,8 +2268,7 @@ func (m *NinOptNativeDefault) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 	if deterministic {
 		return xxx_messageInfo_NinOptNativeDefault.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2473,8 +2426,7 @@ func (m *CustomContainer) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 	if deterministic {
 		return xxx_messageInfo_CustomContainer.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2526,8 +2478,7 @@ func (m *CustomNameNidOptNative) XXX_Marshal(b []byte, deterministic bool) ([]by
 	if deterministic {
 		return xxx_messageInfo_CustomNameNidOptNative.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2579,8 +2530,7 @@ func (m *CustomNameNinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]by
 	if deterministic {
 		return xxx_messageInfo_CustomNameNinOptNative.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2632,8 +2582,7 @@ func (m *CustomNameNinRepNative) XXX_Marshal(b []byte, deterministic bool) ([]by
 	if deterministic {
 		return xxx_messageInfo_CustomNameNinRepNative.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2680,8 +2629,7 @@ func (m *CustomNameNinStruct) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 	if deterministic {
 		return xxx_messageInfo_CustomNameNinStruct.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2722,8 +2670,7 @@ func (m *CustomNameCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte
 	if deterministic {
 		return xxx_messageInfo_CustomNameCustomType.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2763,8 +2710,7 @@ func (m *CustomNameNinEmbeddedStructUnion) XXX_Marshal(b []byte, deterministic b
 	if deterministic {
 		return xxx_messageInfo_CustomNameNinEmbeddedStructUnion.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2803,8 +2749,7 @@ func (m *CustomNameEnum) XXX_Marshal(b []byte, deterministic bool) ([]byte, erro
 	if deterministic {
 		return xxx_messageInfo_CustomNameEnum.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2858,8 +2803,7 @@ func (m *NoExtensionsMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 	if deterministic {
 		return xxx_messageInfo_NoExtensionsMap.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2896,8 +2840,7 @@ func (m *Unrecognized) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_Unrecognized.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2936,8 +2879,7 @@ func (m *UnrecognizedWithInner) XXX_Marshal(b []byte, deterministic bool) ([]byt
 	if deterministic {
 		return xxx_messageInfo_UnrecognizedWithInner.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -2974,8 +2916,7 @@ func (m *UnrecognizedWithInner_Inner) XXX_Marshal(b []byte, deterministic bool) 
 	if deterministic {
 		return xxx_messageInfo_UnrecognizedWithInner_Inner.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -3014,8 +2955,7 @@ func (m *UnrecognizedWithEmbed) XXX_Marshal(b []byte, deterministic bool) ([]byt
 	if deterministic {
 		return xxx_messageInfo_UnrecognizedWithEmbed.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -3052,8 +2992,7 @@ func (m *UnrecognizedWithEmbed_Embedded) XXX_Marshal(b []byte, deterministic boo
 	if deterministic {
 		return xxx_messageInfo_UnrecognizedWithEmbed_Embedded.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -3092,8 +3031,7 @@ func (m *Node) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_Node.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -3131,8 +3069,7 @@ func (m *NonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]byte, e
 	if deterministic {
 		return xxx_messageInfo_NonByteCustomType.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -3170,8 +3107,7 @@ func (m *NidOptNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]b
 	if deterministic {
 		return xxx_messageInfo_NidOptNonByteCustomType.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -3209,8 +3145,7 @@ func (m *NinOptNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]b
 	if deterministic {
 		return xxx_messageInfo_NinOptNonByteCustomType.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -3248,8 +3183,7 @@ func (m *NidRepNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]b
 	if deterministic {
 		return xxx_messageInfo_NidRepNonByteCustomType.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -3287,8 +3221,7 @@ func (m *NinRepNonByteCustomType) XXX_Marshal(b []byte, deterministic bool) ([]b
 	if deterministic {
 		return xxx_messageInfo_NinRepNonByteCustomType.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -3326,8 +3259,7 @@ func (m *ProtoType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_ProtoType.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}

@@ -50,8 +50,7 @@ func (m *DoubleValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 	if deterministic {
 		return xxx_messageInfo_DoubleValue.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -105,8 +104,7 @@ func (m *FloatValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_FloatValue.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -160,8 +158,7 @@ func (m *Int64Value) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_Int64Value.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -215,8 +212,7 @@ func (m *UInt64Value) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 	if deterministic {
 		return xxx_messageInfo_UInt64Value.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -270,8 +266,7 @@ func (m *Int32Value) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_Int32Value.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -325,8 +320,7 @@ func (m *UInt32Value) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 	if deterministic {
 		return xxx_messageInfo_UInt32Value.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -380,8 +374,7 @@ func (m *BoolValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_BoolValue.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -435,8 +428,7 @@ func (m *StringValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 	if deterministic {
 		return xxx_messageInfo_StringValue.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -490,8 +482,7 @@ func (m *BytesValue) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_BytesValue.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}

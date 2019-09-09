@@ -97,8 +97,7 @@ func (m *FloatingPoint) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 	if deterministic {
 		return xxx_messageInfo_FloatingPoint.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -139,8 +138,7 @@ func (m *CustomMap) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_CustomMap.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -194,8 +192,7 @@ func (m *AllMaps) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_AllMaps.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -246,8 +243,7 @@ func (m *AllMapsOrdered) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 func (m *AllMapsOrdered) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	b = b[:cap(b)]
-	n, err := m.MarshalToSizedBuffer(b)
+	n, err := m.MarshalTo(b)
 	if err != nil {
 		return nil, err
 	}

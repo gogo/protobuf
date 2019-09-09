@@ -52,8 +52,7 @@ func (m *Subby) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_Subby.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -108,8 +107,7 @@ func (m *AllTypesOneOf) XXX_Marshal(b []byte, deterministic bool) ([]byte, error
 	if deterministic {
 		return xxx_messageInfo_AllTypesOneOf.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -372,8 +370,7 @@ func (m *TwoOneofs) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
 		return xxx_messageInfo_TwoOneofs.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -526,8 +523,7 @@ func (m *CustomOneof) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 	if deterministic {
 		return xxx_messageInfo_CustomOneof.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}

@@ -89,8 +89,7 @@ func (m *PBuffMarshaler) XXX_Marshal(b []byte, deterministic bool) ([]byte, erro
 	if deterministic {
 		return xxx_messageInfo_PBuffMarshaler.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}

@@ -47,8 +47,7 @@ func (m *RequiredExample) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 	if deterministic {
 		return xxx_messageInfo_RequiredExample.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -122,8 +121,7 @@ func (m *NidOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_NidOptNative.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -281,8 +279,7 @@ func (m *NinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 	if deterministic {
 		return xxx_messageInfo_NinOptNative.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
@@ -426,8 +423,7 @@ func (m *NestedNinOptNative) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 	if deterministic {
 		return xxx_messageInfo_NestedNinOptNative.Marshal(b, m, deterministic)
 	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
+		n, err := m.MarshalTo(b)
 		if err != nil {
 			return nil, err
 		}
