@@ -2717,8 +2717,7 @@ func (g *Generator) generateCommonMethods(mc *msgCtx) {
 	if gogoproto.IsMarshaler(g.file.FileDescriptorProto, mc.message.DescriptorProto) ||
 		gogoproto.IsUnsafeMarshaler(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
 		if gogoproto.IsStableMarshaler(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
-			g.P("b = b[:cap(b)]")
-			g.P("n, err := m.MarshalToSizedBuffer(b)")
+			g.P("n, err := m.MarshalTo(b)")
 			g.P("if err != nil {")
 			g.In()
 			g.P("return nil, err")
@@ -2731,8 +2730,7 @@ func (g *Generator) generateCommonMethods(mc *msgCtx) {
 			g.P("return xxx_messageInfo_", mc.goName, ".Marshal(b, m, deterministic)")
 			g.P("} else {")
 			g.In()
-			g.P("b = b[:cap(b)]")
-			g.P("n, err := m.MarshalToSizedBuffer(b)")
+			g.P("n, err := m.MarshalTo(b)")
 			g.P("if err != nil {")
 			g.In()
 			g.P("return nil, err")

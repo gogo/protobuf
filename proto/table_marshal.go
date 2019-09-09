@@ -2930,10 +2930,23 @@ func Size(pb Message) int {
 	return info.Size(pb)
 }
 
+type reverseMarshaler interface {
+	MarshalToSizedBuffer([]byte) (int, error)
+	Size() int
+}
+
 // Marshal takes a protocol buffer message
 // and encodes it into the wire format, returning the data.
 // This is the main entry point.
 func Marshal(pb Message) ([]byte, error) {
+	if m, ok := pb.(reverseMarshaler); ok {
+		b := make([]byte, m.Size())
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 	if m, ok := pb.(newMarshaler); ok {
 		siz := m.XXX_Size()
 		b := make([]byte, 0, siz)
@@ -2965,6 +2978,17 @@ func (p *Buffer) Marshal(pb Message) error {
 		if _, ok := pb.(Marshaler); ok {
 			return fmt.Errorf("proto: deterministic not supported by the Marshal method of %T", pb)
 		}
+		if _, ok := pb.(reverseMarshaler); ok {
+			return fmt.Errorf("proto: deterministic not supported by the Marshal method of %T", pb)
+		}
+
+	}
+	if m, ok := pb.(reverseMarshaler); ok {
+		siz := m.Size()
+		p.grow(siz) // make sure buf has enough capacity
+		n, err := m.MarshalToSizedBuffer(p.buf[len(p.buf) : len(p.buf)+siz])
+		p.buf = p.buf[:len(p.buf)+n]
+		return err
 	}
 	if m, ok := pb.(newMarshaler); ok {
 		siz := m.XXX_Size()
