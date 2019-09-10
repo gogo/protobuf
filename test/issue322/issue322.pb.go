@@ -24,7 +24,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type OneofTest struct {
 	// Types that are valid to be assigned to Union:
@@ -79,7 +79,7 @@ type isOneofTest_Union interface {
 }
 
 type OneofTest_I struct {
-	I int32 `protobuf:"varint,1,opt,name=i,oneof,def=4"`
+	I int32 `protobuf:"varint,1,opt,name=i,oneof,def=4" json:"i,omitempty"`
 }
 
 func (*OneofTest_I) isOneofTest_Union() {}
@@ -98,54 +98,11 @@ func (m *OneofTest) GetI() int32 {
 	return Default_OneofTest_I
 }
 
-// XXX_OneofFuncs is for the internal use of the proto package.
-func (*OneofTest) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
-	return _OneofTest_OneofMarshaler, _OneofTest_OneofUnmarshaler, _OneofTest_OneofSizer, []interface{}{
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*OneofTest) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
 		(*OneofTest_I)(nil),
 	}
-}
-
-func _OneofTest_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
-	m := msg.(*OneofTest)
-	// union
-	switch x := m.Union.(type) {
-	case *OneofTest_I:
-		_ = b.EncodeVarint(1<<3 | proto.WireVarint)
-		_ = b.EncodeVarint(uint64(x.I))
-	case nil:
-	default:
-		return fmt.Errorf("OneofTest.Union has unexpected type %T", x)
-	}
-	return nil
-}
-
-func _OneofTest_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
-	m := msg.(*OneofTest)
-	switch tag {
-	case 1: // union.i
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeVarint()
-		m.Union = &OneofTest_I{int32(x)}
-		return true, err
-	default:
-		return false, nil
-	}
-}
-
-func _OneofTest_OneofSizer(msg proto.Message) (n int) {
-	m := msg.(*OneofTest)
-	// union
-	switch x := m.Union.(type) {
-	case *OneofTest_I:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(x.I))
-	case nil:
-	default:
-		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
-	}
-	return n
 }
 
 func init() {
@@ -387,7 +344,8 @@ func (m *OneofTest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 }
 
 func (m *OneofTest_I) MarshalTo(dAtA []byte) (int, error) {
-	return m.MarshalToSizedBuffer(dAtA[:m.Size()])
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
 func (m *OneofTest_I) MarshalToSizedBuffer(dAtA []byte) (int, error) {

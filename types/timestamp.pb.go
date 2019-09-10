@@ -23,7 +23,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // A Timestamp represents a point in time independent of any time zone or local
 // calendar, encoded as a count of seconds and fractions of seconds at
@@ -98,11 +98,13 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 // 01:30 UTC on January 15, 2017.
 //
 // In JavaScript, one can convert a Date object to this format using the
-// standard [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
+// standard
+// [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
 // method. In Python, a standard `datetime.datetime` object can be converted
-// to this format using [`strftime`](https://docs.python.org/2/library/time.html#time.strftime)
-// with the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one
-// can use the Joda Time's [`ISODateTimeFormat.dateTime()`](
+// to this format using
+// [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with
+// the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use
+// the Joda Time's [`ISODateTimeFormat.dateTime()`](
 // http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime%2D%2D
 // ) to obtain a formatter capable of generating timestamps in this format.
 //

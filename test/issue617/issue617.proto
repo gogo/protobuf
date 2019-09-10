@@ -1,6 +1,6 @@
 // Protocol Buffers for Go with Gadgets
 //
-// Copyright (c) 2013, The GoGo Authors. All rights reserved.
+// Copyright (c) 2019, The GoGo Authors. All rights reserved.
 // http://github.com/gogo/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
@@ -26,22 +26,22 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto2";
+syntax = "proto3";
 
-package tags;
+package issue617;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
-option (gogoproto.populate_all) = true;
+option (gogoproto.marshaler_all)   = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.sizer_all)       = false;
+option (gogoproto.protosizer_all)  = true;
 
-message Outside {
-	optional Inside Inside = 1 [(gogoproto.embed) = true, (gogoproto.jsontag) = ""];
-	optional string Field2 = 2 [(gogoproto.jsontag) = "MyField2", (gogoproto.moretags) = "xml:\",comment\""];
-	oneof filed {
-		string Field3 = 3 [(gogoproto.jsontag) = "MyField3", (gogoproto.moretags) = "xml:\",comment\""];
-	}
-}
+message Foo {
+  message Bar {
+  }
 
-message Inside {
-	optional string Field1 = 1 [(gogoproto.jsontag) = "MyField1", (gogoproto.moretags) = "xml:\",chardata\""];
+  oneof details {
+    Bar bar = 1;
+  }
 }

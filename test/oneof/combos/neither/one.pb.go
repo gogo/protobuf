@@ -29,7 +29,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type Subby struct {
 	Sub                  *string  `protobuf:"bytes,1,opt,name=sub" json:"sub,omitempty"`
@@ -117,52 +117,52 @@ type isAllTypesOneOf_TestOneof interface {
 }
 
 type AllTypesOneOf_Field1 struct {
-	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1,oneof"`
+	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1,oneof" json:"Field1,omitempty"`
 }
 type AllTypesOneOf_Field2 struct {
-	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2,oneof"`
+	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2,oneof" json:"Field2,omitempty"`
 }
 type AllTypesOneOf_Field3 struct {
-	Field3 int32 `protobuf:"varint,3,opt,name=Field3,oneof"`
+	Field3 int32 `protobuf:"varint,3,opt,name=Field3,oneof" json:"Field3,omitempty"`
 }
 type AllTypesOneOf_Field4 struct {
-	Field4 int64 `protobuf:"varint,4,opt,name=Field4,oneof"`
+	Field4 int64 `protobuf:"varint,4,opt,name=Field4,oneof" json:"Field4,omitempty"`
 }
 type AllTypesOneOf_Field5 struct {
-	Field5 uint32 `protobuf:"varint,5,opt,name=Field5,oneof"`
+	Field5 uint32 `protobuf:"varint,5,opt,name=Field5,oneof" json:"Field5,omitempty"`
 }
 type AllTypesOneOf_Field6 struct {
-	Field6 uint64 `protobuf:"varint,6,opt,name=Field6,oneof"`
+	Field6 uint64 `protobuf:"varint,6,opt,name=Field6,oneof" json:"Field6,omitempty"`
 }
 type AllTypesOneOf_Field7 struct {
-	Field7 int32 `protobuf:"zigzag32,7,opt,name=Field7,oneof"`
+	Field7 int32 `protobuf:"zigzag32,7,opt,name=Field7,oneof" json:"Field7,omitempty"`
 }
 type AllTypesOneOf_Field8 struct {
-	Field8 int64 `protobuf:"zigzag64,8,opt,name=Field8,oneof"`
+	Field8 int64 `protobuf:"zigzag64,8,opt,name=Field8,oneof" json:"Field8,omitempty"`
 }
 type AllTypesOneOf_Field9 struct {
-	Field9 uint32 `protobuf:"fixed32,9,opt,name=Field9,oneof"`
+	Field9 uint32 `protobuf:"fixed32,9,opt,name=Field9,oneof" json:"Field9,omitempty"`
 }
 type AllTypesOneOf_Field10 struct {
-	Field10 int32 `protobuf:"fixed32,10,opt,name=Field10,oneof"`
+	Field10 int32 `protobuf:"fixed32,10,opt,name=Field10,oneof" json:"Field10,omitempty"`
 }
 type AllTypesOneOf_Field11 struct {
-	Field11 uint64 `protobuf:"fixed64,11,opt,name=Field11,oneof"`
+	Field11 uint64 `protobuf:"fixed64,11,opt,name=Field11,oneof" json:"Field11,omitempty"`
 }
 type AllTypesOneOf_Field12 struct {
-	Field12 int64 `protobuf:"fixed64,12,opt,name=Field12,oneof"`
+	Field12 int64 `protobuf:"fixed64,12,opt,name=Field12,oneof" json:"Field12,omitempty"`
 }
 type AllTypesOneOf_Field13 struct {
-	Field13 bool `protobuf:"varint,13,opt,name=Field13,oneof"`
+	Field13 bool `protobuf:"varint,13,opt,name=Field13,oneof" json:"Field13,omitempty"`
 }
 type AllTypesOneOf_Field14 struct {
-	Field14 string `protobuf:"bytes,14,opt,name=Field14,oneof"`
+	Field14 string `protobuf:"bytes,14,opt,name=Field14,oneof" json:"Field14,omitempty"`
 }
 type AllTypesOneOf_Field15 struct {
-	Field15 []byte `protobuf:"bytes,15,opt,name=Field15,oneof"`
+	Field15 []byte `protobuf:"bytes,15,opt,name=Field15,oneof" json:"Field15,omitempty"`
 }
 type AllTypesOneOf_SubMessage struct {
-	SubMessage *Subby `protobuf:"bytes,16,opt,name=sub_message,json=subMessage,oneof"`
+	SubMessage *Subby `protobuf:"bytes,16,opt,name=sub_message,json=subMessage,oneof" json:"sub_message,omitempty"`
 }
 
 func (*AllTypesOneOf_Field1) isAllTypesOneOf_TestOneof()     {}
@@ -301,9 +301,9 @@ func (m *AllTypesOneOf) GetSubMessage() *Subby {
 	return nil
 }
 
-// XXX_OneofFuncs is for the internal use of the proto package.
-func (*AllTypesOneOf) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
-	return _AllTypesOneOf_OneofMarshaler, _AllTypesOneOf_OneofUnmarshaler, _AllTypesOneOf_OneofSizer, []interface{}{
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*AllTypesOneOf) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
 		(*AllTypesOneOf_Field1)(nil),
 		(*AllTypesOneOf_Field2)(nil),
 		(*AllTypesOneOf_Field3)(nil),
@@ -321,255 +321,6 @@ func (*AllTypesOneOf) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer)
 		(*AllTypesOneOf_Field15)(nil),
 		(*AllTypesOneOf_SubMessage)(nil),
 	}
-}
-
-func _AllTypesOneOf_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
-	m := msg.(*AllTypesOneOf)
-	// test_oneof
-	switch x := m.TestOneof.(type) {
-	case *AllTypesOneOf_Field1:
-		_ = b.EncodeVarint(1<<3 | proto.WireFixed64)
-		_ = b.EncodeFixed64(math.Float64bits(x.Field1))
-	case *AllTypesOneOf_Field2:
-		_ = b.EncodeVarint(2<<3 | proto.WireFixed32)
-		_ = b.EncodeFixed32(uint64(math.Float32bits(x.Field2)))
-	case *AllTypesOneOf_Field3:
-		_ = b.EncodeVarint(3<<3 | proto.WireVarint)
-		_ = b.EncodeVarint(uint64(x.Field3))
-	case *AllTypesOneOf_Field4:
-		_ = b.EncodeVarint(4<<3 | proto.WireVarint)
-		_ = b.EncodeVarint(uint64(x.Field4))
-	case *AllTypesOneOf_Field5:
-		_ = b.EncodeVarint(5<<3 | proto.WireVarint)
-		_ = b.EncodeVarint(uint64(x.Field5))
-	case *AllTypesOneOf_Field6:
-		_ = b.EncodeVarint(6<<3 | proto.WireVarint)
-		_ = b.EncodeVarint(uint64(x.Field6))
-	case *AllTypesOneOf_Field7:
-		_ = b.EncodeVarint(7<<3 | proto.WireVarint)
-		_ = b.EncodeZigzag32(uint64(x.Field7))
-	case *AllTypesOneOf_Field8:
-		_ = b.EncodeVarint(8<<3 | proto.WireVarint)
-		_ = b.EncodeZigzag64(uint64(x.Field8))
-	case *AllTypesOneOf_Field9:
-		_ = b.EncodeVarint(9<<3 | proto.WireFixed32)
-		_ = b.EncodeFixed32(uint64(x.Field9))
-	case *AllTypesOneOf_Field10:
-		_ = b.EncodeVarint(10<<3 | proto.WireFixed32)
-		_ = b.EncodeFixed32(uint64(x.Field10))
-	case *AllTypesOneOf_Field11:
-		_ = b.EncodeVarint(11<<3 | proto.WireFixed64)
-		_ = b.EncodeFixed64(uint64(x.Field11))
-	case *AllTypesOneOf_Field12:
-		_ = b.EncodeVarint(12<<3 | proto.WireFixed64)
-		_ = b.EncodeFixed64(uint64(x.Field12))
-	case *AllTypesOneOf_Field13:
-		t := uint64(0)
-		if x.Field13 {
-			t = 1
-		}
-		_ = b.EncodeVarint(13<<3 | proto.WireVarint)
-		_ = b.EncodeVarint(t)
-	case *AllTypesOneOf_Field14:
-		_ = b.EncodeVarint(14<<3 | proto.WireBytes)
-		_ = b.EncodeStringBytes(x.Field14)
-	case *AllTypesOneOf_Field15:
-		_ = b.EncodeVarint(15<<3 | proto.WireBytes)
-		_ = b.EncodeRawBytes(x.Field15)
-	case *AllTypesOneOf_SubMessage:
-		_ = b.EncodeVarint(16<<3 | proto.WireBytes)
-		if err := b.EncodeMessage(x.SubMessage); err != nil {
-			return err
-		}
-	case nil:
-	default:
-		return fmt.Errorf("AllTypesOneOf.TestOneof has unexpected type %T", x)
-	}
-	return nil
-}
-
-func _AllTypesOneOf_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
-	m := msg.(*AllTypesOneOf)
-	switch tag {
-	case 1: // test_oneof.Field1
-		if wire != proto.WireFixed64 {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeFixed64()
-		m.TestOneof = &AllTypesOneOf_Field1{math.Float64frombits(x)}
-		return true, err
-	case 2: // test_oneof.Field2
-		if wire != proto.WireFixed32 {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeFixed32()
-		m.TestOneof = &AllTypesOneOf_Field2{math.Float32frombits(uint32(x))}
-		return true, err
-	case 3: // test_oneof.Field3
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeVarint()
-		m.TestOneof = &AllTypesOneOf_Field3{int32(x)}
-		return true, err
-	case 4: // test_oneof.Field4
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeVarint()
-		m.TestOneof = &AllTypesOneOf_Field4{int64(x)}
-		return true, err
-	case 5: // test_oneof.Field5
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeVarint()
-		m.TestOneof = &AllTypesOneOf_Field5{uint32(x)}
-		return true, err
-	case 6: // test_oneof.Field6
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeVarint()
-		m.TestOneof = &AllTypesOneOf_Field6{x}
-		return true, err
-	case 7: // test_oneof.Field7
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeZigzag32()
-		m.TestOneof = &AllTypesOneOf_Field7{int32(x)}
-		return true, err
-	case 8: // test_oneof.Field8
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeZigzag64()
-		m.TestOneof = &AllTypesOneOf_Field8{int64(x)}
-		return true, err
-	case 9: // test_oneof.Field9
-		if wire != proto.WireFixed32 {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeFixed32()
-		m.TestOneof = &AllTypesOneOf_Field9{uint32(x)}
-		return true, err
-	case 10: // test_oneof.Field10
-		if wire != proto.WireFixed32 {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeFixed32()
-		m.TestOneof = &AllTypesOneOf_Field10{int32(x)}
-		return true, err
-	case 11: // test_oneof.Field11
-		if wire != proto.WireFixed64 {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeFixed64()
-		m.TestOneof = &AllTypesOneOf_Field11{x}
-		return true, err
-	case 12: // test_oneof.Field12
-		if wire != proto.WireFixed64 {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeFixed64()
-		m.TestOneof = &AllTypesOneOf_Field12{int64(x)}
-		return true, err
-	case 13: // test_oneof.Field13
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeVarint()
-		m.TestOneof = &AllTypesOneOf_Field13{x != 0}
-		return true, err
-	case 14: // test_oneof.Field14
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeStringBytes()
-		m.TestOneof = &AllTypesOneOf_Field14{x}
-		return true, err
-	case 15: // test_oneof.Field15
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeRawBytes(true)
-		m.TestOneof = &AllTypesOneOf_Field15{x}
-		return true, err
-	case 16: // test_oneof.sub_message
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		msg := new(Subby)
-		err := b.DecodeMessage(msg)
-		m.TestOneof = &AllTypesOneOf_SubMessage{msg}
-		return true, err
-	default:
-		return false, nil
-	}
-}
-
-func _AllTypesOneOf_OneofSizer(msg proto.Message) (n int) {
-	m := msg.(*AllTypesOneOf)
-	// test_oneof
-	switch x := m.TestOneof.(type) {
-	case *AllTypesOneOf_Field1:
-		n += 1 // tag and wire
-		n += 8
-	case *AllTypesOneOf_Field2:
-		n += 1 // tag and wire
-		n += 4
-	case *AllTypesOneOf_Field3:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(x.Field3))
-	case *AllTypesOneOf_Field4:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(x.Field4))
-	case *AllTypesOneOf_Field5:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(x.Field5))
-	case *AllTypesOneOf_Field6:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(x.Field6))
-	case *AllTypesOneOf_Field7:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64((uint32(x.Field7) << 1) ^ uint32((int32(x.Field7) >> 31))))
-	case *AllTypesOneOf_Field8:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(uint64(x.Field8<<1) ^ uint64((int64(x.Field8) >> 63))))
-	case *AllTypesOneOf_Field9:
-		n += 1 // tag and wire
-		n += 4
-	case *AllTypesOneOf_Field10:
-		n += 1 // tag and wire
-		n += 4
-	case *AllTypesOneOf_Field11:
-		n += 1 // tag and wire
-		n += 8
-	case *AllTypesOneOf_Field12:
-		n += 1 // tag and wire
-		n += 8
-	case *AllTypesOneOf_Field13:
-		n += 1 // tag and wire
-		n += 1
-	case *AllTypesOneOf_Field14:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(len(x.Field14)))
-		n += len(x.Field14)
-	case *AllTypesOneOf_Field15:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(len(x.Field15)))
-		n += len(x.Field15)
-	case *AllTypesOneOf_SubMessage:
-		s := proto.Size(x.SubMessage)
-		n += 2 // tag and wire
-		n += proto.SizeVarint(uint64(s))
-		n += s
-	case nil:
-	default:
-		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
-	}
-	return n
 }
 
 type TwoOneofs struct {
@@ -627,22 +378,22 @@ type isTwoOneofs_Two interface {
 }
 
 type TwoOneofs_Field1 struct {
-	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1,oneof"`
+	Field1 float64 `protobuf:"fixed64,1,opt,name=Field1,oneof" json:"Field1,omitempty"`
 }
 type TwoOneofs_Field2 struct {
-	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2,oneof"`
+	Field2 float32 `protobuf:"fixed32,2,opt,name=Field2,oneof" json:"Field2,omitempty"`
 }
 type TwoOneofs_Field3 struct {
-	Field3 int32 `protobuf:"varint,3,opt,name=Field3,oneof"`
+	Field3 int32 `protobuf:"varint,3,opt,name=Field3,oneof" json:"Field3,omitempty"`
 }
 type TwoOneofs_Field34 struct {
-	Field34 string `protobuf:"bytes,34,opt,name=Field34,oneof"`
+	Field34 string `protobuf:"bytes,34,opt,name=Field34,oneof" json:"Field34,omitempty"`
 }
 type TwoOneofs_Field35 struct {
-	Field35 []byte `protobuf:"bytes,35,opt,name=Field35,oneof"`
+	Field35 []byte `protobuf:"bytes,35,opt,name=Field35,oneof" json:"Field35,omitempty"`
 }
 type TwoOneofs_SubMessage2 struct {
-	SubMessage2 *Subby `protobuf:"bytes,36,opt,name=sub_message2,json=subMessage2,oneof"`
+	SubMessage2 *Subby `protobuf:"bytes,36,opt,name=sub_message2,json=subMessage2,oneof" json:"sub_message2,omitempty"`
 }
 
 func (*TwoOneofs_Field1) isTwoOneofs_One()      {}
@@ -707,9 +458,9 @@ func (m *TwoOneofs) GetSubMessage2() *Subby {
 	return nil
 }
 
-// XXX_OneofFuncs is for the internal use of the proto package.
-func (*TwoOneofs) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
-	return _TwoOneofs_OneofMarshaler, _TwoOneofs_OneofUnmarshaler, _TwoOneofs_OneofSizer, []interface{}{
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*TwoOneofs) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
 		(*TwoOneofs_Field1)(nil),
 		(*TwoOneofs_Field2)(nil),
 		(*TwoOneofs_Field3)(nil),
@@ -717,133 +468,6 @@ func (*TwoOneofs) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) err
 		(*TwoOneofs_Field35)(nil),
 		(*TwoOneofs_SubMessage2)(nil),
 	}
-}
-
-func _TwoOneofs_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
-	m := msg.(*TwoOneofs)
-	// one
-	switch x := m.One.(type) {
-	case *TwoOneofs_Field1:
-		_ = b.EncodeVarint(1<<3 | proto.WireFixed64)
-		_ = b.EncodeFixed64(math.Float64bits(x.Field1))
-	case *TwoOneofs_Field2:
-		_ = b.EncodeVarint(2<<3 | proto.WireFixed32)
-		_ = b.EncodeFixed32(uint64(math.Float32bits(x.Field2)))
-	case *TwoOneofs_Field3:
-		_ = b.EncodeVarint(3<<3 | proto.WireVarint)
-		_ = b.EncodeVarint(uint64(x.Field3))
-	case nil:
-	default:
-		return fmt.Errorf("TwoOneofs.One has unexpected type %T", x)
-	}
-	// two
-	switch x := m.Two.(type) {
-	case *TwoOneofs_Field34:
-		_ = b.EncodeVarint(34<<3 | proto.WireBytes)
-		_ = b.EncodeStringBytes(x.Field34)
-	case *TwoOneofs_Field35:
-		_ = b.EncodeVarint(35<<3 | proto.WireBytes)
-		_ = b.EncodeRawBytes(x.Field35)
-	case *TwoOneofs_SubMessage2:
-		_ = b.EncodeVarint(36<<3 | proto.WireBytes)
-		if err := b.EncodeMessage(x.SubMessage2); err != nil {
-			return err
-		}
-	case nil:
-	default:
-		return fmt.Errorf("TwoOneofs.Two has unexpected type %T", x)
-	}
-	return nil
-}
-
-func _TwoOneofs_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
-	m := msg.(*TwoOneofs)
-	switch tag {
-	case 1: // one.Field1
-		if wire != proto.WireFixed64 {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeFixed64()
-		m.One = &TwoOneofs_Field1{math.Float64frombits(x)}
-		return true, err
-	case 2: // one.Field2
-		if wire != proto.WireFixed32 {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeFixed32()
-		m.One = &TwoOneofs_Field2{math.Float32frombits(uint32(x))}
-		return true, err
-	case 3: // one.Field3
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeVarint()
-		m.One = &TwoOneofs_Field3{int32(x)}
-		return true, err
-	case 34: // two.Field34
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeStringBytes()
-		m.Two = &TwoOneofs_Field34{x}
-		return true, err
-	case 35: // two.Field35
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeRawBytes(true)
-		m.Two = &TwoOneofs_Field35{x}
-		return true, err
-	case 36: // two.sub_message2
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		msg := new(Subby)
-		err := b.DecodeMessage(msg)
-		m.Two = &TwoOneofs_SubMessage2{msg}
-		return true, err
-	default:
-		return false, nil
-	}
-}
-
-func _TwoOneofs_OneofSizer(msg proto.Message) (n int) {
-	m := msg.(*TwoOneofs)
-	// one
-	switch x := m.One.(type) {
-	case *TwoOneofs_Field1:
-		n += 1 // tag and wire
-		n += 8
-	case *TwoOneofs_Field2:
-		n += 1 // tag and wire
-		n += 4
-	case *TwoOneofs_Field3:
-		n += 1 // tag and wire
-		n += proto.SizeVarint(uint64(x.Field3))
-	case nil:
-	default:
-		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
-	}
-	// two
-	switch x := m.Two.(type) {
-	case *TwoOneofs_Field34:
-		n += 2 // tag and wire
-		n += proto.SizeVarint(uint64(len(x.Field34)))
-		n += len(x.Field34)
-	case *TwoOneofs_Field35:
-		n += 2 // tag and wire
-		n += proto.SizeVarint(uint64(len(x.Field35)))
-		n += len(x.Field35)
-	case *TwoOneofs_SubMessage2:
-		s := proto.Size(x.SubMessage2)
-		n += 2 // tag and wire
-		n += proto.SizeVarint(uint64(s))
-		n += s
-	case nil:
-	default:
-		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
-	}
-	return n
 }
 
 type CustomOneof struct {
@@ -890,16 +514,16 @@ type isCustomOneof_Custom interface {
 }
 
 type CustomOneof_Stringy struct {
-	Stringy string `protobuf:"bytes,34,opt,name=Stringy,oneof"`
+	Stringy string `protobuf:"bytes,34,opt,name=Stringy,oneof" json:"Stringy,omitempty"`
 }
 type CustomOneof_CustomType struct {
-	CustomType github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,35,opt,name=CustomType,oneof,customtype=github.com/gogo/protobuf/test/custom.Uint128"`
+	CustomType github_com_gogo_protobuf_test_custom.Uint128 `protobuf:"bytes,35,opt,name=CustomType,oneof,customtype=github.com/gogo/protobuf/test/custom.Uint128" json:"CustomType,omitempty"`
 }
 type CustomOneof_CastType struct {
-	CastType github_com_gogo_protobuf_test_casttype.MyUint64Type `protobuf:"varint,36,opt,name=CastType,oneof,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type"`
+	CastType github_com_gogo_protobuf_test_casttype.MyUint64Type `protobuf:"varint,36,opt,name=CastType,oneof,casttype=github.com/gogo/protobuf/test/casttype.MyUint64Type" json:"CastType,omitempty"`
 }
 type CustomOneof_MyCustomName struct {
-	MyCustomName int64 `protobuf:"varint,37,opt,name=CustomName,oneof"`
+	MyCustomName int64 `protobuf:"varint,37,opt,name=CustomName,oneof" json:"CustomName,omitempty"`
 }
 
 func (*CustomOneof_Stringy) isCustomOneof_Custom()      {}
@@ -935,108 +559,14 @@ func (m *CustomOneof) GetMyCustomName() int64 {
 	return 0
 }
 
-// XXX_OneofFuncs is for the internal use of the proto package.
-func (*CustomOneof) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
-	return _CustomOneof_OneofMarshaler, _CustomOneof_OneofUnmarshaler, _CustomOneof_OneofSizer, []interface{}{
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*CustomOneof) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
 		(*CustomOneof_Stringy)(nil),
 		(*CustomOneof_CustomType)(nil),
 		(*CustomOneof_CastType)(nil),
 		(*CustomOneof_MyCustomName)(nil),
 	}
-}
-
-func _CustomOneof_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
-	m := msg.(*CustomOneof)
-	// custom
-	switch x := m.Custom.(type) {
-	case *CustomOneof_Stringy:
-		_ = b.EncodeVarint(34<<3 | proto.WireBytes)
-		_ = b.EncodeStringBytes(x.Stringy)
-	case *CustomOneof_CustomType:
-		_ = b.EncodeVarint(35<<3 | proto.WireBytes)
-		dAtA, err := x.CustomType.Marshal()
-		if err != nil {
-			return err
-		}
-		_ = b.EncodeRawBytes(dAtA)
-	case *CustomOneof_CastType:
-		_ = b.EncodeVarint(36<<3 | proto.WireVarint)
-		_ = b.EncodeVarint(uint64(x.CastType))
-	case *CustomOneof_MyCustomName:
-		_ = b.EncodeVarint(37<<3 | proto.WireVarint)
-		_ = b.EncodeVarint(uint64(x.MyCustomName))
-	case nil:
-	default:
-		return fmt.Errorf("CustomOneof.Custom has unexpected type %T", x)
-	}
-	return nil
-}
-
-func _CustomOneof_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
-	m := msg.(*CustomOneof)
-	switch tag {
-	case 34: // custom.Stringy
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeStringBytes()
-		m.Custom = &CustomOneof_Stringy{x}
-		return true, err
-	case 35: // custom.CustomType
-		if wire != proto.WireBytes {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeRawBytes(true)
-		if err != nil {
-			return true, err
-		}
-		var cc github_com_gogo_protobuf_test_custom.Uint128
-		c := &cc
-		err = c.Unmarshal(x)
-		m.Custom = &CustomOneof_CustomType{*c}
-		return true, err
-	case 36: // custom.CastType
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeVarint()
-		m.Custom = &CustomOneof_CastType{github_com_gogo_protobuf_test_casttype.MyUint64Type(x)}
-		return true, err
-	case 37: // custom.CustomName
-		if wire != proto.WireVarint {
-			return true, proto.ErrInternalBadWireType
-		}
-		x, err := b.DecodeVarint()
-		m.Custom = &CustomOneof_MyCustomName{int64(x)}
-		return true, err
-	default:
-		return false, nil
-	}
-}
-
-func _CustomOneof_OneofSizer(msg proto.Message) (n int) {
-	m := msg.(*CustomOneof)
-	// custom
-	switch x := m.Custom.(type) {
-	case *CustomOneof_Stringy:
-		n += 2 // tag and wire
-		n += proto.SizeVarint(uint64(len(x.Stringy)))
-		n += len(x.Stringy)
-	case *CustomOneof_CustomType:
-		n += 2 // tag and wire
-		n += proto.SizeVarint(uint64(x.CustomType.Size()))
-		n += x.CustomType.Size()
-	case *CustomOneof_CastType:
-		n += 2 // tag and wire
-		n += proto.SizeVarint(uint64(x.CastType))
-	case *CustomOneof_MyCustomName:
-		n += 2 // tag and wire
-		n += proto.SizeVarint(uint64(x.MyCustomName))
-	case nil:
-	default:
-		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
-	}
-	return n
 }
 
 func init() {
