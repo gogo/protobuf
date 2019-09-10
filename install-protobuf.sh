@@ -7,7 +7,7 @@ die() {
     exit 1
 }
 
-cd /home/travis
+cd ${HOME}
 
 case "$PROTOBUF_VERSION" in
 2*)
