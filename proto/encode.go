@@ -197,8 +197,7 @@ func (p *Buffer) EncodeMessage(pb Message) error {
 	// at the correct place when calling
 	// p.Marshal()
 	pp := p.buf
-	p.buf = p.buf[len(p.buf):]
-	p.adjustBufferCap(siz)
+	p.buf = p.buf[len(p.buf) : len(p.buf) : len(p.buf)+siz]
 
 	err := p.Marshal(pb)
 	// Prefix the marshaled message with the

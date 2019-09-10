@@ -2969,11 +2969,9 @@ func (p *Buffer) Marshal(pb Message) error {
 	if m, ok := pb.(newMarshaler); ok {
 		siz := m.XXX_Size()
 		p.grow(siz) // make sure buf has enough capacity
-		pp := p.buf
-		p.buf = p.buf[len(p.buf):]
-		p.adjustBufferCap(siz)
-		p.buf, err = m.XXX_Marshal(p.buf, p.deterministic)
-		p.buf = append(pp, p.buf...)
+		pp := p.buf[len(p.buf) : len(p.buf) : len(p.buf)+siz]
+		pp, err = m.XXX_Marshal(pp, p.deterministic)
+		p.buf = append(p.buf, pp...)
 		return err
 	}
 	if m, ok := pb.(Marshaler); ok {
