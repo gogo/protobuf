@@ -57,6 +57,7 @@ import (
 
 const secondInNanos = int64(time.Second / time.Nanosecond)
 const maxSecondsInDuration = 315576000000
+const defaultAnyTypePropertyName = "@type"
 
 // Marshaler is a configurable object for converting between
 // protocol buffer objects and a JSON representation for them.
@@ -81,6 +82,12 @@ type Marshaler struct {
 	// fully-qualified type name from the type URL and pass that to
 	// proto.MessageType(string).
 	AnyResolver AnyResolver
+
+	// A custom JSON property name for handling the case of Any message
+	// type_url property. This will allow this property to have custom
+	// name for cases where JSON receivers are not able to handle
+	// standard @symbol provided as default
+	AnyTypePropertyKeyName string
 }
 
 // AnyResolver takes a type URL, present in an Any message, and resolves it into
@@ -171,6 +178,11 @@ var (
 
 // marshalObject writes a struct to the Writer.
 func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeURL string) error {
+	// Detect if property for Any conversions is set and
+	// update it with default value if it wasn't set
+	if len(m.AnyTypePropertyKeyName) == 0 {
+		m.AnyTypePropertyKeyName = defaultAnyTypePropertyName
+	}
 	if jsm, ok := v.(JSONPBMarshaler); ok {
 		b, err := jsm.MarshalJSONPB(m)
 		if err != nil {
@@ -186,7 +198,7 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 			if err != nil {
 				return fmt.Errorf("failed to marshal type URL %q to JSON: %v", typeURL, err)
 			}
-			js["@type"] = (*json.RawMessage)(&turl)
+			js[m.AnyTypePropertyKeyName] = (*json.RawMessage)(&turl)
 			if m.Indent != "" {
 				b, err = json.MarshalIndent(js, indent, m.Indent)
 			} else {
@@ -486,7 +498,7 @@ func (m *Marshaler) marshalTypeURL(out *errWriter, indent, typeURL string) error
 		out.write(indent)
 		out.write(m.Indent)
 	}
-	out.write(`"@type":`)
+	out.write("\"" + m.AnyTypePropertyKeyName + "\":")
 	if m.Indent != "" {
 		out.write(" ")
 	}
@@ -759,6 +771,12 @@ type Unmarshaler struct {
 	// fully-qualified type name from the type URL and pass that to
 	// proto.MessageType(string).
 	AnyResolver AnyResolver
+
+	// A custom JSON property name for handling the case of Any message
+	// type_url property. This will allow this property to have custom
+	// name for cases where JSON receivers are not able to handle
+	// standard @symbol provided as default
+	AnyTypePropertyKeyName string
 }
 
 // UnmarshalNext unmarshals the next protocol buffer from a JSON object stream.
@@ -807,8 +825,12 @@ func UnmarshalString(str string, pb proto.Message) error {
 // unmarshalValue converts/copies a value into the target.
 // prop may be nil.
 func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMessage, prop *proto.Properties) error {
+	// Detect if property for Any conversions is set and
+	// update it with default value if it wasn't set
+	if len(u.AnyTypePropertyKeyName) == 0 {
+		u.AnyTypePropertyKeyName = defaultAnyTypePropertyName
+	}
 	targetType := target.Type()
-
 	// Allocate memory for pointer fields.
 	if targetType.Kind() == reflect.Ptr {
 		// If input value is "null" and target is a pointer type, then the field should be treated as not set
@@ -841,14 +863,14 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 				return err
 			}
 
-			val, ok := jsonFields["@type"]
+			val, ok := jsonFields[u.AnyTypePropertyKeyName]
 			if !ok || val == nil {
-				return errors.New("Any JSON doesn't have '@type'")
+				return errors.New("Any JSON doesn't have '@type' or other type_url equivalent ")
 			}
 
 			var turl string
 			if err := json.Unmarshal([]byte(*val), &turl); err != nil {
-				return fmt.Errorf("can't unmarshal Any's '@type': %q", *val)
+				return fmt.Errorf("can't unmarshal Any's '@type' or other type_url equivalent: %q", *val)
 			}
 			target.Field(0).SetString(turl)
 
@@ -873,7 +895,7 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 					return fmt.Errorf("can't unmarshal Any nested proto %T: %v", m, err)
 				}
 			} else {
-				delete(jsonFields, "@type")
+				delete(jsonFields, u.AnyTypePropertyKeyName)
 				nestedProto, uerr := json.Marshal(jsonFields)
 				if uerr != nil {
 					return fmt.Errorf("can't generate JSON for Any's nested proto to be unmarshaled: %v", uerr)
