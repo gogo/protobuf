@@ -192,18 +192,7 @@ func (p *Buffer) EncodeMessage(pb Message) error {
 	sizVar := SizeVarint(uint64(siz))
 	p.grow(siz + sizVar)
 	p.EncodeVarint(uint64(siz))
-
-	// Adjust p.buf so that we marshal
-	// at the correct place when calling
-	// p.Marshal()
-	pp := p.buf
-	p.buf = p.buf[len(p.buf) : len(p.buf) : len(p.buf)+siz]
-
-	err := p.Marshal(pb)
-	// Prefix the marshaled message with the
-	// encoded varint.
-	p.buf = append(pp, p.buf...)
-	return err
+	return p.Marshal(pb)
 }
 
 // All protocol buffer fields are nillable, but be careful.
