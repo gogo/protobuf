@@ -67,7 +67,10 @@ func marshalCheck(t *testing.T, m proto.Message, size int) {
 		t.Fatal(err)
 	}
 	bufferBytes := buf.Bytes()
-	protoBytes, _ := proto.Marshal(m)
+	protoBytes, err := proto.Marshal(m)
+	if err != nil {
+		t.Fatal(err)
+	}
 	protoBytes = append(protoBytes, protoBytes...)
 	if !bytes.Equal(bufferBytes, protoBytes) {
 		t.Fatalf("proto.Buffer Marshal != proto.Marshal (%v != %v)\n", bufferBytes, protoBytes)
