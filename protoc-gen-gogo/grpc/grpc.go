@@ -165,6 +165,10 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 	g.P("type ", servName, "Client interface {")
 	for i, method := range service.Method {
 		g.gen.PrintComments(fmt.Sprintf("%s,2,%d", path, i)) // 2 means method in a service.
+		if method.GetOptions().GetDeprecated() {
+			g.P("//")
+			g.P(deprecationComment)
+		}
 		g.P(g.generateClientSignature(servName, method))
 	}
 	g.P("}")
@@ -212,6 +216,10 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 	g.P("type ", serverType, " interface {")
 	for i, method := range service.Method {
 		g.gen.PrintComments(fmt.Sprintf("%s,2,%d", path, i)) // 2 means method in a service.
+		if method.GetOptions().GetDeprecated() {
+			g.P("//")
+			g.P(deprecationComment)
+		}
 		g.P(g.generateServerSignature(servName, method))
 	}
 	g.P("}")
