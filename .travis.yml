@@ -7,7 +7,7 @@ env:
   - PROTOBUF_VERSION=3.9.1
 
 before_install:
-  - ./install-protobuf.sh
+  - HOME=/home/travis ./install-protobuf.sh
   - PATH=/home/travis/bin:$PATH protoc --version
 
 script:
