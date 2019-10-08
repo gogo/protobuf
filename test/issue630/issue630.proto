@@ -38,6 +38,10 @@ message Foo {
   repeated Bar Bar1 = 1 [(gogoproto.nullable) = false];
 }
 
+message Qux {
+  repeated Bar Bar1 = 1 [(gogoproto.nullable) = true];
+}
+
 message Bar {
   optional string Baz = 1 [(gogoproto.nullable) = false];
 }

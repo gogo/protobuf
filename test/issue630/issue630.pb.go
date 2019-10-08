@@ -61,6 +61,44 @@ func (m *Foo) GetBar1() []Bar {
 	return nil
 }
 
+type Qux struct {
+	Bar1                 []*Bar   `protobuf:"bytes,1,rep,name=Bar1" json:"Bar1,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Qux) Reset()         { *m = Qux{} }
+func (m *Qux) String() string { return proto.CompactTextString(m) }
+func (*Qux) ProtoMessage()    {}
+func (*Qux) Descriptor() ([]byte, []int) {
+	return fileDescriptor_60374e06e51d301c, []int{1}
+}
+func (m *Qux) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Qux.Unmarshal(m, b)
+}
+func (m *Qux) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Qux.Marshal(b, m, deterministic)
+}
+func (m *Qux) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Qux.Merge(m, src)
+}
+func (m *Qux) XXX_Size() int {
+	return xxx_messageInfo_Qux.Size(m)
+}
+func (m *Qux) XXX_DiscardUnknown() {
+	xxx_messageInfo_Qux.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Qux proto.InternalMessageInfo
+
+func (m *Qux) GetBar1() []*Bar {
+	if m != nil {
+		return m.Bar1
+	}
+	return nil
+}
+
 type Bar struct {
 	Baz                  string   `protobuf:"bytes,1,opt,name=Baz" json:"Baz"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -72,7 +110,7 @@ func (m *Bar) Reset()         { *m = Bar{} }
 func (m *Bar) String() string { return proto.CompactTextString(m) }
 func (*Bar) ProtoMessage()    {}
 func (*Bar) Descriptor() ([]byte, []int) {
-	return fileDescriptor_60374e06e51d301c, []int{1}
+	return fileDescriptor_60374e06e51d301c, []int{2}
 }
 func (m *Bar) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Bar.Unmarshal(m, b)
@@ -101,22 +139,24 @@ func (m *Bar) GetBaz() string {
 
 func init() {
 	proto.RegisterType((*Foo)(nil), "issue630.Foo")
+	proto.RegisterType((*Qux)(nil), "issue630.Qux")
 	proto.RegisterType((*Bar)(nil), "issue630.Bar")
 }
 
 func init() { proto.RegisterFile("issue630.proto", fileDescriptor_60374e06e51d301c) }
 
 var fileDescriptor_60374e06e51d301c = []byte{
-	// 140 bytes of a gzipped FileDescriptorProto
+	// 150 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0x2c, 0x2e, 0x2e,
 	0x4d, 0x35, 0x33, 0x36, 0xd0, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x80, 0xf1, 0xa5, 0x74,
 	0xd3, 0x33, 0x4b, 0x32, 0x4a, 0x93, 0xf4, 0x92, 0xf3, 0x73, 0xf5, 0xd3, 0xf3, 0xd3, 0xf3, 0xf5,
 	0xc1, 0x0a, 0x92, 0x4a, 0xd3, 0xc0, 0x3c, 0x30, 0x07, 0xcc, 0x82, 0x68, 0x54, 0xd2, 0xe3, 0x62,
 	0x76, 0xcb, 0xcf, 0x17, 0x52, 0xe7, 0x62, 0x71, 0x4a, 0x2c, 0x32, 0x94, 0x60, 0x54, 0x60, 0xd6,
 	0xe0, 0x36, 0xe2, 0xd5, 0x83, 0x1b, 0xef, 0x94, 0x58, 0xe4, 0xc4, 0x72, 0xe2, 0x9e, 0x3c, 0x43,
-	0x10, 0x58, 0x81, 0x92, 0x2c, 0x17, 0xb3, 0x53, 0x62, 0x91, 0x90, 0x18, 0x88, 0xaa, 0x92, 0x60,
-	0x54, 0x60, 0xd4, 0xe0, 0x84, 0xca, 0x83, 0x04, 0x9c, 0x58, 0x3e, 0x3c, 0x94, 0x63, 0x04, 0x04,
-	0x00, 0x00, 0xff, 0xff, 0xd9, 0x0d, 0x56, 0xe2, 0x9e, 0x00, 0x00, 0x00,
+	0x10, 0x58, 0x01, 0x48, 0x7d, 0x60, 0x69, 0x05, 0x61, 0xf5, 0x8c, 0x50, 0xf5, 0xb2, 0x5c, 0xcc,
+	0x4e, 0x89, 0x45, 0x42, 0x62, 0x20, 0xaa, 0x4a, 0x82, 0x51, 0x81, 0x51, 0x83, 0x13, 0x6a, 0x1e,
+	0x48, 0xc0, 0x89, 0xe5, 0xc3, 0x43, 0x39, 0x46, 0x40, 0x00, 0x00, 0x00, 0xff, 0xff, 0xc9, 0x5d,
+	0xa4, 0x14, 0xce, 0x00, 0x00, 0x00,
 }
 
 func (this *Foo) GoString() string {
@@ -131,6 +171,21 @@ func (this *Foo) GoString() string {
 			vs[i] = this.Bar1[i]
 		}
 		s = append(s, "Bar1: "+fmt.Sprintf("%#v", vs)+",\n")
+	}
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
+func (this *Qux) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 5)
+	s = append(s, "&issue630.Qux{")
+	if this.Bar1 != nil {
+		s = append(s, "Bar1: "+fmt.Sprintf("%#v", this.Bar1)+",\n")
 	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")

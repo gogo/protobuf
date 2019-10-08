@@ -41,3 +41,15 @@ func TestRepeatedNonNullableGoString(t *testing.T) {
 		t.Fatalf("expected:\n%s\ngot:\n%s\n", expected, actual)
 	}
 }
+
+func TestRepeatedNullableGoString(t *testing.T) {
+	qux := &Qux{Bar1: []*Bar{{Baz: "a"}, {Baz: "b"}}}
+	expected := `&issue630.Qux{Bar1: []*issue630.Bar{&issue630.Bar{Baz: "a",
+}, &issue630.Bar{Baz: "b",
+}},
+}`
+	actual := qux.GoString()
+	if expected != actual {
+		t.Fatalf("expected:\n%s\ngot:\n%s\n", expected, actual)
+	}
+}
