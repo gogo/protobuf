@@ -26,6 +26,6 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-generate:
+regenerate:
 	go install github.com/gogo/protobuf/protoc-gen-gogo
 	protoc --proto_path=../../../../../:../../protobuf/:. --gogo_out=. issue620.proto
