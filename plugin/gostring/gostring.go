@@ -103,6 +103,7 @@ import (
 	"strings"
 
 	"github.com/gogo/protobuf/gogoproto"
+	"github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 )
 
@@ -260,8 +261,8 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 				}
 				if field.IsEnum() {
 					if nullable && !repeated && !proto3 {
-						goTyp, _ := p.GoType(message, field)
-						p.P(`s = append(s, "`, fieldname, `: " + valueToGoString`, p.localName, `(this.`, fieldname, `,"`, generator.GoTypeToName(goTyp), `"`, `) + ",\n")`)
+						typ := enumTypeName(field)
+						p.P(`s = append(s, "`, fieldname, `: " + valueToGoString`, p.localName, `(this.`, fieldname, `,"`, typ, `"`, `) + ",\n")`)
 					} else {
 						p.P(`s = append(s, "`, fieldname, `: " + `, fmtPkg.Use(), `.Sprintf("%#v", this.`, fieldname, `) + ",\n")`)
 					}
@@ -379,6 +380,25 @@ func (p *gostring) Generate(file *generator.FileDescriptor) {
 		p.Out()
 		p.P(`}`)
 	}
+}
+
+func enumTypeName(field *descriptor.FieldDescriptorProto) string {
+	tn := []byte(field.GetTypeName())
+	if len(tn) > 1 && tn[0] == '.' {
+		tn = tn[1:]
+	}
+	first := true
+	for i, v := range tn {
+		if v != '.' {
+			continue
+		}
+		if first {
+			first = false
+			continue
+		}
+		tn[i] = '_'
+	}
+	return string(tn)
 }
 
 func init() {
