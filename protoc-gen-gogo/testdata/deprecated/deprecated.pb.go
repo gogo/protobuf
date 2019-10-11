@@ -125,7 +125,7 @@ type isDeprecatedResponse_DeprecatedOneof interface {
 }
 
 type DeprecatedResponse_DeprecatedOneofField struct {
-	DeprecatedOneofField string `protobuf:"bytes,2,opt,name=deprecated_oneof_field,json=deprecatedOneofField,proto3,oneof"`
+	DeprecatedOneofField string `protobuf:"bytes,2,opt,name=deprecated_oneof_field,json=deprecatedOneofField,proto3,oneof" json:"deprecated_oneof_field,omitempty"`
 }
 
 func (*DeprecatedResponse_DeprecatedOneofField) isDeprecatedResponse_DeprecatedOneof() {}

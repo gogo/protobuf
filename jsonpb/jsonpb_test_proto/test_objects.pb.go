@@ -620,19 +620,19 @@ type isMsgWithOneof_Union interface {
 }
 
 type MsgWithOneof_Title struct {
-	Title string `protobuf:"bytes,1,opt,name=title,oneof"`
+	Title string `protobuf:"bytes,1,opt,name=title,oneof" json:"title,omitempty"`
 }
 type MsgWithOneof_Salary struct {
-	Salary int64 `protobuf:"varint,2,opt,name=salary,oneof"`
+	Salary int64 `protobuf:"varint,2,opt,name=salary,oneof" json:"salary,omitempty"`
 }
 type MsgWithOneof_Country struct {
-	Country string `protobuf:"bytes,3,opt,name=Country,oneof"`
+	Country string `protobuf:"bytes,3,opt,name=Country,oneof" json:"Country,omitempty"`
 }
 type MsgWithOneof_HomeAddress struct {
-	HomeAddress string `protobuf:"bytes,4,opt,name=home_address,json=homeAddress,oneof"`
+	HomeAddress string `protobuf:"bytes,4,opt,name=home_address,json=homeAddress,oneof" json:"home_address,omitempty"`
 }
 type MsgWithOneof_MsgWithRequired struct {
-	MsgWithRequired *MsgWithRequired `protobuf:"bytes,5,opt,name=msg_with_required,json=msgWithRequired,oneof"`
+	MsgWithRequired *MsgWithRequired `protobuf:"bytes,5,opt,name=msg_with_required,json=msgWithRequired,oneof" json:"msg_with_required,omitempty"`
 }
 
 func (*MsgWithOneof_Title) isMsgWithOneof_Union()           {}

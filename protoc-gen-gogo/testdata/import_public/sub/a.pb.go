@@ -176,10 +176,10 @@ type isM_OneofField interface {
 }
 
 type M_OneofInt32 struct {
-	OneofInt32 int32 `protobuf:"varint,2,opt,name=oneof_int32,json=oneofInt32,oneof"`
+	OneofInt32 int32 `protobuf:"varint,2,opt,name=oneof_int32,json=oneofInt32,oneof" json:"oneof_int32,omitempty"`
 }
 type M_OneofInt64 struct {
-	OneofInt64 int64 `protobuf:"varint,3,opt,name=oneof_int64,json=oneofInt64,oneof"`
+	OneofInt64 int64 `protobuf:"varint,3,opt,name=oneof_int64,json=oneofInt64,oneof" json:"oneof_int64,omitempty"`
 }
 
 func (*M_OneofInt32) isM_OneofField() {}
@@ -312,10 +312,10 @@ type isM_Submessage_SubmessageOneofField interface {
 }
 
 type M_Submessage_SubmessageOneofInt32 struct {
-	SubmessageOneofInt32 int32 `protobuf:"varint,1,opt,name=submessage_oneof_int32,json=submessageOneofInt32,oneof"`
+	SubmessageOneofInt32 int32 `protobuf:"varint,1,opt,name=submessage_oneof_int32,json=submessageOneofInt32,oneof" json:"submessage_oneof_int32,omitempty"`
 }
 type M_Submessage_SubmessageOneofInt64 struct {
-	SubmessageOneofInt64 int64 `protobuf:"varint,2,opt,name=submessage_oneof_int64,json=submessageOneofInt64,oneof"`
+	SubmessageOneofInt64 int64 `protobuf:"varint,2,opt,name=submessage_oneof_int64,json=submessageOneofInt64,oneof" json:"submessage_oneof_int64,omitempty"`
 }
 
 func (*M_Submessage_SubmessageOneofInt32) isM_Submessage_SubmessageOneofField() {}

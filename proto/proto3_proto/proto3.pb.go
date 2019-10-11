@@ -437,7 +437,7 @@ type isTestUTF8_Oneof interface {
 }
 
 type TestUTF8_Field struct {
-	Field string `protobuf:"bytes,3,opt,name=field,proto3,oneof"`
+	Field string `protobuf:"bytes,3,opt,name=field,proto3,oneof" json:"field,omitempty"`
 }
 
 func (*TestUTF8_Field) isTestUTF8_Oneof() {}

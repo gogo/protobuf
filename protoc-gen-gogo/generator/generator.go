@@ -2581,10 +2581,8 @@ func (g *Generator) generateOneofDecls(mc *msgCtx, topLevelFields []topLevelFiel
 	g.P()
 	for _, of := range ofields {
 		for i, sf := range of.subFields {
-			_, wiretype := g.GoType(mc.message, sf.protoField)
-			tag := "protobuf:" + g.goTag(mc.message, sf.protoField, wiretype)
 			fieldFullPath := fmt.Sprintf("%s,%d,%d", mc.message.path, messageFieldPath, i)
-			g.P("type ", Annotate(mc.message.file, fieldFullPath, sf.oneofTypeName), " struct{ ", Annotate(mc.message.file, fieldFullPath, sf.goName), " ", sf.goType, " `", tag, "` }")
+			g.P("type ", Annotate(mc.message.file, fieldFullPath, sf.oneofTypeName), " struct{ ", Annotate(mc.message.file, fieldFullPath, sf.goName), " ", sf.goType, " `", sf.tags, "` }")
 			if !gogoproto.IsStdType(sf.protoField) && !gogoproto.IsCustomType(sf.protoField) && !gogoproto.IsCastType(sf.protoField) {
 				g.RecordTypeUse(sf.protoField.GetTypeName())
 			}
@@ -2932,7 +2930,6 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			}
 
 			oneofField := oFields[*field.OneofIndex]
-			tag = "protobuf:" + g.goTag(message, field, wiretype)
 			sf := oneofSubField{
 				fieldCommon: fieldCommon{
 					goName:     fieldName,
