@@ -27,7 +27,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type M struct {
 	A                    *string  `protobuf:"bytes,1,opt,name=a" json:"a,omitempty"`
@@ -469,7 +469,7 @@ func valueToGoStringFileDot(v interface{}, typ string) string {
 }
 func NewPopulatedM(r randyFileDot, easy bool) *M {
 	this := &M{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v1 := string(randStringFileDot(r))
 		this.A = &v1
 	}

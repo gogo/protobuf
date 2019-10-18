@@ -28,7 +28,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type MapTest struct {
 	StrStr               map[string]string `protobuf:"bytes,1,rep,name=str_str,json=strStr,proto3" json:"str_str,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
@@ -711,7 +711,7 @@ func valueToGoStringMap(v interface{}, typ string) string {
 }
 func NewPopulatedMapTest(r randyMap, easy bool) *MapTest {
 	this := &MapTest{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v1 := r.Intn(10)
 		this.StrStr = make(map[string]string)
 		for i := 0; i < v1; i++ {
@@ -726,7 +726,7 @@ func NewPopulatedMapTest(r randyMap, easy bool) *MapTest {
 
 func NewPopulatedFakeMap(r randyMap, easy bool) *FakeMap {
 	this := &FakeMap{}
-	if r.Intn(10) != 0 {
+	if r.Intn(5) != 0 {
 		v2 := r.Intn(5)
 		this.Entries = make([]*FakeMapEntry, v2)
 		for i := 0; i < v2; i++ {
