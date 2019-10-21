@@ -134,44 +134,47 @@ func (g *gomobile) generateService(file *generator.FileDescriptor, service *pb.S
 	if pkg := file.GetPackage(); pkg != "" {
 		fullServName = pkg + "." + fullServName
 	}
-	servName := generator.CamelCase(origServName)
+	handlerName := generator.CamelCase(origServName)
 	deprecated := service.GetOptions().GetDeprecated()
 
-	// Server interface.
-	serverType := servName + "Server"
-	g.P("// ", serverType, " is the server API for ", servName, " service.")
+	// Handler interface.
+	handlerType := handlerName + "Handler"
+	g.P("// ", handlerType, " is the handler API for ", handlerName, " service.")
 	if deprecated {
 		g.P("//")
 		g.P(deprecationComment)
 	}
-	g.P("var handler ", serverType)
 
-	g.P("type ", serverType, " interface {")
+	handlerVar := strings.ToLower(handlerType[0:1]) + handlerType[1:]
+	g.P("var ", handlerVar, " ", handlerType)
+
+	g.P("type ", handlerType, " interface {")
 	for i, method := range service.Method {
 		g.gen.PrintComments(fmt.Sprintf("%s,2,%d", path, i)) // 2 means method in a service.
-		g.P(g.generateServerSignature(servName, method))
+		g.P(g.generateHandlerSignature(handlerName, method))
 	}
 	g.P("}")
 	g.P()
 
-	// Server Unimplemented struct for forward compatability.
+	// Handler Unimplemented struct for forward compatability.
 	if deprecated {
 		g.P(deprecationComment)
 	}
 
-	// Server registration.
+	// Handler registration.
 	if deprecated {
 		g.P(deprecationComment)
 	}
-	g.P("func Register", servName, "Server(srv ", serverType, ") {")
-	g.P("handler = srv")
+
+	g.P("func register", handlerName, "Handler(srv ", handlerType, ") {")
+	g.P(handlerVar, " = srv")
 	g.P("}")
 	g.P()
 
-	// Server handler implementations.
+	// Handler handler implementations.
 	var handlerNames []string
 	for _, method := range service.Method {
-		hname := g.generateServerMethod(servName, fullServName, method)
+		hname := g.generateHandlerMethod(handlerVar, method)
 		handlerNames = append(handlerNames, hname)
 	}
 
@@ -205,8 +208,8 @@ func (g *gomobile) generateService(file *generator.FileDescriptor, service *pb.S
 	g.P()
 }
 
-// generateServerSignatureWithParamNames returns the server-side signature for a method with parameter names.
-func (g *gomobile) generateServerSignatureWithParamNames(servName string, method *pb.MethodDescriptorProto) string {
+// generateHandlerSignatureWithParamNames returns the handler-side signature for a method with parameter names.
+func (g *gomobile) generateHandlerSignatureWithParamNames(handlerName string, method *pb.MethodDescriptorProto) string {
 	origMethName := method.GetName()
 	methName := generator.CamelCase(origMethName)
 	if reservedClientName[methName] {
@@ -225,8 +228,8 @@ func (g *gomobile) generateServerSignatureWithParamNames(servName string, method
 	return methName + "(" + strings.Join(reqArgs, ", ") + ") " + ret
 }
 
-// generateServerSignature returns the server-side signature for a method.
-func (g *gomobile) generateServerSignature(servName string, method *pb.MethodDescriptorProto) string {
+// generateHandlerSignature returns the handler-side signature for a method.
+func (g *gomobile) generateHandlerSignature(handlerName string, method *pb.MethodDescriptorProto) string {
 	origMethName := method.GetName()
 	methName := generator.CamelCase(origMethName)
 	if reservedClientName[methName] {
@@ -246,7 +249,7 @@ func (g *gomobile) generateServerSignature(servName string, method *pb.MethodDes
 	return methName + "(" + strings.Join(reqArgs, ", ") + ") " + ret
 }
 
-func (g *gomobile) generateServerMethod(servName, fullServName string, method *pb.MethodDescriptorProto) string {
+func (g *gomobile) generateHandlerMethod(handlerVar string, method *pb.MethodDescriptorProto) string {
 	methName := generator.CamelCase(method.GetName())
 	hname := fmt.Sprintf("%s", methName)
 	inType := g.typeName(method.GetInputType())
@@ -260,7 +263,7 @@ func (g *gomobile) generateServerMethod(servName, fullServName string, method *p
 		g.P("return resp")
 		g.P("}")
 
-		g.P("resp, _ := handler.", methName, "(in).Marshal()")
+		g.P("resp, _ := ", handlerVar, ".", methName, "(in).Marshal()")
 		g.P("return resp")
 
 		g.P("}")
