@@ -72,8 +72,8 @@ var (
 // 	}
 // }
 
-// BenchmarkEmpy measures the overhead of doing the minimal possible encode.
-func BenchmarkEmpy(b *testing.B) {
+// BenchmarkEmpty measures the overhead of doing the minimal possible encode.
+func BenchmarkEmpty(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		raw, err := proto.Marshal(&tpb.Message{})
 		if err != nil {
