@@ -2817,6 +2817,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	}
 
 	mapFieldTypes := make(map[*descriptor.FieldDescriptorProto]string) // keep track of the map fields to be added later
+	var interfaceFieldName string
 
 	for i, field := range message.Field {
 		// Allocate the getter and the field at the same time so name
@@ -2858,7 +2859,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			base := CamelCase(odp.GetName())
 			names := allocNames(base, "Get"+base)
 			fname, gname := names[0], names[1]
-
+			interfaceFieldName = fname
 			// This is the first field of a oneof we haven't seen before.
 			// Generate the union field.
 			oneofFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageOneofPath, *field.OneofIndex)
@@ -2870,7 +2871,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			// Generate the rest of this comment later,
 			// when we've computed any disambiguation.
 
-			dname := "is" + goTypeName + "_" + fname
+			dname := "is" + goTypeName + fname
 			oneOftag := `protobuf_oneof:"` + odp.GetName() + `"`
 			of := oneofField{
 				fieldCommon: fieldCommon{
@@ -2905,7 +2906,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		}
 		dvalue := g.getterDefault(field, goTypeName, GoTypeToName(goTyp))
 		if oneof {
-			tname := goTypeName + "_" + fieldName
+			tname := goTypeName + interfaceFieldName + fieldName
 			// It is possible for this to collide with a message or enum
 			// nested in this message. Check for collisions.
 			for {
@@ -3341,7 +3342,7 @@ func CamelCase(s string) string {
 
 // CamelCaseSlice is like CamelCase, but the argument is a slice of strings to
 // be joined with "_".
-func CamelCaseSlice(elem []string) string { return CamelCase(strings.Join(elem, "_")) }
+func CamelCaseSlice(elem []string) string { return CamelCase(strings.Join(elem, "")) }
 
 // dottedSlice turns a sliced name into a dotted name.
 func dottedSlice(elem []string) string { return strings.Join(elem, ".") }
