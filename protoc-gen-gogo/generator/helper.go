@@ -33,6 +33,7 @@ import (
 	"go/parser"
 	"go/printer"
 	"go/token"
+	"os"
 	"path"
 	"strings"
 
@@ -73,7 +74,15 @@ func (g *Generator) OneOfTypeName(message *Descriptor, field *descriptor.FieldDe
 	typeName := message.TypeName()
 	ccTypeName := CamelCaseSlice(typeName)
 	fieldName := g.GetOneOfFieldName(message, field)
-	tname := ccTypeName + "_" + fieldName
+
+	var tname string
+	if os.Getenv(noUnderscoreModeEnvVar) == "1" {
+		oneOfFieldName := CamelCase(*(message.GetOneofDecl()[0].Name))
+		tname = ccTypeName + oneOfFieldName + "Of" + fieldName
+	} else {
+		tname = ccTypeName + "_" + fieldName
+	}
+
 	// It is possible for this to collide with a message or enum
 	// nested in this message. Check for collisions.
 	ok := true

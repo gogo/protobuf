@@ -74,7 +74,7 @@ import (
 // proto package is introduced; the generated code references
 // a constant, proto.ProtoPackageIsVersionN (where N is generatedCodeVersion).
 const generatedCodeVersion = 3
-
+const noUnderscoreModeEnvVar = "GOGO_NO_UNDERSCORE"
 // A Plugin provides functionality to add to the output during Go code generation,
 // such as to produce RPC stubs.
 type Plugin interface {
@@ -2817,7 +2817,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	}
 
 	mapFieldTypes := make(map[*descriptor.FieldDescriptorProto]string) // keep track of the map fields to be added later
-	var interfaceFieldName string
+	var oneOfFieldName string
 
 	for i, field := range message.Field {
 		// Allocate the getter and the field at the same time so name
@@ -2859,7 +2859,8 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			base := CamelCase(odp.GetName())
 			names := allocNames(base, "Get"+base)
 			fname, gname := names[0], names[1]
-			interfaceFieldName = fname
+			oneOfFieldName = fname
+
 			// This is the first field of a oneof we haven't seen before.
 			// Generate the union field.
 			oneofFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageOneofPath, *field.OneofIndex)
@@ -2871,7 +2872,12 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			// Generate the rest of this comment later,
 			// when we've computed any disambiguation.
 
-			dname := "is" + goTypeName + fname
+			var dname string
+			if os.Getenv(noUnderscoreModeEnvVar) == "1" {
+				dname = "is" + goTypeName + fname
+			} else {
+				dname = "is" + goTypeName + fname
+			}
 			oneOftag := `protobuf_oneof:"` + odp.GetName() + `"`
 			of := oneofField{
 				fieldCommon: fieldCommon{
@@ -2906,7 +2912,12 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		}
 		dvalue := g.getterDefault(field, goTypeName, GoTypeToName(goTyp))
 		if oneof {
-			tname := goTypeName + interfaceFieldName + fieldName
+			var tname string
+			if os.Getenv(noUnderscoreModeEnvVar) == "1" {
+				tname = goTypeName + oneOfFieldName + "Of" + fieldName
+			} else {
+				tname = goTypeName + "_" + fieldName
+			}
 			// It is possible for this to collide with a message or enum
 			// nested in this message. Check for collisions.
 			for {
@@ -3342,7 +3353,12 @@ func CamelCase(s string) string {
 
 // CamelCaseSlice is like CamelCase, but the argument is a slice of strings to
 // be joined with "_".
-func CamelCaseSlice(elem []string) string { return CamelCase(strings.Join(elem, "")) }
+func CamelCaseSlice(elem []string) string {
+	if os.Getenv(noUnderscoreModeEnvVar) == "1" {
+		return CamelCase(strings.Join(elem, ""))
+	}
+	return CamelCase(strings.Join(elem, "_"))
+}
 
 // dottedSlice turns a sliced name into a dotted name.
 func dottedSlice(elem []string) string { return strings.Join(elem, ".") }

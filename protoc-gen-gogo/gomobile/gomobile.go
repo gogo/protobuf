@@ -254,12 +254,15 @@ func (g *gomobile) generateHandlerMethod(handlerVar string, method *pb.MethodDes
 	hname := fmt.Sprintf("%s", methName)
 	inType := g.typeName(method.GetInputType())
 	outType := g.typeName(method.GetOutputType())
-
+	errorPrefix := "_Error"
+	if os.Getenv("GOGO_NO_UNDERSCORE") == "1" {
+		errorPrefix = "Error"
+	}
 	if !method.GetServerStreaming() && !method.GetClientStreaming() {
 		g.P("func ", hname, "(b []byte) ([]byte) {")
 		g.P("in := new(", pbPkg+"."+inType, ")")
 		g.P("if err := in.Unmarshal(b); err != nil { ")
-		g.P("resp, _ := (&", pbPkg, ".", outType, "{Error: &", pbPkg, ".", outType, "_Error{Code: ", pbPkg, ".", outType, "_Error_BAD_INPUT, Description: err.Error()}}).Marshal()")
+		g.P("resp, _ := (&", pbPkg, ".", outType, "{Error: &", pbPkg, ".", outType, errorPrefix, "{Code: ", pbPkg, ".", outType, errorPrefix, "_BAD_INPUT, Description: err.Error()}}).Marshal()")
 		g.P("return resp")
 		g.P("}")
 
