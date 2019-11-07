@@ -76,7 +76,7 @@ func (g *Generator) OneOfTypeName(message *Descriptor, field *descriptor.FieldDe
 	fieldName := g.GetOneOfFieldName(message, field)
 
 	var tname string
-	if os.Getenv(noUnderscoreModeEnvVar) == "1" {
+	if os.Getenv(envVarNoUnderscoreMode) == "1" {
 		oneOfFieldName := CamelCase(*(message.GetOneofDecl()[0].Name))
 		tname = ccTypeName + oneOfFieldName + "Of" + fieldName
 	} else {

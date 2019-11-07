@@ -74,7 +74,9 @@ import (
 // proto package is introduced; the generated code references
 // a constant, proto.ProtoPackageIsVersionN (where N is generatedCodeVersion).
 const generatedCodeVersion = 3
-const noUnderscoreModeEnvVar = "GOGO_NO_UNDERSCORE"
+const envVarNoUnderscoreMode = "GOGO_NO_UNDERSCORE"
+const envVarExportOneOfInterface = "GOGO_EXPORT_ONEOF_INTERFACE"
+
 // A Plugin provides functionality to add to the output during Go code generation,
 // such as to produce RPC stubs.
 type Plugin interface {
@@ -2873,11 +2875,19 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			// when we've computed any disambiguation.
 
 			var dname string
-			if os.Getenv(noUnderscoreModeEnvVar) == "1" {
-				dname = "is" + goTypeName + fname
+			var interfacePrefix string
+			if os.Getenv(envVarExportOneOfInterface) == "1" {
+				interfacePrefix = "Is"
 			} else {
-				dname = "is" + goTypeName + fname
+				interfacePrefix = "is"
 			}
+
+			if os.Getenv(envVarNoUnderscoreMode) == "1" {
+				dname = interfacePrefix + goTypeName + fname
+			} else {
+				dname = interfacePrefix + goTypeName + fname
+			}
+
 			oneOftag := `protobuf_oneof:"` + odp.GetName() + `"`
 			of := oneofField{
 				fieldCommon: fieldCommon{
@@ -2913,7 +2923,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		dvalue := g.getterDefault(field, goTypeName, GoTypeToName(goTyp))
 		if oneof {
 			var tname string
-			if os.Getenv(noUnderscoreModeEnvVar) == "1" {
+			if os.Getenv(envVarNoUnderscoreMode) == "1" {
 				tname = goTypeName + oneOfFieldName + "Of" + fieldName
 			} else {
 				tname = goTypeName + "_" + fieldName
@@ -3354,7 +3364,7 @@ func CamelCase(s string) string {
 // CamelCaseSlice is like CamelCase, but the argument is a slice of strings to
 // be joined with "_".
 func CamelCaseSlice(elem []string) string {
-	if os.Getenv(noUnderscoreModeEnvVar) == "1" {
+	if os.Getenv(envVarNoUnderscoreMode) == "1" {
 		return CamelCase(strings.Join(elem, ""))
 	}
 	return CamelCase(strings.Join(elem, "_"))
