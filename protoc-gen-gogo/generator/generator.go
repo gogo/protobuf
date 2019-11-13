@@ -2486,8 +2486,12 @@ func (g *Generator) generateGet(mc *msgCtx, protoField *descriptor.FieldDescript
 
 // generateInternalStructFields just adds the XXX_<something> fields to the message struct.
 func (g *Generator) generateInternalStructFields(mc *msgCtx, topLevelFields []topLevelField) {
+	moreXXXTags := gogoproto.GetMoreXXXTags(g.file.FileDescriptorProto, mc.message.DescriptorProto)
+	if moreXXXTags != "" {
+		moreXXXTags = " " + moreXXXTags
+	}
 	if gogoproto.HasUnkeyed(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
-		g.P("XXX_NoUnkeyedLiteral\tstruct{} `json:\"-\"`") // prevent unkeyed struct literals
+		g.P("XXX_NoUnkeyedLiteral\tstruct{} `json:\"-\"", moreXXXTags, "`") // prevent unkeyed struct literals
 	}
 	if len(mc.message.ExtensionRange) > 0 {
 		if gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
@@ -2495,16 +2499,16 @@ func (g *Generator) generateInternalStructFields(mc *msgCtx, topLevelFields []to
 			if opts := mc.message.Options; opts != nil && opts.GetMessageSetWireFormat() {
 				messageset = "protobuf_messageset:\"1\" "
 			}
-			g.P(g.Pkg["proto"], ".XXX_InternalExtensions `", messageset, "json:\"-\"`")
+			g.P(g.Pkg["proto"], ".XXX_InternalExtensions `", messageset, "json:\"-\"", moreXXXTags, "`")
 		} else {
-			g.P("XXX_extensions\t\t[]byte `protobuf:\"bytes,0,opt\" json:\"-\"`")
+			g.P("XXX_extensions\t\t[]byte `protobuf:\"bytes,0,opt\" json:\"-\"", moreXXXTags, "`")
 		}
 	}
 	if gogoproto.HasUnrecognized(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
-		g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
+		g.P("XXX_unrecognized\t[]byte `json:\"-\"", moreXXXTags, "`")
 	}
 	if gogoproto.HasSizecache(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
-		g.P("XXX_sizecache\tint32 `json:\"-\"`")
+		g.P("XXX_sizecache\tint32 `json:\"-\"", moreXXXTags, "`")
 	}
 }
 
