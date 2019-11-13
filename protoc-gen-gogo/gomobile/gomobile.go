@@ -99,7 +99,7 @@ func (g *gomobile) Generate(file *generator.FileDescriptor) {
 		g.gen.Fail("neeed to set PACKAGE_PATH env var")
 	}
 
-	pbPkg = string(g.gen.AddImport(generator.GoImportPath(os.Getenv("PACKAGE_PATH"))))
+	//pbPkg = string(g.gen.AddImport(generator.GoImportPath(os.Getenv("PACKAGE_PATH"))))
 
 	// Assert version compatibility.
 	g.P("// This is a compile-time assertion to ensure that this generated file")
@@ -219,10 +219,10 @@ func (g *gomobile) generateHandlerSignatureWithParamNames(handlerName string, me
 	var reqArgs []string
 	ret := "error"
 	if !method.GetServerStreaming() && !method.GetClientStreaming() {
-		ret = "*" + pbPkg + "." + g.typeName(method.GetOutputType()) + ""
+		ret = "*" + g.typeName(method.GetOutputType()) + ""
 	}
 	if !method.GetClientStreaming() {
-		reqArgs = append(reqArgs, "req *"+pbPkg+"."+g.typeName(method.GetInputType()))
+		reqArgs = append(reqArgs, "req *"+g.typeName(method.GetInputType()))
 	}
 
 	return methName + "(" + strings.Join(reqArgs, ", ") + ") " + ret
@@ -239,11 +239,11 @@ func (g *gomobile) generateHandlerSignature(handlerName string, method *pb.Metho
 	var reqArgs []string
 	ret := ""
 	if !method.GetServerStreaming() && !method.GetClientStreaming() {
-		ret = "*" + pbPkg + "." + g.typeName(method.GetOutputType())
+		ret = "*" + g.typeName(method.GetOutputType())
 	}
 
 	if !method.GetClientStreaming() {
-		reqArgs = append(reqArgs, "*"+pbPkg+"."+g.typeName(method.GetInputType()))
+		reqArgs = append(reqArgs, "*"+g.typeName(method.GetInputType()))
 	}
 
 	return methName + "(" + strings.Join(reqArgs, ", ") + ") " + ret
@@ -260,9 +260,9 @@ func (g *gomobile) generateHandlerMethod(handlerVar string, method *pb.MethodDes
 	}
 	if !method.GetServerStreaming() && !method.GetClientStreaming() {
 		g.P("func ", hname, "(b []byte) ([]byte) {")
-		g.P("in := new(", pbPkg+"."+inType, ")")
+		g.P("in := new(", inType, ")")
 		g.P("if err := in.Unmarshal(b); err != nil { ")
-		g.P("resp, _ := (&", pbPkg, ".", outType, "{Error: &", pbPkg, ".", outType, errorPrefix, "{Code: ", pbPkg, ".", outType, errorPrefix, "_BAD_INPUT, Description: err.Error()}}).Marshal()")
+		g.P("resp, _ := (&", outType, "{Error: &", outType, errorPrefix, "{Code: ", outType, errorPrefix, "_BAD_INPUT, Description: err.Error()}}).Marshal()")
 		g.P("return resp")
 		g.P("}")
 
