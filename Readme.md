@@ -63,6 +63,7 @@ These projects use gogoprotobuf:
   - <a href="http://skywalking.apache.org/">Apache SkyWalking APM</a> - Istio telemetry receiver based on Mixer bypass protocol
   - <a href="https://github.com/hyperledger/burrow">Hyperledger Burrow</a> - a permissioned DLT framework
   - <a href="https://github.com/iov-one/weave">IOV Weave</a> - a blockchain framework - <a href="https://github.com/iov-one/weave/tree/23f9856f1e316f93cb3d45d92c4c6a0c4810f6bf/spec/gogo">sample proto files</a>
+  - <a href="https://github.com/tendermint/tendermint">Tendermint Core</a> - BFT Consensus in Go used for Byzantine-Fault Tolerant State Machines. Or Blockchain, for short.
 
 Please let us know if you are using gogoprotobuf by posting on our <a href="https://groups.google.com/forum/#!topic/gogoprotobuf/Brw76BxmFpQ">GoogleGroup</a>.
 
