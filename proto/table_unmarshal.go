@@ -105,7 +105,7 @@ type unmarshalFieldInfo struct {
 
 var (
 	unmarshalInfoMap  = map[reflect.Type]*unmarshalInfo{}
-	unmarshalInfoLock sync.Mutex
+	unmarshalInfoLock sync.RWMutex
 )
 
 // getUnmarshalInfo returns the data structure which can be
@@ -116,10 +116,17 @@ func getUnmarshalInfo(t reflect.Type) *unmarshalInfo {
 	// unconditionally. We would end up allocating one
 	// per occurrence of that type as a message or submessage.
 	// We use a cache here just to reduce memory usage.
+	unmarshalInfoLock.RLock()
+	u, ok := unmarshalInfoMap[t]
+	unmarshalInfoLock.RUnlock()
+	if ok {
+		return u
+	}
+
 	unmarshalInfoLock.Lock()
 	defer unmarshalInfoLock.Unlock()
-	u := unmarshalInfoMap[t]
-	if u == nil {
+	u, ok = unmarshalInfoMap[t]
+	if !ok {
 		u = &unmarshalInfo{typ: t}
 		// Note: we just set the type here. The rest of the fields
 		// will be initialized on first use.
