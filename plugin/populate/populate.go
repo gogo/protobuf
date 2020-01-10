@@ -323,6 +323,7 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 			}
 		}
 		p.Out()
+		p.P(`}`)
 	} else if gogoproto.IsCustomType(field) {
 		funcCall := p.getCustomFuncCall(goTypName)
 		if field.IsRepeated() {
