@@ -474,6 +474,11 @@ func (p *testJson) Generate(imports generator.PluginImports, file *generator.Fil
 		if message.DescriptorProto.GetOptions().GetMapEntry() {
 			continue
 		}
+
+		if gogoproto.HasCastTypeWith(file.FileDescriptorProto, message.DescriptorProto) {
+			continue
+		}
+
 		if gogoproto.HasTestGen(file.FileDescriptorProto, message.DescriptorProto) {
 			used = true
 			p.P(`func Test`, ccTypeName, `JSON(t *`, testingPkg.Use(), `.T) {`)
@@ -537,6 +542,11 @@ func (p *testText) Generate(imports generator.PluginImports, file *generator.Fil
 		if message.DescriptorProto.GetOptions().GetMapEntry() {
 			continue
 		}
+
+		if gogoproto.HasCastTypeWith(file.FileDescriptorProto, message.DescriptorProto) {
+			continue
+		}
+
 		if gogoproto.HasTestGen(file.FileDescriptorProto, message.DescriptorProto) {
 			used = true
 

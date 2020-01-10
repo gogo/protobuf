@@ -341,6 +341,17 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 			p.P(p.varGen.Next(), `:= `, funcCall)
 			p.P(`this.`, fieldname, ` = *`, p.varGen.Current())
 		}
+	} else if gogoproto.IsCastTypeWith(field) {
+		_, _, _, casterTyp, err := generator.GetCastTypeWith(field)
+		if err != nil {
+			panic(err)
+		}
+		p.P(`{`)
+		p.In()
+		p.P("__caster := &", casterTyp, "{}")
+		p.P(`this.`, fieldname, ` = __caster.NewPopulated()`)
+		p.Out()
+		p.P(`}`)
 	} else if field.IsMessage() || p.IsGroup(field) {
 		funcCall := p.getFuncCall(goTypName, field)
 		if field.IsRepeated() {

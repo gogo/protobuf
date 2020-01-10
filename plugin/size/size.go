@@ -509,7 +509,19 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
-		if !gogoproto.IsCustomType(field) {
+		if gogoproto.IsCastTypeWith(field) {
+			_, _, _, casterTyp, err := generator.GetCastTypeWith(field)
+			if err != nil {
+				panic(err)
+			}
+			p.P(`{`)
+			p.In()
+			p.P("__caster := &", casterTyp, "{}")
+			p.P(`l = __caster.Size(m.`, fieldname, `)`)
+			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+			p.Out()
+			p.P(`}`)
+		} else if !gogoproto.IsCustomType(field) {
 			if repeated {
 				p.P(`for _, b := range m.`, fieldname, ` { `)
 				p.In()

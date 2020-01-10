@@ -30,6 +30,7 @@ package generator
 
 import (
 	"bytes"
+	"fmt"
 	"go/parser"
 	"go/printer"
 	"go/token"
@@ -402,6 +403,29 @@ func getCustomType(field *descriptor.FieldDescriptorProto) (packageName string, 
 		}
 	}
 	return "", "", err
+}
+
+func GetCastTypeWith(field *descriptor.FieldDescriptorProto) (string, string, string, string, error) {
+	return getCastTypeWith(field)
+}
+
+func getCastTypeWith(field *descriptor.FieldDescriptorProto) (casteePkg string, casteeTyp string, casterPkg string, casterTyp string, err error) {
+	if field.Options != nil {
+		var v interface{}
+		v, err = proto.GetExtension(field.Options, gogoproto.E_Casttypewith)
+		if err == nil && v.(*string) != nil {
+			all := *(v.(*string))
+			ctypes := strings.Split(all, ";")
+			if len(ctypes) != 2 {
+				err = fmt.Errorf("Bad casttypewith syntax %s", all)
+				return
+			}
+			casteePkg, casteeTyp = splitCPackageType(ctypes[0])
+			casterPkg, casterTyp = splitCPackageType(ctypes[1])
+			return
+		}
+	}
+	return
 }
 
 func splitCPackageType(ctype string) (packageName string, typ string) {

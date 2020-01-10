@@ -123,6 +123,23 @@ func IsCastType(field *google_protobuf.FieldDescriptorProto) bool {
 	return false
 }
 
+func IsCastTypeWith(field *google_protobuf.FieldDescriptorProto) bool {
+	typ := GetCastTypeWith(field)
+	if len(typ) > 0 {
+		return true
+	}
+	return false
+}
+
+func HasCastTypeWith(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
+	for _, f := range message.GetField() {
+		if IsCastTypeWith(f) {
+			return true
+		}
+	}
+	return false
+}
+
 func IsCastKey(field *google_protobuf.FieldDescriptorProto) bool {
 	typ := GetCastKey(field)
 	if len(typ) > 0 {
@@ -166,6 +183,19 @@ func GetCastType(field *google_protobuf.FieldDescriptorProto) string {
 	}
 	if field.Options != nil {
 		v, err := proto.GetExtension(field.Options, E_Casttype)
+		if err == nil && v.(*string) != nil {
+			return *(v.(*string))
+		}
+	}
+	return ""
+}
+
+func GetCastTypeWith(field *google_protobuf.FieldDescriptorProto) string {
+	if field == nil {
+		return ""
+	}
+	if field.Options != nil {
+		v, err := proto.GetExtension(field.Options, E_Casttypewith)
 		if err == nil && v.(*string) != nil {
 			return *(v.(*string))
 		}
