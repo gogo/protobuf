@@ -388,16 +388,14 @@ func (this *Struct) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	Fields_this := this.Fields
-	Fields_that := that1.Fields
-	if len(Fields_this) != len(Fields_that) {
-		if len(Fields_this) < len(Fields_that) {
+	if len(this.Fields) != len(that1.Fields) {
+		if len(this.Fields) < len(that1.Fields) {
 			return -1
 		}
 		return 1
 	}
-	for i := range Fields_this {
-		if c := Fields_this[i].Compare(Fields_that[i]); c != 0 {
+	for i := range this.Fields {
+		if c := this.Fields[i].Compare(that1.Fields[i]); c != 0 {
 			return c
 		}
 	}
@@ -704,16 +702,14 @@ func (this *ListValue) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	Values_this := this.Values
-	Values_that := that1.Values
-	if len(Values_this) != len(Values_that) {
-		if len(Values_this) < len(Values_that) {
+	if len(this.Values) != len(that1.Values) {
+		if len(this.Values) < len(that1.Values) {
 			return -1
 		}
 		return 1
 	}
-	for i := range Values_this {
-		if c := Values_this[i].Compare(Values_that[i]); c != 0 {
+	for i := range this.Values {
+		if c := this.Values[i].Compare(that1.Values[i]); c != 0 {
 			return c
 		}
 	}

@@ -649,5 +649,9 @@ message ProtoType {
 }
 
 message CastRepeated {
-	repeated ProtoType Field1 = 1 [(gogoproto.castrepeated) = "ProtoTypes"];
+	repeated ProtoType Field1 = 1 [(gogoproto.castrepeated) = "ProtoTypesPointer"];
+}
+
+message NidCastRepeated {
+	repeated ProtoType Field1 = 1 [(gogoproto.castrepeated) = "ProtoTypesNotPointer", (gogoproto.nullable) = false];
 }

@@ -1,7 +1,12 @@
 package test
 
-type ProtoTypes []*ProtoType
+type ProtoTypesPointer []*ProtoType
+type ProtoTypesNotPointer []ProtoType
 
-func NewPopulatedProtoTypes(r randyThetest) *ProtoTypes {
-	return &ProtoTypes{&ProtoType{}}
+func NewPopulatedProtoTypesPointer(r randyThetest) *ProtoTypesPointer {
+	return &ProtoTypesPointer{&ProtoType{}}
+}
+
+func NewPopulatedProtoTypesNotPointer(r randyThetest) *ProtoTypesNotPointer {
+	return &ProtoTypesNotPointer{ProtoType{}}
 }

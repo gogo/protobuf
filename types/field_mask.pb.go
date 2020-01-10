@@ -322,17 +322,15 @@ func (this *FieldMask) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	Paths_this := this.Paths
-	Paths_that := that1.Paths
-	if len(Paths_this) != len(Paths_that) {
-		if len(Paths_this) < len(Paths_that) {
+	if len(this.Paths) != len(that1.Paths) {
+		if len(this.Paths) < len(that1.Paths) {
 			return -1
 		}
 		return 1
 	}
-	for i := range Paths_this {
-		if Paths_this[i] != Paths_that[i] {
-			if Paths_this[i] < Paths_that[i] {
+	for i := range this.Paths {
+		if this.Paths[i] != that1.Paths[i] {
+			if this.Paths[i] < that1.Paths[i] {
 				return -1
 			}
 			return 1
