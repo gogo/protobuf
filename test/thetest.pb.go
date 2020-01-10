@@ -20107,7 +20107,7 @@ func NewProtoTypeFromFace(that ProtoTypeFace) *ProtoType {
 
 type CastRepeatedFace interface {
 	Proto() github_com_gogo_protobuf_proto.Message
-	GetField1() []*ProtoType
+	GetField1() ProtoTypesPointer
 }
 
 func (this *CastRepeated) Proto() github_com_gogo_protobuf_proto.Message {
@@ -20118,7 +20118,7 @@ func (this *CastRepeated) TestProto() github_com_gogo_protobuf_proto.Message {
 	return NewCastRepeatedFromFace(this)
 }
 
-func (this *CastRepeated) GetField1() []*ProtoType {
+func (this *CastRepeated) GetField1() ProtoTypesPointer {
 	return this.Field1
 }
 
@@ -20130,7 +20130,7 @@ func NewCastRepeatedFromFace(that CastRepeatedFace) *CastRepeated {
 
 type NidCastRepeatedFace interface {
 	Proto() github_com_gogo_protobuf_proto.Message
-	GetField1() []ProtoType
+	GetField1() ProtoTypesNotPointer
 }
 
 func (this *NidCastRepeated) Proto() github_com_gogo_protobuf_proto.Message {
@@ -20141,7 +20141,7 @@ func (this *NidCastRepeated) TestProto() github_com_gogo_protobuf_proto.Message 
 	return NewNidCastRepeatedFromFace(this)
 }
 
-func (this *NidCastRepeated) GetField1() []ProtoType {
+func (this *NidCastRepeated) GetField1() ProtoTypesNotPointer {
 	return this.Field1
 }
 
@@ -24215,7 +24215,11 @@ func NewPopulatedProtoType(r randyThetest, easy bool) *ProtoType {
 func NewPopulatedCastRepeated(r randyThetest, easy bool) *CastRepeated {
 	this := &CastRepeated{}
 	if r.Intn(5) != 0 {
-		//TODO
+		v258 := r.Intn(5)
+		this.Field1 = make([]*ProtoType, v258)
+		for i := 0; i < v258; i++ {
+			this.Field1[i] = NewPopulatedProtoType(r, easy)
+		}
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedThetest(r, 2)
@@ -24226,7 +24230,12 @@ func NewPopulatedCastRepeated(r randyThetest, easy bool) *CastRepeated {
 func NewPopulatedNidCastRepeated(r randyThetest, easy bool) *NidCastRepeated {
 	this := &NidCastRepeated{}
 	if r.Intn(5) != 0 {
-		//TODO
+		v259 := r.Intn(5)
+		this.Field1 = make([]ProtoType, v259)
+		for i := 0; i < v259; i++ {
+			v260 := NewPopulatedProtoType(r, easy)
+			this.Field1[i] = *v260
+		}
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedThetest(r, 2)
@@ -24253,9 +24262,9 @@ func randUTF8RuneThetest(r randyThetest) rune {
 	return rune(ru + 61)
 }
 func randStringThetest(r randyThetest) string {
-	v258 := r.Intn(100)
-	tmps := make([]rune, v258)
-	for i := 0; i < v258; i++ {
+	v261 := r.Intn(100)
+	tmps := make([]rune, v261)
+	for i := 0; i < v261; i++ {
 		tmps[i] = randUTF8RuneThetest(r)
 	}
 	return string(tmps)
@@ -24277,11 +24286,11 @@ func randFieldThetest(dAtA []byte, r randyThetest, fieldNumber int, wire int) []
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateThetest(dAtA, uint64(key))
-		v259 := r.Int63()
+		v262 := r.Int63()
 		if r.Intn(2) == 0 {
-			v259 *= -1
+			v262 *= -1
 		}
-		dAtA = encodeVarintPopulateThetest(dAtA, uint64(v259))
+		dAtA = encodeVarintPopulateThetest(dAtA, uint64(v262))
 	case 1:
 		dAtA = encodeVarintPopulateThetest(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

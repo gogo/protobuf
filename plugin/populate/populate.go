@@ -323,12 +323,6 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 			}
 		}
 		p.Out()
-		p.P(`}`)
-	} else if gogoproto.IsCastRepeated(field) {
-		if !field.IsRepeated() {
-			panic("castrepeated can only be used with repeated fields")
-		}
-		p.P("//TODO")
 	} else if gogoproto.IsCustomType(field) {
 		funcCall := p.getCustomFuncCall(goTypName)
 		if field.IsRepeated() {
