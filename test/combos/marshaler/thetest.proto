@@ -655,11 +655,3 @@ message CastRepeated {
 message NidCastRepeated {
 	repeated ProtoType Field1 = 1 [(gogoproto.castrepeated) = "ProtoTypesNotPointer", (gogoproto.nullable) = false];
 }
-
-//message CastRepeatedCustom {
-//	repeated ProtoType Field1 = 1 [(gogoproto.customtype) = "T", (gogoproto.castrepeated) = "ProtoTypes"];
-//}
-//
-//message NidCastRepeatedCustom {
-//	repeated ProtoType Field1 = 1 [(gogoproto.customtype) = "T", (gogoproto.castrepeated) = "ProtoTypes", (gogoproto.nullable) = false];
-//}
