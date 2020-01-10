@@ -1737,6 +1737,11 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		}
 	}
 
+	castrepeated := ""
+	if gogoproto.IsCastRepeated(field) {
+		castrepeated = ",castrepeated=" + gogoproto.GetCastRepeated(field)
+	}
+
 	if message.proto3() {
 		name += ",proto3"
 	}
@@ -1756,7 +1761,7 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 	if gogoproto.IsWktPtr(field) {
 		wktptr = ",wktptr"
 	}
-	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
 		wiretype,
 		field.GetNumber(),
 		optrepreq,
@@ -1770,6 +1775,7 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		casttype,
 		castkey,
 		castvalue,
+		castrepeated,
 		stdtime,
 		stdduration,
 		wktptr))
@@ -2832,6 +2838,17 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		fieldName, fieldGetterName := ns[0], ns[1]
 
 		typename, wiretype := g.GoType(message, field)
+		if gogoproto.IsCastRepeated(field) {
+			var packageName string
+			var err error
+			packageName, typename, err = getCastRepeated(field)
+			if err != nil {
+				g.Fail(err.Error())
+			}
+			if len(packageName) > 0 {
+				g.customImports = append(g.customImports, packageName)
+			}
+		}
 		jsonName := *field.Name
 		jsonTag := jsonName + ",omitempty"
 		repeatedNativeType := (!field.IsMessage() && !gogoproto.IsCustomType(field) && field.IsRepeated())

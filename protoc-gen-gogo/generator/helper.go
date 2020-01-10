@@ -429,6 +429,19 @@ func getCastType(field *descriptor.FieldDescriptorProto) (packageName string, ty
 	return "", "", err
 }
 
+func getCastRepeated(field *descriptor.FieldDescriptorProto) (packageName string, typ string, err error) {
+	if field.Options != nil {
+		var v interface{}
+		v, err = proto.GetExtension(field.Options, gogoproto.E_Castrepeated)
+		if err == nil && v.(*string) != nil {
+			ctype := *(v.(*string))
+			packageName, typ = splitCPackageType(ctype)
+			return packageName, typ, nil
+		}
+	}
+	return "", "", err
+}
+
 func FileName(file *FileDescriptor) string {
 	fname := path.Base(file.FileDescriptorProto.GetName())
 	fname = strings.Replace(fname, ".proto", "", -1)

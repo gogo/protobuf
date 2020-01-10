@@ -1,3 +1,7 @@
 package test
 
-type ProtoTypes []ProtoType
+type ProtoTypes []*ProtoType
+
+func NewPopulatedProtoTypes(r randyThetest) *ProtoTypes {
+	return &ProtoTypes{&ProtoType{}}
+}

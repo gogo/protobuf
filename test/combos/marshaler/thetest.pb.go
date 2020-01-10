@@ -3347,10 +3347,10 @@ func (m *ProtoType) XXX_DiscardUnknown() {
 var xxx_messageInfo_ProtoType proto.InternalMessageInfo
 
 type CastRepeated struct {
-	Field1               []*ProtoType `protobuf:"bytes,1,rep,name=Field1" json:"Field1,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
-	XXX_unrecognized     []byte       `json:"-"`
-	XXX_sizecache        int32        `json:"-"`
+	Field1               ProtoTypes `protobuf:"bytes,1,rep,name=Field1,castrepeated=ProtoTypes" json:"Field1,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
 }
 
 func (m *CastRepeated) Reset()      { *m = CastRepeated{} }
@@ -29197,11 +29197,7 @@ func NewPopulatedProtoType(r randyThetest, easy bool) *ProtoType {
 func NewPopulatedCastRepeated(r randyThetest, easy bool) *CastRepeated {
 	this := &CastRepeated{}
 	if r.Intn(5) != 0 {
-		v258 := r.Intn(5)
-		this.Field1 = make([]*ProtoType, v258)
-		for i := 0; i < v258; i++ {
-			this.Field1[i] = NewPopulatedProtoType(r, easy)
-		}
+		//TODO
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedThetest(r, 2)
@@ -29228,9 +29224,9 @@ func randUTF8RuneThetest(r randyThetest) rune {
 	return rune(ru + 61)
 }
 func randStringThetest(r randyThetest) string {
-	v259 := r.Intn(100)
-	tmps := make([]rune, v259)
-	for i := 0; i < v259; i++ {
+	v258 := r.Intn(100)
+	tmps := make([]rune, v258)
+	for i := 0; i < v258; i++ {
 		tmps[i] = randUTF8RuneThetest(r)
 	}
 	return string(tmps)
@@ -29252,11 +29248,11 @@ func randFieldThetest(dAtA []byte, r randyThetest, fieldNumber int, wire int) []
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateThetest(dAtA, uint64(key))
-		v260 := r.Int63()
+		v259 := r.Int63()
 		if r.Intn(2) == 0 {
-			v260 *= -1
+			v259 *= -1
 		}
-		dAtA = encodeVarintPopulateThetest(dAtA, uint64(v260))
+		dAtA = encodeVarintPopulateThetest(dAtA, uint64(v259))
 	case 1:
 		dAtA = encodeVarintPopulateThetest(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
