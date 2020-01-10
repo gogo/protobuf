@@ -478,25 +478,29 @@ func (this *Api) Compare(that interface{}) int {
 		}
 		return 1
 	}
-	if len(this.Methods) != len(that1.Methods) {
-		if len(this.Methods) < len(that1.Methods) {
+	Methods_this := this.Methods
+	Methods_that := that1.Methods
+	if len(Methods_this) != len(Methods_that) {
+		if len(Methods_this) < len(Methods_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Methods {
-		if c := this.Methods[i].Compare(that1.Methods[i]); c != 0 {
+	for i := range Methods_this {
+		if c := Methods_this[i].Compare(Methods_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.Options) != len(that1.Options) {
-		if len(this.Options) < len(that1.Options) {
+	Options_this := this.Options
+	Options_that := that1.Options
+	if len(Options_this) != len(Options_that) {
+		if len(Options_this) < len(Options_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Options {
-		if c := this.Options[i].Compare(that1.Options[i]); c != 0 {
+	for i := range Options_this {
+		if c := Options_this[i].Compare(Options_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -509,14 +513,16 @@ func (this *Api) Compare(that interface{}) int {
 	if c := this.SourceContext.Compare(that1.SourceContext); c != 0 {
 		return c
 	}
-	if len(this.Mixins) != len(that1.Mixins) {
-		if len(this.Mixins) < len(that1.Mixins) {
+	Mixins_this := this.Mixins
+	Mixins_that := that1.Mixins
+	if len(Mixins_this) != len(Mixins_that) {
+		if len(Mixins_this) < len(Mixins_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Mixins {
-		if c := this.Mixins[i].Compare(that1.Mixins[i]); c != 0 {
+	for i := range Mixins_this {
+		if c := Mixins_this[i].Compare(Mixins_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -586,14 +592,16 @@ func (this *Method) Compare(that interface{}) int {
 		}
 		return 1
 	}
-	if len(this.Options) != len(that1.Options) {
-		if len(this.Options) < len(that1.Options) {
+	Options_this := this.Options
+	Options_that := that1.Options
+	if len(Options_this) != len(Options_that) {
+		if len(Options_this) < len(Options_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Options {
-		if c := this.Options[i].Compare(that1.Options[i]); c != 0 {
+	for i := range Options_this {
+		if c := Options_this[i].Compare(Options_that[i]); c != 0 {
 			return c
 		}
 	}

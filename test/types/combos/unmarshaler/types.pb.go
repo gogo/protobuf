@@ -2180,245 +2180,289 @@ func (this *RepProtoTypes) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.NullableTimestamps) != len(that1.NullableTimestamps) {
-		if len(this.NullableTimestamps) < len(that1.NullableTimestamps) {
+	NullableTimestamps_this := this.NullableTimestamps
+	NullableTimestamps_that := that1.NullableTimestamps
+	if len(NullableTimestamps_this) != len(NullableTimestamps_that) {
+		if len(NullableTimestamps_this) < len(NullableTimestamps_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NullableTimestamps {
-		if c := this.NullableTimestamps[i].Compare(that1.NullableTimestamps[i]); c != 0 {
+	for i := range NullableTimestamps_this {
+		if c := NullableTimestamps_this[i].Compare(NullableTimestamps_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NullableDurations) != len(that1.NullableDurations) {
-		if len(this.NullableDurations) < len(that1.NullableDurations) {
+	NullableDurations_this := this.NullableDurations
+	NullableDurations_that := that1.NullableDurations
+	if len(NullableDurations_this) != len(NullableDurations_that) {
+		if len(NullableDurations_this) < len(NullableDurations_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NullableDurations {
-		if c := this.NullableDurations[i].Compare(that1.NullableDurations[i]); c != 0 {
+	for i := range NullableDurations_this {
+		if c := NullableDurations_this[i].Compare(NullableDurations_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.Timestamps) != len(that1.Timestamps) {
-		if len(this.Timestamps) < len(that1.Timestamps) {
+	Timestamps_this := this.Timestamps
+	Timestamps_that := that1.Timestamps
+	if len(Timestamps_this) != len(Timestamps_that) {
+		if len(Timestamps_this) < len(Timestamps_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Timestamps {
-		if c := this.Timestamps[i].Compare(&that1.Timestamps[i]); c != 0 {
+	for i := range Timestamps_this {
+		if c := Timestamps_that[i].Compare(&Timestamps_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.Durations) != len(that1.Durations) {
-		if len(this.Durations) < len(that1.Durations) {
+	Durations_this := this.Durations
+	Durations_that := that1.Durations
+	if len(Durations_this) != len(Durations_that) {
+		if len(Durations_this) < len(Durations_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Durations {
-		if c := this.Durations[i].Compare(&that1.Durations[i]); c != 0 {
+	for i := range Durations_this {
+		if c := Durations_that[i].Compare(&Durations_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NullableDouble) != len(that1.NullableDouble) {
-		if len(this.NullableDouble) < len(that1.NullableDouble) {
+	NullableDouble_this := this.NullableDouble
+	NullableDouble_that := that1.NullableDouble
+	if len(NullableDouble_this) != len(NullableDouble_that) {
+		if len(NullableDouble_this) < len(NullableDouble_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NullableDouble {
-		if c := this.NullableDouble[i].Compare(that1.NullableDouble[i]); c != 0 {
+	for i := range NullableDouble_this {
+		if c := NullableDouble_this[i].Compare(NullableDouble_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NonnullDouble) != len(that1.NonnullDouble) {
-		if len(this.NonnullDouble) < len(that1.NonnullDouble) {
+	NonnullDouble_this := this.NonnullDouble
+	NonnullDouble_that := that1.NonnullDouble
+	if len(NonnullDouble_this) != len(NonnullDouble_that) {
+		if len(NonnullDouble_this) < len(NonnullDouble_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NonnullDouble {
-		if c := this.NonnullDouble[i].Compare(&that1.NonnullDouble[i]); c != 0 {
+	for i := range NonnullDouble_this {
+		if c := NonnullDouble_that[i].Compare(&NonnullDouble_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NullableFloat) != len(that1.NullableFloat) {
-		if len(this.NullableFloat) < len(that1.NullableFloat) {
+	NullableFloat_this := this.NullableFloat
+	NullableFloat_that := that1.NullableFloat
+	if len(NullableFloat_this) != len(NullableFloat_that) {
+		if len(NullableFloat_this) < len(NullableFloat_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NullableFloat {
-		if c := this.NullableFloat[i].Compare(that1.NullableFloat[i]); c != 0 {
+	for i := range NullableFloat_this {
+		if c := NullableFloat_this[i].Compare(NullableFloat_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NonnullFloat) != len(that1.NonnullFloat) {
-		if len(this.NonnullFloat) < len(that1.NonnullFloat) {
+	NonnullFloat_this := this.NonnullFloat
+	NonnullFloat_that := that1.NonnullFloat
+	if len(NonnullFloat_this) != len(NonnullFloat_that) {
+		if len(NonnullFloat_this) < len(NonnullFloat_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NonnullFloat {
-		if c := this.NonnullFloat[i].Compare(&that1.NonnullFloat[i]); c != 0 {
+	for i := range NonnullFloat_this {
+		if c := NonnullFloat_that[i].Compare(&NonnullFloat_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NullableInt64) != len(that1.NullableInt64) {
-		if len(this.NullableInt64) < len(that1.NullableInt64) {
+	NullableInt64_this := this.NullableInt64
+	NullableInt64_that := that1.NullableInt64
+	if len(NullableInt64_this) != len(NullableInt64_that) {
+		if len(NullableInt64_this) < len(NullableInt64_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NullableInt64 {
-		if c := this.NullableInt64[i].Compare(that1.NullableInt64[i]); c != 0 {
+	for i := range NullableInt64_this {
+		if c := NullableInt64_this[i].Compare(NullableInt64_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NonnullInt64) != len(that1.NonnullInt64) {
-		if len(this.NonnullInt64) < len(that1.NonnullInt64) {
+	NonnullInt64_this := this.NonnullInt64
+	NonnullInt64_that := that1.NonnullInt64
+	if len(NonnullInt64_this) != len(NonnullInt64_that) {
+		if len(NonnullInt64_this) < len(NonnullInt64_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NonnullInt64 {
-		if c := this.NonnullInt64[i].Compare(&that1.NonnullInt64[i]); c != 0 {
+	for i := range NonnullInt64_this {
+		if c := NonnullInt64_that[i].Compare(&NonnullInt64_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NullableUInt64) != len(that1.NullableUInt64) {
-		if len(this.NullableUInt64) < len(that1.NullableUInt64) {
+	NullableUInt64_this := this.NullableUInt64
+	NullableUInt64_that := that1.NullableUInt64
+	if len(NullableUInt64_this) != len(NullableUInt64_that) {
+		if len(NullableUInt64_this) < len(NullableUInt64_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NullableUInt64 {
-		if c := this.NullableUInt64[i].Compare(that1.NullableUInt64[i]); c != 0 {
+	for i := range NullableUInt64_this {
+		if c := NullableUInt64_this[i].Compare(NullableUInt64_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NonnullUInt64) != len(that1.NonnullUInt64) {
-		if len(this.NonnullUInt64) < len(that1.NonnullUInt64) {
+	NonnullUInt64_this := this.NonnullUInt64
+	NonnullUInt64_that := that1.NonnullUInt64
+	if len(NonnullUInt64_this) != len(NonnullUInt64_that) {
+		if len(NonnullUInt64_this) < len(NonnullUInt64_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NonnullUInt64 {
-		if c := this.NonnullUInt64[i].Compare(&that1.NonnullUInt64[i]); c != 0 {
+	for i := range NonnullUInt64_this {
+		if c := NonnullUInt64_that[i].Compare(&NonnullUInt64_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NullableInt32) != len(that1.NullableInt32) {
-		if len(this.NullableInt32) < len(that1.NullableInt32) {
+	NullableInt32_this := this.NullableInt32
+	NullableInt32_that := that1.NullableInt32
+	if len(NullableInt32_this) != len(NullableInt32_that) {
+		if len(NullableInt32_this) < len(NullableInt32_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NullableInt32 {
-		if c := this.NullableInt32[i].Compare(that1.NullableInt32[i]); c != 0 {
+	for i := range NullableInt32_this {
+		if c := NullableInt32_this[i].Compare(NullableInt32_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NonnullInt32) != len(that1.NonnullInt32) {
-		if len(this.NonnullInt32) < len(that1.NonnullInt32) {
+	NonnullInt32_this := this.NonnullInt32
+	NonnullInt32_that := that1.NonnullInt32
+	if len(NonnullInt32_this) != len(NonnullInt32_that) {
+		if len(NonnullInt32_this) < len(NonnullInt32_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NonnullInt32 {
-		if c := this.NonnullInt32[i].Compare(&that1.NonnullInt32[i]); c != 0 {
+	for i := range NonnullInt32_this {
+		if c := NonnullInt32_that[i].Compare(&NonnullInt32_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NullableUInt32) != len(that1.NullableUInt32) {
-		if len(this.NullableUInt32) < len(that1.NullableUInt32) {
+	NullableUInt32_this := this.NullableUInt32
+	NullableUInt32_that := that1.NullableUInt32
+	if len(NullableUInt32_this) != len(NullableUInt32_that) {
+		if len(NullableUInt32_this) < len(NullableUInt32_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NullableUInt32 {
-		if c := this.NullableUInt32[i].Compare(that1.NullableUInt32[i]); c != 0 {
+	for i := range NullableUInt32_this {
+		if c := NullableUInt32_this[i].Compare(NullableUInt32_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NonnullUInt32) != len(that1.NonnullUInt32) {
-		if len(this.NonnullUInt32) < len(that1.NonnullUInt32) {
+	NonnullUInt32_this := this.NonnullUInt32
+	NonnullUInt32_that := that1.NonnullUInt32
+	if len(NonnullUInt32_this) != len(NonnullUInt32_that) {
+		if len(NonnullUInt32_this) < len(NonnullUInt32_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NonnullUInt32 {
-		if c := this.NonnullUInt32[i].Compare(&that1.NonnullUInt32[i]); c != 0 {
+	for i := range NonnullUInt32_this {
+		if c := NonnullUInt32_that[i].Compare(&NonnullUInt32_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NullableBool) != len(that1.NullableBool) {
-		if len(this.NullableBool) < len(that1.NullableBool) {
+	NullableBool_this := this.NullableBool
+	NullableBool_that := that1.NullableBool
+	if len(NullableBool_this) != len(NullableBool_that) {
+		if len(NullableBool_this) < len(NullableBool_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NullableBool {
-		if c := this.NullableBool[i].Compare(that1.NullableBool[i]); c != 0 {
+	for i := range NullableBool_this {
+		if c := NullableBool_this[i].Compare(NullableBool_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NonnullBool) != len(that1.NonnullBool) {
-		if len(this.NonnullBool) < len(that1.NonnullBool) {
+	NonnullBool_this := this.NonnullBool
+	NonnullBool_that := that1.NonnullBool
+	if len(NonnullBool_this) != len(NonnullBool_that) {
+		if len(NonnullBool_this) < len(NonnullBool_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NonnullBool {
-		if c := this.NonnullBool[i].Compare(&that1.NonnullBool[i]); c != 0 {
+	for i := range NonnullBool_this {
+		if c := NonnullBool_that[i].Compare(&NonnullBool_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NullableString) != len(that1.NullableString) {
-		if len(this.NullableString) < len(that1.NullableString) {
+	NullableString_this := this.NullableString
+	NullableString_that := that1.NullableString
+	if len(NullableString_this) != len(NullableString_that) {
+		if len(NullableString_this) < len(NullableString_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NullableString {
-		if c := this.NullableString[i].Compare(that1.NullableString[i]); c != 0 {
+	for i := range NullableString_this {
+		if c := NullableString_this[i].Compare(NullableString_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NonnullString) != len(that1.NonnullString) {
-		if len(this.NonnullString) < len(that1.NonnullString) {
+	NonnullString_this := this.NonnullString
+	NonnullString_that := that1.NonnullString
+	if len(NonnullString_this) != len(NonnullString_that) {
+		if len(NonnullString_this) < len(NonnullString_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NonnullString {
-		if c := this.NonnullString[i].Compare(&that1.NonnullString[i]); c != 0 {
+	for i := range NonnullString_this {
+		if c := NonnullString_that[i].Compare(&NonnullString_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NullableBytes) != len(that1.NullableBytes) {
-		if len(this.NullableBytes) < len(that1.NullableBytes) {
+	NullableBytes_this := this.NullableBytes
+	NullableBytes_that := that1.NullableBytes
+	if len(NullableBytes_this) != len(NullableBytes_that) {
+		if len(NullableBytes_this) < len(NullableBytes_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NullableBytes {
-		if c := this.NullableBytes[i].Compare(that1.NullableBytes[i]); c != 0 {
+	for i := range NullableBytes_this {
+		if c := NullableBytes_this[i].Compare(NullableBytes_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.NonnullBytes) != len(that1.NonnullBytes) {
-		if len(this.NonnullBytes) < len(that1.NonnullBytes) {
+	NonnullBytes_this := this.NonnullBytes
+	NonnullBytes_that := that1.NonnullBytes
+	if len(NonnullBytes_this) != len(NonnullBytes_that) {
+		if len(NonnullBytes_this) < len(NonnullBytes_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.NonnullBytes {
-		if c := this.NonnullBytes[i].Compare(&that1.NonnullBytes[i]); c != 0 {
+	for i := range NonnullBytes_this {
+		if c := NonnullBytes_that[i].Compare(&NonnullBytes_that[i]); c != 0 {
 			return c
 		}
 	}

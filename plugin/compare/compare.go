@@ -29,6 +29,7 @@
 package compare
 
 import (
+	"fmt"
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
@@ -258,9 +259,13 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 			}
 		}
 	} else {
-		p.P(`if len(this.`, fieldname, `) != len(that1.`, fieldname, `) {`)
+		fieldthis := fmt.Sprintf("%s_this", fieldname)
+		fieldthat := fmt.Sprintf("%s_that", fieldname)
+		p.P(fieldthis, ` := this.`, fieldname)
+		p.P(fieldthat, ` := that1.`, fieldname)
+		p.P(`if len(`, fieldthis, `) != len(`, fieldthat, `) {`)
 		p.In()
-		p.P(`if len(this.`, fieldname, `) < len(that1.`, fieldname, `) {`)
+		p.P(`if len(`, fieldthis, `) < len(`, fieldthat, `) {`)
 		p.In()
 		p.P(`return -1`)
 		p.Out()
@@ -268,10 +273,10 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 		p.P(`return 1`)
 		p.Out()
 		p.P(`}`)
-		p.P(`for i := range this.`, fieldname, ` {`)
+		p.P(`for i := range `, fieldthis, ` {`)
 		p.In()
 		if ctype {
-			p.P(`if c := this.`, fieldname, `[i].Compare(that1.`, fieldname, `[i]); c != 0 {`)
+			p.P(`if c := `, fieldthis, `[i].Compare(`, fieldthat, `[i]); c != 0 {`)
 			p.In()
 			p.P(`return c`)
 			p.Out()
@@ -286,11 +291,11 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 				mapValue := m.ValueAliasField
 				if mapValue.IsMessage() || p.IsGroup(mapValue) {
 					if nullable && valuegoTyp == valuegoAliasTyp {
-						p.P(`if c := this.`, fieldname, `[i].Compare(that1.`, fieldname, `[i]); c != 0 {`)
+						p.P(`if c := `, fieldthis, `[i].Compare(`, fieldthat, `[i]); c != 0 {`)
 					} else {
 						// Compare() has a pointer receiver, but map value is a value type
-						a := `this.` + fieldname + `[i]`
-						b := `that1.` + fieldname + `[i]`
+						a := fieldthis + `[i]`
+						b := fieldthat + `[i]`
 						if valuegoTyp != valuegoAliasTyp {
 							// cast back to the type that has the generated methods on it
 							a = `(` + valuegoTyp + `)(` + a + `)`
@@ -309,15 +314,15 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 					p.Out()
 					p.P(`}`)
 				} else if mapValue.IsBytes() {
-					p.P(`if c := `, p.bytesPkg.Use(), `.Compare(this.`, fieldname, `[i], that1.`, fieldname, `[i]); c != 0 {`)
+					p.P(`if c := `, p.bytesPkg.Use(), `.Compare(`, fieldthis, `[i], `, fieldthat, `[i]); c != 0 {`)
 					p.In()
 					p.P(`return c`)
 					p.Out()
 					p.P(`}`)
 				} else if mapValue.IsString() {
-					p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+					p.P(`if `, fieldthis, `[i] != `, fieldthat, `[i] {`)
 					p.In()
-					p.P(`if this.`, fieldname, `[i] < that1.`, fieldname, `[i] {`)
+					p.P(`if `, fieldthis, `[i] < `, fieldthat, `[i] {`)
 					p.In()
 					p.P(`return -1`)
 					p.Out()
@@ -326,9 +331,9 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 					p.Out()
 					p.P(`}`)
 				} else {
-					p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+					p.P(`if `, fieldthis, `[i] != `, fieldthat, `[i] {`)
 					p.In()
-					p.P(`if this.`, fieldname, `[i] < that1.`, fieldname, `[i] {`)
+					p.P(`if `, fieldthis, `[i] < `, fieldthat, `[i] {`)
 					p.In()
 					p.P(`return -1`)
 					p.Out()
@@ -339,28 +344,28 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 				}
 			} else if field.IsMessage() || p.IsGroup(field) {
 				if nullable {
-					p.P(`if c := this.`, fieldname, `[i].Compare(that1.`, fieldname, `[i]); c != 0 {`)
+					p.P(`if c := `, fieldthis, `[i].Compare(`, fieldthat, `[i]); c != 0 {`)
 					p.In()
 					p.P(`return c`)
 					p.Out()
 					p.P(`}`)
 				} else {
-					p.P(`if c := this.`, fieldname, `[i].Compare(&that1.`, fieldname, `[i]); c != 0 {`)
+					p.P(`if c := `, fieldthat, `[i].Compare(&`, fieldthat, `[i]); c != 0 {`)
 					p.In()
 					p.P(`return c`)
 					p.Out()
 					p.P(`}`)
 				}
 			} else if field.IsBytes() {
-				p.P(`if c := `, p.bytesPkg.Use(), `.Compare(this.`, fieldname, `[i], that1.`, fieldname, `[i]); c != 0 {`)
+				p.P(`if c := `, p.bytesPkg.Use(), `.Compare(`, fieldthis, `[i], `, fieldthat, `[i]); c != 0 {`)
 				p.In()
 				p.P(`return c`)
 				p.Out()
 				p.P(`}`)
 			} else if field.IsString() {
-				p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+				p.P(`if `, fieldthis, `[i] != `, fieldthat, `[i] {`)
 				p.In()
-				p.P(`if this.`, fieldname, `[i] < that1.`, fieldname, `[i] {`)
+				p.P(`if `, fieldthis, `[i] < `, fieldthat, `[i] {`)
 				p.In()
 				p.P(`return -1`)
 				p.Out()
@@ -369,9 +374,9 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 				p.Out()
 				p.P(`}`)
 			} else if field.IsBool() {
-				p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+				p.P(`if `, fieldthis, `[i] != `, fieldthat, `[i] {`)
 				p.In()
-				p.P(`if !this.`, fieldname, `[i] {`)
+				p.P(`if !`, fieldthis, `[i] {`)
 				p.In()
 				p.P(`return -1`)
 				p.Out()
@@ -380,9 +385,9 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 				p.Out()
 				p.P(`}`)
 			} else {
-				p.P(`if this.`, fieldname, `[i] != that1.`, fieldname, `[i] {`)
+				p.P(`if `, fieldthis, `[i] != `, fieldthat, `[i] {`)
 				p.In()
-				p.P(`if this.`, fieldname, `[i] < that1.`, fieldname, `[i] {`)
+				p.P(`if `, fieldthis, `[i] < `, fieldthat, `[i] {`)
 				p.In()
 				p.P(`return -1`)
 				p.Out()

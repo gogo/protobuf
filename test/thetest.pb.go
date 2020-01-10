@@ -3463,210 +3463,240 @@ func (this *NidRepNative) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.Field1) != len(that1.Field1) {
-		if len(this.Field1) < len(that1.Field1) {
+	Field1_this := this.Field1
+	Field1_that := that1.Field1
+	if len(Field1_this) != len(Field1_that) {
+		if len(Field1_this) < len(Field1_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field1 {
-		if this.Field1[i] != that1.Field1[i] {
-			if this.Field1[i] < that1.Field1[i] {
+	for i := range Field1_this {
+		if Field1_this[i] != Field1_that[i] {
+			if Field1_this[i] < Field1_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field2) != len(that1.Field2) {
-		if len(this.Field2) < len(that1.Field2) {
+	Field2_this := this.Field2
+	Field2_that := that1.Field2
+	if len(Field2_this) != len(Field2_that) {
+		if len(Field2_this) < len(Field2_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			if this.Field2[i] < that1.Field2[i] {
+	for i := range Field2_this {
+		if Field2_this[i] != Field2_that[i] {
+			if Field2_this[i] < Field2_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field3) != len(that1.Field3) {
-		if len(this.Field3) < len(that1.Field3) {
+	Field3_this := this.Field3
+	Field3_that := that1.Field3
+	if len(Field3_this) != len(Field3_that) {
+		if len(Field3_this) < len(Field3_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field3 {
-		if this.Field3[i] != that1.Field3[i] {
-			if this.Field3[i] < that1.Field3[i] {
+	for i := range Field3_this {
+		if Field3_this[i] != Field3_that[i] {
+			if Field3_this[i] < Field3_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field4) != len(that1.Field4) {
-		if len(this.Field4) < len(that1.Field4) {
+	Field4_this := this.Field4
+	Field4_that := that1.Field4
+	if len(Field4_this) != len(Field4_that) {
+		if len(Field4_this) < len(Field4_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field4 {
-		if this.Field4[i] != that1.Field4[i] {
-			if this.Field4[i] < that1.Field4[i] {
+	for i := range Field4_this {
+		if Field4_this[i] != Field4_that[i] {
+			if Field4_this[i] < Field4_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field5) != len(that1.Field5) {
-		if len(this.Field5) < len(that1.Field5) {
+	Field5_this := this.Field5
+	Field5_that := that1.Field5
+	if len(Field5_this) != len(Field5_that) {
+		if len(Field5_this) < len(Field5_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field5 {
-		if this.Field5[i] != that1.Field5[i] {
-			if this.Field5[i] < that1.Field5[i] {
+	for i := range Field5_this {
+		if Field5_this[i] != Field5_that[i] {
+			if Field5_this[i] < Field5_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field6) != len(that1.Field6) {
-		if len(this.Field6) < len(that1.Field6) {
+	Field6_this := this.Field6
+	Field6_that := that1.Field6
+	if len(Field6_this) != len(Field6_that) {
+		if len(Field6_this) < len(Field6_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field6 {
-		if this.Field6[i] != that1.Field6[i] {
-			if this.Field6[i] < that1.Field6[i] {
+	for i := range Field6_this {
+		if Field6_this[i] != Field6_that[i] {
+			if Field6_this[i] < Field6_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field7) != len(that1.Field7) {
-		if len(this.Field7) < len(that1.Field7) {
+	Field7_this := this.Field7
+	Field7_that := that1.Field7
+	if len(Field7_this) != len(Field7_that) {
+		if len(Field7_this) < len(Field7_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field7 {
-		if this.Field7[i] != that1.Field7[i] {
-			if this.Field7[i] < that1.Field7[i] {
+	for i := range Field7_this {
+		if Field7_this[i] != Field7_that[i] {
+			if Field7_this[i] < Field7_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field8) != len(that1.Field8) {
-		if len(this.Field8) < len(that1.Field8) {
+	Field8_this := this.Field8
+	Field8_that := that1.Field8
+	if len(Field8_this) != len(Field8_that) {
+		if len(Field8_this) < len(Field8_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field8 {
-		if this.Field8[i] != that1.Field8[i] {
-			if this.Field8[i] < that1.Field8[i] {
+	for i := range Field8_this {
+		if Field8_this[i] != Field8_that[i] {
+			if Field8_this[i] < Field8_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field9) != len(that1.Field9) {
-		if len(this.Field9) < len(that1.Field9) {
+	Field9_this := this.Field9
+	Field9_that := that1.Field9
+	if len(Field9_this) != len(Field9_that) {
+		if len(Field9_this) < len(Field9_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field9 {
-		if this.Field9[i] != that1.Field9[i] {
-			if this.Field9[i] < that1.Field9[i] {
+	for i := range Field9_this {
+		if Field9_this[i] != Field9_that[i] {
+			if Field9_this[i] < Field9_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field10) != len(that1.Field10) {
-		if len(this.Field10) < len(that1.Field10) {
+	Field10_this := this.Field10
+	Field10_that := that1.Field10
+	if len(Field10_this) != len(Field10_that) {
+		if len(Field10_this) < len(Field10_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field10 {
-		if this.Field10[i] != that1.Field10[i] {
-			if this.Field10[i] < that1.Field10[i] {
+	for i := range Field10_this {
+		if Field10_this[i] != Field10_that[i] {
+			if Field10_this[i] < Field10_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field11) != len(that1.Field11) {
-		if len(this.Field11) < len(that1.Field11) {
+	Field11_this := this.Field11
+	Field11_that := that1.Field11
+	if len(Field11_this) != len(Field11_that) {
+		if len(Field11_this) < len(Field11_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field11 {
-		if this.Field11[i] != that1.Field11[i] {
-			if this.Field11[i] < that1.Field11[i] {
+	for i := range Field11_this {
+		if Field11_this[i] != Field11_that[i] {
+			if Field11_this[i] < Field11_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field12) != len(that1.Field12) {
-		if len(this.Field12) < len(that1.Field12) {
+	Field12_this := this.Field12
+	Field12_that := that1.Field12
+	if len(Field12_this) != len(Field12_that) {
+		if len(Field12_this) < len(Field12_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field12 {
-		if this.Field12[i] != that1.Field12[i] {
-			if this.Field12[i] < that1.Field12[i] {
+	for i := range Field12_this {
+		if Field12_this[i] != Field12_that[i] {
+			if Field12_this[i] < Field12_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field13) != len(that1.Field13) {
-		if len(this.Field13) < len(that1.Field13) {
+	Field13_this := this.Field13
+	Field13_that := that1.Field13
+	if len(Field13_this) != len(Field13_that) {
+		if len(Field13_this) < len(Field13_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field13 {
-		if this.Field13[i] != that1.Field13[i] {
-			if !this.Field13[i] {
+	for i := range Field13_this {
+		if Field13_this[i] != Field13_that[i] {
+			if !Field13_this[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field14) != len(that1.Field14) {
-		if len(this.Field14) < len(that1.Field14) {
+	Field14_this := this.Field14
+	Field14_that := that1.Field14
+	if len(Field14_this) != len(Field14_that) {
+		if len(Field14_this) < len(Field14_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field14 {
-		if this.Field14[i] != that1.Field14[i] {
-			if this.Field14[i] < that1.Field14[i] {
+	for i := range Field14_this {
+		if Field14_this[i] != Field14_that[i] {
+			if Field14_this[i] < Field14_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field15) != len(that1.Field15) {
-		if len(this.Field15) < len(that1.Field15) {
+	Field15_this := this.Field15
+	Field15_that := that1.Field15
+	if len(Field15_this) != len(Field15_that) {
+		if len(Field15_this) < len(Field15_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field15 {
-		if c := bytes.Compare(this.Field15[i], that1.Field15[i]); c != 0 {
+	for i := range Field15_this {
+		if c := bytes.Compare(Field15_this[i], Field15_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -3700,210 +3730,240 @@ func (this *NinRepNative) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.Field1) != len(that1.Field1) {
-		if len(this.Field1) < len(that1.Field1) {
+	Field1_this := this.Field1
+	Field1_that := that1.Field1
+	if len(Field1_this) != len(Field1_that) {
+		if len(Field1_this) < len(Field1_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field1 {
-		if this.Field1[i] != that1.Field1[i] {
-			if this.Field1[i] < that1.Field1[i] {
+	for i := range Field1_this {
+		if Field1_this[i] != Field1_that[i] {
+			if Field1_this[i] < Field1_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field2) != len(that1.Field2) {
-		if len(this.Field2) < len(that1.Field2) {
+	Field2_this := this.Field2
+	Field2_that := that1.Field2
+	if len(Field2_this) != len(Field2_that) {
+		if len(Field2_this) < len(Field2_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			if this.Field2[i] < that1.Field2[i] {
+	for i := range Field2_this {
+		if Field2_this[i] != Field2_that[i] {
+			if Field2_this[i] < Field2_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field3) != len(that1.Field3) {
-		if len(this.Field3) < len(that1.Field3) {
+	Field3_this := this.Field3
+	Field3_that := that1.Field3
+	if len(Field3_this) != len(Field3_that) {
+		if len(Field3_this) < len(Field3_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field3 {
-		if this.Field3[i] != that1.Field3[i] {
-			if this.Field3[i] < that1.Field3[i] {
+	for i := range Field3_this {
+		if Field3_this[i] != Field3_that[i] {
+			if Field3_this[i] < Field3_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field4) != len(that1.Field4) {
-		if len(this.Field4) < len(that1.Field4) {
+	Field4_this := this.Field4
+	Field4_that := that1.Field4
+	if len(Field4_this) != len(Field4_that) {
+		if len(Field4_this) < len(Field4_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field4 {
-		if this.Field4[i] != that1.Field4[i] {
-			if this.Field4[i] < that1.Field4[i] {
+	for i := range Field4_this {
+		if Field4_this[i] != Field4_that[i] {
+			if Field4_this[i] < Field4_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field5) != len(that1.Field5) {
-		if len(this.Field5) < len(that1.Field5) {
+	Field5_this := this.Field5
+	Field5_that := that1.Field5
+	if len(Field5_this) != len(Field5_that) {
+		if len(Field5_this) < len(Field5_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field5 {
-		if this.Field5[i] != that1.Field5[i] {
-			if this.Field5[i] < that1.Field5[i] {
+	for i := range Field5_this {
+		if Field5_this[i] != Field5_that[i] {
+			if Field5_this[i] < Field5_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field6) != len(that1.Field6) {
-		if len(this.Field6) < len(that1.Field6) {
+	Field6_this := this.Field6
+	Field6_that := that1.Field6
+	if len(Field6_this) != len(Field6_that) {
+		if len(Field6_this) < len(Field6_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field6 {
-		if this.Field6[i] != that1.Field6[i] {
-			if this.Field6[i] < that1.Field6[i] {
+	for i := range Field6_this {
+		if Field6_this[i] != Field6_that[i] {
+			if Field6_this[i] < Field6_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field7) != len(that1.Field7) {
-		if len(this.Field7) < len(that1.Field7) {
+	Field7_this := this.Field7
+	Field7_that := that1.Field7
+	if len(Field7_this) != len(Field7_that) {
+		if len(Field7_this) < len(Field7_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field7 {
-		if this.Field7[i] != that1.Field7[i] {
-			if this.Field7[i] < that1.Field7[i] {
+	for i := range Field7_this {
+		if Field7_this[i] != Field7_that[i] {
+			if Field7_this[i] < Field7_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field8) != len(that1.Field8) {
-		if len(this.Field8) < len(that1.Field8) {
+	Field8_this := this.Field8
+	Field8_that := that1.Field8
+	if len(Field8_this) != len(Field8_that) {
+		if len(Field8_this) < len(Field8_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field8 {
-		if this.Field8[i] != that1.Field8[i] {
-			if this.Field8[i] < that1.Field8[i] {
+	for i := range Field8_this {
+		if Field8_this[i] != Field8_that[i] {
+			if Field8_this[i] < Field8_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field9) != len(that1.Field9) {
-		if len(this.Field9) < len(that1.Field9) {
+	Field9_this := this.Field9
+	Field9_that := that1.Field9
+	if len(Field9_this) != len(Field9_that) {
+		if len(Field9_this) < len(Field9_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field9 {
-		if this.Field9[i] != that1.Field9[i] {
-			if this.Field9[i] < that1.Field9[i] {
+	for i := range Field9_this {
+		if Field9_this[i] != Field9_that[i] {
+			if Field9_this[i] < Field9_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field10) != len(that1.Field10) {
-		if len(this.Field10) < len(that1.Field10) {
+	Field10_this := this.Field10
+	Field10_that := that1.Field10
+	if len(Field10_this) != len(Field10_that) {
+		if len(Field10_this) < len(Field10_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field10 {
-		if this.Field10[i] != that1.Field10[i] {
-			if this.Field10[i] < that1.Field10[i] {
+	for i := range Field10_this {
+		if Field10_this[i] != Field10_that[i] {
+			if Field10_this[i] < Field10_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field11) != len(that1.Field11) {
-		if len(this.Field11) < len(that1.Field11) {
+	Field11_this := this.Field11
+	Field11_that := that1.Field11
+	if len(Field11_this) != len(Field11_that) {
+		if len(Field11_this) < len(Field11_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field11 {
-		if this.Field11[i] != that1.Field11[i] {
-			if this.Field11[i] < that1.Field11[i] {
+	for i := range Field11_this {
+		if Field11_this[i] != Field11_that[i] {
+			if Field11_this[i] < Field11_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field12) != len(that1.Field12) {
-		if len(this.Field12) < len(that1.Field12) {
+	Field12_this := this.Field12
+	Field12_that := that1.Field12
+	if len(Field12_this) != len(Field12_that) {
+		if len(Field12_this) < len(Field12_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field12 {
-		if this.Field12[i] != that1.Field12[i] {
-			if this.Field12[i] < that1.Field12[i] {
+	for i := range Field12_this {
+		if Field12_this[i] != Field12_that[i] {
+			if Field12_this[i] < Field12_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field13) != len(that1.Field13) {
-		if len(this.Field13) < len(that1.Field13) {
+	Field13_this := this.Field13
+	Field13_that := that1.Field13
+	if len(Field13_this) != len(Field13_that) {
+		if len(Field13_this) < len(Field13_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field13 {
-		if this.Field13[i] != that1.Field13[i] {
-			if !this.Field13[i] {
+	for i := range Field13_this {
+		if Field13_this[i] != Field13_that[i] {
+			if !Field13_this[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field14) != len(that1.Field14) {
-		if len(this.Field14) < len(that1.Field14) {
+	Field14_this := this.Field14
+	Field14_that := that1.Field14
+	if len(Field14_this) != len(Field14_that) {
+		if len(Field14_this) < len(Field14_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field14 {
-		if this.Field14[i] != that1.Field14[i] {
-			if this.Field14[i] < that1.Field14[i] {
+	for i := range Field14_this {
+		if Field14_this[i] != Field14_that[i] {
+			if Field14_this[i] < Field14_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field15) != len(that1.Field15) {
-		if len(this.Field15) < len(that1.Field15) {
+	Field15_this := this.Field15
+	Field15_that := that1.Field15
+	if len(Field15_this) != len(Field15_that) {
+		if len(Field15_this) < len(Field15_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field15 {
-		if c := bytes.Compare(this.Field15[i], that1.Field15[i]); c != 0 {
+	for i := range Field15_this {
+		if c := bytes.Compare(Field15_this[i], Field15_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -3937,183 +3997,209 @@ func (this *NidRepPackedNative) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.Field1) != len(that1.Field1) {
-		if len(this.Field1) < len(that1.Field1) {
+	Field1_this := this.Field1
+	Field1_that := that1.Field1
+	if len(Field1_this) != len(Field1_that) {
+		if len(Field1_this) < len(Field1_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field1 {
-		if this.Field1[i] != that1.Field1[i] {
-			if this.Field1[i] < that1.Field1[i] {
+	for i := range Field1_this {
+		if Field1_this[i] != Field1_that[i] {
+			if Field1_this[i] < Field1_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field2) != len(that1.Field2) {
-		if len(this.Field2) < len(that1.Field2) {
+	Field2_this := this.Field2
+	Field2_that := that1.Field2
+	if len(Field2_this) != len(Field2_that) {
+		if len(Field2_this) < len(Field2_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			if this.Field2[i] < that1.Field2[i] {
+	for i := range Field2_this {
+		if Field2_this[i] != Field2_that[i] {
+			if Field2_this[i] < Field2_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field3) != len(that1.Field3) {
-		if len(this.Field3) < len(that1.Field3) {
+	Field3_this := this.Field3
+	Field3_that := that1.Field3
+	if len(Field3_this) != len(Field3_that) {
+		if len(Field3_this) < len(Field3_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field3 {
-		if this.Field3[i] != that1.Field3[i] {
-			if this.Field3[i] < that1.Field3[i] {
+	for i := range Field3_this {
+		if Field3_this[i] != Field3_that[i] {
+			if Field3_this[i] < Field3_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field4) != len(that1.Field4) {
-		if len(this.Field4) < len(that1.Field4) {
+	Field4_this := this.Field4
+	Field4_that := that1.Field4
+	if len(Field4_this) != len(Field4_that) {
+		if len(Field4_this) < len(Field4_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field4 {
-		if this.Field4[i] != that1.Field4[i] {
-			if this.Field4[i] < that1.Field4[i] {
+	for i := range Field4_this {
+		if Field4_this[i] != Field4_that[i] {
+			if Field4_this[i] < Field4_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field5) != len(that1.Field5) {
-		if len(this.Field5) < len(that1.Field5) {
+	Field5_this := this.Field5
+	Field5_that := that1.Field5
+	if len(Field5_this) != len(Field5_that) {
+		if len(Field5_this) < len(Field5_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field5 {
-		if this.Field5[i] != that1.Field5[i] {
-			if this.Field5[i] < that1.Field5[i] {
+	for i := range Field5_this {
+		if Field5_this[i] != Field5_that[i] {
+			if Field5_this[i] < Field5_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field6) != len(that1.Field6) {
-		if len(this.Field6) < len(that1.Field6) {
+	Field6_this := this.Field6
+	Field6_that := that1.Field6
+	if len(Field6_this) != len(Field6_that) {
+		if len(Field6_this) < len(Field6_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field6 {
-		if this.Field6[i] != that1.Field6[i] {
-			if this.Field6[i] < that1.Field6[i] {
+	for i := range Field6_this {
+		if Field6_this[i] != Field6_that[i] {
+			if Field6_this[i] < Field6_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field7) != len(that1.Field7) {
-		if len(this.Field7) < len(that1.Field7) {
+	Field7_this := this.Field7
+	Field7_that := that1.Field7
+	if len(Field7_this) != len(Field7_that) {
+		if len(Field7_this) < len(Field7_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field7 {
-		if this.Field7[i] != that1.Field7[i] {
-			if this.Field7[i] < that1.Field7[i] {
+	for i := range Field7_this {
+		if Field7_this[i] != Field7_that[i] {
+			if Field7_this[i] < Field7_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field8) != len(that1.Field8) {
-		if len(this.Field8) < len(that1.Field8) {
+	Field8_this := this.Field8
+	Field8_that := that1.Field8
+	if len(Field8_this) != len(Field8_that) {
+		if len(Field8_this) < len(Field8_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field8 {
-		if this.Field8[i] != that1.Field8[i] {
-			if this.Field8[i] < that1.Field8[i] {
+	for i := range Field8_this {
+		if Field8_this[i] != Field8_that[i] {
+			if Field8_this[i] < Field8_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field9) != len(that1.Field9) {
-		if len(this.Field9) < len(that1.Field9) {
+	Field9_this := this.Field9
+	Field9_that := that1.Field9
+	if len(Field9_this) != len(Field9_that) {
+		if len(Field9_this) < len(Field9_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field9 {
-		if this.Field9[i] != that1.Field9[i] {
-			if this.Field9[i] < that1.Field9[i] {
+	for i := range Field9_this {
+		if Field9_this[i] != Field9_that[i] {
+			if Field9_this[i] < Field9_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field10) != len(that1.Field10) {
-		if len(this.Field10) < len(that1.Field10) {
+	Field10_this := this.Field10
+	Field10_that := that1.Field10
+	if len(Field10_this) != len(Field10_that) {
+		if len(Field10_this) < len(Field10_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field10 {
-		if this.Field10[i] != that1.Field10[i] {
-			if this.Field10[i] < that1.Field10[i] {
+	for i := range Field10_this {
+		if Field10_this[i] != Field10_that[i] {
+			if Field10_this[i] < Field10_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field11) != len(that1.Field11) {
-		if len(this.Field11) < len(that1.Field11) {
+	Field11_this := this.Field11
+	Field11_that := that1.Field11
+	if len(Field11_this) != len(Field11_that) {
+		if len(Field11_this) < len(Field11_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field11 {
-		if this.Field11[i] != that1.Field11[i] {
-			if this.Field11[i] < that1.Field11[i] {
+	for i := range Field11_this {
+		if Field11_this[i] != Field11_that[i] {
+			if Field11_this[i] < Field11_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field12) != len(that1.Field12) {
-		if len(this.Field12) < len(that1.Field12) {
+	Field12_this := this.Field12
+	Field12_that := that1.Field12
+	if len(Field12_this) != len(Field12_that) {
+		if len(Field12_this) < len(Field12_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field12 {
-		if this.Field12[i] != that1.Field12[i] {
-			if this.Field12[i] < that1.Field12[i] {
+	for i := range Field12_this {
+		if Field12_this[i] != Field12_that[i] {
+			if Field12_this[i] < Field12_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field13) != len(that1.Field13) {
-		if len(this.Field13) < len(that1.Field13) {
+	Field13_this := this.Field13
+	Field13_that := that1.Field13
+	if len(Field13_this) != len(Field13_that) {
+		if len(Field13_this) < len(Field13_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field13 {
-		if this.Field13[i] != that1.Field13[i] {
-			if !this.Field13[i] {
+	for i := range Field13_this {
+		if Field13_this[i] != Field13_that[i] {
+			if !Field13_this[i] {
 				return -1
 			}
 			return 1
@@ -4149,183 +4235,209 @@ func (this *NinRepPackedNative) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.Field1) != len(that1.Field1) {
-		if len(this.Field1) < len(that1.Field1) {
+	Field1_this := this.Field1
+	Field1_that := that1.Field1
+	if len(Field1_this) != len(Field1_that) {
+		if len(Field1_this) < len(Field1_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field1 {
-		if this.Field1[i] != that1.Field1[i] {
-			if this.Field1[i] < that1.Field1[i] {
+	for i := range Field1_this {
+		if Field1_this[i] != Field1_that[i] {
+			if Field1_this[i] < Field1_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field2) != len(that1.Field2) {
-		if len(this.Field2) < len(that1.Field2) {
+	Field2_this := this.Field2
+	Field2_that := that1.Field2
+	if len(Field2_this) != len(Field2_that) {
+		if len(Field2_this) < len(Field2_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			if this.Field2[i] < that1.Field2[i] {
+	for i := range Field2_this {
+		if Field2_this[i] != Field2_that[i] {
+			if Field2_this[i] < Field2_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field3) != len(that1.Field3) {
-		if len(this.Field3) < len(that1.Field3) {
+	Field3_this := this.Field3
+	Field3_that := that1.Field3
+	if len(Field3_this) != len(Field3_that) {
+		if len(Field3_this) < len(Field3_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field3 {
-		if this.Field3[i] != that1.Field3[i] {
-			if this.Field3[i] < that1.Field3[i] {
+	for i := range Field3_this {
+		if Field3_this[i] != Field3_that[i] {
+			if Field3_this[i] < Field3_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field4) != len(that1.Field4) {
-		if len(this.Field4) < len(that1.Field4) {
+	Field4_this := this.Field4
+	Field4_that := that1.Field4
+	if len(Field4_this) != len(Field4_that) {
+		if len(Field4_this) < len(Field4_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field4 {
-		if this.Field4[i] != that1.Field4[i] {
-			if this.Field4[i] < that1.Field4[i] {
+	for i := range Field4_this {
+		if Field4_this[i] != Field4_that[i] {
+			if Field4_this[i] < Field4_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field5) != len(that1.Field5) {
-		if len(this.Field5) < len(that1.Field5) {
+	Field5_this := this.Field5
+	Field5_that := that1.Field5
+	if len(Field5_this) != len(Field5_that) {
+		if len(Field5_this) < len(Field5_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field5 {
-		if this.Field5[i] != that1.Field5[i] {
-			if this.Field5[i] < that1.Field5[i] {
+	for i := range Field5_this {
+		if Field5_this[i] != Field5_that[i] {
+			if Field5_this[i] < Field5_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field6) != len(that1.Field6) {
-		if len(this.Field6) < len(that1.Field6) {
+	Field6_this := this.Field6
+	Field6_that := that1.Field6
+	if len(Field6_this) != len(Field6_that) {
+		if len(Field6_this) < len(Field6_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field6 {
-		if this.Field6[i] != that1.Field6[i] {
-			if this.Field6[i] < that1.Field6[i] {
+	for i := range Field6_this {
+		if Field6_this[i] != Field6_that[i] {
+			if Field6_this[i] < Field6_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field7) != len(that1.Field7) {
-		if len(this.Field7) < len(that1.Field7) {
+	Field7_this := this.Field7
+	Field7_that := that1.Field7
+	if len(Field7_this) != len(Field7_that) {
+		if len(Field7_this) < len(Field7_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field7 {
-		if this.Field7[i] != that1.Field7[i] {
-			if this.Field7[i] < that1.Field7[i] {
+	for i := range Field7_this {
+		if Field7_this[i] != Field7_that[i] {
+			if Field7_this[i] < Field7_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field8) != len(that1.Field8) {
-		if len(this.Field8) < len(that1.Field8) {
+	Field8_this := this.Field8
+	Field8_that := that1.Field8
+	if len(Field8_this) != len(Field8_that) {
+		if len(Field8_this) < len(Field8_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field8 {
-		if this.Field8[i] != that1.Field8[i] {
-			if this.Field8[i] < that1.Field8[i] {
+	for i := range Field8_this {
+		if Field8_this[i] != Field8_that[i] {
+			if Field8_this[i] < Field8_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field9) != len(that1.Field9) {
-		if len(this.Field9) < len(that1.Field9) {
+	Field9_this := this.Field9
+	Field9_that := that1.Field9
+	if len(Field9_this) != len(Field9_that) {
+		if len(Field9_this) < len(Field9_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field9 {
-		if this.Field9[i] != that1.Field9[i] {
-			if this.Field9[i] < that1.Field9[i] {
+	for i := range Field9_this {
+		if Field9_this[i] != Field9_that[i] {
+			if Field9_this[i] < Field9_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field10) != len(that1.Field10) {
-		if len(this.Field10) < len(that1.Field10) {
+	Field10_this := this.Field10
+	Field10_that := that1.Field10
+	if len(Field10_this) != len(Field10_that) {
+		if len(Field10_this) < len(Field10_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field10 {
-		if this.Field10[i] != that1.Field10[i] {
-			if this.Field10[i] < that1.Field10[i] {
+	for i := range Field10_this {
+		if Field10_this[i] != Field10_that[i] {
+			if Field10_this[i] < Field10_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field11) != len(that1.Field11) {
-		if len(this.Field11) < len(that1.Field11) {
+	Field11_this := this.Field11
+	Field11_that := that1.Field11
+	if len(Field11_this) != len(Field11_that) {
+		if len(Field11_this) < len(Field11_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field11 {
-		if this.Field11[i] != that1.Field11[i] {
-			if this.Field11[i] < that1.Field11[i] {
+	for i := range Field11_this {
+		if Field11_this[i] != Field11_that[i] {
+			if Field11_this[i] < Field11_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field12) != len(that1.Field12) {
-		if len(this.Field12) < len(that1.Field12) {
+	Field12_this := this.Field12
+	Field12_that := that1.Field12
+	if len(Field12_this) != len(Field12_that) {
+		if len(Field12_this) < len(Field12_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field12 {
-		if this.Field12[i] != that1.Field12[i] {
-			if this.Field12[i] < that1.Field12[i] {
+	for i := range Field12_this {
+		if Field12_this[i] != Field12_that[i] {
+			if Field12_this[i] < Field12_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field13) != len(that1.Field13) {
-		if len(this.Field13) < len(that1.Field13) {
+	Field13_this := this.Field13
+	Field13_that := that1.Field13
+	if len(Field13_this) != len(Field13_that) {
+		if len(Field13_this) < len(Field13_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field13 {
-		if this.Field13[i] != that1.Field13[i] {
-			if !this.Field13[i] {
+	for i := range Field13_this {
+		if Field13_this[i] != Field13_that[i] {
+			if !Field13_this[i] {
 				return -1
 			}
 			return 1
@@ -4553,131 +4665,151 @@ func (this *NidRepStruct) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.Field1) != len(that1.Field1) {
-		if len(this.Field1) < len(that1.Field1) {
+	Field1_this := this.Field1
+	Field1_that := that1.Field1
+	if len(Field1_this) != len(Field1_that) {
+		if len(Field1_this) < len(Field1_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field1 {
-		if this.Field1[i] != that1.Field1[i] {
-			if this.Field1[i] < that1.Field1[i] {
+	for i := range Field1_this {
+		if Field1_this[i] != Field1_that[i] {
+			if Field1_this[i] < Field1_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field2) != len(that1.Field2) {
-		if len(this.Field2) < len(that1.Field2) {
+	Field2_this := this.Field2
+	Field2_that := that1.Field2
+	if len(Field2_this) != len(Field2_that) {
+		if len(Field2_this) < len(Field2_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			if this.Field2[i] < that1.Field2[i] {
+	for i := range Field2_this {
+		if Field2_this[i] != Field2_that[i] {
+			if Field2_this[i] < Field2_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field3) != len(that1.Field3) {
-		if len(this.Field3) < len(that1.Field3) {
+	Field3_this := this.Field3
+	Field3_that := that1.Field3
+	if len(Field3_this) != len(Field3_that) {
+		if len(Field3_this) < len(Field3_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field3 {
-		if c := this.Field3[i].Compare(&that1.Field3[i]); c != 0 {
+	for i := range Field3_this {
+		if c := Field3_that[i].Compare(&Field3_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.Field4) != len(that1.Field4) {
-		if len(this.Field4) < len(that1.Field4) {
+	Field4_this := this.Field4
+	Field4_that := that1.Field4
+	if len(Field4_this) != len(Field4_that) {
+		if len(Field4_this) < len(Field4_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field4 {
-		if c := this.Field4[i].Compare(&that1.Field4[i]); c != 0 {
+	for i := range Field4_this {
+		if c := Field4_that[i].Compare(&Field4_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.Field6) != len(that1.Field6) {
-		if len(this.Field6) < len(that1.Field6) {
+	Field6_this := this.Field6
+	Field6_that := that1.Field6
+	if len(Field6_this) != len(Field6_that) {
+		if len(Field6_this) < len(Field6_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field6 {
-		if this.Field6[i] != that1.Field6[i] {
-			if this.Field6[i] < that1.Field6[i] {
+	for i := range Field6_this {
+		if Field6_this[i] != Field6_that[i] {
+			if Field6_this[i] < Field6_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field7) != len(that1.Field7) {
-		if len(this.Field7) < len(that1.Field7) {
+	Field7_this := this.Field7
+	Field7_that := that1.Field7
+	if len(Field7_this) != len(Field7_that) {
+		if len(Field7_this) < len(Field7_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field7 {
-		if this.Field7[i] != that1.Field7[i] {
-			if this.Field7[i] < that1.Field7[i] {
+	for i := range Field7_this {
+		if Field7_this[i] != Field7_that[i] {
+			if Field7_this[i] < Field7_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field8) != len(that1.Field8) {
-		if len(this.Field8) < len(that1.Field8) {
+	Field8_this := this.Field8
+	Field8_that := that1.Field8
+	if len(Field8_this) != len(Field8_that) {
+		if len(Field8_this) < len(Field8_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field8 {
-		if c := this.Field8[i].Compare(&that1.Field8[i]); c != 0 {
+	for i := range Field8_this {
+		if c := Field8_that[i].Compare(&Field8_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.Field13) != len(that1.Field13) {
-		if len(this.Field13) < len(that1.Field13) {
+	Field13_this := this.Field13
+	Field13_that := that1.Field13
+	if len(Field13_this) != len(Field13_that) {
+		if len(Field13_this) < len(Field13_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field13 {
-		if this.Field13[i] != that1.Field13[i] {
-			if !this.Field13[i] {
+	for i := range Field13_this {
+		if Field13_this[i] != Field13_that[i] {
+			if !Field13_this[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field14) != len(that1.Field14) {
-		if len(this.Field14) < len(that1.Field14) {
+	Field14_this := this.Field14
+	Field14_that := that1.Field14
+	if len(Field14_this) != len(Field14_that) {
+		if len(Field14_this) < len(Field14_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field14 {
-		if this.Field14[i] != that1.Field14[i] {
-			if this.Field14[i] < that1.Field14[i] {
+	for i := range Field14_this {
+		if Field14_this[i] != Field14_that[i] {
+			if Field14_this[i] < Field14_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field15) != len(that1.Field15) {
-		if len(this.Field15) < len(that1.Field15) {
+	Field15_this := this.Field15
+	Field15_that := that1.Field15
+	if len(Field15_this) != len(Field15_that) {
+		if len(Field15_this) < len(Field15_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field15 {
-		if c := bytes.Compare(this.Field15[i], that1.Field15[i]); c != 0 {
+	for i := range Field15_this {
+		if c := bytes.Compare(Field15_this[i], Field15_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -4711,131 +4843,151 @@ func (this *NinRepStruct) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.Field1) != len(that1.Field1) {
-		if len(this.Field1) < len(that1.Field1) {
+	Field1_this := this.Field1
+	Field1_that := that1.Field1
+	if len(Field1_this) != len(Field1_that) {
+		if len(Field1_this) < len(Field1_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field1 {
-		if this.Field1[i] != that1.Field1[i] {
-			if this.Field1[i] < that1.Field1[i] {
+	for i := range Field1_this {
+		if Field1_this[i] != Field1_that[i] {
+			if Field1_this[i] < Field1_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field2) != len(that1.Field2) {
-		if len(this.Field2) < len(that1.Field2) {
+	Field2_this := this.Field2
+	Field2_that := that1.Field2
+	if len(Field2_this) != len(Field2_that) {
+		if len(Field2_this) < len(Field2_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			if this.Field2[i] < that1.Field2[i] {
+	for i := range Field2_this {
+		if Field2_this[i] != Field2_that[i] {
+			if Field2_this[i] < Field2_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field3) != len(that1.Field3) {
-		if len(this.Field3) < len(that1.Field3) {
+	Field3_this := this.Field3
+	Field3_that := that1.Field3
+	if len(Field3_this) != len(Field3_that) {
+		if len(Field3_this) < len(Field3_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field3 {
-		if c := this.Field3[i].Compare(that1.Field3[i]); c != 0 {
+	for i := range Field3_this {
+		if c := Field3_this[i].Compare(Field3_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.Field4) != len(that1.Field4) {
-		if len(this.Field4) < len(that1.Field4) {
+	Field4_this := this.Field4
+	Field4_that := that1.Field4
+	if len(Field4_this) != len(Field4_that) {
+		if len(Field4_this) < len(Field4_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field4 {
-		if c := this.Field4[i].Compare(that1.Field4[i]); c != 0 {
+	for i := range Field4_this {
+		if c := Field4_this[i].Compare(Field4_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.Field6) != len(that1.Field6) {
-		if len(this.Field6) < len(that1.Field6) {
+	Field6_this := this.Field6
+	Field6_that := that1.Field6
+	if len(Field6_this) != len(Field6_that) {
+		if len(Field6_this) < len(Field6_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field6 {
-		if this.Field6[i] != that1.Field6[i] {
-			if this.Field6[i] < that1.Field6[i] {
+	for i := range Field6_this {
+		if Field6_this[i] != Field6_that[i] {
+			if Field6_this[i] < Field6_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field7) != len(that1.Field7) {
-		if len(this.Field7) < len(that1.Field7) {
+	Field7_this := this.Field7
+	Field7_that := that1.Field7
+	if len(Field7_this) != len(Field7_that) {
+		if len(Field7_this) < len(Field7_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field7 {
-		if this.Field7[i] != that1.Field7[i] {
-			if this.Field7[i] < that1.Field7[i] {
+	for i := range Field7_this {
+		if Field7_this[i] != Field7_that[i] {
+			if Field7_this[i] < Field7_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field8) != len(that1.Field8) {
-		if len(this.Field8) < len(that1.Field8) {
+	Field8_this := this.Field8
+	Field8_that := that1.Field8
+	if len(Field8_this) != len(Field8_that) {
+		if len(Field8_this) < len(Field8_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field8 {
-		if c := this.Field8[i].Compare(that1.Field8[i]); c != 0 {
+	for i := range Field8_this {
+		if c := Field8_this[i].Compare(Field8_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.Field13) != len(that1.Field13) {
-		if len(this.Field13) < len(that1.Field13) {
+	Field13_this := this.Field13
+	Field13_that := that1.Field13
+	if len(Field13_this) != len(Field13_that) {
+		if len(Field13_this) < len(Field13_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field13 {
-		if this.Field13[i] != that1.Field13[i] {
-			if !this.Field13[i] {
+	for i := range Field13_this {
+		if Field13_this[i] != Field13_that[i] {
+			if !Field13_this[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field14) != len(that1.Field14) {
-		if len(this.Field14) < len(that1.Field14) {
+	Field14_this := this.Field14
+	Field14_that := that1.Field14
+	if len(Field14_this) != len(Field14_that) {
+		if len(Field14_this) < len(Field14_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field14 {
-		if this.Field14[i] != that1.Field14[i] {
-			if this.Field14[i] < that1.Field14[i] {
+	for i := range Field14_this {
+		if Field14_this[i] != Field14_that[i] {
+			if Field14_this[i] < Field14_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field15) != len(that1.Field15) {
-		if len(this.Field15) < len(that1.Field15) {
+	Field15_this := this.Field15
+	Field15_that := that1.Field15
+	if len(Field15_this) != len(Field15_that) {
+		if len(Field15_this) < len(Field15_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field15 {
-		if c := bytes.Compare(this.Field15[i], that1.Field15[i]); c != 0 {
+	for i := range Field15_this {
+		if c := bytes.Compare(Field15_this[i], Field15_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -4962,14 +5114,16 @@ func (this *NidNestedStruct) Compare(that interface{}) int {
 	if c := this.Field1.Compare(&that1.Field1); c != 0 {
 		return c
 	}
-	if len(this.Field2) != len(that1.Field2) {
-		if len(this.Field2) < len(that1.Field2) {
+	Field2_this := this.Field2
+	Field2_that := that1.Field2
+	if len(Field2_this) != len(Field2_that) {
+		if len(Field2_this) < len(Field2_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field2 {
-		if c := this.Field2[i].Compare(&that1.Field2[i]); c != 0 {
+	for i := range Field2_this {
+		if c := Field2_that[i].Compare(&Field2_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -5006,14 +5160,16 @@ func (this *NinNestedStruct) Compare(that interface{}) int {
 	if c := this.Field1.Compare(that1.Field1); c != 0 {
 		return c
 	}
-	if len(this.Field2) != len(that1.Field2) {
-		if len(this.Field2) < len(that1.Field2) {
+	Field2_this := this.Field2
+	Field2_that := that1.Field2
+	if len(Field2_this) != len(Field2_that) {
+		if len(Field2_this) < len(Field2_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field2 {
-		if c := this.Field2[i].Compare(that1.Field2[i]); c != 0 {
+	for i := range Field2_this {
+		if c := Field2_this[i].Compare(Field2_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -5170,25 +5326,29 @@ func (this *NidRepCustom) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.Id) != len(that1.Id) {
-		if len(this.Id) < len(that1.Id) {
+	Id_this := this.Id
+	Id_that := that1.Id
+	if len(Id_this) != len(Id_that) {
+		if len(Id_this) < len(Id_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Id {
-		if c := this.Id[i].Compare(that1.Id[i]); c != 0 {
+	for i := range Id_this {
+		if c := Id_this[i].Compare(Id_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.Value) != len(that1.Value) {
-		if len(this.Value) < len(that1.Value) {
+	Value_this := this.Value
+	Value_that := that1.Value
+	if len(Value_this) != len(Value_that) {
+		if len(Value_this) < len(Value_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Value {
-		if c := this.Value[i].Compare(that1.Value[i]); c != 0 {
+	for i := range Value_this {
+		if c := Value_this[i].Compare(Value_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -5222,25 +5382,29 @@ func (this *NinRepCustom) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.Id) != len(that1.Id) {
-		if len(this.Id) < len(that1.Id) {
+	Id_this := this.Id
+	Id_that := that1.Id
+	if len(Id_this) != len(Id_that) {
+		if len(Id_this) < len(Id_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Id {
-		if c := this.Id[i].Compare(that1.Id[i]); c != 0 {
+	for i := range Id_this {
+		if c := Id_this[i].Compare(Id_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.Value) != len(that1.Value) {
-		if len(this.Value) < len(that1.Value) {
+	Value_this := this.Value
+	Value_that := that1.Value
+	if len(Value_this) != len(Value_that) {
+		if len(Value_this) < len(Value_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Value {
-		if c := this.Value[i].Compare(that1.Value[i]); c != 0 {
+	for i := range Value_this {
+		if c := Value_this[i].Compare(Value_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -6027,43 +6191,49 @@ func (this *NidRepEnum) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.Field1) != len(that1.Field1) {
-		if len(this.Field1) < len(that1.Field1) {
+	Field1_this := this.Field1
+	Field1_that := that1.Field1
+	if len(Field1_this) != len(Field1_that) {
+		if len(Field1_this) < len(Field1_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field1 {
-		if this.Field1[i] != that1.Field1[i] {
-			if this.Field1[i] < that1.Field1[i] {
+	for i := range Field1_this {
+		if Field1_this[i] != Field1_that[i] {
+			if Field1_this[i] < Field1_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field2) != len(that1.Field2) {
-		if len(this.Field2) < len(that1.Field2) {
+	Field2_this := this.Field2
+	Field2_that := that1.Field2
+	if len(Field2_this) != len(Field2_that) {
+		if len(Field2_this) < len(Field2_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			if this.Field2[i] < that1.Field2[i] {
+	for i := range Field2_this {
+		if Field2_this[i] != Field2_that[i] {
+			if Field2_this[i] < Field2_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field3) != len(that1.Field3) {
-		if len(this.Field3) < len(that1.Field3) {
+	Field3_this := this.Field3
+	Field3_that := that1.Field3
+	if len(Field3_this) != len(Field3_that) {
+		if len(Field3_this) < len(Field3_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field3 {
-		if this.Field3[i] != that1.Field3[i] {
-			if this.Field3[i] < that1.Field3[i] {
+	for i := range Field3_this {
+		if Field3_this[i] != Field3_that[i] {
+			if Field3_this[i] < Field3_that[i] {
 				return -1
 			}
 			return 1
@@ -6099,43 +6269,49 @@ func (this *NinRepEnum) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.Field1) != len(that1.Field1) {
-		if len(this.Field1) < len(that1.Field1) {
+	Field1_this := this.Field1
+	Field1_that := that1.Field1
+	if len(Field1_this) != len(Field1_that) {
+		if len(Field1_this) < len(Field1_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field1 {
-		if this.Field1[i] != that1.Field1[i] {
-			if this.Field1[i] < that1.Field1[i] {
+	for i := range Field1_this {
+		if Field1_this[i] != Field1_that[i] {
+			if Field1_this[i] < Field1_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field2) != len(that1.Field2) {
-		if len(this.Field2) < len(that1.Field2) {
+	Field2_this := this.Field2
+	Field2_that := that1.Field2
+	if len(Field2_this) != len(Field2_that) {
+		if len(Field2_this) < len(Field2_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field2 {
-		if this.Field2[i] != that1.Field2[i] {
-			if this.Field2[i] < that1.Field2[i] {
+	for i := range Field2_this {
+		if Field2_this[i] != Field2_that[i] {
+			if Field2_this[i] < Field2_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Field3) != len(that1.Field3) {
-		if len(this.Field3) < len(that1.Field3) {
+	Field3_this := this.Field3
+	Field3_that := that1.Field3
+	if len(Field3_this) != len(Field3_that) {
+		if len(Field3_this) < len(Field3_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field3 {
-		if this.Field3[i] != that1.Field3[i] {
-			if this.Field3[i] < that1.Field3[i] {
+	for i := range Field3_this {
+		if Field3_this[i] != Field3_that[i] {
+			if Field3_this[i] < Field3_that[i] {
 				return -1
 			}
 			return 1
@@ -7310,210 +7486,240 @@ func (this *CustomNameNinRepNative) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.FieldA) != len(that1.FieldA) {
-		if len(this.FieldA) < len(that1.FieldA) {
+	FieldA_this := this.FieldA
+	FieldA_that := that1.FieldA
+	if len(FieldA_this) != len(FieldA_that) {
+		if len(FieldA_this) < len(FieldA_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldA {
-		if this.FieldA[i] != that1.FieldA[i] {
-			if this.FieldA[i] < that1.FieldA[i] {
+	for i := range FieldA_this {
+		if FieldA_this[i] != FieldA_that[i] {
+			if FieldA_this[i] < FieldA_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.FieldB) != len(that1.FieldB) {
-		if len(this.FieldB) < len(that1.FieldB) {
+	FieldB_this := this.FieldB
+	FieldB_that := that1.FieldB
+	if len(FieldB_this) != len(FieldB_that) {
+		if len(FieldB_this) < len(FieldB_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldB {
-		if this.FieldB[i] != that1.FieldB[i] {
-			if this.FieldB[i] < that1.FieldB[i] {
+	for i := range FieldB_this {
+		if FieldB_this[i] != FieldB_that[i] {
+			if FieldB_this[i] < FieldB_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.FieldC) != len(that1.FieldC) {
-		if len(this.FieldC) < len(that1.FieldC) {
+	FieldC_this := this.FieldC
+	FieldC_that := that1.FieldC
+	if len(FieldC_this) != len(FieldC_that) {
+		if len(FieldC_this) < len(FieldC_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldC {
-		if this.FieldC[i] != that1.FieldC[i] {
-			if this.FieldC[i] < that1.FieldC[i] {
+	for i := range FieldC_this {
+		if FieldC_this[i] != FieldC_that[i] {
+			if FieldC_this[i] < FieldC_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.FieldD) != len(that1.FieldD) {
-		if len(this.FieldD) < len(that1.FieldD) {
+	FieldD_this := this.FieldD
+	FieldD_that := that1.FieldD
+	if len(FieldD_this) != len(FieldD_that) {
+		if len(FieldD_this) < len(FieldD_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldD {
-		if this.FieldD[i] != that1.FieldD[i] {
-			if this.FieldD[i] < that1.FieldD[i] {
+	for i := range FieldD_this {
+		if FieldD_this[i] != FieldD_that[i] {
+			if FieldD_this[i] < FieldD_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.FieldE) != len(that1.FieldE) {
-		if len(this.FieldE) < len(that1.FieldE) {
+	FieldE_this := this.FieldE
+	FieldE_that := that1.FieldE
+	if len(FieldE_this) != len(FieldE_that) {
+		if len(FieldE_this) < len(FieldE_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldE {
-		if this.FieldE[i] != that1.FieldE[i] {
-			if this.FieldE[i] < that1.FieldE[i] {
+	for i := range FieldE_this {
+		if FieldE_this[i] != FieldE_that[i] {
+			if FieldE_this[i] < FieldE_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.FieldF) != len(that1.FieldF) {
-		if len(this.FieldF) < len(that1.FieldF) {
+	FieldF_this := this.FieldF
+	FieldF_that := that1.FieldF
+	if len(FieldF_this) != len(FieldF_that) {
+		if len(FieldF_this) < len(FieldF_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldF {
-		if this.FieldF[i] != that1.FieldF[i] {
-			if this.FieldF[i] < that1.FieldF[i] {
+	for i := range FieldF_this {
+		if FieldF_this[i] != FieldF_that[i] {
+			if FieldF_this[i] < FieldF_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.FieldG) != len(that1.FieldG) {
-		if len(this.FieldG) < len(that1.FieldG) {
+	FieldG_this := this.FieldG
+	FieldG_that := that1.FieldG
+	if len(FieldG_this) != len(FieldG_that) {
+		if len(FieldG_this) < len(FieldG_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldG {
-		if this.FieldG[i] != that1.FieldG[i] {
-			if this.FieldG[i] < that1.FieldG[i] {
+	for i := range FieldG_this {
+		if FieldG_this[i] != FieldG_that[i] {
+			if FieldG_this[i] < FieldG_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.FieldH) != len(that1.FieldH) {
-		if len(this.FieldH) < len(that1.FieldH) {
+	FieldH_this := this.FieldH
+	FieldH_that := that1.FieldH
+	if len(FieldH_this) != len(FieldH_that) {
+		if len(FieldH_this) < len(FieldH_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldH {
-		if this.FieldH[i] != that1.FieldH[i] {
-			if this.FieldH[i] < that1.FieldH[i] {
+	for i := range FieldH_this {
+		if FieldH_this[i] != FieldH_that[i] {
+			if FieldH_this[i] < FieldH_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.FieldI) != len(that1.FieldI) {
-		if len(this.FieldI) < len(that1.FieldI) {
+	FieldI_this := this.FieldI
+	FieldI_that := that1.FieldI
+	if len(FieldI_this) != len(FieldI_that) {
+		if len(FieldI_this) < len(FieldI_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldI {
-		if this.FieldI[i] != that1.FieldI[i] {
-			if this.FieldI[i] < that1.FieldI[i] {
+	for i := range FieldI_this {
+		if FieldI_this[i] != FieldI_that[i] {
+			if FieldI_this[i] < FieldI_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.FieldJ) != len(that1.FieldJ) {
-		if len(this.FieldJ) < len(that1.FieldJ) {
+	FieldJ_this := this.FieldJ
+	FieldJ_that := that1.FieldJ
+	if len(FieldJ_this) != len(FieldJ_that) {
+		if len(FieldJ_this) < len(FieldJ_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldJ {
-		if this.FieldJ[i] != that1.FieldJ[i] {
-			if this.FieldJ[i] < that1.FieldJ[i] {
+	for i := range FieldJ_this {
+		if FieldJ_this[i] != FieldJ_that[i] {
+			if FieldJ_this[i] < FieldJ_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.FieldK) != len(that1.FieldK) {
-		if len(this.FieldK) < len(that1.FieldK) {
+	FieldK_this := this.FieldK
+	FieldK_that := that1.FieldK
+	if len(FieldK_this) != len(FieldK_that) {
+		if len(FieldK_this) < len(FieldK_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldK {
-		if this.FieldK[i] != that1.FieldK[i] {
-			if this.FieldK[i] < that1.FieldK[i] {
+	for i := range FieldK_this {
+		if FieldK_this[i] != FieldK_that[i] {
+			if FieldK_this[i] < FieldK_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.FieldL) != len(that1.FieldL) {
-		if len(this.FieldL) < len(that1.FieldL) {
+	FieldL_this := this.FieldL
+	FieldL_that := that1.FieldL
+	if len(FieldL_this) != len(FieldL_that) {
+		if len(FieldL_this) < len(FieldL_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldL {
-		if this.FieldL[i] != that1.FieldL[i] {
-			if this.FieldL[i] < that1.FieldL[i] {
+	for i := range FieldL_this {
+		if FieldL_this[i] != FieldL_that[i] {
+			if FieldL_this[i] < FieldL_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.FieldM) != len(that1.FieldM) {
-		if len(this.FieldM) < len(that1.FieldM) {
+	FieldM_this := this.FieldM
+	FieldM_that := that1.FieldM
+	if len(FieldM_this) != len(FieldM_that) {
+		if len(FieldM_this) < len(FieldM_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldM {
-		if this.FieldM[i] != that1.FieldM[i] {
-			if !this.FieldM[i] {
+	for i := range FieldM_this {
+		if FieldM_this[i] != FieldM_that[i] {
+			if !FieldM_this[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.FieldN) != len(that1.FieldN) {
-		if len(this.FieldN) < len(that1.FieldN) {
+	FieldN_this := this.FieldN
+	FieldN_that := that1.FieldN
+	if len(FieldN_this) != len(FieldN_that) {
+		if len(FieldN_this) < len(FieldN_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldN {
-		if this.FieldN[i] != that1.FieldN[i] {
-			if this.FieldN[i] < that1.FieldN[i] {
+	for i := range FieldN_this {
+		if FieldN_this[i] != FieldN_that[i] {
+			if FieldN_this[i] < FieldN_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.FieldO) != len(that1.FieldO) {
-		if len(this.FieldO) < len(that1.FieldO) {
+	FieldO_this := this.FieldO
+	FieldO_that := that1.FieldO
+	if len(FieldO_this) != len(FieldO_that) {
+		if len(FieldO_this) < len(FieldO_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldO {
-		if c := bytes.Compare(this.FieldO[i], that1.FieldO[i]); c != 0 {
+	for i := range FieldO_this {
+		if c := bytes.Compare(FieldO_this[i], FieldO_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -7574,14 +7780,16 @@ func (this *CustomNameNinStruct) Compare(that interface{}) int {
 	if c := this.FieldC.Compare(that1.FieldC); c != 0 {
 		return c
 	}
-	if len(this.FieldD) != len(that1.FieldD) {
-		if len(this.FieldD) < len(that1.FieldD) {
+	FieldD_this := this.FieldD
+	FieldD_that := that1.FieldD
+	if len(FieldD_this) != len(FieldD_that) {
+		if len(FieldD_this) < len(FieldD_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldD {
-		if c := this.FieldD[i].Compare(that1.FieldD[i]); c != 0 {
+	for i := range FieldD_this {
+		if c := FieldD_this[i].Compare(FieldD_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -7687,25 +7895,29 @@ func (this *CustomNameCustomType) Compare(that interface{}) int {
 	} else if c := this.FieldB.Compare(*that1.FieldB); c != 0 {
 		return c
 	}
-	if len(this.FieldC) != len(that1.FieldC) {
-		if len(this.FieldC) < len(that1.FieldC) {
+	FieldC_this := this.FieldC
+	FieldC_that := that1.FieldC
+	if len(FieldC_this) != len(FieldC_that) {
+		if len(FieldC_this) < len(FieldC_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldC {
-		if c := this.FieldC[i].Compare(that1.FieldC[i]); c != 0 {
+	for i := range FieldC_this {
+		if c := FieldC_this[i].Compare(FieldC_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.FieldD) != len(that1.FieldD) {
-		if len(this.FieldD) < len(that1.FieldD) {
+	FieldD_this := this.FieldD
+	FieldD_that := that1.FieldD
+	if len(FieldD_this) != len(FieldD_that) {
+		if len(FieldD_this) < len(FieldD_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldD {
-		if c := this.FieldD[i].Compare(that1.FieldD[i]); c != 0 {
+	for i := range FieldD_this {
+		if c := FieldD_this[i].Compare(FieldD_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -7799,15 +8011,17 @@ func (this *CustomNameEnum) Compare(that interface{}) int {
 	} else if that1.FieldA != nil {
 		return -1
 	}
-	if len(this.FieldB) != len(that1.FieldB) {
-		if len(this.FieldB) < len(that1.FieldB) {
+	FieldB_this := this.FieldB
+	FieldB_that := that1.FieldB
+	if len(FieldB_this) != len(FieldB_that) {
+		if len(FieldB_this) < len(FieldB_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.FieldB {
-		if this.FieldB[i] != that1.FieldB[i] {
-			if this.FieldB[i] < that1.FieldB[i] {
+	for i := range FieldB_this {
+		if FieldB_this[i] != FieldB_that[i] {
+			if FieldB_this[i] < FieldB_that[i] {
 				return -1
 			}
 			return 1
@@ -7927,14 +8141,16 @@ func (this *UnrecognizedWithInner) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.Embedded) != len(that1.Embedded) {
-		if len(this.Embedded) < len(that1.Embedded) {
+	Embedded_this := this.Embedded
+	Embedded_that := that1.Embedded
+	if len(Embedded_this) != len(Embedded_that) {
+		if len(Embedded_this) < len(Embedded_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Embedded {
-		if c := this.Embedded[i].Compare(that1.Embedded[i]); c != 0 {
+	for i := range Embedded_this {
+		if c := Embedded_this[i].Compare(Embedded_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -8115,14 +8331,16 @@ func (this *Node) Compare(that interface{}) int {
 	} else if that1.Label != nil {
 		return -1
 	}
-	if len(this.Children) != len(that1.Children) {
-		if len(this.Children) < len(that1.Children) {
+	Children_this := this.Children
+	Children_that := that1.Children
+	if len(Children_this) != len(Children_that) {
+		if len(Children_this) < len(Children_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Children {
-		if c := this.Children[i].Compare(that1.Children[i]); c != 0 {
+	for i := range Children_this {
+		if c := Children_this[i].Compare(Children_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -8267,14 +8485,16 @@ func (this *NidRepNonByteCustomType) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.Field1) != len(that1.Field1) {
-		if len(this.Field1) < len(that1.Field1) {
+	Field1_this := this.Field1
+	Field1_that := that1.Field1
+	if len(Field1_this) != len(Field1_that) {
+		if len(Field1_this) < len(Field1_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field1 {
-		if c := this.Field1[i].Compare(that1.Field1[i]); c != 0 {
+	for i := range Field1_this {
+		if c := Field1_this[i].Compare(Field1_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -8308,14 +8528,16 @@ func (this *NinRepNonByteCustomType) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.Field1) != len(that1.Field1) {
-		if len(this.Field1) < len(that1.Field1) {
+	Field1_this := this.Field1
+	Field1_that := that1.Field1
+	if len(Field1_this) != len(Field1_that) {
+		if len(Field1_this) < len(Field1_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field1 {
-		if c := this.Field1[i].Compare(that1.Field1[i]); c != 0 {
+	for i := range Field1_this {
+		if c := Field1_this[i].Compare(Field1_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -8391,14 +8613,16 @@ func (this *CastRepeated) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if len(this.Field1) != len(that1.Field1) {
-		if len(this.Field1) < len(that1.Field1) {
+	Field1_this := this.Field1
+	Field1_that := that1.Field1
+	if len(Field1_this) != len(Field1_that) {
+		if len(Field1_this) < len(Field1_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Field1 {
-		if c := this.Field1[i].Compare(that1.Field1[i]); c != 0 {
+	for i := range Field1_this {
+		if c := Field1_this[i].Compare(Field1_that[i]); c != 0 {
 			return c
 		}
 	}

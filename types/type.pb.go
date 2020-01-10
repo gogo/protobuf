@@ -732,39 +732,45 @@ func (this *Type) Compare(that interface{}) int {
 		}
 		return 1
 	}
-	if len(this.Fields) != len(that1.Fields) {
-		if len(this.Fields) < len(that1.Fields) {
+	Fields_this := this.Fields
+	Fields_that := that1.Fields
+	if len(Fields_this) != len(Fields_that) {
+		if len(Fields_this) < len(Fields_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Fields {
-		if c := this.Fields[i].Compare(that1.Fields[i]); c != 0 {
+	for i := range Fields_this {
+		if c := Fields_this[i].Compare(Fields_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.Oneofs) != len(that1.Oneofs) {
-		if len(this.Oneofs) < len(that1.Oneofs) {
+	Oneofs_this := this.Oneofs
+	Oneofs_that := that1.Oneofs
+	if len(Oneofs_this) != len(Oneofs_that) {
+		if len(Oneofs_this) < len(Oneofs_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Oneofs {
-		if this.Oneofs[i] != that1.Oneofs[i] {
-			if this.Oneofs[i] < that1.Oneofs[i] {
+	for i := range Oneofs_this {
+		if Oneofs_this[i] != Oneofs_that[i] {
+			if Oneofs_this[i] < Oneofs_that[i] {
 				return -1
 			}
 			return 1
 		}
 	}
-	if len(this.Options) != len(that1.Options) {
-		if len(this.Options) < len(that1.Options) {
+	Options_this := this.Options
+	Options_that := that1.Options
+	if len(Options_this) != len(Options_that) {
+		if len(Options_this) < len(Options_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Options {
-		if c := this.Options[i].Compare(that1.Options[i]); c != 0 {
+	for i := range Options_this {
+		if c := Options_this[i].Compare(Options_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -849,14 +855,16 @@ func (this *Field) Compare(that interface{}) int {
 		}
 		return 1
 	}
-	if len(this.Options) != len(that1.Options) {
-		if len(this.Options) < len(that1.Options) {
+	Options_this := this.Options
+	Options_that := that1.Options
+	if len(Options_this) != len(Options_that) {
+		if len(Options_this) < len(Options_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Options {
-		if c := this.Options[i].Compare(that1.Options[i]); c != 0 {
+	for i := range Options_this {
+		if c := Options_this[i].Compare(Options_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -908,25 +916,29 @@ func (this *Enum) Compare(that interface{}) int {
 		}
 		return 1
 	}
-	if len(this.Enumvalue) != len(that1.Enumvalue) {
-		if len(this.Enumvalue) < len(that1.Enumvalue) {
+	Enumvalue_this := this.Enumvalue
+	Enumvalue_that := that1.Enumvalue
+	if len(Enumvalue_this) != len(Enumvalue_that) {
+		if len(Enumvalue_this) < len(Enumvalue_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Enumvalue {
-		if c := this.Enumvalue[i].Compare(that1.Enumvalue[i]); c != 0 {
+	for i := range Enumvalue_this {
+		if c := Enumvalue_this[i].Compare(Enumvalue_that[i]); c != 0 {
 			return c
 		}
 	}
-	if len(this.Options) != len(that1.Options) {
-		if len(this.Options) < len(that1.Options) {
+	Options_this := this.Options
+	Options_that := that1.Options
+	if len(Options_this) != len(Options_that) {
+		if len(Options_this) < len(Options_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Options {
-		if c := this.Options[i].Compare(that1.Options[i]); c != 0 {
+	for i := range Options_this {
+		if c := Options_this[i].Compare(Options_that[i]); c != 0 {
 			return c
 		}
 	}
@@ -981,14 +993,16 @@ func (this *EnumValue) Compare(that interface{}) int {
 		}
 		return 1
 	}
-	if len(this.Options) != len(that1.Options) {
-		if len(this.Options) < len(that1.Options) {
+	Options_this := this.Options
+	Options_that := that1.Options
+	if len(Options_this) != len(Options_that) {
+		if len(Options_this) < len(Options_that) {
 			return -1
 		}
 		return 1
 	}
-	for i := range this.Options {
-		if c := this.Options[i].Compare(that1.Options[i]); c != 0 {
+	for i := range Options_this {
+		if c := Options_this[i].Compare(Options_that[i]); c != 0 {
 			return c
 		}
 	}
