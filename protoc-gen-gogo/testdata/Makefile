@@ -33,3 +33,4 @@ all: test
 
 test:
 	go test
+	cd grpc && go build grpc.pb.go
