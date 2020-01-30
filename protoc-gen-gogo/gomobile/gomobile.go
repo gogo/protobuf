@@ -185,6 +185,10 @@ func (g *gomobile) generateService(file *generator.FileDescriptor, service *pb.S
 	g.P("var cd []byte")
 	g.P("switch cmd {")
 	for _, method := range service.Method {
+		if method.GetServerStreaming() || method.GetClientStreaming() {
+			// not supported
+			continue
+		}
 		methName := generator.CamelCase(method.GetName())
 
 		g.P("case \"", methName, "\":")
