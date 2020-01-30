@@ -36,6 +36,7 @@ package grpc
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 
@@ -48,6 +49,9 @@ import (
 // the grpc package is introduced; the generated code references
 // a constant, grpc.SupportPackageIsVersionN (where N is generatedCodeVersion).
 const generatedCodeVersion = 4
+
+const envVarServerMethodNoContextMode = "GOGO_GRPC_SERVER_METHOD_NO_CONTEXT"
+const envVarServerMethodNoErrorMode = "GOGO_GRPC_SERVER_METHOD_NO_ERROR"
 
 // Paths for packages used by code generated in this file,
 // relative to the import_prefix of the generator.Generator.
@@ -297,11 +301,19 @@ func (g *grpc) generateServerMethodConcrete(servName string, method *pb.MethodDe
 	var nilArg string
 	if !method.GetServerStreaming() && !method.GetClientStreaming() {
 		nilArg = "nil, "
+		if os.Getenv(envVarServerMethodNoErrorMode) == "1" {
+			nilArg = "nil"
+		}
 	}
 	methName := generator.CamelCase(method.GetName())
-	statusPkg := string(g.gen.AddImport(statusPkgPath))
-	codePkg := string(g.gen.AddImport(codePkgPath))
-	g.P("return ", nilArg, statusPkg, `.Errorf(`, codePkg, `.Unimplemented, "method `, methName, ` not implemented")`)
+
+	if os.Getenv(envVarServerMethodNoErrorMode) == "1" {
+		g.P("return ", nilArg)
+	} else {
+		statusPkg := string(g.gen.AddImport(statusPkgPath))
+		codePkg := string(g.gen.AddImport(codePkgPath))
+		g.P("return ", nilArg, statusPkg, `.Errorf(`, codePkg, `.Unimplemented, "method `, methName, ` not implemented")`)
+	}
 	g.P("}")
 }
 
@@ -413,10 +425,20 @@ func (g *grpc) generateServerSignatureWithParamNames(servName string, method *pb
 	}
 
 	var reqArgs []string
-	ret := "error"
+	var ret string
+	if os.Getenv(envVarServerMethodNoErrorMode) != "1" {
+		ret = "error"
+	}
 	if !method.GetServerStreaming() && !method.GetClientStreaming() {
-		reqArgs = append(reqArgs, "ctx "+contextPkg+".Context")
-		ret = "(*" + g.typeName(method.GetOutputType()) + ", error)"
+		if os.Getenv(envVarServerMethodNoContextMode) != "1" {
+			reqArgs = append(reqArgs, "ctx "+contextPkg+".Context")
+		}
+
+		var errSuffix = ", error"
+		if os.Getenv(envVarServerMethodNoErrorMode) == "1" {
+			errSuffix = ""
+		}
+		ret = "(*" + g.typeName(method.GetOutputType()) + errSuffix + ")"
 	}
 	if !method.GetClientStreaming() {
 		reqArgs = append(reqArgs, "req *"+g.typeName(method.GetInputType()))
@@ -437,10 +459,21 @@ func (g *grpc) generateServerSignature(servName string, method *pb.MethodDescrip
 	}
 
 	var reqArgs []string
-	ret := "error"
+	var ret string
+	if os.Getenv(envVarServerMethodNoErrorMode) != "1" {
+		ret = "error"
+	}
+
 	if !method.GetServerStreaming() && !method.GetClientStreaming() {
-		reqArgs = append(reqArgs, contextPkg+".Context")
-		ret = "(*" + g.typeName(method.GetOutputType()) + ", error)"
+		if os.Getenv(envVarServerMethodNoContextMode) != "1" {
+			reqArgs = append(reqArgs, contextPkg+".Context")
+		}
+
+		var errSuffix = ", error"
+		if os.Getenv(envVarServerMethodNoErrorMode) == "1" {
+			errSuffix = ""
+		}
+		ret = "(*" + g.typeName(method.GetOutputType()) + errSuffix + ")"
 	}
 	if !method.GetClientStreaming() {
 		reqArgs = append(reqArgs, "*"+g.typeName(method.GetInputType()))
@@ -462,13 +495,28 @@ func (g *grpc) generateServerMethod(servName, fullServName string, method *pb.Me
 		g.P("func ", hname, "(srv interface{}, ctx ", contextPkg, ".Context, dec func(interface{}) error, interceptor ", grpcPkg, ".UnaryServerInterceptor) (interface{}, error) {")
 		g.P("in := new(", inType, ")")
 		g.P("if err := dec(in); err != nil { return nil, err }")
-		g.P("if interceptor == nil { return srv.(", servName, "Server).", methName, "(ctx, in) }")
+
+		ctxSuff := "ctx, "
+		if os.Getenv(envVarServerMethodNoContextMode) == "1" {
+			ctxSuff = ""
+		}
+
+		if os.Getenv(envVarServerMethodNoErrorMode) != "1" {
+			g.P("if interceptor == nil { return srv.(", servName, "Server).", methName, "("+ctxSuff+"in) }")
+		} else {
+			g.P("if interceptor == nil { return srv.(", servName, "Server).", methName, "("+ctxSuff+"in), nil }")
+		}
 		g.P("info := &", grpcPkg, ".UnaryServerInfo{")
 		g.P("Server: srv,")
 		g.P("FullMethod: ", strconv.Quote(fmt.Sprintf("/%s/%s", fullServName, methName)), ",")
 		g.P("}")
 		g.P("handler := func(ctx ", contextPkg, ".Context, req interface{}) (interface{}, error) {")
-		g.P("return srv.(", servName, "Server).", methName, "(ctx, req.(*", inType, "))")
+		if os.Getenv(envVarServerMethodNoErrorMode) != "1" {
+			g.P("return srv.(", servName, "Server).", methName, "("+ctxSuff+"req.(*", inType, "))")
+		} else {
+			g.P("return srv.(", servName, "Server).", methName, "("+ctxSuff+"req.(*", inType, ")), nil")
+		}
+
 		g.P("}")
 		g.P("return interceptor(ctx, in, info, handler)")
 		g.P("}")
@@ -476,13 +524,24 @@ func (g *grpc) generateServerMethod(servName, fullServName string, method *pb.Me
 		return hname
 	}
 	streamType := unexport(servName) + methName + "Server"
+
 	g.P("func ", hname, "(srv interface{}, stream ", grpcPkg, ".ServerStream) error {")
 	if !method.GetClientStreaming() {
 		g.P("m := new(", inType, ")")
 		g.P("if err := stream.RecvMsg(m); err != nil { return err }")
-		g.P("return srv.(", servName, "Server).", methName, "(m, &", streamType, "{stream})")
+		if os.Getenv(envVarServerMethodNoErrorMode) != "1" {
+			g.P("return srv.(", servName, "Server).", methName, "(m, &", streamType, "{stream})")
+		} else {
+			g.P("srv.(", servName, "Server).", methName, "(m, &", streamType, "{stream})")
+			g.P("return nil")
+		}
 	} else {
-		g.P("return srv.(", servName, "Server).", methName, "(&", streamType, "{stream})")
+		if os.Getenv(envVarServerMethodNoErrorMode) != "1" {
+			g.P("return srv.(", servName, "Server).", methName, "(&", streamType, "{stream})")
+		} else {
+			g.P("return srv.(", servName, "Server).", methName, "(&", streamType, "{stream})")
+			g.P("return nil")
+		}
 	}
 	g.P("}")
 	g.P()

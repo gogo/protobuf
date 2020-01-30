@@ -246,6 +246,10 @@ func (g *gomobile) generateHandlerSignature(handlerName string, method *pb.Metho
 		reqArgs = append(reqArgs, "*"+g.typeName(method.GetInputType()))
 	}
 
+	if method.GetServerStreaming() || method.GetClientStreaming() {
+		methName = "// Streams not supported ### " + methName
+	}
+
 	return methName + "(" + strings.Join(reqArgs, ", ") + ") " + ret
 }
 
