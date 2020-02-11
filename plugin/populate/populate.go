@@ -111,11 +111,11 @@ func NewVarGen() VarGen {
 
 func (this *varGen) Next() string {
 	this.index++
-	return fmt.Sprintf("v%d", this.index)
+	return fmt.Sprintf("vAlue%d", this.index)
 }
 
 func (this *varGen) Current() string {
-	return fmt.Sprintf("v%d", this.index)
+	return fmt.Sprintf("vAlue%d", this.index)
 }
 
 type plugin struct {
