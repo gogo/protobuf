@@ -330,33 +330,33 @@ func encodeVarintIssue503(dAtA []byte, offset int, v uint64) int {
 }
 func NewPopulatedFoo(r randyIssue503, easy bool) *Foo {
 	this := &Foo{}
-	v1 := r.Intn(10)
-	this.Num1 = make([]int64, v1)
-	for i := 0; i < v1; i++ {
+	vAlue1 := r.Intn(10)
+	this.Num1 = make([]int64, vAlue1)
+	for i := 0; i < vAlue1; i++ {
 		this.Num1[i] = int64(r.Int63())
 		if r.Intn(2) == 0 {
 			this.Num1[i] *= -1
 		}
 	}
-	v2 := r.Intn(10)
-	this.Num2 = make([]int32, v2)
-	for i := 0; i < v2; i++ {
+	vAlue2 := r.Intn(10)
+	this.Num2 = make([]int32, vAlue2)
+	for i := 0; i < vAlue2; i++ {
 		this.Num2[i] = int32(r.Int31())
 		if r.Intn(2) == 0 {
 			this.Num2[i] *= -1
 		}
 	}
-	v3 := r.Intn(10)
-	this.Str1 = make([]string, v3)
-	for i := 0; i < v3; i++ {
+	vAlue3 := r.Intn(10)
+	this.Str1 = make([]string, vAlue3)
+	for i := 0; i < vAlue3; i++ {
 		this.Str1[i] = string(randStringIssue503(r))
 	}
-	v4 := r.Intn(10)
-	this.Dat1 = make([][]byte, v4)
-	for i := 0; i < v4; i++ {
-		v5 := r.Intn(100)
-		this.Dat1[i] = make([]byte, v5)
-		for j := 0; j < v5; j++ {
+	vAlue4 := r.Intn(10)
+	this.Dat1 = make([][]byte, vAlue4)
+	for i := 0; i < vAlue4; i++ {
+		vAlue5 := r.Intn(100)
+		this.Dat1[i] = make([]byte, vAlue5)
+		for j := 0; j < vAlue5; j++ {
 			this.Dat1[i][j] = byte(r.Intn(256))
 		}
 	}
@@ -385,9 +385,9 @@ func randUTF8RuneIssue503(r randyIssue503) rune {
 	return rune(ru + 61)
 }
 func randStringIssue503(r randyIssue503) string {
-	v6 := r.Intn(100)
-	tmps := make([]rune, v6)
-	for i := 0; i < v6; i++ {
+	vAlue6 := r.Intn(100)
+	tmps := make([]rune, vAlue6)
+	for i := 0; i < vAlue6; i++ {
 		tmps[i] = randUTF8RuneIssue503(r)
 	}
 	return string(tmps)
@@ -409,11 +409,11 @@ func randFieldIssue503(dAtA []byte, r randyIssue503, fieldNumber int, wire int) 
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateIssue503(dAtA, uint64(key))
-		v7 := r.Int63()
+		vAlue7 := r.Int63()
 		if r.Intn(2) == 0 {
-			v7 *= -1
+			vAlue7 *= -1
 		}
-		dAtA = encodeVarintPopulateIssue503(dAtA, uint64(v7))
+		dAtA = encodeVarintPopulateIssue503(dAtA, uint64(vAlue7))
 	case 1:
 		dAtA = encodeVarintPopulateIssue503(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

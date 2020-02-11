@@ -195,12 +195,12 @@ func encodeVarintIndex(dAtA []byte, offset int, v uint64) int {
 func NewPopulatedIndexQuery(r randyIndex, easy bool) *IndexQuery {
 	this := &IndexQuery{}
 	if r.Intn(5) != 0 {
-		v1 := string(randStringIndex(r))
-		this.Key = &v1
+		vAlue1 := string(randStringIndex(r))
+		this.Key = &vAlue1
 	}
 	if r.Intn(5) != 0 {
-		v2 := string(randStringIndex(r))
-		this.Value = &v2
+		vAlue2 := string(randStringIndex(r))
+		this.Value = &vAlue2
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedIndex(r, 3)
@@ -227,9 +227,9 @@ func randUTF8RuneIndex(r randyIndex) rune {
 	return rune(ru + 61)
 }
 func randStringIndex(r randyIndex) string {
-	v3 := r.Intn(100)
-	tmps := make([]rune, v3)
-	for i := 0; i < v3; i++ {
+	vAlue3 := r.Intn(100)
+	tmps := make([]rune, vAlue3)
+	for i := 0; i < vAlue3; i++ {
 		tmps[i] = randUTF8RuneIndex(r)
 	}
 	return string(tmps)
@@ -251,11 +251,11 @@ func randFieldIndex(dAtA []byte, r randyIndex, fieldNumber int, wire int) []byte
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateIndex(dAtA, uint64(key))
-		v4 := r.Int63()
+		vAlue4 := r.Int63()
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			vAlue4 *= -1
 		}
-		dAtA = encodeVarintPopulateIndex(dAtA, uint64(v4))
+		dAtA = encodeVarintPopulateIndex(dAtA, uint64(vAlue4))
 	case 1:
 		dAtA = encodeVarintPopulateIndex(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

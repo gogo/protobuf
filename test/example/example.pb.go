@@ -1602,8 +1602,8 @@ func NewPopulatedA(r randyExample, easy bool) *A {
 	if r.Intn(2) == 0 {
 		this.Number *= -1
 	}
-	v1 := github_com_gogo_protobuf_test.NewPopulatedUuid(r)
-	this.Id = *v1
+	vAlue1 := github_com_gogo_protobuf_test.NewPopulatedUuid(r)
+	this.Id = *vAlue1
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedExample(r, 4)
 	}
@@ -1612,14 +1612,14 @@ func NewPopulatedA(r randyExample, easy bool) *A {
 
 func NewPopulatedB(r randyExample, easy bool) *B {
 	this := &B{}
-	v2 := NewPopulatedA(r, easy)
-	this.A = *v2
+	vAlue2 := NewPopulatedA(r, easy)
+	this.A = *vAlue2
 	if r.Intn(5) != 0 {
-		v3 := r.Intn(10)
-		this.G = make([]github_com_gogo_protobuf_test_custom.Uint128, v3)
-		for i := 0; i < v3; i++ {
-			v4 := github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
-			this.G[i] = *v4
+		vAlue3 := r.Intn(10)
+		this.G = make([]github_com_gogo_protobuf_test_custom.Uint128, vAlue3)
+		for i := 0; i < vAlue3; i++ {
+			vAlue4 := github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
+			this.G[i] = *vAlue4
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1631,11 +1631,11 @@ func NewPopulatedB(r randyExample, easy bool) *B {
 func NewPopulatedC(r randyExample, easy bool) *C {
 	this := &C{}
 	if r.Intn(5) != 0 {
-		v5 := int64(r.Int63())
+		vAlue5 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v5 *= -1
+			vAlue5 *= -1
 		}
-		this.MySize = &v5
+		this.MySize = &vAlue5
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedExample(r, 2)
@@ -1675,8 +1675,8 @@ func NewPopulatedE(r randyExample, easy bool) *E {
 func NewPopulatedR(r randyExample, easy bool) *R {
 	this := &R{}
 	if r.Intn(5) != 0 {
-		v6 := uint32(r.Uint32())
-		this.Recognized = &v6
+		vAlue6 := uint32(r.Uint32())
+		this.Recognized = &vAlue6
 	}
 	if !easy && r.Intn(10) != 0 {
 	}
@@ -1686,11 +1686,11 @@ func NewPopulatedR(r randyExample, easy bool) *R {
 func NewPopulatedCastType(r randyExample, easy bool) *CastType {
 	this := &CastType{}
 	if r.Intn(5) != 0 {
-		v7 := int32(r.Int63())
+		vAlue7 := int32(r.Int63())
 		if r.Intn(2) == 0 {
-			v7 *= -1
+			vAlue7 *= -1
 		}
-		this.Int32 = &v7
+		this.Int32 = &vAlue7
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedExample(r, 2)
@@ -1717,9 +1717,9 @@ func randUTF8RuneExample(r randyExample) rune {
 	return rune(ru + 61)
 }
 func randStringExample(r randyExample) string {
-	v8 := r.Intn(100)
-	tmps := make([]rune, v8)
-	for i := 0; i < v8; i++ {
+	vAlue8 := r.Intn(100)
+	tmps := make([]rune, vAlue8)
+	for i := 0; i < vAlue8; i++ {
 		tmps[i] = randUTF8RuneExample(r)
 	}
 	return string(tmps)
@@ -1741,11 +1741,11 @@ func randFieldExample(dAtA []byte, r randyExample, fieldNumber int, wire int) []
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateExample(dAtA, uint64(key))
-		v9 := r.Int63()
+		vAlue9 := r.Int63()
 		if r.Intn(2) == 0 {
-			v9 *= -1
+			vAlue9 *= -1
 		}
-		dAtA = encodeVarintPopulateExample(dAtA, uint64(v9))
+		dAtA = encodeVarintPopulateExample(dAtA, uint64(vAlue9))
 	case 1:
 		dAtA = encodeVarintPopulateExample(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

@@ -180,9 +180,9 @@ func encodeVarintIndeximport(dAtA []byte, offset int, v uint64) int {
 func NewPopulatedIndexQueries(r randyIndeximport, easy bool) *IndexQueries {
 	this := &IndexQueries{}
 	if r.Intn(5) != 0 {
-		v1 := r.Intn(5)
-		this.Queries = make([]*index.IndexQuery, v1)
-		for i := 0; i < v1; i++ {
+		vAlue1 := r.Intn(5)
+		this.Queries = make([]*index.IndexQuery, vAlue1)
+		for i := 0; i < vAlue1; i++ {
 			this.Queries[i] = index.NewPopulatedIndexQuery(r, easy)
 		}
 	}
@@ -211,9 +211,9 @@ func randUTF8RuneIndeximport(r randyIndeximport) rune {
 	return rune(ru + 61)
 }
 func randStringIndeximport(r randyIndeximport) string {
-	v2 := r.Intn(100)
-	tmps := make([]rune, v2)
-	for i := 0; i < v2; i++ {
+	vAlue2 := r.Intn(100)
+	tmps := make([]rune, vAlue2)
+	for i := 0; i < vAlue2; i++ {
 		tmps[i] = randUTF8RuneIndeximport(r)
 	}
 	return string(tmps)
@@ -235,11 +235,11 @@ func randFieldIndeximport(dAtA []byte, r randyIndeximport, fieldNumber int, wire
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateIndeximport(dAtA, uint64(key))
-		v3 := r.Int63()
+		vAlue3 := r.Int63()
 		if r.Intn(2) == 0 {
-			v3 *= -1
+			vAlue3 *= -1
 		}
-		dAtA = encodeVarintPopulateIndeximport(dAtA, uint64(v3))
+		dAtA = encodeVarintPopulateIndeximport(dAtA, uint64(vAlue3))
 	case 1:
 		dAtA = encodeVarintPopulateIndeximport(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

@@ -4682,8 +4682,8 @@ func encodeVarintOne(dAtA []byte, offset int, v uint64) int {
 func NewPopulatedSubby(r randyOne, easy bool) *Subby {
 	this := &Subby{}
 	if r.Intn(5) != 0 {
-		v1 := string(randStringOne(r))
-		this.Sub = &v1
+		vAlue1 := string(randStringOne(r))
+		this.Sub = &vAlue1
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedOne(r, 2)
@@ -4830,9 +4830,9 @@ func NewPopulatedAllTypesOneOf_Field14(r randyOne, easy bool) *AllTypesOneOf_Fie
 }
 func NewPopulatedAllTypesOneOf_Field15(r randyOne, easy bool) *AllTypesOneOf_Field15 {
 	this := &AllTypesOneOf_Field15{}
-	v2 := r.Intn(100)
-	this.Field15 = make([]byte, v2)
-	for i := 0; i < v2; i++ {
+	vAlue2 := r.Intn(100)
+	this.Field15 = make([]byte, vAlue2)
+	for i := 0; i < vAlue2; i++ {
 		this.Field15[i] = byte(r.Intn(256))
 	}
 	return this
@@ -4899,9 +4899,9 @@ func NewPopulatedTwoOneofs_Field34(r randyOne, easy bool) *TwoOneofs_Field34 {
 }
 func NewPopulatedTwoOneofs_Field35(r randyOne, easy bool) *TwoOneofs_Field35 {
 	this := &TwoOneofs_Field35{}
-	v3 := r.Intn(100)
-	this.Field35 = make([]byte, v3)
-	for i := 0; i < v3; i++ {
+	vAlue3 := r.Intn(100)
+	this.Field35 = make([]byte, vAlue3)
+	for i := 0; i < vAlue3; i++ {
 		this.Field35[i] = byte(r.Intn(256))
 	}
 	return this
@@ -4937,8 +4937,8 @@ func NewPopulatedCustomOneof_Stringy(r randyOne, easy bool) *CustomOneof_Stringy
 }
 func NewPopulatedCustomOneof_CustomType(r randyOne, easy bool) *CustomOneof_CustomType {
 	this := &CustomOneof_CustomType{}
-	v4 := github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
-	this.CustomType = *v4
+	vAlue4 := github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
+	this.CustomType = *vAlue4
 	return this
 }
 func NewPopulatedCustomOneof_CastType(r randyOne, easy bool) *CustomOneof_CastType {
@@ -4974,9 +4974,9 @@ func randUTF8RuneOne(r randyOne) rune {
 	return rune(ru + 61)
 }
 func randStringOne(r randyOne) string {
-	v5 := r.Intn(100)
-	tmps := make([]rune, v5)
-	for i := 0; i < v5; i++ {
+	vAlue5 := r.Intn(100)
+	tmps := make([]rune, vAlue5)
+	for i := 0; i < vAlue5; i++ {
 		tmps[i] = randUTF8RuneOne(r)
 	}
 	return string(tmps)
@@ -4998,11 +4998,11 @@ func randFieldOne(dAtA []byte, r randyOne, fieldNumber int, wire int) []byte {
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateOne(dAtA, uint64(key))
-		v6 := r.Int63()
+		vAlue6 := r.Int63()
 		if r.Intn(2) == 0 {
-			v6 *= -1
+			vAlue6 *= -1
 		}
-		dAtA = encodeVarintPopulateOne(dAtA, uint64(v6))
+		dAtA = encodeVarintPopulateOne(dAtA, uint64(vAlue6))
 	case 1:
 		dAtA = encodeVarintPopulateOne(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

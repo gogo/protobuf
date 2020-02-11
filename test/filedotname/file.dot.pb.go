@@ -470,8 +470,8 @@ func valueToGoStringFileDot(v interface{}, typ string) string {
 func NewPopulatedM(r randyFileDot, easy bool) *M {
 	this := &M{}
 	if r.Intn(5) != 0 {
-		v1 := string(randStringFileDot(r))
-		this.A = &v1
+		vAlue1 := string(randStringFileDot(r))
+		this.A = &vAlue1
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedFileDot(r, 2)
@@ -498,9 +498,9 @@ func randUTF8RuneFileDot(r randyFileDot) rune {
 	return rune(ru + 61)
 }
 func randStringFileDot(r randyFileDot) string {
-	v2 := r.Intn(100)
-	tmps := make([]rune, v2)
-	for i := 0; i < v2; i++ {
+	vAlue2 := r.Intn(100)
+	tmps := make([]rune, vAlue2)
+	for i := 0; i < vAlue2; i++ {
 		tmps[i] = randUTF8RuneFileDot(r)
 	}
 	return string(tmps)
@@ -522,11 +522,11 @@ func randFieldFileDot(dAtA []byte, r randyFileDot, fieldNumber int, wire int) []
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateFileDot(dAtA, uint64(key))
-		v3 := r.Int63()
+		vAlue3 := r.Int63()
 		if r.Intn(2) == 0 {
-			v3 *= -1
+			vAlue3 *= -1
 		}
-		dAtA = encodeVarintPopulateFileDot(dAtA, uint64(v3))
+		dAtA = encodeVarintPopulateFileDot(dAtA, uint64(vAlue3))
 	case 1:
 		dAtA = encodeVarintPopulateFileDot(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

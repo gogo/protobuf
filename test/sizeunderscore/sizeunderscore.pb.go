@@ -222,19 +222,19 @@ func encodeVarintSizeunderscore(dAtA []byte, offset int, v uint64) int {
 func NewPopulatedSizeMessage(r randySizeunderscore, easy bool) *SizeMessage {
 	this := &SizeMessage{}
 	if r.Intn(5) != 0 {
-		v1 := int64(r.Int63())
+		vAlue1 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v1 *= -1
+			vAlue1 *= -1
 		}
-		this.Size_ = &v1
+		this.Size_ = &vAlue1
 	}
 	if r.Intn(5) != 0 {
-		v2 := bool(bool(r.Intn(2) == 0))
-		this.Equal_ = &v2
+		vAlue2 := bool(bool(r.Intn(2) == 0))
+		this.Equal_ = &vAlue2
 	}
 	if r.Intn(5) != 0 {
-		v3 := string(randStringSizeunderscore(r))
-		this.String_ = &v3
+		vAlue3 := string(randStringSizeunderscore(r))
+		this.String_ = &vAlue3
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedSizeunderscore(r, 4)
@@ -261,9 +261,9 @@ func randUTF8RuneSizeunderscore(r randySizeunderscore) rune {
 	return rune(ru + 61)
 }
 func randStringSizeunderscore(r randySizeunderscore) string {
-	v4 := r.Intn(100)
-	tmps := make([]rune, v4)
-	for i := 0; i < v4; i++ {
+	vAlue4 := r.Intn(100)
+	tmps := make([]rune, vAlue4)
+	for i := 0; i < vAlue4; i++ {
 		tmps[i] = randUTF8RuneSizeunderscore(r)
 	}
 	return string(tmps)
@@ -285,11 +285,11 @@ func randFieldSizeunderscore(dAtA []byte, r randySizeunderscore, fieldNumber int
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateSizeunderscore(dAtA, uint64(key))
-		v5 := r.Int63()
+		vAlue5 := r.Int63()
 		if r.Intn(2) == 0 {
-			v5 *= -1
+			vAlue5 *= -1
 		}
-		dAtA = encodeVarintPopulateSizeunderscore(dAtA, uint64(v5))
+		dAtA = encodeVarintPopulateSizeunderscore(dAtA, uint64(vAlue5))
 	case 1:
 		dAtA = encodeVarintPopulateSizeunderscore(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

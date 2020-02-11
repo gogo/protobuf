@@ -482,9 +482,9 @@ func randUTF8RuneOneofembed(r randyOneofembed) rune {
 	return rune(ru + 61)
 }
 func randStringOneofembed(r randyOneofembed) string {
-	v1 := r.Intn(100)
-	tmps := make([]rune, v1)
-	for i := 0; i < v1; i++ {
+	vAlue1 := r.Intn(100)
+	tmps := make([]rune, vAlue1)
+	for i := 0; i < vAlue1; i++ {
 		tmps[i] = randUTF8RuneOneofembed(r)
 	}
 	return string(tmps)
@@ -506,11 +506,11 @@ func randFieldOneofembed(dAtA []byte, r randyOneofembed, fieldNumber int, wire i
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateOneofembed(dAtA, uint64(key))
-		v2 := r.Int63()
+		vAlue2 := r.Int63()
 		if r.Intn(2) == 0 {
-			v2 *= -1
+			vAlue2 *= -1
 		}
-		dAtA = encodeVarintPopulateOneofembed(dAtA, uint64(v2))
+		dAtA = encodeVarintPopulateOneofembed(dAtA, uint64(vAlue2))
 	case 1:
 		dAtA = encodeVarintPopulateOneofembed(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

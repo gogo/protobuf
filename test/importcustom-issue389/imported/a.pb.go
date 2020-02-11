@@ -189,9 +189,9 @@ func randUTF8RuneA(r randyA) rune {
 	return rune(ru + 61)
 }
 func randStringA(r randyA) string {
-	v1 := r.Intn(100)
-	tmps := make([]rune, v1)
-	for i := 0; i < v1; i++ {
+	vAlue1 := r.Intn(100)
+	tmps := make([]rune, vAlue1)
+	for i := 0; i < vAlue1; i++ {
 		tmps[i] = randUTF8RuneA(r)
 	}
 	return string(tmps)
@@ -213,11 +213,11 @@ func randFieldA(dAtA []byte, r randyA, fieldNumber int, wire int) []byte {
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateA(dAtA, uint64(key))
-		v2 := r.Int63()
+		vAlue2 := r.Int63()
 		if r.Intn(2) == 0 {
-			v2 *= -1
+			vAlue2 *= -1
 		}
-		dAtA = encodeVarintPopulateA(dAtA, uint64(v2))
+		dAtA = encodeVarintPopulateA(dAtA, uint64(vAlue2))
 	case 1:
 		dAtA = encodeVarintPopulateA(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

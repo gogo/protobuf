@@ -2628,9 +2628,9 @@ func NewPopulatedSampleOneOf_Field14(r randyOne, easy bool) *SampleOneOf_Field14
 }
 func NewPopulatedSampleOneOf_Field15(r randyOne, easy bool) *SampleOneOf_Field15 {
 	this := &SampleOneOf_Field15{}
-	v1 := r.Intn(100)
-	this.Field15 = make([]byte, v1)
-	for i := 0; i < v1; i++ {
+	vAlue1 := r.Intn(100)
+	this.Field15 = make([]byte, vAlue1)
+	for i := 0; i < vAlue1; i++ {
 		this.Field15[i] = byte(r.Intn(256))
 	}
 	return this
@@ -2660,9 +2660,9 @@ func randUTF8RuneOne(r randyOne) rune {
 	return rune(ru + 61)
 }
 func randStringOne(r randyOne) string {
-	v2 := r.Intn(100)
-	tmps := make([]rune, v2)
-	for i := 0; i < v2; i++ {
+	vAlue2 := r.Intn(100)
+	tmps := make([]rune, vAlue2)
+	for i := 0; i < vAlue2; i++ {
 		tmps[i] = randUTF8RuneOne(r)
 	}
 	return string(tmps)
@@ -2684,11 +2684,11 @@ func randFieldOne(dAtA []byte, r randyOne, fieldNumber int, wire int) []byte {
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateOne(dAtA, uint64(key))
-		v3 := r.Int63()
+		vAlue3 := r.Int63()
 		if r.Intn(2) == 0 {
-			v3 *= -1
+			vAlue3 *= -1
 		}
-		dAtA = encodeVarintPopulateOne(dAtA, uint64(v3))
+		dAtA = encodeVarintPopulateOne(dAtA, uint64(vAlue3))
 	case 1:
 		dAtA = encodeVarintPopulateOne(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

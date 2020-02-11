@@ -443,9 +443,9 @@ func encodeVarintFieldMask(dAtA []byte, offset int, v uint64) int {
 }
 func NewPopulatedFieldMask(r randyFieldMask, easy bool) *FieldMask {
 	this := &FieldMask{}
-	v1 := r.Intn(10)
-	this.Paths = make([]string, v1)
-	for i := 0; i < v1; i++ {
+	vAlue1 := r.Intn(10)
+	this.Paths = make([]string, vAlue1)
+	for i := 0; i < vAlue1; i++ {
 		this.Paths[i] = string(randStringFieldMask(r))
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -473,9 +473,9 @@ func randUTF8RuneFieldMask(r randyFieldMask) rune {
 	return rune(ru + 61)
 }
 func randStringFieldMask(r randyFieldMask) string {
-	v2 := r.Intn(100)
-	tmps := make([]rune, v2)
-	for i := 0; i < v2; i++ {
+	vAlue2 := r.Intn(100)
+	tmps := make([]rune, vAlue2)
+	for i := 0; i < vAlue2; i++ {
 		tmps[i] = randUTF8RuneFieldMask(r)
 	}
 	return string(tmps)
@@ -497,11 +497,11 @@ func randFieldFieldMask(dAtA []byte, r randyFieldMask, fieldNumber int, wire int
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateFieldMask(dAtA, uint64(key))
-		v3 := r.Int63()
+		vAlue3 := r.Int63()
 		if r.Intn(2) == 0 {
-			v3 *= -1
+			vAlue3 *= -1
 		}
-		dAtA = encodeVarintPopulateFieldMask(dAtA, uint64(v3))
+		dAtA = encodeVarintPopulateFieldMask(dAtA, uint64(vAlue3))
 	case 1:
 		dAtA = encodeVarintPopulateFieldMask(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

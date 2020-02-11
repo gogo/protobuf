@@ -523,8 +523,8 @@ func NewPopulatedDroppedWithoutGetters(r randyIssue260, easy bool) *DroppedWitho
 	if r.Intn(2) == 0 {
 		this.Width *= -1
 	}
-	v1 := github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
-	this.Timestamp = *v1
+	vAlue1 := github_com_gogo_protobuf_types.NewPopulatedStdTime(r, easy)
+	this.Timestamp = *vAlue1
 	if !easy && r.Intn(10) != 0 {
 	}
 	return this
@@ -561,9 +561,9 @@ func randUTF8RuneIssue260(r randyIssue260) rune {
 	return rune(ru + 61)
 }
 func randStringIssue260(r randyIssue260) string {
-	v2 := r.Intn(100)
-	tmps := make([]rune, v2)
-	for i := 0; i < v2; i++ {
+	vAlue2 := r.Intn(100)
+	tmps := make([]rune, vAlue2)
+	for i := 0; i < vAlue2; i++ {
 		tmps[i] = randUTF8RuneIssue260(r)
 	}
 	return string(tmps)
@@ -585,11 +585,11 @@ func randFieldIssue260(dAtA []byte, r randyIssue260, fieldNumber int, wire int) 
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateIssue260(dAtA, uint64(key))
-		v3 := r.Int63()
+		vAlue3 := r.Int63()
 		if r.Intn(2) == 0 {
-			v3 *= -1
+			vAlue3 *= -1
 		}
-		dAtA = encodeVarintPopulateIssue260(dAtA, uint64(v3))
+		dAtA = encodeVarintPopulateIssue260(dAtA, uint64(vAlue3))
 	case 1:
 		dAtA = encodeVarintPopulateIssue260(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

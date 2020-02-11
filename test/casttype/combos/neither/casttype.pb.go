@@ -1055,97 +1055,97 @@ func valueToGoStringCasttype(v interface{}, typ string) string {
 func NewPopulatedCastaway(r randyCasttype, easy bool) *Castaway {
 	this := &Castaway{}
 	if r.Intn(5) != 0 {
-		v1 := int32(r.Int63())
+		vAlue1 := int32(r.Int63())
 		if r.Intn(2) == 0 {
-			v1 *= -1
+			vAlue1 *= -1
 		}
-		this.Int32Ptr = &v1
+		this.Int32Ptr = &vAlue1
 	}
 	this.Int32 = int32(r.Int63())
 	if r.Intn(2) == 0 {
 		this.Int32 *= -1
 	}
 	if r.Intn(5) != 0 {
-		v2 := github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
-		this.MyUint64Ptr = &v2
+		vAlue2 := github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
+		this.MyUint64Ptr = &vAlue2
 	}
 	this.MyUint64 = github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
 	if r.Intn(5) != 0 {
-		v3 := github_com_gogo_protobuf_test_casttype.MyFloat32Type(r.Float32())
+		vAlue3 := github_com_gogo_protobuf_test_casttype.MyFloat32Type(r.Float32())
 		if r.Intn(2) == 0 {
-			v3 *= -1
+			vAlue3 *= -1
 		}
-		this.MyFloat32Ptr = &v3
+		this.MyFloat32Ptr = &vAlue3
 	}
 	this.MyFloat32 = github_com_gogo_protobuf_test_casttype.MyFloat32Type(r.Float32())
 	if r.Intn(2) == 0 {
 		this.MyFloat32 *= -1
 	}
 	if r.Intn(5) != 0 {
-		v4 := github_com_gogo_protobuf_test_casttype.MyFloat64Type(r.Float64())
+		vAlue4 := github_com_gogo_protobuf_test_casttype.MyFloat64Type(r.Float64())
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			vAlue4 *= -1
 		}
-		this.MyFloat64Ptr = &v4
+		this.MyFloat64Ptr = &vAlue4
 	}
 	this.MyFloat64 = github_com_gogo_protobuf_test_casttype.MyFloat64Type(r.Float64())
 	if r.Intn(2) == 0 {
 		this.MyFloat64 *= -1
 	}
 	if r.Intn(5) != 0 {
-		v5 := r.Intn(100)
-		this.MyBytes = make(github_com_gogo_protobuf_test_casttype.Bytes, v5)
-		for i := 0; i < v5; i++ {
+		vAlue5 := r.Intn(100)
+		this.MyBytes = make(github_com_gogo_protobuf_test_casttype.Bytes, vAlue5)
+		for i := 0; i < vAlue5; i++ {
 			this.MyBytes[i] = byte(r.Intn(256))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v6 := r.Intn(100)
-		this.NormalBytes = make([]byte, v6)
-		for i := 0; i < v6; i++ {
+		vAlue6 := r.Intn(100)
+		this.NormalBytes = make([]byte, vAlue6)
+		for i := 0; i < vAlue6; i++ {
 			this.NormalBytes[i] = byte(r.Intn(256))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v7 := r.Intn(10)
-		this.MyUint64S = make([]github_com_gogo_protobuf_test_casttype.MyUint64Type, v7)
-		for i := 0; i < v7; i++ {
+		vAlue7 := r.Intn(10)
+		this.MyUint64S = make([]github_com_gogo_protobuf_test_casttype.MyUint64Type, vAlue7)
+		for i := 0; i < vAlue7; i++ {
 			this.MyUint64S[i] = github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v8 := r.Intn(10)
+		vAlue8 := r.Intn(10)
 		this.MyMap = make(github_com_gogo_protobuf_test_casttype.MyMapType)
-		for i := 0; i < v8; i++ {
-			v9 := randStringCasttype(r)
-			this.MyMap[v9] = uint64(uint64(r.Uint32()))
+		for i := 0; i < vAlue8; i++ {
+			vAlue9 := randStringCasttype(r)
+			this.MyMap[vAlue9] = uint64(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v10 := r.Intn(10)
+		vAlue10 := r.Intn(10)
 		this.MyCustomMap = make(map[github_com_gogo_protobuf_test_casttype.MyStringType]github_com_gogo_protobuf_test_casttype.MyUint64Type)
-		for i := 0; i < v10; i++ {
-			v11 := github_com_gogo_protobuf_test_casttype.MyStringType(randStringCasttype(r))
-			this.MyCustomMap[v11] = github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
+		for i := 0; i < vAlue10; i++ {
+			vAlue11 := github_com_gogo_protobuf_test_casttype.MyStringType(randStringCasttype(r))
+			this.MyCustomMap[vAlue11] = github_com_gogo_protobuf_test_casttype.MyUint64Type(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v12 := r.Intn(10)
+		vAlue12 := r.Intn(10)
 		this.MyNullableMap = make(map[github_com_gogo_protobuf_test_casttype.MyInt32Type]*Wilson)
-		for i := 0; i < v12; i++ {
+		for i := 0; i < vAlue12; i++ {
 			this.MyNullableMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(int32(r.Int31()))] = NewPopulatedWilson(r, easy)
 		}
 	}
 	if r.Intn(5) != 0 {
-		v13 := r.Intn(10)
+		vAlue13 := r.Intn(10)
 		this.MyEmbeddedMap = make(map[github_com_gogo_protobuf_test_casttype.MyInt32Type]Wilson)
-		for i := 0; i < v13; i++ {
+		for i := 0; i < vAlue13; i++ {
 			this.MyEmbeddedMap[github_com_gogo_protobuf_test_casttype.MyInt32Type(int32(r.Int31()))] = *NewPopulatedWilson(r, easy)
 		}
 	}
 	if r.Intn(5) != 0 {
-		v14 := github_com_gogo_protobuf_test_casttype.MyStringType(randStringCasttype(r))
-		this.String_ = &v14
+		vAlue14 := github_com_gogo_protobuf_test_casttype.MyStringType(randStringCasttype(r))
+		this.String_ = &vAlue14
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedCasttype(r, 17)
@@ -1156,11 +1156,11 @@ func NewPopulatedCastaway(r randyCasttype, easy bool) *Castaway {
 func NewPopulatedWilson(r randyCasttype, easy bool) *Wilson {
 	this := &Wilson{}
 	if r.Intn(5) != 0 {
-		v15 := int64(r.Int63())
+		vAlue15 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v15 *= -1
+			vAlue15 *= -1
 		}
-		this.Int64 = &v15
+		this.Int64 = &vAlue15
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedCasttype(r, 2)
@@ -1187,9 +1187,9 @@ func randUTF8RuneCasttype(r randyCasttype) rune {
 	return rune(ru + 61)
 }
 func randStringCasttype(r randyCasttype) string {
-	v16 := r.Intn(100)
-	tmps := make([]rune, v16)
-	for i := 0; i < v16; i++ {
+	vAlue16 := r.Intn(100)
+	tmps := make([]rune, vAlue16)
+	for i := 0; i < vAlue16; i++ {
 		tmps[i] = randUTF8RuneCasttype(r)
 	}
 	return string(tmps)
@@ -1211,11 +1211,11 @@ func randFieldCasttype(dAtA []byte, r randyCasttype, fieldNumber int, wire int) 
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateCasttype(dAtA, uint64(key))
-		v17 := r.Int63()
+		vAlue17 := r.Int63()
 		if r.Intn(2) == 0 {
-			v17 *= -1
+			vAlue17 *= -1
 		}
-		dAtA = encodeVarintPopulateCasttype(dAtA, uint64(v17))
+		dAtA = encodeVarintPopulateCasttype(dAtA, uint64(vAlue17))
 	case 1:
 		dAtA = encodeVarintPopulateCasttype(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

@@ -689,16 +689,16 @@ func valueToGoStringCastvalue(v interface{}, typ string) string {
 func NewPopulatedCastaway(r randyCastvalue, easy bool) *Castaway {
 	this := &Castaway{}
 	if r.Intn(5) != 0 {
-		v1 := r.Intn(10)
+		vAlue1 := r.Intn(10)
 		this.CastMapValueMessage = make(map[int32]MyWilson)
-		for i := 0; i < v1; i++ {
+		for i := 0; i < vAlue1; i++ {
 			this.CastMapValueMessage[int32(r.Int31())] = (MyWilson)(*NewPopulatedWilson(r, easy))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v2 := r.Intn(10)
+		vAlue2 := r.Intn(10)
 		this.CastMapValueMessageNullable = make(map[int32]*MyWilson)
-		for i := 0; i < v2; i++ {
+		for i := 0; i < vAlue2; i++ {
 			this.CastMapValueMessageNullable[int32(r.Int31())] = (*MyWilson)(NewPopulatedWilson(r, easy))
 		}
 	}
@@ -711,11 +711,11 @@ func NewPopulatedCastaway(r randyCastvalue, easy bool) *Castaway {
 func NewPopulatedWilson(r randyCastvalue, easy bool) *Wilson {
 	this := &Wilson{}
 	if r.Intn(5) != 0 {
-		v3 := int64(r.Int63())
+		vAlue3 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v3 *= -1
+			vAlue3 *= -1
 		}
-		this.Int64 = &v3
+		this.Int64 = &vAlue3
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedCastvalue(r, 2)
@@ -742,9 +742,9 @@ func randUTF8RuneCastvalue(r randyCastvalue) rune {
 	return rune(ru + 61)
 }
 func randStringCastvalue(r randyCastvalue) string {
-	v4 := r.Intn(100)
-	tmps := make([]rune, v4)
-	for i := 0; i < v4; i++ {
+	vAlue4 := r.Intn(100)
+	tmps := make([]rune, vAlue4)
+	for i := 0; i < vAlue4; i++ {
 		tmps[i] = randUTF8RuneCastvalue(r)
 	}
 	return string(tmps)
@@ -766,11 +766,11 @@ func randFieldCastvalue(dAtA []byte, r randyCastvalue, fieldNumber int, wire int
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateCastvalue(dAtA, uint64(key))
-		v5 := r.Int63()
+		vAlue5 := r.Int63()
 		if r.Intn(2) == 0 {
-			v5 *= -1
+			vAlue5 *= -1
 		}
-		dAtA = encodeVarintPopulateCastvalue(dAtA, uint64(v5))
+		dAtA = encodeVarintPopulateCastvalue(dAtA, uint64(vAlue5))
 	case 1:
 		dAtA = encodeVarintPopulateCastvalue(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
