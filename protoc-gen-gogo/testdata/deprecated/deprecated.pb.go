@@ -208,12 +208,17 @@ type DeprecatedServiceClient interface {
 	DeprecatedCall(ctx context.Context, in *DeprecatedRequest, opts ...grpc.CallOption) (*DeprecatedResponse, error)
 }
 
+type ClientConn interface {
+	Invoke(ctx context.Context, method string, args, reply interface{}, opts ...grpc.CallOption) error
+	NewStream(ctx context.Context, desc *StreamDesc, method string, opts ...grpc.CallOption) (grpc.ClientStream, error)
+}
+
 type deprecatedServiceClient struct {
-	cc *grpc.ClientConn
+	cc ClientConn
 }
 
 // Deprecated: Do not use.
-func NewDeprecatedServiceClient(cc *grpc.ClientConn) DeprecatedServiceClient {
+func NewDeprecatedServiceClient(cc ClientConn) DeprecatedServiceClient {
 	return &deprecatedServiceClient{cc}
 }
 
@@ -244,8 +249,12 @@ func (*UnimplementedDeprecatedServiceServer) DeprecatedCall(ctx context.Context,
 	return nil, status.Errorf(codes.Unimplemented, "method DeprecatedCall not implemented")
 }
 
+type Server interface {
+	RegisterService(sd *grpc.ServiceDesc, ss interface{})
+}
+
 // Deprecated: Do not use.
-func RegisterDeprecatedServiceServer(s *grpc.Server, srv DeprecatedServiceServer) {
+func RegisterDeprecatedServiceServer(s Server, srv DeprecatedServiceServer) {
 	s.RegisterService(&_DeprecatedService_serviceDesc, srv)
 }
 

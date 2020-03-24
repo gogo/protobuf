@@ -50,11 +50,16 @@ const _ = grpc.SupportPackageIsVersion4
 type EmptyServiceClient interface {
 }
 
-type emptyServiceClient struct {
-	cc *grpc.ClientConn
+type ClientConn interface {
+	Invoke(ctx context.Context, method string, args, reply interface{}, opts ...grpc.CallOption) error
+	NewStream(ctx context.Context, desc *StreamDesc, method string, opts ...grpc.CallOption) (grpc.ClientStream, error)
 }
 
-func NewEmptyServiceClient(cc *grpc.ClientConn) EmptyServiceClient {
+type emptyServiceClient struct {
+	cc ClientConn
+}
+
+func NewEmptyServiceClient(cc ClientConn) EmptyServiceClient {
 	return &emptyServiceClient{cc}
 }
 
@@ -66,7 +71,11 @@ type EmptyServiceServer interface {
 type UnimplementedEmptyServiceServer struct {
 }
 
-func RegisterEmptyServiceServer(s *grpc.Server, srv EmptyServiceServer) {
+type Server interface {
+	RegisterService(sd *grpc.ServiceDesc, ss interface{})
+}
+
+func RegisterEmptyServiceServer(s Server, srv EmptyServiceServer) {
 	s.RegisterService(&_EmptyService_serviceDesc, srv)
 }
 
