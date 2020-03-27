@@ -175,7 +175,7 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 
 	// Client structure.
 	g.P("type ", unexport(servName), "Client struct {")
-	g.P("cc", gogoGrpcPkg, ".ClientConn")
+	g.P("cc ", gogoGrpcPkg, ".ClientConn")
 	g.P("}")
 	g.P()
 

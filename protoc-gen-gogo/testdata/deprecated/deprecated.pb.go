@@ -8,6 +8,7 @@ package deprecated
 import (
 	context "context"
 	fmt "fmt"
+	grpc1 "github.com/gogo/protobuf/grpc"
 	proto "github.com/gogo/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -208,13 +209,8 @@ type DeprecatedServiceClient interface {
 	DeprecatedCall(ctx context.Context, in *DeprecatedRequest, opts ...grpc.CallOption) (*DeprecatedResponse, error)
 }
 
-type ClientConn interface {
-	Invoke(ctx context.Context, method string, args, reply interface{}, opts ...grpc.CallOption) error
-	NewStream(ctx context.Context, desc *StreamDesc, method string, opts ...grpc.CallOption) (grpc.ClientStream, error)
-}
-
 type deprecatedServiceClient struct {
-	cc ClientConn
+	cc grpc1.ClientConn
 }
 
 // Deprecated: Do not use.
@@ -249,12 +245,8 @@ func (*UnimplementedDeprecatedServiceServer) DeprecatedCall(ctx context.Context,
 	return nil, status.Errorf(codes.Unimplemented, "method DeprecatedCall not implemented")
 }
 
-type Server interface {
-	RegisterService(sd *grpc.ServiceDesc, ss interface{})
-}
-
 // Deprecated: Do not use.
-func RegisterDeprecatedServiceServer(s Server, srv DeprecatedServiceServer) {
+func RegisterDeprecatedServiceServer(s grpc1.Server, srv DeprecatedServiceServer) {
 	s.RegisterService(&_DeprecatedService_serviceDesc, srv)
 }
 

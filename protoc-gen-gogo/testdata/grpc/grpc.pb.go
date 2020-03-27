@@ -6,6 +6,7 @@ package testing
 import (
 	context "context"
 	fmt "fmt"
+	grpc1 "github.com/gogo/protobuf/grpc"
 	proto "github.com/gogo/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -194,13 +195,8 @@ type TestClient interface {
 	Bidi(ctx context.Context, opts ...grpc.CallOption) (Test_BidiClient, error)
 }
 
-type ClientConn interface {
-	Invoke(ctx context.Context, method string, args, reply interface{}, opts ...grpc.CallOption) error
-	NewStream(ctx context.Context, desc *StreamDesc, method string, opts ...grpc.CallOption) (grpc.ClientStream, error)
-}
-
 type testClient struct {
-	cc ClientConn
+	cc grpc1.ClientConn
 }
 
 func NewTestClient(cc ClientConn) TestClient {
@@ -341,11 +337,7 @@ func (*UnimplementedTestServer) Bidi(srv Test_BidiServer) error {
 	return status.Errorf(codes.Unimplemented, "method Bidi not implemented")
 }
 
-type Server interface {
-	RegisterService(sd *grpc.ServiceDesc, ss interface{})
-}
-
-func RegisterTestServer(s Server, srv TestServer) {
+func RegisterTestServer(s grpc1.Server, srv TestServer) {
 	s.RegisterService(&_Test_serviceDesc, srv)
 }
 

@@ -6,6 +6,7 @@ package testing
 import (
 	context "context"
 	fmt "fmt"
+	grpc1 "github.com/gogo/protobuf/grpc"
 	proto "github.com/gogo/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	math "math"
@@ -50,13 +51,8 @@ const _ = grpc.SupportPackageIsVersion4
 type EmptyServiceClient interface {
 }
 
-type ClientConn interface {
-	Invoke(ctx context.Context, method string, args, reply interface{}, opts ...grpc.CallOption) error
-	NewStream(ctx context.Context, desc *StreamDesc, method string, opts ...grpc.CallOption) (grpc.ClientStream, error)
-}
-
 type emptyServiceClient struct {
-	cc ClientConn
+	cc grpc1.ClientConn
 }
 
 func NewEmptyServiceClient(cc ClientConn) EmptyServiceClient {
@@ -71,11 +67,7 @@ type EmptyServiceServer interface {
 type UnimplementedEmptyServiceServer struct {
 }
 
-type Server interface {
-	RegisterService(sd *grpc.ServiceDesc, ss interface{})
-}
-
-func RegisterEmptyServiceServer(s Server, srv EmptyServiceServer) {
+func RegisterEmptyServiceServer(s grpc1.Server, srv EmptyServiceServer) {
 	s.RegisterService(&_EmptyService_serviceDesc, srv)
 }
 
