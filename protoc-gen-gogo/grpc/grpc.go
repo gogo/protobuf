@@ -183,7 +183,7 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 	if deprecated {
 		g.P(deprecationComment)
 	}
-	g.P("func New", servName, "Client (cc ClientConn) ", servName, "Client {")
+	g.P("func New", servName, "Client (cc ", gogoGrpcPkg, ".ClientConn) ", servName, "Client {")
 	g.P("return &", unexport(servName), "Client{cc}")
 	g.P("}")
 	g.P()

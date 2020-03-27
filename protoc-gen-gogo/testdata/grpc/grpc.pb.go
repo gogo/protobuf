@@ -199,7 +199,7 @@ type testClient struct {
 	cc grpc1.ClientConn
 }
 
-func NewTestClient(cc ClientConn) TestClient {
+func NewTestClient(cc grpc1.ClientConn) TestClient {
 	return &testClient{cc}
 }
 

@@ -55,7 +55,7 @@ type emptyServiceClient struct {
 	cc grpc1.ClientConn
 }
 
-func NewEmptyServiceClient(cc ClientConn) EmptyServiceClient {
+func NewEmptyServiceClient(cc grpc1.ClientConn) EmptyServiceClient {
 	return &emptyServiceClient{cc}
 }
 

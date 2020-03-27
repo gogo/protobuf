@@ -214,7 +214,7 @@ type deprecatedServiceClient struct {
 }
 
 // Deprecated: Do not use.
-func NewDeprecatedServiceClient(cc ClientConn) DeprecatedServiceClient {
+func NewDeprecatedServiceClient(cc grpc1.ClientConn) DeprecatedServiceClient {
 	return &deprecatedServiceClient{cc}
 }
 
