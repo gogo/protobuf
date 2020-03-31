@@ -109,6 +109,25 @@ func (m *Struct) GetFields() map[string]*Value {
 	return nil
 }
 
+func (m *Struct) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *Struct) Clone() *Struct {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Struct)
+	*cloned = *m
+
+	if m.Fields != nil {
+		cloned.Fields = make(map[string]*Value, len(m.Fields))
+		for k, v := range m.Fields {
+			cloned.Fields[k] = v.Clone()
+		}
+	}
+	return cloned
+}
+
 func (*Struct) XXX_MessageName() string {
 	return "google.protobuf.Struct"
 }
@@ -174,6 +193,7 @@ type isValue_Kind interface {
 	MarshalTo([]byte) (int, error)
 	Size() int
 	Compare(interface{}) int
+	Clone() isValue_Kind
 }
 
 type Value_NullValue struct {
@@ -195,12 +215,68 @@ type Value_ListValue struct {
 	ListValue *ListValue `protobuf:"bytes,6,opt,name=list_value,json=listValue,proto3,oneof" json:"list_value,omitempty"`
 }
 
-func (*Value_NullValue) isValue_Kind()   {}
+func (*Value_NullValue) isValue_Kind() {}
+func (m *Value_NullValue) Clone() isValue_Kind {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Value_NullValue)
+	*cloned = *m
+
+	return cloned
+}
 func (*Value_NumberValue) isValue_Kind() {}
+func (m *Value_NumberValue) Clone() isValue_Kind {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Value_NumberValue)
+	*cloned = *m
+
+	return cloned
+}
 func (*Value_StringValue) isValue_Kind() {}
-func (*Value_BoolValue) isValue_Kind()   {}
+func (m *Value_StringValue) Clone() isValue_Kind {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Value_StringValue)
+	*cloned = *m
+
+	return cloned
+}
+func (*Value_BoolValue) isValue_Kind() {}
+func (m *Value_BoolValue) Clone() isValue_Kind {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Value_BoolValue)
+	*cloned = *m
+
+	return cloned
+}
 func (*Value_StructValue) isValue_Kind() {}
-func (*Value_ListValue) isValue_Kind()   {}
+func (m *Value_StructValue) Clone() isValue_Kind {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Value_StructValue)
+	*cloned = *m
+
+	cloned.StructValue = m.StructValue.Clone()
+	return cloned
+}
+func (*Value_ListValue) isValue_Kind() {}
+func (m *Value_ListValue) Clone() isValue_Kind {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Value_ListValue)
+	*cloned = *m
+
+	cloned.ListValue = m.ListValue.Clone()
+	return cloned
+}
 
 func (m *Value) GetKind() isValue_Kind {
 	if m != nil {
@@ -263,6 +339,22 @@ func (*Value) XXX_OneofWrappers() []interface{} {
 	}
 }
 
+func (m *Value) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *Value) Clone() *Value {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Value)
+	*cloned = *m
+
+	if m.Kind != nil {
+		cloned.Kind = m.Kind.Clone()
+	}
+	return cloned
+}
+
 func (*Value) XXX_MessageName() string {
 	return "google.protobuf.Value"
 }
@@ -316,6 +408,25 @@ func (m *ListValue) GetValues() []*Value {
 		return m.Values
 	}
 	return nil
+}
+
+func (m *ListValue) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *ListValue) Clone() *ListValue {
+	if m == nil {
+		return nil
+	}
+	cloned := new(ListValue)
+	*cloned = *m
+
+	if m.Values != nil {
+		cloned.Values = make([]*Value, len(m.Values))
+		for idx, v := range m.Values {
+			cloned.Values[idx] = v.Clone()
+		}
+	}
+	return cloned
 }
 
 func (*ListValue) XXX_MessageName() string {
@@ -973,7 +1084,7 @@ func (this *Struct) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&types.Struct{")
 	keysForFields := make([]string, 0, len(this.Fields))
-	for k := range this.Fields {
+	for k, _ := range this.Fields {
 		keysForFields = append(keysForFields, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Strings(keysForFields)
@@ -1604,7 +1715,7 @@ func (this *Struct) String() string {
 		return "nil"
 	}
 	keysForFields := make([]string, 0, len(this.Fields))
-	for k := range this.Fields {
+	for k, _ := range this.Fields {
 		keysForFields = append(keysForFields, k)
 	}
 	github_com_gogo_protobuf_sortkeys.Strings(keysForFields)

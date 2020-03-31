@@ -75,6 +75,19 @@ func (m *SourceContext) GetFileName() string {
 	return ""
 }
 
+func (m *SourceContext) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *SourceContext) Clone() *SourceContext {
+	if m == nil {
+		return nil
+	}
+	cloned := new(SourceContext)
+	*cloned = *m
+
+	return cloned
+}
+
 func (*SourceContext) XXX_MessageName() string {
 	return "google.protobuf.SourceContext"
 }

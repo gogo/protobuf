@@ -189,6 +189,23 @@ func (m *Any) GetValue() []byte {
 	return nil
 }
 
+func (m *Any) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *Any) Clone() *Any {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Any)
+	*cloned = *m
+
+	if m.Value != nil {
+		cloned.Value = make([]byte, len(m.Value))
+		copy(cloned.Value, m.Value)
+	}
+	return cloned
+}
+
 func (*Any) XXX_MessageName() string {
 	return "google.protobuf.Any"
 }

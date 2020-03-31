@@ -271,6 +271,23 @@ func (m *FieldMask) GetPaths() []string {
 	return nil
 }
 
+func (m *FieldMask) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *FieldMask) Clone() *FieldMask {
+	if m == nil {
+		return nil
+	}
+	cloned := new(FieldMask)
+	*cloned = *m
+
+	if m.Paths != nil {
+		cloned.Paths = make([]string, len(m.Paths))
+		copy(cloned.Paths, m.Paths)
+	}
+	return cloned
+}
+
 func (*FieldMask) XXX_MessageName() string {
 	return "google.protobuf.FieldMask"
 }

@@ -73,6 +73,19 @@ func (m *Empty) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Empty proto.InternalMessageInfo
 
+func (m *Empty) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *Empty) Clone() *Empty {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Empty)
+	*cloned = *m
+
+	return cloned
+}
+
 func (*Empty) XXX_MessageName() string {
 	return "google.protobuf.Empty"
 }

@@ -77,6 +77,19 @@ func (m *DoubleValue) GetValue() float64 {
 	return 0
 }
 
+func (m *DoubleValue) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *DoubleValue) Clone() *DoubleValue {
+	if m == nil {
+		return nil
+	}
+	cloned := new(DoubleValue)
+	*cloned = *m
+
+	return cloned
+}
+
 func (*DoubleValue) XXX_MessageName() string {
 	return "google.protobuf.DoubleValue"
 }
@@ -130,6 +143,19 @@ func (m *FloatValue) GetValue() float32 {
 		return m.Value
 	}
 	return 0
+}
+
+func (m *FloatValue) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *FloatValue) Clone() *FloatValue {
+	if m == nil {
+		return nil
+	}
+	cloned := new(FloatValue)
+	*cloned = *m
+
+	return cloned
 }
 
 func (*FloatValue) XXX_MessageName() string {
@@ -187,6 +213,19 @@ func (m *Int64Value) GetValue() int64 {
 	return 0
 }
 
+func (m *Int64Value) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *Int64Value) Clone() *Int64Value {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Int64Value)
+	*cloned = *m
+
+	return cloned
+}
+
 func (*Int64Value) XXX_MessageName() string {
 	return "google.protobuf.Int64Value"
 }
@@ -240,6 +279,19 @@ func (m *UInt64Value) GetValue() uint64 {
 		return m.Value
 	}
 	return 0
+}
+
+func (m *UInt64Value) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *UInt64Value) Clone() *UInt64Value {
+	if m == nil {
+		return nil
+	}
+	cloned := new(UInt64Value)
+	*cloned = *m
+
+	return cloned
 }
 
 func (*UInt64Value) XXX_MessageName() string {
@@ -297,6 +349,19 @@ func (m *Int32Value) GetValue() int32 {
 	return 0
 }
 
+func (m *Int32Value) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *Int32Value) Clone() *Int32Value {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Int32Value)
+	*cloned = *m
+
+	return cloned
+}
+
 func (*Int32Value) XXX_MessageName() string {
 	return "google.protobuf.Int32Value"
 }
@@ -350,6 +415,19 @@ func (m *UInt32Value) GetValue() uint32 {
 		return m.Value
 	}
 	return 0
+}
+
+func (m *UInt32Value) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *UInt32Value) Clone() *UInt32Value {
+	if m == nil {
+		return nil
+	}
+	cloned := new(UInt32Value)
+	*cloned = *m
+
+	return cloned
 }
 
 func (*UInt32Value) XXX_MessageName() string {
@@ -407,6 +485,19 @@ func (m *BoolValue) GetValue() bool {
 	return false
 }
 
+func (m *BoolValue) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *BoolValue) Clone() *BoolValue {
+	if m == nil {
+		return nil
+	}
+	cloned := new(BoolValue)
+	*cloned = *m
+
+	return cloned
+}
+
 func (*BoolValue) XXX_MessageName() string {
 	return "google.protobuf.BoolValue"
 }
@@ -462,6 +553,19 @@ func (m *StringValue) GetValue() string {
 	return ""
 }
 
+func (m *StringValue) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *StringValue) Clone() *StringValue {
+	if m == nil {
+		return nil
+	}
+	cloned := new(StringValue)
+	*cloned = *m
+
+	return cloned
+}
+
 func (*StringValue) XXX_MessageName() string {
 	return "google.protobuf.StringValue"
 }
@@ -515,6 +619,23 @@ func (m *BytesValue) GetValue() []byte {
 		return m.Value
 	}
 	return nil
+}
+
+func (m *BytesValue) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *BytesValue) Clone() *BytesValue {
+	if m == nil {
+		return nil
+	}
+	cloned := new(BytesValue)
+	*cloned = *m
+
+	if m.Value != nil {
+		cloned.Value = make([]byte, len(m.Value))
+		copy(cloned.Value, m.Value)
+	}
+	return cloned
 }
 
 func (*BytesValue) XXX_MessageName() string {

@@ -267,6 +267,36 @@ func (m *Type) GetSyntax() Syntax {
 	return Syntax_SYNTAX_PROTO2
 }
 
+func (m *Type) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *Type) Clone() *Type {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Type)
+	*cloned = *m
+
+	if m.Fields != nil {
+		cloned.Fields = make([]*Field, len(m.Fields))
+		for idx, v := range m.Fields {
+			cloned.Fields[idx] = v.Clone()
+		}
+	}
+	if m.Oneofs != nil {
+		cloned.Oneofs = make([]string, len(m.Oneofs))
+		copy(cloned.Oneofs, m.Oneofs)
+	}
+	if m.Options != nil {
+		cloned.Options = make([]*Option, len(m.Options))
+		for idx, v := range m.Options {
+			cloned.Options[idx] = v.Clone()
+		}
+	}
+	cloned.SourceContext = m.SourceContext.Clone()
+	return cloned
+}
+
 func (*Type) XXX_MessageName() string {
 	return "google.protobuf.Type"
 }
@@ -402,6 +432,25 @@ func (m *Field) GetDefaultValue() string {
 	return ""
 }
 
+func (m *Field) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *Field) Clone() *Field {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Field)
+	*cloned = *m
+
+	if m.Options != nil {
+		cloned.Options = make([]*Option, len(m.Options))
+		for idx, v := range m.Options {
+			cloned.Options[idx] = v.Clone()
+		}
+	}
+	return cloned
+}
+
 func (*Field) XXX_MessageName() string {
 	return "google.protobuf.Field"
 }
@@ -490,6 +539,32 @@ func (m *Enum) GetSyntax() Syntax {
 	return Syntax_SYNTAX_PROTO2
 }
 
+func (m *Enum) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *Enum) Clone() *Enum {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Enum)
+	*cloned = *m
+
+	if m.Enumvalue != nil {
+		cloned.Enumvalue = make([]*EnumValue, len(m.Enumvalue))
+		for idx, v := range m.Enumvalue {
+			cloned.Enumvalue[idx] = v.Clone()
+		}
+	}
+	if m.Options != nil {
+		cloned.Options = make([]*Option, len(m.Options))
+		for idx, v := range m.Options {
+			cloned.Options[idx] = v.Clone()
+		}
+	}
+	cloned.SourceContext = m.SourceContext.Clone()
+	return cloned
+}
+
 func (*Enum) XXX_MessageName() string {
 	return "google.protobuf.Enum"
 }
@@ -560,6 +635,25 @@ func (m *EnumValue) GetOptions() []*Option {
 	return nil
 }
 
+func (m *EnumValue) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *EnumValue) Clone() *EnumValue {
+	if m == nil {
+		return nil
+	}
+	cloned := new(EnumValue)
+	*cloned = *m
+
+	if m.Options != nil {
+		cloned.Options = make([]*Option, len(m.Options))
+		for idx, v := range m.Options {
+			cloned.Options[idx] = v.Clone()
+		}
+	}
+	return cloned
+}
+
 func (*EnumValue) XXX_MessageName() string {
 	return "google.protobuf.EnumValue"
 }
@@ -626,6 +720,20 @@ func (m *Option) GetValue() *Any {
 		return m.Value
 	}
 	return nil
+}
+
+func (m *Option) MessageClone() proto.Message {
+	return m.Clone()
+}
+func (m *Option) Clone() *Option {
+	if m == nil {
+		return nil
+	}
+	cloned := new(Option)
+	*cloned = *m
+
+	cloned.Value = m.Value.Clone()
+	return cloned
 }
 
 func (*Option) XXX_MessageName() string {
