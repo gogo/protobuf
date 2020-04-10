@@ -39,6 +39,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"reflect"
 )
 
 // errOverflow is returned when an integer is too large to be represented.
@@ -332,6 +333,9 @@ type newUnmarshaler interface {
 // existing data in pb is always removed. Use UnmarshalMerge
 // to preserve and append to existing data.
 func Unmarshal(buf []byte, pb Message) error {
+	if pb == nil || isNil(reflect.ValueOf(pb)) {
+		return ErrNil
+	}
 	pb.Reset()
 	if u, ok := pb.(newUnmarshaler); ok {
 		return u.XXX_Unmarshal(buf)

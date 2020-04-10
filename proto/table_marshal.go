@@ -2934,6 +2934,9 @@ func Size(pb Message) int {
 // and encodes it into the wire format, returning the data.
 // This is the main entry point.
 func Marshal(pb Message) ([]byte, error) {
+	if pb == nil || isNil(reflect.ValueOf(pb)) {
+		return nil, ErrNil
+	}
 	if m, ok := pb.(newMarshaler); ok {
 		siz := m.XXX_Size()
 		b := make([]byte, 0, siz)
