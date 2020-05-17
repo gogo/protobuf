@@ -35,6 +35,7 @@ import (
 	"os"
 	"strings"
 
+	_ "github.com/gogo/protobuf/plugin/annotation"
 	_ "github.com/gogo/protobuf/plugin/compare"
 	_ "github.com/gogo/protobuf/plugin/defaultcheck"
 	_ "github.com/gogo/protobuf/plugin/description"
