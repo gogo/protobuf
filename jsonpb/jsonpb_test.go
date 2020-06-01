@@ -53,6 +53,15 @@ var (
 		Indent: "  ",
 	}
 
+	marshalerSkipEscapeHTML = Marshaler{
+		SkipEscapeHTML: true,
+	}
+
+	marshalerSkipEscapeHTMLPretty = Marshaler{
+		SkipEscapeHTML: true,
+		Indent:         "  ",
+	}
+
 	simpleObject = &pb.Simple{
 		OInt32:     proto.Int32(-32),
 		OInt32Str:  proto.Int32(-32),
@@ -166,6 +175,29 @@ var (
   "oString": "hello \"there\"",
   "oBytes": "YmVlcCBib29w",
   "oCastBytes": "d293"
+}`
+
+	htmlEscapeObject = &pb.Simple{
+		OString: proto.String("<test>&</test>"),
+	}
+
+	htmlEscapeObjectJSON = `{` +
+		`"oString":"\u003ctest\u003e\u0026\u003c/test\u003e"` +
+		`}`
+
+	htmlEscapeObjectPrettyJSON = `{
+  "oString": "\u003ctest\u003e\u0026\u003c/test\u003e"
+}`
+	htmlSkipEscapeObject = &pb.Simple{
+		OString: proto.String("<test>&</test>"),
+	}
+
+	htmlSkipEscapeObjectJSON = `{` +
+		`"oString":"<test>&</test>"` +
+		`}`
+
+	htmlSkipEscapeObjectPrettyJSON = `{
+  "oString": "<test>&</test>"
 }`
 
 	repeatsObject = &pb.Repeats{
@@ -412,6 +444,10 @@ var marshalingTests = []struct {
 }{
 	{"simple flat object", marshaler, simpleObject, simpleObjectOutputJSON},
 	{"simple pretty object", marshalerAllOptions, simpleObject, simpleObjectOutputPrettyJSON},
+	{"html escaped flat object", marshaler, htmlEscapeObject, htmlEscapeObjectJSON},
+	{"html escaped pretty object", marshalerAllOptions, htmlEscapeObject, htmlEscapeObjectPrettyJSON},
+	{"html unescaped flat object", marshalerSkipEscapeHTML, htmlSkipEscapeObject, htmlSkipEscapeObjectJSON},
+	{"html unescaped pretty object", marshalerSkipEscapeHTMLPretty, htmlSkipEscapeObject, htmlSkipEscapeObjectPrettyJSON},
 	{"non-finite floats fields object", marshaler, nonFinites, nonFinitesJSON},
 	{"repeated fields flat object", marshaler, repeatsObject, repeatsObjectJSON},
 	{"repeated fields pretty object", marshalerAllOptions, repeatsObject, repeatsObjectPrettyJSON},

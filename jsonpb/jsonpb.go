@@ -76,6 +76,10 @@ type Marshaler struct {
 	// Whether to use the original (.proto) name for fields.
 	OrigName bool
 
+	// Whether to skip escaping "problematic" HTML characters
+	// (see encoding/json Encoder.SetEscapeHTML)
+	SkipEscapeHTML bool
+
 	// A custom URL resolver to use when marshaling Any messages to JSON.
 	// If unset, the default resolution strategy is to extract the
 	// fully-qualified type name from the type URL and pass that to
@@ -182,15 +186,15 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 			if err = json.Unmarshal(b, &js); err != nil {
 				return fmt.Errorf("type %T produced invalid JSON: %v", v, err)
 			}
-			turl, err := json.Marshal(typeURL)
+			turl, err := m.jsonMarshal(typeURL)
 			if err != nil {
 				return fmt.Errorf("failed to marshal type URL %q to JSON: %v", typeURL, err)
 			}
 			js["@type"] = (*json.RawMessage)(&turl)
 			if m.Indent != "" {
-				b, err = json.MarshalIndent(js, indent, m.Indent)
+				b, err = m.jsonMarshalIndent(js, indent, m.Indent)
 			} else {
-				b, err = json.Marshal(js)
+				b, err = m.jsonMarshal(js)
 			}
 			if err != nil {
 				return err
@@ -490,7 +494,7 @@ func (m *Marshaler) marshalTypeURL(out *errWriter, indent, typeURL string) error
 	if m.Indent != "" {
 		out.write(" ")
 	}
-	b, err := json.Marshal(typeURL)
+	b, err := m.jsonMarshal(typeURL)
 	if err != nil {
 		return err
 	}
@@ -675,7 +679,7 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 			}
 
 			// TODO handle map key prop properly
-			b, err := json.Marshal(k.Interface())
+			b, err := m.jsonMarshal(k.Interface())
 			if err != nil {
 				return err
 			}
@@ -683,7 +687,7 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 
 			// If the JSON is not a string value, encode it again to make it one.
 			if !strings.HasPrefix(s, `"`) {
-				b, err := json.Marshal(s)
+				b, err := m.jsonMarshal(s)
 				if err != nil {
 					return err
 				}
@@ -732,7 +736,7 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 	}
 
 	// Default handling defers to the encoding/json library.
-	b, err := json.Marshal(v.Interface())
+	b, err := m.jsonMarshal(v.Interface())
 	if err != nil {
 		return err
 	}
@@ -1432,4 +1436,51 @@ func checkRequiredFieldsInValue(v reflect.Value) error {
 		return checkRequiredFields(v.Interface().(proto.Message))
 	}
 	return nil
+}
+
+// jsonMarshal defers to the encoding/json library, obeying the SkipEscapeHTML
+// option if set.
+func (m *Marshaler) jsonMarshal(in interface{}) ([]byte, error) {
+	if m.SkipEscapeHTML {
+		// An Encoder is required to disable HTML escaping
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		// Disable indentation to get the same output as json.Marshal
+		encoder.SetIndent("", "")
+		err := encoder.Encode(in)
+		out := buffer.Bytes()
+
+		// Strip trailing newline added by encoder.Encode
+		if len(out) > 0 {
+			out = out[:len(out)-1]
+		}
+
+		return out, err
+	}
+
+	return json.Marshal(in)
+}
+
+// jsonMarshalIndent defers to the encoding/json library, obeying the
+// SkipEscapeHTML option if set.
+func (m *Marshaler) jsonMarshalIndent(in interface{}, prefix, indent string) ([]byte, error) {
+	if m.SkipEscapeHTML {
+		// An Encoder is required to disable HTML escaping
+		buffer := &bytes.Buffer{}
+		encoder := json.NewEncoder(buffer)
+		encoder.SetEscapeHTML(false)
+		encoder.SetIndent(prefix, indent)
+		err := encoder.Encode(in)
+		out := buffer.Bytes()
+
+		// Strip trailing newline added by encoder.Encode
+		if len(out) > 0 {
+			out = out[:len(out)-1]
+		}
+
+		return out, err
+	}
+
+	return json.MarshalIndent(in, prefix, indent)
 }
