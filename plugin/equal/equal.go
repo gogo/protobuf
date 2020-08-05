@@ -614,7 +614,7 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 			p.Out()
 			p.P(`}`)
 
-			p.P(`for k, _ := range thatmap {`)
+			p.P(`for k := range thatmap {`)
 			p.In()
 			p.P(`if _, ok := thismap[k]; !ok {`)
 			p.In()

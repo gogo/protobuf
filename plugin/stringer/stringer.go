@@ -204,7 +204,7 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 			keygoAliasTyp = strings.Replace(keygoAliasTyp, "*", "", 1)
 			keyCapTyp := generator.CamelCase(keygoTyp)
 			p.P(keysName, ` := make([]`, keygoTyp, `, 0, len(this.`, fieldname, `))`)
-			p.P(`for k, _ := range this.`, fieldname, ` {`)
+			p.P(`for k := range this.`, fieldname, ` {`)
 			p.In()
 			if keygoAliasTyp == keygoTyp {
 				p.P(keysName, ` = append(`, keysName, `, k)`)
