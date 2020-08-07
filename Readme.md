@@ -1,3 +1,5 @@
+[GoGo Protobuf looking for new ownership](https://github.com/gogo/protobuf/issues/691)
+
 # Protocol Buffers for Go with Gadgets
 
 [![Build Status](https://travis-ci.org/gogo/protobuf.svg?branch=master)](https://travis-ci.org/gogo/protobuf)
