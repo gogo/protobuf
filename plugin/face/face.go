@@ -177,7 +177,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		p.P(`Proto() `, protoPkg.Use(), `.Message`)
 		for _, field := range message.Field {
 			fieldname := p.GetFieldName(message, field)
-			goTyp, _ := p.GoType(message, field)
+			goTyp, _ := p.GoStructFieldType(message, field)
 			if p.IsMap(field) {
 				m := p.GoMapType(nil, field)
 				goTyp = m.GoType
@@ -201,7 +201,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		p.P(``)
 		for _, field := range message.Field {
 			fieldname := p.GetFieldName(message, field)
-			goTyp, _ := p.GoType(message, field)
+			goTyp, _ := p.GoStructFieldType(message, field)
 			if p.IsMap(field) {
 				m := p.GoMapType(nil, field)
 				goTyp = m.GoType

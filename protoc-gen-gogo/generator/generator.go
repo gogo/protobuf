@@ -1737,6 +1737,11 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		}
 	}
 
+	castrepeated := ""
+	if gogoproto.IsCastRepeated(field) {
+		castrepeated = ",castrepeated=" + gogoproto.GetCastRepeated(field)
+	}
+
 	if message.proto3() {
 		name += ",proto3"
 	}
@@ -1756,7 +1761,7 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 	if gogoproto.IsWktPtr(field) {
 		wktptr = ",wktptr"
 	}
-	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
 		wiretype,
 		field.GetNumber(),
 		optrepreq,
@@ -1770,6 +1775,7 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		casttype,
 		castkey,
 		castvalue,
+		castrepeated,
 		stdtime,
 		stdduration,
 		wktptr))
@@ -1911,6 +1917,26 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 		typ = "[]" + typ
 	}
 	return
+}
+
+// GoStructFieldType returns the exact struct field type for a field given that arrays may be cast using castrepeated
+// as a final step
+func (g *Generator) GoStructFieldType(message *Descriptor, field *descriptor.FieldDescriptorProto) (typ string, wire string) {
+	typ, wire = g.GoType(message, field)
+	if isRepeated(field) {
+		if gogoproto.IsCastRepeated(field) {
+			var packageName string
+			var err error
+			packageName, typ, err = getCastRepeated(field)
+			if err != nil {
+				g.Fail(err.Error())
+			}
+			if len(packageName) > 0 {
+				g.customImports = append(g.customImports, packageName)
+			}
+		}
+	}
+	return typ, wire
 }
 
 // GoMapDescriptor is a full description of the map output struct.
@@ -2831,7 +2857,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		ns := allocNames(base, "Get"+base)
 		fieldName, fieldGetterName := ns[0], ns[1]
 
-		typename, wiretype := g.GoType(message, field)
+		typename, wiretype := g.GoStructFieldType(message, field)
 		jsonName := *field.Name
 		jsonTag := jsonName + ",omitempty"
 		repeatedNativeType := (!field.IsMessage() && !gogoproto.IsCustomType(field) && field.IsRepeated())

@@ -37,3 +37,6 @@ regenerate:
 	cp bug_test.go ./combos/both/
 	cp bug_test.go ./combos/marshaler/
 	cp bug_test.go ./combos/unmarshaler/
+	cp prototypes.go ./combos/both/
+	cp prototypes.go ./combos/marshaler/
+	cp prototypes.go ./combos/unmarshaler/

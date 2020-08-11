@@ -647,3 +647,11 @@ message NinRepNonByteCustomType {
 message ProtoType {
   optional string Field2 = 1;
 }
+
+message CastRepeated {
+	repeated ProtoType Field1 = 1 [(gogoproto.castrepeated) = "ProtoTypesPointer"];
+}
+
+message NidCastRepeated {
+	repeated ProtoType Field1 = 1 [(gogoproto.castrepeated) = "ProtoTypesNotPointer", (gogoproto.nullable) = false];
+}

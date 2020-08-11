@@ -139,6 +139,14 @@ func IsCastValue(field *google_protobuf.FieldDescriptorProto) bool {
 	return false
 }
 
+func IsCastRepeated(field *google_protobuf.FieldDescriptorProto) bool {
+	typ := GetCastRepeated(field)
+	if len(typ) > 0 {
+		return true
+	}
+	return false
+}
+
 func HasEnumDecl(file *google_protobuf.FileDescriptorProto, enum *google_protobuf.EnumDescriptorProto) bool {
 	return proto.GetBoolExtension(enum.Options, E_Enumdecl, proto.GetBoolExtension(file.Options, E_EnumdeclAll, true))
 }
@@ -192,6 +200,19 @@ func GetCastValue(field *google_protobuf.FieldDescriptorProto) string {
 	}
 	if field.Options != nil {
 		v, err := proto.GetExtension(field.Options, E_Castvalue)
+		if err == nil && v.(*string) != nil {
+			return *(v.(*string))
+		}
+	}
+	return ""
+}
+
+func GetCastRepeated(field *google_protobuf.FieldDescriptorProto) string {
+	if field == nil {
+		return ""
+	}
+	if field.Options != nil {
+		v, err := proto.GetExtension(field.Options, E_Castrepeated)
 		if err == nil && v.(*string) != nil {
 			return *(v.(*string))
 		}
