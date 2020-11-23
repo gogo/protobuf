@@ -33,6 +33,7 @@ package proto_test
 
 import (
 	"testing"
+	"time"
 
 	"github.com/gogo/protobuf/proto"
 
@@ -380,6 +381,15 @@ var mergeTests = []struct {
 			Others: []*pb.OtherMessage{},
 		},
 	},
+	{
+		src: &myMessage{},
+		dst: &myMessage{
+			Sub: Sub{Timestamp: newTimestampPtr(time.Date(1984, time.April, 4, 0, 0, 0, 0, time.UTC))},
+		},
+		want: &myMessage{
+			Sub: Sub{Timestamp: newTimestampPtr(time.Date(1984, time.April, 4, 0, 0, 0, 0, time.UTC))},
+		},
+	},
 }
 
 func TestMerge(t *testing.T) {
@@ -394,4 +404,51 @@ func TestMerge(t *testing.T) {
 			t.Errorf("Merge(%v, %v)\ngot  %v\nwant %v", m.dst, m.src, got, m.want)
 		}
 	}
+}
+
+func (r *myMessage) Reset()         { *r = myMessage{} }
+func (r *myMessage) String() string { return proto.CompactTextString(r) }
+func (r *myMessage) ProtoMessage()  {}
+
+func (r *Sub) Reset()         { *r = Sub{} }
+func (r *Sub) String() string { return proto.CompactTextString(r) }
+func (r *Sub) ProtoMessage()  {}
+
+// Merge merges this value with src.
+// src is assumed to be of type *Sub
+// Implements proto.Merger
+func (r *Sub) Merge(src proto.Message) {
+	s, ok := src.(*Sub)
+	if !ok {
+		return
+	}
+	if s.Timestamp != nil {
+		t := *s.Timestamp
+		r.Timestamp = &t
+	}
+}
+
+// myMessage describes a custom protobuf type that contains
+// a field using a non-protobuf type which does not lend itself
+// to reflect-style cloning due to the use of unexported fields.
+// custom implementation of the Merge interface is required
+// for Clone to succeed
+type myMessage struct {
+	// Sub describes a field embedded as value instead of a pointer
+	Sub Sub `protobuf:"bytes,1,opt,name=Sub,stdtime" json:"sub"`
+}
+
+type Sub struct {
+	// Timestamp specifies a timestamp as a pointer to a time.Time value.
+	// This is similar to the following protobuf definition:
+	// google.protobuf.Timestamp Tiestamp = 1 [
+	//	   (gogoproto.stdtime) = true,
+	//	   (gogoproto.nullable) = false,
+	//	   (gogoproto.jsontag) = "timestamp"
+	// ];
+	Timestamp *time.Time `protobuf:"bytes,1,opt,name=Timestamp,stdtime" json:"timestamp"`
+}
+
+func newTimestampPtr(t time.Time) *time.Time {
+	return &t
 }
