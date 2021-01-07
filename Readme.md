@@ -2,7 +2,7 @@
 
 # Protocol Buffers for Go with Gadgets
 
-[![Build Status](https://github.com/gogo/protobuf/workflows/ci-workflow/badge.svg)](https://github.com/gogo/protobuf/actions)
+[![Build Status](https://github.com/gogo/protobuf/workflows/Continuous%20Integration/badge.svg)](https://github.com/gogo/protobuf/actions)
 [![GoDoc](https://godoc.org/github.com/gogo/protobuf?status.svg)](http://godoc.org/github.com/gogo/protobuf)
 
 gogoprotobuf is a fork of <a href="https://github.com/golang/protobuf">golang/protobuf</a> with extra code generation features.
