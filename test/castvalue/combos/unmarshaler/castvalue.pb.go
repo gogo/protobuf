@@ -99,7 +99,9 @@ func init() {
 	proto.RegisterType((*Wilson)(nil), "castvalue.Wilson")
 }
 
-func init() { proto.RegisterFile("combos/unmarshaler/castvalue.proto", fileDescriptor_8a43cbd4586a8bcb) }
+func init() {
+	proto.RegisterFile("combos/unmarshaler/castvalue.proto", fileDescriptor_8a43cbd4586a8bcb)
+}
 
 var fileDescriptor_8a43cbd4586a8bcb = []byte{
 	// 359 bytes of a gzipped FileDescriptorProto
