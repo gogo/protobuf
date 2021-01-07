@@ -486,7 +486,9 @@ func init() {
 	proto.RegisterType((*NotPacked)(nil), "theproto3.NotPacked")
 }
 
-func init() { proto.RegisterFile("combos/unmarshaler/theproto3.proto", fileDescriptor_e24bba79c1e35a1f) }
+func init() {
+	proto.RegisterFile("combos/unmarshaler/theproto3.proto", fileDescriptor_e24bba79c1e35a1f)
+}
 
 var fileDescriptor_e24bba79c1e35a1f = []byte{
 	// 1612 bytes of a gzipped FileDescriptorProto
