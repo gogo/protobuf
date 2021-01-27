@@ -149,12 +149,12 @@ tests:
 	(cd test/stdtypes && make test)
 
 vet:
-	go get golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow
+	GO111MODULE=on go get golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@release-branch.go1.15
 	go vet ./...
 	go vet -vettool=$(shell which shadow) ./...
 
 errcheck:
-	go get github.com/kisielk/errcheck
+	GO111MODULE=on go get github.com/kisielk/errcheck@v1.2.0
 	errcheck ./test/...
 
 drone:
