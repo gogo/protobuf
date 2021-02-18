@@ -99,7 +99,9 @@ func init() {
 	proto.RegisterType((*Wilson)(nil), "castvalue.Wilson")
 }
 
-func init() { proto.RegisterFile("combos/unmarshaler/castvalue.proto", fileDescriptor_8a43cbd4586a8bcb) }
+func init() {
+	proto.RegisterFile("combos/unmarshaler/castvalue.proto", fileDescriptor_8a43cbd4586a8bcb)
+}
 
 var fileDescriptor_8a43cbd4586a8bcb = []byte{
 	// 359 bytes of a gzipped FileDescriptorProto
@@ -1034,7 +1036,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					if err != nil {
 						return err
 					}
-					if skippy < 0 {
+					if (skippy < 0) || (iNdEx+skippy) < 0 {
 						return ErrInvalidLengthCastvalue
 					}
 					if (iNdEx + skippy) > postIndex {
@@ -1149,7 +1151,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 					if err != nil {
 						return err
 					}
-					if skippy < 0 {
+					if (skippy < 0) || (iNdEx+skippy) < 0 {
 						return ErrInvalidLengthCastvalue
 					}
 					if (iNdEx + skippy) > postIndex {
@@ -1166,10 +1168,7 @@ func (m *Castaway) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthCastvalue
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthCastvalue
 			}
 			if (iNdEx + skippy) > l {
@@ -1240,10 +1239,7 @@ func (m *Wilson) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthCastvalue
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthCastvalue
 			}
 			if (iNdEx + skippy) > l {
