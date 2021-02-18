@@ -35,7 +35,7 @@ Here is a link explaining <a href="https://github.com/golang/protobuf/issues/763
 
 These projects use gogoprotobuf:
 
-  - <a href="http://godoc.org/github.com/coreos/etcd">etcd</a> - <a href="https://blog.gopheracademy.com/advent-2015/etcd-distributed-key-value-store-with-grpc-http2/">blog</a> - <a href="https://github.com/coreos/etcd/blob/master/etcdserver/etcdserverpb/etcdserver.proto">sample proto file</a>
+  - <a href="http://godoc.org/github.com/coreos/etcd">etcd</a> - <a href="https://blog.gopheracademy.com/advent-2015/etcd-distributed-key-value-store-with-grpc-http2/">blog</a> - <a href="https://github.com/etcd-io/etcd/blob/master/api/etcdserverpb/etcdserver.proto">sample proto file</a>
   - <a href="https://www.spacemonkey.com/">spacemonkey</a> - <a href="https://www.spacemonkey.com/blog/posts/go-space-monkey">blog</a>
   - <a href="http://badoo.com">badoo</a> - <a href="https://github.com/badoo/lsd/blob/32061f501c5eca9c76c596d790b450501ba27b2f/proto/lsd.proto">sample proto file</a>
   - <a href="https://github.com/mesos/mesos-go">mesos-go</a> - <a href="https://github.com/mesos/mesos-go/blob/f9e5fb7c2f50ab5f23299f26b6b07c5d6afdd252/api/v0/mesosproto/authentication.proto">sample proto file</a>
