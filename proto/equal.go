@@ -215,7 +215,7 @@ func equalAny(v1, v2 reflect.Value, prop *Properties) bool {
 		}
 		return true
 	case reflect.String:
-		return v1.Interface().(string) == v2.Interface().(string)
+		return v1.String() == v2.String()
 	case reflect.Struct:
 		return equalStruct(v1, v2)
 	case reflect.Uint32, reflect.Uint64:
