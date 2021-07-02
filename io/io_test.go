@@ -36,6 +36,7 @@ import (
 	goio "io"
 	"math/rand"
 	"testing"
+	stdiotest "testing/iotest"
 	"time"
 )
 
@@ -191,7 +192,7 @@ func TestVarintError(t *testing.T) {
 func TestFull(t *testing.T) {
 	buf := newBuffer()
 	writer := io.NewFullWriter(buf)
-	reader := io.NewFullReader(buf, 1024*1024)
+	reader := io.NewFullReader(stdiotest.OneByteReader(buf), 1024*1024)
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	msgIn := test.NewPopulatedNinOptNative(r, true)
 	if err := writer.WriteMsg(msgIn); err != nil {

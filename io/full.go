@@ -87,11 +87,19 @@ func NewFullReader(r io.Reader, maxSize int) ReadCloser {
 }
 
 func (this *fullReader) ReadMsg(msg proto.Message) error {
-	length, err := this.r.Read(this.buf)
-	if err != nil {
-		return err
+	n, maxSize := 0, len(this.buf)
+	for n < maxSize {
+		nn, err := this.r.Read(this.buf[n:])
+		n += nn
+		if err != nil {
+			if n > 0 && err == io.EOF {
+				break
+			}
+			return err
+		}
 	}
-	return proto.Unmarshal(this.buf[:length], msg)
+
+	return proto.Unmarshal(this.buf[:n], msg)
 }
 
 func (this *fullReader) Close() error {
