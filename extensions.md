@@ -72,7 +72,7 @@ The enumprefix, getters and stringer extensions can be used to remove some of th
 <tr><td> goproto_unkeyed (alpha) </td><td> Message </td><td> bool </td><td>if false, XXX_unkeyed field is not generated. </td><td> true </td></tr>
 <tr><td> goproto_sizecache (alpha) </td><td> Message </td><td> bool </td><td>if false, XXX_sizecache field is not generated. </td><td> true </td></tr>
 <tr><td> goproto_registration (beta) </td><td> File </td><td> bool </td><td>if true, the generated files will register all messages and types against both gogo/protobuf and golang/protobuf. This is necessary when using third-party packages which read registrations from golang/protobuf (such as the grpc-gateway). </td><td> false </td></tr>
-<tr><td> message_name </td><td> Message </td><td> bool </td><td>if true, a `XXX_MessageName()` method is generated that returns the message's name.  This is useful for grpc-gateway compatibility.</td><td> false </td></tr>
+<tr><td> messagename </td><td> Message </td><td> bool </td><td>if true, a `XXX_MessageName()` method is generated that returns the message's name.  This is useful for grpc-gateway compatibility.</td><td> false </td></tr>
 </table>
 
 # Less Typing
