@@ -202,6 +202,17 @@ func equalAny(v1, v2 reflect.Value, prop *Properties) bool {
 			if v1.IsNil() != v2.IsNil() {
 				return false
 			}
+
+			// Edge case: if field is a cast type of []byte, special conversion
+			// to []byte is required for bytes.Equal.
+			if v1.Type() != reflect.TypeOf([]byte{}) {
+				w1 := reflect.New(reflect.TypeOf([]byte{})).Elem()
+				w2 := reflect.New(reflect.TypeOf([]byte{})).Elem()
+				w1.Set(v1)
+				w2.Set(v2)
+				return bytes.Equal(w1.Interface().([]byte), w2.Interface().([]byte))
+			}
+
 			return bytes.Equal(v1.Interface().([]byte), v2.Interface().([]byte))
 		}
 
