@@ -306,6 +306,10 @@ func IsUnion(file *google_protobuf.FileDescriptorProto, message *google_protobuf
 	return proto.GetBoolExtension(message.Options, E_Onlyone, proto.GetBoolExtension(file.Options, E_OnlyoneAll, false))
 }
 
+func GetStringAnnotation(message *google_protobuf.DescriptorProto) string {
+	return proto.GetStringExtension(message.Options, E_Annotation)
+}
+
 func HasGoString(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
 	return proto.GetBoolExtension(message.Options, E_Gostring, proto.GetBoolExtension(file.Options, E_GostringAll, false))
 }

@@ -79,6 +79,21 @@ func GetBoolExtension(pb Message, extension *ExtensionDesc, ifnotset bool) bool 
 	return *(value.(*bool))
 }
 
+func GetStringExtension(pb Message, extension *ExtensionDesc) string {
+	if reflect.ValueOf(pb).IsNil() {
+		return ""
+	}
+	value, err := GetExtension(pb, extension)
+	if err != nil {
+		return ""
+	}
+
+	if value.(*string) == nil {
+		return ""
+	}
+	return *(value.(*string))
+}
+
 func (this *Extension) Equal(that *Extension) bool {
 	if err := this.Encode(); err != nil {
 		return false

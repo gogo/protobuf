@@ -595,6 +595,31 @@ func MessageType(name string) reflect.Type {
 	return protoMapTypes[name]
 }
 
+// A registry of message type's annotations.
+var (
+	annotations = make(map[reflect.Type]string) // message type => annotation
+)
+
+// RegisterAnnotation is called from generated code and maps from the
+// message type to its annotation.
+func RegisterAnnotation(x Message, annotation string) {
+	annotations[reflect.TypeOf(x)] = annotation
+}
+
+// GetAnnotation returns the annotation for a message.
+func GetAnnotation(x Message) string {
+	return annotations[reflect.TypeOf(x)]
+}
+
+// GetAnnotations returns all annotations registered.
+func GetAnnotations() []string {
+	var ret []string
+	for _, v := range annotations {
+		ret = append(ret, v)
+	}
+	return ret
+}
+
 // A registry of all linked proto files.
 var (
 	protoFiles = make(map[string][]byte) // file name => fileDescriptor
