@@ -1413,7 +1413,15 @@ func (g *Generator) generateImports() {
 	} else {
 		g.PrintImport(GoPackageName(g.Pkg["proto"]), GoImportPath(g.ImportPrefix)+GoImportPath("github.com/golang/protobuf/proto"))
 	}
-	for importPath, packageName := range imports {
+	importsOrder := make([]GoImportPath, 0, len(imports))
+	for importPath := range imports {
+		importsOrder = append(importsOrder, importPath)
+	}
+	sort.Slice(importsOrder, func(i, j int) bool {
+		return importsOrder[i] < importsOrder[j]
+	})
+	for _, importPath := range importsOrder {
+		packageName := imports[importPath]
 		g.P(packageName, " ", GoImportPath(g.ImportPrefix)+importPath)
 	}
 	// Custom gogo imports
