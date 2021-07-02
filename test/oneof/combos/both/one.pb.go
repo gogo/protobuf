@@ -687,17 +687,17 @@ func (this *Subby) Compare(that interface{}) int {
 	} else if this == nil {
 		return -1
 	}
-	if this.Sub != nil && that1.Sub != nil {
-		if *this.Sub != *that1.Sub {
-			if *this.Sub < *that1.Sub {
-				return -1
-			}
+	if that1.Sub == nil {
+		if this.Sub != nil {
 			return 1
 		}
-	} else if this.Sub != nil {
-		return 1
-	} else if that1.Sub != nil {
+	} else if this.Sub == nil {
 		return -1
+	} else if *this.Sub != *that1.Sub {
+		if *this.Sub < *that1.Sub {
+			return -1
+		}
+		return 1
 	}
 	if c := bytes.Compare(this.XXX_unrecognized, that1.XXX_unrecognized); c != 0 {
 		return c
