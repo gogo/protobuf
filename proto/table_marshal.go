@@ -96,7 +96,7 @@ type marshalElemInfo struct {
 
 var (
 	marshalInfoMap  = map[reflect.Type]*marshalInfo{}
-	marshalInfoLock sync.Mutex
+	marshalInfoLock sync.RWMutex
 
 	uint8SliceType = reflect.TypeOf(([]uint8)(nil)).Kind()
 )
@@ -105,8 +105,14 @@ var (
 // The info it returns may not necessarily initialized.
 // t is the type of the message (NOT the pointer to it).
 func getMarshalInfo(t reflect.Type) *marshalInfo {
-	marshalInfoLock.Lock()
+	marshalInfoLock.RLock()
 	u, ok := marshalInfoMap[t]
+	marshalInfoLock.RUnlock()
+	if ok {
+		return u
+	}
+	marshalInfoLock.Lock()
+	u, ok = marshalInfoMap[t]
 	if !ok {
 		u = &marshalInfo{typ: t}
 		marshalInfoMap[t] = u
