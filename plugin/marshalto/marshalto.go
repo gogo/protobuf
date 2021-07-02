@@ -746,7 +746,33 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			p.encodeKey(fieldNumber, wireType)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
-		if !gogoproto.IsCustomType(field) {
+		if gogoproto.IsCastTypeWith(field) {
+			if !nullable || repeated {
+				panic("casttypewith only supports single pointers")
+			}
+			_, _, _, casterTyp, err := generator.GetCastTypeWith(field)
+			if err != nil {
+				panic(err)
+			}
+			p.P(`{`)
+			p.In()
+			p.P("__caster := &", casterTyp, "{}")
+			if protoSizer {
+				p.P(`size := __caster.ProtoSize(m.`, fieldname, `)`)
+			} else {
+				p.P(`size := __caster.Size(m.`, fieldname, `)`)
+			}
+			p.P(`i -= size`)
+			p.P(`if _, err := __caster.MarshalTo(m.`, fieldname, `, dAtA[i:]); err != nil {`)
+			p.In()
+			p.P(`return 0, err`)
+			p.Out()
+			p.P(`}`)
+			p.Out()
+			p.callVarint(`size`)
+			p.P(`}`)
+			p.encodeKey(fieldNumber, wireType)
+		} else if !gogoproto.IsCustomType(field) {
 			if repeated {
 				val := p.reverseListRange(`m.`, fieldname)
 				p.P(`i -= len(`, val, `)`)

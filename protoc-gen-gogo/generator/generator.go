@@ -1727,6 +1727,11 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		casttype = ",casttype=" + gogoproto.GetCastType(field)
 	}
 
+	casttypewith := ""
+	if gogoproto.IsCastTypeWith(field) {
+		casttype = ",casttypewith=" + gogoproto.GetCastTypeWith(field)
+	}
+
 	castkey := ""
 	if gogoproto.IsCastKey(field) {
 		castkey = ",castkey=" + gogoproto.GetCastKey(field)
@@ -1764,7 +1769,7 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 	if gogoproto.IsWktPtr(field) {
 		wktptr = ",wktptr"
 	}
-	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+	return strconv.Quote(fmt.Sprintf("%s,%d,%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
 		wiretype,
 		field.GetNumber(),
 		optrepreq,
@@ -1776,6 +1781,7 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		embed,
 		ctype,
 		casttype,
+		casttypewith,
 		castkey,
 		castvalue,
 		stdtime,
@@ -1887,6 +1893,27 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 		if len(packageName) > 0 {
 			g.customImports = append(g.customImports, packageName)
 		}
+	case gogoproto.IsCastTypeWith(field) && (gogoproto.IsCustomType(field) || gogoproto.IsCastType(field)):
+		g.Fail(field.GetName() + " casttypewith is incompatible with customtype and casttype")
+	case gogoproto.IsCastTypeWith(field):
+		var casteePkg string
+		var casterPkg string
+		var err error
+		if field.GetType() == descriptor.FieldDescriptorProto_TYPE_BYTES {
+			casteePkg, typ, casterPkg, _, err = getCastTypeWith(field)
+			if err != nil {
+				g.Fail(err.Error())
+			}
+			if len(casteePkg) > 0 {
+				g.customImports = append(g.customImports, casteePkg)
+			}
+			if len(casterPkg) > 0 {
+				g.customImports = append(g.customImports, casterPkg)
+			}
+			typ = "*" + typ
+		} else {
+			g.Fail(field.GetName() + " casttypewith only works with bytes")
+		}
 	case gogoproto.IsStdTime(field):
 		g.customImports = append(g.customImports, "time")
 		typ = "time.Time"
@@ -1971,6 +1998,21 @@ func (g *Generator) GoMapType(d *Descriptor, field *descriptor.FieldDescriptorPr
 		return m
 	}
 
+	if gogoproto.IsCastTypeWith(field) {
+		var packageName string
+		var typ string
+		var err error
+		packageName, typ, _, _, err = getCastTypeWith(field)
+		if err != nil {
+			g.Fail(err.Error())
+		}
+		if len(packageName) > 0 {
+			g.customImports = append(g.customImports, packageName)
+		}
+		m.GoType = typ
+		return m
+	}
+
 	// We don't use stars, except for message-typed values.
 	// Message and enum types are the only two possibly foreign types used in maps,
 	// so record their use. They are not permitted as map keys.
@@ -1983,7 +2025,7 @@ func (g *Generator) GoMapType(d *Descriptor, field *descriptor.FieldDescriptorPr
 		if !gogoproto.IsNullable(m.ValueAliasField) {
 			valType = strings.TrimPrefix(valType, "*")
 		}
-		if !gogoproto.IsStdType(m.ValueAliasField) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
+		if !gogoproto.IsStdType(m.ValueAliasField) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) && !gogoproto.IsCastTypeWith(field) {
 			g.RecordTypeUse(m.ValueAliasField.GetTypeName())
 		}
 	default:
@@ -2591,7 +2633,7 @@ func (g *Generator) generateOneofDecls(mc *msgCtx, topLevelFields []topLevelFiel
 		for i, sf := range of.subFields {
 			fieldFullPath := fmt.Sprintf("%s,%d,%d", mc.message.path, messageFieldPath, i)
 			g.P("type ", Annotate(mc.message.file, fieldFullPath, sf.oneofTypeName), " struct{ ", Annotate(mc.message.file, fieldFullPath, sf.goName), " ", sf.goType, " `", sf.tags, "` }")
-			if !gogoproto.IsStdType(sf.protoField) && !gogoproto.IsCustomType(sf.protoField) && !gogoproto.IsCastType(sf.protoField) {
+			if !gogoproto.IsStdType(sf.protoField) && !gogoproto.IsCustomType(sf.protoField) && !gogoproto.IsCastType(sf.protoField) && !gogoproto.IsCastTypeWith(sf.protoField) {
 				g.RecordTypeUse(sf.protoField.GetTypeName())
 			}
 		}
@@ -2958,7 +3000,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			}
 
 			oneofField.subFields = append(oneofField.subFields, &sf)
-			if !gogoproto.IsStdType(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
+			if !gogoproto.IsStdType(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) && !gogoproto.IsCastTypeWith(field) {
 				g.RecordTypeUse(field.GetTypeName())
 			}
 			continue
@@ -2991,7 +3033,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		topLevelFields = append(topLevelFields, pf)
 
 		if gogoproto.HasTypeDecl(message.file.FileDescriptorProto, message.DescriptorProto) {
-			if !gogoproto.IsStdType(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) {
+			if !gogoproto.IsStdType(field) && !gogoproto.IsCustomType(field) && !gogoproto.IsCastType(field) && !gogoproto.IsCastTypeWith(field) {
 				g.RecordTypeUse(field.GetTypeName())
 			}
 		} else {
@@ -2999,7 +3041,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			// over all its fields to be able to mark as used any imported types
 			// used by those fields.
 			for _, mfield := range message.Field {
-				if !gogoproto.IsStdType(mfield) && !gogoproto.IsCustomType(mfield) && !gogoproto.IsCastType(mfield) {
+				if !gogoproto.IsStdType(mfield) && !gogoproto.IsCustomType(mfield) && !gogoproto.IsCastType(mfield) && !gogoproto.IsCastTypeWith(mfield) {
 					g.RecordTypeUse(mfield.GetTypeName())
 				}
 			}

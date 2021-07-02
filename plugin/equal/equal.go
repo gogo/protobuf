@@ -305,7 +305,26 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 	isTimestamp := gogoproto.IsStdTime(field)
 	// oneof := field.OneofIndex != nil
 	if !repeated {
-		if ctype || isTimestamp {
+		if gogoproto.IsCastTypeWith(field) {
+			_, _, _, casterTyp, err := generator.GetCastTypeWith(field)
+			if err != nil {
+				panic(err)
+			}
+			p.P(`{`)
+			p.In()
+			p.P("__caster := &", casterTyp, "{}")
+			p.P(`if !__caster.Equal(this.`, fieldname, `, that1.`, fieldname, `){`)
+			p.In()
+			if verbose {
+				p.P(`return `, p.fmtPkg.Use(), `.Errorf("`, fieldname, ` this(%v) Not Equal that(%v)", this.`, fieldname, `, that1.`, fieldname, `)`)
+			} else {
+				p.P(`return false`)
+			}
+			p.Out()
+			p.P(`}`)
+			p.Out()
+			p.P(`}`)
+		} else if ctype || isTimestamp {
 			if nullable {
 				p.P(`if that1.`, fieldname, ` == nil {`)
 				p.In()

@@ -140,6 +140,7 @@ regenerate:
 	make -C test/issue620 regenerate
 	make -C test/protobuffer regenerate
 	make -C test/issue630 regenerate
+	make -C test/casttypewith regenerate
 
 	make gofmt
 
