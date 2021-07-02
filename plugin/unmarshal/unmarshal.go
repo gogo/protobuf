@@ -272,9 +272,18 @@ func (p *unmarshal) declareMapField(varName string, nullable bool, customType bo
 	case descriptor.FieldDescriptorProto_TYPE_BOOL:
 		p.P(`var `, varName, ` bool`)
 	case descriptor.FieldDescriptorProto_TYPE_STRING:
-		cast, _ := p.GoType(nil, field)
-		cast = strings.Replace(cast, "*", "", 1)
-		p.P(`var `, varName, ` `, cast)
+		if customType {
+			_, ctyp, err := generator.GetCustomType(field)
+			if err != nil {
+				panic(err)
+			}
+			p.P(`var `, varName, `1 `, ctyp)
+			p.P(`var `, varName, ` = &`, varName, `1`)
+		} else {
+			cast, _ := p.GoType(nil, field)
+			cast = strings.Replace(cast, "*", "", 1)
+			p.P(`var `, varName, ` `, cast)
+		}
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		if gogoproto.IsStdTime(field) {
 			p.P(varName, ` := new(time.Time)`)
@@ -652,15 +661,54 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 		p.Out()
 		p.P(`}`)
-		if oneof {
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{`, typ, `(dAtA[iNdEx:postIndex])}`)
-		} else if repeated {
-			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, typ, `(dAtA[iNdEx:postIndex]))`)
-		} else if proto3 || !nullable {
-			p.P(`m.`, fieldname, ` = `, typ, `(dAtA[iNdEx:postIndex])`)
+		if !gogoproto.IsCustomType(field) {
+			if oneof {
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{`, typ, `(dAtA[iNdEx:postIndex])}`)
+			} else if repeated {
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, typ, `(dAtA[iNdEx:postIndex]))`)
+			} else if proto3 || !nullable {
+				p.P(`m.`, fieldname, ` = `, typ, `(dAtA[iNdEx:postIndex])`)
+			} else {
+				p.P(`s := `, typ, `(dAtA[iNdEx:postIndex])`)
+				p.P(`m.`, fieldname, ` = &s`)
+			}
 		} else {
-			p.P(`s := `, typ, `(dAtA[iNdEx:postIndex])`)
-			p.P(`m.`, fieldname, ` = &s`)
+			_, ctyp, err := generator.GetCustomType(field)
+			if err != nil {
+				panic(err)
+			}
+			if oneof {
+				p.P(`var vv `, ctyp)
+				p.P(`v := &vv`)
+				p.P(`if err := v.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {`)
+				p.In()
+				p.P(`return err`)
+				p.Out()
+				p.P(`}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{*v}`)
+			} else if repeated {
+				p.P(`var v `, ctyp)
+				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
+				p.P(`if err := m.`, fieldname, `[len(m.`, fieldname, `)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {`)
+				p.In()
+				p.P(`return err`)
+				p.Out()
+				p.P(`}`)
+			} else if nullable {
+				p.P(`var v `, ctyp)
+				p.P(`m.`, fieldname, ` = &v`)
+				p.P(`if err := m.`, fieldname, `.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {`)
+				p.In()
+				p.P(`return err`)
+				p.Out()
+				p.P(`}`)
+			} else {
+				p.P(`if err := m.`, fieldname, `.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {`)
+				p.In()
+				p.P(`return err`)
+				p.Out()
+				p.P(`}`)
+			}
 		}
 		p.P(`iNdEx = postIndex`)
 	case descriptor.FieldDescriptorProto_TYPE_GROUP:
