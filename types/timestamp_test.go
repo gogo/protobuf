@@ -32,6 +32,7 @@
 package types
 
 import (
+	"fmt"
 	"math"
 	"testing"
 	"time"
@@ -148,5 +149,75 @@ func TestTimestampNow(t *testing.T) {
 	}
 	if tm.Before(before) || tm.After(after) {
 		t.Errorf("between %v and %v\nTimestamp(TimestampNow()) = %v", before, after, tm)
+	}
+}
+
+func TestSizeOfStdTimeAllocs(t *testing.T) {
+	for _, s := range tests {
+		if !s.valid {
+			continue // May be allocs in invalid cases.
+		}
+
+		nSizeOfAllocs := testing.AllocsPerRun(1, func() {
+			SizeOfStdTime(s.t)
+		})
+
+		if nSizeOfAllocs > 0 {
+			t.Fatalf("unexpected %v allocs during SizeOf for %v", nSizeOfAllocs, s.t)
+		}
+	}
+}
+
+func TestStdTimeMarshalToAllocs(t *testing.T) {
+	for _, s := range tests {
+		if !s.valid {
+			continue // May be allocs in invalid cases.
+		}
+
+		size := SizeOfStdTime(s.t)
+		buf := make([]byte, size)
+		nMarshalAllocs := testing.AllocsPerRun(1, func() {
+			if _, err := StdTimeMarshalTo(s.t, buf); err != nil {
+				t.Fatal(err)
+			}
+		})
+
+		if nMarshalAllocs > 0 {
+			t.Fatalf("unexpected %v allocs during marshal for %v", nMarshalAllocs, s.t)
+		}
+	}
+}
+
+func TestStdTimeUnmarshalAllocs(t *testing.T) {
+	for _, s := range tests {
+		if !s.valid {
+			continue // May be allocs in invalid cases.
+		}
+
+		data, err := StdTimeMarshal(s.t)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		var tt time.Time
+		nUnmarshalAllocs := testing.AllocsPerRun(1, func() {
+			if err := StdTimeUnmarshal(&tt, data); err != nil {
+				t.Fatal(err)
+			}
+		})
+
+		if nUnmarshalAllocs > 0 {
+			t.Fatalf("unexpected %v allocs during unmarshal for %v", nUnmarshalAllocs, s.t)
+		}
+	}
+}
+
+func TestFormatTimestamp(t *testing.T) {
+	for _, s := range tests {
+		expected := fmt.Sprintf("%#v", s.ts)
+		got := formatTimestamp(s.ts)
+		if got != expected {
+			t.Errorf("got %v expected %v", got, expected)
+		}
 	}
 }

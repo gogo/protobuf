@@ -58,7 +58,7 @@ func NewPopulatedStdTime(r interface {
 }
 
 func SizeOfStdTime(t time.Time) int {
-	ts, err := TimestampProto(t)
+	ts, err := timestampProto(t)
 	if err != nil {
 		return 0
 	}
@@ -73,7 +73,7 @@ func StdTimeMarshal(t time.Time) ([]byte, error) {
 }
 
 func StdTimeMarshalTo(t time.Time, data []byte) (int, error) {
-	ts, err := TimestampProto(t)
+	ts, err := timestampProto(t)
 	if err != nil {
 		return 0, err
 	}
