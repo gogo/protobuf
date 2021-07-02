@@ -192,10 +192,10 @@ func (this *FieldDescriptorProto) GoString() string {
 		s = append(s, "Number: "+valueToGoStringDescriptor(this.Number, "int32")+",\n")
 	}
 	if this.Label != nil {
-		s = append(s, "Label: "+valueToGoStringDescriptor(this.Label, "FieldDescriptorProto_Label")+",\n")
+		s = append(s, "Label: "+valueToGoStringDescriptor(this.Label, "google.protobuf_FieldDescriptorProto_Label")+",\n")
 	}
 	if this.Type != nil {
-		s = append(s, "Type: "+valueToGoStringDescriptor(this.Type, "FieldDescriptorProto_Type")+",\n")
+		s = append(s, "Type: "+valueToGoStringDescriptor(this.Type, "google.protobuf_FieldDescriptorProto_Type")+",\n")
 	}
 	if this.TypeName != nil {
 		s = append(s, "TypeName: "+valueToGoStringDescriptor(this.TypeName, "string")+",\n")
@@ -378,7 +378,7 @@ func (this *FileOptions) GoString() string {
 		s = append(s, "JavaStringCheckUtf8: "+valueToGoStringDescriptor(this.JavaStringCheckUtf8, "bool")+",\n")
 	}
 	if this.OptimizeFor != nil {
-		s = append(s, "OptimizeFor: "+valueToGoStringDescriptor(this.OptimizeFor, "FileOptions_OptimizeMode")+",\n")
+		s = append(s, "OptimizeFor: "+valueToGoStringDescriptor(this.OptimizeFor, "google.protobuf_FileOptions_OptimizeMode")+",\n")
 	}
 	if this.GoPackage != nil {
 		s = append(s, "GoPackage: "+valueToGoStringDescriptor(this.GoPackage, "string")+",\n")
@@ -467,13 +467,13 @@ func (this *FieldOptions) GoString() string {
 	s := make([]string, 0, 11)
 	s = append(s, "&descriptor.FieldOptions{")
 	if this.Ctype != nil {
-		s = append(s, "Ctype: "+valueToGoStringDescriptor(this.Ctype, "FieldOptions_CType")+",\n")
+		s = append(s, "Ctype: "+valueToGoStringDescriptor(this.Ctype, "google.protobuf_FieldOptions_CType")+",\n")
 	}
 	if this.Packed != nil {
 		s = append(s, "Packed: "+valueToGoStringDescriptor(this.Packed, "bool")+",\n")
 	}
 	if this.Jstype != nil {
-		s = append(s, "Jstype: "+valueToGoStringDescriptor(this.Jstype, "FieldOptions_JSType")+",\n")
+		s = append(s, "Jstype: "+valueToGoStringDescriptor(this.Jstype, "google.protobuf_FieldOptions_JSType")+",\n")
 	}
 	if this.Lazy != nil {
 		s = append(s, "Lazy: "+valueToGoStringDescriptor(this.Lazy, "bool")+",\n")
@@ -580,7 +580,7 @@ func (this *MethodOptions) GoString() string {
 		s = append(s, "Deprecated: "+valueToGoStringDescriptor(this.Deprecated, "bool")+",\n")
 	}
 	if this.IdempotencyLevel != nil {
-		s = append(s, "IdempotencyLevel: "+valueToGoStringDescriptor(this.IdempotencyLevel, "MethodOptions_IdempotencyLevel")+",\n")
+		s = append(s, "IdempotencyLevel: "+valueToGoStringDescriptor(this.IdempotencyLevel, "google.protobuf_MethodOptions_IdempotencyLevel")+",\n")
 	}
 	if this.UninterpretedOption != nil {
 		s = append(s, "UninterpretedOption: "+fmt.Sprintf("%#v", this.UninterpretedOption)+",\n")
