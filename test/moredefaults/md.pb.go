@@ -253,8 +253,8 @@ func (this *MoreDefaultsA) Equal(that interface{}) bool {
 func NewPopulatedMoreDefaultsB(r randyMd, easy bool) *MoreDefaultsB {
 	this := &MoreDefaultsB{}
 	if r.Intn(5) != 0 {
-		v1 := string(randStringMd(r))
-		this.Field1 = &v1
+		vAlue1 := string(randStringMd(r))
+		this.Field1 = &vAlue1
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedMd(r, 2)
@@ -265,11 +265,11 @@ func NewPopulatedMoreDefaultsB(r randyMd, easy bool) *MoreDefaultsB {
 func NewPopulatedMoreDefaultsA(r randyMd, easy bool) *MoreDefaultsA {
 	this := &MoreDefaultsA{}
 	if r.Intn(5) != 0 {
-		v2 := int64(r.Int63())
+		vAlue2 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v2 *= -1
+			vAlue2 *= -1
 		}
-		this.Field1 = &v2
+		this.Field1 = &vAlue2
 	}
 	this.Field2 = int64(r.Int63())
 	if r.Intn(2) == 0 {
@@ -278,13 +278,13 @@ func NewPopulatedMoreDefaultsA(r randyMd, easy bool) *MoreDefaultsA {
 	if r.Intn(5) != 0 {
 		this.B1 = NewPopulatedMoreDefaultsB(r, easy)
 	}
-	v3 := NewPopulatedMoreDefaultsB(r, easy)
-	this.B2 = *v3
+	vAlue3 := NewPopulatedMoreDefaultsB(r, easy)
+	this.B2 = *vAlue3
 	if r.Intn(5) != 0 {
 		this.A1 = example.NewPopulatedA(r, easy)
 	}
-	v4 := example.NewPopulatedA(r, easy)
-	this.A2 = *v4
+	vAlue4 := example.NewPopulatedA(r, easy)
+	this.A2 = *vAlue4
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedMd(r, 7)
 	}
@@ -310,9 +310,9 @@ func randUTF8RuneMd(r randyMd) rune {
 	return rune(ru + 61)
 }
 func randStringMd(r randyMd) string {
-	v5 := r.Intn(100)
-	tmps := make([]rune, v5)
-	for i := 0; i < v5; i++ {
+	vAlue5 := r.Intn(100)
+	tmps := make([]rune, vAlue5)
+	for i := 0; i < vAlue5; i++ {
 		tmps[i] = randUTF8RuneMd(r)
 	}
 	return string(tmps)
@@ -334,11 +334,11 @@ func randFieldMd(dAtA []byte, r randyMd, fieldNumber int, wire int) []byte {
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateMd(dAtA, uint64(key))
-		v6 := r.Int63()
+		vAlue6 := r.Int63()
 		if r.Intn(2) == 0 {
-			v6 *= -1
+			vAlue6 *= -1
 		}
-		dAtA = encodeVarintPopulateMd(dAtA, uint64(v6))
+		dAtA = encodeVarintPopulateMd(dAtA, uint64(vAlue6))
 	case 1:
 		dAtA = encodeVarintPopulateMd(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

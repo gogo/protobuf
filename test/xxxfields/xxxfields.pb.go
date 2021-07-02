@@ -736,46 +736,46 @@ func (this *StructWithoutSizeCache) Equal(that interface{}) bool {
 func NewPopulatedNativeWithSizeCache(r randyXxxfields, easy bool) *NativeWithSizeCache {
 	this := &NativeWithSizeCache{}
 	if r.Intn(5) != 0 {
-		v1 := float64(r.Float64())
+		vAlue1 := float64(r.Float64())
 		if r.Intn(2) == 0 {
-			v1 *= -1
+			vAlue1 *= -1
 		}
-		this.Field1 = &v1
+		this.Field1 = &vAlue1
 	}
 	if r.Intn(5) != 0 {
-		v2 := float32(r.Float32())
+		vAlue2 := float32(r.Float32())
 		if r.Intn(2) == 0 {
-			v2 *= -1
+			vAlue2 *= -1
 		}
-		this.Field2 = &v2
+		this.Field2 = &vAlue2
 	}
 	if r.Intn(5) != 0 {
-		v3 := int32(r.Int31())
+		vAlue3 := int32(r.Int31())
 		if r.Intn(2) == 0 {
-			v3 *= -1
+			vAlue3 *= -1
 		}
-		this.Field3 = &v3
+		this.Field3 = &vAlue3
 	}
 	if r.Intn(5) != 0 {
-		v4 := int64(r.Int63())
+		vAlue4 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			vAlue4 *= -1
 		}
-		this.Field4 = &v4
+		this.Field4 = &vAlue4
 	}
 	this.Field11 = uint64(uint64(r.Uint32()))
 	if r.Intn(5) != 0 {
-		v5 := bool(bool(r.Intn(2) == 0))
-		this.Field13 = &v5
+		vAlue5 := bool(bool(r.Intn(2) == 0))
+		this.Field13 = &vAlue5
 	}
 	if r.Intn(5) != 0 {
-		v6 := string(randStringXxxfields(r))
-		this.Field14 = &v6
+		vAlue6 := string(randStringXxxfields(r))
+		this.Field14 = &vAlue6
 	}
 	if r.Intn(5) != 0 {
-		v7 := r.Intn(100)
-		this.Field15 = make([]byte, v7)
-		for i := 0; i < v7; i++ {
+		vAlue7 := r.Intn(100)
+		this.Field15 = make([]byte, vAlue7)
+		for i := 0; i < vAlue7; i++ {
 			this.Field15[i] = byte(r.Intn(256))
 		}
 	}
@@ -794,32 +794,32 @@ func NewPopulatedStructWithSizeCache(r randyXxxfields, easy bool) *StructWithSiz
 	if r.Intn(2) == 0 {
 		this.Field2 *= -1
 	}
-	v8 := NewPopulatedNativeWithSizeCache(r, easy)
-	this.Field3 = *v8
+	vAlue8 := NewPopulatedNativeWithSizeCache(r, easy)
+	this.Field3 = *vAlue8
 	if r.Intn(5) != 0 {
-		v9 := uint64(uint64(r.Uint32()))
-		this.Field6 = &v9
+		vAlue9 := uint64(uint64(r.Uint32()))
+		this.Field6 = &vAlue9
 	}
 	this.Field7 = int32(r.Int31())
 	if r.Intn(2) == 0 {
 		this.Field7 *= -1
 	}
-	v10 := NewPopulatedNativeWithoutSizeCache(r, easy)
-	this.Field8 = *v10
+	vAlue10 := NewPopulatedNativeWithoutSizeCache(r, easy)
+	this.Field8 = *vAlue10
 	if r.Intn(5) != 0 {
-		v11 := r.Intn(10)
-		this.Field13 = make([]bool, v11)
-		for i := 0; i < v11; i++ {
+		vAlue11 := r.Intn(10)
+		this.Field13 = make([]bool, vAlue11)
+		for i := 0; i < vAlue11; i++ {
 			this.Field13[i] = bool(bool(r.Intn(2) == 0))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v12 := string(randStringXxxfields(r))
-		this.Field14 = &v12
+		vAlue12 := string(randStringXxxfields(r))
+		this.Field14 = &vAlue12
 	}
-	v13 := r.Intn(100)
-	this.Field15 = make([]byte, v13)
-	for i := 0; i < v13; i++ {
+	vAlue13 := r.Intn(100)
+	this.Field15 = make([]byte, vAlue13)
+	for i := 0; i < vAlue13; i++ {
 		this.Field15[i] = byte(r.Intn(256))
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -830,46 +830,46 @@ func NewPopulatedStructWithSizeCache(r randyXxxfields, easy bool) *StructWithSiz
 func NewPopulatedNativeWithoutSizeCache(r randyXxxfields, easy bool) *NativeWithoutSizeCache {
 	this := &NativeWithoutSizeCache{}
 	if r.Intn(5) != 0 {
-		v14 := float64(r.Float64())
+		vAlue14 := float64(r.Float64())
 		if r.Intn(2) == 0 {
-			v14 *= -1
+			vAlue14 *= -1
 		}
-		this.Field1 = &v14
+		this.Field1 = &vAlue14
 	}
 	if r.Intn(5) != 0 {
-		v15 := float32(r.Float32())
+		vAlue15 := float32(r.Float32())
 		if r.Intn(2) == 0 {
-			v15 *= -1
+			vAlue15 *= -1
 		}
-		this.Field2 = &v15
+		this.Field2 = &vAlue15
 	}
 	if r.Intn(5) != 0 {
-		v16 := int32(r.Int31())
+		vAlue16 := int32(r.Int31())
 		if r.Intn(2) == 0 {
-			v16 *= -1
+			vAlue16 *= -1
 		}
-		this.Field3 = &v16
+		this.Field3 = &vAlue16
 	}
 	if r.Intn(5) != 0 {
-		v17 := int64(r.Int63())
+		vAlue17 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v17 *= -1
+			vAlue17 *= -1
 		}
-		this.Field4 = &v17
+		this.Field4 = &vAlue17
 	}
 	this.Field11 = uint64(uint64(r.Uint32()))
 	if r.Intn(5) != 0 {
-		v18 := bool(bool(r.Intn(2) == 0))
-		this.Field13 = &v18
+		vAlue18 := bool(bool(r.Intn(2) == 0))
+		this.Field13 = &vAlue18
 	}
 	if r.Intn(5) != 0 {
-		v19 := string(randStringXxxfields(r))
-		this.Field14 = &v19
+		vAlue19 := string(randStringXxxfields(r))
+		this.Field14 = &vAlue19
 	}
 	if r.Intn(5) != 0 {
-		v20 := r.Intn(100)
-		this.Field15 = make([]byte, v20)
-		for i := 0; i < v20; i++ {
+		vAlue20 := r.Intn(100)
+		this.Field15 = make([]byte, vAlue20)
+		for i := 0; i < vAlue20; i++ {
 			this.Field15[i] = byte(r.Intn(256))
 		}
 	}
@@ -888,32 +888,32 @@ func NewPopulatedStructWithoutSizeCache(r randyXxxfields, easy bool) *StructWith
 	if r.Intn(2) == 0 {
 		this.Field2 *= -1
 	}
-	v21 := NewPopulatedNativeWithSizeCache(r, easy)
-	this.Field3 = *v21
+	vAlue21 := NewPopulatedNativeWithSizeCache(r, easy)
+	this.Field3 = *vAlue21
 	if r.Intn(5) != 0 {
-		v22 := uint64(uint64(r.Uint32()))
-		this.Field6 = &v22
+		vAlue22 := uint64(uint64(r.Uint32()))
+		this.Field6 = &vAlue22
 	}
 	this.Field7 = int32(r.Int31())
 	if r.Intn(2) == 0 {
 		this.Field7 *= -1
 	}
-	v23 := NewPopulatedNativeWithoutSizeCache(r, easy)
-	this.Field8 = *v23
+	vAlue23 := NewPopulatedNativeWithoutSizeCache(r, easy)
+	this.Field8 = *vAlue23
 	if r.Intn(5) != 0 {
-		v24 := r.Intn(10)
-		this.Field13 = make([]bool, v24)
-		for i := 0; i < v24; i++ {
+		vAlue24 := r.Intn(10)
+		this.Field13 = make([]bool, vAlue24)
+		for i := 0; i < vAlue24; i++ {
 			this.Field13[i] = bool(bool(r.Intn(2) == 0))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v25 := string(randStringXxxfields(r))
-		this.Field14 = &v25
+		vAlue25 := string(randStringXxxfields(r))
+		this.Field14 = &vAlue25
 	}
-	v26 := r.Intn(100)
-	this.Field15 = make([]byte, v26)
-	for i := 0; i < v26; i++ {
+	vAlue26 := r.Intn(100)
+	this.Field15 = make([]byte, vAlue26)
+	for i := 0; i < vAlue26; i++ {
 		this.Field15[i] = byte(r.Intn(256))
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -940,9 +940,9 @@ func randUTF8RuneXxxfields(r randyXxxfields) rune {
 	return rune(ru + 61)
 }
 func randStringXxxfields(r randyXxxfields) string {
-	v27 := r.Intn(100)
-	tmps := make([]rune, v27)
-	for i := 0; i < v27; i++ {
+	vAlue27 := r.Intn(100)
+	tmps := make([]rune, vAlue27)
+	for i := 0; i < vAlue27; i++ {
 		tmps[i] = randUTF8RuneXxxfields(r)
 	}
 	return string(tmps)
@@ -964,11 +964,11 @@ func randFieldXxxfields(dAtA []byte, r randyXxxfields, fieldNumber int, wire int
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateXxxfields(dAtA, uint64(key))
-		v28 := r.Int63()
+		vAlue28 := r.Int63()
 		if r.Intn(2) == 0 {
-			v28 *= -1
+			vAlue28 *= -1
 		}
-		dAtA = encodeVarintPopulateXxxfields(dAtA, uint64(v28))
+		dAtA = encodeVarintPopulateXxxfields(dAtA, uint64(vAlue28))
 	case 1:
 		dAtA = encodeVarintPopulateXxxfields(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

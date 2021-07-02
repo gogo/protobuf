@@ -839,9 +839,9 @@ func valueToGoStringGroup(v interface{}, typ string) string {
 func NewPopulatedGroups1(r randyGroup, easy bool) *Groups1 {
 	this := &Groups1{}
 	if r.Intn(5) != 0 {
-		v1 := r.Intn(5)
-		this.G = make([]*Groups1_G, v1)
-		for i := 0; i < v1; i++ {
+		vAlue1 := r.Intn(5)
+		this.G = make([]*Groups1_G, vAlue1)
+		for i := 0; i < vAlue1; i++ {
 			this.G[i] = NewPopulatedGroups1_G(r, easy)
 		}
 	}
@@ -854,18 +854,18 @@ func NewPopulatedGroups1(r randyGroup, easy bool) *Groups1 {
 func NewPopulatedGroups1_G(r randyGroup, easy bool) *Groups1_G {
 	this := &Groups1_G{}
 	if r.Intn(5) != 0 {
-		v2 := int64(r.Int63())
+		vAlue2 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v2 *= -1
+			vAlue2 *= -1
 		}
-		this.Field1 = &v2
+		this.Field1 = &vAlue2
 	}
 	if r.Intn(5) != 0 {
-		v3 := float64(r.Float64())
+		vAlue3 := float64(r.Float64())
 		if r.Intn(2) == 0 {
-			v3 *= -1
+			vAlue3 *= -1
 		}
-		this.Field2 = &v3
+		this.Field2 = &vAlue3
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedGroup(r, 3)
@@ -887,16 +887,16 @@ func NewPopulatedGroups2(r randyGroup, easy bool) *Groups2 {
 func NewPopulatedGroups2_G(r randyGroup, easy bool) *Groups2_G {
 	this := &Groups2_G{}
 	if r.Intn(5) != 0 {
-		v4 := int64(r.Int63())
+		vAlue4 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			vAlue4 *= -1
 		}
-		this.Field1 = &v4
+		this.Field1 = &vAlue4
 	}
 	if r.Intn(5) != 0 {
-		v5 := r.Intn(10)
-		this.Field2 = make([]float64, v5)
-		for i := 0; i < v5; i++ {
+		vAlue5 := r.Intn(10)
+		this.Field2 = make([]float64, vAlue5)
+		for i := 0; i < vAlue5; i++ {
 			this.Field2[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field2[i] *= -1
@@ -928,9 +928,9 @@ func randUTF8RuneGroup(r randyGroup) rune {
 	return rune(ru + 61)
 }
 func randStringGroup(r randyGroup) string {
-	v6 := r.Intn(100)
-	tmps := make([]rune, v6)
-	for i := 0; i < v6; i++ {
+	vAlue6 := r.Intn(100)
+	tmps := make([]rune, vAlue6)
+	for i := 0; i < vAlue6; i++ {
 		tmps[i] = randUTF8RuneGroup(r)
 	}
 	return string(tmps)
@@ -952,11 +952,11 @@ func randFieldGroup(dAtA []byte, r randyGroup, fieldNumber int, wire int) []byte
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateGroup(dAtA, uint64(key))
-		v7 := r.Int63()
+		vAlue7 := r.Int63()
 		if r.Intn(2) == 0 {
-			v7 *= -1
+			vAlue7 *= -1
 		}
-		dAtA = encodeVarintPopulateGroup(dAtA, uint64(v7))
+		dAtA = encodeVarintPopulateGroup(dAtA, uint64(vAlue7))
 	case 1:
 		dAtA = encodeVarintPopulateGroup(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

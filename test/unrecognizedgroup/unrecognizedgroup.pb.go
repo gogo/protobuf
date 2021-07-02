@@ -1192,16 +1192,16 @@ func encodeVarintUnrecognizedgroup(dAtA []byte, offset int, v uint64) int {
 func NewPopulatedNewNoGroup(r randyUnrecognizedgroup, easy bool) *NewNoGroup {
 	this := &NewNoGroup{}
 	if r.Intn(5) != 0 {
-		v1 := int64(r.Int63())
+		vAlue1 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v1 *= -1
+			vAlue1 *= -1
 		}
-		this.Field1 = &v1
+		this.Field1 = &vAlue1
 	}
 	if r.Intn(5) != 0 {
-		v2 := r.Intn(10)
-		this.Field3 = make([]float64, v2)
-		for i := 0; i < v2; i++ {
+		vAlue2 := r.Intn(10)
+		this.Field3 = make([]float64, vAlue2)
+		for i := 0; i < vAlue2; i++ {
 			this.Field3[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field3[i] *= -1
@@ -1220,11 +1220,11 @@ func NewPopulatedNewNoGroup(r randyUnrecognizedgroup, easy bool) *NewNoGroup {
 func NewPopulatedA(r randyUnrecognizedgroup, easy bool) *A {
 	this := &A{}
 	if r.Intn(5) != 0 {
-		v3 := int64(r.Int63())
+		vAlue3 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v3 *= -1
+			vAlue3 *= -1
 		}
-		this.AField = &v3
+		this.AField = &vAlue3
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedUnrecognizedgroup(r, 2)
@@ -1235,19 +1235,19 @@ func NewPopulatedA(r randyUnrecognizedgroup, easy bool) *A {
 func NewPopulatedOldWithGroup(r randyUnrecognizedgroup, easy bool) *OldWithGroup {
 	this := &OldWithGroup{}
 	if r.Intn(5) != 0 {
-		v4 := int64(r.Int63())
+		vAlue4 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			vAlue4 *= -1
 		}
-		this.Field1 = &v4
+		this.Field1 = &vAlue4
 	}
 	if r.Intn(5) != 0 {
 		this.Group1 = NewPopulatedOldWithGroup_Group1(r, easy)
 	}
 	if r.Intn(5) != 0 {
-		v5 := r.Intn(10)
-		this.Field3 = make([]float64, v5)
-		for i := 0; i < v5; i++ {
+		vAlue5 := r.Intn(10)
+		this.Field3 = make([]float64, vAlue5)
+		for i := 0; i < vAlue5; i++ {
 			this.Field3[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field3[i] *= -1
@@ -1266,23 +1266,23 @@ func NewPopulatedOldWithGroup(r randyUnrecognizedgroup, easy bool) *OldWithGroup
 func NewPopulatedOldWithGroup_Group1(r randyUnrecognizedgroup, easy bool) *OldWithGroup_Group1 {
 	this := &OldWithGroup_Group1{}
 	if r.Intn(5) != 0 {
-		v6 := int64(r.Int63())
+		vAlue6 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v6 *= -1
+			vAlue6 *= -1
 		}
-		this.Field1 = &v6
+		this.Field1 = &vAlue6
 	}
 	if r.Intn(5) != 0 {
-		v7 := int32(r.Int31())
+		vAlue7 := int32(r.Int31())
 		if r.Intn(2) == 0 {
-			v7 *= -1
+			vAlue7 *= -1
 		}
-		this.Field2 = &v7
+		this.Field2 = &vAlue7
 	}
 	if r.Intn(5) != 0 {
-		v8 := r.Intn(10)
-		this.Field3 = make([]float64, v8)
-		for i := 0; i < v8; i++ {
+		vAlue8 := r.Intn(10)
+		this.Field3 = make([]float64, vAlue8)
+		for i := 0; i < vAlue8; i++ {
 			this.Field3[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field3[i] *= -1
@@ -1298,16 +1298,16 @@ func NewPopulatedOldWithGroup_Group1(r randyUnrecognizedgroup, easy bool) *OldWi
 func NewPopulatedOldWithGroup_Group2(r randyUnrecognizedgroup, easy bool) *OldWithGroup_Group2 {
 	this := &OldWithGroup_Group2{}
 	if r.Intn(5) != 0 {
-		v9 := int64(r.Int63())
+		vAlue9 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v9 *= -1
+			vAlue9 *= -1
 		}
-		this.Field1 = &v9
+		this.Field1 = &vAlue9
 	}
 	if r.Intn(5) != 0 {
-		v10 := r.Intn(10)
-		this.Field2 = make([]float64, v10)
-		for i := 0; i < v10; i++ {
+		vAlue10 := r.Intn(10)
+		this.Field2 = make([]float64, vAlue10)
+		for i := 0; i < vAlue10; i++ {
 			this.Field2[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field2[i] *= -1
@@ -1339,9 +1339,9 @@ func randUTF8RuneUnrecognizedgroup(r randyUnrecognizedgroup) rune {
 	return rune(ru + 61)
 }
 func randStringUnrecognizedgroup(r randyUnrecognizedgroup) string {
-	v11 := r.Intn(100)
-	tmps := make([]rune, v11)
-	for i := 0; i < v11; i++ {
+	vAlue11 := r.Intn(100)
+	tmps := make([]rune, vAlue11)
+	for i := 0; i < vAlue11; i++ {
 		tmps[i] = randUTF8RuneUnrecognizedgroup(r)
 	}
 	return string(tmps)
@@ -1363,11 +1363,11 @@ func randFieldUnrecognizedgroup(dAtA []byte, r randyUnrecognizedgroup, fieldNumb
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateUnrecognizedgroup(dAtA, uint64(key))
-		v12 := r.Int63()
+		vAlue12 := r.Int63()
 		if r.Intn(2) == 0 {
-			v12 *= -1
+			vAlue12 *= -1
 		}
-		dAtA = encodeVarintPopulateUnrecognizedgroup(dAtA, uint64(v12))
+		dAtA = encodeVarintPopulateUnrecognizedgroup(dAtA, uint64(vAlue12))
 	case 1:
 		dAtA = encodeVarintPopulateUnrecognizedgroup(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

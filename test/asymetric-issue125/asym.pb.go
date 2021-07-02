@@ -294,11 +294,11 @@ func encodeVarintAsym(dAtA []byte, offset int, v uint64) int {
 func NewPopulatedM(r randyAsym, easy bool) *M {
 	this := &M{}
 	if r.Intn(5) != 0 {
-		v1 := r.Intn(10)
-		this.Arr = make([]MyType, v1)
-		for i := 0; i < v1; i++ {
-			v2 := NewPopulatedMyType(r)
-			this.Arr[i] = *v2
+		vAlue1 := r.Intn(10)
+		this.Arr = make([]MyType, vAlue1)
+		for i := 0; i < vAlue1; i++ {
+			vAlue2 := NewPopulatedMyType(r)
+			this.Arr[i] = *vAlue2
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -326,9 +326,9 @@ func randUTF8RuneAsym(r randyAsym) rune {
 	return rune(ru + 61)
 }
 func randStringAsym(r randyAsym) string {
-	v3 := r.Intn(100)
-	tmps := make([]rune, v3)
-	for i := 0; i < v3; i++ {
+	vAlue3 := r.Intn(100)
+	tmps := make([]rune, vAlue3)
+	for i := 0; i < vAlue3; i++ {
 		tmps[i] = randUTF8RuneAsym(r)
 	}
 	return string(tmps)
@@ -350,11 +350,11 @@ func randFieldAsym(dAtA []byte, r randyAsym, fieldNumber int, wire int) []byte {
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateAsym(dAtA, uint64(key))
-		v4 := r.Int63()
+		vAlue4 := r.Int63()
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			vAlue4 *= -1
 		}
-		dAtA = encodeVarintPopulateAsym(dAtA, uint64(v4))
+		dAtA = encodeVarintPopulateAsym(dAtA, uint64(vAlue4))
 	case 1:
 		dAtA = encodeVarintPopulateAsym(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

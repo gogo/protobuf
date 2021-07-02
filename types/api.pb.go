@@ -1103,16 +1103,16 @@ func NewPopulatedApi(r randyApi, easy bool) *Api {
 	this := &Api{}
 	this.Name = string(randStringApi(r))
 	if r.Intn(5) != 0 {
-		v1 := r.Intn(5)
-		this.Methods = make([]*Method, v1)
-		for i := 0; i < v1; i++ {
+		vAlue1 := r.Intn(5)
+		this.Methods = make([]*Method, vAlue1)
+		for i := 0; i < vAlue1; i++ {
 			this.Methods[i] = NewPopulatedMethod(r, easy)
 		}
 	}
 	if r.Intn(5) != 0 {
-		v2 := r.Intn(5)
-		this.Options = make([]*Option, v2)
-		for i := 0; i < v2; i++ {
+		vAlue2 := r.Intn(5)
+		this.Options = make([]*Option, vAlue2)
+		for i := 0; i < vAlue2; i++ {
 			this.Options[i] = NewPopulatedOption(r, easy)
 		}
 	}
@@ -1121,9 +1121,9 @@ func NewPopulatedApi(r randyApi, easy bool) *Api {
 		this.SourceContext = NewPopulatedSourceContext(r, easy)
 	}
 	if r.Intn(5) != 0 {
-		v3 := r.Intn(5)
-		this.Mixins = make([]*Mixin, v3)
-		for i := 0; i < v3; i++ {
+		vAlue3 := r.Intn(5)
+		this.Mixins = make([]*Mixin, vAlue3)
+		for i := 0; i < vAlue3; i++ {
 			this.Mixins[i] = NewPopulatedMixin(r, easy)
 		}
 	}
@@ -1142,9 +1142,9 @@ func NewPopulatedMethod(r randyApi, easy bool) *Method {
 	this.ResponseTypeUrl = string(randStringApi(r))
 	this.ResponseStreaming = bool(bool(r.Intn(2) == 0))
 	if r.Intn(5) != 0 {
-		v4 := r.Intn(5)
-		this.Options = make([]*Option, v4)
-		for i := 0; i < v4; i++ {
+		vAlue4 := r.Intn(5)
+		this.Options = make([]*Option, vAlue4)
+		for i := 0; i < vAlue4; i++ {
 			this.Options[i] = NewPopulatedOption(r, easy)
 		}
 	}
@@ -1184,9 +1184,9 @@ func randUTF8RuneApi(r randyApi) rune {
 	return rune(ru + 61)
 }
 func randStringApi(r randyApi) string {
-	v5 := r.Intn(100)
-	tmps := make([]rune, v5)
-	for i := 0; i < v5; i++ {
+	vAlue5 := r.Intn(100)
+	tmps := make([]rune, vAlue5)
+	for i := 0; i < vAlue5; i++ {
 		tmps[i] = randUTF8RuneApi(r)
 	}
 	return string(tmps)
@@ -1208,11 +1208,11 @@ func randFieldApi(dAtA []byte, r randyApi, fieldNumber int, wire int) []byte {
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateApi(dAtA, uint64(key))
-		v6 := r.Int63()
+		vAlue6 := r.Int63()
 		if r.Intn(2) == 0 {
-			v6 *= -1
+			vAlue6 *= -1
 		}
-		dAtA = encodeVarintPopulateApi(dAtA, uint64(v6))
+		dAtA = encodeVarintPopulateApi(dAtA, uint64(vAlue6))
 	case 1:
 		dAtA = encodeVarintPopulateApi(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

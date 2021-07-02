@@ -2400,11 +2400,11 @@ func valueToGoStringMapsproto2(v interface{}, typ string) string {
 func NewPopulatedFloatingPoint(r randyMapsproto2, easy bool) *FloatingPoint {
 	this := &FloatingPoint{}
 	if r.Intn(5) != 0 {
-		v1 := float64(r.Float64())
+		vAlue1 := float64(r.Float64())
 		if r.Intn(2) == 0 {
-			v1 *= -1
+			vAlue1 *= -1
 		}
-		this.F = &v1
+		this.F = &vAlue1
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedMapsproto2(r, 2)
@@ -2415,30 +2415,30 @@ func NewPopulatedFloatingPoint(r randyMapsproto2, easy bool) *FloatingPoint {
 func NewPopulatedCustomMap(r randyMapsproto2, easy bool) *CustomMap {
 	this := &CustomMap{}
 	if r.Intn(5) != 0 {
-		v2 := r.Intn(10)
+		vAlue2 := r.Intn(10)
 		this.Nullable128S = make(map[string]*github_com_gogo_protobuf_test_custom.Uint128)
-		for i := 0; i < v2; i++ {
+		for i := 0; i < vAlue2; i++ {
 			this.Nullable128S[randStringMapsproto2(r)] = (*github_com_gogo_protobuf_test_custom.Uint128)(github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v3 := r.Intn(10)
+		vAlue3 := r.Intn(10)
 		this.Uint128S = make(map[string]github_com_gogo_protobuf_test_custom.Uint128)
-		for i := 0; i < v3; i++ {
+		for i := 0; i < vAlue3; i++ {
 			this.Uint128S[randStringMapsproto2(r)] = (github_com_gogo_protobuf_test_custom.Uint128)(*github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v4 := r.Intn(10)
+		vAlue4 := r.Intn(10)
 		this.NullableIds = make(map[string]*github_com_gogo_protobuf_test.Uuid)
-		for i := 0; i < v4; i++ {
+		for i := 0; i < vAlue4; i++ {
 			this.NullableIds[randStringMapsproto2(r)] = (*github_com_gogo_protobuf_test.Uuid)(github_com_gogo_protobuf_test.NewPopulatedUuid(r))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v5 := r.Intn(10)
+		vAlue5 := r.Intn(10)
 		this.Ids = make(map[string]github_com_gogo_protobuf_test.Uuid)
-		for i := 0; i < v5; i++ {
+		for i := 0; i < vAlue5; i++ {
 			this.Ids[randStringMapsproto2(r)] = (github_com_gogo_protobuf_test.Uuid)(*github_com_gogo_protobuf_test.NewPopulatedUuid(r))
 		}
 	}
@@ -2451,163 +2451,163 @@ func NewPopulatedCustomMap(r randyMapsproto2, easy bool) *CustomMap {
 func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 	this := &AllMaps{}
 	if r.Intn(5) != 0 {
-		v6 := r.Intn(10)
+		vAlue6 := r.Intn(10)
 		this.StringToDoubleMap = make(map[string]float64)
-		for i := 0; i < v6; i++ {
-			v7 := randStringMapsproto2(r)
-			this.StringToDoubleMap[v7] = float64(r.Float64())
+		for i := 0; i < vAlue6; i++ {
+			vAlue7 := randStringMapsproto2(r)
+			this.StringToDoubleMap[vAlue7] = float64(r.Float64())
 			if r.Intn(2) == 0 {
-				this.StringToDoubleMap[v7] *= -1
+				this.StringToDoubleMap[vAlue7] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v8 := r.Intn(10)
+		vAlue8 := r.Intn(10)
 		this.StringToFloatMap = make(map[string]float32)
-		for i := 0; i < v8; i++ {
-			v9 := randStringMapsproto2(r)
-			this.StringToFloatMap[v9] = float32(r.Float32())
+		for i := 0; i < vAlue8; i++ {
+			vAlue9 := randStringMapsproto2(r)
+			this.StringToFloatMap[vAlue9] = float32(r.Float32())
 			if r.Intn(2) == 0 {
-				this.StringToFloatMap[v9] *= -1
+				this.StringToFloatMap[vAlue9] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v10 := r.Intn(10)
+		vAlue10 := r.Intn(10)
 		this.Int32Map = make(map[int32]int32)
-		for i := 0; i < v10; i++ {
-			v11 := int32(r.Int31())
-			this.Int32Map[v11] = int32(r.Int31())
+		for i := 0; i < vAlue10; i++ {
+			vAlue11 := int32(r.Int31())
+			this.Int32Map[vAlue11] = int32(r.Int31())
 			if r.Intn(2) == 0 {
-				this.Int32Map[v11] *= -1
+				this.Int32Map[vAlue11] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v12 := r.Intn(10)
+		vAlue12 := r.Intn(10)
 		this.Int64Map = make(map[int64]int64)
-		for i := 0; i < v12; i++ {
-			v13 := int64(r.Int63())
-			this.Int64Map[v13] = int64(r.Int63())
+		for i := 0; i < vAlue12; i++ {
+			vAlue13 := int64(r.Int63())
+			this.Int64Map[vAlue13] = int64(r.Int63())
 			if r.Intn(2) == 0 {
-				this.Int64Map[v13] *= -1
+				this.Int64Map[vAlue13] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v14 := r.Intn(10)
+		vAlue14 := r.Intn(10)
 		this.Uint32Map = make(map[uint32]uint32)
-		for i := 0; i < v14; i++ {
-			v15 := uint32(r.Uint32())
-			this.Uint32Map[v15] = uint32(r.Uint32())
+		for i := 0; i < vAlue14; i++ {
+			vAlue15 := uint32(r.Uint32())
+			this.Uint32Map[vAlue15] = uint32(r.Uint32())
 		}
 	}
 	if r.Intn(5) != 0 {
-		v16 := r.Intn(10)
+		vAlue16 := r.Intn(10)
 		this.Uint64Map = make(map[uint64]uint64)
-		for i := 0; i < v16; i++ {
-			v17 := uint64(uint64(r.Uint32()))
-			this.Uint64Map[v17] = uint64(uint64(r.Uint32()))
+		for i := 0; i < vAlue16; i++ {
+			vAlue17 := uint64(uint64(r.Uint32()))
+			this.Uint64Map[vAlue17] = uint64(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v18 := r.Intn(10)
+		vAlue18 := r.Intn(10)
 		this.Sint32Map = make(map[int32]int32)
-		for i := 0; i < v18; i++ {
-			v19 := int32(r.Int31())
-			this.Sint32Map[v19] = int32(r.Int31())
+		for i := 0; i < vAlue18; i++ {
+			vAlue19 := int32(r.Int31())
+			this.Sint32Map[vAlue19] = int32(r.Int31())
 			if r.Intn(2) == 0 {
-				this.Sint32Map[v19] *= -1
+				this.Sint32Map[vAlue19] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v20 := r.Intn(10)
+		vAlue20 := r.Intn(10)
 		this.Sint64Map = make(map[int64]int64)
-		for i := 0; i < v20; i++ {
-			v21 := int64(r.Int63())
-			this.Sint64Map[v21] = int64(r.Int63())
+		for i := 0; i < vAlue20; i++ {
+			vAlue21 := int64(r.Int63())
+			this.Sint64Map[vAlue21] = int64(r.Int63())
 			if r.Intn(2) == 0 {
-				this.Sint64Map[v21] *= -1
+				this.Sint64Map[vAlue21] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v22 := r.Intn(10)
+		vAlue22 := r.Intn(10)
 		this.Fixed32Map = make(map[uint32]uint32)
-		for i := 0; i < v22; i++ {
-			v23 := uint32(r.Uint32())
-			this.Fixed32Map[v23] = uint32(r.Uint32())
+		for i := 0; i < vAlue22; i++ {
+			vAlue23 := uint32(r.Uint32())
+			this.Fixed32Map[vAlue23] = uint32(r.Uint32())
 		}
 	}
 	if r.Intn(5) != 0 {
-		v24 := r.Intn(10)
+		vAlue24 := r.Intn(10)
 		this.Sfixed32Map = make(map[int32]int32)
-		for i := 0; i < v24; i++ {
-			v25 := int32(r.Int31())
-			this.Sfixed32Map[v25] = int32(r.Int31())
+		for i := 0; i < vAlue24; i++ {
+			vAlue25 := int32(r.Int31())
+			this.Sfixed32Map[vAlue25] = int32(r.Int31())
 			if r.Intn(2) == 0 {
-				this.Sfixed32Map[v25] *= -1
+				this.Sfixed32Map[vAlue25] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v26 := r.Intn(10)
+		vAlue26 := r.Intn(10)
 		this.Fixed64Map = make(map[uint64]uint64)
-		for i := 0; i < v26; i++ {
-			v27 := uint64(uint64(r.Uint32()))
-			this.Fixed64Map[v27] = uint64(uint64(r.Uint32()))
+		for i := 0; i < vAlue26; i++ {
+			vAlue27 := uint64(uint64(r.Uint32()))
+			this.Fixed64Map[vAlue27] = uint64(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v28 := r.Intn(10)
+		vAlue28 := r.Intn(10)
 		this.Sfixed64Map = make(map[int64]int64)
-		for i := 0; i < v28; i++ {
-			v29 := int64(r.Int63())
-			this.Sfixed64Map[v29] = int64(r.Int63())
+		for i := 0; i < vAlue28; i++ {
+			vAlue29 := int64(r.Int63())
+			this.Sfixed64Map[vAlue29] = int64(r.Int63())
 			if r.Intn(2) == 0 {
-				this.Sfixed64Map[v29] *= -1
+				this.Sfixed64Map[vAlue29] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v30 := r.Intn(10)
+		vAlue30 := r.Intn(10)
 		this.BoolMap = make(map[bool]bool)
-		for i := 0; i < v30; i++ {
-			v31 := bool(bool(r.Intn(2) == 0))
-			this.BoolMap[v31] = bool(bool(r.Intn(2) == 0))
+		for i := 0; i < vAlue30; i++ {
+			vAlue31 := bool(bool(r.Intn(2) == 0))
+			this.BoolMap[vAlue31] = bool(bool(r.Intn(2) == 0))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v32 := r.Intn(10)
+		vAlue32 := r.Intn(10)
 		this.StringMap = make(map[string]string)
-		for i := 0; i < v32; i++ {
+		for i := 0; i < vAlue32; i++ {
 			this.StringMap[randStringMapsproto2(r)] = randStringMapsproto2(r)
 		}
 	}
 	if r.Intn(5) != 0 {
-		v33 := r.Intn(10)
+		vAlue33 := r.Intn(10)
 		this.StringToBytesMap = make(map[string][]byte)
-		for i := 0; i < v33; i++ {
-			v34 := r.Intn(100)
-			v35 := randStringMapsproto2(r)
-			this.StringToBytesMap[v35] = make([]byte, v34)
-			for i := 0; i < v34; i++ {
-				this.StringToBytesMap[v35][i] = byte(r.Intn(256))
+		for i := 0; i < vAlue33; i++ {
+			vAlue34 := r.Intn(100)
+			vAlue35 := randStringMapsproto2(r)
+			this.StringToBytesMap[vAlue35] = make([]byte, vAlue34)
+			for i := 0; i < vAlue34; i++ {
+				this.StringToBytesMap[vAlue35][i] = byte(r.Intn(256))
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v36 := r.Intn(10)
+		vAlue36 := r.Intn(10)
 		this.StringToEnumMap = make(map[string]MapEnum)
-		for i := 0; i < v36; i++ {
+		for i := 0; i < vAlue36; i++ {
 			this.StringToEnumMap[randStringMapsproto2(r)] = MapEnum([]int32{0, 1, 2}[r.Intn(3)])
 		}
 	}
 	if r.Intn(5) != 0 {
-		v37 := r.Intn(10)
+		vAlue37 := r.Intn(10)
 		this.StringToMsgMap = make(map[string]*FloatingPoint)
-		for i := 0; i < v37; i++ {
+		for i := 0; i < vAlue37; i++ {
 			this.StringToMsgMap[randStringMapsproto2(r)] = NewPopulatedFloatingPoint(r, easy)
 		}
 	}
@@ -2620,163 +2620,163 @@ func NewPopulatedAllMaps(r randyMapsproto2, easy bool) *AllMaps {
 func NewPopulatedAllMapsOrdered(r randyMapsproto2, easy bool) *AllMapsOrdered {
 	this := &AllMapsOrdered{}
 	if r.Intn(5) != 0 {
-		v38 := r.Intn(10)
+		vAlue38 := r.Intn(10)
 		this.StringToDoubleMap = make(map[string]float64)
-		for i := 0; i < v38; i++ {
-			v39 := randStringMapsproto2(r)
-			this.StringToDoubleMap[v39] = float64(r.Float64())
+		for i := 0; i < vAlue38; i++ {
+			vAlue39 := randStringMapsproto2(r)
+			this.StringToDoubleMap[vAlue39] = float64(r.Float64())
 			if r.Intn(2) == 0 {
-				this.StringToDoubleMap[v39] *= -1
+				this.StringToDoubleMap[vAlue39] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v40 := r.Intn(10)
+		vAlue40 := r.Intn(10)
 		this.StringToFloatMap = make(map[string]float32)
-		for i := 0; i < v40; i++ {
-			v41 := randStringMapsproto2(r)
-			this.StringToFloatMap[v41] = float32(r.Float32())
+		for i := 0; i < vAlue40; i++ {
+			vAlue41 := randStringMapsproto2(r)
+			this.StringToFloatMap[vAlue41] = float32(r.Float32())
 			if r.Intn(2) == 0 {
-				this.StringToFloatMap[v41] *= -1
+				this.StringToFloatMap[vAlue41] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v42 := r.Intn(10)
+		vAlue42 := r.Intn(10)
 		this.Int32Map = make(map[int32]int32)
-		for i := 0; i < v42; i++ {
-			v43 := int32(r.Int31())
-			this.Int32Map[v43] = int32(r.Int31())
+		for i := 0; i < vAlue42; i++ {
+			vAlue43 := int32(r.Int31())
+			this.Int32Map[vAlue43] = int32(r.Int31())
 			if r.Intn(2) == 0 {
-				this.Int32Map[v43] *= -1
+				this.Int32Map[vAlue43] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v44 := r.Intn(10)
+		vAlue44 := r.Intn(10)
 		this.Int64Map = make(map[int64]int64)
-		for i := 0; i < v44; i++ {
-			v45 := int64(r.Int63())
-			this.Int64Map[v45] = int64(r.Int63())
+		for i := 0; i < vAlue44; i++ {
+			vAlue45 := int64(r.Int63())
+			this.Int64Map[vAlue45] = int64(r.Int63())
 			if r.Intn(2) == 0 {
-				this.Int64Map[v45] *= -1
+				this.Int64Map[vAlue45] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v46 := r.Intn(10)
+		vAlue46 := r.Intn(10)
 		this.Uint32Map = make(map[uint32]uint32)
-		for i := 0; i < v46; i++ {
-			v47 := uint32(r.Uint32())
-			this.Uint32Map[v47] = uint32(r.Uint32())
+		for i := 0; i < vAlue46; i++ {
+			vAlue47 := uint32(r.Uint32())
+			this.Uint32Map[vAlue47] = uint32(r.Uint32())
 		}
 	}
 	if r.Intn(5) != 0 {
-		v48 := r.Intn(10)
+		vAlue48 := r.Intn(10)
 		this.Uint64Map = make(map[uint64]uint64)
-		for i := 0; i < v48; i++ {
-			v49 := uint64(uint64(r.Uint32()))
-			this.Uint64Map[v49] = uint64(uint64(r.Uint32()))
+		for i := 0; i < vAlue48; i++ {
+			vAlue49 := uint64(uint64(r.Uint32()))
+			this.Uint64Map[vAlue49] = uint64(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v50 := r.Intn(10)
+		vAlue50 := r.Intn(10)
 		this.Sint32Map = make(map[int32]int32)
-		for i := 0; i < v50; i++ {
-			v51 := int32(r.Int31())
-			this.Sint32Map[v51] = int32(r.Int31())
+		for i := 0; i < vAlue50; i++ {
+			vAlue51 := int32(r.Int31())
+			this.Sint32Map[vAlue51] = int32(r.Int31())
 			if r.Intn(2) == 0 {
-				this.Sint32Map[v51] *= -1
+				this.Sint32Map[vAlue51] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v52 := r.Intn(10)
+		vAlue52 := r.Intn(10)
 		this.Sint64Map = make(map[int64]int64)
-		for i := 0; i < v52; i++ {
-			v53 := int64(r.Int63())
-			this.Sint64Map[v53] = int64(r.Int63())
+		for i := 0; i < vAlue52; i++ {
+			vAlue53 := int64(r.Int63())
+			this.Sint64Map[vAlue53] = int64(r.Int63())
 			if r.Intn(2) == 0 {
-				this.Sint64Map[v53] *= -1
+				this.Sint64Map[vAlue53] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v54 := r.Intn(10)
+		vAlue54 := r.Intn(10)
 		this.Fixed32Map = make(map[uint32]uint32)
-		for i := 0; i < v54; i++ {
-			v55 := uint32(r.Uint32())
-			this.Fixed32Map[v55] = uint32(r.Uint32())
+		for i := 0; i < vAlue54; i++ {
+			vAlue55 := uint32(r.Uint32())
+			this.Fixed32Map[vAlue55] = uint32(r.Uint32())
 		}
 	}
 	if r.Intn(5) != 0 {
-		v56 := r.Intn(10)
+		vAlue56 := r.Intn(10)
 		this.Sfixed32Map = make(map[int32]int32)
-		for i := 0; i < v56; i++ {
-			v57 := int32(r.Int31())
-			this.Sfixed32Map[v57] = int32(r.Int31())
+		for i := 0; i < vAlue56; i++ {
+			vAlue57 := int32(r.Int31())
+			this.Sfixed32Map[vAlue57] = int32(r.Int31())
 			if r.Intn(2) == 0 {
-				this.Sfixed32Map[v57] *= -1
+				this.Sfixed32Map[vAlue57] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v58 := r.Intn(10)
+		vAlue58 := r.Intn(10)
 		this.Fixed64Map = make(map[uint64]uint64)
-		for i := 0; i < v58; i++ {
-			v59 := uint64(uint64(r.Uint32()))
-			this.Fixed64Map[v59] = uint64(uint64(r.Uint32()))
+		for i := 0; i < vAlue58; i++ {
+			vAlue59 := uint64(uint64(r.Uint32()))
+			this.Fixed64Map[vAlue59] = uint64(uint64(r.Uint32()))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v60 := r.Intn(10)
+		vAlue60 := r.Intn(10)
 		this.Sfixed64Map = make(map[int64]int64)
-		for i := 0; i < v60; i++ {
-			v61 := int64(r.Int63())
-			this.Sfixed64Map[v61] = int64(r.Int63())
+		for i := 0; i < vAlue60; i++ {
+			vAlue61 := int64(r.Int63())
+			this.Sfixed64Map[vAlue61] = int64(r.Int63())
 			if r.Intn(2) == 0 {
-				this.Sfixed64Map[v61] *= -1
+				this.Sfixed64Map[vAlue61] *= -1
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v62 := r.Intn(10)
+		vAlue62 := r.Intn(10)
 		this.BoolMap = make(map[bool]bool)
-		for i := 0; i < v62; i++ {
-			v63 := bool(bool(r.Intn(2) == 0))
-			this.BoolMap[v63] = bool(bool(r.Intn(2) == 0))
+		for i := 0; i < vAlue62; i++ {
+			vAlue63 := bool(bool(r.Intn(2) == 0))
+			this.BoolMap[vAlue63] = bool(bool(r.Intn(2) == 0))
 		}
 	}
 	if r.Intn(5) != 0 {
-		v64 := r.Intn(10)
+		vAlue64 := r.Intn(10)
 		this.StringMap = make(map[string]string)
-		for i := 0; i < v64; i++ {
+		for i := 0; i < vAlue64; i++ {
 			this.StringMap[randStringMapsproto2(r)] = randStringMapsproto2(r)
 		}
 	}
 	if r.Intn(5) != 0 {
-		v65 := r.Intn(10)
+		vAlue65 := r.Intn(10)
 		this.StringToBytesMap = make(map[string][]byte)
-		for i := 0; i < v65; i++ {
-			v66 := r.Intn(100)
-			v67 := randStringMapsproto2(r)
-			this.StringToBytesMap[v67] = make([]byte, v66)
-			for i := 0; i < v66; i++ {
-				this.StringToBytesMap[v67][i] = byte(r.Intn(256))
+		for i := 0; i < vAlue65; i++ {
+			vAlue66 := r.Intn(100)
+			vAlue67 := randStringMapsproto2(r)
+			this.StringToBytesMap[vAlue67] = make([]byte, vAlue66)
+			for i := 0; i < vAlue66; i++ {
+				this.StringToBytesMap[vAlue67][i] = byte(r.Intn(256))
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v68 := r.Intn(10)
+		vAlue68 := r.Intn(10)
 		this.StringToEnumMap = make(map[string]MapEnum)
-		for i := 0; i < v68; i++ {
+		for i := 0; i < vAlue68; i++ {
 			this.StringToEnumMap[randStringMapsproto2(r)] = MapEnum([]int32{0, 1, 2}[r.Intn(3)])
 		}
 	}
 	if r.Intn(5) != 0 {
-		v69 := r.Intn(10)
+		vAlue69 := r.Intn(10)
 		this.StringToMsgMap = make(map[string]*FloatingPoint)
-		for i := 0; i < v69; i++ {
+		for i := 0; i < vAlue69; i++ {
 			this.StringToMsgMap[randStringMapsproto2(r)] = NewPopulatedFloatingPoint(r, easy)
 		}
 	}
@@ -2805,9 +2805,9 @@ func randUTF8RuneMapsproto2(r randyMapsproto2) rune {
 	return rune(ru + 61)
 }
 func randStringMapsproto2(r randyMapsproto2) string {
-	v70 := r.Intn(100)
-	tmps := make([]rune, v70)
-	for i := 0; i < v70; i++ {
+	vAlue70 := r.Intn(100)
+	tmps := make([]rune, vAlue70)
+	for i := 0; i < vAlue70; i++ {
 		tmps[i] = randUTF8RuneMapsproto2(r)
 	}
 	return string(tmps)
@@ -2829,11 +2829,11 @@ func randFieldMapsproto2(dAtA []byte, r randyMapsproto2, fieldNumber int, wire i
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateMapsproto2(dAtA, uint64(key))
-		v71 := r.Int63()
+		vAlue71 := r.Int63()
 		if r.Intn(2) == 0 {
-			v71 *= -1
+			vAlue71 *= -1
 		}
-		dAtA = encodeVarintPopulateMapsproto2(dAtA, uint64(v71))
+		dAtA = encodeVarintPopulateMapsproto2(dAtA, uint64(vAlue71))
 	case 1:
 		dAtA = encodeVarintPopulateMapsproto2(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

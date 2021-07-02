@@ -164,8 +164,8 @@ func NewPopulatedOutside(r randyTags, easy bool) *Outside {
 		this.Inside = NewPopulatedInside(r, easy)
 	}
 	if r.Intn(5) != 0 {
-		v1 := string(randStringTags(r))
-		this.Field2 = &v1
+		vAlue1 := string(randStringTags(r))
+		this.Field2 = &vAlue1
 	}
 	oneofNumber_Filed := []int32{3}[r.Intn(1)]
 	switch oneofNumber_Filed {
@@ -186,8 +186,8 @@ func NewPopulatedOutside_Field3(r randyTags, easy bool) *Outside_Field3 {
 func NewPopulatedInside(r randyTags, easy bool) *Inside {
 	this := &Inside{}
 	if r.Intn(5) != 0 {
-		v2 := string(randStringTags(r))
-		this.Field1 = &v2
+		vAlue2 := string(randStringTags(r))
+		this.Field1 = &vAlue2
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedTags(r, 2)
@@ -214,9 +214,9 @@ func randUTF8RuneTags(r randyTags) rune {
 	return rune(ru + 61)
 }
 func randStringTags(r randyTags) string {
-	v3 := r.Intn(100)
-	tmps := make([]rune, v3)
-	for i := 0; i < v3; i++ {
+	vAlue3 := r.Intn(100)
+	tmps := make([]rune, vAlue3)
+	for i := 0; i < vAlue3; i++ {
 		tmps[i] = randUTF8RuneTags(r)
 	}
 	return string(tmps)
@@ -238,11 +238,11 @@ func randFieldTags(dAtA []byte, r randyTags, fieldNumber int, wire int) []byte {
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateTags(dAtA, uint64(key))
-		v4 := r.Int63()
+		vAlue4 := r.Int63()
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			vAlue4 *= -1
 		}
-		dAtA = encodeVarintPopulateTags(dAtA, uint64(v4))
+		dAtA = encodeVarintPopulateTags(dAtA, uint64(vAlue4))
 	case 1:
 		dAtA = encodeVarintPopulateTags(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

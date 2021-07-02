@@ -885,9 +885,9 @@ func encodeVarintMap(dAtA []byte, offset int, v uint64) int {
 func NewPopulatedMapTest(r randyMap, easy bool) *MapTest {
 	this := &MapTest{}
 	if r.Intn(5) != 0 {
-		v1 := r.Intn(10)
+		vAlue1 := r.Intn(10)
 		this.StrStr = make(map[string]string)
-		for i := 0; i < v1; i++ {
+		for i := 0; i < vAlue1; i++ {
 			this.StrStr[randStringMap(r)] = randStringMap(r)
 		}
 	}
@@ -900,9 +900,9 @@ func NewPopulatedMapTest(r randyMap, easy bool) *MapTest {
 func NewPopulatedFakeMap(r randyMap, easy bool) *FakeMap {
 	this := &FakeMap{}
 	if r.Intn(5) != 0 {
-		v2 := r.Intn(5)
-		this.Entries = make([]*FakeMapEntry, v2)
-		for i := 0; i < v2; i++ {
+		vAlue2 := r.Intn(5)
+		this.Entries = make([]*FakeMapEntry, vAlue2)
+		for i := 0; i < vAlue2; i++ {
 			this.Entries[i] = NewPopulatedFakeMapEntry(r, easy)
 		}
 	}
@@ -942,9 +942,9 @@ func randUTF8RuneMap(r randyMap) rune {
 	return rune(ru + 61)
 }
 func randStringMap(r randyMap) string {
-	v3 := r.Intn(100)
-	tmps := make([]rune, v3)
-	for i := 0; i < v3; i++ {
+	vAlue3 := r.Intn(100)
+	tmps := make([]rune, vAlue3)
+	for i := 0; i < vAlue3; i++ {
 		tmps[i] = randUTF8RuneMap(r)
 	}
 	return string(tmps)
@@ -966,11 +966,11 @@ func randFieldMap(dAtA []byte, r randyMap, fieldNumber int, wire int) []byte {
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateMap(dAtA, uint64(key))
-		v4 := r.Int63()
+		vAlue4 := r.Int63()
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			vAlue4 *= -1
 		}
-		dAtA = encodeVarintPopulateMap(dAtA, uint64(v4))
+		dAtA = encodeVarintPopulateMap(dAtA, uint64(vAlue4))
 	case 1:
 		dAtA = encodeVarintPopulateMap(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

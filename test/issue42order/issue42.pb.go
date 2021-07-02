@@ -245,15 +245,15 @@ func encodeVarintIssue42(dAtA []byte, offset int, v uint64) int {
 func NewPopulatedUnorderedFields(r randyIssue42, easy bool) *UnorderedFields {
 	this := &UnorderedFields{}
 	if r.Intn(5) != 0 {
-		v1 := uint64(uint64(r.Uint32()))
-		this.B = &v1
+		vAlue1 := uint64(uint64(r.Uint32()))
+		this.B = &vAlue1
 	}
 	if r.Intn(5) != 0 {
-		v2 := int64(r.Int63())
+		vAlue2 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v2 *= -1
+			vAlue2 *= -1
 		}
-		this.A = &v2
+		this.A = &vAlue2
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedIssue42(r, 11)
@@ -264,15 +264,15 @@ func NewPopulatedUnorderedFields(r randyIssue42, easy bool) *UnorderedFields {
 func NewPopulatedOrderedFields(r randyIssue42, easy bool) *OrderedFields {
 	this := &OrderedFields{}
 	if r.Intn(5) != 0 {
-		v3 := uint64(uint64(r.Uint32()))
-		this.B = &v3
+		vAlue3 := uint64(uint64(r.Uint32()))
+		this.B = &vAlue3
 	}
 	if r.Intn(5) != 0 {
-		v4 := int64(r.Int63())
+		vAlue4 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			vAlue4 *= -1
 		}
-		this.A = &v4
+		this.A = &vAlue4
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedIssue42(r, 11)
@@ -299,9 +299,9 @@ func randUTF8RuneIssue42(r randyIssue42) rune {
 	return rune(ru + 61)
 }
 func randStringIssue42(r randyIssue42) string {
-	v5 := r.Intn(100)
-	tmps := make([]rune, v5)
-	for i := 0; i < v5; i++ {
+	vAlue5 := r.Intn(100)
+	tmps := make([]rune, vAlue5)
+	for i := 0; i < vAlue5; i++ {
 		tmps[i] = randUTF8RuneIssue42(r)
 	}
 	return string(tmps)
@@ -323,11 +323,11 @@ func randFieldIssue42(dAtA []byte, r randyIssue42, fieldNumber int, wire int) []
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateIssue42(dAtA, uint64(key))
-		v6 := r.Int63()
+		vAlue6 := r.Int63()
 		if r.Intn(2) == 0 {
-			v6 *= -1
+			vAlue6 *= -1
 		}
-		dAtA = encodeVarintPopulateIssue42(dAtA, uint64(v6))
+		dAtA = encodeVarintPopulateIssue42(dAtA, uint64(vAlue6))
 	case 1:
 		dAtA = encodeVarintPopulateIssue42(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

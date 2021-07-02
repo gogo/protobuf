@@ -528,8 +528,8 @@ func NewPopulatedNidOptEnum(r randyEnumstringer, easy bool) *NidOptEnum {
 func NewPopulatedNinOptEnum(r randyEnumstringer, easy bool) *NinOptEnum {
 	this := &NinOptEnum{}
 	if r.Intn(5) != 0 {
-		v1 := TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
-		this.Field1 = &v1
+		vAlue1 := TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
+		this.Field1 = &vAlue1
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedEnumstringer(r, 2)
@@ -540,9 +540,9 @@ func NewPopulatedNinOptEnum(r randyEnumstringer, easy bool) *NinOptEnum {
 func NewPopulatedNidRepEnum(r randyEnumstringer, easy bool) *NidRepEnum {
 	this := &NidRepEnum{}
 	if r.Intn(5) != 0 {
-		v2 := r.Intn(10)
-		this.Field1 = make([]TheTestEnum, v2)
-		for i := 0; i < v2; i++ {
+		vAlue2 := r.Intn(10)
+		this.Field1 = make([]TheTestEnum, vAlue2)
+		for i := 0; i < vAlue2; i++ {
 			this.Field1[i] = TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
 		}
 	}
@@ -555,9 +555,9 @@ func NewPopulatedNidRepEnum(r randyEnumstringer, easy bool) *NidRepEnum {
 func NewPopulatedNinRepEnum(r randyEnumstringer, easy bool) *NinRepEnum {
 	this := &NinRepEnum{}
 	if r.Intn(5) != 0 {
-		v3 := r.Intn(10)
-		this.Field1 = make([]TheTestEnum, v3)
-		for i := 0; i < v3; i++ {
+		vAlue3 := r.Intn(10)
+		this.Field1 = make([]TheTestEnum, vAlue3)
+		for i := 0; i < vAlue3; i++ {
 			this.Field1[i] = TheTestEnum([]int32{0, 1, 2}[r.Intn(3)])
 		}
 	}
@@ -586,9 +586,9 @@ func randUTF8RuneEnumstringer(r randyEnumstringer) rune {
 	return rune(ru + 61)
 }
 func randStringEnumstringer(r randyEnumstringer) string {
-	v4 := r.Intn(100)
-	tmps := make([]rune, v4)
-	for i := 0; i < v4; i++ {
+	vAlue4 := r.Intn(100)
+	tmps := make([]rune, vAlue4)
+	for i := 0; i < vAlue4; i++ {
 		tmps[i] = randUTF8RuneEnumstringer(r)
 	}
 	return string(tmps)
@@ -610,11 +610,11 @@ func randFieldEnumstringer(dAtA []byte, r randyEnumstringer, fieldNumber int, wi
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateEnumstringer(dAtA, uint64(key))
-		v5 := r.Int63()
+		vAlue5 := r.Int63()
 		if r.Intn(2) == 0 {
-			v5 *= -1
+			vAlue5 *= -1
 		}
-		dAtA = encodeVarintPopulateEnumstringer(dAtA, uint64(v5))
+		dAtA = encodeVarintPopulateEnumstringer(dAtA, uint64(vAlue5))
 	case 1:
 		dAtA = encodeVarintPopulateEnumstringer(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

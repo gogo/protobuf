@@ -143,8 +143,8 @@ func valueToGoStringEvents(v interface{}, typ string) string {
 func NewPopulatedSubtype(r randyEvents, easy bool) *Subtype {
 	this := &Subtype{}
 	if r.Intn(5) != 0 {
-		v1 := issue312.TaskState([]int32{6, 0, 1}[r.Intn(3)])
-		this.State = &v1
+		vAlue1 := issue312.TaskState([]int32{6, 0, 1}[r.Intn(3)])
+		this.State = &vAlue1
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedEvents(r, 5)
@@ -171,9 +171,9 @@ func randUTF8RuneEvents(r randyEvents) rune {
 	return rune(ru + 61)
 }
 func randStringEvents(r randyEvents) string {
-	v2 := r.Intn(100)
-	tmps := make([]rune, v2)
-	for i := 0; i < v2; i++ {
+	vAlue2 := r.Intn(100)
+	tmps := make([]rune, vAlue2)
+	for i := 0; i < vAlue2; i++ {
 		tmps[i] = randUTF8RuneEvents(r)
 	}
 	return string(tmps)
@@ -195,11 +195,11 @@ func randFieldEvents(dAtA []byte, r randyEvents, fieldNumber int, wire int) []by
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateEvents(dAtA, uint64(key))
-		v3 := r.Int63()
+		vAlue3 := r.Int63()
 		if r.Intn(2) == 0 {
-			v3 *= -1
+			vAlue3 *= -1
 		}
-		dAtA = encodeVarintPopulateEvents(dAtA, uint64(v3))
+		dAtA = encodeVarintPopulateEvents(dAtA, uint64(vAlue3))
 	case 1:
 		dAtA = encodeVarintPopulateEvents(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

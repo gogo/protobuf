@@ -745,11 +745,11 @@ func NewPopulatedBig(r randyUnmarshalmerge, easy bool) *Big {
 		this.Sub = NewPopulatedSub(r, easy)
 	}
 	if r.Intn(5) != 0 {
-		v1 := int64(r.Int63())
+		vAlue1 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v1 *= -1
+			vAlue1 *= -1
 		}
-		this.Number = &v1
+		this.Number = &vAlue1
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedUnmarshalmerge(r, 3)
@@ -763,11 +763,11 @@ func NewPopulatedBigUnsafe(r randyUnmarshalmerge, easy bool) *BigUnsafe {
 		this.Sub = NewPopulatedSub(r, easy)
 	}
 	if r.Intn(5) != 0 {
-		v2 := int64(r.Int63())
+		vAlue2 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v2 *= -1
+			vAlue2 *= -1
 		}
-		this.Number = &v2
+		this.Number = &vAlue2
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedUnmarshalmerge(r, 3)
@@ -778,11 +778,11 @@ func NewPopulatedBigUnsafe(r randyUnmarshalmerge, easy bool) *BigUnsafe {
 func NewPopulatedSub(r randyUnmarshalmerge, easy bool) *Sub {
 	this := &Sub{}
 	if r.Intn(5) != 0 {
-		v3 := int64(r.Int63())
+		vAlue3 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v3 *= -1
+			vAlue3 *= -1
 		}
-		this.SubNumber = &v3
+		this.SubNumber = &vAlue3
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedUnmarshalmerge(r, 2)
@@ -846,9 +846,9 @@ func randUTF8RuneUnmarshalmerge(r randyUnmarshalmerge) rune {
 	return rune(ru + 61)
 }
 func randStringUnmarshalmerge(r randyUnmarshalmerge) string {
-	v4 := r.Intn(100)
-	tmps := make([]rune, v4)
-	for i := 0; i < v4; i++ {
+	vAlue4 := r.Intn(100)
+	tmps := make([]rune, vAlue4)
+	for i := 0; i < vAlue4; i++ {
 		tmps[i] = randUTF8RuneUnmarshalmerge(r)
 	}
 	return string(tmps)
@@ -870,11 +870,11 @@ func randFieldUnmarshalmerge(dAtA []byte, r randyUnmarshalmerge, fieldNumber int
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateUnmarshalmerge(dAtA, uint64(key))
-		v5 := r.Int63()
+		vAlue5 := r.Int63()
 		if r.Intn(2) == 0 {
-			v5 *= -1
+			vAlue5 *= -1
 		}
-		dAtA = encodeVarintPopulateUnmarshalmerge(dAtA, uint64(v5))
+		dAtA = encodeVarintPopulateUnmarshalmerge(dAtA, uint64(vAlue5))
 	case 1:
 		dAtA = encodeVarintPopulateUnmarshalmerge(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

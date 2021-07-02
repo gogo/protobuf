@@ -2494,18 +2494,18 @@ func encodeVarintUnrecognized(dAtA []byte, offset int, v uint64) int {
 func NewPopulatedA(r randyUnrecognized, easy bool) *A {
 	this := &A{}
 	if r.Intn(5) != 0 {
-		v1 := r.Intn(5)
-		this.B = make([]*B, v1)
-		for i := 0; i < v1; i++ {
+		vAlue1 := r.Intn(5)
+		this.B = make([]*B, vAlue1)
+		for i := 0; i < vAlue1; i++ {
 			this.B[i] = NewPopulatedB(r, easy)
 		}
 	}
 	if r.Intn(5) != 0 {
-		v2 := int64(r.Int63())
+		vAlue2 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v2 *= -1
+			vAlue2 *= -1
 		}
-		this.Field1 = &v2
+		this.Field1 = &vAlue2
 	}
 	if !easy && r.Intn(10) != 0 {
 	}
@@ -2532,11 +2532,11 @@ func NewPopulatedB(r randyUnrecognized, easy bool) *B {
 func NewPopulatedD(r randyUnrecognized, easy bool) *D {
 	this := &D{}
 	if r.Intn(5) != 0 {
-		v3 := int64(r.Int63())
+		vAlue3 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v3 *= -1
+			vAlue3 *= -1
 		}
-		this.Field1 = &v3
+		this.Field1 = &vAlue3
 	}
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedUnrecognized(r, 2)
@@ -2547,45 +2547,45 @@ func NewPopulatedD(r randyUnrecognized, easy bool) *D {
 func NewPopulatedC(r randyUnrecognized, easy bool) *C {
 	this := &C{}
 	if r.Intn(5) != 0 {
-		v4 := float64(r.Float64())
+		vAlue4 := float64(r.Float64())
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			vAlue4 *= -1
 		}
-		this.Field2 = &v4
+		this.Field2 = &vAlue4
 	}
 	if r.Intn(5) != 0 {
-		v5 := string(randStringUnrecognized(r))
-		this.Field3 = &v5
+		vAlue5 := string(randStringUnrecognized(r))
+		this.Field3 = &vAlue5
 	}
 	if r.Intn(5) != 0 {
-		v6 := float64(r.Float64())
+		vAlue6 := float64(r.Float64())
 		if r.Intn(2) == 0 {
-			v6 *= -1
+			vAlue6 *= -1
 		}
-		this.Field4 = &v6
+		this.Field4 = &vAlue6
 	}
 	if r.Intn(5) != 0 {
-		v7 := r.Intn(10)
-		this.Field5 = make([][]byte, v7)
-		for i := 0; i < v7; i++ {
-			v8 := r.Intn(100)
-			this.Field5[i] = make([]byte, v8)
-			for j := 0; j < v8; j++ {
+		vAlue7 := r.Intn(10)
+		this.Field5 = make([][]byte, vAlue7)
+		for i := 0; i < vAlue7; i++ {
+			vAlue8 := r.Intn(100)
+			this.Field5[i] = make([]byte, vAlue8)
+			for j := 0; j < vAlue8; j++ {
 				this.Field5[i][j] = byte(r.Intn(256))
 			}
 		}
 	}
 	if r.Intn(5) != 0 {
-		v9 := int64(r.Int63())
+		vAlue9 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v9 *= -1
+			vAlue9 *= -1
 		}
-		this.Field6 = &v9
+		this.Field6 = &vAlue9
 	}
 	if r.Intn(5) != 0 {
-		v10 := r.Intn(10)
-		this.Field7 = make([]float32, v10)
-		for i := 0; i < v10; i++ {
+		vAlue10 := r.Intn(10)
+		this.Field7 = make([]float32, vAlue10)
+		for i := 0; i < vAlue10; i++ {
 			this.Field7[i] = float32(r.Float32())
 			if r.Intn(2) == 0 {
 				this.Field7[i] *= -1
@@ -2601,9 +2601,9 @@ func NewPopulatedC(r randyUnrecognized, easy bool) *C {
 func NewPopulatedU(r randyUnrecognized, easy bool) *U {
 	this := &U{}
 	if r.Intn(5) != 0 {
-		v11 := r.Intn(10)
-		this.Field2 = make([]float64, v11)
-		for i := 0; i < v11; i++ {
+		vAlue11 := r.Intn(10)
+		this.Field2 = make([]float64, vAlue11)
+		for i := 0; i < vAlue11; i++ {
 			this.Field2[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field2[i] *= -1
@@ -2611,8 +2611,8 @@ func NewPopulatedU(r randyUnrecognized, easy bool) *U {
 		}
 	}
 	if r.Intn(5) != 0 {
-		v12 := uint32(r.Uint32())
-		this.Field3 = &v12
+		vAlue12 := uint32(r.Uint32())
+		this.Field3 = &vAlue12
 	}
 	if !easy && r.Intn(10) != 0 {
 	}
@@ -2622,9 +2622,9 @@ func NewPopulatedU(r randyUnrecognized, easy bool) *U {
 func NewPopulatedUnoM(r randyUnrecognized, easy bool) *UnoM {
 	this := &UnoM{}
 	if r.Intn(5) != 0 {
-		v13 := r.Intn(10)
-		this.Field2 = make([]float64, v13)
-		for i := 0; i < v13; i++ {
+		vAlue13 := r.Intn(10)
+		this.Field2 = make([]float64, vAlue13)
+		for i := 0; i < vAlue13; i++ {
 			this.Field2[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field2[i] *= -1
@@ -2632,8 +2632,8 @@ func NewPopulatedUnoM(r randyUnrecognized, easy bool) *UnoM {
 		}
 	}
 	if r.Intn(5) != 0 {
-		v14 := uint32(r.Uint32())
-		this.Field3 = &v14
+		vAlue14 := uint32(r.Uint32())
+		this.Field3 = &vAlue14
 	}
 	if !easy && r.Intn(10) != 0 {
 	}
@@ -2643,18 +2643,18 @@ func NewPopulatedUnoM(r randyUnrecognized, easy bool) *UnoM {
 func NewPopulatedOldA(r randyUnrecognized, easy bool) *OldA {
 	this := &OldA{}
 	if r.Intn(5) != 0 {
-		v15 := r.Intn(5)
-		this.B = make([]*OldB, v15)
-		for i := 0; i < v15; i++ {
+		vAlue15 := r.Intn(5)
+		this.B = make([]*OldB, vAlue15)
+		for i := 0; i < vAlue15; i++ {
 			this.B[i] = NewPopulatedOldB(r, easy)
 		}
 	}
 	if r.Intn(5) != 0 {
-		v16 := int64(r.Int63())
+		vAlue16 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v16 *= -1
+			vAlue16 *= -1
 		}
-		this.Field1 = &v16
+		this.Field1 = &vAlue16
 	}
 	if !easy && r.Intn(10) != 0 {
 	}
@@ -2678,34 +2678,34 @@ func NewPopulatedOldB(r randyUnrecognized, easy bool) *OldB {
 func NewPopulatedOldC(r randyUnrecognized, easy bool) *OldC {
 	this := &OldC{}
 	if r.Intn(5) != 0 {
-		v17 := int64(r.Int63())
+		vAlue17 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v17 *= -1
+			vAlue17 *= -1
 		}
-		this.Field1 = &v17
+		this.Field1 = &vAlue17
 	}
 	if r.Intn(5) != 0 {
-		v18 := float64(r.Float64())
+		vAlue18 := float64(r.Float64())
 		if r.Intn(2) == 0 {
-			v18 *= -1
+			vAlue18 *= -1
 		}
-		this.Field2 = &v18
+		this.Field2 = &vAlue18
 	}
 	if r.Intn(5) != 0 {
-		v19 := string(randStringUnrecognized(r))
-		this.Field3 = &v19
+		vAlue19 := string(randStringUnrecognized(r))
+		this.Field3 = &vAlue19
 	}
 	if r.Intn(5) != 0 {
-		v20 := int64(r.Int63())
+		vAlue20 := int64(r.Int63())
 		if r.Intn(2) == 0 {
-			v20 *= -1
+			vAlue20 *= -1
 		}
-		this.Field6 = &v20
+		this.Field6 = &vAlue20
 	}
 	if r.Intn(5) != 0 {
-		v21 := r.Intn(10)
-		this.Field7 = make([]float32, v21)
-		for i := 0; i < v21; i++ {
+		vAlue21 := r.Intn(10)
+		this.Field7 = make([]float32, vAlue21)
+		for i := 0; i < vAlue21; i++ {
 			this.Field7[i] = float32(r.Float32())
 			if r.Intn(2) == 0 {
 				this.Field7[i] *= -1
@@ -2721,13 +2721,13 @@ func NewPopulatedOldC(r randyUnrecognized, easy bool) *OldC {
 func NewPopulatedOldU(r randyUnrecognized, easy bool) *OldU {
 	this := &OldU{}
 	if r.Intn(5) != 0 {
-		v22 := string(randStringUnrecognized(r))
-		this.Field1 = &v22
+		vAlue22 := string(randStringUnrecognized(r))
+		this.Field1 = &vAlue22
 	}
 	if r.Intn(5) != 0 {
-		v23 := r.Intn(10)
-		this.Field2 = make([]float64, v23)
-		for i := 0; i < v23; i++ {
+		vAlue23 := r.Intn(10)
+		this.Field2 = make([]float64, vAlue23)
+		for i := 0; i < vAlue23; i++ {
 			this.Field2[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field2[i] *= -1
@@ -2743,13 +2743,13 @@ func NewPopulatedOldU(r randyUnrecognized, easy bool) *OldU {
 func NewPopulatedOldUnoM(r randyUnrecognized, easy bool) *OldUnoM {
 	this := &OldUnoM{}
 	if r.Intn(5) != 0 {
-		v24 := string(randStringUnrecognized(r))
-		this.Field1 = &v24
+		vAlue24 := string(randStringUnrecognized(r))
+		this.Field1 = &vAlue24
 	}
 	if r.Intn(5) != 0 {
-		v25 := r.Intn(10)
-		this.Field2 = make([]float64, v25)
-		for i := 0; i < v25; i++ {
+		vAlue25 := r.Intn(10)
+		this.Field2 = make([]float64, vAlue25)
+		for i := 0; i < vAlue25; i++ {
 			this.Field2[i] = float64(r.Float64())
 			if r.Intn(2) == 0 {
 				this.Field2[i] *= -1
@@ -2781,9 +2781,9 @@ func randUTF8RuneUnrecognized(r randyUnrecognized) rune {
 	return rune(ru + 61)
 }
 func randStringUnrecognized(r randyUnrecognized) string {
-	v26 := r.Intn(100)
-	tmps := make([]rune, v26)
-	for i := 0; i < v26; i++ {
+	vAlue26 := r.Intn(100)
+	tmps := make([]rune, vAlue26)
+	for i := 0; i < vAlue26; i++ {
 		tmps[i] = randUTF8RuneUnrecognized(r)
 	}
 	return string(tmps)
@@ -2805,11 +2805,11 @@ func randFieldUnrecognized(dAtA []byte, r randyUnrecognized, fieldNumber int, wi
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateUnrecognized(dAtA, uint64(key))
-		v27 := r.Int63()
+		vAlue27 := r.Int63()
 		if r.Intn(2) == 0 {
-			v27 *= -1
+			vAlue27 *= -1
 		}
-		dAtA = encodeVarintPopulateUnrecognized(dAtA, uint64(v27))
+		dAtA = encodeVarintPopulateUnrecognized(dAtA, uint64(vAlue27))
 	case 1:
 		dAtA = encodeVarintPopulateUnrecognized(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

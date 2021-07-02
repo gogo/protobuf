@@ -838,16 +838,16 @@ func encodeVarintRequiredexample(dAtA []byte, offset int, v uint64) int {
 }
 func NewPopulatedRequiredExample(r randyRequiredexample, easy bool) *RequiredExample {
 	this := &RequiredExample{}
-	v1 := string(randStringRequiredexample(r))
-	this.TheRequiredString = &v1
+	vAlue1 := string(randStringRequiredexample(r))
+	this.TheRequiredString = &vAlue1
 	if r.Intn(5) != 0 {
-		v2 := string(randStringRequiredexample(r))
-		this.TheOptionalString = &v2
+		vAlue2 := string(randStringRequiredexample(r))
+		this.TheOptionalString = &vAlue2
 	}
 	if r.Intn(5) != 0 {
-		v3 := r.Intn(10)
-		this.TheRepeatedStrings = make([]string, v3)
-		for i := 0; i < v3; i++ {
+		vAlue3 := r.Intn(10)
+		this.TheRepeatedStrings = make([]string, vAlue3)
+		for i := 0; i < vAlue3; i++ {
 			this.TheRepeatedStrings[i] = string(randStringRequiredexample(r))
 		}
 	}
@@ -897,9 +897,9 @@ func NewPopulatedNidOptNative(r randyRequiredexample, easy bool) *NidOptNative {
 	}
 	this.Field13 = bool(bool(r.Intn(2) == 0))
 	this.Field14 = string(randStringRequiredexample(r))
-	v4 := r.Intn(100)
-	this.Field15 = make([]byte, v4)
-	for i := 0; i < v4; i++ {
+	vAlue4 := r.Intn(100)
+	this.Field15 = make([]byte, vAlue4)
+	for i := 0; i < vAlue4; i++ {
 		this.Field15[i] = byte(r.Intn(256))
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -910,61 +910,61 @@ func NewPopulatedNidOptNative(r randyRequiredexample, easy bool) *NidOptNative {
 
 func NewPopulatedNinOptNative(r randyRequiredexample, easy bool) *NinOptNative {
 	this := &NinOptNative{}
-	v5 := float64(r.Float64())
+	vAlue5 := float64(r.Float64())
 	if r.Intn(2) == 0 {
-		v5 *= -1
+		vAlue5 *= -1
 	}
-	this.Field1 = &v5
-	v6 := float32(r.Float32())
+	this.Field1 = &vAlue5
+	vAlue6 := float32(r.Float32())
 	if r.Intn(2) == 0 {
-		v6 *= -1
+		vAlue6 *= -1
 	}
-	this.Field2 = &v6
-	v7 := int32(r.Int31())
+	this.Field2 = &vAlue6
+	vAlue7 := int32(r.Int31())
 	if r.Intn(2) == 0 {
-		v7 *= -1
+		vAlue7 *= -1
 	}
-	this.Field3 = &v7
-	v8 := int64(r.Int63())
+	this.Field3 = &vAlue7
+	vAlue8 := int64(r.Int63())
 	if r.Intn(2) == 0 {
-		v8 *= -1
+		vAlue8 *= -1
 	}
-	this.Field4 = &v8
-	v9 := uint32(r.Uint32())
-	this.Field5 = &v9
-	v10 := uint64(uint64(r.Uint32()))
-	this.Field6 = &v10
-	v11 := int32(r.Int31())
+	this.Field4 = &vAlue8
+	vAlue9 := uint32(r.Uint32())
+	this.Field5 = &vAlue9
+	vAlue10 := uint64(uint64(r.Uint32()))
+	this.Field6 = &vAlue10
+	vAlue11 := int32(r.Int31())
 	if r.Intn(2) == 0 {
-		v11 *= -1
+		vAlue11 *= -1
 	}
-	this.Field7 = &v11
-	v12 := int64(r.Int63())
+	this.Field7 = &vAlue11
+	vAlue12 := int64(r.Int63())
 	if r.Intn(2) == 0 {
-		v12 *= -1
+		vAlue12 *= -1
 	}
-	this.Field8 = &v12
-	v13 := uint32(r.Uint32())
-	this.Field9 = &v13
-	v14 := int32(r.Int31())
+	this.Field8 = &vAlue12
+	vAlue13 := uint32(r.Uint32())
+	this.Field9 = &vAlue13
+	vAlue14 := int32(r.Int31())
 	if r.Intn(2) == 0 {
-		v14 *= -1
+		vAlue14 *= -1
 	}
-	this.Field10 = &v14
-	v15 := uint64(uint64(r.Uint32()))
-	this.Field11 = &v15
-	v16 := int64(r.Int63())
+	this.Field10 = &vAlue14
+	vAlue15 := uint64(uint64(r.Uint32()))
+	this.Field11 = &vAlue15
+	vAlue16 := int64(r.Int63())
 	if r.Intn(2) == 0 {
-		v16 *= -1
+		vAlue16 *= -1
 	}
-	this.Field12 = &v16
-	v17 := bool(bool(r.Intn(2) == 0))
-	this.Field13 = &v17
-	v18 := string(randStringRequiredexample(r))
-	this.Field14 = &v18
-	v19 := r.Intn(100)
-	this.Field15 = make([]byte, v19)
-	for i := 0; i < v19; i++ {
+	this.Field12 = &vAlue16
+	vAlue17 := bool(bool(r.Intn(2) == 0))
+	this.Field13 = &vAlue17
+	vAlue18 := string(randStringRequiredexample(r))
+	this.Field14 = &vAlue18
+	vAlue19 := r.Intn(100)
+	this.Field15 = make([]byte, vAlue19)
+	for i := 0; i < vAlue19; i++ {
 		this.Field15[i] = byte(r.Intn(256))
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -976,9 +976,9 @@ func NewPopulatedNinOptNative(r randyRequiredexample, easy bool) *NinOptNative {
 func NewPopulatedNestedNinOptNative(r randyRequiredexample, easy bool) *NestedNinOptNative {
 	this := &NestedNinOptNative{}
 	if r.Intn(5) != 0 {
-		v20 := r.Intn(5)
-		this.NestedNinOpts = make([]*NinOptNative, v20)
-		for i := 0; i < v20; i++ {
+		vAlue20 := r.Intn(5)
+		this.NestedNinOpts = make([]*NinOptNative, vAlue20)
+		for i := 0; i < vAlue20; i++ {
 			this.NestedNinOpts[i] = NewPopulatedNinOptNative(r, easy)
 		}
 	}
@@ -1007,9 +1007,9 @@ func randUTF8RuneRequiredexample(r randyRequiredexample) rune {
 	return rune(ru + 61)
 }
 func randStringRequiredexample(r randyRequiredexample) string {
-	v21 := r.Intn(100)
-	tmps := make([]rune, v21)
-	for i := 0; i < v21; i++ {
+	vAlue21 := r.Intn(100)
+	tmps := make([]rune, vAlue21)
+	for i := 0; i < vAlue21; i++ {
 		tmps[i] = randUTF8RuneRequiredexample(r)
 	}
 	return string(tmps)
@@ -1031,11 +1031,11 @@ func randFieldRequiredexample(dAtA []byte, r randyRequiredexample, fieldNumber i
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateRequiredexample(dAtA, uint64(key))
-		v22 := r.Int63()
+		vAlue22 := r.Int63()
 		if r.Intn(2) == 0 {
-			v22 *= -1
+			vAlue22 *= -1
 		}
-		dAtA = encodeVarintPopulateRequiredexample(dAtA, uint64(v22))
+		dAtA = encodeVarintPopulateRequiredexample(dAtA, uint64(vAlue22))
 	case 1:
 		dAtA = encodeVarintPopulateRequiredexample(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

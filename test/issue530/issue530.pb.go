@@ -1477,73 +1477,73 @@ func encodeVarintIssue530(dAtA []byte, offset int, v uint64) int {
 }
 func NewPopulatedFoo5(r randyIssue530, easy bool) *Foo5 {
 	this := &Foo5{}
-	v1 := NewPopulatedBar1(r, easy)
-	this.Bar1 = *v1
+	vAlue1 := NewPopulatedBar1(r, easy)
+	this.Bar1 = *vAlue1
 	if r.Intn(5) != 0 {
 		this.Bar2 = NewPopulatedBar1(r, easy)
 	}
-	v2 := NewPopulatedBar2(r, easy)
-	this.Bar3 = *v2
+	vAlue2 := NewPopulatedBar2(r, easy)
+	this.Bar3 = *vAlue2
 	if r.Intn(5) != 0 {
 		this.Bar4 = NewPopulatedBar2(r, easy)
 	}
 	if r.Intn(5) != 0 {
-		v3 := r.Intn(5)
-		this.Bars1 = make([]Bar1, v3)
-		for i := 0; i < v3; i++ {
-			v4 := NewPopulatedBar1(r, easy)
-			this.Bars1[i] = *v4
+		vAlue3 := r.Intn(5)
+		this.Bars1 = make([]Bar1, vAlue3)
+		for i := 0; i < vAlue3; i++ {
+			vAlue4 := NewPopulatedBar1(r, easy)
+			this.Bars1[i] = *vAlue4
 		}
 	}
 	if r.Intn(5) != 0 {
-		v5 := r.Intn(5)
-		this.Bars2 = make([]*Bar1, v5)
-		for i := 0; i < v5; i++ {
+		vAlue5 := r.Intn(5)
+		this.Bars2 = make([]*Bar1, vAlue5)
+		for i := 0; i < vAlue5; i++ {
 			this.Bars2[i] = NewPopulatedBar1(r, easy)
 		}
 	}
 	if r.Intn(5) != 0 {
-		v6 := r.Intn(5)
-		this.Bars3 = make([]Bar2, v6)
-		for i := 0; i < v6; i++ {
-			v7 := NewPopulatedBar2(r, easy)
-			this.Bars3[i] = *v7
+		vAlue6 := r.Intn(5)
+		this.Bars3 = make([]Bar2, vAlue6)
+		for i := 0; i < vAlue6; i++ {
+			vAlue7 := NewPopulatedBar2(r, easy)
+			this.Bars3[i] = *vAlue7
 		}
 	}
 	if r.Intn(5) != 0 {
-		v8 := r.Intn(5)
-		this.Bars4 = make([]*Bar2, v8)
-		for i := 0; i < v8; i++ {
+		vAlue8 := r.Intn(5)
+		this.Bars4 = make([]*Bar2, vAlue8)
+		for i := 0; i < vAlue8; i++ {
 			this.Bars4[i] = NewPopulatedBar2(r, easy)
 		}
 	}
 	if r.Intn(5) != 0 {
-		v9 := r.Intn(5)
-		this.Barrs1 = make([]Bar3, v9)
-		for i := 0; i < v9; i++ {
-			v10 := NewPopulatedBar3(r, easy)
-			this.Barrs1[i] = *v10
+		vAlue9 := r.Intn(5)
+		this.Barrs1 = make([]Bar3, vAlue9)
+		for i := 0; i < vAlue9; i++ {
+			vAlue10 := NewPopulatedBar3(r, easy)
+			this.Barrs1[i] = *vAlue10
 		}
 	}
 	if r.Intn(5) != 0 {
-		v11 := r.Intn(5)
-		this.Barrs2 = make([]Bar5, v11)
-		for i := 0; i < v11; i++ {
-			v12 := NewPopulatedBar5(r, easy)
-			this.Barrs2[i] = *v12
+		vAlue11 := r.Intn(5)
+		this.Barrs2 = make([]Bar5, vAlue11)
+		for i := 0; i < vAlue11; i++ {
+			vAlue12 := NewPopulatedBar5(r, easy)
+			this.Barrs2[i] = *vAlue12
 		}
 	}
 	if r.Intn(5) != 0 {
-		v13 := r.Intn(10)
+		vAlue13 := r.Intn(10)
 		this.Barmap1 = make(map[string]*Bar3)
-		for i := 0; i < v13; i++ {
+		for i := 0; i < vAlue13; i++ {
 			this.Barmap1[randStringIssue530(r)] = NewPopulatedBar3(r, easy)
 		}
 	}
 	if r.Intn(5) != 0 {
-		v14 := r.Intn(10)
+		vAlue14 := r.Intn(10)
 		this.Barmap2 = make(map[string]*Bar5)
-		for i := 0; i < v14; i++ {
+		for i := 0; i < vAlue14; i++ {
 			this.Barmap2[randStringIssue530(r)] = NewPopulatedBar5(r, easy)
 		}
 	}
@@ -1563,8 +1563,8 @@ func NewPopulatedBar1(r randyIssue530, easy bool) *Bar1 {
 func NewPopulatedBar2(r randyIssue530, easy bool) *Bar2 {
 	this := &Bar2{}
 	if r.Intn(5) != 0 {
-		v15 := string(randStringIssue530(r))
-		this.Str = &v15
+		vAlue15 := string(randStringIssue530(r))
+		this.Str = &vAlue15
 	}
 	if !easy && r.Intn(10) != 0 {
 	}
@@ -1574,19 +1574,19 @@ func NewPopulatedBar2(r randyIssue530, easy bool) *Bar2 {
 func NewPopulatedBar3(r randyIssue530, easy bool) *Bar3 {
 	this := &Bar3{}
 	if r.Intn(5) != 0 {
-		v16 := r.Intn(5)
-		this.Bars4 = make([]Bar4, v16)
-		for i := 0; i < v16; i++ {
-			v17 := NewPopulatedBar4(r, easy)
-			this.Bars4[i] = *v17
+		vAlue16 := r.Intn(5)
+		this.Bars4 = make([]Bar4, vAlue16)
+		for i := 0; i < vAlue16; i++ {
+			vAlue17 := NewPopulatedBar4(r, easy)
+			this.Bars4[i] = *vAlue17
 		}
 	}
 	if r.Intn(5) != 0 {
-		v18 := r.Intn(5)
-		this.Bars2 = make([]Bar2, v18)
-		for i := 0; i < v18; i++ {
-			v19 := NewPopulatedBar2(r, easy)
-			this.Bars2[i] = *v19
+		vAlue18 := r.Intn(5)
+		this.Bars2 = make([]Bar2, vAlue18)
+		for i := 0; i < vAlue18; i++ {
+			vAlue19 := NewPopulatedBar2(r, easy)
+			this.Bars2[i] = *vAlue19
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1605,16 +1605,16 @@ func NewPopulatedBar4(r randyIssue530, easy bool) *Bar4 {
 func NewPopulatedBar5(r randyIssue530, easy bool) *Bar5 {
 	this := &Bar5{}
 	if r.Intn(5) != 0 {
-		v20 := r.Intn(5)
-		this.Bars2 = make([]*Bar2, v20)
-		for i := 0; i < v20; i++ {
+		vAlue20 := r.Intn(5)
+		this.Bars2 = make([]*Bar2, vAlue20)
+		for i := 0; i < vAlue20; i++ {
 			this.Bars2[i] = NewPopulatedBar2(r, easy)
 		}
 	}
 	if r.Intn(5) != 0 {
-		v21 := r.Intn(5)
-		this.Bars1 = make([]*Bar1, v21)
-		for i := 0; i < v21; i++ {
+		vAlue21 := r.Intn(5)
+		this.Bars1 = make([]*Bar1, vAlue21)
+		for i := 0; i < vAlue21; i++ {
 			this.Bars1[i] = NewPopulatedBar1(r, easy)
 		}
 	}
@@ -1626,24 +1626,24 @@ func NewPopulatedBar5(r randyIssue530, easy bool) *Bar5 {
 func NewPopulatedBar7(r randyIssue530, easy bool) *Bar7 {
 	this := &Bar7{}
 	if r.Intn(5) == 0 {
-		v22 := r.Intn(5)
-		this.Bars71 = make([]Bar7, v22)
-		for i := 0; i < v22; i++ {
-			v23 := NewPopulatedBar7(r, easy)
-			this.Bars71[i] = *v23
+		vAlue22 := r.Intn(5)
+		this.Bars71 = make([]Bar7, vAlue22)
+		for i := 0; i < vAlue22; i++ {
+			vAlue23 := NewPopulatedBar7(r, easy)
+			this.Bars71[i] = *vAlue23
 		}
 	}
 	if r.Intn(5) == 0 {
-		v24 := r.Intn(5)
-		this.Bars72 = make([]*Bar7, v24)
-		for i := 0; i < v24; i++ {
+		vAlue24 := r.Intn(5)
+		this.Bars72 = make([]*Bar7, vAlue24)
+		for i := 0; i < vAlue24; i++ {
 			this.Bars72[i] = NewPopulatedBar7(r, easy)
 		}
 	}
 	this.Str1 = string(randStringIssue530(r))
 	if r.Intn(5) != 0 {
-		v25 := string(randStringIssue530(r))
-		this.Str2 = &v25
+		vAlue25 := string(randStringIssue530(r))
+		this.Str2 = &vAlue25
 	}
 	if !easy && r.Intn(10) != 0 {
 	}
@@ -1653,11 +1653,11 @@ func NewPopulatedBar7(r randyIssue530, easy bool) *Bar7 {
 func NewPopulatedBar8(r randyIssue530, easy bool) *Bar8 {
 	this := &Bar8{}
 	if r.Intn(5) != 0 {
-		v26 := r.Intn(5)
-		this.Bars1 = make([]Bar9, v26)
-		for i := 0; i < v26; i++ {
-			v27 := NewPopulatedBar9(r, easy)
-			this.Bars1[i] = *v27
+		vAlue26 := r.Intn(5)
+		this.Bars1 = make([]Bar9, vAlue26)
+		for i := 0; i < vAlue26; i++ {
+			vAlue27 := NewPopulatedBar9(r, easy)
+			this.Bars1[i] = *vAlue27
 		}
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1692,9 +1692,9 @@ func randUTF8RuneIssue530(r randyIssue530) rune {
 	return rune(ru + 61)
 }
 func randStringIssue530(r randyIssue530) string {
-	v28 := r.Intn(100)
-	tmps := make([]rune, v28)
-	for i := 0; i < v28; i++ {
+	vAlue28 := r.Intn(100)
+	tmps := make([]rune, vAlue28)
+	for i := 0; i < vAlue28; i++ {
 		tmps[i] = randUTF8RuneIssue530(r)
 	}
 	return string(tmps)
@@ -1716,11 +1716,11 @@ func randFieldIssue530(dAtA []byte, r randyIssue530, fieldNumber int, wire int) 
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateIssue530(dAtA, uint64(key))
-		v29 := r.Int63()
+		vAlue29 := r.Int63()
 		if r.Intn(2) == 0 {
-			v29 *= -1
+			vAlue29 *= -1
 		}
-		dAtA = encodeVarintPopulateIssue530(dAtA, uint64(v29))
+		dAtA = encodeVarintPopulateIssue530(dAtA, uint64(vAlue29))
 	case 1:
 		dAtA = encodeVarintPopulateIssue530(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

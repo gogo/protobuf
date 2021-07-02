@@ -1319,9 +1319,9 @@ func encodeVarintStruct(dAtA []byte, offset int, v uint64) int {
 func NewPopulatedStruct(r randyStruct, easy bool) *Struct {
 	this := &Struct{}
 	if r.Intn(5) == 0 {
-		v1 := r.Intn(10)
+		vAlue1 := r.Intn(10)
 		this.Fields = make(map[string]*Value)
-		for i := 0; i < v1; i++ {
+		for i := 0; i < vAlue1; i++ {
 			this.Fields[randStringStruct(r)] = NewPopulatedValue(r, easy)
 		}
 	}
@@ -1390,9 +1390,9 @@ func NewPopulatedValue_ListValue(r randyStruct, easy bool) *Value_ListValue {
 func NewPopulatedListValue(r randyStruct, easy bool) *ListValue {
 	this := &ListValue{}
 	if r.Intn(5) == 0 {
-		v2 := r.Intn(5)
-		this.Values = make([]*Value, v2)
-		for i := 0; i < v2; i++ {
+		vAlue2 := r.Intn(5)
+		this.Values = make([]*Value, vAlue2)
+		for i := 0; i < vAlue2; i++ {
 			this.Values[i] = NewPopulatedValue(r, easy)
 		}
 	}
@@ -1421,9 +1421,9 @@ func randUTF8RuneStruct(r randyStruct) rune {
 	return rune(ru + 61)
 }
 func randStringStruct(r randyStruct) string {
-	v3 := r.Intn(100)
-	tmps := make([]rune, v3)
-	for i := 0; i < v3; i++ {
+	vAlue3 := r.Intn(100)
+	tmps := make([]rune, vAlue3)
+	for i := 0; i < vAlue3; i++ {
 		tmps[i] = randUTF8RuneStruct(r)
 	}
 	return string(tmps)
@@ -1445,11 +1445,11 @@ func randFieldStruct(dAtA []byte, r randyStruct, fieldNumber int, wire int) []by
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateStruct(dAtA, uint64(key))
-		v4 := r.Int63()
+		vAlue4 := r.Int63()
 		if r.Intn(2) == 0 {
-			v4 *= -1
+			vAlue4 *= -1
 		}
-		dAtA = encodeVarintPopulateStruct(dAtA, uint64(v4))
+		dAtA = encodeVarintPopulateStruct(dAtA, uint64(vAlue4))
 	case 1:
 		dAtA = encodeVarintPopulateStruct(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

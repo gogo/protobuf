@@ -246,14 +246,14 @@ func encodeVarintIssue498(dAtA []byte, offset int, v uint64) int {
 }
 func NewPopulatedMessage(r randyIssue498, easy bool) *Message {
 	this := &Message{}
-	v1 := uint8(r.Uint32())
-	this.Uint8 = &v1
-	v2 := uint16(r.Uint32())
-	this.Uint16 = &v2
-	v3 := int8(r.Uint32())
-	this.Int8 = &v3
-	v4 := int16(r.Uint32())
-	this.Int16 = &v4
+	vAlue1 := uint8(r.Uint32())
+	this.Uint8 = &vAlue1
+	vAlue2 := uint16(r.Uint32())
+	this.Uint16 = &vAlue2
+	vAlue3 := int8(r.Uint32())
+	this.Int8 = &vAlue3
+	vAlue4 := int16(r.Uint32())
+	this.Int16 = &vAlue4
 	if !easy && r.Intn(10) != 0 {
 		this.XXX_unrecognized = randUnrecognizedIssue498(r, 5)
 	}
@@ -279,9 +279,9 @@ func randUTF8RuneIssue498(r randyIssue498) rune {
 	return rune(ru + 61)
 }
 func randStringIssue498(r randyIssue498) string {
-	v5 := r.Intn(100)
-	tmps := make([]rune, v5)
-	for i := 0; i < v5; i++ {
+	vAlue5 := r.Intn(100)
+	tmps := make([]rune, vAlue5)
+	for i := 0; i < vAlue5; i++ {
 		tmps[i] = randUTF8RuneIssue498(r)
 	}
 	return string(tmps)
@@ -303,11 +303,11 @@ func randFieldIssue498(dAtA []byte, r randyIssue498, fieldNumber int, wire int) 
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateIssue498(dAtA, uint64(key))
-		v6 := r.Int63()
+		vAlue6 := r.Int63()
 		if r.Intn(2) == 0 {
-			v6 *= -1
+			vAlue6 *= -1
 		}
-		dAtA = encodeVarintPopulateIssue498(dAtA, uint64(v6))
+		dAtA = encodeVarintPopulateIssue498(dAtA, uint64(vAlue6))
 	case 1:
 		dAtA = encodeVarintPopulateIssue498(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

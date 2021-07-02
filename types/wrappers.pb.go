@@ -1641,9 +1641,9 @@ func NewPopulatedStringValue(r randyWrappers, easy bool) *StringValue {
 
 func NewPopulatedBytesValue(r randyWrappers, easy bool) *BytesValue {
 	this := &BytesValue{}
-	v1 := r.Intn(100)
-	this.Value = make([]byte, v1)
-	for i := 0; i < v1; i++ {
+	vAlue1 := r.Intn(100)
+	this.Value = make([]byte, vAlue1)
+	for i := 0; i < vAlue1; i++ {
 		this.Value[i] = byte(r.Intn(256))
 	}
 	if !easy && r.Intn(10) != 0 {
@@ -1671,9 +1671,9 @@ func randUTF8RuneWrappers(r randyWrappers) rune {
 	return rune(ru + 61)
 }
 func randStringWrappers(r randyWrappers) string {
-	v2 := r.Intn(100)
-	tmps := make([]rune, v2)
-	for i := 0; i < v2; i++ {
+	vAlue2 := r.Intn(100)
+	tmps := make([]rune, vAlue2)
+	for i := 0; i < vAlue2; i++ {
 		tmps[i] = randUTF8RuneWrappers(r)
 	}
 	return string(tmps)
@@ -1695,11 +1695,11 @@ func randFieldWrappers(dAtA []byte, r randyWrappers, fieldNumber int, wire int) 
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateWrappers(dAtA, uint64(key))
-		v3 := r.Int63()
+		vAlue3 := r.Int63()
 		if r.Intn(2) == 0 {
-			v3 *= -1
+			vAlue3 *= -1
 		}
-		dAtA = encodeVarintPopulateWrappers(dAtA, uint64(v3))
+		dAtA = encodeVarintPopulateWrappers(dAtA, uint64(vAlue3))
 	case 1:
 		dAtA = encodeVarintPopulateWrappers(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))

@@ -1782,21 +1782,21 @@ func NewPopulatedType(r randyType, easy bool) *Type {
 	this := &Type{}
 	this.Name = string(randStringType(r))
 	if r.Intn(5) != 0 {
-		v1 := r.Intn(5)
-		this.Fields = make([]*Field, v1)
-		for i := 0; i < v1; i++ {
+		vAlue1 := r.Intn(5)
+		this.Fields = make([]*Field, vAlue1)
+		for i := 0; i < vAlue1; i++ {
 			this.Fields[i] = NewPopulatedField(r, easy)
 		}
 	}
-	v2 := r.Intn(10)
-	this.Oneofs = make([]string, v2)
-	for i := 0; i < v2; i++ {
+	vAlue2 := r.Intn(10)
+	this.Oneofs = make([]string, vAlue2)
+	for i := 0; i < vAlue2; i++ {
 		this.Oneofs[i] = string(randStringType(r))
 	}
 	if r.Intn(5) != 0 {
-		v3 := r.Intn(5)
-		this.Options = make([]*Option, v3)
-		for i := 0; i < v3; i++ {
+		vAlue3 := r.Intn(5)
+		this.Options = make([]*Option, vAlue3)
+		for i := 0; i < vAlue3; i++ {
 			this.Options[i] = NewPopulatedOption(r, easy)
 		}
 	}
@@ -1826,9 +1826,9 @@ func NewPopulatedField(r randyType, easy bool) *Field {
 	}
 	this.Packed = bool(bool(r.Intn(2) == 0))
 	if r.Intn(5) != 0 {
-		v4 := r.Intn(5)
-		this.Options = make([]*Option, v4)
-		for i := 0; i < v4; i++ {
+		vAlue4 := r.Intn(5)
+		this.Options = make([]*Option, vAlue4)
+		for i := 0; i < vAlue4; i++ {
 			this.Options[i] = NewPopulatedOption(r, easy)
 		}
 	}
@@ -1844,16 +1844,16 @@ func NewPopulatedEnum(r randyType, easy bool) *Enum {
 	this := &Enum{}
 	this.Name = string(randStringType(r))
 	if r.Intn(5) != 0 {
-		v5 := r.Intn(5)
-		this.Enumvalue = make([]*EnumValue, v5)
-		for i := 0; i < v5; i++ {
+		vAlue5 := r.Intn(5)
+		this.Enumvalue = make([]*EnumValue, vAlue5)
+		for i := 0; i < vAlue5; i++ {
 			this.Enumvalue[i] = NewPopulatedEnumValue(r, easy)
 		}
 	}
 	if r.Intn(5) != 0 {
-		v6 := r.Intn(5)
-		this.Options = make([]*Option, v6)
-		for i := 0; i < v6; i++ {
+		vAlue6 := r.Intn(5)
+		this.Options = make([]*Option, vAlue6)
+		for i := 0; i < vAlue6; i++ {
 			this.Options[i] = NewPopulatedOption(r, easy)
 		}
 	}
@@ -1875,9 +1875,9 @@ func NewPopulatedEnumValue(r randyType, easy bool) *EnumValue {
 		this.Number *= -1
 	}
 	if r.Intn(5) != 0 {
-		v7 := r.Intn(5)
-		this.Options = make([]*Option, v7)
-		for i := 0; i < v7; i++ {
+		vAlue7 := r.Intn(5)
+		this.Options = make([]*Option, vAlue7)
+		for i := 0; i < vAlue7; i++ {
 			this.Options[i] = NewPopulatedOption(r, easy)
 		}
 	}
@@ -1918,9 +1918,9 @@ func randUTF8RuneType(r randyType) rune {
 	return rune(ru + 61)
 }
 func randStringType(r randyType) string {
-	v8 := r.Intn(100)
-	tmps := make([]rune, v8)
-	for i := 0; i < v8; i++ {
+	vAlue8 := r.Intn(100)
+	tmps := make([]rune, vAlue8)
+	for i := 0; i < vAlue8; i++ {
 		tmps[i] = randUTF8RuneType(r)
 	}
 	return string(tmps)
@@ -1942,11 +1942,11 @@ func randFieldType(dAtA []byte, r randyType, fieldNumber int, wire int) []byte {
 	switch wire {
 	case 0:
 		dAtA = encodeVarintPopulateType(dAtA, uint64(key))
-		v9 := r.Int63()
+		vAlue9 := r.Int63()
 		if r.Intn(2) == 0 {
-			v9 *= -1
+			vAlue9 *= -1
 		}
-		dAtA = encodeVarintPopulateType(dAtA, uint64(v9))
+		dAtA = encodeVarintPopulateType(dAtA, uint64(vAlue9))
 	case 1:
 		dAtA = encodeVarintPopulateType(dAtA, uint64(key))
 		dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))
