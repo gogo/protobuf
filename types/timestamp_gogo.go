@@ -32,9 +32,7 @@ import (
 	"time"
 )
 
-func NewPopulatedTimestamp(r interface {
-	Int63() int64
-}, easy bool) *Timestamp {
+func NewPopulatedTimestamp(r int63er, easy bool) *Timestamp {
 	this := &Timestamp{}
 	ns := int64(r.Int63())
 	this.Seconds = ns / 1e9
@@ -46,9 +44,7 @@ func (ts *Timestamp) String() string {
 	return TimestampString(ts)
 }
 
-func NewPopulatedStdTime(r interface {
-	Int63() int64
-}, easy bool) *time.Time {
+func NewPopulatedStdTime(r int63er, easy bool) *time.Time {
 	timestamp := NewPopulatedTimestamp(r, easy)
 	t, err := TimestampFromProto(timestamp)
 	if err != nil {
