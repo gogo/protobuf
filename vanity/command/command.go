@@ -54,6 +54,7 @@ import (
 	"github.com/gogo/protobuf/proto"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	_ "github.com/gogo/protobuf/protoc-gen-gogo/grpc"
+	_ "github.com/gogo/protobuf/protoc-gen-gogo/grpcnamed"
 	plugin "github.com/gogo/protobuf/protoc-gen-gogo/plugin"
 )
 
