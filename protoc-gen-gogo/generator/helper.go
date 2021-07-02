@@ -209,6 +209,9 @@ func (g *Generator) GetOneOfFieldName(message *Descriptor, field *descriptor.Fie
 			return fieldname + "_"
 		}
 	}
+	if field.OneofIndex != nil && "Get"+CamelCase(message.OneofDecl[int(*field.OneofIndex)].GetName()) == fieldname {
+		return fieldname + "_"
+	}
 	return fieldname
 }
 
