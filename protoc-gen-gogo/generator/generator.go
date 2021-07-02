@@ -2879,13 +2879,15 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			// when we've computed any disambiguation.
 
 			dname := "is" + goTypeName + "_" + fname
-			oneOftag := `protobuf_oneof:"` + odp.GetName() + `"`
+			oneofTag := `protobuf_oneof:"` + odp.GetName() + `"`
+			oneofMoreTags := gogoproto.GetOneOfMoreTags(odp)
+			oneofTags := fmt.Sprintf("%s %s", oneofTag, oneofMoreTags)
 			of := oneofField{
 				fieldCommon: fieldCommon{
 					goName:     fname,
 					getterName: gname,
 					goType:     dname,
-					tags:       oneOftag,
+					tags:       oneofTags,
 					protoName:  odp.GetName(),
 					fullPath:   oneofFullPath,
 					protoField: field,

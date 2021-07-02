@@ -142,3 +142,7 @@ extend google.protobuf.FieldOptions {
 	optional bool wktpointer = 65012;
 
 }
+
+extend google.protobuf.OneofOptions {
+	optional string oneof_moretags = 67001;
+}
