@@ -179,7 +179,8 @@ func (g *gomobile) generateService(file *generator.FileDescriptor, service *pb.S
 	}
 
 	g.P()
-
+	g.P("var PanicHandler func(v interface{})")
+	g.P()
 	g.P("func CommandAsync(cmd string, data []byte, callback func(data []byte)) {")
 	g.P("go func() {")
 	g.P("var cd []byte")
@@ -267,14 +268,23 @@ func (g *gomobile) generateHandlerMethod(handlerVar string, method *pb.MethodDes
 		errorPrefix = "Error"
 	}
 	if !method.GetServerStreaming() && !method.GetClientStreaming() {
-		g.P("func ", hname, "(b []byte) ([]byte) {")
+		g.P("func ", hname, "(b []byte) (resp []byte) {")
+		g.P("defer func() {")
+		g.P("if PanicHandler != nil {")
+		g.P("if r := recover(); r != nil {")
+		g.P("resp, _ = (&", outType, "{Error: &", outType, errorPrefix, "{Code: ", outType, errorPrefix, "_UNKNOWN_ERROR, Description: \"panic recovered\"}}).Marshal()")
+		g.P("PanicHandler(r)")
+		g.P("}")
+		g.P("}")
+		g.P("}()")
+		g.P()
 		g.P("in := new(", inType, ")")
 		g.P("if err := in.Unmarshal(b); err != nil { ")
-		g.P("resp, _ := (&", outType, "{Error: &", outType, errorPrefix, "{Code: ", outType, errorPrefix, "_BAD_INPUT, Description: err.Error()}}).Marshal()")
+		g.P("resp, _ = (&", outType, "{Error: &", outType, errorPrefix, "{Code: ", outType, errorPrefix, "_BAD_INPUT, Description: err.Error()}}).Marshal()")
 		g.P("return resp")
 		g.P("}")
-
-		g.P("resp, _ := ", handlerVar, ".", methName, "(in).Marshal()")
+		g.P()
+		g.P("resp, _ = ", handlerVar, ".", methName, "(in).Marshal()")
 		g.P("return resp")
 
 		g.P("}")
