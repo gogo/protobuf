@@ -33,6 +33,8 @@ syntax = "proto3";
 
 package jsonpb;
 
+import weak "gogoproto/gogo.proto";
+
 message Simple3 {
   double dub = 1;
 }
@@ -47,6 +49,14 @@ message SimpleMap3 {
 
 message SimpleNull3 {
   Simple3 simple = 1;
+}
+
+message SimpleNotNull3 {
+  Simple3 simple = 1 [(gogoproto.nullable) = false];
+}
+
+message BytesArrayCast3 {
+  bytes bt = 1 [(gogoproto.nullable) = false, (gogoproto.customtype) = "FourByteA"];
 }
 
 enum Numeral {

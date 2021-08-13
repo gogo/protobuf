@@ -169,6 +169,44 @@ var (
 	messageType = reflect.TypeOf((*proto.Message)(nil)).Elem()
 )
 
+// isZero reports whether v is the zero value for its type.
+// This implementation is based on reflect.Value.IsZero() in go1.13+ but is
+// inlined here for backwards compatibility with earlier go versions.
+func isZero(v reflect.Value) bool {
+	switch v.Kind() {
+	case reflect.Bool:
+		return !v.Bool()
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+		return v.Int() == 0
+	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		return v.Uint() == 0
+	case reflect.Float32, reflect.Float64:
+		return math.Float64bits(v.Float()) == 0
+	case reflect.Complex64, reflect.Complex128:
+		c := v.Complex()
+		return math.Float64bits(real(c)) == 0 && math.Float64bits(imag(c)) == 0
+	case reflect.Array:
+		for i := 0; i < v.Len(); i++ {
+			if !isZero(v.Index(i)) {
+				return false
+			}
+		}
+		return true
+	case reflect.Chan, reflect.Func, reflect.Interface, reflect.Map, reflect.Ptr, reflect.Slice, reflect.UnsafePointer:
+		return v.IsNil()
+	case reflect.String:
+		return v.Len() == 0
+	case reflect.Struct:
+		for i := 0; i < v.NumField(); i++ {
+			if !isZero(v.Field(i)) {
+				return false
+			}
+		}
+		return true
+	}
+	return false
+}
+
 // marshalObject writes a struct to the Writer.
 func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeURL string) error {
 	if jsm, ok := v.(JSONPBMarshaler); ok {
@@ -313,31 +351,8 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 		}
 
 		if !m.EmitDefaults {
-			switch value.Kind() {
-			case reflect.Bool:
-				if !value.Bool() {
-					continue
-				}
-			case reflect.Int32, reflect.Int64:
-				if value.Int() == 0 {
-					continue
-				}
-			case reflect.Uint32, reflect.Uint64:
-				if value.Uint() == 0 {
-					continue
-				}
-			case reflect.Float32, reflect.Float64:
-				if value.Float() == 0 {
-					continue
-				}
-			case reflect.String:
-				if value.Len() == 0 {
-					continue
-				}
-			case reflect.Map, reflect.Ptr, reflect.Slice:
-				if value.IsNil() {
-					continue
-				}
+			if isZero(value) {
+				continue
 			}
 		}
 
