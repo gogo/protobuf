@@ -64,7 +64,7 @@ import (
 
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
-	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	"github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator/internal/remap"
 	plugin "github.com/gogo/protobuf/protoc-gen-gogo/plugin"
 )
@@ -548,7 +548,7 @@ func (g *Generator) CommandLineParameters(parameter string) {
 	if pluginList == "none" {
 		pluginList = ""
 	}
-	gogoPluginNames := []string{"unmarshal", "unsafeunmarshaler", "union", "stringer", "size", "protosizer", "populate", "marshalto", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck", "oneofcheck", "compare"}
+	gogoPluginNames := []string{"unmarshal", "unsafeunmarshaler", "union", "stringer", "size", "protosizer", "populate", "marshalto", "unsafemarshaler", "gostring", "face", "equal", "enumstringer", "embedcheck", "description", "defaultcheck", "oneofcheck", "compare", "jsonwkt"}
 	pluginList = strings.Join(append(gogoPluginNames, pluginList), "+")
 	if pluginList != "" {
 		// Amend the set of plugins.

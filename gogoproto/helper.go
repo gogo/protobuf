@@ -28,8 +28,10 @@
 
 package gogoproto
 
-import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-import proto "github.com/gogo/protobuf/proto"
+import (
+	"github.com/gogo/protobuf/proto"
+	google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+)
 
 func IsEmbed(field *google_protobuf.FieldDescriptorProto) bool {
 	return proto.GetBoolExtension(field.Options, E_Embed, false)
@@ -145,6 +147,16 @@ func HasEnumDecl(file *google_protobuf.FileDescriptorProto, enum *google_protobu
 
 func HasTypeDecl(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
 	return proto.GetBoolExtension(message.Options, E_Typedecl, proto.GetBoolExtension(file.Options, E_TypedeclAll, true))
+}
+
+func GetWellKnownType(message *google_protobuf.DescriptorProto) *string {
+	if message != nil && message.Options != nil {
+		v, err := proto.GetExtension(message.Options, E_JsonWellKnownType)
+		if err == nil && v.(*string) != nil {
+			return v.(*string)
+		}
+	}
+	return nil
 }
 
 func GetCustomType(field *google_protobuf.FieldDescriptorProto) string {

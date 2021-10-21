@@ -43,6 +43,7 @@ import (
 	_ "github.com/gogo/protobuf/plugin/equal"
 	_ "github.com/gogo/protobuf/plugin/face"
 	_ "github.com/gogo/protobuf/plugin/gostring"
+	_ "github.com/gogo/protobuf/plugin/jsonwkt"
 	_ "github.com/gogo/protobuf/plugin/marshalto"
 	_ "github.com/gogo/protobuf/plugin/oneofcheck"
 	_ "github.com/gogo/protobuf/plugin/populate"
