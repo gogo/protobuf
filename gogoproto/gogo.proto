@@ -142,3 +142,8 @@ extend google.protobuf.FieldOptions {
 	optional bool wktpointer = 65012;
 
 }
+
+extend google.protobuf.ServiceOptions {
+	optional bool genregistry = 168001;
+}
+

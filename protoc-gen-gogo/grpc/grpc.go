@@ -39,6 +39,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/gogo/protobuf/gogoproto"
 	pb "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 )
@@ -151,7 +152,7 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 	}
 	servName := generator.CamelCase(origServName)
 	deprecated := service.GetOptions().GetDeprecated()
-
+	genRegistry := gogoproto.IsServiceGenRegistry(service)
 	g.P()
 	g.P(fmt.Sprintf(`// %sClient is the client API for %s service.
 //
@@ -273,6 +274,20 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 	g.P("},")
 	g.P("Metadata: \"", file.GetName(), "\",")
 	g.P("}")
+
+	if genRegistry {
+		registry := servName + "ServiceRegistry"
+		g.P()
+		g.P("type _", registry, " struct {")
+		g.P("ServiceDesc *", grpcPkg, ".ServiceDesc")
+		g.P("ImplService ", serverType)
+		g.P()
+		g.P("}")
+		g.P("var ", registry, " = _", registry, "{")
+		g.P("ServiceDesc: ", serviceDescVar, ",")
+		g.P("}")
+		g.P()
+	}
 	g.P()
 }
 
