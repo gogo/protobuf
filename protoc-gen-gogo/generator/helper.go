@@ -30,6 +30,7 @@ package generator
 
 import (
 	"bytes"
+	"go/ast"
 	"go/parser"
 	"go/printer"
 	"go/token"
@@ -375,13 +376,14 @@ func (g *Generator) generatePlugin(file *FileDescriptor, p Plugin) {
 	// Reformat generated code.
 	contents := string(g.Buffer.Bytes())
 	fset := token.NewFileSet()
-	ast, err := parser.ParseFile(fset, "", g, parser.ParseComments)
+	fileAST, err := parser.ParseFile(fset, "", g, parser.ParseComments)
 	if err != nil {
 		g.Fail("bad Go source code was generated:", contents, err.Error())
 		return
 	}
+	ast.SortImports(fset, fileAST)
 	g.Reset()
-	err = (&printer.Config{Mode: printer.TabIndent | printer.UseSpaces, Tabwidth: 8}).Fprint(g, fset, ast)
+	err = (&printer.Config{Mode: printer.TabIndent | printer.UseSpaces, Tabwidth: 8}).Fprint(g, fset, fileAST)
 	if err != nil {
 		g.Fail("generated Go source code could not be reformatted:", err.Error())
 	}
