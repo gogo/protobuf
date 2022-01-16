@@ -292,7 +292,7 @@ func GetInternalStructFieldTags(file *google_protobuf.FileDescriptorProto) *stri
 		return nil
 	}
 	if file.Options != nil {
-		v, err := proto.GetExtension(file.Options, E_IgnoreInternalStructFieldTags)
+		v, err := proto.GetExtension(file.Options, E_InternalStructFieldTags)
 		if err == nil && v.(*string) != nil {
 			return (v.(*string))
 		}
