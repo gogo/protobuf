@@ -363,6 +363,15 @@ var E_GoprotoUnkeyedAll = &proto.ExtensionDesc{
 	Filename:      "gogo.proto",
 }
 
+var E_IgnoreInternalStructFieldTags = &proto.ExtensionDesc{
+	ExtendedType:  (*descriptor.FileOptions)(nil),
+	ExtensionType: ([]string)(nil),
+	Field:         64036,
+	Name:          "gogoproto.ignore_internal_struct_field_tags",
+	Tag:           "bytes,63036,rep,name=ignore_internal_struct_field_tags",
+	Filename:      "gogoproto/gogo.proto",
+}
+
 var E_GoprotoGetters = &proto.ExtensionDesc{
 	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
@@ -596,6 +605,7 @@ var E_GoprotoUnkeyed = &proto.ExtensionDesc{
 	Tag:           "varint,64035,opt,name=goproto_unkeyed",
 	Filename:      "gogo.proto",
 }
+
 
 var E_Nullable = &proto.ExtensionDesc{
 	ExtendedType:  (*descriptor.FieldOptions)(nil),
