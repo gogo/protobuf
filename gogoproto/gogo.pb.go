@@ -365,7 +365,7 @@ var E_GoprotoUnkeyedAll = &proto.ExtensionDesc{
 
 var E_IgnoreInternalStructFieldTags = &proto.ExtensionDesc{
 	ExtendedType:  (*descriptor.FileOptions)(nil),
-	ExtensionType: ([]string)(nil),
+	ExtensionType: (*string)(nil),
 	Field:         64036,
 	Name:          "gogoproto.ignore_internal_struct_field_tags",
 	Tag:           "bytes,63036,rep,name=ignore_internal_struct_field_tags",

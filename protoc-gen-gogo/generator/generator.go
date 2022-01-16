@@ -2494,17 +2494,15 @@ func (g *Generator) generateGet(mc *msgCtx, protoField *descriptor.FieldDescript
 
 // generateInternalStructFields just adds the XXX_<something> fields to the message struct.
 func (g *Generator) generateInternalStructFields(mc *msgCtx, topLevelFields []topLevelField) {
-	ignoreInternalStructFieldTags := gogoproto.GetIgnoreInternalStructFieldTags(g.file.FileDescriptorProto, mc.message.DescriptorProto)
+	internalStructFieldTags := gogoproto.GetInternalStructFieldTags(g.file.FileDescriptorProto)
 
-	resolvedIgnoredTags := ""
-	if len(ignoreInternalStructFieldTags) > 0 {
-		for _, el := range ignoreInternalStructFieldTags {
-			resolvedIgnoredTags = "," + (*el) + "\"-\""
-		}
+	resolvedInternaltags := ""
+	if internalStructFieldTags != nil {
+		resolvedInternaltags = ", " + *internalStructFieldTags
 	}
 
 	if gogoproto.HasUnkeyed(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
-		g.P("XXX_NoUnkeyedLiteral\tstruct{} `json:\"-\"`" + resolvedIgnoredTags) // prevent unkeyed struct literals
+		g.P("XXX_NoUnkeyedLiteral\tstruct{} `json:\"-\"`" + resolvedInternaltags) // prevent unkeyed struct literals
 	}
 	if len(mc.message.ExtensionRange) > 0 {
 		if gogoproto.HasExtensionsMap(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
@@ -2512,16 +2510,16 @@ func (g *Generator) generateInternalStructFields(mc *msgCtx, topLevelFields []to
 			if opts := mc.message.Options; opts != nil && opts.GetMessageSetWireFormat() {
 				messageset = "protobuf_messageset:\"1\" "
 			}
-			g.P(g.Pkg["proto"], ".XXX_InternalExtensions `", messageset, "json:\"-\"`"+resolvedIgnoredTags)
+			g.P(g.Pkg["proto"], ".XXX_InternalExtensions `", messageset, "json:\"-\"`"+resolvedInternaltags)
 		} else {
-			g.P("XXX_extensions\t\t[]byte `protobuf:\"bytes,0,opt\" json:\"-\"`" + resolvedIgnoredTags)
+			g.P("XXX_extensions\t\t[]byte `protobuf:\"bytes,0,opt\" json:\"-\"`" + resolvedInternaltags)
 		}
 	}
 	if gogoproto.HasUnrecognized(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
-		g.P("XXX_unrecognized\t[]byte `json:\"-\"`" + resolvedIgnoredTags)
+		g.P("XXX_unrecognized\t[]byte `json:\"-\"`" + resolvedInternaltags)
 	}
 	if gogoproto.HasSizecache(g.file.FileDescriptorProto, mc.message.DescriptorProto) {
-		g.P("XXX_sizecache\tint32 `json:\"-\"`" + resolvedIgnoredTags)
+		g.P("XXX_sizecache\tint32 `json:\"-\"`" + resolvedInternaltags)
 	}
 }
 

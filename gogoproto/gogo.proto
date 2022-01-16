@@ -88,7 +88,7 @@ extend google.protobuf.FileOptions {
 	optional bool goproto_sizecache_all = 63034;
 	optional bool goproto_unkeyed_all = 63035;
 
-	repeated string ignore_internal_struct_field_tags = 63036;
+	optional string ignore_internal_struct_field_tags = 63036;
 }
 
 extend google.protobuf.MessageOptions {
