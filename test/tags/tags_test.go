@@ -72,3 +72,17 @@ func TestTags(t *testing.T) {
 		}
 	}
 }
+
+func TestHiddenTags(t *testing.T) {
+	var tests = []string{
+		"XXX_NoUnkeyedLiteral", "XXX_unrecognized", "XXX_sizecache",
+	}
+
+	for _, tt := range tests {
+		tv := reflect.ValueOf(Inside{}).Type()
+		f, _ := tv.FieldByName(tt)
+		if xmltag := f.Tag.Get("xml"); xmltag != "-" {
+			t.Fatalf("proto %q type: xml tag %s != %s", tv.Name(), xmltag, "-")
+		}
+	}
+}

@@ -369,7 +369,7 @@ var E_InternalStructFieldTags = &proto.ExtensionDesc{
 	Field:         64036,
 	Name:          "gogoproto.internal_struct_field_tags",
 	Tag:           "bytes,63036,rep,name=internal_struct_field_tags",
-	Filename:      "gogoproto/gogo.proto",
+	Filename:      "gogo.proto",
 }
 
 var E_GoprotoGetters = &proto.ExtensionDesc{
