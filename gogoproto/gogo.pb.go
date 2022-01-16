@@ -606,7 +606,6 @@ var E_GoprotoUnkeyed = &proto.ExtensionDesc{
 	Filename:      "gogo.proto",
 }
 
-
 var E_Nullable = &proto.ExtensionDesc{
 	ExtendedType:  (*descriptor.FieldOptions)(nil),
 	ExtensionType: (*bool)(nil),
