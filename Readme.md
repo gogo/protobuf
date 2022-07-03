@@ -79,6 +79,12 @@ Please let us know if you are using gogoprotobuf by posting on our <a href="http
   - <a href="https://jbrandhorst.com/post/gogoproto/">So you want to use GoGo Protobuf - Johan Brandhorst</a>
   - <a href="https://jbrandhorst.com/post/grpc-errors/">Advanced gRPC Error Usage - Johan Brandhorst</a>
   - <a href="https://www.udemy.com/grpc-golang/?couponCode=GITHUB10">gRPC Golang Course on Udemy - Stephane Maarek</a>
+  
+## Preparing for GopherCon UK 2022
+
+<a href="https://www.youtube.com/watch?v=8kL7_KTsIoc" target="_blank">
+ <img src="https://img.youtube.com/vi/8kL7_KTsIoc/maxres3.jpg" alt="Preparing for GopherCon UK 2022 video" width="480" border="10" />
+</a>
 
 ## Getting Started
 
