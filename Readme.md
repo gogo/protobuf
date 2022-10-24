@@ -1,6 +1,10 @@
-[GoGo Protobuf looking for new ownership](https://github.com/gogo/protobuf/issues/691)
+[GoGo Protobuf is Deprecated](https://twitter.com/awalterschulze/status/1584553056100057088)
 
-# Protocol Buffers for Go with Gadgets
+# [[Deprecated](https://twitter.com/awalterschulze/status/1584553056100057088)] Protocol Buffers for Go with Gadgets
+
+<a href="https://www.youtube.com/watch?v=HTIltI0NuNg&list=PLYwF9EIrl42T3ml_ANaNifOuTQtLxaZgQ&index=3" target="_blank">
+ <img src="https://img.youtube.com/vi/HTIltI0NuNg/maxres1.jpg" alt="Watch the video" width="480" border="10" />
+</a>
 
 [![Build Status](https://github.com/gogo/protobuf/workflows/Continuous%20Integration/badge.svg)](https://github.com/gogo/protobuf/actions)
 [![GoDoc](https://godoc.org/github.com/gogo/protobuf?status.svg)](http://godoc.org/github.com/gogo/protobuf)
