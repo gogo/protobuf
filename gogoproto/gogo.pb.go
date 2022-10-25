@@ -363,6 +363,15 @@ var E_GoprotoUnkeyedAll = &proto.ExtensionDesc{
 	Filename:      "gogo.proto",
 }
 
+var E_InternalStructFieldTags = &proto.ExtensionDesc{
+	ExtendedType:  (*descriptor.FileOptions)(nil),
+	ExtensionType: (*string)(nil),
+	Field:         64036,
+	Name:          "gogoproto.internal_struct_field_tags",
+	Tag:           "bytes,63036,rep,name=internal_struct_field_tags",
+	Filename:      "gogo.proto",
+}
+
 var E_GoprotoGetters = &proto.ExtensionDesc{
 	ExtendedType:  (*descriptor.MessageOptions)(nil),
 	ExtensionType: (*bool)(nil),
