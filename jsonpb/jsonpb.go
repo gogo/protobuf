@@ -64,6 +64,9 @@ type Marshaler struct {
 	// Whether to render enum values as integers, as opposed to string values.
 	EnumsAsInts bool
 
+	// Whether to render number64 type such as int64, uint64 as integers instead of string values.
+	Num64AsInts bool
+
 	// Whether to render fields with zero values.
 	EmitDefaults bool
 
@@ -736,7 +739,7 @@ func (m *Marshaler) marshalValue(out *errWriter, prop *proto.Properties, v refle
 	if err != nil {
 		return err
 	}
-	needToQuote := string(b[0]) != `"` && (v.Kind() == reflect.Int64 || v.Kind() == reflect.Uint64)
+	needToQuote := string(b[0]) != `"` && ((v.Kind() == reflect.Int64 || v.Kind() == reflect.Uint64) && !m.Num64AsInts)
 	if needToQuote {
 		out.write(`"`)
 	}
