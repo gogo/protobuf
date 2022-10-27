@@ -413,3 +413,13 @@ func HasSizecache(file *google_protobuf.FileDescriptorProto, message *google_pro
 func HasUnkeyed(file *google_protobuf.FileDescriptorProto, message *google_protobuf.DescriptorProto) bool {
 	return proto.GetBoolExtension(message.Options, E_GoprotoUnkeyed, proto.GetBoolExtension(file.Options, E_GoprotoUnkeyedAll, true))
 }
+
+func IsServiceGenRegistry(service *google_protobuf.ServiceDescriptorProto) bool {
+	if service == nil {
+		return false
+	}
+	if service.Options == nil {
+		return false
+	}
+	return proto.GetBoolExtension(service.Options, E_Genregistry, false)
+}
