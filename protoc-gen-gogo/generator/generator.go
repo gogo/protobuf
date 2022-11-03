@@ -466,6 +466,8 @@ type Generator struct {
 
 	customImports  []string
 	writtenImports map[string]bool // For de-duplicating written imports
+
+	buildTag string
 }
 
 type pathType int
@@ -536,6 +538,8 @@ func (g *Generator) CommandLineParameters(parameter string) {
 			if v == "true" {
 				g.annotateCode = true
 			}
+		case "build_tag":
+			g.buildTag = v
 		default:
 			if len(k) > 0 && k[0] == 'M' {
 				g.ImportMap[k[1:]] = v
@@ -1195,6 +1199,11 @@ func (g *Generator) generate(file *FileDescriptor) {
 	g.addedImports = make(map[GoImportPath]bool)
 	for name := range globalPackageNames {
 		g.usedPackageNames[name] = true
+	}
+
+	if g.buildTag != "" {
+		g.P("//go:build ", g.buildTag)
+		g.P("// +build ", g.buildTag)
 	}
 
 	g.P("// This is a compile-time assertion to ensure that this generated file")
