@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go_version: [1.12.x, 1.11.x]
-        protobuf_version: [3.9.1, 3.0.2, 2.6.1]
+        go_version: [1.15.x, 1.12.x]
+        protobuf_version: [3.14.0, 3.0.2, 2.6.1]
       fail-fast: false
     steps:
       - name: Checkout branch
@@ -42,5 +42,5 @@ jobs:
         run: GOPATH=/home/runner/work/protobuf/gopath GOBIN=$GOPATH/bin PATH=$HOME/bin:$GOBIN:$PATH make buildserverall
 
       - name: Diff check
-        if: matrix.protobuf_version == '3.9.1' && matrix.go_version == '1.12.x'
+        if: matrix.protobuf_version == '3.14.0' && matrix.go_version == '1.15.x'
         run: (! git status --porcelain | read || (git status; git diff; exit 1))

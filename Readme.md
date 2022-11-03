@@ -1,8 +1,12 @@
-[GoGo Protobuf looking for new ownership](https://github.com/gogo/protobuf/issues/691)
+[GoGo Protobuf is Deprecated](https://twitter.com/awalterschulze/status/1584553056100057088)
 
-# Protocol Buffers for Go with Gadgets
+# [[Deprecated](https://twitter.com/awalterschulze/status/1584553056100057088)] Protocol Buffers for Go with Gadgets
 
-[![Build Status](https://travis-ci.org/gogo/protobuf.svg?branch=master)](https://travis-ci.org/gogo/protobuf)
+<a href="https://www.youtube.com/watch?v=HTIltI0NuNg&list=PLYwF9EIrl42T3ml_ANaNifOuTQtLxaZgQ&index=3" target="_blank">
+ <img src="https://img.youtube.com/vi/HTIltI0NuNg/maxres1.jpg" alt="Watch the video" width="480" border="10" />
+</a>
+
+[![Build Status](https://github.com/gogo/protobuf/workflows/Continuous%20Integration/badge.svg)](https://github.com/gogo/protobuf/actions)
 [![GoDoc](https://godoc.org/github.com/gogo/protobuf?status.svg)](http://godoc.org/github.com/gogo/protobuf)
 
 gogoprotobuf is a fork of <a href="https://github.com/golang/protobuf">golang/protobuf</a> with extra code generation features.
@@ -79,6 +83,12 @@ Please let us know if you are using gogoprotobuf by posting on our <a href="http
   - <a href="https://jbrandhorst.com/post/gogoproto/">So you want to use GoGo Protobuf - Johan Brandhorst</a>
   - <a href="https://jbrandhorst.com/post/grpc-errors/">Advanced gRPC Error Usage - Johan Brandhorst</a>
   - <a href="https://www.udemy.com/grpc-golang/?couponCode=GITHUB10">gRPC Golang Course on Udemy - Stephane Maarek</a>
+  
+## Preparing for GopherCon UK 2022
+
+<a href="https://www.youtube.com/watch?v=8kL7_KTsIoc" target="_blank">
+ <img src="https://img.youtube.com/vi/8kL7_KTsIoc/maxres3.jpg" alt="Preparing for GopherCon UK 2022 video" width="480" border="10" />
+</a>
 
 ## Getting Started
 
@@ -92,10 +102,10 @@ After that you can choose:
 ### Installation
 
 To install it, you must first have Go (at least version 1.6.3 or 1.9 if you are using gRPC) installed (see [http://golang.org/doc/install](http://golang.org/doc/install)).
-Latest patch versions of 1.10 and 1.11 are continuously tested.
+Latest patch versions of 1.12 and 1.15 are continuously tested.
 
 Next, install the standard protocol buffer implementation from [https://github.com/google/protobuf](https://github.com/google/protobuf).
-Most versions from 2.3.1 should not give any problems, but 2.6.1, 3.0.2 and 3.6.1 are continuously tested.
+Most versions from 2.3.1 should not give any problems, but 2.6.1, 3.0.2 and 3.14.0 are continuously tested.
 
 ### Speed
 
