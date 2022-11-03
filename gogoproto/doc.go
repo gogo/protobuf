@@ -112,7 +112,7 @@ See below that the field's name is MySize and not Size.
 		MySize		*int64
 	}
 
-The is useful when having a protocol buffer message with a field name which conflicts with a generated method.
+This is useful when having a protocol buffer message with a field name which conflicts with a generated method.
 As an example, having a field name size and using the sizer plugin to generate a Size method will cause a go compiler error.
 Using customname you can fix this error without changing the field name.
 This is typically useful when working with a protocol buffer that was designed before these methods and/or the go language were avialable.
