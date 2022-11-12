@@ -647,3 +647,9 @@ message NinRepNonByteCustomType {
 message ProtoType {
   optional string Field2 = 1;
 }
+
+// Test of jsonwkt plugin
+message UUIDValue {
+	option (gogoproto.json_well_known_type) = "StringValue";
+	optional string value = 1;
+}
