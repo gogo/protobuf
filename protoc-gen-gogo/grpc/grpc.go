@@ -52,10 +52,11 @@ const generatedCodeVersion = 4
 // Paths for packages used by code generated in this file,
 // relative to the import_prefix of the generator.Generator.
 const (
-	contextPkgPath = "context"
-	grpcPkgPath    = "google.golang.org/grpc"
-	codePkgPath    = "google.golang.org/grpc/codes"
-	statusPkgPath  = "google.golang.org/grpc/status"
+	contextPkgPath  = "context"
+	grpcPkgPath     = "google.golang.org/grpc"
+	codePkgPath     = "google.golang.org/grpc/codes"
+	statusPkgPath   = "google.golang.org/grpc/status"
+	gogoGrpcPkgPath = "github.com/gogo/protobuf/grpc"
 )
 
 func init() {
@@ -77,8 +78,9 @@ func (g *grpc) Name() string {
 // They may vary from the final path component of the import path
 // if the name is used by other packages.
 var (
-	contextPkg string
-	grpcPkg    string
+	contextPkg  string
+	grpcPkg     string
+	gogoGrpcPkg string
 )
 
 // Init initializes the plugin.
@@ -109,6 +111,7 @@ func (g *grpc) Generate(file *generator.FileDescriptor) {
 
 	contextPkg = string(g.gen.AddImport(contextPkgPath))
 	grpcPkg = string(g.gen.AddImport(grpcPkgPath))
+	gogoGrpcPkg = string(g.gen.AddImport(gogoGrpcPkgPath))
 
 	g.P("// Reference imports to suppress errors if they are not otherwise used.")
 	g.P("var _ ", contextPkg, ".Context")
@@ -172,7 +175,7 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 
 	// Client structure.
 	g.P("type ", unexport(servName), "Client struct {")
-	g.P("cc *", grpcPkg, ".ClientConn")
+	g.P("cc ", gogoGrpcPkg, ".ClientConn")
 	g.P("}")
 	g.P()
 
@@ -180,7 +183,7 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 	if deprecated {
 		g.P(deprecationComment)
 	}
-	g.P("func New", servName, "Client (cc *", grpcPkg, ".ClientConn) ", servName, "Client {")
+	g.P("func New", servName, "Client (cc ", gogoGrpcPkg, ".ClientConn) ", servName, "Client {")
 	g.P("return &", unexport(servName), "Client{cc}")
 	g.P("}")
 	g.P()
@@ -227,7 +230,7 @@ func (g *grpc) generateService(file *generator.FileDescriptor, service *pb.Servi
 	if deprecated {
 		g.P(deprecationComment)
 	}
-	g.P("func Register", servName, "Server(s *", grpcPkg, ".Server, srv ", serverType, ") {")
+	g.P("func Register", servName, "Server(s ", gogoGrpcPkg, ".Server, srv ", serverType, ") {")
 	g.P("s.RegisterService(&", serviceDescVar, `, srv)`)
 	g.P("}")
 	g.P()
