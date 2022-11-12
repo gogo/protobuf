@@ -644,6 +644,22 @@ message NinRepNonByteCustomType {
 	repeated ProtoType Field1 = 1 [(gogoproto.customtype) = "T"];
 }
 
+message StringCustomType {
+	optional string Field1 = 1 [(gogoproto.customtype) = "T"];
+}
+
+message NidOptStringCustomType {
+	optional string Field1 = 1 [(gogoproto.customtype) = "T", (gogoproto.nullable) = false];
+}
+
+message NidRepStringCustomType {
+	repeated string Field1 = 1 [(gogoproto.customtype) = "T", (gogoproto.nullable) = false];
+}
+
+message NinRepStringCustomType {
+	repeated string Field1 = 1 [(gogoproto.customtype) = "T"];
+}
+
 message ProtoType {
   optional string Field2 = 1;
 }

@@ -607,33 +607,46 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			p.encodeKey(fieldNumber, wireType)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_STRING:
-		if repeated {
-			val := p.reverseListRange(`m.`, fieldname)
-			p.P(`i -= len(`, val, `)`)
-			p.P(`copy(dAtA[i:], `, val, `)`)
-			p.callVarint(`len(`, val, `)`)
-			p.encodeKey(fieldNumber, wireType)
-			p.Out()
-			p.P(`}`)
-		} else if proto3 {
-			p.P(`if len(m.`, fieldname, `) > 0 {`)
-			p.In()
-			p.P(`i -= len(m.`, fieldname, `)`)
-			p.P(`copy(dAtA[i:], m.`, fieldname, `)`)
-			p.callVarint(`len(m.`, fieldname, `)`)
-			p.encodeKey(fieldNumber, wireType)
-			p.Out()
-			p.P(`}`)
-		} else if !nullable {
-			p.P(`i -= len(m.`, fieldname, `)`)
-			p.P(`copy(dAtA[i:], m.`, fieldname, `)`)
-			p.callVarint(`len(m.`, fieldname, `)`)
-			p.encodeKey(fieldNumber, wireType)
+		if !gogoproto.IsCustomType(field) {
+			if repeated {
+				val := p.reverseListRange(`m.`, fieldname)
+				p.P(`i -= len(`, val, `)`)
+				p.P(`copy(dAtA[i:], `, val, `)`)
+				p.callVarint(`len(`, val, `)`)
+				p.encodeKey(fieldNumber, wireType)
+				p.Out()
+				p.P(`}`)
+			} else if proto3 {
+				p.P(`if len(m.`, fieldname, `) > 0 {`)
+				p.In()
+				p.P(`i -= len(m.`, fieldname, `)`)
+				p.P(`copy(dAtA[i:], m.`, fieldname, `)`)
+				p.callVarint(`len(m.`, fieldname, `)`)
+				p.encodeKey(fieldNumber, wireType)
+				p.Out()
+				p.P(`}`)
+			} else if !nullable {
+				p.P(`i -= len(m.`, fieldname, `)`)
+				p.P(`copy(dAtA[i:], m.`, fieldname, `)`)
+				p.callVarint(`len(m.`, fieldname, `)`)
+				p.encodeKey(fieldNumber, wireType)
+			} else {
+				p.P(`i -= len(*m.`, fieldname, `)`)
+				p.P(`copy(dAtA[i:], *m.`, fieldname, `)`)
+				p.callVarint(`len(*m.`, fieldname, `)`)
+				p.encodeKey(fieldNumber, wireType)
+			}
 		} else {
-			p.P(`i -= len(*m.`, fieldname, `)`)
-			p.P(`copy(dAtA[i:], *m.`, fieldname, `)`)
-			p.callVarint(`len(*m.`, fieldname, `)`)
-			p.encodeKey(fieldNumber, wireType)
+			if repeated {
+				val := p.reverseListRange(`m.`, fieldname)
+				p.forward(val, true, protoSizer)
+				p.encodeKey(fieldNumber, wireType)
+				p.Out()
+				p.P(`}`)
+			} else {
+				p.forward(`m.`+fieldname, true, protoSizer)
+				p.encodeKey(fieldNumber, wireType)
+			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_GROUP:
 		panic(fmt.Errorf("marshaler does not support group %v", fieldname))

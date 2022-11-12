@@ -334,26 +334,40 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 			p.P(`n+=`, strconv.Itoa(key+1))
 		}
 	case descriptor.FieldDescriptorProto_TYPE_STRING:
-		if repeated {
-			p.P(`for _, s := range m.`, fieldname, ` { `)
-			p.In()
-			p.P(`l = len(s)`)
-			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-			p.Out()
-			p.P(`}`)
-		} else if proto3 {
-			p.P(`l=len(m.`, fieldname, `)`)
-			p.P(`if l > 0 {`)
-			p.In()
-			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
-			p.Out()
-			p.P(`}`)
-		} else if nullable {
-			p.P(`l=len(*m.`, fieldname, `)`)
-			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+		if !gogoproto.IsCustomType(field) {
+			if repeated {
+				p.P(`for _, s := range m.`, fieldname, ` { `)
+				p.In()
+				p.P(`l = len(s)`)
+				p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+				p.Out()
+				p.P(`}`)
+			} else if proto3 {
+				p.P(`l=len(m.`, fieldname, `)`)
+				p.P(`if l > 0 {`)
+				p.In()
+				p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+				p.Out()
+				p.P(`}`)
+			} else if nullable {
+				p.P(`l=len(*m.`, fieldname, `)`)
+				p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+			} else {
+				p.P(`l=len(m.`, fieldname, `)`)
+				p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+			}
 		} else {
-			p.P(`l=len(m.`, fieldname, `)`)
-			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+			if repeated {
+				p.P(`for _, e := range m.`, fieldname, ` { `)
+				p.In()
+				p.P(`l=e.`, sizeName, `()`)
+				p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+				p.Out()
+				p.P(`}`)
+			} else {
+				p.P(`l=m.`, fieldname, `.`, sizeName, `()`)
+				p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
+			}
 		}
 	case descriptor.FieldDescriptorProto_TYPE_GROUP:
 		panic(fmt.Errorf("size does not support group %v", fieldname))
