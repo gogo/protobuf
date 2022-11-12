@@ -152,9 +152,12 @@ func (file *FileDescriptorProto) GetMessage(typeName string) *DescriptorProto {
 		if msg.GetName() == typeName {
 			return msg
 		}
-		nes := file.GetNestedMessage(msg, strings.TrimPrefix(typeName, msg.GetName()+"."))
-		if nes != nil {
-			return nes
+		prefix := msg.GetName() + "."
+		if strings.HasPrefix(typeName, prefix) {
+			nes := file.GetNestedMessage(msg, strings.TrimPrefix(typeName, prefix))
+			if nes != nil {
+				return nes
+			}
 		}
 	}
 	return nil
