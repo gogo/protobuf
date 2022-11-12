@@ -357,6 +357,9 @@ func (g *Generator) generatePlugin(file *FileDescriptor, p Plugin) {
 	g.usedPackageNames = make(map[GoPackageName]bool)
 	g.addedImports = make(map[GoImportPath]bool)
 	g.file = file
+	for name := range globalPackageNames {
+		g.usedPackageNames[name] = true
+	}
 
 	// Run the plugins before the imports so we know which imports are necessary.
 	p.Generate(file)
