@@ -53,14 +53,7 @@ func main() {
 
 	vanity.ForEachFile(files, vanity.TurnOnMessageNameAll)
 
-	for _, file := range files {
-		if strings.HasSuffix(file.GetName(), "struct.proto") {
-			// TODO struct can also get a compare method when
-			// https://github.com/gogo/protobuf/issues/221 is fixed
-			//continue
-		}
-		vanity.TurnOnCompareAll(file)
-	}
+	vanity.ForEachFile(files, vanity.TurnOnCompareAll)
 
 	for _, file := range files {
 		if strings.HasSuffix(file.GetName(), "timestamp.proto") ||
@@ -68,6 +61,9 @@ func main() {
 			continue
 		}
 		vanity.TurnOnStringerAll(file)
+		if strings.HasSuffix(file.GetName(), "any.proto") {
+			continue
+		}
 		vanity.TurnOnPopulateAll(file)
 	}
 
