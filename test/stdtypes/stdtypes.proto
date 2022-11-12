@@ -49,6 +49,7 @@ option (gogoproto.unsafe_marshaler_all) = false;
 option (gogoproto.unsafe_unmarshaler_all) = false;
 
 message StdTypes {
+  option (gogoproto.compare) = true;
   google.protobuf.Timestamp nullableTimestamp = 1 [(gogoproto.stdtime) = true];
   google.protobuf.Duration nullableDuration = 2 [(gogoproto.stdduration) = true];
   google.protobuf.Timestamp timestamp = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
@@ -83,6 +84,7 @@ message StdTypes {
 }
 
 message RepStdTypes {
+  option (gogoproto.compare) = true;
   repeated google.protobuf.Timestamp nullableTimestamps = 1 [(gogoproto.stdtime) = true];
   repeated google.protobuf.Duration nullableDurations = 2 [(gogoproto.stdduration) = true];
   repeated google.protobuf.Timestamp timestamps = 3 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
@@ -152,6 +154,7 @@ message MapStdTypes {
 }
 
 message OneofStdTypes {
+  option (gogoproto.compare) = true;
   oneof OneOfStdTimes {
     google.protobuf.Timestamp timestamp = 1 [(gogoproto.stdtime) = true];
     google.protobuf.Duration duration = 2 [(gogoproto.stdduration) = true];
