@@ -37,6 +37,7 @@ import (
 	. "github.com/gogo/protobuf/proto"
 	proto3pb "github.com/gogo/protobuf/proto/proto3_proto"
 	pb "github.com/gogo/protobuf/proto/test_proto"
+	casttypepb "github.com/gogo/protobuf/test/casttype/combos/both"
 )
 
 // Four identical base messages.
@@ -232,6 +233,12 @@ var EqualTests = []struct {
 		&pb.Communique{Union: &pb.Communique_Number{Number: 41}},
 		&pb.Communique{Union: &pb.Communique_Name{Name: "Bobby Tables"}},
 		false,
+	},
+	{
+		"casttype bytes",
+		&casttypepb.Castaway{MyBytes: []byte{0x01}},
+		&casttypepb.Castaway{MyBytes: []byte{0x01}},
+		true,
 	},
 }
 
