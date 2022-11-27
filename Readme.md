@@ -112,6 +112,10 @@ Most versions from 2.3.1 should not give any problems, but 2.6.1, 3.0.2 and 3.14
 Install the protoc-gen-gofast binary
 
     go get github.com/gogo/protobuf/protoc-gen-gofast
+    
+    or 
+    
+    go install github.com/gogo/protobuf/protoc-gen-gofast (if you are using go 1.17 or later version)
 
 Use it to generate faster marshaling and unmarshaling go code for your protocol buffers.
 
