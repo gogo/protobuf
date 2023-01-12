@@ -85,14 +85,15 @@ package populate
 
 import (
 	"fmt"
+	"math"
+	"strconv"
+	"strings"
+
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"github.com/gogo/protobuf/vanity"
-	"math"
-	"strconv"
-	"strings"
 )
 
 type VarGen interface {
@@ -123,6 +124,7 @@ type plugin struct {
 	varGen     VarGen
 	atleastOne bool
 	localName  string
+	typesPkg   generator.Single
 }
 
 func NewPlugin() *plugin {
@@ -180,7 +182,7 @@ func negative(fieldType descriptor.FieldDescriptorProto_Type) bool {
 	return true
 }
 
-func getFuncName(goTypName string) string {
+func (p *plugin) getFuncName(goTypName string, field *descriptor.FieldDescriptorProto) string {
 	funcName := "NewPopulated" + goTypName
 	goTypNames := strings.Split(goTypName, ".")
 	if len(goTypNames) == 2 {
@@ -188,17 +190,43 @@ func getFuncName(goTypName string) string {
 	} else if len(goTypNames) != 1 {
 		panic(fmt.Errorf("unreachable: too many dots in %v", goTypName))
 	}
+	if field != nil {
+		switch {
+		case gogoproto.IsStdTime(field):
+			funcName = p.typesPkg.Use() + ".NewPopulatedStdTime"
+		case gogoproto.IsStdDuration(field):
+			funcName = p.typesPkg.Use() + ".NewPopulatedStdDuration"
+		case gogoproto.IsStdDouble(field):
+			funcName = p.typesPkg.Use() + ".NewPopulatedStdDouble"
+		case gogoproto.IsStdFloat(field):
+			funcName = p.typesPkg.Use() + ".NewPopulatedStdFloat"
+		case gogoproto.IsStdInt64(field):
+			funcName = p.typesPkg.Use() + ".NewPopulatedStdInt64"
+		case gogoproto.IsStdUInt64(field):
+			funcName = p.typesPkg.Use() + ".NewPopulatedStdUInt64"
+		case gogoproto.IsStdInt32(field):
+			funcName = p.typesPkg.Use() + ".NewPopulatedStdInt32"
+		case gogoproto.IsStdUInt32(field):
+			funcName = p.typesPkg.Use() + ".NewPopulatedStdUInt32"
+		case gogoproto.IsStdBool(field):
+			funcName = p.typesPkg.Use() + ".NewPopulatedStdBool"
+		case gogoproto.IsStdString(field):
+			funcName = p.typesPkg.Use() + ".NewPopulatedStdString"
+		case gogoproto.IsStdBytes(field):
+			funcName = p.typesPkg.Use() + ".NewPopulatedStdBytes"
+		}
+	}
 	return funcName
 }
 
-func getFuncCall(goTypName string) string {
-	funcName := getFuncName(goTypName)
+func (p *plugin) getFuncCall(goTypName string, field *descriptor.FieldDescriptorProto) string {
+	funcName := p.getFuncName(goTypName, field)
 	funcCall := funcName + "(r, easy)"
 	return funcCall
 }
 
-func getCustomFuncCall(goTypName string) string {
-	funcName := getFuncName(goTypName)
+func (p *plugin) getCustomFuncCall(goTypName string) string {
+	funcName := p.getFuncName(goTypName, nil)
 	funcCall := funcName + "(r)"
 	return funcCall
 }
@@ -248,10 +276,17 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 		if keygoAliasTyp != keygoTyp {
 			keyval = keygoAliasTyp + `(` + keyval + `)`
 		}
-		if m.ValueField.IsMessage() || p.IsGroup(field) {
+		if m.ValueField.IsMessage() || p.IsGroup(field) ||
+			(m.ValueField.IsBytes() && gogoproto.IsCustomType(field)) {
 			s := `this.` + fieldname + `[` + keyval + `] = `
-			goTypName = generator.GoTypeToName(valuegoTyp)
-			funcCall := getFuncCall(goTypName)
+			if gogoproto.IsStdType(field) {
+				valuegoTyp = valuegoAliasTyp
+			}
+			funcCall := p.getCustomFuncCall(goTypName)
+			if !gogoproto.IsCustomType(field) {
+				goTypName = generator.GoTypeToName(valuegoTyp)
+				funcCall = p.getFuncCall(goTypName, m.ValueAliasField)
+			}
 			if !nullable {
 				funcCall = `*` + funcCall
 			}
@@ -289,8 +324,25 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 		}
 		p.Out()
 		p.P(`}`)
+	} else if gogoproto.IsCustomType(field) {
+		funcCall := p.getCustomFuncCall(goTypName)
+		if field.IsRepeated() {
+			p.P(p.varGen.Next(), ` := r.Intn(10)`)
+			p.P(`this.`, fieldname, ` = make(`, goTyp, `, `, p.varGen.Current(), `)`)
+			p.P(`for i := 0; i < `, p.varGen.Current(), `; i++ {`)
+			p.In()
+			p.P(p.varGen.Next(), `:= `, funcCall)
+			p.P(`this.`, fieldname, `[i] = *`, p.varGen.Current())
+			p.Out()
+			p.P(`}`)
+		} else if gogoproto.IsNullable(field) {
+			p.P(`this.`, fieldname, ` = `, funcCall)
+		} else {
+			p.P(p.varGen.Next(), `:= `, funcCall)
+			p.P(`this.`, fieldname, ` = *`, p.varGen.Current())
+		}
 	} else if field.IsMessage() || p.IsGroup(field) {
-		funcCall := getFuncCall(goTypName)
+		funcCall := p.getFuncCall(goTypName, field)
 		if field.IsRepeated() {
 			p.P(p.varGen.Next(), ` := r.Intn(5)`)
 			p.P(`this.`, fieldname, ` = make(`, goTyp, `, `, p.varGen.Current(), `)`)
@@ -329,23 +381,6 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 				p.P(p.varGen.Next(), ` := `, val)
 				p.P(`this.`, fieldname, ` = &`, p.varGen.Current())
 			}
-		} else if gogoproto.IsCustomType(field) {
-			funcCall := getCustomFuncCall(goTypName)
-			if field.IsRepeated() {
-				p.P(p.varGen.Next(), ` := r.Intn(10)`)
-				p.P(`this.`, fieldname, ` = make(`, goTyp, `, `, p.varGen.Current(), `)`)
-				p.P(`for i := 0; i < `, p.varGen.Current(), `; i++ {`)
-				p.In()
-				p.P(p.varGen.Next(), `:= `, funcCall)
-				p.P(`this.`, fieldname, `[i] = *`, p.varGen.Current())
-				p.Out()
-				p.P(`}`)
-			} else if gogoproto.IsNullable(field) {
-				p.P(`this.`, fieldname, ` = `, funcCall)
-			} else {
-				p.P(p.varGen.Next(), `:= `, funcCall)
-				p.P(`this.`, fieldname, ` = *`, p.varGen.Current())
-			}
 		} else if field.IsBytes() {
 			if field.IsRepeated() {
 				p.P(p.varGen.Next(), ` := r.Intn(10)`)
@@ -371,7 +406,8 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 				p.P(`}`)
 			}
 		} else if field.IsString() {
-			val := fmt.Sprintf("randString%v(r)", p.localName)
+			typName := generator.GoTypeToName(goTyp)
+			val := fmt.Sprintf("%s(randString%v(r))", typName, p.localName)
 			if field.IsRepeated() {
 				p.P(p.varGen.Next(), ` := r.Intn(10)`)
 				p.P(`this.`, fieldname, ` = make(`, goTyp, `, `, p.varGen.Current(), `)`)
@@ -427,7 +463,7 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 	}
 }
 
-func (p *plugin) hasLoop(field *descriptor.FieldDescriptorProto, visited []*generator.Descriptor, excludes []*generator.Descriptor) *generator.Descriptor {
+func (p *plugin) hasLoop(pkg string, field *descriptor.FieldDescriptorProto, visited []*generator.Descriptor, excludes []*generator.Descriptor) *generator.Descriptor {
 	if field.IsMessage() || p.IsGroup(field) || p.IsMap(field) {
 		var fieldMessage *generator.Descriptor
 		if p.IsMap(field) {
@@ -451,24 +487,27 @@ func (p *plugin) hasLoop(field *descriptor.FieldDescriptorProto, visited []*gene
 				return fieldMessage
 			}
 		}
+
 		for _, f := range fieldMessage.Field {
-			visited = append(visited, fieldMessage)
-			loopTo := p.hasLoop(f, visited, excludes)
-			if loopTo != nil {
-				return loopTo
+			if strings.HasPrefix(f.GetTypeName(), "."+pkg) {
+				visited = append(visited, fieldMessage)
+				loopTo := p.hasLoop(pkg, f, visited, excludes)
+				if loopTo != nil {
+					return loopTo
+				}
 			}
 		}
 	}
 	return nil
 }
 
-func (p *plugin) loops(field *descriptor.FieldDescriptorProto, message *generator.Descriptor) int {
+func (p *plugin) loops(pkg string, field *descriptor.FieldDescriptorProto, message *generator.Descriptor) int {
 	//fmt.Fprintf(os.Stderr, "loops %v %v\n", field.GetTypeName(), generator.CamelCaseSlice(message.TypeName()))
 	excludes := []*generator.Descriptor{}
 	loops := 0
 	for {
 		visited := []*generator.Descriptor{}
-		loopTo := p.hasLoop(field, visited, excludes)
+		loopTo := p.hasLoop(pkg, field, visited, excludes)
 		if loopTo == nil {
 			break
 		}
@@ -484,7 +523,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.varGen = NewVarGen()
 	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
-
+	p.typesPkg = p.NewImport("github.com/gogo/protobuf/types")
 	p.localName = generator.FileName(file)
 	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
 	if !gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
@@ -503,7 +542,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		loopLevels := make([]int, len(message.Field))
 		maxLoopLevel := 0
 		for i, field := range message.Field {
-			loopLevels[i] = p.loops(field, message)
+			loopLevels[i] = p.loops(file.GetPackage(), field, message)
 			if loopLevels[i] > maxLoopLevel {
 				maxLoopLevel = loopLevels[i]
 			}
@@ -515,7 +554,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		p.P(`func NewPopulated`, ccTypeName, `(r randy`, p.localName, `, easy bool) *`, ccTypeName, ` {`)
 		p.In()
 		p.P(`this := &`, ccTypeName, `{}`)
-		if gogoproto.IsUnion(message.File(), message.DescriptorProto) && len(message.Field) > 0 {
+		if gogoproto.IsUnion(message.File().FileDescriptorProto, message.DescriptorProto) && len(message.Field) > 0 {
 			p.P(`fieldNum := r.Intn(`, fmt.Sprintf("%d", ranTotal), `)`)
 			p.P(`switch fieldNum {`)
 			k := 0
@@ -545,9 +584,9 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 						p.GenerateField(file, message, field)
 					} else {
 						if loopLevels[fieldIndex] > 0 {
-							p.P(`if r.Intn(10) == 0 {`)
+							p.P(`if r.Intn(5) == 0 {`)
 						} else {
-							p.P(`if r.Intn(10) != 0 {`)
+							p.P(`if r.Intn(5) != 0 {`)
 						}
 						p.In()
 						p.GenerateField(file, message, field)
@@ -614,8 +653,8 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 				}
 				p.P(`wire := r.Intn(4)`)
 				p.P(`if wire == 3 { wire = 5 }`)
-				p.P(`data := randField`, p.localName, `(nil, r, fieldNumber, wire)`)
-				p.P(protoPkg.Use(), `.SetRawExtension(this, int32(fieldNumber), data)`)
+				p.P(`dAtA := randField`, p.localName, `(nil, r, fieldNumber, wire)`)
+				p.P(protoPkg.Use(), `.SetRawExtension(this, int32(fieldNumber), dAtA)`)
 				p.Out()
 				p.P(`}`)
 				p.Out()
@@ -648,7 +687,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 			p.P(`func NewPopulated`, ccTypeName, `(r randy`, p.localName, `, easy bool) *`, ccTypeName, ` {`)
 			p.In()
 			p.P(`this := &`, ccTypeName, `{}`)
-			vanity.TurnOffNullableForNativeTypesWithoutDefaultsOnly(f)
+			vanity.TurnOffNullableForNativeTypes(f)
 			p.GenerateField(file, message, f)
 			p.P(`return this`)
 			p.Out()
@@ -700,7 +739,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	p.Out()
 	p.P(`}`)
 
-	p.P(`func randUnrecognized`, p.localName, `(r randy`, p.localName, `, maxFieldNumber int) (data []byte) {`)
+	p.P(`func randUnrecognized`, p.localName, `(r randy`, p.localName, `, maxFieldNumber int) (dAtA []byte) {`)
 	p.In()
 	p.P(`l := r.Intn(5)`)
 	p.P(`for i := 0; i < l; i++ {`)
@@ -708,64 +747,64 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	p.P(`wire := r.Intn(4)`)
 	p.P(`if wire == 3 { wire = 5 }`)
 	p.P(`fieldNumber := maxFieldNumber + r.Intn(100)`)
-	p.P(`data = randField`, p.localName, `(data, r, fieldNumber, wire)`)
+	p.P(`dAtA = randField`, p.localName, `(dAtA, r, fieldNumber, wire)`)
 	p.Out()
 	p.P(`}`)
-	p.P(`return data`)
+	p.P(`return dAtA`)
 	p.Out()
 	p.P(`}`)
 
-	p.P(`func randField`, p.localName, `(data []byte, r randy`, p.localName, `, fieldNumber int, wire int) []byte {`)
+	p.P(`func randField`, p.localName, `(dAtA []byte, r randy`, p.localName, `, fieldNumber int, wire int) []byte {`)
 	p.In()
 	p.P(`key := uint32(fieldNumber)<<3 | uint32(wire)`)
 	p.P(`switch wire {`)
 	p.P(`case 0:`)
 	p.In()
-	p.P(`data = encodeVarintPopulate`, p.localName, `(data, uint64(key))`)
+	p.P(`dAtA = encodeVarintPopulate`, p.localName, `(dAtA, uint64(key))`)
 	p.P(p.varGen.Next(), ` := r.Int63()`)
 	p.P(`if r.Intn(2) == 0 {`)
 	p.In()
 	p.P(p.varGen.Current(), ` *= -1`)
 	p.Out()
 	p.P(`}`)
-	p.P(`data = encodeVarintPopulate`, p.localName, `(data, uint64(`, p.varGen.Current(), `))`)
+	p.P(`dAtA = encodeVarintPopulate`, p.localName, `(dAtA, uint64(`, p.varGen.Current(), `))`)
 	p.Out()
 	p.P(`case 1:`)
 	p.In()
-	p.P(`data = encodeVarintPopulate`, p.localName, `(data, uint64(key))`)
-	p.P(`data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))`)
+	p.P(`dAtA = encodeVarintPopulate`, p.localName, `(dAtA, uint64(key))`)
+	p.P(`dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))`)
 	p.Out()
 	p.P(`case 2:`)
 	p.In()
-	p.P(`data = encodeVarintPopulate`, p.localName, `(data, uint64(key))`)
+	p.P(`dAtA = encodeVarintPopulate`, p.localName, `(dAtA, uint64(key))`)
 	p.P(`ll := r.Intn(100)`)
-	p.P(`data = encodeVarintPopulate`, p.localName, `(data, uint64(ll))`)
+	p.P(`dAtA = encodeVarintPopulate`, p.localName, `(dAtA, uint64(ll))`)
 	p.P(`for j := 0; j < ll; j++ {`)
 	p.In()
-	p.P(`data = append(data, byte(r.Intn(256)))`)
+	p.P(`dAtA = append(dAtA, byte(r.Intn(256)))`)
 	p.Out()
 	p.P(`}`)
 	p.Out()
 	p.P(`default:`)
 	p.In()
-	p.P(`data = encodeVarintPopulate`, p.localName, `(data, uint64(key))`)
-	p.P(`data = append(data, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))`)
+	p.P(`dAtA = encodeVarintPopulate`, p.localName, `(dAtA, uint64(key))`)
+	p.P(`dAtA = append(dAtA, byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)), byte(r.Intn(256)))`)
 	p.Out()
 	p.P(`}`)
-	p.P(`return data`)
+	p.P(`return dAtA`)
 	p.Out()
 	p.P(`}`)
 
-	p.P(`func encodeVarintPopulate`, p.localName, `(data []byte, v uint64) []byte {`)
+	p.P(`func encodeVarintPopulate`, p.localName, `(dAtA []byte, v uint64) []byte {`)
 	p.In()
 	p.P(`for v >= 1<<7 {`)
 	p.In()
-	p.P(`data = append(data, uint8(uint64(v)&0x7f|0x80))`)
+	p.P(`dAtA = append(dAtA, uint8(uint64(v)&0x7f|0x80))`)
 	p.P(`v >>= 7`)
 	p.Out()
 	p.P(`}`)
-	p.P(`data = append(data, uint8(v))`)
-	p.P(`return data`)
+	p.P(`dAtA = append(dAtA, uint8(v))`)
+	p.P(`return dAtA`)
 	p.Out()
 	p.P(`}`)
 

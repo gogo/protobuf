@@ -118,7 +118,7 @@ func (this *pluginImports) NewImport(pkg string) Single {
 func (this *pluginImports) GenerateImports(file *FileDescriptor) {
 	for _, s := range this.singles {
 		if s.IsUsed() {
-			this.generator.PrintImport(s.Name(), s.Location())
+			this.generator.PrintImport(GoPackageName(s.Name()), GoImportPath(s.Location()))
 		}
 	}
 }
@@ -137,7 +137,7 @@ type importedPackage struct {
 	importPrefix string
 }
 
-func newImportedPackage(importPrefix, pkg string) *importedPackage {
+func newImportedPackage(importPrefix string, pkg string) *importedPackage {
 	return &importedPackage{
 		pkg:          pkg,
 		importPrefix: importPrefix,
@@ -146,7 +146,7 @@ func newImportedPackage(importPrefix, pkg string) *importedPackage {
 
 func (this *importedPackage) Use() string {
 	if !this.used {
-		this.name = RegisterUniquePackageName(this.pkg, nil)
+		this.name = string(cleanPackageName(this.pkg))
 		this.used = true
 	}
 	return this.name
@@ -182,7 +182,7 @@ func (g *Generator) GetFieldName(message *Descriptor, field *descriptor.FieldDes
 			return fieldname + "_"
 		}
 	}
-	if !gogoproto.IsProtoSizer(message.file, message.DescriptorProto) {
+	if !gogoproto.IsProtoSizer(message.file.FileDescriptorProto, message.DescriptorProto) {
 		if fieldname == "Size" {
 			return fieldname + "_"
 		}
@@ -204,7 +204,7 @@ func (g *Generator) GetOneOfFieldName(message *Descriptor, field *descriptor.Fie
 			return fieldname + "_"
 		}
 	}
-	if !gogoproto.IsProtoSizer(message.file, message.DescriptorProto) {
+	if !gogoproto.IsProtoSizer(message.file.FileDescriptorProto, message.DescriptorProto) {
 		if fieldname == "Size" {
 			return fieldname + "_"
 		}
@@ -240,15 +240,42 @@ func (g *Generator) GetMapKeyField(field, keyField *descriptor.FieldDescriptorPr
 }
 
 func (g *Generator) GetMapValueField(field, valField *descriptor.FieldDescriptorProto) *descriptor.FieldDescriptorProto {
-	if !gogoproto.IsCastValue(field) && gogoproto.IsNullable(field) {
-		return valField
+	if gogoproto.IsCustomType(field) && gogoproto.IsCastValue(field) {
+		g.Fail("cannot have a customtype and casttype: ", field.String())
 	}
 	valField = proto.Clone(valField).(*descriptor.FieldDescriptorProto)
 	if valField.Options == nil {
 		valField.Options = &descriptor.FieldOptions{}
 	}
+
+	stdtime := gogoproto.IsStdTime(field)
+	if stdtime {
+		if err := proto.SetExtension(valField.Options, gogoproto.E_Stdtime, &stdtime); err != nil {
+			g.Fail(err.Error())
+		}
+	}
+
+	stddur := gogoproto.IsStdDuration(field)
+	if stddur {
+		if err := proto.SetExtension(valField.Options, gogoproto.E_Stdduration, &stddur); err != nil {
+			g.Fail(err.Error())
+		}
+	}
+
+	wktptr := gogoproto.IsWktPtr(field)
+	if wktptr {
+		if err := proto.SetExtension(valField.Options, gogoproto.E_Wktpointer, &wktptr); err != nil {
+			g.Fail(err.Error())
+		}
+	}
+
 	if valType := gogoproto.GetCastValue(field); len(valType) > 0 {
 		if err := proto.SetExtension(valField.Options, gogoproto.E_Casttype, &valType); err != nil {
+			g.Fail(err.Error())
+		}
+	}
+	if valType := gogoproto.GetCustomType(field); len(valType) > 0 {
+		if err := proto.SetExtension(valField.Options, gogoproto.E_Customtype, &valType); err != nil {
 			g.Fail(err.Error())
 		}
 	}
@@ -263,7 +290,7 @@ func (g *Generator) GetMapValueField(field, valField *descriptor.FieldDescriptor
 // GoMapValueTypes returns the map value Go type and the alias map value Go type (for casting), taking into
 // account whether the map is nullable or the value is a message.
 func GoMapValueTypes(mapField, valueField *descriptor.FieldDescriptorProto, goValueType, goValueAliasType string) (nullable bool, outGoType string, outGoAliasType string) {
-	nullable = gogoproto.IsNullable(mapField) && valueField.IsMessage()
+	nullable = gogoproto.IsNullable(mapField) && (valueField.IsMessage() || gogoproto.IsCustomType(mapField))
 	if nullable {
 		// ensure the non-aliased Go value type is a pointer for consistency
 		if strings.HasPrefix(goValueType, "*") {
@@ -313,20 +340,23 @@ func (g *Generator) GeneratePlugin(p Plugin) {
 			continue
 		}
 		g.Response.File = append(g.Response.File, &plugin.CodeGeneratorResponse_File{
-			Name:    proto.String(file.goFileName()),
+			Name:    proto.String(file.goFileName(g.pathType)),
 			Content: proto.String(g.String()),
 		})
 	}
 }
 
-func (g *Generator) SetFile(file *descriptor.FileDescriptorProto) {
-	g.file = g.FileOf(file)
+func (g *Generator) SetFile(filename string) {
+	g.file = g.fileByName(filename)
 }
 
 func (g *Generator) generatePlugin(file *FileDescriptor, p Plugin) {
 	g.writtenImports = make(map[string]bool)
-	g.file = g.FileOf(file.FileDescriptorProto)
-	g.usedPackages = make(map[string]bool)
+	g.usedPackages = make(map[GoImportPath]bool)
+	g.packageNames = make(map[GoImportPath]GoPackageName)
+	g.usedPackageNames = make(map[GoPackageName]bool)
+	g.addedImports = make(map[GoImportPath]bool)
+	g.file = file
 
 	// Run the plugins before the imports so we know which imports are necessary.
 	p.Generate(file)
@@ -335,7 +365,7 @@ func (g *Generator) generatePlugin(file *FileDescriptor, p Plugin) {
 	rem := g.Buffer
 	g.Buffer = new(bytes.Buffer)
 	g.generateHeader()
-	p.GenerateImports(g.file)
+	// p.GenerateImports(g.file)
 	g.generateImports()
 	if !g.writeOutput {
 		return
@@ -399,32 +429,6 @@ func getCastType(field *descriptor.FieldDescriptorProto) (packageName string, ty
 	return "", "", err
 }
 
-func getCastKey(field *descriptor.FieldDescriptorProto) (packageName string, typ string, err error) {
-	if field.Options != nil {
-		var v interface{}
-		v, err = proto.GetExtension(field.Options, gogoproto.E_Castkey)
-		if err == nil && v.(*string) != nil {
-			ctype := *(v.(*string))
-			packageName, typ = splitCPackageType(ctype)
-			return packageName, typ, nil
-		}
-	}
-	return "", "", err
-}
-
-func getCastValue(field *descriptor.FieldDescriptorProto) (packageName string, typ string, err error) {
-	if field.Options != nil {
-		var v interface{}
-		v, err = proto.GetExtension(field.Options, gogoproto.E_Castvalue)
-		if err == nil && v.(*string) != nil {
-			ctype := *(v.(*string))
-			packageName, typ = splitCPackageType(ctype)
-			return packageName, typ, nil
-		}
-	}
-	return "", "", err
-}
-
 func FileName(file *FileDescriptor) string {
 	fname := path.Base(file.FileDescriptorProto.GetName())
 	fname = strings.Replace(fname, ".proto", "", -1)
@@ -444,4 +448,14 @@ func (g *Generator) AllFiles() *descriptor.FileDescriptorSet {
 
 func (d *Descriptor) Path() string {
 	return d.path
+}
+
+func (g *Generator) useTypes() string {
+	pkg := strings.Map(badToUnderscore, "github.com/gogo/protobuf/types")
+	g.customImports = append(g.customImports, "github.com/gogo/protobuf/types")
+	return pkg
+}
+
+func (d *FileDescriptor) GoPackageName() string {
+	return string(d.packageName)
 }

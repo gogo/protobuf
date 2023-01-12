@@ -29,54 +29,17 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io/ioutil"
-	"os"
 	"os/exec"
+	"sort"
 	"strings"
 )
 
-type MixMatch struct {
-	Old []string
-	New []string
-}
-
-func (this *MixMatch) Regenerate() {
-	fmt.Printf("mixbench\n")
-	uuidData, err := ioutil.ReadFile("../uuid.go")
-	if err != nil {
-		panic(err)
-	}
-	if err = ioutil.WriteFile("./testdata/uuid.go", uuidData, 0666); err != nil {
-		panic(err)
-	}
-	data, err := ioutil.ReadFile("../thetest.proto")
-	if err != nil {
-		panic(err)
-	}
-	content := string(data)
-	for i, old := range this.Old {
-		content = strings.Replace(content, old, this.New[i], -1)
-	}
-	if err = ioutil.WriteFile("./testdata/thetest.proto", []byte(content), 0666); err != nil {
-		panic(err)
-	}
-	var regenerate = exec.Command("protoc", "--gogo_out=.", "-I=../../:../../protobuf/:../../../../../:.", "./testdata/thetest.proto")
-	fmt.Printf("regenerating\n")
-	out, err := regenerate.CombinedOutput()
-	fmt.Printf("regenerate output: %v\n", string(out))
-	if err != nil {
-		panic(err)
-	}
-}
-
-func (this *MixMatch) Bench(rgx string, outFileName string) {
-	if err := os.MkdirAll("./testdata", 0777); err != nil {
-		panic(err)
-	}
-	this.Regenerate()
-	var test = exec.Command("go", "test", "-test.timeout=20m", "-test.v", "-test.run=XXX", "-test.bench="+rgx, "./testdata/")
-	fmt.Printf("benching\n")
+func bench(folder, rgx, outFileName string) {
+	var test = exec.Command("go", "test", "-test.timeout=20m", "-test.v", "-test.run=XXX", "-test.bench="+rgx, folder)
+	fmt.Printf("benching %v - %v - %v\n", folder, rgx, outFileName)
 	out, err := test.CombinedOutput()
 	fmt.Printf("bench output: %v\n", string(out))
 	if err != nil {
@@ -85,54 +48,49 @@ func (this *MixMatch) Bench(rgx string, outFileName string) {
 	if err := ioutil.WriteFile(outFileName, out, 0666); err != nil {
 		panic(err)
 	}
-	if err := os.RemoveAll("./testdata"); err != nil {
-		panic(err)
-	}
-}
-
-func NewMixMatch(marshaler, unmarshaler, unsafe_marshaler, unsafe_unmarshaler bool) *MixMatch {
-	mm := &MixMatch{}
-	if marshaler {
-		mm.Old = append(mm.Old, "option (gogoproto.marshaler_all) = false;")
-		mm.New = append(mm.New, "option (gogoproto.marshaler_all) = true;")
-	} else {
-		mm.Old = append(mm.Old, "option (gogoproto.marshaler_all) = true;")
-		mm.New = append(mm.New, "option (gogoproto.marshaler_all) = false;")
-	}
-	if unmarshaler {
-		mm.Old = append(mm.Old, "option (gogoproto.unmarshaler_all) = false;")
-		mm.New = append(mm.New, "option (gogoproto.unmarshaler_all) = true;")
-	} else {
-		mm.Old = append(mm.Old, "option (gogoproto.unmarshaler_all) = true;")
-		mm.New = append(mm.New, "option (gogoproto.unmarshaler_all) = false;")
-	}
-	if unsafe_marshaler {
-		mm.Old = append(mm.Old, "option (gogoproto.unsafe_marshaler_all) = false;")
-		mm.New = append(mm.New, "option (gogoproto.unsafe_marshaler_all) = true;")
-	} else {
-		mm.Old = append(mm.Old, "option (gogoproto.unsafe_marshaler_all) = true;")
-		mm.New = append(mm.New, "option (gogoproto.unsafe_marshaler_all) = false;")
-	}
-	if unsafe_unmarshaler {
-		mm.Old = append(mm.Old, "option (gogoproto.unsafe_unmarshaler_all) = false;")
-		mm.New = append(mm.New, "option (gogoproto.unsafe_unmarshaler_all) = true;")
-	} else {
-		mm.Old = append(mm.Old, "option (gogoproto.unsafe_unmarshaler_all) = true;")
-		mm.New = append(mm.New, "option (gogoproto.unsafe_unmarshaler_all) = false;")
-	}
-	return mm
 }
 
 func main() {
-	NewMixMatch(true, true, false, false).Bench("ProtoMarshal", "marshaler.txt")
-	NewMixMatch(false, false, false, false).Bench("ProtoMarshal", "marshal.txt")
-	NewMixMatch(false, false, true, true).Bench("ProtoMarshal", "unsafe_marshaler.txt")
-	NewMixMatch(true, true, false, false).Bench("ProtoUnmarshal", "unmarshaler.txt")
-	NewMixMatch(false, false, false, false).Bench("ProtoUnmarshal", "unmarshal.txt")
-	NewMixMatch(false, false, true, true).Bench("ProtoUnmarshal", "unsafe_unmarshaler.txt")
-	fmt.Println("Running benchcmp will show the performance difference between using reflect and generated code for marshalling and unmarshalling of protocol buffers")
-	fmt.Println("$GOROOT/misc/benchcmp marshal.txt marshaler.txt")
-	fmt.Println("$GOROOT/misc/benchcmp unmarshal.txt unmarshaler.txt")
-	fmt.Println("$GOROOT/misc/benchcmp marshal.txt unsafe_marshaler.txt")
-	fmt.Println("$GOROOT/misc/benchcmp unmarshal.txt unsafe_unmarshaler.txt")
+	flag.Parse()
+	fmt.Printf("Running benches: %v\n", benchList)
+	for _, bench := range strings.Split(benchList, " ") {
+		b, ok := benches[bench]
+		if !ok {
+			fmt.Printf("No benchmark with name: %v\n", bench)
+			continue
+		}
+		b()
+	}
+	if strings.Contains(benchList, "all") {
+		fmt.Println("Running benchcmp will show the performance difference between using reflect and generated code for marshalling and unmarshalling of protocol buffers")
+		fmt.Println("benchcmp ./test/mixbench/marshal.txt ./test/mixbench/marshaler.txt")
+		fmt.Println("benchcmp ./test/mixbench/unmarshal.txt ./test/mixbench/unmarshaler.txt")
+	}
+}
+
+var benches = make(map[string]func())
+
+var benchList string
+
+func init() {
+	benches["marshaler"] = func() { bench("./test/combos/both/", "ProtoMarshal", "./test/mixbench/marshaler.txt") }
+	benches["marshal"] = func() { bench("./test/", "ProtoMarshal", "./test/mixbench/marshal.txt") }
+	benches["unmarshaler"] = func() { bench("./test/combos/both/", "ProtoUnmarshal", "./test/mixbench/unmarshaler.txt") }
+	benches["unmarshal"] = func() { bench("./test/", "ProtoUnmarshal", "./test/mixbench/unmarshal.txt") }
+	var ops []string
+	for k := range benches {
+		ops = append(ops, k)
+	}
+	sort.Strings(ops)
+	benches["all"] = benchall(ops)
+	ops = append(ops, "all")
+	flag.StringVar(&benchList, "benchlist", "all", fmt.Sprintf("List of benchmarks to run. Options: %v", ops))
+}
+
+func benchall(ops []string) func() {
+	return func() {
+		for _, o := range ops {
+			benches[o]()
+		}
+	}
 }

@@ -69,6 +69,9 @@ The following message:
 given to the size plugin, will generate the following code:
 
   func (m *B) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	l = m.A.Size()
@@ -90,13 +93,13 @@ and the following test code:
 	func TestBSize(t *testing5.T) {
 		popr := math_rand5.New(math_rand5.NewSource(time5.Now().UnixNano()))
 		p := NewPopulatedB(popr, true)
-		data, err := github_com_gogo_protobuf_proto2.Marshal(p)
+		dAtA, err := github_com_gogo_protobuf_proto2.Marshal(p)
 		if err != nil {
 			panic(err)
 		}
 		size := p.Size()
-		if len(data) != size {
-			t.Fatalf("size %v != marshalled size %v", size, len(data))
+		if len(dAtA) != size {
+			t.Fatalf("size %v != marshalled size %v", size, len(dAtA))
 		}
 	}
 
@@ -121,6 +124,7 @@ package size
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 
@@ -136,6 +140,8 @@ type size struct {
 	generator.PluginImports
 	atleastOne bool
 	localName  string
+	typesPkg   generator.Single
+	bitsPkg    generator.Single
 }
 
 func NewSize() *size {
@@ -183,14 +189,7 @@ func keySize(fieldNumber int32, wireType int) int {
 func (p *size) sizeVarint() {
 	p.P(`
 	func sov`, p.localName, `(x uint64) (n int) {
-		for {
-			n++
-			x >>= 7
-			if x == 0 {
-				break
-			}
-		}
-		return n
+                return (`, p.bitsPkg.Use(), `.Len64(x | 1) + 6)/ 7
 	}`)
 }
 
@@ -198,6 +197,37 @@ func (p *size) sizeZigZag() {
 	p.P(`func soz`, p.localName, `(x uint64) (n int) {
 		return sov`, p.localName, `(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 	}`)
+}
+
+func (p *size) std(field *descriptor.FieldDescriptorProto, name string) (string, bool) {
+	ptr := ""
+	if gogoproto.IsNullable(field) {
+		ptr = "*"
+	}
+	if gogoproto.IsStdTime(field) {
+		return p.typesPkg.Use() + `.SizeOfStdTime(` + ptr + name + `)`, true
+	} else if gogoproto.IsStdDuration(field) {
+		return p.typesPkg.Use() + `.SizeOfStdDuration(` + ptr + name + `)`, true
+	} else if gogoproto.IsStdDouble(field) {
+		return p.typesPkg.Use() + `.SizeOfStdDouble(` + ptr + name + `)`, true
+	} else if gogoproto.IsStdFloat(field) {
+		return p.typesPkg.Use() + `.SizeOfStdFloat(` + ptr + name + `)`, true
+	} else if gogoproto.IsStdInt64(field) {
+		return p.typesPkg.Use() + `.SizeOfStdInt64(` + ptr + name + `)`, true
+	} else if gogoproto.IsStdUInt64(field) {
+		return p.typesPkg.Use() + `.SizeOfStdUInt64(` + ptr + name + `)`, true
+	} else if gogoproto.IsStdInt32(field) {
+		return p.typesPkg.Use() + `.SizeOfStdInt32(` + ptr + name + `)`, true
+	} else if gogoproto.IsStdUInt32(field) {
+		return p.typesPkg.Use() + `.SizeOfStdUInt32(` + ptr + name + `)`, true
+	} else if gogoproto.IsStdBool(field) {
+		return p.typesPkg.Use() + `.SizeOfStdBool(` + ptr + name + `)`, true
+	} else if gogoproto.IsStdString(field) {
+		return p.typesPkg.Use() + `.SizeOfStdString(` + ptr + name + `)`, true
+	} else if gogoproto.IsStdBytes(field) {
+		return p.typesPkg.Use() + `.SizeOfStdBytes(` + ptr + name + `)`, true
+	}
+	return "", false
 }
 
 func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto, sizeName string) {
@@ -212,7 +242,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 		p.P(`if m.`, fieldname, ` != nil {`)
 		p.In()
 	}
-	packed := field.IsPacked()
+	packed := field.IsPacked() || (proto3 && field.IsPacked3())
 	_, wire := p.GoType(message, field)
 	wireType := wireToType(wire)
 	fieldNumber := field.GetNumber()
@@ -394,27 +424,45 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 				sum = append(sum, strconv.Itoa(valueKeySize))
 				sum = append(sum, `len(v)+sov`+p.localName+`(uint64(len(v)))`)
 			case descriptor.FieldDescriptorProto_TYPE_BYTES:
-				p.P(`l = 0`)
-				if proto3 {
-					p.P(`if len(v) > 0 {`)
+				if gogoproto.IsCustomType(field) {
+					p.P(`l = 0`)
+					if nullable {
+						p.P(`if v != nil {`)
+						p.In()
+					}
+					p.P(`l = v.`, sizeName, `()`)
+					p.P(`l += `, strconv.Itoa(valueKeySize), ` + sov`+p.localName+`(uint64(l))`)
+					if nullable {
+						p.Out()
+						p.P(`}`)
+					}
+					sum = append(sum, `l`)
 				} else {
-					p.P(`if v != nil {`)
+					p.P(`l = 0`)
+					if proto3 {
+						p.P(`if len(v) > 0 {`)
+					} else {
+						p.P(`if v != nil {`)
+					}
+					p.In()
+					p.P(`l = `, strconv.Itoa(valueKeySize), ` + len(v)+sov`+p.localName+`(uint64(len(v)))`)
+					p.Out()
+					p.P(`}`)
+					sum = append(sum, `l`)
 				}
-				p.In()
-				p.P(`l = `, strconv.Itoa(valueKeySize), ` + len(v)+sov`+p.localName+`(uint64(len(v)))`)
-				p.Out()
-				p.P(`}`)
-				sum = append(sum, `l`)
 			case descriptor.FieldDescriptorProto_TYPE_SINT32,
 				descriptor.FieldDescriptorProto_TYPE_SINT64:
 				sum = append(sum, strconv.Itoa(valueKeySize))
 				sum = append(sum, `soz`+p.localName+`(uint64(v))`)
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
+				stdSizeCall, stdOk := p.std(m.ValueAliasField, "v")
 				if nullable {
 					p.P(`l = 0`)
 					p.P(`if v != nil {`)
 					p.In()
-					if valuegoTyp != valuegoAliasTyp {
+					if stdOk {
+						p.P(`l = `, stdSizeCall)
+					} else if valuegoTyp != valuegoAliasTyp {
 						p.P(`l = ((`, valuegoTyp, `)(v)).`, sizeName, `()`)
 					} else {
 						p.P(`l = v.`, sizeName, `()`)
@@ -424,7 +472,9 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 					p.P(`}`)
 					sum = append(sum, `l`)
 				} else {
-					if valuegoTyp != valuegoAliasTyp {
+					if stdOk {
+						p.P(`l = `, stdSizeCall)
+					} else if valuegoTyp != valuegoAliasTyp {
 						p.P(`l = ((*`, valuegoTyp, `)(&v)).`, sizeName, `()`)
 					} else {
 						p.P(`l = v.`, sizeName, `()`)
@@ -440,12 +490,22 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 		} else if repeated {
 			p.P(`for _, e := range m.`, fieldname, ` { `)
 			p.In()
-			p.P(`l=e.`, sizeName, `()`)
+			stdSizeCall, stdOk := p.std(field, "e")
+			if stdOk {
+				p.P(`l=`, stdSizeCall)
+			} else {
+				p.P(`l=e.`, sizeName, `()`)
+			}
 			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 			p.Out()
 			p.P(`}`)
 		} else {
-			p.P(`l=m.`, fieldname, `.`, sizeName, `()`)
+			stdSizeCall, stdOk := p.std(field, "m."+fieldname)
+			if stdOk {
+				p.P(`l=`, stdSizeCall)
+			} else {
+				p.P(`l=m.`, fieldname, `.`, sizeName, `()`)
+			}
 			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 		}
 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
@@ -521,12 +581,18 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
 	p.localName = generator.FileName(file)
+	p.typesPkg = p.NewImport("github.com/gogo/protobuf/types")
 	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
+	p.bitsPkg = p.NewImport("math/bits")
 	if !gogoproto.ImportsGoGoProto(file.FileDescriptorProto) {
 		protoPkg = p.NewImport("github.com/golang/protobuf/proto")
 	}
 	for _, message := range file.Messages() {
 		sizeName := ""
+		if gogoproto.IsSizer(file.FileDescriptorProto, message.DescriptorProto) && gogoproto.IsProtoSizer(file.FileDescriptorProto, message.DescriptorProto) {
+			fmt.Fprintf(os.Stderr, "ERROR: message %v cannot support both sizer and protosizer plugins\n", generator.CamelCase(*message.Name))
+			os.Exit(1)
+		}
 		if gogoproto.IsSizer(file.FileDescriptorProto, message.DescriptorProto) {
 			sizeName = "Size"
 		} else if gogoproto.IsProtoSizer(file.FileDescriptorProto, message.DescriptorProto) {
@@ -541,6 +607,11 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		p.P(`func (m *`, ccTypeName, `) `, sizeName, `() (n int) {`)
 		p.In()
+		p.P(`if m == nil {`)
+		p.In()
+		p.P(`return 0`)
+		p.Out()
+		p.P(`}`)
 		p.P(`var l int`)
 		p.P(`_ = l`)
 		oneofs := make(map[string]struct{})
@@ -596,9 +667,14 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 			ccTypeName := p.OneOfTypeName(message, f)
 			p.P(`func (m *`, ccTypeName, `) `, sizeName, `() (n int) {`)
 			p.In()
+			p.P(`if m == nil {`)
+			p.In()
+			p.P(`return 0`)
+			p.Out()
+			p.P(`}`)
 			p.P(`var l int`)
 			p.P(`_ = l`)
-			vanity.TurnOffNullableForNativeTypesWithoutDefaultsOnly(f)
+			vanity.TurnOffNullableForNativeTypes(f)
 			p.generateField(false, file, message, f, sizeName)
 			p.P(`return n`)
 			p.Out()

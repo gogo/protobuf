@@ -46,7 +46,6 @@ type MixMatch struct {
 	Old      []string
 	Filename string
 	Args     []string
-	Plugins  string
 }
 
 func (this MixMatch) Gen(folder string, news []string) {
@@ -70,8 +69,7 @@ func (this MixMatch) Gen(folder string, news []string) {
 	if err = ioutil.WriteFile(filepath.Join(folder, this.Filename), []byte(content), 0666); err != nil {
 		panic(err)
 	}
-	args := append([]string{"--gogo_out=" + this.Plugins + "."}, this.Args...)
-	args = append(args, filepath.Join(folder, this.Filename))
+	args := append(this.Args, filepath.Join(folder, this.Filename))
 	var regenerate = exec.Command("protoc", args...)
 	out, err := regenerate.CombinedOutput()
 
@@ -95,80 +93,80 @@ func (this MixMatch) Gen(folder string, news []string) {
 	}
 }
 
-var min = flag.String("version", "2.3.0", "minimum protoc version")
-var proto_path = flag.String("proto_path", ".", "")
-var def = flag.Bool("default", true, "generate the case where everything is false")
-var plugins = flag.String("plugins", "", "--gogo_out=plugins=<plugins>:.")
+func filter(ss []string, flag string) ([]string, string) {
+	s := make([]string, 0, len(ss))
+	var v string
+	for i := range ss {
+		if strings.Contains(ss[i], flag) {
+			vs := strings.Split(ss[i], "=")
+			v = vs[1]
+			continue
+		}
+		s = append(s, ss[i])
+	}
+	return s, v
+}
+
+func filterArgs(ss []string) ([]string, []string) {
+	var args []string
+	var flags []string
+	for i := range ss {
+		if strings.Contains(ss[i], "=") {
+			flags = append(flags, ss[i])
+			continue
+		}
+		args = append(args, ss[i])
+	}
+	return flags, args
+}
 
 func main() {
-	flag.Parse()
-	if !version.AtLeast(*min) {
+	flag.String("version", "2.3.0", "minimum protoc version")
+	flag.Bool("default", true, "generate the case where everything is false")
+	flags, args := filterArgs(os.Args[1:])
+	var min string
+	flags, min = filter(flags, "-version")
+	if len(min) == 0 {
+		min = "2.3.1"
+	}
+	if !version.AtLeast(min) {
 		fmt.Printf("protoc version not high enough to parse this proto file\n")
 		return
 	}
-	args := flag.Args()
+	if len(args) != 1 {
+		fmt.Printf("protoc-gen-combo expects a filename\n")
+		os.Exit(1)
+	}
 	filename := args[0]
-	args = append([]string{"--proto_path=" + *proto_path})
+	var def string
+	flags, def = filter(flags, "-default")
 	if _, err := exec.LookPath("protoc"); err != nil {
 		panic("cannot find protoc in PATH")
-	}
-	pluginStr := ""
-	if len(*plugins) > 0 {
-		pluginStr = "plugins=" + *plugins + ":"
 	}
 	m := MixMatch{
 		Old: []string{
 			"option (gogoproto.unmarshaler_all) = false;",
 			"option (gogoproto.marshaler_all) = false;",
-			"option (gogoproto.unsafe_unmarshaler_all) = false;",
-			"option (gogoproto.unsafe_marshaler_all) = false;",
 		},
 		Filename: filename,
-		Args:     args,
-		Plugins:  pluginStr,
+		Args:     flags,
 	}
-	if *def {
+	if def != "false" {
 		m.Gen("./combos/neither/", []string{
 			"option (gogoproto.unmarshaler_all) = false;",
 			"option (gogoproto.marshaler_all) = false;",
-			"option (gogoproto.unsafe_unmarshaler_all) = false;",
-			"option (gogoproto.unsafe_marshaler_all) = false;",
 		})
 	}
 	m.Gen("./combos/marshaler/", []string{
 		"option (gogoproto.unmarshaler_all) = false;",
 		"option (gogoproto.marshaler_all) = true;",
-		"option (gogoproto.unsafe_unmarshaler_all) = false;",
-		"option (gogoproto.unsafe_marshaler_all) = false;",
 	})
 	m.Gen("./combos/unmarshaler/", []string{
 		"option (gogoproto.unmarshaler_all) = true;",
 		"option (gogoproto.marshaler_all) = false;",
-		"option (gogoproto.unsafe_unmarshaler_all) = false;",
-		"option (gogoproto.unsafe_marshaler_all) = false;",
 	})
 	m.Gen("./combos/both/", []string{
 		"option (gogoproto.unmarshaler_all) = true;",
 		"option (gogoproto.marshaler_all) = true;",
-		"option (gogoproto.unsafe_unmarshaler_all) = false;",
-		"option (gogoproto.unsafe_marshaler_all) = false;",
-	})
-	m.Gen("./combos/unsafemarshaler/", []string{
-		"option (gogoproto.unmarshaler_all) = false;",
-		"option (gogoproto.marshaler_all) = false;",
-		"option (gogoproto.unsafe_unmarshaler_all) = false;",
-		"option (gogoproto.unsafe_marshaler_all) = true;",
-	})
-	m.Gen("./combos/unsafeunmarshaler/", []string{
-		"option (gogoproto.unmarshaler_all) = false;",
-		"option (gogoproto.marshaler_all) = false;",
-		"option (gogoproto.unsafe_unmarshaler_all) = true;",
-		"option (gogoproto.unsafe_marshaler_all) = false;",
-	})
-	m.Gen("./combos/unsafeboth/", []string{
-		"option (gogoproto.unmarshaler_all) = false;",
-		"option (gogoproto.marshaler_all) = false;",
-		"option (gogoproto.unsafe_unmarshaler_all) = true;",
-		"option (gogoproto.unsafe_marshaler_all) = true;",
 	})
 }

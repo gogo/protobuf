@@ -27,18 +27,13 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 regenerate:
+	go install github.com/gogo/protobuf/protoc-gen-gogo
 	go install github.com/gogo/protobuf/protoc-gen-combo
-	protoc --gogo_out=. --proto_path=../:../../../../:../protobuf/:. thetest.proto
-	protoc-gen-combo --default=false --proto_path=../:../../../../:../protobuf/:. thetest.proto
+	protoc --gogo_out=. --proto_path=../protobuf/:../:../../../../:. thetest.proto
+	protoc-gen-combo --default=false --gogo_out=. --proto_path=../protobuf/:../:../../../../:. thetest.proto
 	cp uuid.go ./combos/both/
 	cp uuid.go ./combos/marshaler/
 	cp uuid.go ./combos/unmarshaler/
-	cp uuid.go ./combos/unsafeboth/
-	cp uuid.go ./combos/unsafemarshaler/
-	cp uuid.go ./combos/unsafeunmarshaler/
 	cp bug_test.go ./combos/both/
 	cp bug_test.go ./combos/marshaler/
 	cp bug_test.go ./combos/unmarshaler/
-	cp bug_test.go ./combos/unsafeboth/
-	cp bug_test.go ./combos/unsafemarshaler/
-	cp bug_test.go ./combos/unsafeunmarshaler/

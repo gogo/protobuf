@@ -32,13 +32,13 @@
 package proto_test
 
 import (
+	"fmt"
 	"math"
-	"reflect"
 	"testing"
 
 	. "github.com/gogo/protobuf/proto"
 	proto3pb "github.com/gogo/protobuf/proto/proto3_proto"
-	. "github.com/gogo/protobuf/proto/testdata"
+	. "github.com/gogo/protobuf/proto/test_proto"
 )
 
 type UnmarshalTextTest struct {
@@ -167,10 +167,19 @@ var unMarshalTextTests = []UnmarshalTextTest{
 
 	// Quoted string with UTF-8 bytes.
 	{
-		in: "count:42 name: '\303\277\302\201\xAB'",
+		in: "count:42 name: '\303\277\302\201\x00\xAB\xCD\xEF'",
 		out: &MyMessage{
 			Count: Int32(42),
-			Name:  String("\303\277\302\201\xAB"),
+			Name:  String("\303\277\302\201\x00\xAB\xCD\xEF"),
+		},
+	},
+
+	// Quoted string with unicode escapes.
+	{
+		in: `count: 42 name: "\u0047\U00000047\uffff\U0010ffff"`,
+		out: &MyMessage{
+			Count: Int32(42),
+			Name:  String("GG\uffff\U0010ffff"),
 		},
 	},
 
@@ -178,6 +187,24 @@ var unMarshalTextTests = []UnmarshalTextTest{
 	{
 		in:  `inner: < host: "\0" >` + "\n",
 		err: `line 1.15: invalid quoted string "\0": \0 requires 2 following digits`,
+	},
+
+	// Bad \u escape
+	{
+		in:  `count: 42 name: "\u000"`,
+		err: `line 1.16: invalid quoted string "\u000": \u requires 4 following digits`,
+	},
+
+	// Bad \U escape
+	{
+		in:  `count: 42 name: "\U0000000"`,
+		err: `line 1.16: invalid quoted string "\U0000000": \U requires 8 following digits`,
+	},
+
+	// Bad \U escape
+	{
+		in:  `count: 42 name: "\xxx"`,
+		err: `line 1.16: invalid quoted string "\xxx": \xxx contains non-hexadecimal digits`,
 	},
 
 	// Number too large for int64
@@ -263,6 +290,12 @@ var unMarshalTextTests = []UnmarshalTextTest{
 		err: `line 1.17: invalid float32: "17.4"`,
 	},
 
+	// unclosed bracket doesn't cause infinite loop
+	{
+		in:  `[`,
+		err: `line 1.0: unclosed type_url or extension name`,
+	},
+
 	// Enum
 	{
 		in: `count:42 bikeshed: BLUE`,
@@ -330,7 +363,7 @@ var unMarshalTextTests = []UnmarshalTextTest{
 	// Missing required field
 	{
 		in:  `name: "Pawel"`,
-		err: `proto: required field "testdata.MyMessage.count" not set`,
+		err: fmt.Sprintf(`proto: required field "%T.count" not set`, MyMessage{}),
 		out: &MyMessage{
 			Name: String("Pawel"),
 		},
@@ -339,7 +372,7 @@ var unMarshalTextTests = []UnmarshalTextTest{
 	// Missing required field in a required submessage
 	{
 		in:  `count: 42 we_must_go_deeper < leo_finally_won_an_oscar <> >`,
-		err: `proto: required field "testdata.InnerMessage.host" not set`,
+		err: fmt.Sprintf(`proto: required field "%T.host" not set`, InnerMessage{}),
 		out: &MyMessage{
 			Count:          Int32(42),
 			WeMustGoDeeper: &RequiredInnerMessage{LeoFinallyWonAnOscar: &InnerMessage{}},
@@ -380,11 +413,100 @@ var unMarshalTextTests = []UnmarshalTextTest{
 		},
 	},
 
+	// Boolean false
+	{
+		in: `count:42 inner { host: "example.com" connected: false }`,
+		out: &MyMessage{
+			Count: Int32(42),
+			Inner: &InnerMessage{
+				Host:      String("example.com"),
+				Connected: Bool(false),
+			},
+		},
+	},
+	// Boolean true
+	{
+		in: `count:42 inner { host: "example.com" connected: true }`,
+		out: &MyMessage{
+			Count: Int32(42),
+			Inner: &InnerMessage{
+				Host:      String("example.com"),
+				Connected: Bool(true),
+			},
+		},
+	},
+	// Boolean 0
+	{
+		in: `count:42 inner { host: "example.com" connected: 0 }`,
+		out: &MyMessage{
+			Count: Int32(42),
+			Inner: &InnerMessage{
+				Host:      String("example.com"),
+				Connected: Bool(false),
+			},
+		},
+	},
+	// Boolean 1
+	{
+		in: `count:42 inner { host: "example.com" connected: 1 }`,
+		out: &MyMessage{
+			Count: Int32(42),
+			Inner: &InnerMessage{
+				Host:      String("example.com"),
+				Connected: Bool(true),
+			},
+		},
+	},
+	// Boolean f
+	{
+		in: `count:42 inner { host: "example.com" connected: f }`,
+		out: &MyMessage{
+			Count: Int32(42),
+			Inner: &InnerMessage{
+				Host:      String("example.com"),
+				Connected: Bool(false),
+			},
+		},
+	},
+	// Boolean t
+	{
+		in: `count:42 inner { host: "example.com" connected: t }`,
+		out: &MyMessage{
+			Count: Int32(42),
+			Inner: &InnerMessage{
+				Host:      String("example.com"),
+				Connected: Bool(true),
+			},
+		},
+	},
+	// Boolean False
+	{
+		in: `count:42 inner { host: "example.com" connected: False }`,
+		out: &MyMessage{
+			Count: Int32(42),
+			Inner: &InnerMessage{
+				Host:      String("example.com"),
+				Connected: Bool(false),
+			},
+		},
+	},
+	// Boolean True
+	{
+		in: `count:42 inner { host: "example.com" connected: True }`,
+		out: &MyMessage{
+			Count: Int32(42),
+			Inner: &InnerMessage{
+				Host:      String("example.com"),
+				Connected: Bool(true),
+			},
+		},
+	},
+
 	// Extension
-	buildExtStructTest(`count: 42 [testdata.Ext.more]:<data:"Hello, world!" >`),
-	buildExtStructTest(`count: 42 [testdata.Ext.more] {data:"Hello, world!"}`),
-	buildExtDataTest(`count: 42 [testdata.Ext.text]:"Hello, world!" [testdata.Ext.number]:1729`),
-	buildExtRepStringTest(`count: 42 [testdata.greeting]:"bula" [testdata.greeting]:"hola"`),
+	buildExtStructTest(`count: 42 [test_proto.Ext.more]:<data:"Hello, world!" >`),
+	buildExtStructTest(`count: 42 [test_proto.Ext.more] {data:"Hello, world!"}`),
+	buildExtDataTest(`count: 42 [test_proto.Ext.text]:"Hello, world!" [test_proto.Ext.number]:1729`),
+	buildExtRepStringTest(`count: 42 [test_proto.greeting]:"bula" [test_proto.greeting]:"hola"`),
 
 	// Big all-in-one
 	{
@@ -445,7 +567,7 @@ func TestUnmarshalText(t *testing.T) {
 			// We don't expect failure.
 			if err != nil {
 				t.Errorf("Test %d: Unexpected error: %v", i, err)
-			} else if !reflect.DeepEqual(pb, test.out) {
+			} else if !Equal(pb, test.out) {
 				t.Errorf("Test %d: Incorrect populated \nHave: %v\nWant: %v",
 					i, pb, test.out)
 			}
@@ -456,7 +578,7 @@ func TestUnmarshalText(t *testing.T) {
 			} else if err.Error() != test.err {
 				t.Errorf("Test %d: Incorrect error.\nHave: %v\nWant: %v",
 					i, err.Error(), test.err)
-			} else if _, ok := err.(*RequiredNotSetError); ok && test.out != nil && !reflect.DeepEqual(pb, test.out) {
+			} else if _, ok := err.(*RequiredNotSetError); ok && test.out != nil && !Equal(pb, test.out) {
 				t.Errorf("Test %d: Incorrect populated \nHave: %v\nWant: %v",
 					i, pb, test.out)
 			}
@@ -539,13 +661,24 @@ func TestMapParsing(t *testing.T) {
 func TestOneofParsing(t *testing.T) {
 	const in = `name:"Shrek"`
 	m := new(Communique)
-	want := &Communique{Union: &Communique_Name{"Shrek"}}
+	want := &Communique{Union: &Communique_Name{Name: "Shrek"}}
 	if err := UnmarshalText(in, m); err != nil {
 		t.Fatal(err)
 	}
 	if !Equal(m, want) {
 		t.Errorf("\n got %v\nwant %v", m, want)
 	}
+
+	const inOverwrite = `name:"Shrek" number:42`
+	m = new(Communique)
+	testErr := "line 1.13: field 'number' would overwrite already parsed oneof 'Union'"
+	if err := UnmarshalText(inOverwrite, m); err == nil {
+		t.Errorf("TestOneofParsing: Didn't get expected error: %v", testErr)
+	} else if err.Error() != testErr {
+		t.Errorf("TestOneofParsing: Incorrect error.\nHave: %v\nWant: %v",
+			err.Error(), testErr)
+	}
+
 }
 
 var benchInput string

@@ -26,11 +26,19 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+GO_VERSION:=$(shell go version)
+BENCHLIST?=all
+
+# Skip known issues from purego tests
+# https://github.com/gogo/protobuf/issues/447
+# https://github.com/gogo/protobuf/issues/448
+SKIPISSUE:="/jsonpb|/test/casttype/|/test/oneof/combos/"
+
 .PHONY: nuke regenerate tests clean install gofmt vet contributors
 
 all: clean install regenerate install tests errcheck vet
 
-buildserverall: clean install regenerate install tests vet
+buildserverall: clean install regenerate install tests vet js purego
 
 install:
 	go install ./proto
@@ -44,23 +52,25 @@ install:
 	go install ./protoc-gen-gostring
 	go install ./protoc-min-version
 	go install ./protoc-gen-combo
+	go install ./gogoreplace
 
 clean:
 	go clean ./...
 
 nuke:
-	go clean -i ./...
+	go clean -i -cache ./...
 
 gofmt:
 	gofmt -l -s -w .
 
 regenerate:
-	make -C protoc-gen-gogo/descriptor regenerate
-	make -C protoc-gen-gogo/plugin regenerate
-	make -C protoc-gen-gogo/testdata regenerate
+	make -C protoc-gen-gogo regenerate
 	make -C gogoproto regenerate
-	make -C proto/testdata regenerate
+	make -C proto/test_proto regenerate
+	make -C proto/proto3_proto regenerate
 	make -C jsonpb/jsonpb_test_proto regenerate
+	make -C conformance regenerate
+	make -C protobuf regenerate
 	make -C test regenerate
 	make -C test/example regenerate
 	make -C test/unrecognized regenerate
@@ -78,10 +88,12 @@ regenerate:
 	make -C test/oneof regenerate
 	make -C test/oneof3 regenerate
 	make -C test/theproto3 regenerate
+	make -C test/mapdefaults regenerate
 	make -C test/mapsproto2 regenerate
 	make -C test/issue42order regenerate
 	make -C proto generate-test-pbs
 	make -C test/importdedup regenerate
+	make -C test/importduplicate regenerate
 	make -C test/custombytesnonstruct regenerate
 	make -C test/required regenerate
 	make -C test/casttype regenerate
@@ -96,15 +108,50 @@ regenerate:
 	make -C test/asymetric-issue125 regenerate
 	make -C test/filedotname regenerate
 	make -C test/nopackage regenerate
+	make -C test/types regenerate
+	make -C test/proto3extension regenerate
+	make -C test/stdtypes regenerate
+	make -C test/data regenerate
+	make -C test/typedecl regenerate
+	make -C test/issue260 regenerate
+	make -C test/issue261 regenerate
+	make -C test/issue262 regenerate
+	make -C test/issue312 regenerate
+	make -C test/enumdecl regenerate
+	make -C test/typedecl_all regenerate
+	make -C test/enumdecl_all regenerate
+	make -C test/int64support regenerate
+	make -C test/issue322 regenerate
+	make -C test/issue330 regenerate
+	make -C test/importcustom-issue389 regenerate
+	make -C test/merge regenerate
+	make -C test/cachedsize regenerate
+	make -C test/deterministic regenerate
+	make -C test/issue438 regenerate
+	make -C test/issue444 regenerate
+	make -C test/issue449 regenerate
+	make -C test/xxxfields regenerate
+	make -C test/issue435 regenerate
+	make -C test/issue411 regenerate
+	make -C test/issue498 regenerate
+	make -C test/issue503 regenerate
+	make -C test/issue530 regenerate
+	make -C test/issue617 regenerate
+	make -C test/issue620 regenerate
+	make -C test/protobuffer regenerate
+	make -C test/issue630 regenerate
+
 	make gofmt
 
 tests:
 	go build ./test/enumprefix
 	go test ./...
+	(cd test/stdtypes && make test)
 
 vet:
+	go get golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow
 	go vet ./...
-	go tool vet --shadow .
+	go vet -vettool=$(shell which shadow) ./...
 
 errcheck:
 	go get github.com/kisielk/errcheck
@@ -115,15 +162,30 @@ drone:
 	(cd $(GOPATH)/src/github.com/gogo/protobuf && make buildserverall)
 
 testall:
-	make -C protoc-gen-gogo/testdata test
+	go get -u github.com/golang/protobuf/proto
+	make -C protoc-gen-gogo test
 	make -C vanity/test test
+	make -C test/registration test
+	make -C conformance test
+	make -C test/issue427 test
 	make tests
 
 bench:
+	go get golang.org/x/tools/cmd/benchcmp
 	(cd test/mixbench && go build .)
-	(cd test/mixbench && ./mixbench)
+	./test/mixbench/mixbench -benchlist "${BENCHLIST}"
 
 contributors:
 	git log --format='%aN <%aE>' | sort -fu > CONTRIBUTORS
 
+js:
+ifeq (go1.12, $(findstring go1.12, $(GO_VERSION)))
+	go get -u github.com/gopherjs/gopherjs
+	gopherjs build github.com/gogo/protobuf/protoc-gen-gogo
+endif
 
+purego:
+	go test -tags purego $$(go list ./... | grep -Ev $(SKIPISSUE))
+
+update:
+	(cd protobuf && make update)
