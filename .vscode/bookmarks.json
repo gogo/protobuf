@@ -1,0 +1,19 @@
+{
+	"files": [
+		{
+			"path": "protoc-gen-gogo/generator/generator.go",
+			"bookmarks": [
+				{
+					"line": 2636,
+					"column": 20,
+					"label": ""
+				},
+				{
+					"line": 2649,
+					"column": 8,
+					"label": ""
+				}
+			]
+		}
+	]
+}
