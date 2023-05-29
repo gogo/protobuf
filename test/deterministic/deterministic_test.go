@@ -30,8 +30,9 @@ package deterministic
 
 import (
 	"bytes"
-	"github.com/gogo/protobuf/proto"
 	"testing"
+
+	"github.com/gogo/protobuf/proto"
 )
 
 func getTestMap() map[string]string {
@@ -75,7 +76,7 @@ func TestOrderedMap(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if bytes.Compare(data1, data2) != 0 {
+	if !bytes.Equal(data1, data2) {
 		t.Fatal("byte arrays are not the same\n", data1, "\n", data2)
 	}
 }
@@ -121,7 +122,7 @@ func TestMapNoMarshaler(t *testing.T) {
 	}
 	data2 := b2.Bytes()
 
-	if bytes.Compare(data1, data2) != 0 {
+	if !bytes.Equal(data1, data2) {
 		t.Fatal("byte arrays are not the same:\n", data1, "\n", data2)
 	}
 }
@@ -149,7 +150,7 @@ func TestOrderedNestedMap(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if bytes.Compare(data1, data2) != 0 {
+	if !bytes.Equal(data1, data2) {
 		t.Fatal("byte arrays are not the same\n", data1, "\n", data2)
 	}
 }
@@ -189,7 +190,7 @@ func TestOrderedNestedStructMap(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if bytes.Compare(data1, data2) != 0 {
+	if !bytes.Equal(data1, data2) {
 		t.Fatal("byte arrays are not the same\n", data1, "\n", data2)
 	}
 }

@@ -28,8 +28,10 @@
 
 package gogoproto
 
-import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-import proto "github.com/gogo/protobuf/proto"
+import (
+	proto "github.com/gogo/protobuf/proto"
+	google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+)
 
 func IsEmbed(field *google_protobuf.FieldDescriptorProto) bool {
 	return proto.GetBoolExtension(field.Options, E_Embed, false)
@@ -109,34 +111,22 @@ func NeedsNilCheck(proto3 bool, field *google_protobuf.FieldDescriptorProto) boo
 
 func IsCustomType(field *google_protobuf.FieldDescriptorProto) bool {
 	typ := GetCustomType(field)
-	if len(typ) > 0 {
-		return true
-	}
-	return false
+	return len(typ) > 0
 }
 
 func IsCastType(field *google_protobuf.FieldDescriptorProto) bool {
 	typ := GetCastType(field)
-	if len(typ) > 0 {
-		return true
-	}
-	return false
+	return len(typ) > 0
 }
 
 func IsCastKey(field *google_protobuf.FieldDescriptorProto) bool {
 	typ := GetCastKey(field)
-	if len(typ) > 0 {
-		return true
-	}
-	return false
+	return len(typ) > 0
 }
 
 func IsCastValue(field *google_protobuf.FieldDescriptorProto) bool {
 	typ := GetCastValue(field)
-	if len(typ) > 0 {
-		return true
-	}
-	return false
+	return len(typ) > 0
 }
 
 func HasEnumDecl(file *google_protobuf.FileDescriptorProto, enum *google_protobuf.EnumDescriptorProto) bool {
@@ -201,26 +191,17 @@ func GetCastValue(field *google_protobuf.FieldDescriptorProto) string {
 
 func IsCustomName(field *google_protobuf.FieldDescriptorProto) bool {
 	name := GetCustomName(field)
-	if len(name) > 0 {
-		return true
-	}
-	return false
+	return len(name) > 0
 }
 
 func IsEnumCustomName(field *google_protobuf.EnumDescriptorProto) bool {
 	name := GetEnumCustomName(field)
-	if len(name) > 0 {
-		return true
-	}
-	return false
+	return len(name) > 0
 }
 
 func IsEnumValueCustomName(field *google_protobuf.EnumValueDescriptorProto) bool {
 	name := GetEnumValueCustomName(field)
-	if len(name) > 0 {
-		return true
-	}
-	return false
+	return len(name) > 0
 }
 
 func GetCustomName(field *google_protobuf.FieldDescriptorProto) string {

@@ -373,7 +373,7 @@ func (g *Generator) generatePlugin(file *FileDescriptor, p Plugin) {
 	g.Write(rem.Bytes())
 
 	// Reformat generated code.
-	contents := string(g.Buffer.Bytes())
+	contents := g.Buffer.String()
 	fset := token.NewFileSet()
 	ast, err := parser.ParseFile(fset, "", g, parser.ParseComments)
 	if err != nil {
