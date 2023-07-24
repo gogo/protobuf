@@ -46,14 +46,14 @@ It is enabled by the following extensions:
 
 For incorrect usage of nullable with tests see:
 
-  github.com/gogo/protobuf/test/nullableconflict
-
+	github.com/gogo/protobuf/test/nullableconflict
 */
 package defaultcheck
 
 import (
 	"fmt"
 	"github.com/gogo/protobuf/gogoproto"
+	"github.com/gogo/protobuf/proto3optional"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"os"
 )
@@ -75,10 +75,11 @@ func (p *plugin) Init(g *generator.Generator) {
 }
 
 func (p *plugin) Generate(file *generator.FileDescriptor) {
-	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	for _, msg := range file.Messages() {
 		getters := gogoproto.HasGoGetters(file.FileDescriptorProto, msg.DescriptorProto)
 		face := gogoproto.IsFace(file.FileDescriptorProto, msg.DescriptorProto)
+		proto3Resolver := proto3optional.NewResolver(gogoproto.IsProto3(file.FileDescriptorProto), msg.Field)
+
 		for _, field := range msg.GetField() {
 			if len(field.GetDefaultValue()) > 0 {
 				if !getters {
@@ -90,7 +91,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 					os.Exit(1)
 				}
 			}
-			if gogoproto.IsNullable(field) {
+			if gogoproto.IsNullable(field, proto3Resolver) {
 				continue
 			}
 			if len(field.GetDefaultValue()) > 0 {
@@ -100,7 +101,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 			if !field.IsMessage() && !gogoproto.IsCustomType(field) {
 				if field.IsRepeated() {
 					fmt.Fprintf(os.Stderr, "WARNING: field %v.%v is a repeated non-nullable native type, nullable=false has no effect\n", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
-				} else if proto3 {
+				} else if proto3Resolver.IsProto3WithoutOptional(field) {
 					fmt.Fprintf(os.Stderr, "ERROR: field %v.%v is a native type and in proto3 syntax with nullable=false there exists conflicting implementations when encoding zero values", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
 					os.Exit(1)
 				}
@@ -118,8 +119,10 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 			}
 		}
 	}
+
+	proto3Resolver := proto3optional.NewResolver(gogoproto.IsProto3(file.FileDescriptorProto), file.GetExtension())
 	for _, e := range file.GetExtension() {
-		if !gogoproto.IsNullable(e) {
+		if !gogoproto.IsNullable(e, proto3Resolver) {
 			fmt.Fprintf(os.Stderr, "ERROR: extended field %v cannot be nullable %v", generator.CamelCase(e.GetName()), generator.CamelCase(*e.Name))
 			os.Exit(1)
 		}

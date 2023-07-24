@@ -57,120 +57,119 @@ And benchmarks given it is enabled using one of the following extensions:
 
 Let us look at:
 
-  github.com/gogo/protobuf/test/example/example.proto
+	github.com/gogo/protobuf/test/example/example.proto
 
 Btw all the output can be seen at:
 
-  github.com/gogo/protobuf/test/example/*
+	github.com/gogo/protobuf/test/example/*
 
 The following message:
 
-  option (gogoproto.unmarshaler_all) = true;
+	  option (gogoproto.unmarshaler_all) = true;
 
-  message B {
-	option (gogoproto.description) = true;
-	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
-	repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
-  }
+	  message B {
+		option (gogoproto.description) = true;
+		optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
+		repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
+	  }
 
 given to the unmarshal plugin, will generate the following code:
 
-  func (m *B) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return proto.ErrWrongType
-			}
-			var msglen int
+	  func (m *B) Unmarshal(dAtA []byte) error {
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			var wire uint64
 			for shift := uint(0); ; shift += 7 {
 				if iNdEx >= l {
 					return io.ErrUnexpectedEOF
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
+				wire |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			postIndex := iNdEx + msglen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.A.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return proto.ErrWrongType
-			}
-			var byteLen int
-			for shift := uint(0); ; shift += 7 {
-				if iNdEx >= l {
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return proto.ErrWrongType
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= (int(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				postIndex := iNdEx + msglen
+				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				byteLen |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
+				if err := m.A.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+					return err
 				}
-			}
-			postIndex := iNdEx + byteLen
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.G = append(m.G, github_com_gogo_protobuf_test_custom.Uint128{})
-			if err := m.G[len(m.G)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			var sizeOfWire int
-			for {
-				sizeOfWire++
-				wire >>= 7
-				if wire == 0 {
-					break
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return proto.ErrWrongType
 				}
+				var byteLen int
+				for shift := uint(0); ; shift += 7 {
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					byteLen |= (int(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				postIndex := iNdEx + byteLen
+				if postIndex > l {
+					return io.ErrUnexpectedEOF
+				}
+				m.G = append(m.G, github_com_gogo_protobuf_test_custom.Uint128{})
+				if err := m.G[len(m.G)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				iNdEx = postIndex
+			default:
+				var sizeOfWire int
+				for {
+					sizeOfWire++
+					wire >>= 7
+					if wire == 0 {
+						break
+					}
+				}
+				iNdEx -= sizeOfWire
+				skippy, err := skip(dAtA[iNdEx:])
+				if err != nil {
+					return err
+				}
+				if (iNdEx + skippy) > l {
+					return io.ErrUnexpectedEOF
+				}
+				m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+				iNdEx += skippy
 			}
-			iNdEx -= sizeOfWire
-			skippy, err := skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
 		}
-	}
-	return nil
-  }
+		return nil
+	  }
 
 Remember when using this code to call proto.Unmarshal.
 This will call m.Reset and invoke the generated Unmarshal method for you.
 If you call m.Unmarshal without m.Reset you could be merging protocol buffers.
-
 */
 package unmarshal
 
@@ -181,6 +180,7 @@ import (
 
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
+	"github.com/gogo/protobuf/proto3optional"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 )
@@ -253,7 +253,7 @@ func (p *unmarshal) decodeFixed64(varName string, typeName string) {
 	p.P(`iNdEx += 8`)
 }
 
-func (p *unmarshal) declareMapField(varName string, nullable bool, customType bool, field *descriptor.FieldDescriptorProto) {
+func (p *unmarshal) declareMapField(varName string, nullable bool, customType bool, field *descriptor.FieldDescriptorProto, proto3Resolver *proto3optional.Resolver) {
 	switch field.GetType() {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
 		p.P(`var `, varName, ` float64`)
@@ -272,7 +272,7 @@ func (p *unmarshal) declareMapField(varName string, nullable bool, customType bo
 	case descriptor.FieldDescriptorProto_TYPE_BOOL:
 		p.P(`var `, varName, ` bool`)
 	case descriptor.FieldDescriptorProto_TYPE_STRING:
-		cast, _ := p.GoType(nil, field)
+		cast, _ := p.GoType(nil, field, proto3Resolver)
 		cast = strings.Replace(cast, "*", "", 1)
 		p.P(`var `, varName, ` `, cast)
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
@@ -334,7 +334,7 @@ func (p *unmarshal) declareMapField(varName string, nullable bool, customType bo
 	}
 }
 
-func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.FieldDescriptorProto) {
+func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.FieldDescriptorProto, proto3Resolver *proto3optional.Resolver) {
 	switch field.GetType() {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
 		p.P(`var `, varName, `temp uint64`)
@@ -378,7 +378,7 @@ func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.
 		p.P(`return `, p.ioPkg.Use(), `.ErrUnexpectedEOF`)
 		p.Out()
 		p.P(`}`)
-		cast, _ := p.GoType(nil, field)
+		cast, _ := p.GoType(nil, field, proto3Resolver)
 		cast = strings.Replace(cast, "*", "", 1)
 		p.P(varName, ` = `, cast, `(dAtA[iNdEx:postStringIndex`, varName, `])`)
 		p.P(`iNdEx = postStringIndex`, varName)
@@ -488,8 +488,8 @@ func (p *unmarshal) mapField(varName string, customType bool, field *descriptor.
 	}
 }
 
-func (p *unmarshal) noStarOrSliceType(msg *generator.Descriptor, field *descriptor.FieldDescriptorProto) string {
-	typ, _ := p.GoType(msg, field)
+func (p *unmarshal) noStarOrSliceType(msg *generator.Descriptor, field *descriptor.FieldDescriptorProto, proto3Resolver *proto3optional.Resolver) string {
+	typ, _ := p.GoType(msg, field, proto3Resolver)
 	if typ[0] == '*' {
 		return typ[1:]
 	}
@@ -499,21 +499,21 @@ func (p *unmarshal) noStarOrSliceType(msg *generator.Descriptor, field *descript
 	return typ
 }
 
-func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descriptor, field *descriptor.FieldDescriptorProto, fieldname string, proto3 bool) {
+func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descriptor, field *descriptor.FieldDescriptorProto, fieldname string, proto3Resolver *proto3optional.Resolver) {
 	repeated := field.IsRepeated()
-	nullable := gogoproto.IsNullable(field)
-	typ := p.noStarOrSliceType(msg, field)
-	oneof := field.OneofIndex != nil
+	nullable := gogoproto.IsNullable(field, proto3Resolver)
+	typ := p.noStarOrSliceType(msg, field, proto3Resolver)
+	oneof := proto3Resolver.IsRealOneOf(field)
 	switch *field.Type {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
 		p.P(`var v uint64`)
 		p.decodeFixed64("v", "uint64")
 		if oneof {
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{`, typ, "(", p.mathPkg.Use(), `.Float64frombits(v))}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{`, typ, "(", p.mathPkg.Use(), `.Float64frombits(v))}`)
 		} else if repeated {
 			p.P(`v2 := `, typ, "(", p.mathPkg.Use(), `.Float64frombits(v))`)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v2)`)
-		} else if proto3 || !nullable {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) || !nullable {
 			p.P(`m.`, fieldname, ` = `, typ, "(", p.mathPkg.Use(), `.Float64frombits(v))`)
 		} else {
 			p.P(`v2 := `, typ, "(", p.mathPkg.Use(), `.Float64frombits(v))`)
@@ -523,11 +523,11 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.P(`var v uint32`)
 		p.decodeFixed32("v", "uint32")
 		if oneof {
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{`, typ, "(", p.mathPkg.Use(), `.Float32frombits(v))}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{`, typ, "(", p.mathPkg.Use(), `.Float32frombits(v))}`)
 		} else if repeated {
 			p.P(`v2 := `, typ, "(", p.mathPkg.Use(), `.Float32frombits(v))`)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v2)`)
-		} else if proto3 || !nullable {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) || !nullable {
 			p.P(`m.`, fieldname, ` = `, typ, "(", p.mathPkg.Use(), `.Float32frombits(v))`)
 		} else {
 			p.P(`v2 := `, typ, "(", p.mathPkg.Use(), `.Float32frombits(v))`)
@@ -537,12 +537,12 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		if oneof {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{v}`)
 		} else if repeated {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-		} else if proto3 || !nullable {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) || !nullable {
 			p.P(`m.`, fieldname, ` = 0`)
 			p.decodeVarint("m."+fieldname, typ)
 		} else {
@@ -554,12 +554,12 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		if oneof {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{v}`)
 		} else if repeated {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-		} else if proto3 || !nullable {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) || !nullable {
 			p.P(`m.`, fieldname, ` = 0`)
 			p.decodeVarint("m."+fieldname, typ)
 		} else {
@@ -571,12 +571,12 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		if oneof {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{v}`)
 		} else if repeated {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-		} else if proto3 || !nullable {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) || !nullable {
 			p.P(`m.`, fieldname, ` = 0`)
 			p.decodeVarint("m."+fieldname, typ)
 		} else {
@@ -588,12 +588,12 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		if oneof {
 			p.P(`var v `, typ)
 			p.decodeFixed64("v", typ)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{v}`)
 		} else if repeated {
 			p.P(`var v `, typ)
 			p.decodeFixed64("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-		} else if proto3 || !nullable {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) || !nullable {
 			p.P(`m.`, fieldname, ` = 0`)
 			p.decodeFixed64("m."+fieldname, typ)
 		} else {
@@ -605,12 +605,12 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		if oneof {
 			p.P(`var v `, typ)
 			p.decodeFixed32("v", typ)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{v}`)
 		} else if repeated {
 			p.P(`var v `, typ)
 			p.decodeFixed32("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-		} else if proto3 || !nullable {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) || !nullable {
 			p.P(`m.`, fieldname, ` = 0`)
 			p.decodeFixed32("m."+fieldname, typ)
 		} else {
@@ -623,10 +623,10 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.decodeVarint("v", "int")
 		if oneof {
 			p.P(`b := `, typ, `(v != 0)`)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{b}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{b}`)
 		} else if repeated {
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, typ, `(v != 0))`)
-		} else if proto3 || !nullable {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) || !nullable {
 			p.P(`m.`, fieldname, ` = `, typ, `(v != 0)`)
 		} else {
 			p.P(`b := `, typ, `(v != 0)`)
@@ -653,10 +653,10 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.Out()
 		p.P(`}`)
 		if oneof {
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{`, typ, `(dAtA[iNdEx:postIndex])}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{`, typ, `(dAtA[iNdEx:postIndex])}`)
 		} else if repeated {
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, typ, `(dAtA[iNdEx:postIndex]))`)
-		} else if proto3 || !nullable {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) || !nullable {
 			p.P(`m.`, fieldname, ` = `, typ, `(dAtA[iNdEx:postIndex])`)
 		} else {
 			p.P(`s := `, typ, `(dAtA[iNdEx:postIndex])`)
@@ -784,18 +784,18 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			p.P(`return err`)
 			p.Out()
 			p.P(`}`)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{v}`)
 		} else if p.IsMap(field) {
-			m := p.GoMapType(nil, field)
+			m := p.GoMapType(nil, field, proto3Resolver)
 
-			keygoTyp, _ := p.GoType(nil, m.KeyField)
-			keygoAliasTyp, _ := p.GoType(nil, m.KeyAliasField)
+			keygoTyp, _ := p.GoType(nil, m.KeyField, proto3Resolver)
+			keygoAliasTyp, _ := p.GoType(nil, m.KeyAliasField, proto3Resolver)
 			// keys may not be pointers
 			keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
 			keygoAliasTyp = strings.Replace(keygoAliasTyp, "*", "", 1)
 
-			valuegoTyp, _ := p.GoType(nil, m.ValueField)
-			valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField)
+			valuegoTyp, _ := p.GoType(nil, m.ValueField, proto3Resolver)
+			valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField, proto3Resolver)
 
 			// if the map type is an alias and key or values are aliases (type Foo map[Bar]Baz),
 			// we need to explicitly record their use here.
@@ -806,7 +806,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 				p.RecordTypeUse(m.ValueAliasField.GetTypeName())
 			}
 
-			nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp)
+			nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp, proto3Resolver)
 			if gogoproto.IsStdType(field) {
 				valuegoTyp = valuegoAliasTyp
 			}
@@ -817,8 +817,8 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			p.Out()
 			p.P(`}`)
 
-			p.declareMapField("mapkey", false, false, m.KeyAliasField)
-			p.declareMapField("mapvalue", nullable, gogoproto.IsCustomType(field), m.ValueAliasField)
+			p.declareMapField("mapkey", false, false, m.KeyAliasField, proto3Resolver)
+			p.declareMapField("mapvalue", nullable, gogoproto.IsCustomType(field), m.ValueAliasField, proto3Resolver)
 			p.P(`for iNdEx < postIndex {`)
 			p.In()
 
@@ -829,11 +829,11 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 
 			p.P(`if fieldNum == 1 {`)
 			p.In()
-			p.mapField("mapkey", false, m.KeyAliasField)
+			p.mapField("mapkey", false, m.KeyAliasField, proto3Resolver)
 			p.Out()
 			p.P(`} else if fieldNum == 2 {`)
 			p.In()
-			p.mapField("mapvalue", gogoproto.IsCustomType(field), m.ValueAliasField)
+			p.mapField("mapvalue", gogoproto.IsCustomType(field), m.ValueAliasField, proto3Resolver)
 			p.Out()
 			p.P(`} else {`)
 			p.In()
@@ -947,7 +947,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			} else if nullable && !gogoproto.IsCustomType(field) {
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, &`, msgname, `{})`)
 			} else {
-				goType, _ := p.GoType(nil, field)
+				goType, _ := p.GoType(nil, field, proto3Resolver)
 				// remove the slice from the type, i.e. []*T -> *T
 				goType = goType[2:]
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, goType, `{})`)
@@ -1053,7 +1053,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			} else if gogoproto.IsStdBytes(field) {
 				p.P(`m.`, fieldname, ` = new([]byte)`)
 			} else {
-				goType, _ := p.GoType(nil, field)
+				goType, _ := p.GoType(nil, field, proto3Resolver)
 				// remove the star from the type
 				p.P(`m.`, fieldname, ` = &`, goType[1:], `{}`)
 			}
@@ -1144,7 +1144,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 			if oneof {
 				p.P(`v := make([]byte, postIndex-iNdEx)`)
 				p.P(`copy(v, dAtA[iNdEx:postIndex])`)
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{v}`)
 			} else if repeated {
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, make([]byte, postIndex-iNdEx))`)
 				p.P(`copy(m.`, fieldname, `[len(m.`, fieldname, `)-1], dAtA[iNdEx:postIndex])`)
@@ -1169,7 +1169,7 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 				p.P(`return err`)
 				p.Out()
 				p.P(`}`)
-				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{*v}`)
+				p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{*v}`)
 			} else if repeated {
 				p.P(`var v `, ctyp)
 				p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
@@ -1199,12 +1199,12 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		if oneof {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{v}`)
 		} else if repeated {
 			p.P(`var v `, typ)
 			p.decodeVarint("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-		} else if proto3 || !nullable {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) || !nullable {
 			p.P(`m.`, fieldname, ` = 0`)
 			p.decodeVarint("m."+fieldname, typ)
 		} else {
@@ -1217,12 +1217,12 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		if oneof {
 			p.P(`var v `, typName)
 			p.decodeVarint("v", typName)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{v}`)
 		} else if repeated {
 			p.P(`var v `, typName)
 			p.decodeVarint("v", typName)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-		} else if proto3 || !nullable {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) || !nullable {
 			p.P(`m.`, fieldname, ` = 0`)
 			p.decodeVarint("m."+fieldname, typName)
 		} else {
@@ -1234,12 +1234,12 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		if oneof {
 			p.P(`var v `, typ)
 			p.decodeFixed32("v", typ)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{v}`)
 		} else if repeated {
 			p.P(`var v `, typ)
 			p.decodeFixed32("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-		} else if proto3 || !nullable {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) || !nullable {
 			p.P(`m.`, fieldname, ` = 0`)
 			p.decodeFixed32("m."+fieldname, typ)
 		} else {
@@ -1251,12 +1251,12 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		if oneof {
 			p.P(`var v `, typ)
 			p.decodeFixed64("v", typ)
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{v}`)
 		} else if repeated {
 			p.P(`var v `, typ)
 			p.decodeFixed64("v", typ)
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-		} else if proto3 || !nullable {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) || !nullable {
 			p.P(`m.`, fieldname, ` = 0`)
 			p.decodeFixed64("m."+fieldname, typ)
 		} else {
@@ -1269,10 +1269,10 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.decodeVarint("v", typ)
 		p.P(`v = `, typ, `((uint32(v) >> 1) ^ uint32(((v&1)<<31)>>31))`)
 		if oneof {
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{v}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{v}`)
 		} else if repeated {
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, v)`)
-		} else if proto3 || !nullable {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) || !nullable {
 			p.P(`m.`, fieldname, ` = v`)
 		} else {
 			p.P(`m.`, fieldname, ` = &v`)
@@ -1282,10 +1282,10 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 		p.decodeVarint("v", "uint64")
 		p.P(`v = (v >> 1) ^ uint64((int64(v&1)<<63)>>63)`)
 		if oneof {
-			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field), `{`, typ, `(v)}`)
+			p.P(`m.`, fieldname, ` = &`, p.OneOfTypeName(msg, field, proto3Resolver), `{`, typ, `(v)}`)
 		} else if repeated {
 			p.P(`m.`, fieldname, ` = append(m.`, fieldname, `, `, typ, `(v))`)
-		} else if proto3 || !nullable {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) || !nullable {
 			p.P(`m.`, fieldname, ` = `, typ, `(v)`)
 		} else {
 			p.P(`v2 := `, typ, `(v)`)
@@ -1297,7 +1297,6 @@ func (p *unmarshal) field(file *generator.FileDescriptor, msg *generator.Descrip
 }
 
 func (p *unmarshal) Generate(file *generator.FileDescriptor) {
-	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
 	p.localName = generator.FileName(file)
@@ -1364,11 +1363,14 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 		p.P(`}`)
 		p.P(`switch fieldNum {`)
 		p.In()
+
+		proto3Resolver := proto3optional.NewResolver(gogoproto.IsProto3(file.FileDescriptorProto), message.Field)
+
 		for _, field := range message.Field {
-			fieldname := p.GetFieldName(message, field)
+			fieldname := p.GetFieldName(message, field, proto3Resolver)
 			errFieldname := fieldname
-			if field.OneofIndex != nil {
-				errFieldname = p.GetOneOfFieldName(message, field)
+			if proto3Resolver.IsRealOneOf(field) {
+				errFieldname = p.GetOneOfFieldName(message, field, proto3Resolver)
 			}
 			possiblyPacked := field.IsScalar() && field.IsRepeated()
 			p.P(`case `, strconv.Itoa(int(field.GetNumber())), `:`)
@@ -1377,7 +1379,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 			if possiblyPacked {
 				p.P(`if wireType == `, strconv.Itoa(wireType), `{`)
 				p.In()
-				p.field(file, message, field, fieldname, false)
+				p.field(file, message, field, fieldname, proto3Resolver)
 				p.Out()
 				p.P(`} else if wireType == `, strconv.Itoa(proto.WireBytes), `{`)
 				p.In()
@@ -1423,13 +1425,13 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				}
 				p.P(`if elementCount != 0 && len(m.`, fieldname, `) == 0 {`)
 				p.In()
-				p.P(`m.`, fieldname, ` = make([]`, p.noStarOrSliceType(message, field), `, 0, elementCount)`)
+				p.P(`m.`, fieldname, ` = make([]`, p.noStarOrSliceType(message, field, proto3Resolver), `, 0, elementCount)`)
 				p.Out()
 				p.P(`}`)
 
 				p.P(`for iNdEx < postIndex {`)
 				p.In()
-				p.field(file, message, field, fieldname, false)
+				p.field(file, message, field, fieldname, proto3Resolver)
 				p.Out()
 				p.P(`}`)
 				p.Out()
@@ -1444,7 +1446,7 @@ func (p *unmarshal) Generate(file *generator.FileDescriptor) {
 				p.P(`return ` + fmtPkg.Use() + `.Errorf("proto: wrong wireType = %d for field ` + errFieldname + `", wireType)`)
 				p.Out()
 				p.P(`}`)
-				p.field(file, message, field, fieldname, proto3)
+				p.field(file, message, field, fieldname, proto3Resolver)
 			}
 
 			if field.IsRequired() {

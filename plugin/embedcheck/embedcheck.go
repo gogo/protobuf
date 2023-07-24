@@ -40,8 +40,7 @@ It is enabled by the following extensions:
 
 For incorrect usage of embed with tests see:
 
-  github.com/gogo/protobuf/test/embedconflict
-
+	github.com/gogo/protobuf/test/embedconflict
 */
 package embedcheck
 
@@ -109,7 +108,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 				p.checkOverwrite(msg, os)
 			}
 		}
-		p.checkNameSpace(msg)
+		p.checkNameSpace(msg, gogoproto.IsProto3(file.FileDescriptorProto))
 		for _, field := range msg.GetField() {
 			if gogoproto.IsEmbed(field) && gogoproto.IsCustomName(field) {
 				fmt.Fprintf(os.Stderr, "ERROR: field %v with custom name %v cannot be embedded", *field.Name, gogoproto.GetCustomName(field))
@@ -126,14 +125,14 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	}
 }
 
-func (p *plugin) checkNameSpace(message *generator.Descriptor) map[string]bool {
+func (p *plugin) checkNameSpace(message *generator.Descriptor, proto3 bool) map[string]bool {
 	ccTypeName := generator.CamelCaseSlice(message.TypeName())
 	names := make(map[string]bool)
 	for _, field := range message.Field {
 		fieldname := generator.CamelCase(*field.Name)
 		if field.IsMessage() && gogoproto.IsEmbed(field) {
 			desc := p.ObjectNamed(field.GetTypeName())
-			moreNames := p.checkNameSpace(desc.(*generator.Descriptor))
+			moreNames := p.checkNameSpace(desc.(*generator.Descriptor), proto3)
 			for another := range moreNames {
 				if names[another] {
 					fmt.Fprintf(os.Stderr, "ERROR: duplicate embedded fieldname %v in type %v\n", fieldname, ccTypeName)

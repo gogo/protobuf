@@ -32,13 +32,13 @@ For instance:
 An error is caused if a oneof field:
   - is used in a face
   - is an embedded field
-
 */
 package oneofcheck
 
 import (
 	"fmt"
 	"github.com/gogo/protobuf/gogoproto"
+	"github.com/gogo/protobuf/proto3optional"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"os"
 )
@@ -61,9 +61,11 @@ func (p *plugin) Init(g *generator.Generator) {
 
 func (p *plugin) Generate(file *generator.FileDescriptor) {
 	for _, msg := range file.Messages() {
+		proto3Resolver := proto3optional.NewResolver(gogoproto.IsProto3(file.FileDescriptorProto), msg.Field)
+
 		face := gogoproto.IsFace(file.FileDescriptorProto, msg.DescriptorProto)
 		for _, field := range msg.GetField() {
-			if field.OneofIndex == nil {
+			if !proto3Resolver.IsRealOneOf(field) {
 				continue
 			}
 			if face {
@@ -74,7 +76,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be in an oneof and an embedded field\n", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
 				os.Exit(1)
 			}
-			if !gogoproto.IsNullable(field) {
+			if !gogoproto.IsNullable(field, proto3Resolver) {
 				fmt.Fprintf(os.Stderr, "ERROR: field %v.%v cannot be in an oneof and a non-nullable field\n", generator.CamelCase(*msg.Name), generator.CamelCase(*field.Name))
 				os.Exit(1)
 			}

@@ -31,6 +31,7 @@ package compare
 import (
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
+	"github.com/gogo/protobuf/proto3optional"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"github.com/gogo/protobuf/vanity"
@@ -142,12 +143,11 @@ func (p *plugin) generateMsgNullAndTypeCheck(ccTypeName string) {
 	p.P(`}`)
 }
 
-func (p *plugin) generateField(file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
-	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
-	fieldname := p.GetOneOfFieldName(message, field)
+func (p *plugin) generateField(file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto, proto3Resolver *proto3optional.Resolver) {
+	fieldname := p.GetOneOfFieldName(message, field, proto3Resolver)
 	repeated := field.IsRepeated()
 	ctype := gogoproto.IsCustomType(field)
-	nullable := gogoproto.IsNullable(field)
+	nullable := gogoproto.IsNullable(field, proto3Resolver)
 	// oneof := field.OneofIndex != nil
 	if !repeated {
 		if ctype {
@@ -190,7 +190,7 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 				p.Out()
 				p.P(`}`)
 			} else if field.IsString() {
-				if nullable && !proto3 {
+				if nullable && !proto3Resolver.IsProto3WithoutOptional(field) {
 					p.generateNullableField(fieldname)
 				} else {
 					p.P(`if this.`, fieldname, ` != that1.`, fieldname, `{`)
@@ -205,7 +205,7 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 					p.P(`}`)
 				}
 			} else if field.IsBool() {
-				if nullable && !proto3 {
+				if nullable && !proto3Resolver.IsProto3WithoutOptional(field) {
 					p.P(`if this.`, fieldname, ` != nil && that1.`, fieldname, ` != nil {`)
 					p.In()
 					p.P(`if *this.`, fieldname, ` != *that1.`, fieldname, `{`)
@@ -241,7 +241,7 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 					p.P(`}`)
 				}
 			} else {
-				if nullable && !proto3 {
+				if nullable && !proto3Resolver.IsProto3WithoutOptional(field) {
 					p.generateNullableField(fieldname)
 				} else {
 					p.P(`if this.`, fieldname, ` != that1.`, fieldname, `{`)
@@ -278,10 +278,10 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 			p.P(`}`)
 		} else {
 			if p.IsMap(field) {
-				m := p.GoMapType(nil, field)
-				valuegoTyp, _ := p.GoType(nil, m.ValueField)
-				valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField)
-				nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp)
+				m := p.GoMapType(nil, field, proto3Resolver)
+				valuegoTyp, _ := p.GoType(nil, m.ValueField, proto3Resolver)
+				valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField, proto3Resolver)
+				nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp, proto3Resolver)
 
 				mapValue := m.ValueAliasField
 				if mapValue.IsMessage() || p.IsGroup(mapValue) {
@@ -402,12 +402,15 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 	p.P(`func (this *`, ccTypeName, `) Compare(that interface{}) int {`)
 	p.In()
 	p.generateMsgNullAndTypeCheck(ccTypeName)
+
+	proto3Resolver := proto3optional.NewResolver(gogoproto.IsProto3(file.FileDescriptorProto), message.Field)
+
 	oneofs := make(map[string]struct{})
 
 	for _, field := range message.Field {
-		oneof := field.OneofIndex != nil
+		oneof := proto3Resolver.IsRealOneOf(field)
 		if oneof {
-			fieldname := p.GetFieldName(message, field)
+			fieldname := p.GetFieldName(message, field, proto3Resolver)
 			if _, ok := oneofs[fieldname]; ok {
 				continue
 			} else {
@@ -435,7 +438,7 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 			p.P(`switch this.`, fieldname, `.(type) {`)
 			for i, subfield := range message.Field {
 				if *subfield.OneofIndex == *field.OneofIndex {
-					ccTypeName := p.OneOfTypeName(message, subfield)
+					ccTypeName := p.OneOfTypeName(message, subfield, proto3Resolver)
 					p.P(`case *`, ccTypeName, `:`)
 					p.In()
 					p.P(`thisType = `, i)
@@ -452,7 +455,7 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 			p.P(`switch that1.`, fieldname, `.(type) {`)
 			for i, subfield := range message.Field {
 				if *subfield.OneofIndex == *field.OneofIndex {
-					ccTypeName := p.OneOfTypeName(message, subfield)
+					ccTypeName := p.OneOfTypeName(message, subfield, proto3Resolver)
 					p.P(`case *`, ccTypeName, `:`)
 					p.In()
 					p.P(`that1Type = `, i)
@@ -485,7 +488,7 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 			p.Out()
 			p.P(`}`)
 		} else {
-			p.generateField(file, message, field)
+			p.generateField(file, message, field, proto3Resolver)
 		}
 	}
 	if message.DescriptorProto.HasExtension() {
@@ -557,17 +560,17 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 	//Generate Compare methods for oneof fields
 	m := proto.Clone(message.DescriptorProto).(*descriptor.DescriptorProto)
 	for _, field := range m.Field {
-		oneof := field.OneofIndex != nil
+		oneof := proto3Resolver.IsRealOneOf(field)
 		if !oneof {
 			continue
 		}
-		ccTypeName := p.OneOfTypeName(message, field)
+		ccTypeName := p.OneOfTypeName(message, field, proto3Resolver)
 		p.P(`func (this *`, ccTypeName, `) Compare(that interface{}) int {`)
 		p.In()
 
 		p.generateMsgNullAndTypeCheck(ccTypeName)
 		vanity.TurnOffNullableForNativeTypes(field)
-		p.generateField(file, message, field)
+		p.generateField(file, message, field, proto3Resolver)
 
 		p.P(`return 0`)
 		p.Out()
