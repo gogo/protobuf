@@ -37,40 +37,40 @@ It is enabled by the following extensions:
 
 Let us look at:
 
-  github.com/gogo/protobuf/test/example/example.proto
+	github.com/gogo/protobuf/test/example/example.proto
 
 Btw all the output can be seen at:
 
-  github.com/gogo/protobuf/test/example/*
+	github.com/gogo/protobuf/test/example/*
 
 The following message:
 
-  option (gogoproto.populate_all) = true;
+	  option (gogoproto.populate_all) = true;
 
-  message B {
-	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
-	repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
-  }
+	  message B {
+		optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
+		repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
+	  }
 
 given to the populate plugin, will generate code the following code:
 
-  func NewPopulatedB(r randyExample, easy bool) *B {
-	this := &B{}
-	v2 := NewPopulatedA(r, easy)
-	this.A = *v2
-	if r.Intn(10) != 0 {
-		v3 := r.Intn(10)
-		this.G = make([]github_com_gogo_protobuf_test_custom.Uint128, v3)
-		for i := 0; i < v3; i++ {
-			v4 := github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
-			this.G[i] = *v4
+	  func NewPopulatedB(r randyExample, easy bool) *B {
+		this := &B{}
+		v2 := NewPopulatedA(r, easy)
+		this.A = *v2
+		if r.Intn(10) != 0 {
+			v3 := r.Intn(10)
+			this.G = make([]github_com_gogo_protobuf_test_custom.Uint128, v3)
+			for i := 0; i < v3; i++ {
+				v4 := github_com_gogo_protobuf_test_custom.NewPopulatedUint128(r)
+				this.G[i] = *v4
+			}
 		}
-	}
-	if !easy && r.Intn(10) != 0 {
-		this.XXX_unrecognized = randUnrecognizedExample(r, 3)
-	}
-	return this
-  }
+		if !easy && r.Intn(10) != 0 {
+			this.XXX_unrecognized = randUnrecognizedExample(r, 3)
+		}
+		return this
+	  }
 
 The idea that is useful for testing.
 Most of the other plugins' generated test code uses it.
@@ -79,7 +79,6 @@ if you turn off the popluate plugin and write your own custom NewPopulated funct
 
 If the easy flag is not set the XXX_unrecognized and XXX_extensions fields are also populated.
 These have caused problems with JSON marshalling and unmarshalling tests.
-
 */
 package populate
 
@@ -91,6 +90,7 @@ import (
 
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
+	"github.com/gogo/protobuf/proto3optional"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"github.com/gogo/protobuf/vanity"
@@ -243,25 +243,24 @@ func (p *plugin) getEnumVal(field *descriptor.FieldDescriptorProto, goTyp string
 	return val
 }
 
-func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
-	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
-	goTyp, _ := p.GoType(message, field)
-	fieldname := p.GetOneOfFieldName(message, field)
+func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto, proto3Resolver *proto3optional.Resolver) {
+	goTyp, _ := p.GoType(message, field, proto3Resolver)
+	fieldname := p.GetOneOfFieldName(message, field, proto3Resolver)
 	goTypName := generator.GoTypeToName(goTyp)
 	if p.IsMap(field) {
-		m := p.GoMapType(nil, field)
-		keygoTyp, _ := p.GoType(nil, m.KeyField)
+		m := p.GoMapType(nil, field, proto3Resolver)
+		keygoTyp, _ := p.GoType(nil, m.KeyField, proto3Resolver)
 		keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
-		keygoAliasTyp, _ := p.GoType(nil, m.KeyAliasField)
+		keygoAliasTyp, _ := p.GoType(nil, m.KeyAliasField, proto3Resolver)
 		keygoAliasTyp = strings.Replace(keygoAliasTyp, "*", "", 1)
 
-		valuegoTyp, _ := p.GoType(nil, m.ValueField)
-		valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField)
+		valuegoTyp, _ := p.GoType(nil, m.ValueField, proto3Resolver)
+		valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField, proto3Resolver)
 		keytypName := generator.GoTypeToName(keygoTyp)
 		keygoAliasTyp = generator.GoTypeToName(keygoAliasTyp)
 		valuetypAliasName := generator.GoTypeToName(valuegoAliasTyp)
 
-		nullable, valuegoTyp, valuegoAliasTyp := generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp)
+		nullable, valuegoTyp, valuegoAliasTyp := generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp, proto3Resolver)
 
 		p.P(p.varGen.Next(), ` := r.Intn(10)`)
 		p.P(`this.`, fieldname, ` = make(`, m.GoType, `)`)
@@ -335,7 +334,7 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 			p.P(`this.`, fieldname, `[i] = *`, p.varGen.Current())
 			p.Out()
 			p.P(`}`)
-		} else if gogoproto.IsNullable(field) {
+		} else if gogoproto.IsNullable(field, proto3Resolver) {
 			p.P(`this.`, fieldname, ` = `, funcCall)
 		} else {
 			p.P(p.varGen.Next(), `:= `, funcCall)
@@ -348,7 +347,7 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 			p.P(`this.`, fieldname, ` = make(`, goTyp, `, `, p.varGen.Current(), `)`)
 			p.P(`for i := 0; i < `, p.varGen.Current(), `; i++ {`)
 			p.In()
-			if gogoproto.IsNullable(field) {
+			if gogoproto.IsNullable(field, proto3Resolver) {
 				p.P(`this.`, fieldname, `[i] = `, funcCall)
 			} else {
 				p.P(p.varGen.Next(), `:= `, funcCall)
@@ -357,7 +356,7 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 			p.Out()
 			p.P(`}`)
 		} else {
-			if gogoproto.IsNullable(field) {
+			if gogoproto.IsNullable(field, proto3Resolver) {
 				p.P(`this.`, fieldname, ` = `, funcCall)
 			} else {
 				p.P(p.varGen.Next(), `:= `, funcCall)
@@ -375,7 +374,7 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 				p.P(`this.`, fieldname, `[i] = `, val)
 				p.Out()
 				p.P(`}`)
-			} else if !gogoproto.IsNullable(field) || proto3 {
+			} else if !gogoproto.IsNullable(field, proto3Resolver) || proto3Resolver.IsProto3WithoutOptional(field) {
 				p.P(`this.`, fieldname, ` = `, val)
 			} else {
 				p.P(p.varGen.Next(), ` := `, val)
@@ -416,7 +415,7 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 				p.P(`this.`, fieldname, `[i] = `, val)
 				p.Out()
 				p.P(`}`)
-			} else if !gogoproto.IsNullable(field) || proto3 {
+			} else if !gogoproto.IsNullable(field, proto3Resolver) || proto3Resolver.IsProto3WithoutOptional(field) {
 				p.P(`this.`, fieldname, ` = `, val)
 			} else {
 				p.P(p.varGen.Next(), `:= `, val)
@@ -439,7 +438,7 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 				}
 				p.Out()
 				p.P(`}`)
-			} else if !gogoproto.IsNullable(field) || proto3 {
+			} else if !gogoproto.IsNullable(field, proto3Resolver) || proto3Resolver.IsProto3WithoutOptional(field) {
 				p.P(`this.`, fieldname, ` = `, value(typName, field.GetType()))
 				if negative(field.GetType()) {
 					p.P(`if r.Intn(2) == 0 {`)
@@ -463,11 +462,11 @@ func (p *plugin) GenerateField(file *generator.FileDescriptor, message *generato
 	}
 }
 
-func (p *plugin) hasLoop(pkg string, field *descriptor.FieldDescriptorProto, visited []*generator.Descriptor, excludes []*generator.Descriptor) *generator.Descriptor {
+func (p *plugin) hasLoop(pkg string, field *descriptor.FieldDescriptorProto, visited []*generator.Descriptor, excludes []*generator.Descriptor, proto3Resolver *proto3optional.Resolver) *generator.Descriptor {
 	if field.IsMessage() || p.IsGroup(field) || p.IsMap(field) {
 		var fieldMessage *generator.Descriptor
 		if p.IsMap(field) {
-			m := p.GoMapType(nil, field)
+			m := p.GoMapType(nil, field, proto3Resolver)
 			if !m.ValueField.IsMessage() {
 				return nil
 			}
@@ -491,7 +490,7 @@ func (p *plugin) hasLoop(pkg string, field *descriptor.FieldDescriptorProto, vis
 		for _, f := range fieldMessage.Field {
 			if strings.HasPrefix(f.GetTypeName(), "."+pkg) {
 				visited = append(visited, fieldMessage)
-				loopTo := p.hasLoop(pkg, f, visited, excludes)
+				loopTo := p.hasLoop(pkg, f, visited, excludes, proto3Resolver)
 				if loopTo != nil {
 					return loopTo
 				}
@@ -501,13 +500,13 @@ func (p *plugin) hasLoop(pkg string, field *descriptor.FieldDescriptorProto, vis
 	return nil
 }
 
-func (p *plugin) loops(pkg string, field *descriptor.FieldDescriptorProto, message *generator.Descriptor) int {
+func (p *plugin) loops(pkg string, field *descriptor.FieldDescriptorProto, message *generator.Descriptor, proto3Resolver *proto3optional.Resolver) int {
 	//fmt.Fprintf(os.Stderr, "loops %v %v\n", field.GetTypeName(), generator.CamelCaseSlice(message.TypeName()))
 	excludes := []*generator.Descriptor{}
 	loops := 0
 	for {
 		visited := []*generator.Descriptor{}
-		loopTo := p.hasLoop(pkg, field, visited, excludes)
+		loopTo := p.hasLoop(pkg, field, visited, excludes, proto3Resolver)
 		if loopTo == nil {
 			break
 		}
@@ -522,7 +521,6 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 	p.atleastOne = false
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.varGen = NewVarGen()
-	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	p.typesPkg = p.NewImport("github.com/gogo/protobuf/types")
 	p.localName = generator.FileName(file)
 	protoPkg := p.NewImport("github.com/gogo/protobuf/proto")
@@ -541,8 +539,11 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		ccTypeName := generator.CamelCaseSlice(message.TypeName())
 		loopLevels := make([]int, len(message.Field))
 		maxLoopLevel := 0
+
+		proto3Resolver := proto3optional.NewResolver(gogoproto.IsProto3(file.FileDescriptorProto), message.Field)
+
 		for i, field := range message.Field {
-			loopLevels[i] = p.loops(file.GetPackage(), field, message)
+			loopLevels[i] = p.loops(file.GetPackage(), field, message, proto3Resolver)
 			if loopLevels[i] > maxLoopLevel {
 				maxLoopLevel = loopLevels[i]
 			}
@@ -567,7 +568,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 				k += ran
 				p.P(`case `, strings.Join(is, ","), `:`)
 				p.In()
-				p.GenerateField(file, message, field)
+				p.GenerateField(file, message, field, proto3Resolver)
 				p.Out()
 			}
 			p.P(`}`)
@@ -578,10 +579,10 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 				if field.GetNumber() > maxFieldNumber {
 					maxFieldNumber = field.GetNumber()
 				}
-				oneof := field.OneofIndex != nil
+				oneof := proto3Resolver.IsRealOneOf(field)
 				if !oneof {
-					if field.IsRequired() || (!gogoproto.IsNullable(field) && !field.IsRepeated()) || (proto3 && !field.IsMessage()) {
-						p.GenerateField(file, message, field)
+					if field.IsRequired() || (!gogoproto.IsNullable(field, proto3Resolver) && !field.IsRepeated()) || (proto3Resolver.IsProto3WithoutOptional(field) && !field.IsMessage()) {
+						p.GenerateField(file, message, field, proto3Resolver)
 					} else {
 						if loopLevels[fieldIndex] > 0 {
 							p.P(`if r.Intn(5) == 0 {`)
@@ -589,12 +590,12 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 							p.P(`if r.Intn(5) != 0 {`)
 						}
 						p.In()
-						p.GenerateField(file, message, field)
+						p.GenerateField(file, message, field, proto3Resolver)
 						p.Out()
 						p.P(`}`)
 					}
 				} else {
-					fieldname := p.GetFieldName(message, field)
+					fieldname := p.GetFieldName(message, field, proto3Resolver)
 					if _, ok := oneofs[fieldname]; ok {
 						continue
 					} else {
@@ -602,7 +603,7 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 					}
 					fieldNumbers := []int32{}
 					for _, f := range message.Field {
-						fname := p.GetFieldName(message, f)
+						fname := p.GetFieldName(message, f, proto3Resolver)
 						if fname == fieldname {
 							fieldNumbers = append(fieldNumbers, f.GetNumber())
 						}
@@ -611,13 +612,13 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 					p.P(`oneofNumber_`, fieldname, ` := `, fmt.Sprintf("%#v", fieldNumbers), `[r.Intn(`, strconv.Itoa(len(fieldNumbers)), `)]`)
 					p.P(`switch oneofNumber_`, fieldname, ` {`)
 					for _, f := range message.Field {
-						fname := p.GetFieldName(message, f)
+						fname := p.GetFieldName(message, f, proto3Resolver)
 						if fname != fieldname {
 							continue
 						}
 						p.P(`case `, strconv.Itoa(int(f.GetNumber())), `:`)
 						p.In()
-						ccTypeName := p.OneOfTypeName(message, f)
+						ccTypeName := p.OneOfTypeName(message, f, proto3Resolver)
 						p.P(`this.`, fname, ` = NewPopulated`, ccTypeName, `(r, easy)`)
 						p.Out()
 					}
@@ -679,16 +680,16 @@ func (p *plugin) Generate(file *generator.FileDescriptor) {
 		//Generate NewPopulated functions for oneof fields
 		m := proto.Clone(message.DescriptorProto).(*descriptor.DescriptorProto)
 		for _, f := range m.Field {
-			oneof := f.OneofIndex != nil
+			oneof := proto3Resolver.IsRealOneOf(f)
 			if !oneof {
 				continue
 			}
-			ccTypeName := p.OneOfTypeName(message, f)
+			ccTypeName := p.OneOfTypeName(message, f, proto3Resolver)
 			p.P(`func NewPopulated`, ccTypeName, `(r randy`, p.localName, `, easy bool) *`, ccTypeName, ` {`)
 			p.In()
 			p.P(`this := &`, ccTypeName, `{}`)
 			vanity.TurnOffNullableForNativeTypes(f)
-			p.GenerateField(file, message, f)
+			p.GenerateField(file, message, f, proto3Resolver)
 			p.P(`return this`)
 			p.Out()
 			p.P(`}`)

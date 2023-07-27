@@ -50,43 +50,43 @@ And a benchmark given it is enabled using one of the following extensions:
 
 Let us look at:
 
-  github.com/gogo/protobuf/test/example/example.proto
+	github.com/gogo/protobuf/test/example/example.proto
 
 Btw all the output can be seen at:
 
-  github.com/gogo/protobuf/test/example/*
+	github.com/gogo/protobuf/test/example/*
 
 The following message:
 
-  option (gogoproto.sizer_all) = true;
+	  option (gogoproto.sizer_all) = true;
 
-  message B {
-	option (gogoproto.description) = true;
-	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
-	repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
-  }
+	  message B {
+		option (gogoproto.description) = true;
+		optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
+		repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
+	  }
 
 given to the size plugin, will generate the following code:
 
-  func (m *B) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = m.A.Size()
-	n += 1 + l + sovExample(uint64(l))
-	if len(m.G) > 0 {
-		for _, e := range m.G {
-			l = e.Size()
-			n += 1 + l + sovExample(uint64(l))
+	  func (m *B) Size() (n int) {
+		if m == nil {
+			return 0
 		}
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-  }
+		var l int
+		_ = l
+		l = m.A.Size()
+		n += 1 + l + sovExample(uint64(l))
+		if len(m.G) > 0 {
+			for _, e := range m.G {
+				l = e.Size()
+				n += 1 + l + sovExample(uint64(l))
+			}
+		}
+		if m.XXX_unrecognized != nil {
+			n += len(m.XXX_unrecognized)
+		}
+		return n
+	  }
 
 and the following test code:
 
@@ -118,7 +118,6 @@ and the following test code:
 	}
 
 The sovExample function is a size of varint function for the example.pb.go file.
-
 */
 package size
 
@@ -130,6 +129,7 @@ import (
 
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
+	"github.com/gogo/protobuf/proto3optional"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"github.com/gogo/protobuf/vanity"
@@ -199,9 +199,9 @@ func (p *size) sizeZigZag() {
 	}`)
 }
 
-func (p *size) std(field *descriptor.FieldDescriptorProto, name string) (string, bool) {
+func (p *size) std(field *descriptor.FieldDescriptorProto, name string, proto3Resolver *proto3optional.Resolver) (string, bool) {
 	ptr := ""
-	if gogoproto.IsNullable(field) {
+	if gogoproto.IsNullable(field, proto3Resolver) {
 		ptr = "*"
 	}
 	if gogoproto.IsStdTime(field) {
@@ -230,11 +230,11 @@ func (p *size) std(field *descriptor.FieldDescriptorProto, name string) (string,
 	return "", false
 }
 
-func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto, sizeName string) {
-	fieldname := p.GetOneOfFieldName(message, field)
-	nullable := gogoproto.IsNullable(field)
+func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto, sizeName string, proto3Resolver *proto3optional.Resolver) {
+	fieldname := p.GetOneOfFieldName(message, field, proto3Resolver)
+	nullable := gogoproto.IsNullable(field, proto3Resolver)
 	repeated := field.IsRepeated()
-	doNilCheck := gogoproto.NeedsNilCheck(proto3, field)
+	doNilCheck := gogoproto.NeedsNilCheck(field, proto3Resolver)
 	if repeated {
 		p.P(`if len(m.`, fieldname, `) > 0 {`)
 		p.In()
@@ -243,7 +243,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 		p.In()
 	}
 	packed := field.IsPacked() || (proto3 && field.IsPacked3())
-	_, wire := p.GoType(message, field)
+	_, wire := p.GoType(message, field, proto3Resolver)
 	wireType := wireToType(wire)
 	fieldNumber := field.GetNumber()
 	if packed {
@@ -258,7 +258,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 			p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(len(m.`, fieldname, `)*8))`, `+len(m.`, fieldname, `)*8`)
 		} else if repeated {
 			p.P(`n+=`, strconv.Itoa(key+8), `*len(m.`, fieldname, `)`)
-		} else if proto3 {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) {
 			p.P(`if m.`, fieldname, ` != 0 {`)
 			p.In()
 			p.P(`n+=`, strconv.Itoa(key+8))
@@ -276,7 +276,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 			p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(len(m.`, fieldname, `)*4))`, `+len(m.`, fieldname, `)*4`)
 		} else if repeated {
 			p.P(`n+=`, strconv.Itoa(key+4), `*len(m.`, fieldname, `)`)
-		} else if proto3 {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) {
 			p.P(`if m.`, fieldname, ` != 0 {`)
 			p.In()
 			p.P(`n+=`, strconv.Itoa(key+4))
@@ -306,7 +306,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 			p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(e))`)
 			p.Out()
 			p.P(`}`)
-		} else if proto3 {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) {
 			p.P(`if m.`, fieldname, ` != 0 {`)
 			p.In()
 			p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(m.`, fieldname, `))`)
@@ -322,7 +322,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 			p.P(`n+=`, strconv.Itoa(key), `+sov`, p.localName, `(uint64(len(m.`, fieldname, `)))`, `+len(m.`, fieldname, `)*1`)
 		} else if repeated {
 			p.P(`n+=`, strconv.Itoa(key+1), `*len(m.`, fieldname, `)`)
-		} else if proto3 {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) {
 			p.P(`if m.`, fieldname, ` {`)
 			p.In()
 			p.P(`n+=`, strconv.Itoa(key+1))
@@ -341,7 +341,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 			p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 			p.Out()
 			p.P(`}`)
-		} else if proto3 {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) {
 			p.P(`l=len(m.`, fieldname, `)`)
 			p.P(`if l > 0 {`)
 			p.In()
@@ -359,13 +359,13 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 		panic(fmt.Errorf("size does not support group %v", fieldname))
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		if p.IsMap(field) {
-			m := p.GoMapType(nil, field)
-			_, keywire := p.GoType(nil, m.KeyAliasField)
-			valuegoTyp, _ := p.GoType(nil, m.ValueField)
-			valuegoAliasTyp, valuewire := p.GoType(nil, m.ValueAliasField)
-			_, fieldwire := p.GoType(nil, field)
+			m := p.GoMapType(nil, field, proto3Resolver)
+			_, keywire := p.GoType(nil, m.KeyAliasField, proto3Resolver)
+			valuegoTyp, _ := p.GoType(nil, m.ValueField, proto3Resolver)
+			valuegoAliasTyp, valuewire := p.GoType(nil, m.ValueAliasField, proto3Resolver)
+			_, fieldwire := p.GoType(nil, field, proto3Resolver)
 
-			nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp)
+			nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp, proto3Resolver)
 
 			fieldKeySize := keySize(field.GetNumber(), wireToType(fieldwire))
 			keyKeySize := keySize(1, wireToType(keywire))
@@ -439,7 +439,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 					sum = append(sum, `l`)
 				} else {
 					p.P(`l = 0`)
-					if proto3 {
+					if proto3Resolver.IsProto3WithoutOptional(field) {
 						p.P(`if len(v) > 0 {`)
 					} else {
 						p.P(`if v != nil {`)
@@ -455,7 +455,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 				sum = append(sum, strconv.Itoa(valueKeySize))
 				sum = append(sum, `soz`+p.localName+`(uint64(v))`)
 			case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
-				stdSizeCall, stdOk := p.std(m.ValueAliasField, "v")
+				stdSizeCall, stdOk := p.std(m.ValueAliasField, "v", proto3Resolver)
 				if nullable {
 					p.P(`l = 0`)
 					p.P(`if v != nil {`)
@@ -490,7 +490,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 		} else if repeated {
 			p.P(`for _, e := range m.`, fieldname, ` { `)
 			p.In()
-			stdSizeCall, stdOk := p.std(field, "e")
+			stdSizeCall, stdOk := p.std(field, "e", proto3Resolver)
 			if stdOk {
 				p.P(`l=`, stdSizeCall)
 			} else {
@@ -500,7 +500,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 			p.Out()
 			p.P(`}`)
 		} else {
-			stdSizeCall, stdOk := p.std(field, "m."+fieldname)
+			stdSizeCall, stdOk := p.std(field, "m."+fieldname, proto3Resolver)
 			if stdOk {
 				p.P(`l=`, stdSizeCall)
 			} else {
@@ -517,7 +517,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 				p.P(`n+=`, strconv.Itoa(key), `+l+sov`, p.localName, `(uint64(l))`)
 				p.Out()
 				p.P(`}`)
-			} else if proto3 {
+			} else if proto3Resolver.IsProto3WithoutOptional(field) {
 				p.P(`l=len(m.`, fieldname, `)`)
 				p.P(`if l > 0 {`)
 				p.In()
@@ -557,7 +557,7 @@ func (p *size) generateField(proto3 bool, file *generator.FileDescriptor, messag
 			p.P(`n+=`, strconv.Itoa(key), `+soz`, p.localName, `(uint64(e))`)
 			p.Out()
 			p.P(`}`)
-		} else if proto3 {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) {
 			p.P(`if m.`, fieldname, ` != 0 {`)
 			p.In()
 			p.P(`n+=`, strconv.Itoa(key), `+soz`, p.localName, `(uint64(m.`, fieldname, `))`)
@@ -614,14 +614,17 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 		p.P(`}`)
 		p.P(`var l int`)
 		p.P(`_ = l`)
+
+		proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
+		proto3Resolver := proto3optional.NewResolver(proto3, message.Field)
+
 		oneofs := make(map[string]struct{})
 		for _, field := range message.Field {
-			oneof := field.OneofIndex != nil
+			oneof := proto3Resolver.IsRealOneOf(field)
 			if !oneof {
-				proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
-				p.generateField(proto3, file, message, field, sizeName)
+				p.generateField(proto3, file, message, field, sizeName, proto3Resolver)
 			} else {
-				fieldname := p.GetFieldName(message, field)
+				fieldname := p.GetFieldName(message, field, proto3Resolver)
 				if _, ok := oneofs[fieldname]; ok {
 					continue
 				} else {
@@ -660,11 +663,11 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 		//Generate Size methods for oneof fields
 		m := proto.Clone(message.DescriptorProto).(*descriptor.DescriptorProto)
 		for _, f := range m.Field {
-			oneof := f.OneofIndex != nil
+			oneof := proto3Resolver.IsRealOneOf(f)
 			if !oneof {
 				continue
 			}
-			ccTypeName := p.OneOfTypeName(message, f)
+			ccTypeName := p.OneOfTypeName(message, f, proto3Resolver)
 			p.P(`func (m *`, ccTypeName, `) `, sizeName, `() (n int) {`)
 			p.In()
 			p.P(`if m == nil {`)
@@ -675,7 +678,7 @@ func (p *size) Generate(file *generator.FileDescriptor) {
 			p.P(`var l int`)
 			p.P(`_ = l`)
 			vanity.TurnOffNullableForNativeTypes(f)
-			p.generateField(false, file, message, f, sizeName)
+			p.generateField(false, file, message, f, sizeName, proto3Resolver)
 			p.P(`return n`)
 			p.Out()
 			p.P(`}`)

@@ -50,21 +50,21 @@ The equal plugin also generates a test given it is enabled using one of the foll
 
 Let us look at:
 
-  github.com/gogo/protobuf/test/example/example.proto
+	github.com/gogo/protobuf/test/example/example.proto
 
 Btw all the output can be seen at:
 
-  github.com/gogo/protobuf/test/example/*
+	github.com/gogo/protobuf/test/example/*
 
 The following message:
 
-  option (gogoproto.equal_all) = true;
-  option (gogoproto.verbose_equal_all) = true;
+	  option (gogoproto.equal_all) = true;
+	  option (gogoproto.verbose_equal_all) = true;
 
-  message B {
-	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
-	repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
-  }
+	  message B {
+		optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
+		repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
+	  }
 
 given to the equal plugin, will generate the following code:
 
@@ -152,13 +152,13 @@ and the following test code:
 		if err := p.VerboseEqual(msg); err != nil {
 			t.Fatalf("%#v !VerboseEqual %#v, since %v", msg, p, err)
 	}
-
 */
 package equal
 
 import (
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
+	"github.com/gogo/protobuf/proto3optional"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"github.com/gogo/protobuf/vanity"
@@ -286,12 +286,12 @@ func (p *plugin) generateMsgNullAndTypeCheck(ccTypeName string, verbose bool) {
 	p.P(`}`)
 }
 
-func (p *plugin) generateField(file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto, verbose bool) {
-	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
-	fieldname := p.GetOneOfFieldName(message, field)
+func (p *plugin) generateField(file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto, verbose bool, proto3Resolver *proto3optional.Resolver) {
+	fieldname := p.GetOneOfFieldName(message, field, proto3Resolver)
 	repeated := field.IsRepeated()
 	ctype := gogoproto.IsCustomType(field)
-	nullable := gogoproto.IsNullable(field)
+	nullable := gogoproto.IsNullable(field, proto3Resolver)
+
 	isNormal := (gogoproto.IsStdDuration(field) ||
 		gogoproto.IsStdDouble(field) ||
 		gogoproto.IsStdFloat(field) ||
@@ -381,13 +381,13 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 			} else if field.IsBytes() {
 				p.P(`if !`, p.bytesPkg.Use(), `.Equal(this.`, fieldname, `, that1.`, fieldname, `) {`)
 			} else if field.IsString() {
-				if nullable && !proto3 {
+				if nullable && !proto3Resolver.IsProto3WithoutOptional(field) {
 					p.generateNullableField(fieldname, verbose)
 				} else {
 					p.P(`if this.`, fieldname, ` != that1.`, fieldname, `{`)
 				}
 			} else {
-				if nullable && !proto3 {
+				if nullable && !proto3Resolver.IsProto3WithoutOptional(field) {
 					p.generateNullableField(fieldname, verbose)
 				} else {
 					p.P(`if this.`, fieldname, ` != that1.`, fieldname, `{`)
@@ -436,10 +436,10 @@ func (p *plugin) generateField(file *generator.FileDescriptor, message *generato
 			}
 		} else {
 			if p.IsMap(field) {
-				m := p.GoMapType(nil, field)
-				valuegoTyp, _ := p.GoType(nil, m.ValueField)
-				valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField)
-				nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp)
+				m := p.GoMapType(nil, field, proto3Resolver)
+				valuegoTyp, _ := p.GoType(nil, m.ValueField, proto3Resolver)
+				valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField, proto3Resolver)
+				nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp, proto3Resolver)
 
 				mapValue := m.ValueAliasField
 				mapValueNormal := (gogoproto.IsStdDuration(mapValue) ||
@@ -537,10 +537,13 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 	p.generateMsgNullAndTypeCheck(ccTypeName, verbose)
 	oneofs := make(map[string]struct{})
 
+	proto3Resolver := proto3optional.NewResolver(gogoproto.IsProto3(file.FileDescriptorProto), message.Field)
+
 	for _, field := range message.Field {
-		oneof := field.OneofIndex != nil
+		oneof := proto3Resolver.IsRealOneOf(field)
+
 		if oneof {
-			fieldname := p.GetFieldName(message, field)
+			fieldname := p.GetFieldName(message, field, proto3Resolver)
 			if _, ok := oneofs[fieldname]; ok {
 				continue
 			} else {
@@ -580,7 +583,7 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 			p.Out()
 			p.P(`}`)
 		} else {
-			p.generateField(file, message, field, verbose)
+			p.generateField(file, message, field, verbose, proto3Resolver)
 		}
 	}
 	if message.DescriptorProto.HasExtension() {
@@ -663,11 +666,11 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 	//Generate Equal methods for oneof fields
 	m := proto.Clone(message.DescriptorProto).(*descriptor.DescriptorProto)
 	for _, field := range m.Field {
-		oneof := field.OneofIndex != nil
+		oneof := proto3Resolver.IsRealOneOf(field)
 		if !oneof {
 			continue
 		}
-		ccTypeName := p.OneOfTypeName(message, field)
+		ccTypeName := p.OneOfTypeName(message, field, proto3Resolver)
 		if verbose {
 			p.P(`func (this *`, ccTypeName, `) VerboseEqual(that interface{}) error {`)
 		} else {
@@ -677,7 +680,7 @@ func (p *plugin) generateMessage(file *generator.FileDescriptor, message *genera
 
 		p.generateMsgNullAndTypeCheck(ccTypeName, verbose)
 		vanity.TurnOffNullableForNativeTypes(field)
-		p.generateField(file, message, field, verbose)
+		p.generateField(file, message, field, verbose, proto3Resolver)
 
 		if verbose {
 			p.P(`return nil`)

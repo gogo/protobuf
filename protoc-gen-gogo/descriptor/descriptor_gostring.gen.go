@@ -183,7 +183,7 @@ func (this *FieldDescriptorProto) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 14)
+	s := make([]string, 0, 15)
 	s = append(s, "&descriptor.FieldDescriptorProto{")
 	if this.Name != nil {
 		s = append(s, "Name: "+valueToGoStringDescriptor(this.Name, "string")+",\n")
@@ -214,6 +214,9 @@ func (this *FieldDescriptorProto) GoString() string {
 	}
 	if this.Options != nil {
 		s = append(s, "Options: "+fmt.Sprintf("%#v", this.Options)+",\n")
+	}
+	if this.Proto3Optional != nil {
+		s = append(s, "Proto3Optional: "+valueToGoStringDescriptor(this.Proto3Optional, "bool")+",\n")
 	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")

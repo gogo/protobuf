@@ -28,15 +28,18 @@
 
 package gogoproto
 
-import google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-import proto "github.com/gogo/protobuf/proto"
+import (
+	proto "github.com/gogo/protobuf/proto"
+	"github.com/gogo/protobuf/proto3optional"
+	google_protobuf "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+)
 
 func IsEmbed(field *google_protobuf.FieldDescriptorProto) bool {
 	return proto.GetBoolExtension(field.Options, E_Embed, false)
 }
 
-func IsNullable(field *google_protobuf.FieldDescriptorProto) bool {
-	return proto.GetBoolExtension(field.Options, E_Nullable, true)
+func IsNullable(field *google_protobuf.FieldDescriptorProto, proto3Resolver *proto3optional.Resolver) bool {
+	return proto.GetBoolExtension(field.Options, E_Nullable, true) || proto3Resolver.IsFakeOneOf(field)
 }
 
 func IsStdTime(field *google_protobuf.FieldDescriptorProto) bool {
@@ -96,12 +99,12 @@ func IsWktPtr(field *google_protobuf.FieldDescriptorProto) bool {
 	return proto.GetBoolExtension(field.Options, E_Wktpointer, false)
 }
 
-func NeedsNilCheck(proto3 bool, field *google_protobuf.FieldDescriptorProto) bool {
-	nullable := IsNullable(field)
+func NeedsNilCheck(field *google_protobuf.FieldDescriptorProto, proto3Resolver *proto3optional.Resolver) bool {
+	nullable := IsNullable(field, proto3Resolver)
 	if field.IsMessage() || IsCustomType(field) {
 		return nullable
 	}
-	if proto3 {
+	if proto3Resolver.IsProto3WithoutOptional(field) {
 		return false
 	}
 	return nullable || *field.Type == google_protobuf.FieldDescriptorProto_TYPE_BYTES

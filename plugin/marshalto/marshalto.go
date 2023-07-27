@@ -57,74 +57,74 @@ And benchmarks given it is enabled using one of the following extensions:
 
 Let us look at:
 
-  github.com/gogo/protobuf/test/example/example.proto
+	github.com/gogo/protobuf/test/example/example.proto
 
 Btw all the output can be seen at:
 
-  github.com/gogo/protobuf/test/example/*
+	github.com/gogo/protobuf/test/example/*
 
 The following message:
 
 option (gogoproto.marshaler_all) = true;
 
-message B {
-	option (gogoproto.description) = true;
-	optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
-	repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
-}
+	message B {
+		option (gogoproto.description) = true;
+		optional A A = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
+		repeated bytes G = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uint128", (gogoproto.nullable) = false];
+	}
 
 given to the marshalto plugin, will generate the following code:
 
-  func (m *B) Marshal() (dAtA []byte, err error) {
-          size := m.Size()
-          dAtA = make([]byte, size)
-          n, err := m.MarshalToSizedBuffer(dAtA[:size])
-          if err != nil {
-                  return nil, err
-          }
-          return dAtA[:n], nil
-  }
+	func (m *B) Marshal() (dAtA []byte, err error) {
+	        size := m.Size()
+	        dAtA = make([]byte, size)
+	        n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	        if err != nil {
+	                return nil, err
+	        }
+	        return dAtA[:n], nil
+	}
 
-  func (m *B) MarshalTo(dAtA []byte) (int, error) {
-          size := m.Size()
-          return m.MarshalToSizedBuffer(dAtA[:size])
-  }
+	func (m *B) MarshalTo(dAtA []byte) (int, error) {
+	        size := m.Size()
+	        return m.MarshalToSizedBuffer(dAtA[:size])
+	}
 
-  func (m *B) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-          i := len(dAtA)
-          _ = i
-          var l int
-          _ = l
-          if m.XXX_unrecognized != nil {
-                  i -= len(m.XXX_unrecognized)
-                  copy(dAtA[i:], m.XXX_unrecognized)
-          }
-          if len(m.G) > 0 {
-                  for iNdEx := len(m.G) - 1; iNdEx >= 0; iNdEx-- {
-                          {
-                                  size := m.G[iNdEx].Size()
-                                  i -= size
-                                  if _, err := m.G[iNdEx].MarshalTo(dAtA[i:]); err != nil {
-                                          return 0, err
-                                  }
-                                  i = encodeVarintExample(dAtA, i, uint64(size))
-                          }
-                          i--
-                          dAtA[i] = 0x12
-                  }
-          }
-          {
-                  size, err := m.A.MarshalToSizedBuffer(dAtA[:i])
-                  if err != nil {
-                          return 0, err
-                  }
-                  i -= size
-                  i = encodeVarintExample(dAtA, i, uint64(size))
-          }
-          i--
-          dAtA[i] = 0xa
-          return len(dAtA) - i, nil
-  }
+	func (m *B) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	        i := len(dAtA)
+	        _ = i
+	        var l int
+	        _ = l
+	        if m.XXX_unrecognized != nil {
+	                i -= len(m.XXX_unrecognized)
+	                copy(dAtA[i:], m.XXX_unrecognized)
+	        }
+	        if len(m.G) > 0 {
+	                for iNdEx := len(m.G) - 1; iNdEx >= 0; iNdEx-- {
+	                        {
+	                                size := m.G[iNdEx].Size()
+	                                i -= size
+	                                if _, err := m.G[iNdEx].MarshalTo(dAtA[i:]); err != nil {
+	                                        return 0, err
+	                                }
+	                                i = encodeVarintExample(dAtA, i, uint64(size))
+	                        }
+	                        i--
+	                        dAtA[i] = 0x12
+	                }
+	        }
+	        {
+	                size, err := m.A.MarshalToSizedBuffer(dAtA[:i])
+	                if err != nil {
+	                        return 0, err
+	                }
+	                i -= size
+	                i = encodeVarintExample(dAtA, i, uint64(size))
+	        }
+	        i--
+	        dAtA[i] = 0xa
+	        return len(dAtA) - i, nil
+	}
 
 As shown above Marshal calculates the size of the not yet marshalled message
 and allocates the appropriate buffer.
@@ -151,6 +151,7 @@ import (
 
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
+	"github.com/gogo/protobuf/proto3optional"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"github.com/gogo/protobuf/vanity"
@@ -330,14 +331,14 @@ func (this orderFields) Swap(i, j int) {
 	this[i], this[j] = this[j], this[i]
 }
 
-func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto) {
-	fieldname := p.GetOneOfFieldName(message, field)
-	nullable := gogoproto.IsNullable(field)
+func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.FileDescriptor, message *generator.Descriptor, field *descriptor.FieldDescriptorProto, proto3Resolver *proto3optional.Resolver) {
+	fieldname := p.GetOneOfFieldName(message, field, proto3Resolver)
+	nullable := gogoproto.IsNullable(field, proto3Resolver)
 	repeated := field.IsRepeated()
 	required := field.IsRequired()
 
 	protoSizer := gogoproto.IsProtoSizer(file.FileDescriptorProto, message.DescriptorProto)
-	doNilCheck := gogoproto.NeedsNilCheck(proto3, field)
+	doNilCheck := gogoproto.NeedsNilCheck(field, proto3Resolver)
 	if required && nullable {
 		p.P(`if m.`, fieldname, `== nil {`)
 		p.In()
@@ -378,7 +379,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			p.encodeKey(fieldNumber, wireType)
 			p.Out()
 			p.P(`}`)
-		} else if proto3 {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) {
 			p.P(`if m.`, fieldname, ` != 0 {`)
 			p.In()
 			p.callFixed64(p.mathPkg.Use(), `.Float64bits(float64(m.`+fieldname, `))`)
@@ -408,7 +409,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			p.encodeKey(fieldNumber, wireType)
 			p.Out()
 			p.P(`}`)
-		} else if proto3 {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) {
 			p.P(`if m.`, fieldname, ` != 0 {`)
 			p.In()
 			p.callFixed32(p.mathPkg.Use(), `.Float32bits(float32(m.`+fieldname, `))`)
@@ -461,7 +462,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			p.encodeKey(fieldNumber, wireType)
 			p.Out()
 			p.P(`}`)
-		} else if proto3 {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) {
 			p.P(`if m.`, fieldname, ` != 0 {`)
 			p.In()
 			p.callVarint(`m.`, fieldname)
@@ -490,7 +491,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			p.encodeKey(fieldNumber, wireType)
 			p.Out()
 			p.P(`}`)
-		} else if proto3 {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) {
 			p.P(`if m.`, fieldname, ` != 0 {`)
 			p.In()
 			p.callFixed64("m." + fieldname)
@@ -519,7 +520,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			p.encodeKey(fieldNumber, wireType)
 			p.Out()
 			p.P(`}`)
-		} else if proto3 {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) {
 			p.P(`if m.`, fieldname, ` != 0 {`)
 			p.In()
 			p.callFixed32("m." + fieldname)
@@ -565,7 +566,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			p.encodeKey(fieldNumber, wireType)
 			p.Out()
 			p.P(`}`)
-		} else if proto3 {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) {
 			p.P(`if m.`, fieldname, ` {`)
 			p.In()
 			p.P(`i--`)
@@ -615,7 +616,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			p.encodeKey(fieldNumber, wireType)
 			p.Out()
 			p.P(`}`)
-		} else if proto3 {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) {
 			p.P(`if len(m.`, fieldname, `) > 0 {`)
 			p.In()
 			p.P(`i -= len(m.`, fieldname, `)`)
@@ -639,16 +640,16 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 		panic(fmt.Errorf("marshaler does not support group %v", fieldname))
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		if p.IsMap(field) {
-			m := p.GoMapType(nil, field)
-			keygoTyp, keywire := p.GoType(nil, m.KeyField)
-			keygoAliasTyp, _ := p.GoType(nil, m.KeyAliasField)
+			m := p.GoMapType(nil, field, proto3Resolver)
+			keygoTyp, keywire := p.GoType(nil, m.KeyField, proto3Resolver)
+			keygoAliasTyp, _ := p.GoType(nil, m.KeyAliasField, proto3Resolver)
 			// keys may not be pointers
 			keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
 			keygoAliasTyp = strings.Replace(keygoAliasTyp, "*", "", 1)
 			keyCapTyp := generator.CamelCase(keygoTyp)
-			valuegoTyp, valuewire := p.GoType(nil, m.ValueField)
-			valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField)
-			nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp)
+			valuegoTyp, valuewire := p.GoType(nil, m.ValueField, proto3Resolver)
+			valuegoAliasTyp, _ := p.GoType(nil, m.ValueAliasField, proto3Resolver)
+			nullable, valuegoTyp, valuegoAliasTyp = generator.GoMapValueTypes(field, m.ValueField, valuegoTyp, valuegoAliasTyp, proto3Resolver)
 			var val string
 			if gogoproto.IsStableMarshaler(file.FileDescriptorProto, message.DescriptorProto) {
 				keysName := `keysFor` + fieldname
@@ -693,7 +694,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 				p.P(`if `, accessor, ` != nil { `)
 				p.In()
 			} else if plainBytes {
-				if proto3 {
+				if proto3Resolver.IsProto3WithoutOptional(field) {
 					p.P(`if len(`, accessor, `) > 0 {`)
 				} else {
 					p.P(`if `, accessor, ` != nil {`)
@@ -718,7 +719,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 		} else if repeated {
 			val := p.reverseListRange(`m.`, fieldname)
 			sizeOfVarName := val
-			if gogoproto.IsNullable(field) {
+			if gogoproto.IsNullable(field, proto3Resolver) {
 				sizeOfVarName = `*` + val
 			}
 			if !p.marshalAllSizeOf(field, sizeOfVarName, ``) {
@@ -733,7 +734,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			p.P(`}`)
 		} else {
 			sizeOfVarName := `m.` + fieldname
-			if gogoproto.IsNullable(field) {
+			if gogoproto.IsNullable(field, proto3Resolver) {
 				sizeOfVarName = `*` + sizeOfVarName
 			}
 			if !p.marshalAllSizeOf(field, sizeOfVarName, numGen.Next()) {
@@ -755,7 +756,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 				p.encodeKey(fieldNumber, wireType)
 				p.Out()
 				p.P(`}`)
-			} else if proto3 {
+			} else if proto3Resolver.IsProto3WithoutOptional(field) {
 				p.P(`if len(m.`, fieldname, `) > 0 {`)
 				p.In()
 				p.P(`i -= len(m.`, fieldname, `)`)
@@ -814,7 +815,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			p.encodeKey(fieldNumber, wireType)
 			p.Out()
 			p.P(`}`)
-		} else if proto3 {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) {
 			p.P(`if m.`, fieldname, ` != 0 {`)
 			p.In()
 			p.callVarint(`(uint32(m.`, fieldname, `) << 1) ^ uint32((m.`, fieldname, ` >> 31))`)
@@ -860,7 +861,7 @@ func (p *marshalto) generateField(proto3 bool, numGen NumGen, file *generator.Fi
 			p.encodeKey(fieldNumber, wireType)
 			p.Out()
 			p.P(`}`)
-		} else if proto3 {
+		} else if proto3Resolver.IsProto3WithoutOptional(field) {
 			p.P(`if m.`, fieldname, ` != 0 {`)
 			p.In()
 			p.callVarint(`(uint64(m.`, fieldname, `) << 1) ^ uint64((m.`, fieldname, ` >> 63))`)
@@ -976,15 +977,18 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 		}
 		fields := orderFields(message.GetField())
 		sort.Sort(fields)
+
+		proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
+		proto3Resolver := proto3optional.NewResolver(proto3, message.Field)
+
 		oneofs := make(map[string]struct{})
 		for i := len(message.Field) - 1; i >= 0; i-- {
 			field := message.Field[i]
-			oneof := field.OneofIndex != nil
+			oneof := proto3Resolver.IsRealOneOf(field)
 			if !oneof {
-				proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
-				p.generateField(proto3, numGen, file, message, field)
+				p.generateField(proto3, numGen, file, message, field, proto3Resolver)
 			} else {
-				fieldname := p.GetFieldName(message, field)
+				fieldname := p.GetFieldName(message, field, proto3Resolver)
 				if _, ok := oneofs[fieldname]; !ok {
 					oneofs[fieldname] = struct{}{}
 					p.P(`if m.`, fieldname, ` != nil {`)
@@ -1003,11 +1007,11 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 		//Generate MarshalTo methods for oneof fields
 		m := proto.Clone(message.DescriptorProto).(*descriptor.DescriptorProto)
 		for _, field := range m.Field {
-			oneof := field.OneofIndex != nil
+			oneof := proto3Resolver.IsRealOneOf(field)
 			if !oneof {
 				continue
 			}
-			ccTypeName := p.OneOfTypeName(message, field)
+			ccTypeName := p.OneOfTypeName(message, field, proto3Resolver)
 			p.P(`func (m *`, ccTypeName, `) MarshalTo(dAtA []byte) (int, error) {`)
 			p.In()
 			if gogoproto.IsProtoSizer(file.FileDescriptorProto, message.DescriptorProto) {
@@ -1023,7 +1027,7 @@ func (p *marshalto) Generate(file *generator.FileDescriptor) {
 			p.In()
 			p.P(`i := len(dAtA)`)
 			vanity.TurnOffNullableForNativeTypes(field)
-			p.generateField(false, numGen, file, message, field)
+			p.generateField(false, numGen, file, message, field, proto3Resolver)
 			p.P(`return len(dAtA) - i, nil`)
 			p.Out()
 			p.P(`}`)

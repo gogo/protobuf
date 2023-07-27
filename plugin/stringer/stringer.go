@@ -41,38 +41,38 @@ The stringer plugin also generates a test given it is enabled using one of the f
 
 Let us look at:
 
-  github.com/gogo/protobuf/test/example/example.proto
+	github.com/gogo/protobuf/test/example/example.proto
 
 Btw all the output can be seen at:
 
-  github.com/gogo/protobuf/test/example/*
+	github.com/gogo/protobuf/test/example/*
 
 The following message:
 
-  option (gogoproto.goproto_stringer_all) = false;
-  option (gogoproto.stringer_all) =  true;
+	  option (gogoproto.goproto_stringer_all) = false;
+	  option (gogoproto.stringer_all) =  true;
 
-  message A {
-	optional string Description = 1 [(gogoproto.nullable) = false];
-	optional int64 Number = 2 [(gogoproto.nullable) = false];
-	optional bytes Id = 3 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uuid", (gogoproto.nullable) = false];
-  }
+	  message A {
+		optional string Description = 1 [(gogoproto.nullable) = false];
+		optional int64 Number = 2 [(gogoproto.nullable) = false];
+		optional bytes Id = 3 [(gogoproto.customtype) = "github.com/gogo/protobuf/test/custom.Uuid", (gogoproto.nullable) = false];
+	  }
 
 given to the stringer stringer, will generate the following code:
 
-  func (this *A) String() string {
-	if this == nil {
-		return "nil"
-	}
-	s := strings.Join([]string{`&A{`,
-		`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
-		`Number:` + fmt.Sprintf("%v", this.Number) + `,`,
-		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
-		`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
-		`}`,
-	}, "")
-	return s
-  }
+	  func (this *A) String() string {
+		if this == nil {
+			return "nil"
+		}
+		s := strings.Join([]string{`&A{`,
+			`Description:` + fmt.Sprintf("%v", this.Description) + `,`,
+			`Number:` + fmt.Sprintf("%v", this.Number) + `,`,
+			`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
+			`XXX_unrecognized:` + fmt.Sprintf("%v", this.XXX_unrecognized) + `,`,
+			`}`,
+		}, "")
+		return s
+	  }
 
 and the following test code:
 
@@ -88,12 +88,12 @@ and the following test code:
 
 Typically fmt.Printf("%v") will stop to print when it reaches a pointer and
 not print their values, while the generated String method will always print all values, recursively.
-
 */
 package stringer
 
 import (
 	"github.com/gogo/protobuf/gogoproto"
+	"github.com/gogo/protobuf/proto3optional"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 	"strings"
 )
@@ -118,7 +118,6 @@ func (p *stringer) Init(g *generator.Generator) {
 }
 
 func (p *stringer) Generate(file *generator.FileDescriptor) {
-	proto3 := gogoproto.IsProto3(file.FileDescriptorProto)
 	p.PluginImports = generator.NewPluginImports(p.Generator)
 	p.atleastOne = false
 
@@ -148,12 +147,15 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 		p.P(`return "nil"`)
 		p.Out()
 		p.P(`}`)
+
+		proto3Resolver := proto3optional.NewResolver(gogoproto.IsProto3(file.FileDescriptorProto), message.Field)
+
 		for _, field := range message.Field {
 			if p.IsMap(field) || !field.IsRepeated() {
 				continue
 			}
 			if (field.IsMessage() && !gogoproto.IsCustomType(field)) || p.IsGroup(field) {
-				nullable := gogoproto.IsNullable(field)
+				nullable := gogoproto.IsNullable(field, proto3Resolver)
 				desc := p.ObjectNamed(field.GetTypeName())
 				msgname := p.TypeName(desc)
 				msgnames := strings.Split(msgname, ".")
@@ -163,7 +165,7 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 				if fieldMessageDesc != nil {
 					gogoStringer = gogoproto.IsStringer(file.FileDescriptorProto, fieldMessageDesc)
 				}
-				fieldname := p.GetFieldName(message, field)
+				fieldname := p.GetFieldName(message, field, proto3Resolver)
 				stringfunc := fmtPkg.Use() + `.Sprintf("%v", f)`
 				if gogoStringer {
 					stringfunc = `f.String()`
@@ -193,14 +195,14 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 			if !p.IsMap(field) {
 				continue
 			}
-			fieldname := p.GetFieldName(message, field)
+			fieldname := p.GetFieldName(message, field, proto3Resolver)
 
-			m := p.GoMapType(nil, field)
+			m := p.GoMapType(nil, field, proto3Resolver)
 			mapgoTyp, keyField, keyAliasField := m.GoType, m.KeyField, m.KeyAliasField
 			keysName := `keysFor` + fieldname
-			keygoTyp, _ := p.GoType(nil, keyField)
+			keygoTyp, _ := p.GoType(nil, keyField, proto3Resolver)
 			keygoTyp = strings.Replace(keygoTyp, "*", "", 1)
-			keygoAliasTyp, _ := p.GoType(nil, keyAliasField)
+			keygoAliasTyp, _ := p.GoType(nil, keyAliasField, proto3Resolver)
 			keygoAliasTyp = strings.Replace(keygoAliasTyp, "*", "", 1)
 			keyCapTyp := generator.CamelCase(keygoTyp)
 			p.P(keysName, ` := make([]`, keygoTyp, `, 0, len(this.`, fieldname, `))`)
@@ -228,12 +230,13 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 			p.P(mapName, ` += "}"`)
 		}
 		p.P("s := ", stringsPkg.Use(), ".Join([]string{`&", ccTypeName, "{`,")
+
 		oneofs := make(map[string]struct{})
 		for _, field := range message.Field {
-			nullable := gogoproto.IsNullable(field)
+			nullable := gogoproto.IsNullable(field, proto3Resolver)
 			repeated := field.IsRepeated()
-			fieldname := p.GetFieldName(message, field)
-			oneof := field.OneofIndex != nil
+			fieldname := p.GetFieldName(message, field, proto3Resolver)
+			oneof := proto3Resolver.IsRealOneOf(field)
 			if oneof {
 				if _, ok := oneofs[fieldname]; ok {
 					continue
@@ -267,7 +270,7 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 					p.P("`", fieldname, ":`", ` + `, stringsPkg.Use(), `.Replace(`, stringsPkg.Use(), `.Replace(`, stringfunc, `, "`, typeName, `","`, msgname, `"`, ", 1),`&`,``,1) + `,", "`,")
 				}
 			} else {
-				if nullable && !repeated && !proto3 {
+				if nullable && !repeated && !proto3Resolver.IsProto3WithoutOptional(field) {
 					p.P("`", fieldname, ":`", ` + valueToString`, p.localName, `(this.`, fieldname, ") + `,", "`,")
 				} else {
 					p.P("`", fieldname, ":`", ` + `, fmtPkg.Use(), `.Sprintf("%v", this.`, fieldname, ") + `,", "`,")
@@ -292,11 +295,11 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 
 		//Generate String methods for oneof fields
 		for _, field := range message.Field {
-			oneof := field.OneofIndex != nil
+			oneof := proto3Resolver.IsRealOneOf(field)
 			if !oneof {
 				continue
 			}
-			ccTypeName := p.OneOfTypeName(message, field)
+			ccTypeName := p.OneOfTypeName(message, field, proto3Resolver)
 			p.P(`func (this *`, ccTypeName, `) String() string {`)
 			p.In()
 			p.P(`if this == nil {`)
@@ -305,7 +308,7 @@ func (p *stringer) Generate(file *generator.FileDescriptor) {
 			p.Out()
 			p.P(`}`)
 			p.P("s := ", stringsPkg.Use(), ".Join([]string{`&", ccTypeName, "{`,")
-			fieldname := p.GetOneOfFieldName(message, field)
+			fieldname := p.GetOneOfFieldName(message, field, proto3Resolver)
 			if field.IsMessage() || p.IsGroup(field) {
 				desc := p.ObjectNamed(field.GetTypeName())
 				msgname := p.TypeName(desc)

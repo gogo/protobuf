@@ -38,6 +38,7 @@ import (
 
 	"github.com/gogo/protobuf/gogoproto"
 	"github.com/gogo/protobuf/proto"
+	"github.com/gogo/protobuf/proto3optional"
 	descriptor "github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	plugin "github.com/gogo/protobuf/protoc-gen-gogo/plugin"
 )
@@ -69,10 +70,10 @@ func (g *Generator) TypeNameByObject(typeName string) Object {
 	return o
 }
 
-func (g *Generator) OneOfTypeName(message *Descriptor, field *descriptor.FieldDescriptorProto) string {
+func (g *Generator) OneOfTypeName(message *Descriptor, field *descriptor.FieldDescriptorProto, proto3Resolver *proto3optional.Resolver) string {
 	typeName := message.TypeName()
 	ccTypeName := CamelCaseSlice(typeName)
-	fieldName := g.GetOneOfFieldName(message, field)
+	fieldName := g.GetOneOfFieldName(message, field, proto3Resolver)
 	tname := ccTypeName + "_" + fieldName
 	// It is possible for this to collide with a message or enum
 	// nested in this message. Check for collisions.
@@ -164,8 +165,8 @@ func (this *importedPackage) Location() string {
 	return this.importPrefix + this.pkg
 }
 
-func (g *Generator) GetFieldName(message *Descriptor, field *descriptor.FieldDescriptorProto) string {
-	goTyp, _ := g.GoType(message, field)
+func (g *Generator) GetFieldName(message *Descriptor, field *descriptor.FieldDescriptorProto, proto3Resolver *proto3optional.Resolver) string {
+	goTyp, _ := g.GoType(message, field, proto3Resolver)
 	fieldname := CamelCase(*field.Name)
 	if gogoproto.IsCustomName(field) {
 		fieldname = gogoproto.GetCustomName(field)
@@ -173,7 +174,7 @@ func (g *Generator) GetFieldName(message *Descriptor, field *descriptor.FieldDes
 	if gogoproto.IsEmbed(field) {
 		fieldname = EmbedFieldName(goTyp)
 	}
-	if field.OneofIndex != nil {
+	if proto3Resolver.IsRealOneOf(field) {
 		fieldname = message.OneofDecl[int(*field.OneofIndex)].GetName()
 		fieldname = CamelCase(fieldname)
 	}
@@ -190,8 +191,8 @@ func (g *Generator) GetFieldName(message *Descriptor, field *descriptor.FieldDes
 	return fieldname
 }
 
-func (g *Generator) GetOneOfFieldName(message *Descriptor, field *descriptor.FieldDescriptorProto) string {
-	goTyp, _ := g.GoType(message, field)
+func (g *Generator) GetOneOfFieldName(message *Descriptor, field *descriptor.FieldDescriptorProto, proto3Resolver *proto3optional.Resolver) string {
+	goTyp, _ := g.GoType(message, field, proto3Resolver)
 	fieldname := CamelCase(*field.Name)
 	if gogoproto.IsCustomName(field) {
 		fieldname = gogoproto.GetCustomName(field)
@@ -239,7 +240,7 @@ func (g *Generator) GetMapKeyField(field, keyField *descriptor.FieldDescriptorPr
 	return keyField
 }
 
-func (g *Generator) GetMapValueField(field, valField *descriptor.FieldDescriptorProto) *descriptor.FieldDescriptorProto {
+func (g *Generator) GetMapValueField(field, valField *descriptor.FieldDescriptorProto, proto3Resolver *proto3optional.Resolver) *descriptor.FieldDescriptorProto {
 	if gogoproto.IsCustomType(field) && gogoproto.IsCastValue(field) {
 		g.Fail("cannot have a customtype and casttype: ", field.String())
 	}
@@ -280,7 +281,7 @@ func (g *Generator) GetMapValueField(field, valField *descriptor.FieldDescriptor
 		}
 	}
 
-	nullable := gogoproto.IsNullable(field)
+	nullable := gogoproto.IsNullable(field, proto3Resolver)
 	if err := proto.SetExtension(valField.Options, gogoproto.E_Nullable, &nullable); err != nil {
 		g.Fail(err.Error())
 	}
@@ -289,8 +290,8 @@ func (g *Generator) GetMapValueField(field, valField *descriptor.FieldDescriptor
 
 // GoMapValueTypes returns the map value Go type and the alias map value Go type (for casting), taking into
 // account whether the map is nullable or the value is a message.
-func GoMapValueTypes(mapField, valueField *descriptor.FieldDescriptorProto, goValueType, goValueAliasType string) (nullable bool, outGoType string, outGoAliasType string) {
-	nullable = gogoproto.IsNullable(mapField) && (valueField.IsMessage() || gogoproto.IsCustomType(mapField))
+func GoMapValueTypes(mapField, valueField *descriptor.FieldDescriptorProto, goValueType, goValueAliasType string, proto3Resolver *proto3optional.Resolver) (nullable bool, outGoType string, outGoAliasType string) {
+	nullable = gogoproto.IsNullable(mapField, proto3Resolver) && (valueField.IsMessage() || gogoproto.IsCustomType(mapField))
 	if nullable {
 		// ensure the non-aliased Go value type is a pointer for consistency
 		if strings.HasPrefix(goValueType, "*") {
