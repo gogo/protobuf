@@ -202,13 +202,13 @@ func (p *Properties) String() string {
 // Parse populates p by parsing a string in the protobuf struct field tag style.
 func (p *Properties) Parse(s string) {
 	// "bytes,49,opt,name=foo,def=hello!"
-	fields := strings.Split(s, ",") // breaks def=, but handled below.
-	if len(fields) < 2 {
+	comma := strings.IndexByte(s, ',')
+	if comma == -1 {
 		log.Printf("proto: tag has too few fields: %q", s)
 		return
 	}
 
-	p.Wire = fields[0]
+	p.Wire = s[:comma]
 	switch p.Wire {
 	case "varint":
 		p.WireType = WireVarint
@@ -228,15 +228,35 @@ func (p *Properties) Parse(s string) {
 		return
 	}
 
+	pos := comma + 1
+	comma = strings.IndexByte(s[pos:], ',')
+	var tagField string
+	if comma == -1 {
+		tagField = s[pos:]
+		pos = len(s)
+	} else {
+		tagField = s[pos : pos+comma]
+		pos += comma + 1
+	}
+
 	var err error
-	p.Tag, err = strconv.Atoi(fields[1])
+	p.Tag, err = strconv.Atoi(tagField)
 	if err != nil {
 		return
 	}
 
+	var f string
 outer:
-	for i := 2; i < len(fields); i++ {
-		f := fields[i]
+	for pos < len(s) {
+		comma := strings.IndexByte(s[pos:], ',')
+		if comma == -1 {
+			f = s[pos:]
+			pos = len(s)
+		} else {
+			f = s[pos : pos+comma]
+			pos += comma + 1
+		}
+
 		switch {
 		case f == "req":
 			p.Required = true
@@ -247,29 +267,44 @@ outer:
 		case f == "packed":
 			p.Packed = true
 		case strings.HasPrefix(f, "name="):
-			p.OrigName = f[5:]
+			p.OrigName, _ = strings.CutPrefix(f, "name=")
 		case strings.HasPrefix(f, "json="):
-			p.JSONName = f[5:]
+			p.JSONName, _ = strings.CutPrefix(f, "json=")
 		case strings.HasPrefix(f, "enum="):
-			p.Enum = f[5:]
+			p.Enum, _ = strings.CutPrefix(f, "enum=")
 		case f == "proto3":
 			p.proto3 = true
 		case f == "oneof":
 			p.oneof = true
 		case strings.HasPrefix(f, "def="):
 			p.HasDefault = true
-			p.Default = f[4:] // rest of string
-			if i+1 < len(fields) {
+			p.Default, _ = strings.CutPrefix(f, "def=") // rest of string
+			if pos < len(s) {
 				// Commas aren't escaped, and def is always last.
-				p.Default += "," + strings.Join(fields[i+1:], ",")
-				break outer
+				p.Default += "," + s[pos:]
 			}
+			break outer
 		case strings.HasPrefix(f, "embedded="):
-			p.OrigName = strings.Split(f, "=")[1]
+			value, _ := strings.CutPrefix(f, "embedded=")
+			if eq := strings.IndexByte(value, '='); eq != -1 {
+				p.OrigName = value[:eq]
+			} else {
+				p.OrigName = value
+			}
 		case strings.HasPrefix(f, "customtype="):
-			p.CustomType = strings.Split(f, "=")[1]
+			value, _ := strings.CutPrefix(f, "customtype=")
+			if eq := strings.IndexByte(value, '='); eq != -1 {
+				p.CustomType = value[:eq]
+			} else {
+				p.CustomType = value
+			}
 		case strings.HasPrefix(f, "casttype="):
-			p.CastType = strings.Split(f, "=")[1]
+			value, _ := strings.CutPrefix(f, "casttype=")
+			if eq := strings.IndexByte(value, '='); eq != -1 {
+				p.CastType = value[:eq]
+			} else {
+				p.CastType = value
+			}
 		case f == "stdtime":
 			p.StdTime = true
 		case f == "stdduration":
